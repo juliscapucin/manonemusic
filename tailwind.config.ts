@@ -1,20 +1,59 @@
-import type { Config } from 'tailwindcss'
+import type { Config } from "tailwindcss"
 
 const config: Config = {
-  content: [
-    './src/pages/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/components/**/*.{js,ts,jsx,tsx,mdx}',
-    './src/app/**/*.{js,ts,jsx,tsx,mdx}',
-  ],
-  theme: {
-    extend: {
-      backgroundImage: {
-        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-        'gradient-conic':
-          'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
-      },
-    },
-  },
-  plugins: [],
+	content: [
+		"./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
+		"./src/components/**/*.{js,ts,jsx,tsx,mdx}",
+		"./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+	],
+	theme: {
+		extend: {
+			animation: {
+				"fade-in": "fadeIn 1s linear forwards",
+			},
+			maxWidth: {
+				desktop: "1000px",
+			},
+			minHeight: {
+				"1/2": "50vh",
+			},
+			fontFamily: {
+				headline: ["var(--font-primary) sans-serif"],
+				text: ["var(--font-secondary)"],
+			},
+			zIndex: {
+				5: "5",
+				8: "8",
+				15: "15",
+				100: "100",
+			},
+			letterSpacing: { tightest: "-.075em" },
+			colors: {
+				colorBlack: "rgb(var(--color-black) / <alpha-value>)",
+				colorWhite: "rgb(var(--color-white) / <alpha-value>)",
+				primary: "rgb(var(--color-primary) / <alpha-value>)",
+				secondary: "rgb(var(--color-secondary) / <alpha-value>)",
+				colorFaded: "rgb(var(--color-faded) / <alpha-value>)",
+			},
+			fontSize: {
+				displayLarge: "12rem",
+				displayMedium: "10.3rem",
+				displaySmall: "5.7rem",
+				headlineLarge: "3.2rem",
+				headlineMedium: "2.8rem",
+				headlineSmall: "2.4rem",
+				titleLarge: "2.2rem",
+				titleMedium: "1.6rem",
+				titleSmall: "1.4rem",
+				bodyLarge: "1.8rem",
+				bodyMedium: "1.6rem",
+				bodySmall: "1.4rem",
+				labelLarge: "1.4rem",
+				labelMedium: "1.2rem",
+				labelSmall: "1.1rem",
+			},
+		},
+	},
+	plugins: [],
 }
 export default config
