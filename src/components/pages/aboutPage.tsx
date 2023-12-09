@@ -4,5 +4,9 @@ type AboutData = {
 }
 
 export default function AboutPage({ data }: { data: AboutData }) {
-	return <div>About Page</div>
+	return (
+		<>
+			<p>{data.text}</p>
+		</>
+	)
 }

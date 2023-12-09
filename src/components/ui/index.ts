@@ -1,5 +1,5 @@
-import Grid from "./Grid"
-import Loader from "./Loader"
-import Title from "./Title"
+import Grid from "./grid"
+import Loader from "./loader"
+import Title from "./title"
 
 export { Grid, Loader, Title }

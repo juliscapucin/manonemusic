@@ -4,10 +4,12 @@ import { notFound } from "next/navigation"
 import { AboutPage } from "@/components/pages"
 
 import { fetchGraphQL } from "@/lib"
+import { Title } from "@/components/ui"
 
 export const metadata: Metadata = {
 	title: "About",
-	description: "A list of projects I have worked on.",
+	description:
+		"Man One Music and lead composer Matt Rudge specialise in original music and sound.",
 }
 
 const query = `
@@ -22,12 +24,14 @@ const query = `
 `
 
 export default async function Page() {
-	const data = await fetchGraphQL(query)
-
-	console.log(data)
+	const data = await fetchGraphQL(query, "aboutPageCollection")
 
 	if (!data) return notFound()
 
-	// return <AboutPage data={data} />
-	return <h1>About</h1>
+	return (
+		<>
+			<Title>{data.title}</Title>
+			<AboutPage data={data} />
+		</>
+	)
 }

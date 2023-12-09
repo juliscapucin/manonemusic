@@ -33,7 +33,7 @@ const config: Config = {
 				colorWhite: "rgb(var(--color-white) / <alpha-value>)",
 				primary: "rgb(var(--color-primary) / <alpha-value>)",
 				secondary: "rgb(var(--color-secondary) / <alpha-value>)",
-				colorFaded: "rgb(var(--color-faded) / <alpha-value>)",
+				colorFaded: "rgba(var(--color-secondary-rgb), 0.3)",
 			},
 			fontSize: {
 				displayLarge: "12rem",

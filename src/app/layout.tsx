@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import localFont from "next/font/local"
 import "./globals.css"
-import { RootLayout } from "@/components"
+import { Header, RootLayout } from "@/components"
 
 // Load custom font //
 const font = localFont({
@@ -29,6 +29,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 			<body
 				className={`${font.className} max-width-wrapper min-h-full h-full bg-colorFaded`}
 			>
+				<Header />
 				{children}
 			</body>
 		</RootLayout>

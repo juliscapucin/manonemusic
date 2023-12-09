@@ -1,3 +1,11 @@
-export default function ReleasesPage() {
-	return <div>H</div>
+type AboutData = {
+	title: string
+}
+
+export default function ReleasesPage({ data }: { data: AboutData }) {
+	return (
+		<>
+			<p>hi</p>
+		</>
+	)
 }

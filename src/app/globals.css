@@ -14,17 +14,15 @@
       --color-white: 252 249 248;
    }
    :root[data-theme='dark'] {
-      --color-primary: 18 12 15;
-      --color-secondary: 252 249 248;
-      --color-faded: 154 152 152;
-      --color-scroll: 252, 249, 248;
+      --color-primary: 3 30 27;
+      --color-secondary: 182 209 194;
+      --color-secondary-rgb: 182, 209, 194;
       --color-focus: 154, 152, 152;
    }
    :root[data-theme='light'] {
       --color-primary: 249 246 238;
       --color-secondary: 18 12 15;
-      --color-faded: 154 152 152;
-      --color-scroll: 18, 12, 15;
+      --color-secondary-rgb: 18, 12, 15;
       --color-focus: 154, 152, 152;
    }
 
@@ -33,11 +31,11 @@
       height: 4px;
    }
    ::-webkit-scrollbar-track {
-      background-color: rgba(var(--color-scroll), 0.2);
+      background-color: rgba(var(--color-secondary-rgb), 0.2);
       margin-block: 2px;
    }
    ::-webkit-scrollbar-thumb {
-      background-color: rgba(var(--color-scroll), 1);
+      background-color: rgba(var(--color-secondary-rgb), 1);
       width: 1rem;
       height: 1rem;
       border: none;
