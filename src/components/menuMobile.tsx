@@ -3,10 +3,10 @@
 import { useRef } from "react"
 import { usePathname } from "next/navigation"
 
-// import { animateMobileMenu } from "@/animations"
+import { animateMobileMenu } from "@/animations"
 
 import { Availability, ThemeSwitcher } from "@/components"
-// import { ButtonBurger, ButtonClose } from '@/components/buttons';
+import { ButtonBurger, ButtonClose } from "@/components/buttons"
 
 type NavLink = { label: string; slug: string }
 
@@ -28,13 +28,13 @@ export default function MenuMobile({
 				<div className='block lg:hidden'>
 					<div className='absolute max-w-full max-w-16 py-2 flex justify-end items-center bg-primary'>
 						{/* Burger Button */}
-						{/* <ButtonBurger
+						<ButtonBurger
 							action={(e) => {
 								if (mobileMenuRef.current) {
 									animateMobileMenu(mobileMenuRef.current)
 								}
 							}}
-						/> */}
+						/>
 					</div>
 					<aside
 						className='absolute top-0 w-full custom-min-h-screen p-8 bg-primary transition-transform -translate-y-full duration-300'
@@ -42,13 +42,13 @@ export default function MenuMobile({
 					>
 						{/* Close Button */}
 						<div className='absolute top-8 right-8'>
-							{/* <ButtonClose
+							<ButtonClose
 								action={(e) => {
 									if (mobileMenuRef.current) {
 										animateMobileMenu(mobileMenuRef.current)
 									}
 								}}
-							/> */}
+							/>
 						</div>
 
 						{/* Nav Links */}
