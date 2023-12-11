@@ -1,4 +1,4 @@
-import { useState, useRef, useLayoutEffect } from "react"
+import { useState, useRef } from "react"
 
 export default function CopyEmailButton() {
 	const [showCopyFeedback, setShowCopyFeedback] = useState(false)
@@ -16,22 +16,6 @@ export default function CopyEmailButton() {
 			})
 	}
 
-	//  useLayoutEffect(() => {
-	//   if (!showCopyFeedback) return;
-
-	//   let ctx = gsap.context(() => {});
-
-	//   ctx.add(() => {
-	//    gsap.fromTo(
-	//     labelRef.current,
-	//     { opacity: 0, y: 20 },
-	//     { opacity: 1, y: 0, duration: 0.1, ease: 'power1.out' }
-	//    );
-	//   });
-
-	//   return () => ctx.revert();
-	//  }, [showCopyFeedback]);
-
 	return (
 		<div className='relative h-16 mt-16'>
 			{showCopyFeedback && (
@@ -44,7 +28,7 @@ export default function CopyEmailButton() {
 					</span>
 				</div>
 			)}
-			<button className='group overflow-hidden h-11' onClick={copyToClipboard}>
+			<button className='group overflow-clip max-h-8' onClick={copyToClipboard}>
 				<div className='flex flex-col group-hover:-translate-y-1/2 transition-transform duration-200'>
 					<span>Copy email address</span>
 					<span>Copy email address</span>

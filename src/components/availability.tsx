@@ -14,7 +14,7 @@ export default function Availability({ variant, modalOpen }: Props) {
 	return (
 		<div className='flex flex-col justify-center items-center'>
 			<span className='block text-headlineSmall'>Available January 2024</span>
-			<div className='overflow-hidden h-28 group'>
+			<div className='overflow-clip h-28 group'>
 				<a
 					href='mailto:hello@juliscapucin.com'
 					className='flex flex-col text-displaySmall font-normal md:group-hover:-translate-y-1/2 transition-transform duration-200'

@@ -77,7 +77,7 @@ export default function ThemeSwitcher({ variant }: Props) {
 			{variant === "header" && (
 				<div
 					className={`theme-switcher flex items-end h-full pb-[6px] transition-transform duration-200 ${
-						!menuOpen && "translate-x-[80px]"
+						!menuOpen && "translate-x-[120px]"
 					}`}
 				>
 					{/* Open Theme Menu */}

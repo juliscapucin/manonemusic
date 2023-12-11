@@ -20,7 +20,7 @@ export default function MenuDesktop({
 	return (
 		<>
 			{navLinks && (
-				<div className={"h-16 max-w-full mx-8 px-4 hidden lg:flex bg-primary"}>
+				<div className={"h-16 w-full hidden lg:flex overflow-clip"}>
 					{/* Menu links */}
 					<nav className='w-full h-full hidden lg:flex justify-end items-center gap-8 mr-8'>
 						{navLinks.map((link) => {
