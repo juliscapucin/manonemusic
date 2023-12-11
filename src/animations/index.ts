@@ -13,8 +13,8 @@ export {
 	animateEnterHorizontal,
 	animateHorizontal,
 	animateHorizontalTransition,
-	animateStaggerText,
 	animateMobileMenu,
 	animateProjectsMenu,
+	animateStaggerText,
 	animateSplitText,
 }

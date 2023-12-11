@@ -8,7 +8,7 @@ import { usePathname } from "next/navigation"
 import { Availability, ThemeSwitcher } from "@/components"
 // import { ButtonBurger, ButtonClose } from '@/components/buttons';
 
-type NavLink = { label: string; slug: string; _key: number }
+type NavLink = { label: string; slug: string }
 
 type NavLinksProps = {
 	navLinks: NavLink[]
@@ -57,7 +57,7 @@ export default function MenuMobile({
 								return (
 									<div
 										className={`relative max-h-32 min-h-32 flex justify-start items-start`}
-										key={link._key}
+										key={link.slug}
 									>
 										{/* Inactive Link */}
 										{(pathname === "/" && link.slug === "/") ||

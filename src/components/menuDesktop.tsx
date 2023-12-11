@@ -4,11 +4,11 @@ import { usePathname } from "next/navigation"
 
 import { MenuLink, ThemeSwitcher } from "@/components"
 
-type NavLink = { label: string; slug: string; _key: number }
+type NavLink = { label: string; slug: string }
 
 type NavLinksProps = {
 	navLinks: NavLink[]
-	transitionOnClick: (link: NavLink) => void
+	transitionOnClick: (link: NavLink, mobileMenuRef?: HTMLDivElement) => void
 }
 
 export default function MenuDesktop({
@@ -27,7 +27,7 @@ export default function MenuDesktop({
 							return (
 								<MenuLink
 									label={link.label}
-									key={link._key}
+									key={link.slug}
 									activeState={
 										pathname.includes(`/${link.slug}`) ? true : false
 									}
