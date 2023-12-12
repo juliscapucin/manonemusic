@@ -23,14 +23,15 @@ const query = `
 `
 
 export default async function Page() {
-	const data = await fetchGraphQL(query, "workPageCollection")
+	const data = await fetchGraphQL(query)
+	const workData = data.workPageCollection.items[0]
 
 	if (!data) return notFound()
 
 	return (
 		<>
-			<Title>{data.title}</Title>
-			<WorkPage data={data} />
+			<Title>{workData.title}</Title>
+			<WorkPage data={workData} />
 		</>
 	)
 }

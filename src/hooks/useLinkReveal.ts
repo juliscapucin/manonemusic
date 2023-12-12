@@ -6,9 +6,7 @@ import { useLayoutEffect } from "react"
 // import { animateStaggerText } from "@/animations"
 
 export default function useLinkReveal(
-	linkRef: React.MutableRefObject<HTMLHeadingElement | HTMLSpanElement | null>,
-	variant: string,
-	modalOpen?: boolean
+	linkRef: React.MutableRefObject<HTMLHeadingElement | HTMLSpanElement | null>
 ) {
 	// Default variant (footer)
 	// useLayoutEffect(() => {

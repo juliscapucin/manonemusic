@@ -23,14 +23,15 @@ const query = `
 `
 
 export default async function Page() {
-	const data = await fetchGraphQL(query, "releasesCollection")
+	const data = await fetchGraphQL(query)
+	const releasesData = data.releasesCollection.items[0]
 
 	if (!data) return notFound()
 
 	return (
 		<>
-			<Title>{data.title}</Title>
-			<ReleasesPage data={data} />
+			<Title>{releasesData.title}</Title>
+			<ReleasesPage data={releasesData} />
 		</>
 	)
 }

@@ -12,7 +12,7 @@ const config: Config = {
 				"fade-in": "fadeIn 1s linear forwards",
 			},
 			maxWidth: {
-				desktop: "1000px",
+				desktop: "2000px",
 			},
 			minHeight: {
 				"1/2": "50vh",

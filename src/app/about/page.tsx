@@ -24,14 +24,15 @@ const query = `
 `
 
 export default async function Page() {
-	const data = await fetchGraphQL(query, "aboutPageCollection")
+	const data = await fetchGraphQL(query)
+	const aboutData = data.aboutPageCollection.items[0]
 
 	if (!data) return notFound()
 
 	return (
 		<>
-			<Title>{data.title}</Title>
-			<AboutPage data={data} />
+			<Title>{aboutData.title}</Title>
+			<AboutPage data={aboutData} />
 		</>
 	)
 }

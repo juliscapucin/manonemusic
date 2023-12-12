@@ -18,12 +18,10 @@ export default function Title({ children, margin }: TitleProps) {
 	}, [titleRef])
 
 	return (
-		<div className='overflow-clip col-span-5'>
+		<div className='overflow-clip mb-16'>
 			<h1
 				ref={titleRef}
-				className={`${
-					margin && "mt-64"
-				} text-displayMedium md:text-displayLarge lg:text-displayLarge whitespace-nowrap`}
+				className='text-displayMedium md:text-displayLarge whitespace-nowrap'
 			>
 				{children}
 			</h1>

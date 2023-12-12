@@ -12,24 +12,31 @@ export const metadata: Metadata = {
 }
 
 const query = `
-	query {
+	query{
 		contactPageCollection {
-			items {
-				title
-				availability
-			}
+		items {
+			title
+			availability
+		}
+		}
+		socialLinkCollection{
+		items {
+			label
+			url
+		}
 		}
 	}
 `
 
 export default async function Page() {
-	const data = await fetchGraphQL(query, "contactPageCollection")
+	const data = await fetchGraphQL(query)
+	const contactData = data.contactPageCollection.items[0]
 
 	if (!data) return notFound()
 
 	return (
 		<>
-			<Title>{data.title}</Title>
+			<Title>{contactData.title}</Title>
 			<ContactPage data={data} />
 		</>
 	)

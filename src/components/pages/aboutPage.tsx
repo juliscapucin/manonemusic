@@ -8,7 +8,7 @@ type AboutData = {
 export default function AboutPage({ data }: { data: AboutData }) {
 	return (
 		<>
-			<p>{data.text}</p>
+			<p className='max-w-prose'>{data.text}</p>
 			<Copyright />
 		</>
 	)
