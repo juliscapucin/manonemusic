@@ -5,13 +5,11 @@ import { WorkPage } from "@/components/pages"
 
 import { fetchGraphQL } from "@/lib"
 import { Title } from "@/components/ui"
-import { ProjectCard } from "@/components"
-
-import { Project } from "@/types"
 
 export const metadata: Metadata = {
-	title: "Work",
-	description: "Man One Music case studies.",
+	title: "About",
+	description:
+		"Man One Music and lead composer Matt Rudge specialise in original music and sound.",
 }
 
 const query = `
@@ -24,7 +22,6 @@ const query = `
 		projectCollection {
 		  items {
 			 title
-			 slug
 			 text
 			 coverImage {
 				url
@@ -42,20 +39,14 @@ const query = `
 export default async function Page() {
 	const data = await fetchGraphQL(query)
 	const workData = data.workPageCollection.items[0]
-	const projectsData = data.projectCollection.items
+	const projectData = data.projectCollection.items[0]
 
 	if (!data) return notFound()
 
 	return (
 		<>
 			<Title>{workData.title}</Title>
-			<WorkPage data={workData} />
-			{projectsData.map((project: Project) => (
-				<ProjectCard
-					key={project.slug}
-					{...{ title: project.title, coverImage: project.coverImage }}
-				/>
-			))}
+			<WorkPage data={projectData} />
 		</>
 	)
 }
