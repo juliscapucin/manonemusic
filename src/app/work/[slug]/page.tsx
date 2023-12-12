@@ -46,7 +46,6 @@ export default async function Page() {
 	return (
 		<>
 			<Title>{workData.title}</Title>
-			<WorkPage data={projectData} />
 		</>
 	)
 }

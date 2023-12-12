@@ -12,11 +12,17 @@ type Props = {
 
 export default function ProjectCard({ title, coverImage }: Props) {
 	return (
-		<Image
-			src={coverImage.url}
-			alt={coverImage.description}
-			width={coverImage.width}
-			height={coverImage.height}
-		/>
+		<div>
+			<div className='relative w-32 h-[40vh] overflow-clip'>
+				<Image
+					className='object-cover'
+					src={coverImage.url}
+					alt={coverImage.description}
+					sizes='50vw'
+					fill
+				/>
+			</div>
+			<span>{title}</span>
+		</div>
 	)
 }

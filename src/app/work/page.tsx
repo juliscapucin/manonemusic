@@ -5,9 +5,6 @@ import { WorkPage } from "@/components/pages"
 
 import { fetchGraphQL } from "@/lib"
 import { Title } from "@/components/ui"
-import { ProjectCard } from "@/components"
-
-import { Project } from "@/types"
 
 export const metadata: Metadata = {
 	title: "Work",
@@ -49,13 +46,7 @@ export default async function Page() {
 	return (
 		<>
 			<Title>{workData.title}</Title>
-			<WorkPage data={workData} />
-			{projectsData.map((project: Project) => (
-				<ProjectCard
-					key={project.slug}
-					{...{ title: project.title, coverImage: project.coverImage }}
-				/>
-			))}
+			<WorkPage projectsData={projectsData} />
 		</>
 	)
 }
