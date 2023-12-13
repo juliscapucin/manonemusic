@@ -1,3 +1,5 @@
+import { HomeSections } from "@/components"
+
 export default function HomePage() {
-	return <div>H</div>
+	return <HomeSections />
 }
