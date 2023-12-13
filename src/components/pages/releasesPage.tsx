@@ -9,9 +9,9 @@ type ReleasesData = {
 
 export default function ReleasesPage({ data }: { data: ReleasesData }) {
 	return (
-		<div>
+		<>
 			<Title>{data.title}</Title>
 			hello
-		</div>
+		</>
 	)
 }

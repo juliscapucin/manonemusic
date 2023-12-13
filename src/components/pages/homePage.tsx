@@ -6,7 +6,12 @@ import { Observer } from "gsap/Observer"
 import { SplitText } from "gsap/SplitText"
 
 import { navLinks } from "@/constants"
-import { AboutPage, ReleasesPage, WorkPage } from "@/components/pages"
+import {
+	AboutPage,
+	ContactPage,
+	ReleasesPage,
+	WorkPage,
+} from "@/components/pages"
 
 const sectionsContent = [
 	{ index: 1, heading: "Home" },
@@ -53,23 +58,22 @@ export default function HomePage({ data }: { data: any }) {
 			{ xPercent: (i) => (i ? -100 * dFactor : 100 * dFactor) },
 			{ xPercent: 0 },
 			0
-		)
-			.fromTo(images[index], { xPercent: 15 * dFactor }, { xPercent: 0 }, 0)
-			.fromTo(
-				splitHeadings[index].chars,
-				{ autoAlpha: 0, xPercent: 150 * dFactor },
-				{
-					autoAlpha: 1,
-					xPercent: 0,
-					duration: 1,
-					ease: "power2",
-					stagger: {
-						each: 0.02,
-						from: "random",
-					},
-				},
-				0.2
-			)
+		).fromTo(images[index], { xPercent: 15 * dFactor }, { xPercent: 0 }, 0)
+		// .fromTo(
+		// 	splitHeadings[index].chars,
+		// 	{ autoAlpha: 0, xPercent: 150 * dFactor },
+		// 	{
+		// 		autoAlpha: 1,
+		// 		xPercent: 0,
+		// 		duration: 1,
+		// 		ease: "power2",
+		// 		stagger: {
+		// 			each: 0.02,
+		// 			from: "random",
+		// 		},
+		// 	},
+		// 	0.2
+		// )
 
 		currentIndex = index
 	}
@@ -79,16 +83,16 @@ export default function HomePage({ data }: { data: any }) {
 		gsap.registerPlugin(SplitText)
 		;(sections = document.querySelectorAll("section")),
 			(images = document.querySelectorAll(".bg")),
-			(headings = gsap.utils.toArray(".section-heading")),
+			// (headings = gsap.utils.toArray(".section-heading")),
 			(outerWrappers = gsap.utils.toArray(".outer")),
 			(innerWrappers = gsap.utils.toArray(".inner")),
-			(splitHeadings = headings.map(
-				(heading) =>
-					new SplitText(heading, {
-						type: "chars,words,lines",
-						linesClass: "clip-text",
-					})
-			)),
+			// (splitHeadings = headings.map(
+			// 	(heading) =>
+			// 		new SplitText(heading, {
+			// 			type: "chars,words,lines",
+			// 			linesClass: "clip-text",
+			// 		})
+			// )),
 			(currentIndex = -1),
 			(wrap = gsap.utils.wrap(0, sections.length - 1))
 
@@ -146,13 +150,13 @@ export default function HomePage({ data }: { data: any }) {
 				<WorkPage data={data.projectCollection.items} />
 			</Section>
 			<Section section={sectionsContent[2]}>
-				<AboutPage data={data.aboutPageCollection.items[0]} />
+				<ReleasesPage data={data.releasesCollection.items[0]} />
 			</Section>
 			<Section section={sectionsContent[3]}>
-				<ReleasesPage data={data.releasesCollection.items[0]} />
+				<AboutPage data={data.aboutPageCollection.items[0]} />
 			</Section>
 			<Section section={sectionsContent[4]}>
-				<ReleasesPage data={data.releasesCollection.items[0]} />
+				<ContactPage data={data.releasesCollection.items[0]} />
 			</Section>
 			<Section section={sectionsContent[0]}>
 				<ReleasesPage data={data.releasesCollection.items[0]} />
@@ -176,9 +180,9 @@ function Section({
 			<div className='outer w-full h-full overflow-clip'>
 				<div className='inner w-full h-full overflow-clip'>
 					<div className='bg absolute flex flex-col justify-center items-center w-full h-full bg-primary'>
-						<h2 className='section-heading text-displayLarge'>
+						{/* <h2 className='section-heading text-displayLarge'>
 							{section.heading}
-						</h2>
+						</h2> */}
 						{children}
 					</div>
 				</div>

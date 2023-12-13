@@ -1,4 +1,4 @@
-import { Copyright } from ".."
+import { Copyright } from "@/components"
 
 type AboutData = {
 	title: string
