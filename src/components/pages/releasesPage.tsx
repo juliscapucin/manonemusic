@@ -1,11 +1,17 @@
-type AboutData = {
+"use client"
+
+import { Title } from "@/components/ui"
+
+type ReleasesData = {
 	title: string
+	text: string
 }
 
-export default function ReleasesPage({ data }: { data: AboutData }) {
+export default function ReleasesPage({ data }: { data: ReleasesData }) {
 	return (
-		<>
-			<p>hi</p>
-		</>
+		<div>
+			<Title>{data.title}</Title>
+			hello
+		</div>
 	)
 }

@@ -5,9 +5,9 @@ export const breakpoints = {
 export const maxWidth = 2000
 
 export const navLinks = [
-	{ label: "Home", slug: "/" },
-	{ label: "Work", slug: "work" },
-	{ label: "Releases", slug: "releases" },
-	{ label: "About", slug: "about" },
-	{ label: "Contact", slug: "contact" },
+	{ label: "Home", slug: "/", index: 1 },
+	{ label: "Work", slug: "work", index: 2 },
+	{ label: "Releases", slug: "releases", index: 3 },
+	{ label: "About", slug: "about", index: 4 },
+	{ label: "Contact", slug: "contact", index: 5 },
 ]

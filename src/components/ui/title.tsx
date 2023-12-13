@@ -5,10 +5,9 @@ import { useEffect, useRef } from "react"
 
 type TitleProps = {
 	children: React.ReactNode
-	margin?: boolean
 }
 
-export default function Title({ children, margin }: TitleProps) {
+export default function Title({ children }: TitleProps) {
 	const titleRef = useRef(null)
 
 	useEffect(() => {
