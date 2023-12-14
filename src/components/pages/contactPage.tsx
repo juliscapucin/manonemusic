@@ -21,7 +21,6 @@ export default function ContactPage({ data }: { data: ContactData }) {
 
 	return (
 		<>
-			<p>hi</p>
 			<Availability availability={availability} />
 			<SocialLinks data={socialsData} />
 		</>

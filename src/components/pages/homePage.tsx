@@ -58,22 +58,23 @@ export default function HomePage({ data }: { data: any }) {
 			{ xPercent: (i) => (i ? -100 * dFactor : 100 * dFactor) },
 			{ xPercent: 0 },
 			0
-		).fromTo(images[index], { xPercent: 15 * dFactor }, { xPercent: 0 }, 0)
-		// .fromTo(
-		// 	splitHeadings[index].chars,
-		// 	{ autoAlpha: 0, xPercent: 150 * dFactor },
-		// 	{
-		// 		autoAlpha: 1,
-		// 		xPercent: 0,
-		// 		duration: 1,
-		// 		ease: "power2",
-		// 		stagger: {
-		// 			each: 0.02,
-		// 			from: "random",
-		// 		},
-		// 	},
-		// 	0.2
-		// )
+		)
+			.fromTo(images[index], { xPercent: 15 * dFactor }, { xPercent: 0 }, 0)
+			.fromTo(
+				splitHeadings[index].chars,
+				{ autoAlpha: 0, xPercent: 150 * dFactor },
+				{
+					autoAlpha: 1,
+					xPercent: 0,
+					duration: 1,
+					ease: "power2",
+					stagger: {
+						each: 0.02,
+						from: "random",
+					},
+				},
+				0.2
+			)
 
 		currentIndex = index
 	}
@@ -83,16 +84,16 @@ export default function HomePage({ data }: { data: any }) {
 		gsap.registerPlugin(SplitText)
 		;(sections = document.querySelectorAll("section")),
 			(images = document.querySelectorAll(".bg")),
-			// (headings = gsap.utils.toArray(".section-heading")),
+			(headings = gsap.utils.toArray(".section-heading")),
 			(outerWrappers = gsap.utils.toArray(".outer")),
 			(innerWrappers = gsap.utils.toArray(".inner")),
-			// (splitHeadings = headings.map(
-			// 	(heading) =>
-			// 		new SplitText(heading, {
-			// 			type: "chars,words,lines",
-			// 			linesClass: "clip-text",
-			// 		})
-			// )),
+			(splitHeadings = headings.map(
+				(heading) =>
+					new SplitText(heading, {
+						type: "chars,words,lines",
+						linesClass: "clip-text",
+					})
+			)),
 			(currentIndex = -1),
 			(wrap = gsap.utils.wrap(0, sections.length - 1))
 
@@ -130,7 +131,7 @@ export default function HomePage({ data }: { data: any }) {
 
 	return (
 		<div>
-			<div className='fixed left-0 right-0 p-8 w-full z-50 flex justify-between'>
+			<div className='fixed top-16 left-0 right-0 p-8 w-full z-50 flex justify-between'>
 				{navLinks.map((link) => {
 					return (
 						<button
@@ -144,7 +145,7 @@ export default function HomePage({ data }: { data: any }) {
 				})}
 			</div>
 			<Section section={sectionsContent[0]}>
-				<ReleasesPage data={data.releasesCollection.items[0]} />
+				<AboutPage data={data.aboutPageCollection.items[0]} />
 			</Section>
 			<Section section={sectionsContent[1]}>
 				<WorkPage data={data.projectCollection.items} />
@@ -159,7 +160,7 @@ export default function HomePage({ data }: { data: any }) {
 				<ContactPage data={data.releasesCollection.items[0]} />
 			</Section>
 			<Section section={sectionsContent[0]}>
-				<ReleasesPage data={data.releasesCollection.items[0]} />
+				<AboutPage data={data.aboutPageCollection.items[0]} />
 			</Section>
 		</div>
 	)
@@ -180,9 +181,9 @@ function Section({
 			<div className='outer w-full h-full overflow-clip'>
 				<div className='inner w-full h-full overflow-clip'>
 					<div className='bg absolute flex flex-col justify-center items-center w-full h-full bg-primary'>
-						{/* <h2 className='section-heading text-displayLarge'>
+						<h2 className='section-heading text-displayLarge mb-8'>
 							{section.heading}
-						</h2> */}
+						</h2>
 						{children}
 					</div>
 				</div>

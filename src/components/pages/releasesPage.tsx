@@ -1,7 +1,5 @@
 "use client"
 
-import { Title } from "@/components/ui"
-
 type ReleasesData = {
 	title: string
 	text: string
@@ -10,8 +8,7 @@ type ReleasesData = {
 export default function ReleasesPage({ data }: { data: ReleasesData }) {
 	return (
 		<>
-			<Title>{data.title}</Title>
-			hello
+			<p className='max-w-prose'>{data.text}</p>
 		</>
 	)
 }
