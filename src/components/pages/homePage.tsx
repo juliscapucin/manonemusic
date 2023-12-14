@@ -7,7 +7,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { Observer } from "gsap/Observer"
 import { SplitText } from "gsap/SplitText"
 
-import { marginTop, navLinks } from "@/constants"
 import {
 	AboutPage,
 	ContactPage,
@@ -16,11 +15,11 @@ import {
 } from "@/components/pages"
 
 const sectionsContent = [
-	{ index: 1, heading: "Home" },
-	{ index: 2, heading: "Work" },
-	{ index: 3, heading: "Releases" },
-	{ index: 4, heading: "About" },
-	{ index: 5, heading: "Contact" },
+	{ index: 1, heading: "Home", width: 0 },
+	{ index: 2, heading: "Work", width: 0 },
+	{ index: 3, heading: "Releases", width: 0 },
+	{ index: 4, heading: "About", width: 0 },
+	{ index: 5, heading: "Contact", width: 0 },
 ]
 
 export default function HomePage({ data }: { data: any }) {
@@ -32,7 +31,9 @@ export default function HomePage({ data }: { data: any }) {
 
 		gsap.registerPlugin(ScrollTrigger, Observer, SplitText)
 
-		const sections = gsap.utils.toArray(sectionsContainerRef.current.children)
+		const sections = gsap.utils.toArray(
+			sectionsContainerRef.current.children
+		) as HTMLDivElement[]
 
 		const getScrollAmount = () => {
 			const totalWidth = sections.reduce((width: number, section: any) => {
@@ -41,9 +42,19 @@ export default function HomePage({ data }: { data: any }) {
 			return (totalWidth - window.innerWidth) * -1
 		}
 
+		const getSectionWidth = () => {
+			sections.forEach((section, index) => {
+				sectionsContent[index].width = section.offsetWidth
+			})
+		}
+
 		getScrollAmount()
 
 		let ctx = gsap.context(() => {
+			getSectionWidth()
+
+			console.log(sectionsContent)
+
 			const tl = gsap.timeline({
 				paused: true,
 				scrollTrigger: {
@@ -56,7 +67,7 @@ export default function HomePage({ data }: { data: any }) {
 			})
 
 			tl.to(sections, {
-				xPercent: -100 * (sections.length - 1),
+				x: () => `+=${getScrollAmount()}`,
 				ease: "none",
 			})
 		})
@@ -74,7 +85,7 @@ export default function HomePage({ data }: { data: any }) {
 	}
 
 	return (
-		<div ref={outerContainerRef} className='overflow-clip'>
+		<div ref={outerContainerRef}>
 			{/* <div className='fixed top-16 left-0 right-0 p-8 w-full z-50 flex justify-between'>
 				{navLinks.map((link, index) => {
 					if (index === 0) return
@@ -90,7 +101,7 @@ export default function HomePage({ data }: { data: any }) {
 				})}
 			</div> */}
 
-			<div ref={sectionsContainerRef} className={`flex flex-row flex-nowrap`}>
+			<div ref={sectionsContainerRef} className='flex'>
 				<AboutPage data={data.aboutPageCollection.items[0]} />
 				<WorkPage data={data.projectCollection.items} />
 				<ReleasesPage data={data.releasesCollection.items[0]} />
