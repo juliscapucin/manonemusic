@@ -4,7 +4,6 @@ import "./globals.css"
 
 import { PageContextProvider } from "@/context"
 import { Header, RootLayout } from "@/components"
-import { MainWrapper } from "@/components/ui"
 
 // Load custom font //
 const font = localFont({
@@ -34,7 +33,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 			>
 				<PageContextProvider>
 					<Header />
-					<MainWrapper>{children}</MainWrapper>
+					{children}
 				</PageContextProvider>
 			</body>
 		</RootLayout>

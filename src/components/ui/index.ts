@@ -1,6 +1,6 @@
 import Grid from "./grid"
 import Loader from "./loader"
-import MainWrapper from "./mainWrapper"
-import Title from "./title"
+import PageWrapper from "./pageWrapper"
+import { Title } from "./title"
 
-export { Grid, Loader, MainWrapper, Title }
+export { Grid, Loader, PageWrapper, Title }

@@ -1,5 +1,9 @@
+"use client"
+
+import { useRef } from "react"
+
 import { Availability, SocialLinks } from "@/components"
-import { Title } from "@/components/ui"
+import { PageWrapper, Title } from "@/components/ui"
 
 type ContactData = {
 	contactPageCollection: {
@@ -17,14 +21,19 @@ type ContactData = {
 }
 
 export default function ContactPage({ data }: { data: ContactData }) {
+	const titleRef = useRef(null)
+
 	const socialsData = data.socialLinkCollection?.items
 	const availability = data.contactPageCollection?.items[0].availability
+	const title = data.contactPageCollection.items[0].title
 
 	return (
-		<div className='w-full min-w-full h-full overflow-clip flex justify-center items-center mt-32'>
-			<Title>{data.contactPageCollection?.items[0].title}</Title>
-			<Availability availability={availability} />
-			<SocialLinks data={socialsData} />
-		</div>
+		<PageWrapper>
+			<Title ref={titleRef}>{title}</Title>
+			<div className='flex gap-32'>
+				<Availability availability={availability} />
+				<SocialLinks data={socialsData} />
+			</div>
+		</PageWrapper>
 	)
 }

@@ -1,6 +1,8 @@
 "use client"
 
-import { Title } from "@/components/ui"
+import { useRef } from "react"
+
+import { PageWrapper, Title } from "@/components/ui"
 
 type ReleasesData = {
 	title: string
@@ -8,11 +10,12 @@ type ReleasesData = {
 }
 
 export default function ReleasesPage({ data }: { data: ReleasesData }) {
-	return (
-		<div className='w-full min-w-full h-full overflow-clip mt-32'>
-			<Title>{data.title}</Title>
+	const titleRef = useRef(null)
 
+	return (
+		<PageWrapper>
+			<Title ref={titleRef}>{data.title}</Title>
 			<p className='max-w-prose'>{data.text}</p>
-		</div>
+		</PageWrapper>
 	)
 }

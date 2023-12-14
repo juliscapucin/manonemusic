@@ -95,7 +95,7 @@ export default function HomePage({ data }: { data: any }) {
 				<WorkPage data={data.projectCollection.items} />
 				<ReleasesPage data={data.releasesCollection.items[0]} />
 				<AboutPage data={data.aboutPageCollection.items[0]} />
-				<ContactPage data={data.releasesCollection.items[0]} />
+				<ContactPage data={data} />
 			</div>
 		</div>
 	)
