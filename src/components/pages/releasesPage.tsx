@@ -3,6 +3,7 @@
 import { useRef } from "react"
 
 import { PageWrapper, Title } from "@/components/ui"
+import { useTitleScrollTrigger } from "@/hooks"
 
 type ReleasesData = {
 	title: string
@@ -10,11 +11,13 @@ type ReleasesData = {
 }
 
 export default function ReleasesPage({ data }: { data: ReleasesData }) {
-	const titleRef = useRef(null)
+	const titleReleasesRef = useRef(null)
+
+	useTitleScrollTrigger(titleReleasesRef)
 
 	return (
 		<PageWrapper>
-			<Title ref={titleRef}>{data.title}</Title>
+			<Title ref={titleReleasesRef}>{data.title}</Title>
 			<p className='max-w-prose'>{data.text}</p>
 		</PageWrapper>
 	)

@@ -4,6 +4,7 @@ import { useRef } from "react"
 
 import { Availability, SocialLinks } from "@/components"
 import { PageWrapper, Title } from "@/components/ui"
+import { useTitleScrollTrigger } from "@/hooks"
 
 type ContactData = {
 	contactPageCollection: {
@@ -21,15 +22,17 @@ type ContactData = {
 }
 
 export default function ContactPage({ data }: { data: ContactData }) {
-	const titleRef = useRef(null)
+	const titleContactRef = useRef(null)
 
 	const socialsData = data.socialLinkCollection?.items
 	const availability = data.contactPageCollection?.items[0].availability
 	const title = data.contactPageCollection.items[0].title
 
+	useTitleScrollTrigger(titleContactRef)
+
 	return (
 		<PageWrapper>
-			<Title ref={titleRef}>{title}</Title>
+			<Title ref={titleContactRef}>{title}</Title>
 			<div className='flex gap-32'>
 				<Availability availability={availability} />
 				<SocialLinks data={socialsData} />
