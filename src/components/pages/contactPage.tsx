@@ -1,4 +1,5 @@
 import { Availability, SocialLinks } from "@/components"
+import { Title } from "@/components/ui"
 
 type ContactData = {
 	contactPageCollection: {
@@ -20,9 +21,10 @@ export default function ContactPage({ data }: { data: ContactData }) {
 	const availability = data.contactPageCollection?.items[0].availability
 
 	return (
-		<>
+		<div className='w-full min-w-full h-full overflow-clip flex justify-center items-center mt-32'>
+			<Title>{data.contactPageCollection?.items[0].title}</Title>
 			<Availability availability={availability} />
 			<SocialLinks data={socialsData} />
-		</>
+		</div>
 	)
 }

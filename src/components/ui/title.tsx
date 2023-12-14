@@ -1,7 +1,9 @@
 "use client"
 
-import { animateSplitText } from "@/animations"
 import { useEffect, useRef } from "react"
+import gsap from "gsap"
+
+import { animateSplitText } from "@/animations"
 
 type TitleProps = {
 	children: React.ReactNode
@@ -11,9 +13,13 @@ export default function Title({ children }: TitleProps) {
 	const titleRef = useRef(null)
 
 	useEffect(() => {
-		if (titleRef.current) {
-			animateSplitText(titleRef.current)
-		}
+		if (!titleRef.current) return
+
+		let ctx = gsap.context(() => {
+			animateSplitText(titleRef.current!)
+		})
+
+		return () => ctx.revert()
 	}, [titleRef])
 
 	return (

@@ -56,7 +56,7 @@ export default async function Home() {
 
 	if (!data) return notFound()
 	return (
-		<main className='w-full h-full flex'>
+		<main className='w-full min-w-full h-full'>
 			<HomePage data={data} />
 		</main>
 	)

@@ -11,3 +11,5 @@ export const navLinks = [
 	{ label: "About", slug: "about", index: 4 },
 	{ label: "Contact", slug: "contact", index: 5 },
 ]
+
+export const marginTop = "128px"
