@@ -31,7 +31,7 @@ export default function homePanels() {
 		// 	panelsContainerRef.current!.isSameNode(targetPanel!.parentElement)
 		// ) {
 		// 	let totalScroll = tween.scrollTrigger.end - tween.scrollTrigger.start,
-		// 		totalMovement = container.scrollWidth - window.innerWidth
+		// 		totalMovement = container.scrollWidth - innerWidth
 		// 	y = Math.round(
 		// 		tween.scrollTrigger.start +
 		// 			(targetElem.offsetLeft / totalMovement) * totalScroll
@@ -57,23 +57,29 @@ export default function homePanels() {
 		const container = panelsContainerRef.current
 		const panels = gsap.utils.toArray(".panel")
 
+		console.log("scrollWidth", container.scrollWidth)
+		console.log("offsetWidth", container.offsetWidth)
+
 		let ctx = gsap.context(() => {
 			tween = gsap.to(panels, {
-				x: () => -1 * (container.scrollWidth - window.innerWidth),
+				x: () => -1 * (container.scrollWidth - innerWidth),
 				ease: "none",
 				scrollTrigger: {
 					trigger: outerContainerRef.current,
 					pin: true,
 					start: "top top",
 					scrub: 1,
-					end: () => "+=" + (container.scrollWidth - window.innerWidth),
-					// onUpdate: (self) => {
-					// 	console.log(self.progress, "/1")
-					// 	console.log(
-					// 		window.scrollY,
-					// 		`/${document.body.scrollHeight - window.innerHeight}`
-					// 	)
-					// },
+					end: () => "+=" + (container.scrollWidth - container.offsetWidth),
+					invalidateOnRefresh: true,
+					markers: true,
+					onUpdate: (self) => {
+						console.log("end", self.end)
+						console.log(self.progress, "/1")
+						console.log(
+							window.scrollY,
+							`/${document.body.scrollHeight - window.innerHeight}`
+						)
+					},
 				},
 			})
 		}, container)
@@ -89,18 +95,15 @@ export default function homePanels() {
 
 			<header ref={headerRef} className='fixed z-100'>
 				<nav className='flex gap-8'>
-					<button data-href='panel-1' onClick={(e) => handleClick(e)}>
-						Panel 1
-					</button>
-					<button data-href='panel-2' onClick={(e) => handleClick(e)}>
-						Panel 2
-					</button>
-					<button data-href='panel-3' onClick={(e) => handleClick(e)}>
-						Panel 3
-					</button>
-					<button data-href='panel-4' onClick={(e) => handleClick(e)}>
-						Panel 4
-					</button>
+					{Array.from({ length: 4 }).map((_, index) => (
+						<button
+							key={`panel-button-${index}`}
+							data-href={`panel-${index + 1}`}
+							onClick={(e) => handleClick(e)}
+						>
+							Panel {index + 1}
+						</button>
+					))}
 				</nav>
 			</header>
 
@@ -109,7 +112,7 @@ export default function homePanels() {
 					{Array.from({ length: 4 }).map((_, index) => (
 						<article
 							data-id={`panel-${index + 1}`}
-							className='panel min-w-full'
+							className='panel min-w-full w-full h-screen min-h-full outline outline-secondary'
 							key={`panel-${index}`}
 						>
 							<div className='container mt-32'>

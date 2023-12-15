@@ -56,7 +56,7 @@ export default async function Home() {
 
 	if (!data) return notFound()
 	return (
-		<main className='w-full min-w-full h-full'>
+		<main className='w-screen custom-min-w-screen min-w-full h-full'>
 			<HomePanels />
 		</main>
 	)

@@ -29,7 +29,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
 		<RootLayout>
 			<body
-				className={`${font.className} w-screen max-width-wrapper h-screen custom-min-h-screen overflow-x-clip`}
+				className={`${font.className} relative w-screen h-screen custom-min-h-screen overflow-x-clip`}
 			>
 				<PageContextProvider>
 					<Header />

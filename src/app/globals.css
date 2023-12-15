@@ -153,7 +153,7 @@ textarea {
    resize: none;
 }
 
-/* WORKAROUND FOR vh */
+/* TAILWIND WORKAROUNDS */
 
 .custom-min-h-screen {
    min-height: 100vh;
