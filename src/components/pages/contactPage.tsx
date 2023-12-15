@@ -33,7 +33,7 @@ export default function ContactPage({ data }: { data: ContactData }) {
 	return (
 		<div className='h-full flex flex-col justify-center items-start'>
 			<Title ref={titleContactRef}>{title}</Title>
-			<div className='flex flex-row flex-nowrap gap-32 px-32'>
+			<div className='flex flex-row flex-nowrap gap-32'>
 				<Availability availability={availability} />
 				<SocialLinks data={socialsData} />
 				<Availability availability={availability} />

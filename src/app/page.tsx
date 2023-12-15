@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation"
-import { HomePage } from "@/components/pages"
+import { HomePanels } from "@/components"
 import { fetchGraphQL } from "@/lib"
 
 const query = `
@@ -57,7 +57,7 @@ export default async function Home() {
 	if (!data) return notFound()
 	return (
 		<main className='w-full min-w-full h-full'>
-			<HomePage data={data} />
+			<HomePanels />
 		</main>
 	)
 }

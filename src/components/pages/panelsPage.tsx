@@ -21,7 +21,7 @@ const sectionsContent = [
 	{ index: 5, heading: "Contact" },
 ]
 
-export default function HomePage({ data }: { data: any }) {
+export default function PanelsPage({ data }: { data: any }) {
 	let sections: NodeListOf<HTMLElement>,
 		images: NodeListOf<HTMLElement>,
 		headings: HTMLElement[],
@@ -46,7 +46,7 @@ export default function HomePage({ data }: { data: any }) {
 		if (currentIndex >= 0) {
 			// The first time this function runs, current is -1
 			gsap.set(sections[currentIndex], { zIndex: 0 })
-			tl.to(images[currentIndex], { xPercent: -15 * dFactor }).set(
+			tl.to(images[currentIndex], { xPercent: -150 * dFactor }).set(
 				sections[currentIndex],
 				{ autoAlpha: 0 }
 			)
@@ -144,35 +144,17 @@ export default function HomePage({ data }: { data: any }) {
 					)
 				})}
 			</div>
-			<Section section={sectionsContent[0]}>
-				<AboutPage data={data.aboutPageCollection.items[0]} />
-			</Section>
-			<Section section={sectionsContent[1]}>
-				<WorkPage data={data.projectCollection.items} />
-			</Section>
-			<Section section={sectionsContent[2]}>
-				<ReleasesPage data={data.releasesCollection.items[0]} />
-			</Section>
-			<Section section={sectionsContent[3]}>
-				<AboutPage data={data.aboutPageCollection.items[0]} />
-			</Section>
-			<Section section={sectionsContent[4]}>
-				<ContactPage data={data.releasesCollection.items[0]} />
-			</Section>
-			<Section section={sectionsContent[0]}>
-				<AboutPage data={data.aboutPageCollection.items[0]} />
-			</Section>
+			<Section section={sectionsContent[0]} />
+			<Section section={sectionsContent[1]} />
+			<Section section={sectionsContent[2]} />
+			<Section section={sectionsContent[3]} />
+			<Section section={sectionsContent[4]} />
+			<Section section={sectionsContent[0]} />
 		</div>
 	)
 }
 
-function Section({
-	section,
-	children,
-}: {
-	section: { index: number; heading: string }
-	children: React.ReactNode
-}) {
+function Section({ section }: { section: { index: number; heading: string } }) {
 	return (
 		<section
 			className={`${section.index} fixed top-0 w-full min-w-full h-full invisible`}
@@ -184,7 +166,6 @@ function Section({
 						<h2 className='section-heading text-displayLarge mb-8'>
 							{section.heading}
 						</h2>
-						{children}
 					</div>
 				</div>
 			</div>

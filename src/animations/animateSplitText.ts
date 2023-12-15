@@ -5,7 +5,7 @@ gsap.registerPlugin(SplitText)
 
 export const animateSplitText = (
 	textElement: HTMLElement,
-	yPercent?: number,
+	xTranslate?: number,
 	delay?: number
 ) => {
 	if (!textElement) return
@@ -13,14 +13,24 @@ export const animateSplitText = (
 
 	const tl = gsap.timeline()
 
-	return tl
-		.set(split.chars, { yPercent: yPercent || 100, scaleY: 1.2 })
-		.to(split.chars, {
-			duration: 0.3,
+	gsap.set(split.chars, {
+		xPercent: (index) => (xTranslate ? xTranslate * (index + 1) : 100),
+		opacity: 0,
+	})
+
+	return tl.fromTo(
+		split.chars,
+		{
+			xPercent: (index) => (xTranslate ? xTranslate * (index + 1) : 100),
+			opacity: 1,
+		},
+		{
+			opacity: 1,
+			xPercent: 0,
+			duration: 0.5,
 			delay: delay || 0.5,
-			yPercent: 0,
-			scaleY: 1,
 			stagger: 0.05,
 			ease: "expo.out",
-		})
+		}
+	)
 }

@@ -13,6 +13,7 @@ export default function useTitleScrollTrigger(
 
 		gsap.registerPlugin(ScrollTrigger)
 		const element = elementRef.current as HTMLDivElement
+		const titleElement = element.querySelector("h1") as HTMLHeadingElement
 
 		const offsetLeft = () => element.parentElement!.offsetLeft
 		const width = () => element.parentElement!.offsetWidth
@@ -23,9 +24,9 @@ export default function useTitleScrollTrigger(
 				start: () => `${offsetLeft() - width() / 2}px 50%`,
 				end: () => `+=${width()}`,
 				invalidateOnRefresh: true,
-				animation: animateSplitText(element, 100, 0),
+				animation: animateSplitText(titleElement, 2000),
 				toggleActions: "play none none reverse",
-				markers: true,
+				// markers: true,
 				// onUpdate: (self) => {
 				// 	console.log(
 				// 		"progress:",

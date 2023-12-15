@@ -2,6 +2,8 @@
 
 import { useEffect, useRef } from "react"
 
+import { navLinks } from "@/constants"
+
 import gsap, { toArray } from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { Observer } from "gsap/Observer"
@@ -53,8 +55,6 @@ export default function HomePage({ data }: { data: any }) {
 		let ctx = gsap.context(() => {
 			getSectionWidth()
 
-			console.log(sectionsContent)
-
 			const tl = gsap.timeline({
 				paused: true,
 				scrollTrigger: {
@@ -63,6 +63,7 @@ export default function HomePage({ data }: { data: any }) {
 					end: () => `+=${getScrollAmount() * -1}`,
 					pin: true,
 					scrub: 1,
+					invalidateOnRefresh: true,
 				},
 			})
 
@@ -70,7 +71,7 @@ export default function HomePage({ data }: { data: any }) {
 				x: () => `+=${getScrollAmount()}`,
 				ease: "none",
 			})
-		})
+		}, outerContainerRef.current)
 
 		return () => {
 			ctx.revert()
@@ -86,7 +87,7 @@ export default function HomePage({ data }: { data: any }) {
 
 	return (
 		<div ref={outerContainerRef}>
-			{/* <div className='fixed top-16 left-0 right-0 p-8 w-full z-50 flex justify-between'>
+			<div className='fixed top-16 left-0 right-0 p-8 w-full z-50 flex justify-between'>
 				{navLinks.map((link, index) => {
 					if (index === 0) return
 					return (
@@ -99,7 +100,7 @@ export default function HomePage({ data }: { data: any }) {
 						</button>
 					)
 				})}
-			</div> */}
+			</div>
 
 			<div ref={sectionsContainerRef} className='flex'>
 				<AboutPage data={data.aboutPageCollection.items[0]} />
