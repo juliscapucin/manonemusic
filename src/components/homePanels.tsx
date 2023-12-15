@@ -10,6 +10,7 @@ import { navLinks } from "@/constants"
 import {
 	AboutPage,
 	ContactPage,
+	HomePage,
 	ReleasesPage,
 	WorkPage,
 } from "@/components/pages"
@@ -21,30 +22,14 @@ export default function homePanels({ data }: { data: AllData }) {
 	const headerRef = useRef<HTMLDivElement | null>(null)
 	let tween: gsap.core.Tween
 
-	const handleClick = (targetSection: string) => {
-		console.log(targetSection)
+	const handleClick = (targetIndex: number) => {
 		const container = panelsContainerRef.current
 		if (!tween.scrollTrigger || !container) return
 
 		const targetPanel = document.querySelector(
-			`[data-id=${targetSection}]`
+			`[data-id=panel-${targetIndex}]`
 		) as HTMLDivElement
 		let y = targetPanel!.offsetLeft
-
-		// TO DO: check if this is necessary
-		// if (
-		// 	targetSection &&
-		// 	panelsContainerRef.current!.isSameNode(targetPanel!.parentElement)
-		// ) {
-		// 	let totalScroll = tween.scrollTrigger.end - tween.scrollTrigger.start,
-		// 		totalMovement = container.scrollWidth - innerWidth
-		// 	y = Math.round(
-		// 		tween.scrollTrigger.start +
-		// 			(targetElem.offsetLeft / totalMovement) * totalScroll
-		// 	)
-		// }
-
-		// console.log("useful stuff!", y, targetSection)
 
 		gsap.to(window, {
 			scrollTo: {
@@ -53,6 +38,8 @@ export default function homePanels({ data }: { data: AllData }) {
 			},
 			duration: 1,
 		})
+
+		window.history.pushState({}, "", navLinks[targetIndex].slug.toLowerCase())
 	}
 
 	// ScrollTrigger + Panel animation
@@ -97,12 +84,12 @@ export default function homePanels({ data }: { data: AllData }) {
 		<div id='page' className='site'>
 			<div id='feather' className='feather'></div>
 
-			<header ref={headerRef} className='fixed z-100'>
+			<header ref={headerRef} className='fixed top-8 left-8 z-100'>
 				<nav className='flex gap-8'>
 					{navLinks.map((link, index) => (
 						<button
 							key={`panel-button-${index}`}
-							onClick={() => handleClick(`panel-${index}`)}
+							onClick={() => handleClick(index)}
 						>
 							{link.label}
 						</button>
@@ -110,56 +97,45 @@ export default function homePanels({ data }: { data: AllData }) {
 				</nav>
 			</header>
 
-			<section ref={outerContainerRef} id='panels'>
-				<div ref={panelsContainerRef} id='panels-container' className='flex'>
+			<section ref={outerContainerRef}>
+				<div ref={panelsContainerRef} className='flex'>
 					{navLinks.map((section, index) => (
 						<article
 							data-id={`panel-${index}`}
-							className='panel min-w-[2000px] h-screen min-h-full pl-8'
+							className='panel min-w-[2000px] h-screen min-h-full pl-8 overflow-clip'
 							key={`panel-${index}`}
 						>
 							<div className='container mt-32'>
-								{section.label === "Home" && (
-									<>
-										<h1 className='text-displayLarge'>{section.label}</h1>
-
-										<p className='text-titleLarge'>
-											Lorem Ipsum is simply dummy text of the printing and
-											typesetting industry. Including versions of Lorem Ipsum.
-										</p>
-									</>
+								{section.label.toLowerCase() === "home" && (
+									<HomePage data={data.aboutPageCollection.items[0]} />
 								)}
 
-								{section.label === "Work" && (
+								{section.label.toLowerCase() === "work" && (
 									<WorkPage data={data.projectCollection.items} />
 								)}
-								{section.label === "Releases" && (
+								{section.label.toLowerCase() === "releases" && (
 									<ReleasesPage data={data.releasesCollection.items[0]} />
 								)}
-								{section.label === "About" && (
+								{section.label.toLowerCase() === "about" && (
 									<AboutPage data={data.aboutPageCollection.items[0]} />
 								)}
-								{section.label === "Contact" && <ContactPage data={data} />}
+								{section.label.toLowerCase() === "contact" && (
+									<ContactPage data={data} />
+								)}
 
 								{/* Previous/Next Navigation */}
 								<div className='absolute bottom-8 left-8 flex gap-8'>
 									<button
-										onClick={() =>
-											handleClick(
-												`${index - 1 > 0 ? `panel-${index - 1}` : "panel-0"}`
-											)
-										}
+										onClick={() => handleClick(index - 1 > 0 ? index - 1 : 0)}
 									>
 										Prev
 									</button>
 									<button
 										onClick={() =>
 											handleClick(
-												`${
-													index + 1 > navLinks.length
-														? `panel-${navLinks.length}`
-														: `panel-${index + 1}`
-												}`
+												index + 1 > navLinks.length
+													? navLinks.length
+													: index + 1
 											)
 										}
 									>

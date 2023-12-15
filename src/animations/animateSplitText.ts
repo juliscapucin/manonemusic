@@ -28,7 +28,7 @@ export const animateSplitText = (
 			opacity: 1,
 			xPercent: 0,
 			duration: 0.5,
-			delay: delay || 0.5,
+			delay: delay || 0,
 			stagger: 0.05,
 			ease: "expo.out",
 		}
