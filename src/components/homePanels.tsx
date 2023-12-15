@@ -6,6 +6,8 @@ import gsap from "gsap"
 import { ScrollToPlugin } from "gsap/ScrollToPlugin"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
+import { navLinks } from "@/constants"
+
 export default function homePanels() {
 	const outerContainerRef = useRef<HTMLDivElement | null>(null)
 	const panelsContainerRef = useRef<HTMLDivElement | null>(null)
@@ -95,13 +97,13 @@ export default function homePanels() {
 
 			<header ref={headerRef} className='fixed z-100'>
 				<nav className='flex gap-8'>
-					{Array.from({ length: 4 }).map((_, index) => (
+					{navLinks.map((link, index) => (
 						<button
 							key={`panel-button-${index}`}
 							data-href={`panel-${index + 1}`}
 							onClick={(e) => handleClick(e)}
 						>
-							Panel {index + 1}
+							{link.label}
 						</button>
 					))}
 				</nav>
@@ -109,15 +111,15 @@ export default function homePanels() {
 
 			<section ref={outerContainerRef} id='panels'>
 				<div ref={panelsContainerRef} id='panels-container' className='flex'>
-					{Array.from({ length: 4 }).map((_, index) => (
+					{navLinks.map((section, index) => (
 						<article
 							data-id={`panel-${index + 1}`}
-							className='panel min-w-full w-full h-screen min-h-full outline outline-secondary'
+							className='panel min-w-[4000px] h-screen min-h-full'
 							key={`panel-${index}`}
 						>
 							<div className='container mt-32'>
 								<div className='col-6'>
-									<h1 className='text-displayLarge'>Panel {index + 1}</h1>
+									<h1 className='text-displayLarge'>{section.label}</h1>
 								</div>
 								<div className='col-6 d-flex flex-column'>
 									<p className='step-description'>
