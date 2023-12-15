@@ -15,21 +15,19 @@ export default function homePanels() {
 	let tween: gsap.core.Tween
 
 	/* Main navigation */
-	const handleClick = (e: React.MouseEvent<HTMLButtonElement>) => {
+	const handleClick = (targetSection: string) => {
+		console.log(targetSection)
 		const container = panelsContainerRef.current
 		if (!tween.scrollTrigger || !container) return
 
-		const targetElem = e.target as HTMLButtonElement
-		const targetAttr = targetElem.getAttribute("data-href")
-
 		const targetPanel = document.querySelector(
-			`[data-id=${targetAttr}]`
+			`[data-id=${targetSection}]`
 		) as HTMLDivElement
 		let y = targetPanel!.offsetLeft
 
 		// TO DO: check if this is necessary
 		// if (
-		// 	targetAttr &&
+		// 	targetSection &&
 		// 	panelsContainerRef.current!.isSameNode(targetPanel!.parentElement)
 		// ) {
 		// 	let totalScroll = tween.scrollTrigger.end - tween.scrollTrigger.start,
@@ -40,7 +38,7 @@ export default function homePanels() {
 		// 	)
 		// }
 
-		// console.log("useful stuff!", y, targetAttr)
+		// console.log("useful stuff!", y, targetSection)
 
 		gsap.to(window, {
 			scrollTo: {
@@ -59,9 +57,6 @@ export default function homePanels() {
 		const container = panelsContainerRef.current
 		const panels = gsap.utils.toArray(".panel")
 
-		console.log("scrollWidth", container.scrollWidth)
-		console.log("offsetWidth", container.offsetWidth)
-
 		let ctx = gsap.context(() => {
 			tween = gsap.to(panels, {
 				x: () => -1 * (container.scrollWidth - innerWidth),
@@ -73,15 +68,15 @@ export default function homePanels() {
 					scrub: 1,
 					end: () => "+=" + (container.scrollWidth - container.offsetWidth),
 					invalidateOnRefresh: true,
-					markers: true,
-					onUpdate: (self) => {
-						console.log("end", self.end)
-						console.log(self.progress, "/1")
-						console.log(
-							window.scrollY,
-							`/${document.body.scrollHeight - window.innerHeight}`
-						)
-					},
+					// markers: true,
+					// onUpdate: (self) => {
+					// 	console.log("end", self.end)
+					// 	console.log(self.progress, "/1")
+					// 	console.log(
+					// 		window.scrollY,
+					// 		`/${document.body.scrollHeight - window.innerHeight}`
+					// 	)
+					// },
 				},
 			})
 		}, container)
@@ -100,8 +95,7 @@ export default function homePanels() {
 					{navLinks.map((link, index) => (
 						<button
 							key={`panel-button-${index}`}
-							data-href={`panel-${index + 1}`}
-							onClick={(e) => handleClick(e)}
+							onClick={() => handleClick(`panel-${index + 1}`)}
 						>
 							{link.label}
 						</button>
@@ -113,7 +107,7 @@ export default function homePanels() {
 				<div ref={panelsContainerRef} id='panels-container' className='flex'>
 					{navLinks.map((section, index) => (
 						<article
-							data-id={`panel-${index + 1}`}
+							data-id={`panel-${index}`}
 							className='panel min-w-[4000px] h-screen min-h-full'
 							key={`panel-${index}`}
 						>
@@ -122,7 +116,7 @@ export default function homePanels() {
 									<h1 className='text-displayLarge'>{section.label}</h1>
 								</div>
 								<div className='col-6 d-flex flex-column'>
-									<p className='step-description'>
+									<p className='text-titleLarge'>
 										Lorem Ipsum is simply dummy text of the printing and
 										typesetting industry. Including versions of Lorem Ipsum.
 									</p>
@@ -130,18 +124,27 @@ export default function homePanels() {
 									<div className='panels-navigation'>
 										<div className='nav-panel' data-sign='minus'>
 											<button
-												data-href={
-													index - 1 > 1 ? `panel-${index - 1}` : "panel-1"
+												onClick={() =>
+													handleClick(
+														`${
+															index - 1 > 0 ? `panel-${index - 1}` : "panel-0"
+														}`
+													)
 												}
-												onClick={(e) => handleClick(e)}
 											>
 												Prev
 											</button>
 										</div>
 										<div className='nav-panel' data-sign='plus'>
 											<button
-												data-href={
-													index + 1 < 4 ? `panel-${index + 1}` : "panel-4"
+												onClick={() =>
+													handleClick(
+														`${
+															index + 1 > navLinks.length
+																? `panel-${navLinks.length}`
+																: `panel-${index + 1}`
+														}`
+													)
 												}
 											>
 												Next
