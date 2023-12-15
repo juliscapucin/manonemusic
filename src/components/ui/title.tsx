@@ -16,7 +16,7 @@ export const Title = forwardRef(function Title(
 	ref: React.Ref<HTMLDivElement>
 ) {
 	return (
-		<div className='overflow-hidden mt-32 mb-16 bg-primary' ref={ref}>
+		<div className='overflow-hidden mb-16 bg-primary' ref={ref}>
 			<h1 className='text-displayMedium md:text-displayLarge whitespace-nowrap'>
 				{children}
 			</h1>

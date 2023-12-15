@@ -20,7 +20,7 @@ export default function WorkPage({ data }: Props) {
 	useTitleScrollTrigger(titleWorkRef)
 
 	return (
-		<div className='custom-min-w-screen h-full flex flex-col justify-center items-start'>
+		<PageWrapper>
 			<Title ref={titleWorkRef}>Work</Title>
 			<div className='flex justify-center gap-4 h-64'>
 				{data.map((project: Project) => (
@@ -30,6 +30,6 @@ export default function WorkPage({ data }: Props) {
 					/>
 				))}
 			</div>
-		</div>
+		</PageWrapper>
 	)
 }

@@ -7,14 +7,20 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 import { navLinks } from "@/constants"
+import {
+	AboutPage,
+	ContactPage,
+	ReleasesPage,
+	WorkPage,
+} from "@/components/pages"
+import { AllData } from "@/types"
 
-export default function homePanels() {
+export default function homePanels({ data }: { data: AllData }) {
 	const outerContainerRef = useRef<HTMLDivElement | null>(null)
 	const panelsContainerRef = useRef<HTMLDivElement | null>(null)
 	const headerRef = useRef<HTMLDivElement | null>(null)
 	let tween: gsap.core.Tween
 
-	/* Main navigation */
 	const handleClick = (targetSection: string) => {
 		console.log(targetSection)
 		const container = panelsContainerRef.current
@@ -49,6 +55,7 @@ export default function homePanels() {
 		})
 	}
 
+	// ScrollTrigger + Panel animation
 	useEffect(() => {
 		if (!outerContainerRef.current || !panelsContainerRef.current) return
 		gsap.registerPlugin(ScrollToPlugin, ScrollTrigger)
@@ -95,7 +102,7 @@ export default function homePanels() {
 					{navLinks.map((link, index) => (
 						<button
 							key={`panel-button-${index}`}
-							onClick={() => handleClick(`panel-${index + 1}`)}
+							onClick={() => handleClick(`panel-${index}`)}
 						>
 							{link.label}
 						</button>
@@ -108,49 +115,56 @@ export default function homePanels() {
 					{navLinks.map((section, index) => (
 						<article
 							data-id={`panel-${index}`}
-							className='panel min-w-[4000px] h-screen min-h-full'
+							className='panel min-w-[2000px] h-screen min-h-full pl-8'
 							key={`panel-${index}`}
 						>
 							<div className='container mt-32'>
-								<div className='col-6'>
-									<h1 className='text-displayLarge'>{section.label}</h1>
-								</div>
-								<div className='col-6 d-flex flex-column'>
-									<p className='text-titleLarge'>
-										Lorem Ipsum is simply dummy text of the printing and
-										typesetting industry. Including versions of Lorem Ipsum.
-									</p>
+								{section.label === "Home" && (
+									<>
+										<h1 className='text-displayLarge'>{section.label}</h1>
 
-									<div className='panels-navigation'>
-										<div className='nav-panel' data-sign='minus'>
-											<button
-												onClick={() =>
-													handleClick(
-														`${
-															index - 1 > 0 ? `panel-${index - 1}` : "panel-0"
-														}`
-													)
-												}
-											>
-												Prev
-											</button>
-										</div>
-										<div className='nav-panel' data-sign='plus'>
-											<button
-												onClick={() =>
-													handleClick(
-														`${
-															index + 1 > navLinks.length
-																? `panel-${navLinks.length}`
-																: `panel-${index + 1}`
-														}`
-													)
-												}
-											>
-												Next
-											</button>
-										</div>
-									</div>
+										<p className='text-titleLarge'>
+											Lorem Ipsum is simply dummy text of the printing and
+											typesetting industry. Including versions of Lorem Ipsum.
+										</p>
+									</>
+								)}
+
+								{section.label === "Work" && (
+									<WorkPage data={data.projectCollection.items} />
+								)}
+								{section.label === "Releases" && (
+									<ReleasesPage data={data.releasesCollection.items[0]} />
+								)}
+								{section.label === "About" && (
+									<AboutPage data={data.aboutPageCollection.items[0]} />
+								)}
+								{section.label === "Contact" && <ContactPage data={data} />}
+
+								{/* Previous/Next Navigation */}
+								<div className='absolute bottom-8 left-8 flex gap-8'>
+									<button
+										onClick={() =>
+											handleClick(
+												`${index - 1 > 0 ? `panel-${index - 1}` : "panel-0"}`
+											)
+										}
+									>
+										Prev
+									</button>
+									<button
+										onClick={() =>
+											handleClick(
+												`${
+													index + 1 > navLinks.length
+														? `panel-${navLinks.length}`
+														: `panel-${index + 1}`
+												}`
+											)
+										}
+									>
+										Next
+									</button>
 								</div>
 							</div>
 						</article>

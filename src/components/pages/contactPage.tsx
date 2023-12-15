@@ -31,16 +31,12 @@ export default function ContactPage({ data }: { data: ContactData }) {
 	useTitleScrollTrigger(titleContactRef)
 
 	return (
-		<div className='h-full flex flex-col justify-center items-start'>
+		<PageWrapper>
 			<Title ref={titleContactRef}>{title}</Title>
 			<div className='flex flex-row flex-nowrap gap-32'>
 				<Availability availability={availability} />
 				<SocialLinks data={socialsData} />
-				<Availability availability={availability} />
-				<SocialLinks data={socialsData} />
-				<Availability availability={availability} />
-				<SocialLinks data={socialsData} />
 			</div>
-		</div>
+		</PageWrapper>
 	)
 }
