@@ -46,7 +46,7 @@ export default async function Page() {
 	return (
 		<>
 			<Title>{workData.title}</Title>
-			<WorkPage projectsData={projectsData} />
+			<WorkPage data={projectsData} />
 		</>
 	)
 }

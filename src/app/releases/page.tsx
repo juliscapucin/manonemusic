@@ -30,7 +30,6 @@ export default async function Page() {
 
 	return (
 		<>
-			<Title>{releasesData.title}</Title>
 			<ReleasesPage data={releasesData} />
 		</>
 	)

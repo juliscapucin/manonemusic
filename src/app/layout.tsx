@@ -29,10 +29,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 	return (
 		<RootLayout>
 			<body
-				className={`${font.className} max-width-wrapper min-h-full h-full pt-32`}
+				className={`${font.className} relative w-screen h-screen custom-min-h-screen overflow-x-clip`}
 			>
 				<PageContextProvider>
-					<Header />
+					{/* <Header /> */}
 					{children}
 				</PageContextProvider>
 			</body>

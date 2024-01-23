@@ -1,30 +1,25 @@
 "use client"
 
+import { forwardRef, useEffect, useRef } from "react"
+
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
+
 import { animateSplitText } from "@/animations"
-import { useEffect, useRef } from "react"
 
 type TitleProps = {
 	children: React.ReactNode
-	margin?: boolean
 }
 
-export default function Title({ children, margin }: TitleProps) {
-	const titleRef = useRef(null)
-
-	useEffect(() => {
-		if (titleRef.current) {
-			animateSplitText(titleRef.current)
-		}
-	}, [titleRef])
-
+export const Title = forwardRef(function Title(
+	{ children }: TitleProps,
+	ref: React.Ref<HTMLDivElement>
+) {
 	return (
-		<div className='overflow-clip mb-16'>
-			<h1
-				ref={titleRef}
-				className='text-displayMedium md:text-displayLarge whitespace-nowrap'
-			>
+		<div className='mb-16 bg-primary' ref={ref}>
+			<h1 className='text-displayMedium md:text-displayLarge whitespace-nowrap'>
 				{children}
 			</h1>
 		</div>
 	)
-}
+})

@@ -1,11 +1,24 @@
-type AboutData = {
+"use client"
+
+import { useRef } from "react"
+
+import { PageWrapper, Title } from "@/components/ui"
+import { useTitleScrollTrigger } from "@/hooks"
+
+type ReleasesData = {
 	title: string
+	text: string
 }
 
-export default function ReleasesPage({ data }: { data: AboutData }) {
+export default function ReleasesPage({ data }: { data: ReleasesData }) {
+	const titleReleasesRef = useRef(null)
+
+	useTitleScrollTrigger(titleReleasesRef)
+
 	return (
-		<>
-			<p>hi</p>
-		</>
+		<PageWrapper>
+			<Title ref={titleReleasesRef}>{data.title}</Title>
+			<p className='max-w-prose'>{data.text}</p>
+		</PageWrapper>
 	)
 }
