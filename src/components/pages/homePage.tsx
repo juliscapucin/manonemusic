@@ -2,7 +2,7 @@
 
 import { useRef } from "react"
 
-import { Copyright } from "@/components"
+import { Copyright, Status } from "@/components"
 import { PageWrapper, Title } from "@/components/ui"
 import { useTitleScrollTrigger } from "@/hooks"
 
@@ -18,9 +18,7 @@ export default function HomePage({ data }: { data: HomeData }) {
 
 	return (
 		<PageWrapper>
-			<Title ref={titleHomeRef}>{data.title}</Title>
-			<p className='max-w-prose'>{data.text}</p>
-			<Copyright />
+			<Status location='Amsterdam' />
 		</PageWrapper>
 	)
 }

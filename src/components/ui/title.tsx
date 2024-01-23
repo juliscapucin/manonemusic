@@ -7,8 +7,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 import { animateSplitText } from "@/animations"
 
+import { Heading } from "@/components/ui"
+
 type TitleProps = {
-	children: React.ReactNode
+	children: string
 }
 
 export const Title = forwardRef(function Title(
@@ -17,9 +19,12 @@ export const Title = forwardRef(function Title(
 ) {
 	return (
 		<div className='mb-16 bg-primary' ref={ref}>
-			<h1 className='text-displayMedium md:text-displayLarge whitespace-nowrap'>
+			<Heading
+				tag={"h1"}
+				styles='text-displayMedium md:text-displayLarge whitespace-nowrap'
+			>
 				{children}
-			</h1>
+			</Heading>
 		</div>
 	)
 })

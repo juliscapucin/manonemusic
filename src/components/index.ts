@@ -6,8 +6,9 @@ import HomePanels from "./homePanels"
 import MenuDesktop from "./menuDesktop"
 import MenuLink from "./menuLink"
 import MenuMobile from "./menuMobile"
-import ProjectCard from "./ProjectCard"
+import ProjectCard from "./projectCard"
 import SocialLinks from "./socialLinks"
+import Status from "./status"
 import ThemeSwitcher from "./themeSwitcher"
 
 export {
@@ -20,6 +21,7 @@ export {
 	MenuMobile,
 	ProjectCard,
 	RootLayout,
-	ThemeSwitcher,
 	SocialLinks,
+	Status,
+	ThemeSwitcher,
 }
