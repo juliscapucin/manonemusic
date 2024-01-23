@@ -29,9 +29,8 @@ function Status({ location }: StatusProps) {
 		let ctx = gsap.context(() => {
 			gsap.from(".line", {
 				xPercent: -100,
-				duration: 1,
-				delay: 0.3,
-				ease: "expo4.out",
+				duration: 0.3,
+				ease: "expo4.inOut",
 				stagger: 0.25,
 			})
 		}, statusWrapperRef.current)
@@ -51,14 +50,11 @@ function Status({ location }: StatusProps) {
 			ref={statusWrapperRef}
 			className='flex flex-col text-titleMedium mt-16 md:mt-4 lg:mt-2 ml-2 mb-16 lg:mb-0 md:col-span-4 lg:col-span-3 xlg:col-span-1 max-w-[250px] overflow-clip'
 		>
-			<h2>Location: {location}</h2>
-			<span className='line h-[1px] bg-secondary'></span>
-			<span>
+			<h2 className='line'>Location: {location}</h2>
+			<span className='line'>
 				{dayOfWeek} | {dayOfMonth} {month}
 			</span>
-			<span className='line h-[1px] bg-secondary'></span>
-			<span>{time}</span>
-			<span className='line h-[1px] bg-secondary'></span>
+			<span className='line'>{time}</span>
 		</div>
 	)
 }
