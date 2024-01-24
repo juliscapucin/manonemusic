@@ -2,7 +2,7 @@ import RootLayout from "./rootLayout"
 import Availability from "./availability"
 import Copyright from "./copyright"
 import Header from "./header"
-import HomePanels from "./homePanels"
+import HorizontalPanel from "./horizontalPanel"
 import MenuDesktop from "./menuDesktop"
 import MenuLink from "./menuLink"
 import MenuMobile from "./menuMobile"
@@ -15,7 +15,7 @@ export {
 	Availability,
 	Copyright,
 	Header,
-	HomePanels,
+	HorizontalPanel,
 	MenuDesktop,
 	MenuLink,
 	MenuMobile,

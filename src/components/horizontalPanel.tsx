@@ -15,13 +15,15 @@ import {
 	WorkPage,
 } from "@/components/pages"
 import { AllData } from "@/types"
+import { Heading } from "@/components/ui"
 
-export default function homePanels({ data }: { data: AllData }) {
+export default function HorizontalPanel({ data }: { data: AllData }) {
 	const outerContainerRef = useRef<HTMLDivElement | null>(null)
 	const panelsContainerRef = useRef<HTMLDivElement | null>(null)
 	const headerRef = useRef<HTMLDivElement | null>(null)
 	let tween: gsap.core.Tween
 
+	// Scroll to panel on nav click
 	const handleClick = (targetIndex: number) => {
 		const container = panelsContainerRef.current
 		if (!tween.scrollTrigger || !container) return
@@ -84,8 +86,8 @@ export default function homePanels({ data }: { data: AllData }) {
 		<div id='page' className='site'>
 			<div id='feather' className='feather'></div>
 
-			<header ref={headerRef} className='fixed top-8 left-8 z-100'>
-				<nav className='flex gap-8'>
+			<header ref={headerRef} className='fixed bottom-8 right-8 w-1/2 z-100'>
+				<nav className='flex flex-col items-start gap-2'>
 					{navLinks.map((link, index) => (
 						<button
 							key={`panel-button-${index}`}
@@ -96,6 +98,14 @@ export default function homePanels({ data }: { data: AllData }) {
 					))}
 				</nav>
 			</header>
+
+			<Heading
+				tag='h1'
+				variant='headline'
+				styles='fixed top-0 left-0 w-screen text-center'
+			>
+				MAN/ONE MUSIC
+			</Heading>
 
 			<section ref={outerContainerRef}>
 				<div ref={panelsContainerRef} className='flex'>
@@ -124,7 +134,7 @@ export default function homePanels({ data }: { data: AllData }) {
 								)}
 
 								{/* Previous/Next Navigation */}
-								<div className='absolute bottom-8 left-8 flex gap-8'>
+								{/* <div className='absolute bottom-8 left-8 flex gap-8'>
 									<button
 										onClick={() => handleClick(index - 1 > 0 ? index - 1 : 0)}
 									>
@@ -141,7 +151,7 @@ export default function homePanels({ data }: { data: AllData }) {
 									>
 										Next
 									</button>
-								</div>
+								</div> */}
 							</div>
 						</article>
 					))}

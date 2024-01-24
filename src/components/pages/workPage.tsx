@@ -17,7 +17,7 @@ type Props = { data: Project[] }
 export default function WorkPage({ data }: Props) {
 	const titleWorkRef = useRef(null)
 
-	useTitleScrollTrigger(titleWorkRef)
+	useTitleScrollTrigger(titleWorkRef, "/work")
 
 	return (
 		<PageWrapper>

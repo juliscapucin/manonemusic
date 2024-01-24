@@ -14,7 +14,7 @@ type AboutData = {
 export default function AboutPage({ data }: { data: AboutData }) {
 	const titleAboutRef = useRef(null)
 
-	useTitleScrollTrigger(titleAboutRef)
+	useTitleScrollTrigger(titleAboutRef, "/about")
 
 	return (
 		<PageWrapper>

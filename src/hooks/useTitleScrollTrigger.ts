@@ -6,7 +6,8 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { animateSplitText } from "@/animations"
 
 export default function useTitleScrollTrigger(
-	elementRef: React.RefObject<HTMLDivElement>
+	elementRef: React.RefObject<HTMLDivElement>,
+	slug: string
 ) {
 	useEffect(() => {
 		if (!elementRef.current) return
@@ -40,6 +41,12 @@ export default function useTitleScrollTrigger(
 					self.direction === 1
 						? (fastScrollEnd = true)
 						: (fastScrollEnd = false)
+
+					// console.log("progress", self.progress)
+
+					if (self.progress > 0 && self.progress < 1) {
+						window.history.pushState({}, "", slug)
+					}
 
 					// console.log("fastScrollEnd", fastScrollEnd)
 					// console.log(

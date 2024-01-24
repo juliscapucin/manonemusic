@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation"
-import { HomePanels } from "@/components"
+import { HorizontalPanel } from "@/components"
 import { fetchGraphQL } from "@/lib"
 
 const query = `
@@ -57,7 +57,7 @@ export default async function Home() {
 	if (!data) return notFound()
 	return (
 		<main className='w-screen custom-min-w-screen min-w-full h-full'>
-			<HomePanels data={data} />
+			<HorizontalPanel data={data} />
 		</main>
 	)
 }
