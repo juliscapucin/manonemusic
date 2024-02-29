@@ -24,7 +24,6 @@ export default function HomePage({ data }: { data: HomeData }) {
 				</Heading>
 				<Status location='Amsterdam' />
 			</div>
-			<Title ref={titleHomeRef}>Home</Title>
 			<div className='absolute left-8 bottom-0'>
 				<p className='w-1/4'>
 					Tailored sound design and audio identities that captures the spirit of

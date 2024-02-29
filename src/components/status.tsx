@@ -54,7 +54,7 @@ function Status({ location }: StatusProps) {
 			<span className='line'>
 				{dayOfWeek} | {dayOfMonth} {month}
 			</span>
-			<span className='line'>{time}</span>
+			{/* {time && <span className='line'>{time}</span>} */}
 		</div>
 	)
 }

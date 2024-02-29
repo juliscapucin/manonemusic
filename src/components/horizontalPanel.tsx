@@ -1,6 +1,7 @@
 "use client"
 
 import React, { useEffect, useRef } from "react"
+import { usePathname } from "next/navigation"
 
 import gsap from "gsap"
 import { ScrollToPlugin } from "gsap/ScrollToPlugin"
@@ -18,20 +19,21 @@ import { AllData } from "@/types"
 import { Heading } from "@/components/ui"
 
 export default function HorizontalPanel({ data }: { data: AllData }) {
+	const pathname = usePathname()
 	const outerContainerRef = useRef<HTMLDivElement | null>(null)
 	const panelsContainerRef = useRef<HTMLDivElement | null>(null)
 	const headerRef = useRef<HTMLDivElement | null>(null)
 	let tween: gsap.core.Tween
 
 	// Scroll to panel on nav click
-	const handleClick = (targetIndex: number) => {
+	const handleSlide = (targetIndex: number, pushSlug: boolean) => {
 		const container = panelsContainerRef.current
 		if (!tween.scrollTrigger || !container) return
 
-		const targetPanel = document.querySelector(
+		const targetPanel = container.querySelector(
 			`[data-id=panel-${targetIndex}]`
 		) as HTMLDivElement
-		let y = targetPanel!.offsetLeft
+		let y = targetPanel?.offsetLeft || 0
 
 		gsap.to(window, {
 			scrollTo: {
@@ -41,7 +43,23 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 			duration: 1,
 		})
 
-		window.history.pushState({}, "", navLinks[targetIndex].slug.toLowerCase())
+		if (pushSlug === true) {
+			gsap.to(window, {
+				scrollTo: {
+					y: y,
+					autoKill: false,
+				},
+				duration: 1,
+			})
+			window.history.pushState({}, "", navLinks[targetIndex].slug.toLowerCase())
+		} else {
+			gsap.set(window, {
+				scrollTo: {
+					y: y,
+					autoKill: false,
+				},
+			})
+		}
 	}
 
 	// ScrollTrigger + Panel animation
@@ -82,6 +100,15 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 		}
 	}, [outerContainerRef, panelsContainerRef])
 
+	// Scroll to panel on page load
+	useEffect(() => {
+		if (pathname === "/") return
+
+		const index = navLinks.findIndex((link) => `/${link.slug}` === pathname)
+
+		handleSlide(index, false)
+	}, [pathname])
+
 	return (
 		<div id='page' className='site'>
 			<div id='feather' className='feather'></div>
@@ -91,7 +118,7 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 					{navLinks.map((link, index) => (
 						<button
 							key={`panel-button-${index}`}
-							onClick={() => handleClick(index)}
+							onClick={() => handleSlide(index, true)}
 						>
 							{link.label}
 						</button>
@@ -138,13 +165,13 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 								{/* Previous/Next Navigation */}
 								{/* <div className='absolute bottom-8 left-8 flex gap-8'>
 									<button
-										onClick={() => handleClick(index - 1 > 0 ? index - 1 : 0)}
+										onClick={() => handleSlide(index - 1 > 0 ? index - 1 : 0)}
 									>
 										Prev
 									</button>
 									<button
 										onClick={() =>
-											handleClick(
+											handleSlide(
 												index + 1 > navLinks.length
 													? navLinks.length
 													: index + 1
