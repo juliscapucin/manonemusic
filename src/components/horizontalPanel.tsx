@@ -112,7 +112,9 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 					{navLinks.map((section, index) => (
 						<article
 							data-id={`panel-${index}`}
-							className='panel min-w-[2000px] h-screen min-h-full pl-8 overflow-clip'
+							className={`${
+								index > 0 && "ml-16"
+							} panel custom-min-w-screen h-screen min-h-full pl-8 overflow-clip`}
 							key={`panel-${index}`}
 						>
 							<div className='container mt-32'>

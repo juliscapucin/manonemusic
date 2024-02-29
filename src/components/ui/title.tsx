@@ -21,7 +21,7 @@ export const Title = forwardRef(function Title(
 		<div className='mb-16 bg-primary' ref={ref}>
 			<Heading
 				tag={"h1"}
-				styles='text-displayMedium md:text-displayLarge whitespace-nowrap'
+				styles='text-displayMedium md:text-displayLarge whitespace-nowrap uppercase'
 				variant='display'
 			>
 				{children}
