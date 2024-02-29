@@ -1,10 +1,12 @@
 "use client"
 
-import { useRef } from "react"
+import { useEffect, useRef } from "react"
+
+import gsap from "gsap"
+import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 import { Copyright, Status } from "@/components"
-import { PageWrapper, Heading, Title } from "@/components/ui"
-import { useTitleScrollTrigger } from "@/hooks"
+import { Heading } from "@/components/ui"
 
 type HomeData = {
 	title: string
@@ -12,12 +14,37 @@ type HomeData = {
 }
 
 export default function HomePage({ data }: { data: HomeData }) {
-	const titleHomeRef = useRef(null)
+	const homeWrapperRef = useRef(null)
 
-	useTitleScrollTrigger(titleHomeRef, "/")
+	useEffect(() => {
+		if (!homeWrapperRef.current) return
+
+		gsap.registerPlugin(ScrollTrigger)
+		const homeWrapper = homeWrapperRef.current as HTMLDivElement
+
+		const offsetLeft = () => homeWrapper!.offsetLeft
+		const width = () => homeWrapper!.offsetWidth
+
+		let ctx = gsap.context(() => {
+			ScrollTrigger.create({
+				trigger: homeWrapper,
+				start: () => `${offsetLeft()}px bottom`,
+				end: () => `+=${width()}`,
+				invalidateOnRefresh: true,
+				onUpdate: (self) => {
+					self.isActive && window.history.pushState({}, "", "/")
+				},
+			})
+		})
+
+		return () => ctx.revert()
+	}, [homeWrapperRef])
 
 	return (
-		<PageWrapper>
+		<div
+			ref={homeWrapperRef}
+			className='w-screen custom-min-w-screen custom-min-h-screen h-full'
+		>
 			<div className='flex w-full'>
 				<Heading tag='h2' variant='headline' styles='w-1/2'>
 					Music & Sound Design
@@ -31,6 +58,6 @@ export default function HomePage({ data }: { data: HomeData }) {
 					identity through sound.
 				</p>
 			</div>
-		</PageWrapper>
+		</div>
 	)
 }

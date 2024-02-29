@@ -25,23 +25,15 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 	const headerRef = useRef<HTMLDivElement | null>(null)
 	let tween: gsap.core.Tween
 
-	// Scroll to panel on nav click
+	// Scroll / jump to panel on nav click / page load
 	const handleSlide = (targetIndex: number, pushSlug: boolean) => {
 		const container = panelsContainerRef.current
-		if (!tween.scrollTrigger || !container) return
+		if (!container) return
 
 		const targetPanel = container.querySelector(
 			`[data-id=panel-${targetIndex}]`
 		) as HTMLDivElement
 		let y = targetPanel?.offsetLeft || 0
-
-		gsap.to(window, {
-			scrollTo: {
-				y: y,
-				autoKill: false,
-			},
-			duration: 1,
-		})
 
 		if (pushSlug === true) {
 			gsap.to(window, {
@@ -100,7 +92,7 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 		}
 	}, [outerContainerRef, panelsContainerRef])
 
-	// Scroll to panel on page load
+	// Jump to panel on page load
 	useEffect(() => {
 		if (pathname === "/") return
 
@@ -111,25 +103,30 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 
 	return (
 		<div id='page' className='site'>
-			<div id='feather' className='feather'></div>
-
-			<header ref={headerRef} className='fixed bottom-8 right-8 w-1/2 z-100'>
-				<nav className='flex flex-col items-start gap-2'>
-					{navLinks.map((link, index) => (
-						<button
-							key={`panel-button-${index}`}
-							onClick={() => handleSlide(index, true)}
-						>
-							{link.label}
-						</button>
-					))}
-				</nav>
-			</header>
+			{pathname === "/" && (
+				<header
+					ref={headerRef}
+					className={`fixed bottom-8 right-8 w-1/2 z-100`}
+				>
+					<nav className='flex flex-col items-start gap-2'>
+						{navLinks.map((link, index) => (
+							<button
+								key={`panel-button-${index}`}
+								onClick={() => handleSlide(index, true)}
+							>
+								{link.label}
+							</button>
+						))}
+					</nav>
+				</header>
+			)}
 
 			<Heading
 				tag='h1'
 				variant='headline'
-				styles='fixed top-0 left-0 w-screen text-center'
+				styles={`fixed top-0 left-0 w-screen text-center transition-transform duration-500 origin-top ${
+					pathname === "/" ? "scale-[2.0]" : ""
+				}`}
 			>
 				MAN/ONE MUSIC
 			</Heading>

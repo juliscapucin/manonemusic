@@ -20,10 +20,6 @@ export default function useTitleScrollTrigger(
 		const offsetLeft = () => parentElement!.offsetLeft
 		const width = () => parentElement!.offsetWidth
 
-		// console.log("parentElement", element.closest("article"))
-		// console.log("offsetLeft", offsetLeft())
-		// console.log("width", width())
-
 		let fastScrollEnd = true
 
 		let ctx = gsap.context(() => {
@@ -38,15 +34,13 @@ export default function useTitleScrollTrigger(
 				// markers: true,
 				onUpdate: (self) => {
 					// define fastScrollEnd depending on scroll direction
-					self.direction === 1
-						? (fastScrollEnd = true)
-						: (fastScrollEnd = false)
+					// self.direction === 1
+					// 	? (fastScrollEnd = true)
+					// 	: (fastScrollEnd = false)
 
 					// console.log("progress", self.progress)
 
-					if (self.progress > 0 && self.progress < 1) {
-						window.history.pushState({}, "", slug)
-					}
+					self.isActive && window.history.pushState({}, "", slug)
 
 					// console.log("fastScrollEnd", fastScrollEnd)
 					// console.log(

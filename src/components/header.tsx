@@ -3,7 +3,6 @@
 import { navLinks } from "@/constants"
 
 import { MenuDesktop, MenuMobile } from "@/components"
-import { Heading } from "@/components/ui"
 
 import { usePageContext } from "@/context"
 

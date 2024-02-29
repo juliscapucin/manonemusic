@@ -16,16 +16,19 @@ export default function Heading({
 
 	switch (variant) {
 		case "display":
-			headingStyles = "text-displayMedium md:text-displayLarge font-normal"
+			headingStyles =
+				"text-displaySmall md:text-displayMedium lg:text-displayLarge font-normal"
 			break
 		case "headline":
-			headingStyles = "text-headlineMedium md:text-headlineLarge"
+			headingStyles =
+				"text-headlineSmall md:text-headlineMedium lg:text-headlineLarge"
 			break
 		case "title":
-			headingStyles = "text-titleMedium md:text-titleLarge"
+			headingStyles = "text-titleSmall md:text-titleMedium lg:text-titleLarge"
 			break
 		default:
-			headingStyles = "text-displayMedium md:text-displayLarge"
+			headingStyles =
+				"text-displaySmall md:text-displayMedium lg:text-displayLarge"
 			break
 	}
 

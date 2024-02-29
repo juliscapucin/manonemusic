@@ -1,11 +1,6 @@
 "use client"
 
-import { forwardRef, useEffect, useRef } from "react"
-
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-
-import { animateSplitText } from "@/animations"
+import { forwardRef } from "react"
 
 import { Heading } from "@/components/ui"
 
