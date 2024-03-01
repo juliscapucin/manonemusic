@@ -3,9 +3,8 @@ import Availability from "./availability"
 import Copyright from "./copyright"
 import Header from "./header"
 import HorizontalPanel from "./horizontalPanel"
-import MenuDesktop from "./menuDesktop"
+import NavBar from "./navBar"
 import MenuLink from "./menuLink"
-import MenuMobile from "./menuMobile"
 import ProjectCard from "./projectCard"
 import SocialLinks from "./socialLinks"
 import Status from "./status"
@@ -16,9 +15,8 @@ export {
 	Copyright,
 	Header,
 	HorizontalPanel,
-	MenuDesktop,
+	NavBar,
 	MenuLink,
-	MenuMobile,
 	ProjectCard,
 	RootLayout,
 	SocialLinks,

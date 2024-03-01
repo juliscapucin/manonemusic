@@ -16,13 +16,12 @@ import {
 	WorkPage,
 } from "@/components/pages"
 import { AllData } from "@/types"
-import { Heading } from "@/components/ui"
+import { NavBar } from "@/components"
 
 export default function HorizontalPanel({ data }: { data: AllData }) {
 	const pathname = usePathname()
 	const outerContainerRef = useRef<HTMLDivElement | null>(null)
 	const panelsContainerRef = useRef<HTMLDivElement | null>(null)
-	const headerRef = useRef<HTMLDivElement | null>(null)
 	let tween: gsap.core.Tween
 
 	// Scroll / jump to panel on nav click / page load
@@ -102,42 +101,26 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 	}, [pathname])
 
 	return (
-		<div id='page' className='site'>
-			{pathname === "/" && (
-				<header
-					ref={headerRef}
-					className={`fixed bottom-8 right-8 w-1/2 z-100`}
-				>
-					<nav className='flex flex-col items-start gap-2'>
-						{navLinks.map((link, index) => (
-							<button
-								key={`panel-button-${index}`}
-								onClick={() => handleSlide(index, true)}
-							>
-								{link.label}
-							</button>
-						))}
-					</nav>
-				</header>
-			)}
+		<div id='page'>
+			<NavBar navLinks={navLinks} transitionOnClick={handleSlide} />
 
-			<Heading
-				tag='h1'
-				variant='headline'
-				styles={`fixed top-0 left-0 w-screen text-center transition-transform duration-500 origin-top ${
-					pathname === "/" ? "scale-[2.0]" : ""
+			{/* Logo */}
+			<h1
+				className={`fixed top-0 left-0 w-screen text-headlineSmall md:text-headlineMedium lg:text-headlineLarge text-center transition-transform duration-500 origin-top ${
+					pathname === "/" ? "scale-[3.0]" : ""
 				}`}
 			>
 				MAN/ONE MUSIC
-			</Heading>
+			</h1>
 
+			{/* Panels */}
 			<section ref={outerContainerRef}>
 				<div ref={panelsContainerRef} className='flex'>
 					{navLinks.map((section, index) => (
 						<article
 							data-id={`panel-${index}`}
 							className={`${
-								index > 0 && "ml-16"
+								index > 0 && "ml-32"
 							} panel custom-min-w-screen h-screen min-h-full pl-8 overflow-clip`}
 							key={`panel-${index}`}
 						>

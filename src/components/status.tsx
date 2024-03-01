@@ -48,9 +48,9 @@ function Status({ location }: StatusProps) {
 	return (
 		<div
 			ref={statusWrapperRef}
-			className='flex flex-col text-titleMedium mt-16 md:mt-4 lg:mt-2 ml-2 mb-16 lg:mb-0 md:col-span-4 lg:col-span-3 xlg:col-span-1 max-w-[250px] overflow-clip'
+			className='flex flex-col w-1/2 text-titleSmall md:text-titleMedium lg:text-titleLarge overflow-clip'
 		>
-			<h2 className='line'>Location: {location}</h2>
+			<h2 className='line'>{location}</h2>
 			<span className='line'>
 				{dayOfWeek} | {dayOfMonth} {month}
 			</span>

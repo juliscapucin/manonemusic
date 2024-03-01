@@ -16,6 +16,7 @@ type HomeData = {
 export default function HomePage({ data }: { data: HomeData }) {
 	const homeWrapperRef = useRef(null)
 
+	// ScrollTrigger for Page Reveal
 	useEffect(() => {
 		if (!homeWrapperRef.current) return
 
@@ -41,11 +42,8 @@ export default function HomePage({ data }: { data: HomeData }) {
 	}, [homeWrapperRef])
 
 	return (
-		<div
-			ref={homeWrapperRef}
-			className='w-screen custom-min-w-screen custom-min-h-screen h-full'
-		>
-			<div className='flex w-full'>
+		<div ref={homeWrapperRef} className='w-screen custom-min-h-screen h-full'>
+			<div className='relative flex mt-48 w-screen pr-16'>
 				<Heading tag='h2' variant='headline' styles='w-1/2'>
 					Music & Sound Design
 				</Heading>
