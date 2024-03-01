@@ -144,3 +144,27 @@ textarea {
 .logo {
    font-size: clamp(3rem, 14vw, 36rem);
 }
+
+.navbar-home {
+   @apply bottom-8 right-0 w-1/2 flex flex-col items-start gap-2 z-100;
+}
+
+.navbar-page {
+   @apply fixed top-0 right-0 w-screen h-screen z-100;
+}
+
+.navbar-page :first-child {
+   @apply fixed top-0 left-0;
+}
+
+.navbar-page :nth-child(2) {
+   @apply fixed top-0 right-0;
+}
+
+.navbar-page :nth-child(3) {
+   @apply fixed bottom-0 left-0;
+}
+
+.navbar-page :nth-child(4) {
+   @apply fixed bottom-0 right-0;
+}

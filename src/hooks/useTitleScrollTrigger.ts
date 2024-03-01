@@ -1,4 +1,5 @@
 import { useEffect } from "react"
+import { usePathname } from "next/navigation"
 
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -9,13 +10,15 @@ export default function useTitleScrollTrigger(
 	elementRef: React.RefObject<HTMLDivElement>,
 	slug: string
 ) {
+	const pathname = usePathname()
+
 	useEffect(() => {
 		if (!elementRef.current) return
 
 		gsap.registerPlugin(ScrollTrigger)
 		const element = elementRef.current as HTMLDivElement
 		const titleElement = element.querySelector("h1") as HTMLHeadingElement
-		const parentElement = element.closest("article") as HTMLDivElement
+		const parentElement = element.closest("section") as HTMLDivElement
 
 		const offsetLeft = () => parentElement!.offsetLeft
 		const width = () => parentElement!.offsetWidth
@@ -40,7 +43,10 @@ export default function useTitleScrollTrigger(
 
 					// console.log("progress", self.progress)
 
-					self.isActive && window.history.pushState({}, "", slug)
+					if (self.isActive && pathname !== slug) {
+						window.history.pushState({}, "", slug)
+						console.log("pushed slug")
+					}
 
 					// console.log("fastScrollEnd", fastScrollEnd)
 					// console.log(

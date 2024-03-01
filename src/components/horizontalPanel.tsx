@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useRef } from "react"
+import React, { useEffect, useRef, useState } from "react"
 import { usePathname } from "next/navigation"
 
 import gsap from "gsap"
@@ -20,6 +20,7 @@ import { NavBar } from "@/components"
 
 export default function HorizontalPanel({ data }: { data: AllData }) {
 	const pathname = usePathname()
+	const [isHome, setIsHome] = useState(pathname === "/" ? true : false)
 	const outerContainerRef = useRef<HTMLDivElement | null>(null)
 	const panelsContainerRef = useRef<HTMLDivElement | null>(null)
 	let tween: gsap.core.Tween
@@ -91,33 +92,41 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 		}
 	}, [outerContainerRef, panelsContainerRef])
 
-	// Jump to panel on page load
+	// Jump to panel on internal page load
 	useEffect(() => {
-		if (pathname === "/") return
+		if (pathname === "/") {
+			setIsHome(true)
+			return
+		}
 
+		setIsHome(false)
 		const index = navLinks.findIndex((link) => `/${link.slug}` === pathname)
 
 		handleSlide(index, false)
 	}, [pathname])
 
 	return (
-		<div id='page'>
-			<NavBar navLinks={navLinks} transitionOnClick={handleSlide} />
+		<div>
+			<NavBar
+				navLinks={navLinks}
+				transitionOnClick={handleSlide}
+				isHome={isHome}
+			/>
 
 			{/* Logo */}
 			<h1
 				className={`logo fixed top-0 left-0 w-screen font-medium text-center leading-none transition-transform duration-500 origin-top ${
-					pathname === "/" ? "" : "scale-20"
+					isHome ? "" : "scale-20"
 				}`}
 			>
 				MAN/ONE MUSIC
 			</h1>
 
 			{/* Panels */}
-			<section ref={outerContainerRef}>
+			<div ref={outerContainerRef}>
 				<div ref={panelsContainerRef} className='flex'>
 					{navLinks.map((section, index) => (
-						<article
+						<section
 							data-id={`panel-${index}`}
 							className={`${
 								index > 0 && "ml-32"
@@ -162,10 +171,10 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 									</button>
 								</div> */}
 							</div>
-						</article>
+						</section>
 					))}
 				</div>
-			</section>
+			</div>
 		</div>
 	)
 }
