@@ -140,3 +140,7 @@ textarea {
 .custom-min-w-screen{
    min-width: 100vw;
 }
+
+.logo {
+   font-size: clamp(3rem, 14vw, 36rem);
+}

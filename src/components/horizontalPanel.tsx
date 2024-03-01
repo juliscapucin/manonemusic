@@ -106,8 +106,8 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 
 			{/* Logo */}
 			<h1
-				className={`fixed top-0 left-0 w-screen text-headlineSmall md:text-headlineMedium lg:text-headlineLarge text-center transition-transform duration-500 origin-top ${
-					pathname === "/" ? "scale-[3.0]" : ""
+				className={`logo fixed top-0 left-0 w-screen font-medium text-center leading-none transition-transform duration-500 origin-top ${
+					pathname === "/" ? "" : "scale-20"
 				}`}
 			>
 				MAN/ONE MUSIC
