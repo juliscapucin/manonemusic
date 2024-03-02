@@ -30,7 +30,7 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 	}, [pathname])
 
 	// Scroll / jump to panel on nav click / page load
-	const handleSlide = (targetIndex: number, pushSlug: boolean) => {
+	const handleSlide = (targetIndex: number, animateSlide: boolean) => {
 		const container = panelsContainerRef.current
 		if (!container) return
 
@@ -39,7 +39,7 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 		) as HTMLDivElement
 		let y = targetPanel?.offsetLeft || 0
 
-		if (pushSlug === true) {
+		if (animateSlide === true) {
 			gsap.to(window, {
 				scrollTo: {
 					y: y,
@@ -47,12 +47,6 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 				},
 				duration: 1,
 			})
-			window.history.pushState(
-				null,
-				"",
-				navLinks[targetIndex].slug.toLowerCase()
-			)
-			window.location.search = "hello"
 		} else {
 			gsap.set(window, {
 				scrollTo: {
