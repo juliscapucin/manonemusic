@@ -28,7 +28,7 @@ export default function ContactPage({ data }: { data: ContactData }) {
 	const availability = data.contactPageCollection?.items[0].availability
 	const title = data.contactPageCollection.items[0].title
 
-	useTitleScrollTrigger(titleContactRef)
+	useTitleScrollTrigger(titleContactRef, "/contact")
 
 	return (
 		<PageWrapper>

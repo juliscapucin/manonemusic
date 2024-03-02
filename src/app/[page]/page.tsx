@@ -1,6 +1,28 @@
+import type { Metadata } from "next"
 import { notFound } from "next/navigation"
-import { HorizontalPanel } from "@/components"
+
+import { AboutPage } from "@/components/pages"
+
 import { fetchGraphQL } from "@/lib"
+import { Title } from "@/components/ui"
+import { HorizontalPanel } from "@/components"
+
+export const metadata: Metadata = {
+	title: "About",
+	description:
+		"Man One Music and lead composer Matt Rudge specialise in original music and sound.",
+}
+
+const queryAbout = `
+	query {
+		aboutPageCollection {
+			items {
+				title
+				text
+			}
+		}
+	}
+`
 
 const query = `
 	query {
@@ -51,7 +73,7 @@ const query = `
 	}
 `
 
-export default async function Home() {
+export default async function Page() {
 	const data = await fetchGraphQL(query)
 
 	if (!data) return notFound()

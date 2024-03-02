@@ -2,27 +2,28 @@
 
 import { usePathname } from "next/navigation"
 
-interface MenuLinkProps {
+interface NavLinkProps {
 	label: string
 	action: () => void
 	activeState?: boolean
+	position?: string
 }
 
-export default function MenuLink({
+export default function NavLink({
 	label,
 	action,
 	activeState,
-}: MenuLinkProps) {
+	position,
+}: NavLinkProps) {
 	const pathname = usePathname()
 
 	return (
-		<>
+		<div className={`${position} px-1`}>
 			{activeState ? (
 				<div className='relative max-h-8'>
-					<span className='text-titleMedium uppercase text-secondary'>
+					<span className='text-titleSmall md:text-titleMedium lg:text-titleLarge uppercase opacity-30'>
 						{label}
 					</span>
-					<div className='absolute -bottom-1 w-full h-[1px] bg-secondary'></div>
 				</div>
 			) : (
 				<div className='overflow-clip max-h-8'>
@@ -36,15 +37,15 @@ export default function MenuLink({
 						aria-hidden={pathname === "/" && label === "Home"}
 						tabIndex={pathname === "/" && label === "Home" ? -1 : 0}
 					>
-						<span className='text-titleMedium uppercase text-secondary'>
+						<span className='text-titleSmall md:text-titleMedium lg:text-titleLarge uppercase'>
 							{label}
 						</span>
-						<span className='text-titleMedium uppercase text-secondary'>
+						<span className='text-titleSmall md:text-titleMedium lg:text-titleLarge uppercase'>
 							{label}
 						</span>
 					</button>
 				</div>
 			)}
-		</>
+		</div>
 	)
 }

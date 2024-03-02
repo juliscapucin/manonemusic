@@ -1,4 +1,5 @@
 import { useEffect } from "react"
+import { usePathname } from "next/navigation"
 
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -6,22 +7,23 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { animateSplitText } from "@/animations"
 
 export default function useTitleScrollTrigger(
-	elementRef: React.RefObject<HTMLDivElement>
+	elementRef: React.RefObject<HTMLDivElement>,
+	slug: string
 ) {
+	const pathname = usePathname()
+
 	useEffect(() => {
+		console.log("pathname", pathname)
+		console.log("slug", slug)
 		if (!elementRef.current) return
 
 		gsap.registerPlugin(ScrollTrigger)
 		const element = elementRef.current as HTMLDivElement
 		const titleElement = element.querySelector("h1") as HTMLHeadingElement
-		const parentElement = element.closest("article") as HTMLDivElement
+		const parentElement = element.closest("section") as HTMLDivElement
 
 		const offsetLeft = () => parentElement!.offsetLeft
 		const width = () => parentElement!.offsetWidth
-
-		// console.log("parentElement", element.closest("article"))
-		// console.log("offsetLeft", offsetLeft())
-		// console.log("width", width())
 
 		let fastScrollEnd = true
 
@@ -32,14 +34,22 @@ export default function useTitleScrollTrigger(
 				end: () => `+=${width()}`,
 				invalidateOnRefresh: true,
 				animation: animateSplitText(titleElement, 2000),
-				toggleActions: "play play play reverse",
-				// fastScrollEnd: fastScrollEnd,
+				toggleActions: "play none none reverse",
+				fastScrollEnd: fastScrollEnd,
 				// markers: true,
 				onUpdate: (self) => {
 					// define fastScrollEnd depending on scroll direction
 					self.direction === 1
 						? (fastScrollEnd = true)
 						: (fastScrollEnd = false)
+
+					// console.log("progress", self.progress)
+
+					if (self.isActive && window.location.pathname !== slug) {
+						console.log("slug", slug)
+						console.log("pathname", pathname)
+						window.history.pushState(null, "", slug)
+					}
 
 					// console.log("fastScrollEnd", fastScrollEnd)
 					// console.log(

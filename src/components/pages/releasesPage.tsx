@@ -13,7 +13,7 @@ type ReleasesData = {
 export default function ReleasesPage({ data }: { data: ReleasesData }) {
 	const titleReleasesRef = useRef(null)
 
-	useTitleScrollTrigger(titleReleasesRef)
+	useTitleScrollTrigger(titleReleasesRef, "/releases")
 
 	return (
 		<PageWrapper>

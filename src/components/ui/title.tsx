@@ -1,14 +1,11 @@
 "use client"
 
-import { forwardRef, useEffect, useRef } from "react"
+import { forwardRef } from "react"
 
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-
-import { animateSplitText } from "@/animations"
+import { Heading } from "@/components/ui"
 
 type TitleProps = {
-	children: React.ReactNode
+	children: string
 }
 
 export const Title = forwardRef(function Title(
@@ -17,9 +14,13 @@ export const Title = forwardRef(function Title(
 ) {
 	return (
 		<div className='mb-16 bg-primary' ref={ref}>
-			<h1 className='text-displayMedium md:text-displayLarge whitespace-nowrap'>
+			<Heading
+				tag={"h1"}
+				styles='text-displayMedium md:text-displayLarge whitespace-nowrap uppercase'
+				variant='display'
+			>
 				{children}
-			</h1>
+			</Heading>
 		</div>
 	)
 })

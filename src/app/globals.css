@@ -116,34 +116,11 @@ h6,
 span,
 button,
 a {
-   text-transform: uppercase;
    font-family: var(--font-primary) sans-serif;
    overflow-wrap: break-word;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-   font-weight: 500;
-   line-height: 0.8;
-   letter-spacing: -0.025em;
-}
 
-h4,
-h5,
-h6 {
-   line-height: 1;
-}
-
-span,
-button,
-a,
-p {
-   font-weight: 300;
-}
 
 button {
    cursor: pointer;
@@ -162,4 +139,32 @@ textarea {
 
 .custom-min-w-screen{
    min-width: 100vw;
+}
+
+.logo {
+   font-size: clamp(3rem, 14vw, 36rem);
+}
+
+.navbar-home {
+   @apply bottom-8 right-0 w-1/2 flex flex-col items-start gap-2 z-100;
+}
+
+.navbar-page {
+   @apply fixed top-0 right-0 w-screen h-screen z-100;
+}
+
+.navbar-page :first-child {
+   @apply fixed top-0 left-0;
+}
+
+.navbar-page :nth-child(2) {
+   @apply fixed top-0 right-0;
+}
+
+.navbar-page :nth-child(3) {
+   @apply fixed bottom-0 left-0;
+}
+
+.navbar-page :nth-child(4) {
+   @apply fixed bottom-0 right-0;
 }

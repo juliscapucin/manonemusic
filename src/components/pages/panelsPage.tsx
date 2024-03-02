@@ -149,7 +149,6 @@ export default function PanelsPage({ data }: { data: any }) {
 			<Section section={sectionsContent[2]} />
 			<Section section={sectionsContent[3]} />
 			<Section section={sectionsContent[4]} />
-			<Section section={sectionsContent[0]} />
 		</div>
 	)
 }
