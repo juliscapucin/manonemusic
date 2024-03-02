@@ -13,6 +13,8 @@ export default function useTitleScrollTrigger(
 	const pathname = usePathname()
 
 	useEffect(() => {
+		console.log("pathname", pathname)
+		console.log("slug", slug)
 		if (!elementRef.current) return
 
 		gsap.registerPlugin(ScrollTrigger)
@@ -43,9 +45,15 @@ export default function useTitleScrollTrigger(
 
 					// console.log("progress", self.progress)
 
-					if (self.isActive && pathname !== slug) {
-						window.history.pushState({}, "", slug)
-						console.log("pushed slug")
+					let count = 0
+
+					if (self.isActive && pathname !== slug && count === 0) {
+						console.log("slug", slug)
+						console.log("pathname", pathname)
+						window.history.pushState(null, "", slug)
+						count++
+					} else {
+						count = 0
 					}
 
 					// console.log("fastScrollEnd", fastScrollEnd)

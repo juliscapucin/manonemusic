@@ -1,6 +1,7 @@
 "use client"
 
 import { useEffect, useRef } from "react"
+import { usePathname } from "next/navigation"
 
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -15,10 +16,11 @@ type HomeData = {
 
 export default function HomePage({ data }: { data: HomeData }) {
 	const homeWrapperRef = useRef(null)
+	const pathname = usePathname()
 
 	// ScrollTrigger for Page Reveal
 	useEffect(() => {
-		if (!homeWrapperRef.current) return
+		if (!homeWrapperRef.current || pathname !== "/") return
 
 		gsap.registerPlugin(ScrollTrigger)
 		const homeWrapper = homeWrapperRef.current as HTMLDivElement
@@ -33,7 +35,9 @@ export default function HomePage({ data }: { data: HomeData }) {
 				end: () => `+=${width()}`,
 				invalidateOnRefresh: true,
 				onUpdate: (self) => {
-					self.isActive && window.history.pushState({}, "", "/")
+					if (self.isActive) {
+						window.history.pushState(null, "", "/")
+					}
 				},
 			})
 		})
@@ -42,7 +46,10 @@ export default function HomePage({ data }: { data: HomeData }) {
 	}, [homeWrapperRef])
 
 	return (
-		<div ref={homeWrapperRef} className='w-screen custom-min-h-screen h-full'>
+		<section
+			ref={homeWrapperRef}
+			className='w-screen custom-min-h-screen h-full'
+		>
 			<div className='relative flex mt-48 w-screen pr-16'>
 				<Heading tag='h2' variant='headline' styles='w-1/2'>
 					Music & Sound Design
@@ -56,6 +63,6 @@ export default function HomePage({ data }: { data: HomeData }) {
 					identity through sound.
 				</p>
 			</div>
-		</div>
+		</section>
 	)
 }

@@ -3,7 +3,7 @@ import localFont from "next/font/local"
 import "./globals.css"
 
 import { PageContextProvider } from "@/context"
-import { Header, RootLayout } from "@/components"
+import { RootLayout } from "@/components"
 
 // Load custom font //
 const font = localFont({
@@ -32,10 +32,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 			<body
 				className={`${font.className} relative w-screen h-screen custom-min-h-screen overflow-x-clip`}
 			>
-				<PageContextProvider>
-					{/* <Header /> */}
-					{children}
-				</PageContextProvider>
+				<PageContextProvider>{children}</PageContextProvider>
 			</body>
 		</RootLayout>
 	)

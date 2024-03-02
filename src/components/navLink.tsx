@@ -6,7 +6,6 @@ interface NavLinkProps {
 	label: string
 	action: () => void
 	activeState?: boolean
-	isHome: boolean
 	position?: string
 }
 
@@ -14,7 +13,6 @@ export default function NavLink({
 	label,
 	action,
 	activeState,
-	isHome,
 	position,
 }: NavLinkProps) {
 	const pathname = usePathname()

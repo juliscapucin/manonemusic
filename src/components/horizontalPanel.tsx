@@ -25,6 +25,10 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 	const panelsContainerRef = useRef<HTMLDivElement | null>(null)
 	let tween: gsap.core.Tween
 
+	useEffect(() => {
+		setIsHome(pathname === "/" ? true : false)
+	}, [pathname])
+
 	// Scroll / jump to panel on nav click / page load
 	const handleSlide = (targetIndex: number, pushSlug: boolean) => {
 		const container = panelsContainerRef.current
@@ -43,7 +47,11 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 				},
 				duration: 1,
 			})
-			window.history.pushState({}, "", navLinks[targetIndex].slug.toLowerCase())
+			window.history.pushState(
+				null,
+				"",
+				navLinks[targetIndex].slug.toLowerCase()
+			)
 		} else {
 			gsap.set(window, {
 				scrollTo: {
@@ -94,6 +102,8 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 
 	// Jump to panel on internal page load
 	useEffect(() => {
+		if (!pathname) return
+
 		if (pathname === "/") {
 			setIsHome(true)
 			return
@@ -103,7 +113,7 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 		const index = navLinks.findIndex((link) => `/${link.slug}` === pathname)
 
 		handleSlide(index, false)
-	}, [pathname])
+	}, [])
 
 	return (
 		<div>
@@ -114,13 +124,16 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 			/>
 
 			{/* Logo */}
-			<h1
-				className={`logo fixed top-0 left-0 w-screen font-medium text-center leading-none transition-transform duration-500 origin-top ${
+			<button
+				className={`fixed top-0 left-0 w-screen transition-transform duration-500 origin-top z-100 ${
 					isHome ? "" : "scale-20"
 				}`}
+				onClick={() => handleSlide(1, true)}
 			>
-				MAN/ONE MUSIC
-			</h1>
+				<h1 className={`logo font-medium text-center leading-none`}>
+					MAN/ONE MUSIC
+				</h1>
+			</button>
 
 			{/* Panels */}
 			<div ref={outerContainerRef}>
