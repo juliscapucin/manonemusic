@@ -52,6 +52,7 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 				"",
 				navLinks[targetIndex].slug.toLowerCase()
 			)
+			window.location.search = "hello"
 		} else {
 			gsap.set(window, {
 				scrollTo: {
@@ -128,7 +129,7 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 				className={`fixed top-0 left-0 w-screen transition-transform duration-500 origin-top z-100 ${
 					isHome ? "" : "scale-20"
 				}`}
-				onClick={() => handleSlide(1, true)}
+				onClick={() => handleSlide(0, true)}
 			>
 				<h1 className={`logo font-medium text-center leading-none`}>
 					MAN/ONE MUSIC

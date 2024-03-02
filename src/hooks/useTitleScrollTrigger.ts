@@ -34,26 +34,21 @@ export default function useTitleScrollTrigger(
 				end: () => `+=${width()}`,
 				invalidateOnRefresh: true,
 				animation: animateSplitText(titleElement, 2000),
-				toggleActions: "play play play reverse",
-				// fastScrollEnd: fastScrollEnd,
+				toggleActions: "play none none reverse",
+				fastScrollEnd: fastScrollEnd,
 				// markers: true,
 				onUpdate: (self) => {
 					// define fastScrollEnd depending on scroll direction
-					// self.direction === 1
-					// 	? (fastScrollEnd = true)
-					// 	: (fastScrollEnd = false)
+					self.direction === 1
+						? (fastScrollEnd = true)
+						: (fastScrollEnd = false)
 
 					// console.log("progress", self.progress)
 
-					let count = 0
-
-					if (self.isActive && pathname !== slug && count === 0) {
+					if (self.isActive && window.location.pathname !== slug) {
 						console.log("slug", slug)
 						console.log("pathname", pathname)
 						window.history.pushState(null, "", slug)
-						count++
-					} else {
-						count = 0
 					}
 
 					// console.log("fastScrollEnd", fastScrollEnd)

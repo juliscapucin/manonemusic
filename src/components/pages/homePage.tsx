@@ -33,9 +33,9 @@ export default function HomePage({ data }: { data: HomeData }) {
 				trigger: homeWrapper,
 				start: () => `${offsetLeft()}px bottom`,
 				end: () => `+=${width()}`,
-				invalidateOnRefresh: true,
+				toggleActions: "play none none reverse",
 				onUpdate: (self) => {
-					if (self.isActive) {
+					if (self.isActive && window.location.pathname !== "/") {
 						window.history.pushState(null, "", "/")
 					}
 				},
