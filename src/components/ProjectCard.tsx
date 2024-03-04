@@ -1,4 +1,7 @@
+"use client"
+
 import Image from "next/image"
+import { useRouter } from "next/navigation"
 
 type Props = {
 	title: string
@@ -8,11 +11,18 @@ type Props = {
 		width: number
 		height: number
 	}
+	slug: string
 }
 
-export default function ProjectCard({ title, coverImage }: Props) {
+export default function ProjectCard({ title, coverImage, slug }: Props) {
+	const router = useRouter()
+	const handleClick = (slug: string) => {
+		// window.history.pushState(null, "", `/projects/${slug}`)
+		router.push(`/projects/${slug}`)
+	}
+
 	return (
-		<div>
+		<button onClick={() => handleClick(slug)} className='bg-colorWhite'>
 			<div className='relative w-32 h-[40vh] overflow-clip'>
 				<Image
 					className='object-cover'
@@ -23,6 +33,6 @@ export default function ProjectCard({ title, coverImage }: Props) {
 				/>
 			</div>
 			<span>{title}</span>
-		</div>
+		</button>
 	)
 }

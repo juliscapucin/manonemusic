@@ -13,10 +13,11 @@ import {
 	ContactPage,
 	HomePage,
 	ReleasesPage,
-	WorkPage,
+	ProjectsPage,
 } from "@/components/pages"
 import { AllData } from "@/types"
 import { NavBar } from "@/components"
+import { Logo } from "@/components/ui"
 
 export default function HorizontalPanel({ data }: { data: AllData }) {
 	const pathname = usePathname()
@@ -47,7 +48,7 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 				},
 				duration: 1,
 				onComplete: () => {
-					setIsHome(targetIndex === 0 ? true : false)
+					targetIndex === 0 && window.history.pushState(null, "", "/")
 				},
 			})
 		} else {
@@ -121,17 +122,7 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 				isHome={isHome}
 			/>
 
-			{/* Logo */}
-			<button
-				className={`fixed top-0 left-0 w-screen transition-transform duration-500 origin-top z-100 ${
-					isHome ? "" : "scale-20"
-				}`}
-				onClick={() => handleSlide(0, true)}
-			>
-				<h1 className={`logo font-medium text-center leading-none`}>
-					MAN/ONE MUSIC
-				</h1>
-			</button>
+			<Logo isHome={isHome} handleSlide={handleSlide} />
 
 			{/* Panels */}
 			<div ref={outerContainerRef}>
@@ -147,8 +138,8 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 									<HomePage data={data.aboutPageCollection.items[0]} />
 								)}
 
-								{section.label.toLowerCase() === "work" && (
-									<WorkPage data={data.projectCollection.items} />
+								{section.label.toLowerCase() === "projects" && (
+									<ProjectsPage data={data.projectCollection.items} />
 								)}
 								{section.label.toLowerCase() === "releases" && (
 									<ReleasesPage data={data.releasesCollection.items[0]} />

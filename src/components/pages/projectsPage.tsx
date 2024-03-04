@@ -14,19 +14,23 @@ type WorkData = {
 
 type Props = { data: Project[] }
 
-export default function WorkPage({ data }: Props) {
+export default function ProjectsPage({ data }: Props) {
 	const titleWorkRef = useRef(null)
 
-	useTitleScrollTrigger(titleWorkRef, "/work")
+	useTitleScrollTrigger(titleWorkRef, "/projects")
 
 	return (
 		<PageWrapper>
-			<Title ref={titleWorkRef}>Work</Title>
-			<div className='flex justify-center gap-4 h-64'>
+			<Title ref={titleWorkRef}>Projects</Title>
+			<div className='flex justify-center gap-4 h-64 z-50'>
 				{data.map((project: Project) => (
 					<ProjectCard
 						key={project.slug}
-						{...{ title: project.title, coverImage: project.coverImage }}
+						{...{
+							title: project.title,
+							coverImage: project.coverImage,
+							slug: project.slug,
+						}}
 					/>
 				))}
 			</div>

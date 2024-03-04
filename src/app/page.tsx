@@ -4,7 +4,7 @@ import { fetchGraphQL } from "@/lib"
 
 const query = `
 	query {
-		workPageCollection {
+		projectsPageCollection {
 			items {
 			  title
 			}
