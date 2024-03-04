@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 
 import { fetchProject } from "@/lib"
 import { Title } from "@/components/ui"
+import { ProjectPage } from "@/components/pages"
 
 export const metadata: Metadata = {
 	title: "Project",
@@ -38,9 +39,5 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
 	if (!data || data.projectCollection.items.length === 0) return notFound()
 
-	return (
-		<>
-			<Title>{projectData.title}</Title>
-		</>
-	)
+	return <ProjectPage projectData={projectData} />
 }
