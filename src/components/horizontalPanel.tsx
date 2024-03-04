@@ -46,6 +46,9 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 					autoKill: false,
 				},
 				duration: 1,
+				onComplete: () => {
+					setIsHome(targetIndex === 0 ? true : false)
+				},
 			})
 		} else {
 			gsap.set(window, {
@@ -132,13 +135,11 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 
 			{/* Panels */}
 			<div ref={outerContainerRef}>
-				<div ref={panelsContainerRef} className='flex'>
+				<div ref={panelsContainerRef} className='flex gap-32'>
 					{navLinks.map((section, index) => (
 						<section
 							data-id={`panel-${index}`}
-							className={`${
-								index > 0 && "ml-32"
-							} panel custom-min-w-screen h-screen min-h-full pl-8 overflow-clip`}
+							className={`panel custom-min-w-screen h-screen min-h-full pl-8 overflow-clip`}
 							key={`panel-${index}`}
 						>
 							<div className='container mt-32'>
