@@ -32,7 +32,10 @@ export default function Layout({ children }: { children: React.ReactNode }) {
 			<body
 				className={`${font.className} relative w-screen h-screen custom-min-h-screen overflow-x-clip`}
 			>
-				<PageContextProvider>{children}</PageContextProvider>
+				<PageContextProvider>
+					{children}
+					<h2 className='fixed top-0 left-0'>hello</h2>
+				</PageContextProvider>
 			</body>
 		</RootLayout>
 	)
