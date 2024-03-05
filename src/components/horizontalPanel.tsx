@@ -122,7 +122,7 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 				isHome={isHome}
 			/>
 
-			<Logo isHome={isHome} handleSlide={handleSlide} />
+			<Logo handleSlide={handleSlide} />
 
 			{/* Panels */}
 			<div ref={outerContainerRef}>

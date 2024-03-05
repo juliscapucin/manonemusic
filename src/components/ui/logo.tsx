@@ -1,13 +1,16 @@
+import { usePathname } from "next/navigation"
+
 type LogoProps = {
-	isHome: boolean
-	handleSlide: (index: number, isHome: boolean) => void
+	handleSlide: (index: number, pushSlug: boolean) => void
 }
 
-export default function Logo({ isHome, handleSlide }: LogoProps) {
+export default function Logo({ handleSlide }: LogoProps) {
+	const pathname = usePathname()
+
 	return (
 		<button
 			className={`fixed top-0 left-0 w-screen transition-transform duration-500 origin-top z-100 ${
-				isHome ? "" : "scale-20"
+				pathname === "/" ? "" : "scale-20"
 			}`}
 			onClick={() => handleSlide(0, true)}
 		>

@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
 import { HorizontalPanel } from "@/components"
-import { fetchGraphQL } from "@/lib"
+import { fetchAll } from "@/lib"
 
 const query = `
 	query {
@@ -52,7 +52,7 @@ const query = `
 `
 
 export default async function Home() {
-	const data = await fetchGraphQL(query)
+	const data = await fetchAll(query)
 
 	if (!data) return notFound()
 	return (

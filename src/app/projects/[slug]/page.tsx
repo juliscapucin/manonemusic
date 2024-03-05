@@ -2,7 +2,6 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
 import { fetchProject } from "@/lib"
-import { Title } from "@/components/ui"
 import { ProjectPage } from "@/components/pages"
 
 export const metadata: Metadata = {

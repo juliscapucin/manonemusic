@@ -3,7 +3,7 @@ import { notFound } from "next/navigation"
 
 import { AboutPage } from "@/components/pages"
 
-import { fetchGraphQL } from "@/lib"
+import { fetchAll } from "@/lib"
 import { Title } from "@/components/ui"
 import { HorizontalPanel } from "@/components"
 
@@ -74,7 +74,7 @@ const query = `
 `
 
 export default async function Page() {
-	const data = await fetchGraphQL(query)
+	const data = await fetchAll(query)
 
 	if (!data) return notFound()
 	return (

@@ -1,4 +1,3 @@
-import fetchGraphQL from "./fetchGraphQL"
-import fetchProject from "./fetchProject"
+import { fetchAll, fetchProject } from "./fetchGraphQL"
 
-export { fetchGraphQL, fetchProject }
+export { fetchAll, fetchProject }
