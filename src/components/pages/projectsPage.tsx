@@ -22,7 +22,7 @@ export default function ProjectsPage({ data }: Props) {
 	return (
 		<PageWrapper>
 			<Title ref={titleWorkRef}>Projects</Title>
-			<div className='flex justify-center gap-4 h-64 z-50'>
+			<div className='flex justify-center gap-4 h-64'>
 				{data.map((project: Project) => (
 					<ProjectCard
 						key={project.slug}

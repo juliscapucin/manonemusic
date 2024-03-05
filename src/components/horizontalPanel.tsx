@@ -31,7 +31,7 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 	}, [pathname])
 
 	// Scroll / jump to panel on nav click / page load
-	const handleSlide = (targetIndex: number, animateSlide: boolean) => {
+	const handlePanelSlide = (targetIndex: number, animateSlide: boolean) => {
 		const container = panelsContainerRef.current
 		if (!container) return
 
@@ -111,18 +111,18 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 		setIsHome(false)
 		const index = navLinks.findIndex((link) => `/${link.slug}` === pathname)
 
-		handleSlide(index, false)
+		handlePanelSlide(index, false)
 	}, [])
 
 	return (
 		<div>
 			<NavBar
 				navLinks={navLinks}
-				transitionOnClick={handleSlide}
+				transitionOnClick={handlePanelSlide}
 				isHome={isHome}
 			/>
 
-			<Logo handleSlide={handleSlide} />
+			<Logo handlePanelSlide={handlePanelSlide} />
 
 			{/* Panels */}
 			<div ref={outerContainerRef}>
@@ -154,13 +154,13 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 								{/* Previous/Next Navigation */}
 								{/* <div className='absolute bottom-8 left-8 flex gap-8'>
 									<button
-										onClick={() => handleSlide(index - 1 > 0 ? index - 1 : 0)}
+										onClick={() => handlePanelSlide(index - 1 > 0 ? index - 1 : 0)}
 									>
 										Prev
 									</button>
 									<button
 										onClick={() =>
-											handleSlide(
+											handlePanelSlide(
 												index + 1 > navLinks.length
 													? navLinks.length
 													: index + 1

@@ -4,7 +4,7 @@ export default function PageWrapper({
 	children: React.ReactNode
 }) {
 	return (
-		<div className='w-screen custom-min-w-screen custom-min-h-screen h-full'>
+		<div className='w-screen custom-min-w-screen custom-min-h-screen'>
 			{children}
 		</div>
 	)

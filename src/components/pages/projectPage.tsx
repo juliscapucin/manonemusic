@@ -1,7 +1,7 @@
 "use client"
 
 import { useRouter } from "next/navigation"
-import { Title } from "@/components/ui"
+import { Logo, Title } from "@/components/ui"
 import { Project } from "@/types"
 
 type ProjectPageProps = {
@@ -17,6 +17,7 @@ export default function ProjectPage({ projectData }: ProjectPageProps) {
 
 	return (
 		<>
+			<Logo />
 			<button className={"absolute z-50"} onClick={handleClose}>
 				Close
 			</button>

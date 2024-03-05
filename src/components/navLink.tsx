@@ -26,7 +26,7 @@ export default function NavLink({
 					</span>
 				</div>
 			) : (
-				<div className='overflow-clip max-h-8'>
+				<div className='overflow-clip max-h-8 pointer-events-auto'>
 					<button
 						className={`flex flex-col justify-center items-center hover:-translate-y-1/2 transition-transform ${
 							label === "Home" &&

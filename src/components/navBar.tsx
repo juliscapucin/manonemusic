@@ -48,7 +48,7 @@ export default function NavBar({
 			{/* Page NavBar */}
 			<nav
 				ref={navRef}
-				className={`fixed bottom-0 right-0 w-screen h-screen grid grid-cols-2 grid-rows-2 ${
+				className={`fixed bottom-0 right-0 w-screen h-screen grid grid-cols-2 grid-rows-2 z-5 pointer-events-none ${
 					isHome ? "hidden" : ""
 				}`}
 			>
