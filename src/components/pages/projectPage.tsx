@@ -42,7 +42,7 @@ export default function ProjectPage({ projectData }: ProjectPageProps) {
 					<p className='w-1/3 min-w-[300px]'>{projectData.text}</p>
 					<Button action={handleTrailer}>View Trailer</Button>
 				</div>
-			</PageWrapper>{" "}
+			</PageWrapper>
 		</div>
 	)
 }

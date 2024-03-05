@@ -7,6 +7,8 @@ import gsap from "gsap"
 import { ScrollToPlugin } from "gsap/ScrollToPlugin"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
+import { PageContextProvider } from "@/context"
+
 import { navLinks } from "@/constants"
 import {
 	AboutPage,
@@ -128,47 +130,51 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 			{/* Panels */}
 			<div ref={outerContainerRef}>
 				<div ref={panelsContainerRef} className='flex gap-32'>
-					{navLinks.map((section, index) => (
-						<section
-							data-id={`panel-${index}`}
-							className={`panel custom-min-w-screen h-screen min-h-full pl-8 overflow-clip`}
-							key={`panel-${index}`}
-						>
-							{section.label.toLowerCase() === "home" && (
-								<HomePage data={data.aboutPageCollection.items[0]} />
-							)}
+					<PageContextProvider>
+						{navLinks.map((section, index) => (
+							<section
+								data-id={`panel-${index}`}
+								className={`panel custom-min-w-screen h-screen min-h-full pl-8 overflow-clip`}
+								key={`panel-${index}`}
+							>
+								{section.label.toLowerCase() === "home" && (
+									<HomePage data={data.aboutPageCollection.items[0]} />
+								)}
 
-							{section.label.toLowerCase() === "projects" && (
-								<ProjectsPage data={data.projectCollection.items} />
-							)}
-							{section.label.toLowerCase() === "releases" && (
-								<ReleasesPage data={data.releasesCollection.items[0]} />
-							)}
-							{section.label.toLowerCase() === "about" && (
-								<AboutPage data={data.aboutPageCollection.items[0]} />
-							)}
-							{section.label.toLowerCase() === "contact" && (
-								<ContactPage data={data} />
-							)}
+								{section.label.toLowerCase() === "projects" && (
+									<ProjectsPage data={data.projectCollection.items} />
+								)}
+								{section.label.toLowerCase() === "releases" && (
+									<ReleasesPage data={data.releasesCollection.items[0]} />
+								)}
+								{section.label.toLowerCase() === "about" && (
+									<AboutPage data={data.aboutPageCollection.items[0]} />
+								)}
+								{section.label.toLowerCase() === "contact" && (
+									<ContactPage data={data} />
+								)}
 
-							{/* Previous/Next Navigation */}
-							<div className='absolute bottom-1/2 right-8 flex gap-8 z-20'>
-								{/* <ButtonScroll
+								{/* Previous/Next Navigation */}
+								<div className='absolute bottom-1/2 right-8 flex gap-8 z-20'>
+									{/* <ButtonScroll
 									action={() =>
 										handlePanelSlide(index - 1 > 0 ? index - 1 : 0, true)
 									}
 								/> */}
-								<ButtonScroll
-									action={() =>
-										handlePanelSlide(
-											index + 1 > navLinks.length ? navLinks.length : index + 1,
-											true
-										)
-									}
-								/>
-							</div>
-						</section>
-					))}
+									<ButtonScroll
+										action={() =>
+											handlePanelSlide(
+												index + 1 > navLinks.length
+													? navLinks.length
+													: index + 1,
+												true
+											)
+										}
+									/>
+								</div>
+							</section>
+						))}
+					</PageContextProvider>
 				</div>
 			</div>
 		</div>
