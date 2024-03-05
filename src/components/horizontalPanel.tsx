@@ -133,26 +133,25 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 							className={`panel custom-min-w-screen h-screen min-h-full pl-8 overflow-clip`}
 							key={`panel-${index}`}
 						>
-							<div className='container mt-32'>
-								{section.label.toLowerCase() === "home" && (
-									<HomePage data={data.aboutPageCollection.items[0]} />
-								)}
+							{section.label.toLowerCase() === "home" && (
+								<HomePage data={data.aboutPageCollection.items[0]} />
+							)}
 
-								{section.label.toLowerCase() === "projects" && (
-									<ProjectsPage data={data.projectCollection.items} />
-								)}
-								{section.label.toLowerCase() === "releases" && (
-									<ReleasesPage data={data.releasesCollection.items[0]} />
-								)}
-								{section.label.toLowerCase() === "about" && (
-									<AboutPage data={data.aboutPageCollection.items[0]} />
-								)}
-								{section.label.toLowerCase() === "contact" && (
-									<ContactPage data={data} />
-								)}
+							{section.label.toLowerCase() === "projects" && (
+								<ProjectsPage data={data.projectCollection.items} />
+							)}
+							{section.label.toLowerCase() === "releases" && (
+								<ReleasesPage data={data.releasesCollection.items[0]} />
+							)}
+							{section.label.toLowerCase() === "about" && (
+								<AboutPage data={data.aboutPageCollection.items[0]} />
+							)}
+							{section.label.toLowerCase() === "contact" && (
+								<ContactPage data={data} />
+							)}
 
-								{/* Previous/Next Navigation */}
-								{/* <div className='absolute bottom-8 left-8 flex gap-8'>
+							{/* Previous/Next Navigation */}
+							{/* <div className='absolute bottom-8 left-8 flex gap-8'>
 									<button
 										onClick={() => handlePanelSlide(index - 1 > 0 ? index - 1 : 0)}
 									>
@@ -170,7 +169,6 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 										Next
 									</button>
 								</div> */}
-							</div>
 						</section>
 					))}
 				</div>
