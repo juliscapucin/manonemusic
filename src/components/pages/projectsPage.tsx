@@ -5,7 +5,7 @@ import { useRef } from "react"
 import { ProjectCard } from "@/components"
 
 import { Project } from "@/types"
-import { PanelWrapper, Title } from "@/components/ui"
+import { PageWrapper, Title } from "@/components/ui"
 import { useTitleScrollTrigger } from "@/hooks"
 import { PageContextProvider } from "@/context"
 
@@ -18,7 +18,7 @@ export default function ProjectsPage({ data }: Props) {
 
 	return (
 		<PageContextProvider>
-			<PanelWrapper>
+			<PageWrapper>
 				<Title ref={titleWorkRef}>Projects</Title>
 				<div className='flex justify-center gap-4 h-64'>
 					{data.map((project: Project) => (
@@ -32,7 +32,7 @@ export default function ProjectsPage({ data }: Props) {
 						/>
 					))}
 				</div>
-			</PanelWrapper>
+			</PageWrapper>
 		</PageContextProvider>
 	)
 }

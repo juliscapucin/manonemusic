@@ -1,7 +1,9 @@
 "use client"
 
+import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
+
 import { Logo, PageWrapper, Title } from "@/components/ui"
 import { Project } from "@/types"
 import { Button } from "@/components/buttons"
@@ -13,10 +15,15 @@ type ProjectPageProps = {
 
 export default function ProjectPage({ projectData }: ProjectPageProps) {
 	const router = useRouter()
-	const { pageRef, transitionOnClick } = usePageContext()
+	const { pageRef, transitionOnClick, transitionOnEnter } = usePageContext()
+
+	useEffect(() => {
+		if (!pageRef.current) return
+		transitionOnEnter(pageRef.current)
+	}, [])
 
 	return (
-		<div ref={pageRef} className='w-screen h-screen overflow-none'>
+		<div className='w-screen h-screen overflow-none'>
 			<Logo />
 			<PageWrapper>
 				<button

@@ -85,14 +85,18 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 					end: () => "+=" + (container.scrollWidth - container.offsetWidth),
 					invalidateOnRefresh: true,
 					// markers: true,
-					// onUpdate: (self) => {
-					// 	console.log("end", self.end)
-					// 	console.log(self.progress, "/1")
-					// 	console.log(
-					// 		window.scrollY,
-					// 		`/${document.body.scrollHeight - window.innerHeight}`
-					// 	)
-					// },
+					onUpdate: (self) => {
+						if (self.progress <= 0.12 && !isHome) {
+							window.history.pushState(null, "", "/")
+							setIsHome(true)
+						}
+						// console.log("end", self.end)
+						// console.log(self.progress, "/1")
+						// console.log(
+						// 	window.scrollY,
+						// 	`/${document.body.scrollHeight - window.innerHeight}`
+						// )
+					},
 				},
 			})
 		}, container)

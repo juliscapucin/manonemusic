@@ -3,7 +3,7 @@
 import { useRef } from "react"
 
 import { Availability, SocialLinks } from "@/components"
-import { PanelWrapper, Title } from "@/components/ui"
+import { PageWrapper, Title } from "@/components/ui"
 import { useTitleScrollTrigger } from "@/hooks"
 
 type ContactData = {
@@ -31,12 +31,12 @@ export default function ContactPage({ data }: { data: ContactData }) {
 	useTitleScrollTrigger(titleContactRef, "/contact")
 
 	return (
-		<PanelWrapper>
+		<PageWrapper>
 			<Title ref={titleContactRef}>{title}</Title>
 			<div className='flex flex-row flex-nowrap gap-32'>
 				<Availability availability={availability} />
 				<SocialLinks data={socialsData} />
 			</div>
-		</PanelWrapper>
+		</PageWrapper>
 	)
 }

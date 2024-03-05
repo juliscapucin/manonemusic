@@ -3,7 +3,7 @@
 import { useRef } from "react"
 
 import { Copyright } from "@/components"
-import { PanelWrapper, Title } from "@/components/ui"
+import { PageWrapper, Title } from "@/components/ui"
 import { useTitleScrollTrigger } from "@/hooks"
 
 type AboutData = {
@@ -17,10 +17,10 @@ export default function AboutPnel({ data }: { data: AboutData }) {
 	useTitleScrollTrigger(titleAboutRef, "/about")
 
 	return (
-		<PanelWrapper>
+		<PageWrapper>
 			<Title ref={titleAboutRef}>{data.title}</Title>
 			<p className='max-w-prose'>{data.text}</p>
 			<Copyright />
-		</PanelWrapper>
+		</PageWrapper>
 	)
 }

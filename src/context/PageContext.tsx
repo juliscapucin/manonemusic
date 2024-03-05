@@ -7,6 +7,7 @@ import gsap from "gsap"
 
 type ContextProps = {
 	transitionOnClick: (link: string) => void
+	transitionOnEnter: (container: HTMLDivElement) => void
 	pageRef: React.MutableRefObject<HTMLDivElement | null>
 }
 
@@ -23,6 +24,16 @@ export const PageContextProvider = ({
 	const router = useRouter()
 	const pathname = usePathname()
 	let ctx = gsap.context(() => {})
+
+	const transitionOnEnter = (container: HTMLDivElement) => {
+		ctx.add(() => {
+			let timeline = gsap.timeline()
+			timeline.set(container, { opacity: 0 }).to(container, {
+				opacity: 1,
+				duration: 0.5,
+			})
+		})
+	}
 
 	const transitionOnClick = (slug: string) => {
 		const container = pageRef.current
@@ -46,10 +57,17 @@ export const PageContextProvider = ({
 		}
 	}, [])
 
+	useEffect(() => {
+		if (!pageRef.current) return
+		transitionOnEnter(pageRef.current)
+		console.log(pathname)
+	}, [pathname])
+
 	return (
 		<PageContext.Provider
 			value={{
 				transitionOnClick,
+				transitionOnEnter,
 				pageRef,
 			}}
 		>

@@ -1,5 +1,7 @@
 "use client"
 
+import { useEffect } from "react"
+
 import { VideoPlayer } from "@/components/ui"
 import { usePageContext } from "@/context"
 
@@ -10,7 +12,12 @@ type TrailerPageProps = {
 }
 
 export default function TrailerPage({ projectData }: TrailerPageProps) {
-	const { pageRef, transitionOnClick } = usePageContext()
+	const { pageRef, transitionOnClick, transitionOnEnter } = usePageContext()
+
+	useEffect(() => {
+		if (!pageRef.current) return
+		transitionOnEnter(pageRef.current)
+	}, [])
 
 	return (
 		<div
