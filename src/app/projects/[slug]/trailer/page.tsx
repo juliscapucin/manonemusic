@@ -40,7 +40,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
 	return (
 		<>
-			<TrailerPage />
+			<TrailerPage projectData={projectData} />
 			<ProjectPage projectData={projectData} />
 		</>
 	)

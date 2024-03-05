@@ -34,7 +34,7 @@ export const PageContextProvider = ({
 				opacity: 0,
 				duration: 0.5,
 				onComplete: () => {
-					router.push(`/projects/${slug}`)
+					router.push(`${slug}`)
 				},
 			})
 		})

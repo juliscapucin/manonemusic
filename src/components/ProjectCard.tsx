@@ -21,7 +21,10 @@ export default function ProjectCard({ title, coverImage, slug }: Props) {
 	const { transitionOnClick } = usePageContext()
 
 	return (
-		<button onClick={() => transitionOnClick(slug)} className='bg-colorWhite'>
+		<button
+			onClick={() => transitionOnClick(`/projects/${slug}`)}
+			className='bg-colorWhite'
+		>
 			<div className='relative w-32 h-[40vh] overflow-clip'>
 				<Image
 					className='object-cover'

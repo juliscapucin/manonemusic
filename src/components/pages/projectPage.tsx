@@ -5,6 +5,7 @@ import Image from "next/image"
 import { Logo, PageWrapper, Title } from "@/components/ui"
 import { Project } from "@/types"
 import { Button } from "@/components/buttons"
+import { usePageContext } from "@/context"
 
 type ProjectPageProps = {
 	projectData: Project
@@ -12,21 +13,17 @@ type ProjectPageProps = {
 
 export default function ProjectPage({ projectData }: ProjectPageProps) {
 	const router = useRouter()
-
-	const handleClose = () => {
-		router.push("/projects")
-	}
-
-	const handleTrailer = () => {
-		router.push(`/projects/${projectData.slug}/trailer`)
-	}
+	const { pageRef, transitionOnClick } = usePageContext()
 
 	return (
-		<div className='w-screen h-screen overflow-none'>
+		<div ref={pageRef} className='w-screen h-screen overflow-none'>
 			<Logo />
 			<PageWrapper>
-				<button className={"absolute z-50"} onClick={handleClose}>
-					Close
+				<button
+					className={"absolute z-30"}
+					onClick={() => transitionOnClick("/projects")}
+				>
+					Back to Projects
 				</button>
 				<Title>{projectData.title}</Title>
 				<div className='flex flex-wrap gap-16'>
@@ -40,7 +37,13 @@ export default function ProjectPage({ projectData }: ProjectPageProps) {
 						/>
 					</div>
 					<p className='w-1/3 min-w-[300px]'>{projectData.text}</p>
-					<Button action={handleTrailer}>View Trailer</Button>
+					<Button
+						action={() =>
+							transitionOnClick(`/projects/${projectData.slug}/trailer`)
+						}
+					>
+						View Trailer
+					</Button>
 				</div>
 			</PageWrapper>
 		</div>

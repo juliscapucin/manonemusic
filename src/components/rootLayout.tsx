@@ -1,5 +1,6 @@
 "use client"
 
+import { PageContextProvider } from "@/context"
 import { useEffect, useState } from "react"
 
 export default function RootLayout(props: { children: React.ReactNode }) {
@@ -18,7 +19,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
 			data-theme={rootTheme}
 			className='relative w-screen h-screen custom-min-h-screen bg-primary text-secondary'
 		>
-			{props.children}
+			<PageContextProvider>{props.children}</PageContextProvider>
 		</html>
 	)
 }
