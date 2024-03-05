@@ -4,6 +4,7 @@ import HomePage from "./homePage"
 import ReleasesPage from "./releasesPage"
 import ProjectsPage from "./projectsPage"
 import ProjectPage from "./projectPage"
+import TrailerPage from "./trailerPage"
 
 export {
 	AboutPage,
@@ -12,4 +13,5 @@ export {
 	ReleasesPage,
 	ProjectPage,
 	ProjectsPage,
+	TrailerPage,
 }

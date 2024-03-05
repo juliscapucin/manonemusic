@@ -18,7 +18,7 @@ export default function ProjectCard({ title, coverImage, slug }: Props) {
 	const router = useRouter()
 	const handleClick = (slug: string) => {
 		// window.history.pushState(null, "", `/projects/${slug}`)
-		router.push(`/projects/${slug}`)
+		router.push(`/projects/${slug}`, { scroll: true })
 	}
 
 	return (
@@ -28,7 +28,7 @@ export default function ProjectCard({ title, coverImage, slug }: Props) {
 					className='object-cover'
 					src={coverImage.url}
 					alt={coverImage.description}
-					sizes='50vw'
+					sizes='20vw'
 					fill
 				/>
 			</div>

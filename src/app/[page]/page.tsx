@@ -1,28 +1,14 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
-import { AboutPage } from "@/components/pages"
-
 import { fetchAll } from "@/lib"
-import { Title } from "@/components/ui"
 import { HorizontalPanel } from "@/components"
 
 export const metadata: Metadata = {
-	title: "About",
+	title: "Man One Music",
 	description:
 		"Man One Music and lead composer Matt Rudge specialise in original music and sound.",
 }
-
-const queryAbout = `
-	query {
-		aboutPageCollection {
-			items {
-				title
-				text
-			}
-		}
-	}
-`
 
 const query = `
 	query {

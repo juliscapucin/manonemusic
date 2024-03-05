@@ -4,6 +4,7 @@ import { useRouter } from "next/navigation"
 import Image from "next/image"
 import { Logo, PageWrapper, Title } from "@/components/ui"
 import { Project } from "@/types"
+import { Button } from "@/components/buttons"
 
 type ProjectPageProps = {
 	projectData: Project
@@ -16,8 +17,12 @@ export default function ProjectPage({ projectData }: ProjectPageProps) {
 		router.push("/projects")
 	}
 
+	const handleTrailer = () => {
+		router.push(`/projects/${projectData.slug}/trailer`)
+	}
+
 	return (
-		<div className='w-screen h-screen overflow-clip'>
+		<div className='w-screen h-screen overflow-none'>
 			<Logo />
 			<PageWrapper>
 				<button className={"absolute z-50"} onClick={handleClose}>
@@ -29,11 +34,13 @@ export default function ProjectPage({ projectData }: ProjectPageProps) {
 						<Image
 							src={projectData.coverImage.url}
 							alt={projectData.coverImage.description}
-							fill={true}
+							fill
 							style={{ objectFit: "cover" }}
+							sizes='50vw'
 						/>
 					</div>
 					<p className='w-1/3 min-w-[300px]'>{projectData.text}</p>
+					<Button action={handleTrailer}>View Trailer</Button>
 				</div>
 			</PageWrapper>{" "}
 		</div>

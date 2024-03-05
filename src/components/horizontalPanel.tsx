@@ -18,6 +18,7 @@ import {
 import { AllData } from "@/types"
 import { NavBar } from "@/components"
 import { Logo } from "@/components/ui"
+import { ButtonScroll } from "./buttons"
 
 export default function HorizontalPanel({ data }: { data: AllData }) {
 	const pathname = usePathname()
@@ -151,24 +152,21 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 							)}
 
 							{/* Previous/Next Navigation */}
-							{/* <div className='absolute bottom-8 left-8 flex gap-8'>
-									<button
-										onClick={() => handlePanelSlide(index - 1 > 0 ? index - 1 : 0)}
-									>
-										Prev
-									</button>
-									<button
-										onClick={() =>
-											handlePanelSlide(
-												index + 1 > navLinks.length
-													? navLinks.length
-													: index + 1
-											)
-										}
-									>
-										Next
-									</button>
-								</div> */}
+							<div className='absolute bottom-1/2 right-8 flex gap-8 z-20'>
+								{/* <ButtonScroll
+									action={() =>
+										handlePanelSlide(index - 1 > 0 ? index - 1 : 0, true)
+									}
+								/> */}
+								<ButtonScroll
+									action={() =>
+										handlePanelSlide(
+											index + 1 > navLinks.length ? navLinks.length : index + 1,
+											true
+										)
+									}
+								/>
+							</div>
 						</section>
 					))}
 				</div>

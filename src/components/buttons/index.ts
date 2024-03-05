@@ -1,5 +1,7 @@
-import ButtonBurger from "./ButtonBurger"
-import ButtonClose from "./ButtonClose"
+import Button from "./button"
+import ButtonBurger from "./buttonBurger"
+import ButtonClose from "./buttonClose"
+import ButtonScroll from "./buttonScroll"
 import CopyEmailButton from "./copyEmailButton"
 
-export { ButtonBurger, ButtonClose, CopyEmailButton }
+export { Button, ButtonBurger, ButtonClose, ButtonScroll, CopyEmailButton }
