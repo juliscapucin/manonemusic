@@ -18,12 +18,12 @@ export default function ProjectPage({ projectData }: ProjectPageProps) {
 	const { pageRef, transitionOnClick, transitionOnEnter } = usePageContext()
 
 	// Transition on Enter
-	useEffect(() => {
-		pageRef.current && transitionOnEnter(pageRef.current)
-	}, [pageRef])
+	// useEffect(() => {
+	// 	pageRef.current && transitionOnEnter(pageRef.current)
+	// }, [pageRef])
 
 	return (
-		<div className='w-screen h-screen overflow-none'>
+		<div className='w-screen h-screen overflow-clip'>
 			<Logo />
 			<PageWrapper>
 				<button
@@ -55,7 +55,7 @@ export default function ProjectPage({ projectData }: ProjectPageProps) {
 						<div className='flex flex-col items-start'>
 							<Button
 								action={() =>
-									transitionOnClick(`/projects/${projectData.slug}/trailer`)
+									router.push(`/projects/${projectData.slug}/trailer`)
 								}
 							>
 								View Trailer

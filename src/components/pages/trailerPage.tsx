@@ -1,43 +1,79 @@
 "use client"
 
-import { useEffect } from "react"
+import { useEffect, useLayoutEffect, useRef } from "react"
+
+import { useRouter } from "next/navigation"
+
+import gsap from "gsap"
 
 import { Logo, VideoPlayer } from "@/components/ui"
-import { usePageContext } from "@/context"
 
 import { Project } from "@/types"
+import { ProjectPage } from "."
 
 type TrailerPageProps = {
 	projectData: Project
 }
 
 export default function TrailerPage({ projectData }: TrailerPageProps) {
-	const { pageRef, transitionOnClick, transitionOnEnter } = usePageContext()
+	const pageContainerRef = useRef(null)
+	const router = useRouter()
+	let ctx = gsap.context(() => {})
+
+	// Transition on Click Back
+	const transitionOnClickBack = (slug: string) => {
+		ctx.add(() => {
+			gsap.to(pageContainerRef.current, {
+				xPercent: 0,
+				duration: 0.5,
+				ease: "power4.out",
+				onComplete: () => {
+					router.push(slug)
+				},
+			})
+		})
+	}
 
 	// Transition on Enter
+	useLayoutEffect(() => {
+		if (!pageContainerRef.current) return
+
+		ctx.add(() => {
+			gsap.to(pageContainerRef.current, {
+				xPercent: -50,
+				duration: 0.5,
+				ease: "power4.out",
+			})
+		})
+	}, [pageContainerRef])
+
 	useEffect(() => {
-		pageRef.current && transitionOnEnter(pageRef.current)
-	}, [pageRef])
+		return () => ctx.revert()
+	}, [])
 
 	return (
-		<>
-			<Logo />
+		<div className='overflow-clip'>
+			<div ref={pageContainerRef} className='flex flex-nowrap gap-16 w-fit'>
+				<ProjectPage projectData={projectData} />
+				<div className='w-screen h-screen overflow-clip'>
+					<Logo />
 
-			<div
-				ref={pageRef}
-				className='absolute flex justify-center items-center w-screen h-screen bg-colorBlack z-50'
-			>
-				<button
-					className={"absolute top-16 left-8"}
-					onClick={() => transitionOnClick(`/projects/${projectData.slug}`)}
-				>
-					Back to Project
-				</button>
-				<VideoPlayer
-					src='https://player.vimeo.com/video/371168497'
-					title='Trailer Video'
-				/>
+					<div className='absolute flex justify-center items-center w-screen h-screen bg-colorBlack z-50'>
+						<button
+							className={"absolute top-16 left-8"}
+							onClick={() =>
+								transitionOnClickBack(`/projects/${projectData.slug}`)
+							}
+						>
+							Back to Project
+						</button>
+						<VideoPlayer
+							src='https://player.vimeo.com/video/371168497'
+							title='Trailer Video'
+						/>
+					</div>
+				</div>
 			</div>
-		</>
+		</div>
 	)
 }

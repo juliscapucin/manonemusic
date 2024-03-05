@@ -45,7 +45,7 @@ export const PageContextProvider = ({
 				opacity: 0,
 				duration: 0.5,
 				onComplete: () => {
-					router.push(`${slug}`, { scroll: false })
+					router.push(`${slug}`)
 				},
 			})
 		})

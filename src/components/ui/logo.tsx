@@ -9,7 +9,6 @@ type LogoProps = {
 export default function Logo({ handlePanelSlide }: LogoProps) {
 	const { transitionOnClick } = usePageContext()
 	const pathname = usePathname()
-	const router = useRouter()
 
 	return (
 		<button
