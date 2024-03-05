@@ -10,4 +10,5 @@ export type Project = {
 		height: number
 	}
 	videoUrl: string
+	credits: string[]
 }

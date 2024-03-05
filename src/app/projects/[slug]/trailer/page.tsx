@@ -38,10 +38,5 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
 	if (!data || data.projectCollection.items.length === 0) return notFound()
 
-	return (
-		<>
-			<TrailerPage projectData={projectData} />
-			<ProjectPage projectData={projectData} />
-		</>
-	)
+	return <TrailerPage projectData={projectData} />
 }

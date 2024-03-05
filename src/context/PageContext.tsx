@@ -45,7 +45,7 @@ export const PageContextProvider = ({
 				opacity: 0,
 				duration: 0.5,
 				onComplete: () => {
-					router.push(`${slug}`)
+					router.push(`${slug}`, { scroll: false })
 				},
 			})
 		})
@@ -56,12 +56,6 @@ export const PageContextProvider = ({
 			ctx.revert()
 		}
 	}, [])
-
-	useEffect(() => {
-		if (!pageRef.current) return
-		transitionOnEnter(pageRef.current)
-		console.log(pathname)
-	}, [pathname])
 
 	return (
 		<PageContext.Provider

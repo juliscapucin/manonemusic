@@ -2,7 +2,7 @@
 
 import { useEffect } from "react"
 
-import { VideoPlayer } from "@/components/ui"
+import { Logo, VideoPlayer } from "@/components/ui"
 import { usePageContext } from "@/context"
 
 import { Project } from "@/types"
@@ -14,26 +14,30 @@ type TrailerPageProps = {
 export default function TrailerPage({ projectData }: TrailerPageProps) {
 	const { pageRef, transitionOnClick, transitionOnEnter } = usePageContext()
 
+	// Transition on Enter
 	useEffect(() => {
-		if (!pageRef.current) return
-		transitionOnEnter(pageRef.current)
-	}, [])
+		pageRef.current && transitionOnEnter(pageRef.current)
+	}, [pageRef])
 
 	return (
-		<div
-			ref={pageRef}
-			className='absolute flex justify-center items-center w-screen h-screen bg-colorBlack z-50'
-		>
-			<button
-				className={"absolute top-16 left-8"}
-				onClick={() => transitionOnClick(`/projects/${projectData.slug}`)}
+		<>
+			<Logo />
+
+			<div
+				ref={pageRef}
+				className='absolute flex justify-center items-center w-screen h-screen bg-colorBlack z-50'
 			>
-				Back to Project
-			</button>
-			<VideoPlayer
-				src='https://player.vimeo.com/video/371168497'
-				title='Trailer Video'
-			/>
-		</div>
+				<button
+					className={"absolute top-16 left-8"}
+					onClick={() => transitionOnClick(`/projects/${projectData.slug}`)}
+				>
+					Back to Project
+				</button>
+				<VideoPlayer
+					src='https://player.vimeo.com/video/371168497'
+					title='Trailer Video'
+				/>
+			</div>
+		</>
 	)
 }

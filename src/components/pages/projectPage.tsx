@@ -17,10 +17,10 @@ export default function ProjectPage({ projectData }: ProjectPageProps) {
 	const router = useRouter()
 	const { pageRef, transitionOnClick, transitionOnEnter } = usePageContext()
 
+	// Transition on Enter
 	useEffect(() => {
-		if (!pageRef.current) return
-		transitionOnEnter(pageRef.current)
-	}, [])
+		pageRef.current && transitionOnEnter(pageRef.current)
+	}, [pageRef])
 
 	return (
 		<div className='w-screen h-screen overflow-none'>
@@ -43,14 +43,32 @@ export default function ProjectPage({ projectData }: ProjectPageProps) {
 							sizes='50vw'
 						/>
 					</div>
-					<p className='w-1/3 min-w-[300px]'>{projectData.text}</p>
-					<Button
-						action={() =>
-							transitionOnClick(`/projects/${projectData.slug}/trailer`)
-						}
-					>
-						View Trailer
-					</Button>
+					<div className='w-1/3 min-w-[300px] space-y-8'>
+						{/* Credits */}
+						<ul className='text-labelLarge'>
+							{projectData.credits &&
+								projectData.credits.map((credit, index) => (
+									<li key={index}>{credit}</li>
+								))}
+						</ul>
+						<p>{projectData.text}</p>
+						<div className='flex flex-col items-start'>
+							<Button
+								action={() =>
+									transitionOnClick(`/projects/${projectData.slug}/trailer`)
+								}
+							>
+								View Trailer
+							</Button>
+							<a
+								className='block underline'
+								href={"https://www.imdb.com"}
+								target='_blank'
+							>
+								View on IMDB
+							</a>
+						</div>
+					</div>
 				</div>
 			</PageWrapper>
 		</div>

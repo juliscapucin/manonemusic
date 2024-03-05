@@ -24,6 +24,7 @@ query GetProjectBySlug($slug: String!) {
 			height
 		 }
 		 videoUrl
+		 credits
 	  }
 	}
  }
