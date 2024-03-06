@@ -63,9 +63,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
 	return (
 		<ProjectPage
-			projectData={projectData}
-			projectsData={projectsData.projectCollection.items}
-			transitionOnEnter={true}
+			{...{
+				projectData,
+				projectsData: projectsData.projectCollection.items,
+				transitionOnEnter: true,
+			}}
 		/>
 	)
 }

@@ -1,14 +1,12 @@
 import { usePathname, useRouter } from "next/navigation"
 
-import { usePageContext } from "@/context"
-
 type LogoProps = {
 	handlePanelSlide?: (index: number, pushSlug: boolean) => void
 }
 
 export default function Logo({ handlePanelSlide }: LogoProps) {
-	const { transitionOnClick } = usePageContext()
 	const pathname = usePathname()
+	const router = useRouter()
 
 	return (
 		<button
@@ -16,7 +14,7 @@ export default function Logo({ handlePanelSlide }: LogoProps) {
 				pathname === "/" ? "" : "scale-20"
 			}`}
 			onClick={() =>
-				handlePanelSlide ? handlePanelSlide(0, true) : transitionOnClick("/")
+				handlePanelSlide ? handlePanelSlide(0, true) : router.push("/")
 			}
 		>
 			<h1 className={`logo font-medium text-center leading-none`}>

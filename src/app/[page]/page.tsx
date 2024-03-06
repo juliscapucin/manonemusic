@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 const query = `
 	query {
-		workPageCollection {
+		projectsPageCollection {
 			items {
 			  title
 			}
@@ -29,7 +29,7 @@ const query = `
 				 width
 				 height
 			  }
-			  videoUrl
+			  gridPosition
 			}
 		 }
 		releasesCollection {
@@ -62,7 +62,10 @@ const query = `
 export default async function Page() {
 	const data = await fetchAll(query)
 
+	console.log(data)
+
 	if (!data) return notFound()
+
 	return (
 		<main className='w-screen custom-min-w-screen min-w-full h-full'>
 			<HorizontalPanel data={data} />

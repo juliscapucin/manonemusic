@@ -21,9 +21,7 @@ const query = `
 				 width
 				 height
 			  }
-			  videoUrl
-			  credits
-			  imdbLink
+			  gridPosition
 			}
 		 }
 		releasesCollection {

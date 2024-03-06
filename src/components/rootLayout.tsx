@@ -19,7 +19,7 @@ export default function RootLayout(props: { children: React.ReactNode }) {
 			data-theme={rootTheme}
 			className='relative w-screen h-screen custom-min-h-screen bg-primary text-secondary'
 		>
-			<PageContextProvider>{props.children}</PageContextProvider>
+			{props.children}
 		</html>
 	)
 }

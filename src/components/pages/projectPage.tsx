@@ -77,11 +77,13 @@ export default function ProjectPage({
 						<div className='flex flex-wrap gap-16'>
 							<div className='relative w-1/4 min-w-[300px] aspect-square overflow-clip'>
 								<Image
-									src={projectData.coverImage.url}
-									alt={projectData.coverImage.description}
-									fill
-									style={{ objectFit: "cover" }}
-									sizes='50vw'
+									{...{
+										src: projectData.coverImage.url,
+										alt: projectData.coverImage.description,
+										fill: true,
+										style: { objectFit: "cover" },
+										sizes: "50vw",
+									}}
 								/>
 							</div>
 							<div className='w-1/3 min-w-[300px] space-y-8'>

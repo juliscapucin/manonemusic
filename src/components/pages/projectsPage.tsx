@@ -1,7 +1,6 @@
 "use client"
 
 import { useRef } from "react"
-import { useRouter } from "next/navigation"
 
 import { ProjectCard } from "@/components"
 
@@ -16,24 +15,30 @@ export default function ProjectsPage({
 	titleScrollTrigger = true,
 }: Props) {
 	const titleWorkRef = useRef(null)
-	const router = useRouter()
+	const gridElements = new Array(36).fill(0)
 
 	useTitleScrollTrigger(titleWorkRef, "/projects")
 
 	return (
 		<PageWrapper>
-			<Title ref={titleScrollTrigger ? titleWorkRef : null}>Projects</Title>
-			<div className='flex justify-center gap-4 h-64'>
-				{data.map((project: Project) => (
-					<ProjectCard
-						key={project.slug}
-						{...{
-							title: project.title,
-							coverImage: project.coverImage,
-							slug: project.slug,
-						}}
-					/>
-				))}
+			<div className='grid grid-cols-12 grid-rows-3 gap-2 w-full h-full relative'>
+				<Title ref={titleScrollTrigger ? titleWorkRef : null}>Projects</Title>
+				{gridElements.map((_, index) => {
+					const project = data.find((project) => project.gridPosition == index)
+
+					console.log(project)
+
+					return project ? (
+						<ProjectCard
+							key={project.slug}
+							title={project.title}
+							coverImage={project.coverImage}
+							slug={project.slug}
+						/>
+					) : (
+						<div key={index} className='w-full h-full'></div>
+					)
+				})}
 			</div>
 		</PageWrapper>
 	)
