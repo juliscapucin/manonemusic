@@ -11,4 +11,5 @@ export type Project = {
 	}
 	videoUrl: string
 	credits: string[]
+	imdbLink: string
 }

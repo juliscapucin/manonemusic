@@ -1,6 +1,5 @@
 "use client"
 
-import { useEffect } from "react"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
 
@@ -16,11 +15,6 @@ type ProjectPageProps = {
 export default function ProjectPage({ projectData }: ProjectPageProps) {
 	const router = useRouter()
 	const { pageRef, transitionOnClick, transitionOnEnter } = usePageContext()
-
-	// Transition on Enter
-	// useEffect(() => {
-	// 	pageRef.current && transitionOnEnter(pageRef.current)
-	// }, [pageRef])
 
 	return (
 		<div className='w-screen h-screen overflow-clip'>
@@ -60,13 +54,15 @@ export default function ProjectPage({ projectData }: ProjectPageProps) {
 							>
 								View Trailer
 							</Button>
-							<a
-								className='block underline'
-								href={"https://www.imdb.com"}
-								target='_blank'
-							>
-								View on IMDB
-							</a>
+							{projectData.imdbLink && (
+								<a
+									className='block underline'
+									href={projectData.imdbLink}
+									target='_blank'
+								>
+									View on IMDB
+								</a>
+							)}
 						</div>
 					</div>
 				</div>

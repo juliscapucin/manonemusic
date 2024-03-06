@@ -25,6 +25,7 @@ query GetProjectBySlug($slug: String!) {
 		 }
 		 videoUrl
 		 credits
+		 imdbLink
 	  }
 	}
  }
