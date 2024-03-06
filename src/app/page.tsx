@@ -2,57 +2,10 @@ import { notFound } from "next/navigation"
 import { HorizontalPanel } from "@/components"
 import { fetchAll } from "@/lib"
 
-const query = `
-	query {
-		projectsPageCollection {
-			items {
-			  title
-			}
-		 }
-		 projectCollection {
-			items {
-			  title
-			  slug
-			  text
-			  coverImage {
-				 url
-				 title
-				 description
-				 width
-				 height
-			  }
-			  gridPosition
-			}
-		 }
-		releasesCollection {
-			items {
-				title
-				text
-			}
-		}
-		aboutPageCollection {
-			items {
-				title
-				text
-			}
-		}
-		contactPageCollection {
-			items {
-				title
-				availability
-			}
-			}
-			socialLinkCollection{
-			items {
-				label
-				url
-			}
-		}
-	}
-`
+import { queryAll } from "@/lib/queries"
 
 export default async function Home() {
-	const data = await fetchAll(query)
+	const data = await fetchAll(queryAll)
 
 	if (!data) return notFound()
 	return (

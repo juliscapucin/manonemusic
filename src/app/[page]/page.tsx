@@ -4,63 +4,16 @@ import { notFound } from "next/navigation"
 import { fetchAll } from "@/lib"
 import { HorizontalPanel } from "@/components"
 
+import { queryAll } from "@/lib/queries"
+
 export const metadata: Metadata = {
 	title: "Man One Music",
 	description:
 		"Man One Music and lead composer Matt Rudge specialise in original music and sound.",
 }
 
-const query = `
-	query {
-		projectsPageCollection {
-			items {
-			  title
-			}
-		 }
-		 projectCollection {
-			items {
-			  title
-			  slug
-			  text
-			  coverImage {
-				 url
-				 title
-				 description
-				 width
-				 height
-			  }
-			  gridPosition
-			}
-		 }
-		releasesCollection {
-			items {
-				title
-				text
-			}
-		}
-		aboutPageCollection {
-			items {
-				title
-				text
-			}
-		}
-		contactPageCollection {
-			items {
-				title
-				availability
-			}
-			}
-			socialLinkCollection{
-			items {
-				label
-				url
-			}
-		}
-	}
-`
-
 export default async function Page() {
-	const data = await fetchAll(query)
+	const data = await fetchAll(queryAll)
 
 	console.log(data)
 
