@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
-import { fetchProject } from "@/lib"
+import { fetchProject, fetchAll } from "@/lib"
 import { ProjectPage } from "@/components/pages"
 
 export const metadata: Metadata = {
@@ -31,14 +31,41 @@ query GetProjectBySlug($slug: String!) {
  }
 `
 
+const allProjectsQuery = `
+	query {
+		 projectCollection {
+			items {
+			  title
+			  slug
+			  text
+			  coverImage {
+				 url
+				 title
+				 description
+				 width
+				 height
+			  }
+			}
+		 }
+	}
+`
+
 export default async function Page({ params }: { params: { slug: string } }) {
 	const { slug } = params
 	const variables = { slug }
 
 	const data = await fetchProject(query, variables)
+	const projectsData = await fetchAll(allProjectsQuery)
 	const projectData = data.projectCollection.items[0]
 
-	if (!data || data.projectCollection.items.length === 0) return notFound()
+	if (!data || !projectsData || data.projectCollection.items.length === 0)
+		return notFound()
 
-	return <ProjectPage projectData={projectData} />
+	return (
+		<ProjectPage
+			projectData={projectData}
+			projectsData={projectsData.projectCollection.items}
+			transitionOnEnter={true}
+		/>
+	)
 }

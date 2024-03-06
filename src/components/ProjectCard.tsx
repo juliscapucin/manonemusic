@@ -22,7 +22,12 @@ export default function ProjectCard({ title, coverImage, slug }: Props) {
 	const { transitionOnClick } = usePageContext()
 
 	return (
-		<button onClick={() => handlePanelSlide(1, true)} className='bg-colorWhite'>
+		<button
+			onClick={() => {
+				handlePanelSlide(1, true, () => router.push(`/projects/${slug}`))
+			}}
+			className='bg-colorWhite'
+		>
 			<div className='relative w-32 h-[40vh] overflow-clip'>
 				<Image
 					className='object-cover'

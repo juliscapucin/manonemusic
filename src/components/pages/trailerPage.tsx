@@ -54,11 +54,11 @@ export default function TrailerPage({ projectData }: TrailerPageProps) {
 	return (
 		<div className='overflow-clip'>
 			<div ref={pageContainerRef} className='flex flex-nowrap gap-16 w-fit'>
-				<ProjectPage projectData={projectData} />
+				<ProjectPage projectData={projectData} transitionOnEnter={false} />
 				<div className='w-screen h-screen overflow-clip'>
 					<Logo />
 
-					<div className='absolute flex justify-center items-center w-screen h-screen bg-colorBlack z-50'>
+					<div className='absolute flex justify-center items-center w-screen h-screen bg-primary z-50'>
 						<button
 							className={"absolute top-16 left-8"}
 							onClick={() =>

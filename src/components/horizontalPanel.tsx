@@ -54,10 +54,11 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 					invalidateOnRefresh: true,
 					// markers: true,
 					onUpdate: (self) => {
-						if (self.progress <= 0.12 && !isHome) {
-							window.history.pushState(null, "", "/")
-							setIsHome(true)
-						}
+						// fix this!
+						// if (self.progress <= 0.12 && !isHome) {
+						// 	window.history.pushState(null, "", "/")
+						// 	setIsHome(true)
+						// }
 						// console.log("end", self.end)
 						// console.log(self.progress, "/1")
 						// console.log(

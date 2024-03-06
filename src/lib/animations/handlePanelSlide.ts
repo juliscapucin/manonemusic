@@ -1,9 +1,9 @@
 import gsap from "gsap"
-import { ScrollToPlugin } from "gsap/ScrollToPlugin"
 
 export const handlePanelSlide = (
 	targetIndex: number,
-	animateSlide: boolean
+	animateSlide: boolean,
+	routerAction?: () => void
 ) => {
 	const targetPanel = document.querySelector(
 		`[data-id=panel-${targetIndex}]`
@@ -16,9 +16,10 @@ export const handlePanelSlide = (
 				y: y,
 				autoKill: false,
 			},
-			duration: 1,
+			duration: 0.8,
 			onComplete: () => {
 				targetIndex === 0 && window.history.pushState(null, "", "/")
+				routerAction && routerAction()
 			},
 		})
 	} else {
