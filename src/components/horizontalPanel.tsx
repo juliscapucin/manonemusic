@@ -7,8 +7,6 @@ import gsap from "gsap"
 import { ScrollToPlugin } from "gsap/ScrollToPlugin"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
-import { PageContextProvider } from "@/context"
-
 import { navLinks } from "@/constants"
 import {
 	AboutPage,
@@ -21,6 +19,7 @@ import { AllData } from "@/types"
 import { NavBar } from "@/components"
 import { Logo } from "@/components/ui"
 import { ButtonScroll } from "./buttons"
+import { handlePanelSlide } from "@/lib/animations"
 
 export default function HorizontalPanel({ data }: { data: AllData }) {
 	const pathname = usePathname()
@@ -32,37 +31,6 @@ export default function HorizontalPanel({ data }: { data: AllData }) {
 	useEffect(() => {
 		setIsHome(pathname === "/" ? true : false)
 	}, [pathname])
-
-	// Scroll / jump to panel on nav click / page load
-	const handlePanelSlide = (targetIndex: number, animateSlide: boolean) => {
-		const container = panelsContainerRef.current
-		if (!container) return
-
-		const targetPanel = container.querySelector(
-			`[data-id=panel-${targetIndex}]`
-		) as HTMLDivElement
-		let y = targetPanel?.offsetLeft || 0
-
-		if (animateSlide === true) {
-			gsap.to(window, {
-				scrollTo: {
-					y: y,
-					autoKill: false,
-				},
-				duration: 1,
-				onComplete: () => {
-					targetIndex === 0 && window.history.pushState(null, "", "/")
-				},
-			})
-		} else {
-			gsap.set(window, {
-				scrollTo: {
-					y: y,
-					autoKill: false,
-				},
-			})
-		}
-	}
 
 	// ScrollTrigger + Panel animation
 	useEffect(() => {

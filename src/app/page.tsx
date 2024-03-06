@@ -22,6 +22,8 @@ const query = `
 				 height
 			  }
 			  videoUrl
+			  credits
+			  imdbLink
 			}
 		 }
 		releasesCollection {

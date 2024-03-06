@@ -18,6 +18,8 @@ interface Project {
 		height: number
 	}
 	videoUrl: string
+	credits: string[]
+	imdbLink: string
 }
 
 interface ProjectCollection {

@@ -40,6 +40,8 @@ export const PageContextProvider = ({
 
 		if (!container) return
 
+		console.log("transitionOnClick", slug)
+
 		ctx.add(() => {
 			gsap.to(container, {
 				opacity: 0,

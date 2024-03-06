@@ -4,6 +4,7 @@ import Image from "next/image"
 import { useRouter } from "next/navigation"
 
 import { usePageContext } from "@/context"
+import { handlePanelSlide } from "@/lib/animations"
 
 type Props = {
 	title: string
@@ -21,10 +22,7 @@ export default function ProjectCard({ title, coverImage, slug }: Props) {
 	const { transitionOnClick } = usePageContext()
 
 	return (
-		<button
-			onClick={() => transitionOnClick(`/projects/${slug}`)}
-			className='bg-colorWhite'
-		>
+		<button onClick={() => handlePanelSlide(1, true)} className='bg-colorWhite'>
 			<div className='relative w-32 h-[40vh] overflow-clip'>
 				<Image
 					className='object-cover'

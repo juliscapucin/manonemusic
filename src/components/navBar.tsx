@@ -13,11 +13,7 @@ type NavLinksProps = {
 	isHome: boolean
 }
 
-export default function NavBar({
-	navLinks,
-	transitionOnClick,
-	isHome,
-}: NavLinksProps) {
+export default function NavBar({ navLinks, transitionOnClick }: NavLinksProps) {
 	const pathname = usePathname()
 	const navRef = useRef<HTMLDivElement | null>(null)
 	const navClasses =

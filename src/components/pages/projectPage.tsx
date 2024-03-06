@@ -18,8 +18,9 @@ export default function ProjectPage({ projectData }: ProjectPageProps) {
 
 	return (
 		<div className='w-screen h-screen overflow-clip'>
-			<Logo />
+			{/* <Logo /> */}
 			<PageWrapper>
+				{/* Back Button */}
 				<button
 					className={"absolute z-30"}
 					onClick={() => transitionOnClick("/projects")}
@@ -46,6 +47,7 @@ export default function ProjectPage({ projectData }: ProjectPageProps) {
 								))}
 						</ul>
 						<p>{projectData.text}</p>
+						{/* Buttons / Links */}
 						<div className='flex flex-col items-start'>
 							<Button
 								action={() =>
