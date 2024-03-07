@@ -26,7 +26,7 @@ export default function ProjectsPage({
 				{gridElements.map((_, index) => {
 					const project = data.find((project) => project.gridPosition == index)
 
-					console.log(project)
+					// console.log(project)
 
 					return project ? (
 						<ProjectCard

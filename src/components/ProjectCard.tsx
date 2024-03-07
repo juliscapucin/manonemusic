@@ -34,7 +34,7 @@ export default function ProjectCard({
 			<div className='relative w-full h-full'>
 				<Image
 					className={`${
-						pathname.includes(slug) && "flip-project-card"
+						pathname.includes(slug) && "gsap-flip-project-card"
 					} object-cover`}
 					src={coverImage.url}
 					alt={coverImage.description}

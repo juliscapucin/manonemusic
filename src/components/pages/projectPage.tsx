@@ -27,6 +27,7 @@ export default function ProjectPage({
 	const searchParams = useSearchParams()
 	const containerRef = useRef<HTMLDivElement>(null)
 	const projectsPageRef = useRef<HTMLDivElement>(null)
+	const projectPageRef = useRef<HTMLDivElement>(null)
 	const imageRef = useRef<HTMLImageElement>(null)
 
 	// const transitionOnClickBack = (slug: string) => {
@@ -44,32 +45,40 @@ export default function ProjectPage({
 	useLayoutEffect(() => {
 		const container = containerRef.current
 		const projectsPage = projectsPageRef.current
+		const projectPage = projectPageRef.current
 
-		if (!container || !projectsPage) return
+		if (!container || !projectsPage || !projectPage) return
 
 		gsap.registerPlugin(Flip)
 
 		let ctx = gsap.context(() => {
 			// Position the project card image on the page
-			Flip.fit(".flip-project-card", ".flip-project-page", {
+			Flip.fit(".gsap-flip-project-card", ".gsap-flip-project-image", {
 				scale: true,
 				absolute: true,
 				duration: 0.3,
 				ease: "power4.out",
 				onComplete: () => {
-					const image = imageRef.current
-					if (!image) return
-					image.classList.remove("opacity-0")
+					gsap.set(".gsap-juli", { opacity: 1 })
+					gsap.to(".project-content", {
+						opacity: 1,
+						duration: 1,
+						delay: 0.5,
+						stagger: 0.3,
+					})
 				},
 			})
-
-			gsap.to(projectsPage, { opacity: 0, duration: 0.3 })
+			gsap.to(projectsPage, {
+				opacity: 0,
+				duration: 0.5,
+				delay: 0.3,
+			})
 		}, [container])
 
 		return () => {
 			ctx.revert()
 		}
-	}, [containerRef, projectsPageRef])
+	}, [containerRef, projectsPageRef, projectPageRef])
 
 	return (
 		<div className='w-screen h-screen overflow-clip'>
@@ -81,7 +90,7 @@ export default function ProjectPage({
 					</div>
 				)}
 				{/* Project Page */}
-				<div className='w-screen h-screen overflow-clip'>
+				<div ref={projectPageRef} className='w-screen h-screen overflow-clip'>
 					{/* <Logo /> */}
 					<PageWrapper>
 						{/* Back Button */}
@@ -91,21 +100,23 @@ export default function ProjectPage({
 						>
 							Back to Projects
 						</button>
-						<Title>{projectData.title}</Title>
-						<div className='flex flex-wrap gap-16'>
-							<div className='flip-project-page relative w-1/4 min-w-[300px] aspect-square overflow-clip'>
+						<Title classes='project-content opacity-0'>
+							{projectData.title}
+						</Title>
+						<div className='gsap-project-page flex flex-wrap gap-16'>
+							<div className='gsap-flip-project-image relative w-1/4 min-w-[300px] aspect-square overflow-clip'>
 								<Image
 									{...{
 										src: projectData.coverImage.url,
 										alt: projectData.coverImage.description,
 										fill: true,
-										className: "object-cover opacity-0",
+										className: "gsap-juli opacity-0 object-cover",
 										sizes: "50vw",
 										ref: imageRef,
 									}}
 								/>
 							</div>
-							<div className='w-1/3 min-w-[300px] space-y-8'>
+							<div className='project-content opacity-0 w-1/3 min-w-[300px] space-y-8'>
 								{/* Credits */}
 								<ul className='text-labelLarge'>
 									{projectData.credits &&
