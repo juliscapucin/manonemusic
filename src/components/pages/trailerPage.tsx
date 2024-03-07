@@ -1,7 +1,6 @@
 "use client"
 
 import { useEffect, useLayoutEffect, useRef } from "react"
-
 import { useRouter } from "next/navigation"
 
 import gsap from "gsap"
@@ -28,7 +27,7 @@ export default function TrailerPage({ projectData }: TrailerPageProps) {
 				duration: 0.5,
 				ease: "power4.out",
 				onComplete: () => {
-					router.push(slug)
+					router.push(`${slug}?back=true`)
 				},
 			})
 		})
@@ -53,7 +52,7 @@ export default function TrailerPage({ projectData }: TrailerPageProps) {
 
 	return (
 		<div className='overflow-clip'>
-			<div ref={pageContainerRef} className='flex flex-nowrap gap-16 w-fit'>
+			<div ref={pageContainerRef} className='flex flex-nowrap w-fit'>
 				<ProjectPage projectData={projectData} transitionOnEnter={false} />
 				<div className='w-screen h-screen overflow-clip'>
 					<Logo />

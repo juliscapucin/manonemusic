@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { useRouter } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 
 import { handlePanelSlide } from "@/lib/animations"
 
@@ -22,6 +22,7 @@ export default function ProjectCard({
 	slug,
 }: ProjectCardProps) {
 	const router = useRouter()
+	const pathname = usePathname()
 
 	return (
 		<button
@@ -30,12 +31,14 @@ export default function ProjectCard({
 			}}
 			className={`w-full h-full relative`}
 		>
-			<div className='relative w-full h-full overflow-clip'>
+			<div className='relative w-full h-full'>
 				<Image
-					className='object-cover'
+					className={`${
+						pathname.includes(slug) && "flip-project-card"
+					} object-cover`}
 					src={coverImage.url}
 					alt={coverImage.description}
-					sizes='20vw'
+					sizes='50vw'
 					fill
 				/>
 			</div>
