@@ -25,8 +25,29 @@ export default function ProjectPage({
 	const router = useRouter()
 	const searchParams = useSearchParams()
 	const containerRef = useRef<HTMLDivElement>(null)
+	let ctx = gsap.context(() => {})
+	let stateCard: Flip.FlipState
 
-	const transitionOnClickBack = (slug: string) => {}
+	const transitionOnClickBack = (slug: string) => {
+		ctx.add(() => {
+			gsap.set(".gsap-projects-page", { display: "block" })
+			gsap.set(".gsap-projects-title", { opacity: 0 })
+			gsap.to(".gsap-projects-page", { opacity: 1, duration: 0.3 })
+			gsap.set(".gsap-project-image", { opacity: 0 })
+
+			gsap.to(".gsap-project-content", { opacity: 0, duration: 0.3 })
+
+			Flip.fit(".gsap-flip-project-card", stateCard, {
+				scale: true,
+				absolute: true,
+				duration: 0.6,
+				ease: "power4.out",
+				onComplete: () => {
+					router.push(slug)
+				},
+			})
+		})
+	}
 
 	// Transition on enter
 	useLayoutEffect(() => {
@@ -36,9 +57,12 @@ export default function ProjectPage({
 
 		gsap.registerPlugin(Flip)
 
-		let ctx = gsap.context(() => {
+		ctx.add(() => {
+			const state = Flip.getState(".gsap-flip-project-image")
+			stateCard = Flip.getState(".gsap-flip-project-card")
+
 			// Position the project card image on the page
-			Flip.fit(".gsap-flip-project-card", ".gsap-flip-project-image", {
+			Flip.fit(".gsap-flip-project-card", state, {
 				scale: true,
 				absolute: true,
 				duration: 0.3,
@@ -47,18 +71,17 @@ export default function ProjectPage({
 					gsap.set(".gsap-project-image", { opacity: 1 })
 					gsap.to(".gsap-project-content", {
 						opacity: 1,
-						duration: 1,
-						delay: 0.5,
+						duration: 0.6,
+						delay: 0.2,
 						stagger: 0.3,
 					})
-				},
-			})
-			gsap.to(".gsap-projects-page", {
-				opacity: 0,
-				duration: 0.5,
-				delay: 0.3,
-				onComplete: () => {
-					gsap.set(".gsap-projects-page", { display: "none" })
+					gsap.to(".gsap-projects-page", {
+						opacity: 0,
+						duration: 0.3,
+						onComplete: () => {
+							gsap.set(".gsap-projects-page", { display: "none" })
+						},
+					})
 				},
 			})
 		}, [container])
@@ -87,7 +110,7 @@ export default function ProjectPage({
 					{/* Back Button */}
 					<button
 						className={"absolute z-30"}
-						onClick={() => router.push("/projects")}
+						onClick={() => transitionOnClickBack("/projects")}
 					>
 						Back to Projects
 					</button>

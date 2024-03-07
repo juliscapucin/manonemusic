@@ -22,7 +22,12 @@ export default function ProjectsPage({
 	return (
 		<PageWrapper>
 			<div className='grid grid-cols-12 grid-rows-3 gap-2 w-full h-full relative'>
-				<Title ref={titleScrollTrigger ? titleWorkRef : null}>Projects</Title>
+				<Title
+					classes='gsap-projects-title'
+					ref={titleScrollTrigger ? titleWorkRef : null}
+				>
+					Projects
+				</Title>
 				{gridElements.map((_, index) => {
 					const project = data.find((project) => project.gridPosition == index)
 
