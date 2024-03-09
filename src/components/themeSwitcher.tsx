@@ -65,7 +65,7 @@ export default function ThemeSwitcher({ variant }: Props) {
 										type='button'
 										className={`${item.color} ${
 											item.theme === theme && "active"
-										} border border-colorFaded w-8 lg:w-10 h-8 lg:h-10`}
+										} border border-faded-30 w-8 lg:w-10 h-8 lg:h-10`}
 										onClick={(e) => handleThemeChange(e, item.theme)}
 									></button>
 								</div>
@@ -111,7 +111,7 @@ export default function ThemeSwitcher({ variant }: Props) {
 										type='button'
 										className={`${item.color} ${
 											item.theme === theme && "active"
-										} border border-colorFaded w-6 h-6 hover:scale-125 transition-transform duration-200`}
+										} border border-faded-30 w-6 h-6 hover:scale-125 transition-transform duration-200`}
 										onClick={(e) => handleThemeChange(e, item.theme)}
 									></button>
 								</div>
