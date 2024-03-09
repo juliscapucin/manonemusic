@@ -1,7 +1,7 @@
 "use client"
 
 import { useWindowDimensions } from "@/hooks"
-import { HorizontalPanel, VerticalPanel } from "@/components"
+import { PanelDesktop, PanelMobile } from "@/components"
 
 import { AllData } from "@/types"
 
@@ -10,9 +10,9 @@ export default function Panels({ data }: { data: AllData }) {
 	return (
 		<>
 			{width > height ? (
-				<HorizontalPanel data={data} />
+				<PanelDesktop data={data} />
 			) : (
-				<VerticalPanel data={data} />
+				<PanelMobile data={data} />
 			)}
 		</>
 	)

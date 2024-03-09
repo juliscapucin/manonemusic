@@ -1,7 +1,8 @@
 import RootLayout from "./rootLayout"
 import Availability from "./availability"
 import Copyright from "./copyright"
-import HorizontalPanel from "./horizontalPanel"
+import PanelDesktop from "./panelDesktop"
+import PanelMobile from "./panelMobile"
 import NavBar from "./navBar"
 import NavLink from "./navLink"
 import Panels from "./panels"
@@ -10,20 +11,19 @@ import ProjectTrailer from "./projectTrailer"
 import SocialLinks from "./socialLinks"
 import Status from "./status"
 import ThemeSwitcher from "./themeSwitcher"
-import VerticalPanel from "./verticalPanel"
 
 export {
 	Availability,
 	Copyright,
-	HorizontalPanel,
 	NavBar,
 	NavLink,
 	Panels,
+	PanelDesktop,
+	PanelMobile,
 	ProjectCard,
 	ProjectTrailer,
 	RootLayout,
 	SocialLinks,
 	Status,
 	ThemeSwitcher,
-	VerticalPanel,
 }

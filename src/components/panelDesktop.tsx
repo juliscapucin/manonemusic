@@ -21,7 +21,7 @@ import { Logo } from "@/components/ui"
 import { ButtonScroll } from "./buttons"
 import { handlePanelSlide } from "@/lib/animations"
 
-export default function HorizontalPanel({ data }: { data: AllData }) {
+export default function PanelDesktop({ data }: { data: AllData }) {
 	const pathname = usePathname()
 	const [isHome, setIsHome] = useState(pathname === "/" ? true : false)
 	const outerContainerRef = useRef<HTMLDivElement | null>(null)
