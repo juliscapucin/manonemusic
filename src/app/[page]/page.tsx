@@ -2,7 +2,7 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
 import { fetchAll } from "@/lib"
-import { HorizontalPanel } from "@/components"
+import { Panels } from "@/components"
 
 import { queryAll } from "@/lib/queries"
 
@@ -19,7 +19,7 @@ export default async function Page() {
 
 	return (
 		<main className='w-screen custom-min-w-screen min-w-full h-full'>
-			<HorizontalPanel data={data} />
+			<Panels data={data} />
 		</main>
 	)
 }

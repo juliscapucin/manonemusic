@@ -5,7 +5,7 @@ import { useRef } from "react"
 import { ProjectCard } from "@/components"
 
 import { Project } from "@/types"
-import { PageWrapper, Title } from "@/components/ui"
+import { PageWrapperDesktop, PageWrapperMobile, Title } from "@/components/ui"
 import { useTitleScrollTrigger } from "@/hooks"
 
 type Props = { data: Project[]; titleScrollTrigger?: boolean }
@@ -20,31 +20,49 @@ export default function ProjectsPage({
 	useTitleScrollTrigger(titleWorkRef, "/projects")
 
 	return (
-		<PageWrapper>
-			<div className='grid grid-cols-12 grid-rows-3 gap-2 w-full h-full relative'>
-				<Title
-					classes='gsap-projects-title'
-					ref={titleScrollTrigger ? titleWorkRef : null}
-				>
-					Projects
-				</Title>
-				{gridElements.map((_, index) => {
-					const project = data.find((project) => project.gridPosition == index)
+		<>
+			<PageWrapperDesktop>
+				<div className='hidden lg:grid grid-cols-12 grid-rows-3 gap-2 w-full h-full relative'>
+					<Title
+						classes='gsap-projects-title'
+						ref={titleScrollTrigger ? titleWorkRef : null}
+					>
+						Projects
+					</Title>
+					{gridElements.map((_, index) => {
+						const project = data.find(
+							(project) => project.gridPosition == index
+						)
 
-					// console.log(project)
+						// console.log(project)
 
-					return project ? (
+						return project ? (
+							<ProjectCard
+								key={project.slug}
+								title={project.title}
+								coverImage={project.coverImage}
+								slug={project.slug}
+							/>
+						) : (
+							<div key={index} className='w-full h-full'></div>
+						)
+					})}
+				</div>
+			</PageWrapperDesktop>
+
+			<PageWrapperMobile>
+				<div className='lg:hidden flex flex-col gap-4'>
+					<Title classes='gsap-projects-title'>Projects</Title>
+					{data.map((project) => (
 						<ProjectCard
 							key={project.slug}
 							title={project.title}
 							coverImage={project.coverImage}
 							slug={project.slug}
 						/>
-					) : (
-						<div key={index} className='w-full h-full'></div>
-					)
-				})}
-			</div>
-		</PageWrapper>
+					))}
+				</div>
+			</PageWrapperMobile>
+		</>
 	)
 }

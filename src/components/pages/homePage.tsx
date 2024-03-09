@@ -48,7 +48,7 @@ export default function HomePage({ data }: { data: HomeData }) {
 	return (
 		<section
 			ref={homeWrapperRef}
-			className='w-screen custom-min-h-screen h-full'
+			className='relative w-screen custom-min-h-screen h-full'
 		>
 			<div className='relative flex mt-48 w-screen pr-16'>
 				<Heading tag='h2' variant='headline' styles='w-1/2'>
