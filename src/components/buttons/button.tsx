@@ -1,8 +1,13 @@
 type ButtonProps = {
 	children: React.ReactNode
 	action: () => void
+	classes?: string
 }
 
-export default function Button({ children, action }: ButtonProps) {
-	return <button onClick={action}>{children}</button>
+export default function Button({ children, action, classes }: ButtonProps) {
+	return (
+		<button className={`${classes && classes}`} onClick={action}>
+			{children}
+		</button>
+	)
 }

@@ -29,6 +29,8 @@ export default function ProjectPage({
 	let stateCard: Flip.FlipState
 
 	const transitionOnClickBack = (slug: string) => {
+		gsap.registerPlugin(Flip)
+
 		ctx.add(() => {
 			gsap.set(".gsap-projects-page", { display: "block" })
 			gsap.set(".gsap-projects-title", { opacity: 0 })
@@ -51,11 +53,11 @@ export default function ProjectPage({
 
 	// Transition on enter
 	useLayoutEffect(() => {
+		gsap.registerPlugin(Flip)
+
 		const container = containerRef.current
 
 		if (!container) return
-
-		gsap.registerPlugin(Flip)
 
 		ctx.add(() => {
 			const state = Flip.getState(".gsap-flip-project-image")
@@ -104,16 +106,14 @@ export default function ProjectPage({
 			)}
 			{/* Project Page */}
 			<div className='gsap-project-page w-fit h-screen flex flex-nowrap'>
-				{/* <Logo /> */}
-
 				<PageWrapper>
 					{/* Back Button */}
-					<button
-						className={"absolute z-30"}
-						onClick={() => transitionOnClickBack("/projects")}
+					<Button
+						classes='absolute z-30'
+						action={() => transitionOnClickBack("/projects")}
 					>
 						Back to Projects
-					</button>
+					</Button>
 					<Title classes='gsap-project-content opacity-0'>
 						{projectData.title}
 					</Title>
@@ -140,17 +140,19 @@ export default function ProjectPage({
 							<p>{projectData.text}</p>
 							{/* Buttons / Links */}
 							<div className='flex flex-col items-start'>
-								<Button
-									action={() =>
-										gsap.to(".gsap-project-page", {
-											xPercent: -50,
-											duration: 1,
-											ease: "power4.out",
-										})
-									}
-								>
-									View Trailer
-								</Button>
+								{projectData.videoUrl && (
+									<Button
+										action={() =>
+											gsap.to(".gsap-project-page", {
+												xPercent: -50,
+												duration: 1,
+												ease: "power4.out",
+											})
+										}
+									>
+										View Trailer
+									</Button>
+								)}
 								{projectData.imdbLink && (
 									<a
 										className='block underline'
@@ -166,18 +168,20 @@ export default function ProjectPage({
 				</PageWrapper>
 
 				{/* Trailer */}
-				<PageWrapper>
-					<ProjectTrailer
-						videoUrl='https://player.vimeo.com/video/371168497'
-						backToProject={() =>
-							gsap.to(".gsap-project-page", {
-								xPercent: 0,
-								duration: 1,
-								ease: "power4.out",
-							})
-						}
-					/>
-				</PageWrapper>
+				{projectData.videoUrl && (
+					<PageWrapper>
+						<ProjectTrailer
+							videoUrl='https://player.vimeo.com/video/371168497'
+							backToProject={() =>
+								gsap.to(".gsap-project-page", {
+									xPercent: 0,
+									duration: 1,
+									ease: "power4.out",
+								})
+							}
+						/>
+					</PageWrapper>
+				)}
 			</div>
 		</div>
 	)

@@ -1,6 +1,5 @@
 "use client"
 
-import { PageContextProvider } from "@/context"
 import { useEffect, useState } from "react"
 
 export default function RootLayout(props: { children: React.ReactNode }) {
