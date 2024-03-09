@@ -17,7 +17,7 @@ import {
 } from "@/components/pages"
 import { AllData } from "@/types"
 import { NavBar } from "@/components"
-import { Logo } from "@/components/ui"
+import { Header } from "@/components/ui"
 import { ButtonScroll } from "./buttons"
 import { handlePanelSlide } from "@/lib/animations"
 
@@ -98,7 +98,7 @@ export default function PanelDesktop({ data }: { data: AllData }) {
 				isHome={isHome}
 			/>
 
-			<Logo handlePanelSlide={handlePanelSlide} />
+			<Header handlePanelSlide={handlePanelSlide} />
 
 			{/* Panels */}
 			<div ref={outerContainerRef}>
