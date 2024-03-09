@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation"
-import { HorizontalPanel } from "@/components"
+import { Panels } from "@/components"
 import { fetchAll } from "@/lib"
 
 import { queryAll } from "@/lib/queries"
@@ -9,8 +9,8 @@ export default async function Home() {
 
 	if (!data) return notFound()
 	return (
-		<main className='w-screen custom-min-w-screen min-w-full h-full'>
-			<HorizontalPanel data={data} />
+		<main className='w-full lg:h-full'>
+			<Panels data={data} />
 		</main>
 	)
 }
