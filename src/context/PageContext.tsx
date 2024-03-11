@@ -3,19 +3,13 @@
 import { usePathname, useRouter } from "next/navigation"
 import { createContext, useContext, useEffect, useRef, useState } from "react"
 
-import {
-	animateHorizontal,
-	animateHorizontalTransition,
-	animateMobileMenu,
-} from "@/animations"
+import gsap from "gsap"
 
-// TYPE
-interface ContextProps {
-	transitionOnClick: (link: NavLink, mobileMenuRef?: HTMLDivElement) => void
+type ContextProps = {
+	transitionOnClick: (link: string) => void
+	transitionOnEnter: (container: HTMLDivElement) => void
 	pageRef: React.MutableRefObject<HTMLDivElement | null>
 }
-
-type NavLink = { label: string; slug: string }
 
 // CREATE CONTEXT
 const PageContext = createContext<ContextProps | null>(null)
@@ -28,24 +22,48 @@ export const PageContextProvider = ({
 }) => {
 	const pageRef = useRef<HTMLDivElement | null>(null)
 	const router = useRouter()
+	const pathname = usePathname()
+	let ctx = gsap.context(() => {})
 
-	const transitionOnClick = (link: NavLink, mobileMenuRef?: HTMLDivElement) => {
-		// Toggle mobile menu
-		if (mobileMenuRef) {
-			animateMobileMenu(mobileMenuRef)
-		}
-
-		router.push(`/${link.slug}`)
-
-		// animateHorizontalTransition(pageRef.current, 0, 100, () => {
-		// 	router.push(`/${link.slug}`)
-		// })
+	const transitionOnEnter = (container: HTMLDivElement) => {
+		ctx.add(() => {
+			let timeline = gsap.timeline()
+			timeline.set(container, { opacity: 0 }).to(container, {
+				opacity: 1,
+				duration: 0.5,
+			})
+		})
 	}
+
+	const transitionOnClick = (slug: string) => {
+		const container = pageRef.current
+
+		if (!container) return
+
+		console.log("transitionOnClick", slug)
+
+		ctx.add(() => {
+			gsap.to(container, {
+				opacity: 0,
+				duration: 0.5,
+				onComplete: () => {
+					router.push(`${slug}`)
+				},
+			})
+		})
+	}
+
+	useEffect(() => {
+		return () => {
+			ctx.revert()
+		}
+	}, [])
 
 	return (
 		<PageContext.Provider
 			value={{
 				transitionOnClick,
+				transitionOnEnter,
 				pageRef,
 			}}
 		>

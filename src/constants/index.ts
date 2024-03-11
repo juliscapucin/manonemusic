@@ -7,8 +7,8 @@ export const maxWidth = 2000
 export const navLinks = [
 	{ label: "Home", slug: "/", index: 1, navLinkPosition: "" },
 	{
-		label: "Work",
-		slug: "work",
+		label: "Projects",
+		slug: "projects",
 		index: 2,
 		navLinkPosition: "fixed top-0 left-0",
 	},

@@ -62,7 +62,7 @@ export default function MenuMobile({
 										{/* Inactive Link */}
 										{(pathname === "/" && link.slug === "/") ||
 										pathname.includes(`/${link.slug}`) ? (
-											<span className='font-headline text-displaySmall uppercase text-colorFaded opacity-70'>
+											<span className='font-headline text-displaySmall uppercase text-faded-30 opacity-70'>
 												{link.label}
 											</span>
 										) : (

@@ -142,7 +142,11 @@ textarea {
 }
 
 .logo {
-   font-size: clamp(3rem, 14vw, 36rem);
+   font-size: 13vw;
+
+   @media screen and (min-width: 768px) {
+      font-size: clamp(3rem, 14vw, 12rem);
+   }
 }
 
 .navbar-home {

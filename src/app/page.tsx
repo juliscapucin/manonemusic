@@ -1,63 +1,16 @@
 import { notFound } from "next/navigation"
-import { HorizontalPanel } from "@/components"
-import { fetchGraphQL } from "@/lib"
+import { Panels } from "@/components"
+import { fetchAll } from "@/lib"
 
-const query = `
-	query {
-		workPageCollection {
-			items {
-			  title
-			}
-		 }
-		 projectCollection {
-			items {
-			  title
-			  slug
-			  text
-			  coverImage {
-				 url
-				 title
-				 description
-				 width
-				 height
-			  }
-			  videoUrl
-			}
-		 }
-		releasesCollection {
-			items {
-				title
-				text
-			}
-		}
-		aboutPageCollection {
-			items {
-				title
-				text
-			}
-		}
-		contactPageCollection {
-			items {
-				title
-				availability
-			}
-			}
-			socialLinkCollection{
-			items {
-				label
-				url
-			}
-		}
-	}
-`
+import { queryAll } from "@/lib/queries"
 
 export default async function Home() {
-	const data = await fetchGraphQL(query)
+	const data = await fetchAll(queryAll)
 
 	if (!data) return notFound()
 	return (
-		<main className='w-screen custom-min-w-screen min-w-full h-full'>
-			<HorizontalPanel data={data} />
+		<main className='w-full lg:h-full'>
+			<Panels data={data} />
 		</main>
 	)
 }

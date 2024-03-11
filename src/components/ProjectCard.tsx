@@ -1,6 +1,11 @@
-import Image from "next/image"
+"use client"
 
-type Props = {
+import Image from "next/image"
+import { usePathname, useRouter } from "next/navigation"
+
+import { handlePanelSlide } from "@/lib/animations"
+
+type ProjectCardProps = {
 	title: string
 	coverImage: {
 		url: string
@@ -8,14 +13,29 @@ type Props = {
 		width: number
 		height: number
 	}
+	slug: string
 }
 
-export default function ProjectCard({ title, coverImage }: Props) {
+export default function ProjectCard({
+	title,
+	coverImage,
+	slug,
+}: ProjectCardProps) {
+	const router = useRouter()
+	const pathname = usePathname()
+
 	return (
-		<div>
-			<div className='relative w-32 h-[40vh] overflow-clip'>
+		<button
+			onClick={() => {
+				handlePanelSlide(1, true, () => router.push(`/projects/${slug}`))
+			}}
+			className={`w-full h-full relative`}
+		>
+			<div className='relative w-full h-full'>
 				<Image
-					className='object-cover'
+					className={`${
+						pathname.includes(slug) && "gsap-flip-project-card z-100"
+					} object-cover`}
 					src={coverImage.url}
 					alt={coverImage.description}
 					sizes='50vw'
@@ -23,6 +43,6 @@ export default function ProjectCard({ title, coverImage }: Props) {
 				/>
 			</div>
 			<span>{title}</span>
-		</div>
+		</button>
 	)
 }
