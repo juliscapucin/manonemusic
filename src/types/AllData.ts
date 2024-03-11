@@ -1,26 +1,12 @@
+import { Project } from "@/types/Project"
+import { Album } from "@/types/Album"
+
 interface WorkPage {
 	title: string
 }
 
 interface WorkPageCollection {
 	items: WorkPage[]
-}
-
-interface Project {
-	title: string
-	slug: string
-	text: string
-	coverImage: {
-		url: string
-		title: string
-		description: string
-		width: number
-		height: number
-	}
-	videoUrl: string
-	credits: string[]
-	imdbLink: string
-	gridPosition: number
 }
 
 interface ProjectCollection {
@@ -34,6 +20,10 @@ interface Release {
 
 interface ReleasesCollection {
 	items: Release[]
+}
+
+interface AlbumCollection {
+	items: Album[]
 }
 
 interface AboutPage {
@@ -67,6 +57,7 @@ export interface AllData {
 	workPageCollection: WorkPageCollection
 	projectCollection: ProjectCollection
 	releasesCollection: ReleasesCollection
+	albumCollection: AlbumCollection
 	aboutPageCollection: AboutPageCollection
 	contactPageCollection: ContactPageCollection
 	socialLinkCollection: SocialLinkCollection

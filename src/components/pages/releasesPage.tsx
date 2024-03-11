@@ -3,28 +3,34 @@
 import { useRef } from "react"
 
 import { PageWrapperDesktop, PageWrapperMobile, Title } from "@/components/ui"
-import { useTitleScrollTrigger } from "@/hooks"
+import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
+import { ReleasesMenu } from ".."
+import { Album } from "@/types"
 
 type ReleasesData = {
 	title: string
 	text: string
 }
 
-export default function ReleasesPage({ data }: { data: ReleasesData }) {
+type ReleasesPageProps = {
+	data: ReleasesData
+	albums: Album[]
+}
+
+export default function ReleasesPage({ data, albums }: ReleasesPageProps) {
 	const titleReleasesRef = useRef(null)
+	const { width, height } = useWindowDimensions()
 
 	useTitleScrollTrigger(titleReleasesRef, "/releases")
 
+	const isLandscape = width > height
+	const PageWrapper = isLandscape ? PageWrapperDesktop : PageWrapperMobile
+
 	return (
-		<>
-			<PageWrapperDesktop>
-				<Title ref={titleReleasesRef}>{data.title}</Title>
-				<p className='max-w-prose'>{data.text}</p>
-			</PageWrapperDesktop>
-			<PageWrapperMobile>
-				<Title>{data.title}</Title>
-				<p className='max-w-prose'>{data.text}</p>
-			</PageWrapperMobile>
-		</>
+		<PageWrapper>
+			<Title ref={isLandscape ? titleReleasesRef : null}>{data.title}</Title>
+			<p className='max-w-prose'>{data.text}</p>
+			<ReleasesMenu albums={albums} />
+		</PageWrapper>
 	)
 }

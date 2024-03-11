@@ -57,6 +57,9 @@ const config: Config = {
 			scale: {
 				"20": "0.2",
 			},
+			rotate: {
+				"270": "270deg",
+			},
 		},
 	},
 	plugins: [],

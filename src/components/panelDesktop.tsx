@@ -113,7 +113,10 @@ export default function PanelDesktop({ data }: { data: AllData }) {
 								<ProjectsPage data={data.projectCollection.items} />
 							)}
 							{section.label.toLowerCase() === "releases" && (
-								<ReleasesPage data={data.releasesCollection.items[0]} />
+								<ReleasesPage
+									data={data.releasesCollection.items[0]}
+									albums={data.albumCollection.items}
+								/>
 							)}
 							{section.label.toLowerCase() === "about" && (
 								<AboutPage data={data.aboutPageCollection.items[0]} />
