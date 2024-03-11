@@ -10,11 +10,23 @@ import {
 
 import { AllData } from "@/types"
 import { usePathname } from "next/navigation"
+import { Logo } from "@/components/ui"
+import { NavBar } from "@/components"
 
 export default function PanelMobile({ data }: { data: AllData }) {
 	const pathname = usePathname()
+
+	const handleNavLinkClick = (index: number, pushSlug: boolean) => {
+		const slug = navLinks[index].slug
+		if (pushSlug) {
+			window.history.pushState(null, "", `/${slug}`)
+		}
+	}
+
 	return (
 		<>
+			<Logo />
+			<NavBar navLinks={navLinks} transitionOnClick={handleNavLinkClick} />
 			{pathname === "/" ? (
 				navLinks.map((section, index) => (
 					<section

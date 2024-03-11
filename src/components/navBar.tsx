@@ -10,7 +10,6 @@ type NavLink = { label: string; slug: string; navLinkPosition: string }
 type NavLinksProps = {
 	navLinks: NavLink[]
 	transitionOnClick: (index: number, pushSlug: boolean) => void
-	isHome: boolean
 }
 
 export default function NavBar({ navLinks, transitionOnClick }: NavLinksProps) {

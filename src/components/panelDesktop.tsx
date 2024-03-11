@@ -92,11 +92,7 @@ export default function PanelDesktop({ data }: { data: AllData }) {
 
 	return (
 		<div>
-			<NavBar
-				navLinks={navLinks}
-				transitionOnClick={handlePanelSlide}
-				isHome={isHome}
-			/>
+			<NavBar navLinks={navLinks} transitionOnClick={handlePanelSlide} />
 
 			<Header handlePanelSlide={handlePanelSlide} />
 
