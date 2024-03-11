@@ -17,10 +17,7 @@ const NotFoundPage = () => {
 				<p className='text-secondary text-xl mb-10'>
 					The page you are looking for does not exist.
 				</p>
-				<Link
-					href='/'
-					className='bg-faded-30 hover:bg-faded-10 text-secondary font-bold py-4 px-6 rounded'
-				>
+				<Link href='/' className='text-secondary font-bold py-4 px-6'>
 					Go Home
 				</Link>
 			</div>

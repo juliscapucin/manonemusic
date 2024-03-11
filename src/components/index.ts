@@ -1,10 +1,11 @@
 import Availability from "./availability"
 import Copyright from "./copyright"
-import PanelDesktop from "./panelDesktop"
-import PanelMobile from "./panelMobile"
 import NavBar from "./navBar"
 import NavLink from "./navLink"
+import PanelContent from "./panelContent"
 import Panels from "./panels"
+import PanelDesktop from "./panelDesktop"
+import PanelMobile from "./panelMobile"
 import ProjectCard from "./projectCard"
 import ProjectTrailer from "./projectTrailer"
 import ReleasesCard from "./releasesCard"
@@ -19,6 +20,7 @@ export {
 	Copyright,
 	NavBar,
 	NavLink,
+	PanelContent,
 	Panels,
 	PanelDesktop,
 	PanelMobile,

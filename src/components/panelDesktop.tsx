@@ -8,15 +8,9 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 import { navLinks } from "@/constants"
-import {
-	AboutPage,
-	ContactPage,
-	HomePage,
-	ReleasesPage,
-	ProjectsPage,
-} from "@/components/pages"
+
 import { AllData } from "@/types"
-import { NavBar } from "@/components"
+import { NavBar, PanelContent } from "@/components"
 import { Header } from "@/components/ui"
 import { ButtonScroll } from "./buttons"
 import { handlePanelSlide } from "@/lib/animations"
@@ -105,25 +99,7 @@ export default function PanelDesktop({ data }: { data: AllData }) {
 							className={`panel custom-min-w-screen h-screen min-h-full pl-8 overflow-clip`}
 							key={`panel-${index}`}
 						>
-							{section.label.toLowerCase() === "home" && (
-								<HomePage data={data.aboutPageCollection.items[0]} />
-							)}
-
-							{section.label.toLowerCase() === "projects" && (
-								<ProjectsPage data={data.projectCollection.items} />
-							)}
-							{section.label.toLowerCase() === "releases" && (
-								<ReleasesPage
-									data={data.releasesCollection.items[0]}
-									albums={data.albumCollection.items}
-								/>
-							)}
-							{section.label.toLowerCase() === "about" && (
-								<AboutPage data={data.aboutPageCollection.items[0]} />
-							)}
-							{section.label.toLowerCase() === "contact" && (
-								<ContactPage data={data} />
-							)}
+							<PanelContent data={data} section={section.label.toLowerCase()} />
 
 							{/* Previous/Next Navigation */}
 							<div className='absolute bottom-1/2 right-8 flex gap-8 z-20'>

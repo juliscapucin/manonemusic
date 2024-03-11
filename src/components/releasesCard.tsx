@@ -1,4 +1,9 @@
+"use client"
+
+import { useRouter } from "next/navigation"
 import Image from "next/image"
+
+import { handlePanelSlide } from "@/lib/animations"
 
 import { Album } from "@/types"
 
@@ -7,17 +12,23 @@ type ReleasesCardProps = {
 }
 
 export default function ReleasesCard({ album }: ReleasesCardProps) {
-	const { title, coverImage } = album
+	// const { title, coverImage, slug } = album
+	const router = useRouter()
 
 	return (
-		<button className='relative w-full aspect-square bg-faded-70'>
+		<button
+			onClick={() => {
+				handlePanelSlide(2, true, () => router.push(`/releases/${album.slug}`))
+			}}
+			className='relative w-full aspect-square bg-faded-70'
+		>
 			<Image
-				src={coverImage.url}
-				alt={`${title} album cover`}
+				src={album.coverImage.url}
+				alt={`${album.title} album cover`}
 				sizes='50vw'
 				fill
 			/>
-			<span>{title}</span>
+			<span>{album.title}</span>
 		</button>
 	)
 }

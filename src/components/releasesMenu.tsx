@@ -1,3 +1,5 @@
+"use client"
+
 import { ReleasesCard } from "@/components"
 import { ButtonArrow } from "@/components/buttons"
 import { Album } from "@/types"
@@ -16,8 +18,9 @@ export default function ReleasesMenu({ albums }: ReleasesMenuProps) {
 					action={() => console.log("click")}
 				/>
 				{albums.map((album) => (
-					<ReleasesCard key={album.slug} album={album} />
+					<ReleasesCard album={album} key={album.slug} />
 				))}
+
 				<ButtonArrow
 					rotation={"90"}
 					classes='absolute bottom-0'

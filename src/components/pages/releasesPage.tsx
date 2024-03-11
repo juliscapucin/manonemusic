@@ -7,17 +7,11 @@ import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 import { ReleasesMenu } from ".."
 import { Album } from "@/types"
 
-type ReleasesData = {
-	title: string
-	text: string
-}
-
 type ReleasesPageProps = {
-	data: ReleasesData
-	albums: Album[]
+	data: { page: { title: string; text: string }; albums: Album[] }
 }
 
-export default function ReleasesPage({ data, albums }: ReleasesPageProps) {
+export default function ReleasesPage({ data }: ReleasesPageProps) {
 	const titleReleasesRef = useRef(null)
 	const { width, height } = useWindowDimensions()
 
@@ -28,9 +22,11 @@ export default function ReleasesPage({ data, albums }: ReleasesPageProps) {
 
 	return (
 		<PageWrapper>
-			<Title ref={isLandscape ? titleReleasesRef : null}>{data.title}</Title>
-			<p className='max-w-prose'>{data.text}</p>
-			<ReleasesMenu albums={albums} />
+			<Title ref={isLandscape ? titleReleasesRef : null}>
+				{data.page.title}
+			</Title>
+			<p className='max-w-prose'>{data.page.text}</p>
+			<ReleasesMenu albums={data.albums} />
 		</PageWrapper>
 	)
 }
