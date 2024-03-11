@@ -81,16 +81,16 @@ query GetProjectBySlug($slug: String!) {
 `
 
 export const queryAlbum = `
-query { 
-	albumCollection {
-		items {
-			title
-			slug
-			coverImage {
-				url
-				width
-				height
-			}
-		}
+query GetAlbumBySlug($slug: String!) {
+	albumCollection(where: {slug: $slug}, limit: 1) {
+	  items {
+		 title
+		 slug
+		 coverImage {
+			url
+			width
+			height
+		 }
+	  }
 	}
 }`
