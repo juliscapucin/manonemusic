@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
-import { fetchAlbum, fetchAll } from "@/lib"
+import { fetchBySlug, fetchAll } from "@/lib"
 import { ReleasePage } from "@/components/pages"
 
 export const metadata: Metadata = {
@@ -15,7 +15,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 	const { slug } = params
 	const variables = { slug }
 
-	const data = await fetchAlbum(queryAlbum, variables)
+	const data = await fetchBySlug(queryAlbum, variables)
 
 	const releasesPageData = await fetchAll(queryAll)
 	const releaseData = data.albumCollection.items[0]
