@@ -73,7 +73,16 @@ export default function PanelDesktop({ data, index }: PanelDesktopProps) {
 	useEffect(() => {
 		if (!pathname || pathname === "/") return
 
-		handlePanelSlide(index, false)
+		// handlePanelSlide(index, false)
+
+		const targetPanel = document.querySelector(
+			`[data-id=panel-${index}]`
+		) as HTMLDivElement
+		let y = targetPanel?.offsetLeft
+
+		window.scrollTo({
+			top: y,
+		})
 	}, [])
 
 	return (

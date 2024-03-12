@@ -1,5 +1,4 @@
-import { useEffect } from "react"
-import { usePathname } from "next/navigation"
+import { useLayoutEffect, useEffect } from "react"
 
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -8,12 +7,14 @@ import { animateSplitText } from "@/animations"
 
 export default function useTitleScrollTrigger(
 	elementRef: React.RefObject<HTMLDivElement>,
-	slug: string
+	slug: string,
+	windowAspectRatio: string
 ) {
-	const pathname = usePathname()
+	let ctx = gsap.context(() => {})
 
-	useEffect(() => {
-		if (!elementRef.current) return
+	useLayoutEffect(() => {
+		// Start ScrollTrigger when window is in landscape mode
+		if (!elementRef.current || windowAspectRatio === "portrait") return
 
 		gsap.registerPlugin(ScrollTrigger)
 		const element = elementRef.current as HTMLDivElement
@@ -25,7 +26,7 @@ export default function useTitleScrollTrigger(
 
 		let fastScrollEnd = true
 
-		let ctx = gsap.context(() => {
+		ctx.add(() => {
 			ScrollTrigger.create({
 				trigger: titleElement,
 				start: () => `${offsetLeft()}px bottom`,
@@ -43,9 +44,8 @@ export default function useTitleScrollTrigger(
 
 					// console.log("progress", self.progress)
 
-					console.log(slug)
-
 					if (self.isActive && window.location.pathname !== slug) {
+						console.log(slug)
 						window.history.pushState(null, "", slug)
 					}
 
@@ -63,5 +63,11 @@ export default function useTitleScrollTrigger(
 		})
 
 		return () => ctx.revert()
-	}, [elementRef])
+	}, [elementRef, windowAspectRatio])
+
+	// Revert ScrollTrigger when window is in portrait mode
+	useEffect(() => {
+		if (windowAspectRatio === "landscape") return
+		ctx.revert()
+	}, [windowAspectRatio])
 }

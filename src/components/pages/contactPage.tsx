@@ -3,8 +3,8 @@
 import { useRef } from "react"
 
 import { Availability, SocialLinks } from "@/components"
-import { PageWrapperDesktop, PageWrapperMobile, Title } from "@/components/ui"
-import { useTitleScrollTrigger } from "@/hooks"
+import { PageWrapper, Title } from "@/components/ui"
+import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 
 type ContactData = {
 	contactPageCollection: {
@@ -27,25 +27,17 @@ export default function ContactPage({ data }: { data: ContactData }) {
 	const socialsData = data.socialLinkCollection?.items
 	const availability = data.contactPageCollection?.items[0].availability
 	const title = data.contactPageCollection.items[0].title
+	const { windowAspectRatio } = useWindowDimensions()
 
-	useTitleScrollTrigger(titleContactRef, "/contact")
+	useTitleScrollTrigger(titleContactRef, "/contact", windowAspectRatio)
 
 	return (
-		<>
-			<PageWrapperDesktop>
-				<Title ref={titleContactRef}>{title}</Title>
-				<div className='flex flex-row flex-nowrap gap-32'>
-					<Availability availability={availability} />
-					<SocialLinks data={socialsData} />
-				</div>
-			</PageWrapperDesktop>
-			<PageWrapperMobile>
-				<Title>{title}</Title>
-				<div className='flex flex-row flex-nowrap gap-32'>
-					<Availability availability={availability} />
-					<SocialLinks data={socialsData} />
-				</div>
-			</PageWrapperMobile>
-		</>
+		<PageWrapper>
+			<Title ref={titleContactRef}>{title}</Title>
+			<div className='flex flex-row flex-nowrap gap-32'>
+				<Availability availability={availability} />
+				<SocialLinks data={socialsData} />
+			</div>
+		</PageWrapper>
 	)
 }

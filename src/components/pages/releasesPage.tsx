@@ -18,20 +18,16 @@ type ReleasesPageProps = {
 
 export default function ReleasesPage({ data }: ReleasesPageProps) {
 	const titleReleasesRef = useRef(null)
-	const { width, height } = useWindowDimensions()
+	const { windowAspectRatio } = useWindowDimensions()
 
-	useTitleScrollTrigger(titleReleasesRef, "/releases")
+	console.log(windowAspectRatio)
 
-	const isLandscape = width > height
-	// const PageWrapper = isLandscape ? PageWrapperDesktop : PageWrapperMobile
+	useTitleScrollTrigger(titleReleasesRef, "/releases", windowAspectRatio)
 
 	return (
 		<PageWrapper classes={"flex justify-between"}>
 			<div>
-				<Title
-					classes='gsap-releases-title'
-					ref={isLandscape ? titleReleasesRef : null}
-				>
+				<Title classes='gsap-releases-title' ref={titleReleasesRef}>
 					{data.page.title}
 				</Title>
 				<p className='max-w-prose'>{data.page.text}</p>
