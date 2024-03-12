@@ -15,16 +15,16 @@ import { Header } from "@/components/ui"
 import { ButtonScroll } from "./buttons"
 import { handlePanelSlide } from "@/lib/animations"
 
-export default function PanelDesktop({ data }: { data: AllData }) {
+type PanelDesktopProps = {
+	data: AllData
+	index: number
+}
+
+export default function PanelDesktop({ data, index }: PanelDesktopProps) {
 	const pathname = usePathname()
-	const [isHome, setIsHome] = useState(pathname === "/" ? true : false)
 	const outerContainerRef = useRef<HTMLDivElement | null>(null)
 	const panelsContainerRef = useRef<HTMLDivElement | null>(null)
 	let tween: gsap.core.Tween
-
-	useEffect(() => {
-		setIsHome(pathname === "/" ? true : false)
-	}, [pathname])
 
 	// ScrollTrigger + Panel animation
 	useEffect(() => {
@@ -48,7 +48,7 @@ export default function PanelDesktop({ data }: { data: AllData }) {
 					invalidateOnRefresh: true,
 					// markers: true,
 					onUpdate: (self) => {
-						// fix this!
+						// TODO fix this!
 						// if (self.progress <= 0.12 && !isHome) {
 						// 	window.history.pushState(null, "", "/")
 						// 	setIsHome(true)
@@ -71,15 +71,7 @@ export default function PanelDesktop({ data }: { data: AllData }) {
 
 	// Jump to panel on internal page load
 	useEffect(() => {
-		if (!pathname) return
-
-		if (pathname === "/") {
-			setIsHome(true)
-			return
-		}
-
-		setIsHome(false)
-		const index = navLinks.findIndex((link) => `/${link.slug}` === pathname)
+		if (!pathname || pathname === "/") return
 
 		handlePanelSlide(index, false)
 	}, [])
@@ -88,7 +80,7 @@ export default function PanelDesktop({ data }: { data: AllData }) {
 		<div>
 			<NavBar navLinks={navLinks} transitionOnClick={handlePanelSlide} />
 
-			<Header handlePanelSlide={handlePanelSlide} />
+			{/* <Header handlePanelSlide={handlePanelSlide} /> */}
 
 			{/* Panels */}
 			<div ref={outerContainerRef}>

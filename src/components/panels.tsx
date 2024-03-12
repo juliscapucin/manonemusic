@@ -5,12 +5,18 @@ import { PanelDesktop, PanelMobile } from "@/components"
 
 import { AllData } from "@/types"
 
-export default function Panels({ data }: { data: AllData }) {
+type PanelsProps = {
+	data: AllData
+	index: number
+}
+
+export default function Panels({ data, index }: PanelsProps) {
 	const { width, height } = useWindowDimensions()
+
 	return (
 		<>
 			{width > height ? (
-				<PanelDesktop data={data} />
+				<PanelDesktop data={data} index={index} />
 			) : (
 				<PanelMobile data={data} />
 			)}

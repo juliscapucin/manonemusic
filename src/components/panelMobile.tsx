@@ -18,7 +18,7 @@ export default function PanelMobile({ data }: { data: AllData }) {
 
 	return (
 		<>
-			<Logo />
+			{/* <Logo /> */}
 			<NavBar navLinks={navLinks} transitionOnClick={handleNavLinkClick} />
 			{pathname === "/" ? (
 				navLinks.map((section, index) => (
