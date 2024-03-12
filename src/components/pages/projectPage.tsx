@@ -28,6 +28,7 @@ export default function ProjectPage({
 	let ctx = gsap.context(() => {})
 	let stateCard: Flip.FlipState
 
+	// TODO refactor to avoid repetition
 	const transitionOnClickBack = (slug: string) => {
 		ctx.add(() => {
 			gsap.set(".gsap-projects-page", { display: "block" })
@@ -49,6 +50,8 @@ export default function ProjectPage({
 		})
 	}
 
+	// TODO refactor to avoid repetition
+	// TODO implement a way to avoid this animation on page reload
 	// Transition on enter
 	useLayoutEffect(() => {
 		gsap.registerPlugin(Flip)

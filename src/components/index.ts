@@ -14,6 +14,9 @@ import RootLayout from "./rootLayout"
 import SocialLinks from "./socialLinks"
 import Status from "./status"
 import ThemeSwitcher from "./themeSwitcher"
+import Player from "./player"
+import PlayerTrack from "./playerTrack"
+import PlayerTrackList from "./playerTrackList"
 
 export {
 	Availability,
@@ -24,6 +27,9 @@ export {
 	Panels,
 	PanelDesktop,
 	PanelMobile,
+	Player,
+	PlayerTrack,
+	PlayerTrackList,
 	ProjectCard,
 	ProjectTrailer,
 	ReleaseCard,

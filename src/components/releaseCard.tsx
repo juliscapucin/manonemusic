@@ -21,7 +21,7 @@ export default function ReleaseCard({ album }: ReleasesCardProps) {
 			onClick={() => {
 				handlePanelSlide(2, true, () => router.push(`/releases/${slug}`))
 			}}
-			className='relative w-full aspect-square'
+			className='relative w-full aspect-square focus-visible:border-secondary focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-secondary transition duration-300 hover:scale-105 transform-gpu overflow-hidden'
 		>
 			<Image
 				className={`${

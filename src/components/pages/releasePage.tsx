@@ -1,16 +1,18 @@
 "use client"
 
+import { useLayoutEffect, useRef } from "react"
 import { useSearchParams, useRouter } from "next/navigation"
 import Image from "next/image"
 
 import gsap from "gsap"
 import Flip from "gsap/Flip"
 
+import { PlayerTrackList } from "@/components"
 import { Logo, PageWrapper, Title } from "@/components/ui"
-import { Album } from "@/types"
 import { Button } from "@/components/buttons"
 import { ReleasesPage } from "@/components/pages"
-import { useLayoutEffect, useRef } from "react"
+
+import { Album } from "@/types"
 
 type releasePageProps = {
 	releaseData: Album
@@ -29,6 +31,7 @@ export default function ReleasePage({
 	let ctx = gsap.context(() => {})
 	let stateCard: Flip.FlipState
 
+	// TODO refactor to avoid repetition
 	const transitionOnClickBack = (slug: string) => {
 		ctx.add(() => {
 			gsap.set(".gsap-releases-page", { display: "block" })
@@ -50,6 +53,8 @@ export default function ReleasePage({
 		})
 	}
 
+	// TODO refactor to avoid repetition
+	// TODO implement a way to avoid this animation on page reload
 	// Transition on enter
 	useLayoutEffect(() => {
 		gsap.registerPlugin(Flip)
@@ -59,6 +64,9 @@ export default function ReleasePage({
 		if (!container) return
 
 		ctx.add(() => {
+			gsap.set(".gsap-release-content", { opacity: 0 })
+			gsap.set(".gsap-release-image", { opacity: 0 })
+
 			const state = Flip.getState(".gsap-flip-release-image")
 			stateCard = Flip.getState(".gsap-flip-release-card")
 
@@ -69,12 +77,16 @@ export default function ReleasePage({
 				duration: 0.3,
 				ease: "power4.out",
 				onComplete: () => {
-					gsap.set(".gsap-release-image", { opacity: 1 })
+					gsap.to(".gsap-release-image", {
+						opacity: 1,
+						duration: 0.3,
+						ease: "power4.inOut",
+					})
 					gsap.to(".gsap-release-content", {
 						opacity: 1,
-						duration: 0.6,
-						delay: 0.2,
-						stagger: 0.3,
+						duration: 1,
+						stagger: 0.1,
+						ease: "power4.inOut",
 					})
 					gsap.to(".gsap-releases-page", {
 						opacity: 0,
@@ -116,22 +128,23 @@ export default function ReleasePage({
 					>
 						Back to releases
 					</Button>
-					<Title classes='gsap-release-content opacity-0'>
-						{releaseData.title}
-					</Title>
-					<div className='gsap-release-page flex flex-wrap gap-16'>
-						<div className='gsap-flip-release-image relative w-1/4 min-w-[300px] aspect-square overflow-clip'>
-							<Image
-								{...{
-									src: releaseData.coverImage.url,
-									alt: `${releaseData.title} album cover`,
-									fill: true,
-									className: "gsap-release-image opacity-0 object-cover",
-									sizes: "50vw",
-								}}
-							/>
+					<Title classes='gsap-release-content'>{releaseData.title}</Title>
+					<div className='relative w-full flex gap-8'>
+						<div className='gsap-release-page flex flex-wrap gap-16'>
+							<div className='gsap-flip-release-image relative w-1/4 min-w-[300px] aspect-square overflow-clip'>
+								<Image
+									{...{
+										src: releaseData.coverImage.url,
+										alt: `${releaseData.title} album cover`,
+										fill: true,
+										className: "gsap-release-image object-cover",
+										sizes: "50vw",
+									}}
+								/>
+							</div>
+							<div className='gsap-release-content w-1/3 min-w-[300px] space-y-8'></div>
 						</div>
-						<div className='gsap-release-content opacity-0 w-1/3 min-w-[300px] space-y-8'></div>
+						<PlayerTrackList />
 					</div>
 				</PageWrapper>
 			</div>
