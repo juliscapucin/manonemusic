@@ -1,46 +1,61 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
-import { Album } from "@/types"
+import { useEffect, useRef } from "react"
+import { Track } from "@/types"
 
 type PlayerTrackProps = {
-	track: { title: string }
+	track: Track
+	action: () => void
+	isPlaying: boolean
 }
 
-export default function PlayerTrack({ track }: PlayerTrackProps) {
-	const [isPlaying, setIsPlaying] = useState(false)
-	const audioRef = useRef(new Audio("/tracks/sample-file-4.mp3"))
+export default function PlayerTrack({
+	track,
+	action,
+	isPlaying,
+}: PlayerTrackProps) {
+	const audioRef = useRef<HTMLAudioElement | null>(null)
 
 	useEffect(() => {
+		audioRef.current = new Audio(track.url)
 		const audio = audioRef.current
+		if (!audio) return
+
+		if (isPlaying) {
+			// Attempt to play the audio and catch any errors
+			audio
+				.play()
+				.catch((error) =>
+					console.error("Error attempting to play audio:", error)
+				)
+		} else {
+			audio.pause()
+		}
 
 		audio.addEventListener("ended", () => {
-			setIsPlaying(false)
+			audio.pause()
 		})
 
 		return () => {
 			audio.pause()
-			setIsPlaying(false)
+			audio.removeEventListener("ended", () => {
+				audio.pause()
+			})
 		}
-	}, [])
-
-	const handlePlayPause = () => {
-		const audio = audioRef.current
-
-		if (isPlaying) {
-			audio.pause()
-			setIsPlaying(false)
-		} else {
-			audio.play()
-			setIsPlaying(true)
-		}
-	}
+	}, [isPlaying, action])
 
 	return (
 		<button
 			className='gsap-release-content group border border-faded-30 min-w-full h-24 p-8 flex transform duration-300 hover:border-secondary focus-visible:bg-faded-30'
-			onClick={handlePlayPause}
+			onClick={action}
 		>
+			{/* <audio
+				ref={audioRef}
+				src={track.url}
+				controls
+				controlsList='nodownload'
+				preload='metadata'
+			/> */}
 			<div className='text-faded-30 transform duration-300 group-hover:text-secondary group-focus-visible:text-secondary'>
 				{isPlaying ? "Pause" : "Play"}
 			</div>

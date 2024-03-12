@@ -1,3 +1,5 @@
+import { Track } from "@/types"
+
 export type Album = {
 	title: string
 	slug: string
@@ -7,8 +9,6 @@ export type Album = {
 		height: number
 	}
 	tracksCollection: {
-		items: {
-			title: string
-		}[]
+		items: Track[]
 	}
 }
