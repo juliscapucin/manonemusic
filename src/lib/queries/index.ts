@@ -91,6 +91,11 @@ query GetAlbumBySlug($slug: String!) {
 			width
 			height
 		 }
+		 tracksCollection {
+			items {
+				title
+			}
+		 }
 	  }
 	}
 }`

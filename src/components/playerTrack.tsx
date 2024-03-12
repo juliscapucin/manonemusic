@@ -1,8 +1,13 @@
 "use client"
 
 import { useEffect, useRef, useState } from "react"
+import { Album } from "@/types"
 
-export default function PlayerTrack() {
+type PlayerTrackProps = {
+	track: { title: string }
+}
+
+export default function PlayerTrack({ track }: PlayerTrackProps) {
 	const [isPlaying, setIsPlaying] = useState(false)
 	const audioRef = useRef(new Audio("/tracks/sample-file-4.mp3"))
 
@@ -40,7 +45,7 @@ export default function PlayerTrack() {
 				{isPlaying ? "Pause" : "Play"}
 			</div>
 			<span className='text-faded-30 transform duration-300 group-hover:text-secondary group-focus-visible:text-secondary'>
-				Track Title
+				{track.title}
 			</span>
 		</button>
 	)

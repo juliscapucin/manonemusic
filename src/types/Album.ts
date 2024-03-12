@@ -6,4 +6,9 @@ export type Album = {
 		width: number
 		height: number
 	}
+	tracksCollection: {
+		items: {
+			title: string
+		}[]
+	}
 }

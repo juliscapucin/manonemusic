@@ -144,7 +144,7 @@ export default function ReleasePage({
 							</div>
 							<div className='gsap-release-content w-1/3 min-w-[300px] space-y-8'></div>
 						</div>
-						<PlayerTrackList />
+						<PlayerTrackList tracks={releaseData.tracksCollection.items} />
 					</div>
 				</PageWrapper>
 			</div>
