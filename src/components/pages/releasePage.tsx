@@ -30,8 +30,6 @@ export default function ReleasePage({
 	let stateCard: Flip.FlipState
 
 	const transitionOnClickBack = (slug: string) => {
-		gsap.registerPlugin(Flip)
-
 		ctx.add(() => {
 			gsap.set(".gsap-releases-page", { display: "block" })
 			gsap.set(".gsap-releases-title", { opacity: 0 })
@@ -104,6 +102,7 @@ export default function ReleasePage({
 				<div className='gsap-releases-page absolute top-0 left-8 pb-8'>
 					<ReleasesPage
 						data={{ page: releasesPageData, albums: releasesData }}
+						titleScrollTrigger={false}
 					/>
 				</div>
 			)}

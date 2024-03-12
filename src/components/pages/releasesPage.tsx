@@ -2,27 +2,32 @@
 
 import { useRef } from "react"
 
-import {
-	PageWrapperDesktop,
-	PageWrapperMobile,
-	PageWrapper,
-	Title,
-} from "@/components/ui"
+import { PageWrapper, Title } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 import { ReleasesMenu } from "@/components"
 import { Album } from "@/types"
 
 type ReleasesPageProps = {
-	data: { page: { title: string; text: string }; albums: Album[] }
+	data: {
+		page: { title: string; text: string }
+		albums: Album[]
+	}
+	titleScrollTrigger?: boolean
 }
 
-export default function ReleasesPage({ data }: ReleasesPageProps) {
+export default function ReleasesPage({
+	data,
+	titleScrollTrigger,
+}: ReleasesPageProps) {
 	const titleReleasesRef = useRef(null)
 	const { windowAspectRatio } = useWindowDimensions()
 
-	console.log(windowAspectRatio)
-
-	useTitleScrollTrigger(titleReleasesRef, "/releases", windowAspectRatio)
+	useTitleScrollTrigger(
+		titleReleasesRef,
+		"/releases",
+		windowAspectRatio,
+		titleScrollTrigger
+	)
 
 	return (
 		<PageWrapper classes={"flex justify-between"}>

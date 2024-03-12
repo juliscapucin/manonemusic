@@ -5,25 +5,22 @@ import { useRef } from "react"
 import { ProjectCard } from "@/components"
 
 import { Project } from "@/types"
-import {
-	PageWrapper,
-	PageWrapperDesktop,
-	PageWrapperMobile,
-	Title,
-} from "@/components/ui"
+import { PageWrapper, Title } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 
 type Props = { data: Project[]; titleScrollTrigger?: boolean }
 
-export default function ProjectsPage({
-	data,
-	titleScrollTrigger = true,
-}: Props) {
+export default function ProjectsPage({ data, titleScrollTrigger }: Props) {
 	const titleWorkRef = useRef(null)
 	const gridElements = new Array(36).fill(0)
 	const { windowAspectRatio } = useWindowDimensions()
 
-	useTitleScrollTrigger(titleWorkRef, "/projects", windowAspectRatio)
+	useTitleScrollTrigger(
+		titleWorkRef,
+		"/projects",
+		windowAspectRatio,
+		titleScrollTrigger
+	)
 
 	return (
 		<PageWrapper>

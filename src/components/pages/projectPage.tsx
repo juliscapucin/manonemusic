@@ -29,8 +29,6 @@ export default function ProjectPage({
 	let stateCard: Flip.FlipState
 
 	const transitionOnClickBack = (slug: string) => {
-		gsap.registerPlugin(Flip)
-
 		ctx.add(() => {
 			gsap.set(".gsap-projects-page", { display: "block" })
 			gsap.set(".gsap-projects-title", { opacity: 0 })
