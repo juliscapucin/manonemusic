@@ -8,7 +8,7 @@ import PanelDesktop from "./panelDesktop"
 import PanelMobile from "./panelMobile"
 import ProjectCard from "./projectCard"
 import ProjectTrailer from "./projectTrailer"
-import ReleasesCard from "./releasesCard"
+import ReleaseCard from "./releaseCard"
 import ReleasesMenu from "./releasesMenu"
 import RootLayout from "./rootLayout"
 import SocialLinks from "./socialLinks"
@@ -26,7 +26,7 @@ export {
 	PanelMobile,
 	ProjectCard,
 	ProjectTrailer,
-	ReleasesCard,
+	ReleaseCard,
 	ReleasesMenu,
 	RootLayout,
 	SocialLinks,

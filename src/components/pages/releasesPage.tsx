@@ -2,9 +2,14 @@
 
 import { useRef } from "react"
 
-import { PageWrapperDesktop, PageWrapperMobile, Title } from "@/components/ui"
+import {
+	PageWrapperDesktop,
+	PageWrapperMobile,
+	PageWrapper,
+	Title,
+} from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
-import { ReleasesMenu } from ".."
+import { ReleasesMenu } from "@/components"
 import { Album } from "@/types"
 
 type ReleasesPageProps = {
@@ -18,14 +23,19 @@ export default function ReleasesPage({ data }: ReleasesPageProps) {
 	useTitleScrollTrigger(titleReleasesRef, "/releases")
 
 	const isLandscape = width > height
-	const PageWrapper = isLandscape ? PageWrapperDesktop : PageWrapperMobile
+	// const PageWrapper = isLandscape ? PageWrapperDesktop : PageWrapperMobile
 
 	return (
-		<PageWrapper>
-			<Title ref={isLandscape ? titleReleasesRef : null}>
-				{data.page.title}
-			</Title>
-			<p className='max-w-prose'>{data.page.text}</p>
+		<PageWrapper classes={"flex justify-between"}>
+			<div>
+				<Title
+					classes='gsap-releases-title'
+					ref={isLandscape ? titleReleasesRef : null}
+				>
+					{data.page.title}
+				</Title>
+				<p className='max-w-prose'>{data.page.text}</p>
+			</div>
 			<ReleasesMenu albums={data.albums} />
 		</PageWrapper>
 	)

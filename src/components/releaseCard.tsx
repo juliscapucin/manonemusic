@@ -11,7 +11,7 @@ type ReleasesCardProps = {
 	album: Album
 }
 
-export default function ReleasesCard({ album }: ReleasesCardProps) {
+export default function ReleaseCard({ album }: ReleasesCardProps) {
 	const { title, coverImage, slug } = album
 	const router = useRouter()
 	const pathname = usePathname()
@@ -21,7 +21,7 @@ export default function ReleasesCard({ album }: ReleasesCardProps) {
 			onClick={() => {
 				handlePanelSlide(2, true, () => router.push(`/releases/${slug}`))
 			}}
-			className='relative w-full aspect-square bg-faded-70'
+			className='relative w-full aspect-square'
 		>
 			<Image
 				className={`${
