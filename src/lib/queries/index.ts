@@ -93,8 +93,10 @@ query GetAlbumBySlug($slug: String!) {
 		 }
 		 tracksCollection {
 			items {
-				title
-				url
+			  ... on Track {
+					title
+					url
+			  }
 			}
 		 }
 	  }

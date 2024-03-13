@@ -14,8 +14,8 @@
       --color-white: 252 249 248;
    }
    :root[data-theme='dark'] {
-      --color-primary: 3 30 27;
-      --color-secondary: 182 209 194;
+      --color-primary: 30 30 30;
+      --color-secondary: 40 209 194;
       --color-secondary-rgb: 182, 209, 194;
       --color-focus: 154, 152, 152;
    }

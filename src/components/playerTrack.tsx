@@ -71,17 +71,19 @@ export default function PlayerTrack({
 		<>
 			{/* Original Player – Hidden */}
 			{isClient && (
-				<ReactPlayer
-					ref={playerRef}
-					url={url}
-					playing={isPlaying}
-					onDuration={handleDuration}
-					onProgress={handleProgress}
-					onEnded={handleEnd}
-					width={"100%"}
-					height={100}
-					style={{ opacity: 0, pointerEvents: "none" }}
-				/>
+				<div className='absolute'>
+					<ReactPlayer
+						ref={playerRef}
+						url={track.url}
+						playing={isPlaying}
+						onDuration={handleDuration}
+						onProgress={handleProgress}
+						onEnded={handleEnd}
+						width={"100%"}
+						height={100}
+						style={{ opacity: 0, pointerEvents: "none" }}
+					/>
+				</div>
 			)}
 			{/* Custom Player */}
 			<button
@@ -103,6 +105,7 @@ export default function PlayerTrack({
 				<span>
 					{formatDuration(playedSeconds)}/{formatDuration(duration)}
 				</span>
+				<span>{track.title}</span>
 			</div>
 		</>
 	)
