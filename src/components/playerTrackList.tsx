@@ -21,13 +21,19 @@ export default function PlayerTrackList({ tracks }: PlayerTrackListProps) {
 			setCurrentlyPlaying(clickedTrackTitle)
 		}
 	}
+
+	const handleSlideClick = (clickedTrackTitle: string) => {
+		setCurrentlyPlaying(clickedTrackTitle)
+	}
+
 	return (
 		<div className='w-full flex flex-col gap-4'>
 			{tracks.map((track) => (
 				<PlayerTrack
 					key={track.title}
 					track={track}
-					action={() => handleTrackClick(track.title)}
+					buttonAction={() => handleTrackClick(track.title)}
+					sliderAction={() => handleSlideClick(track.title)}
 					isPlaying={currentlyPlaying === track.title}
 				/>
 			))}

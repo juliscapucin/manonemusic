@@ -7,13 +7,15 @@ import ReactPlayer from "react-player/soundcloud"
 type PlayerTrackProps = {
 	track: Track
 	isPlaying: boolean
-	action: () => void
+	buttonAction: () => void
+	sliderAction: () => void
 }
 
 export default function PlayerTrack({
 	track,
 	isPlaying,
-	action,
+	buttonAction,
+	sliderAction,
 }: PlayerTrackProps) {
 	const [isClient, setIsClient] = useState(false)
 	const [duration, setDuration] = useState(0) // Store duration in seconds
@@ -29,10 +31,6 @@ export default function PlayerTrack({
 		return `${minutes}:${seconds < 10 ? "0" + seconds : seconds}` // Ensure two-digit seconds
 	}
 
-	const togglePlayer = () => {
-		isPlaying = !isPlaying
-	}
-
 	const handleDuration = (newDuration: number) => {
 		setDuration(newDuration)
 	}
@@ -42,6 +40,11 @@ export default function PlayerTrack({
 			// Update progress only if not currently seeking
 			setPlayedSeconds(playedSeconds)
 		}
+	}
+
+	const handleEnd = () => {
+		buttonAction()
+		setPlayedSeconds(0)
 	}
 
 	// Slider change starts
@@ -55,6 +58,7 @@ export default function PlayerTrack({
 		setSeeking(false)
 		playerRef.current?.seekTo(newTime)
 		setPlayedSeconds(newTime)
+		sliderAction()
 	}
 
 	// Workaround to run component only on client side
@@ -72,13 +76,14 @@ export default function PlayerTrack({
 						playing={isPlaying}
 						onDuration={handleDuration}
 						onProgress={handleProgress}
+						onEnded={handleEnd}
 						width={"100%"}
 						height={100}
 						style={{ opacity: 0, pointerEvents: "none" }}
 					/>
 				)}
 			</div>
-			<button onClick={action}>{isPlaying ? "Pause" : "Play"}</button>
+			<button onClick={buttonAction}>{isPlaying ? "Pause" : "Play"}</button>
 			<div>
 				<input
 					type='range'
