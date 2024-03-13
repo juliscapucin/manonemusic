@@ -161,13 +161,6 @@ textarea {
 
 /* SOUNDCLOUD WIDGET */
 
-
-
-iframe .visualAudible {
-   opacity: 0 !important;
-}
-
-iframe .progress {
+iframe .privacyPolicy {
    display: none !important;
 }
-
