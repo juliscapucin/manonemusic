@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef } from "react"
 import { Track } from "@/types"
 import ReactPlayer from "react-player/soundcloud"
+import { IconPause, IconPlay } from "@/components/icons"
 
 type PlayerTrackProps = {
 	track: Track
@@ -68,22 +69,27 @@ export default function PlayerTrack({
 
 	return (
 		<>
-			<div className='gsap-release-content'>
-				{isClient && (
-					<ReactPlayer
-						ref={playerRef}
-						url={url}
-						playing={isPlaying}
-						onDuration={handleDuration}
-						onProgress={handleProgress}
-						onEnded={handleEnd}
-						width={"100%"}
-						height={100}
-						style={{ opacity: 0, pointerEvents: "none" }}
-					/>
-				)}
-			</div>
-			<button onClick={buttonAction}>{isPlaying ? "Pause" : "Play"}</button>
+			{/* Original Player – Hidden */}
+			{isClient && (
+				<ReactPlayer
+					ref={playerRef}
+					url={url}
+					playing={isPlaying}
+					onDuration={handleDuration}
+					onProgress={handleProgress}
+					onEnded={handleEnd}
+					width={"100%"}
+					height={100}
+					style={{ opacity: 0, pointerEvents: "none" }}
+				/>
+			)}
+			{/* Custom Player */}
+			<button
+				className='relative border border-faded-30 p-4'
+				onClick={buttonAction}
+			>
+				{isPlaying ? <IconPause /> : <IconPlay />}
+			</button>
 			<div>
 				<input
 					type='range'
