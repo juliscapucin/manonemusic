@@ -158,3 +158,16 @@ textarea {
 .navbar-page :nth-child(4) {
    @apply fixed bottom-0 right-0;
 }
+
+/* SOUNDCLOUD WIDGET */
+
+
+
+iframe .visualAudible {
+   opacity: 0 !important;
+}
+
+iframe .progress {
+   display: none !important;
+}
+
