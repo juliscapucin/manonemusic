@@ -27,9 +27,10 @@ export default function PlayerTrackList({ tracks }: PlayerTrackListProps) {
 	}
 
 	return (
-		<div className='w-full flex flex-col gap-4'>
-			{tracks.map((track) => (
+		<div className='w-full'>
+			{tracks.map((track, index) => (
 				<PlayerTrack
+					index={index}
 					key={track.title}
 					track={track}
 					buttonAction={() => handleTrackClick(track.title)}

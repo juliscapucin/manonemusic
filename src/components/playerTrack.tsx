@@ -6,6 +6,7 @@ import ReactPlayer from "react-player/soundcloud"
 import { IconPause, IconPlay } from "@/components/icons"
 
 type PlayerTrackProps = {
+	index: number
 	track: Track
 	isPlaying: boolean
 	buttonAction: () => void
@@ -13,6 +14,7 @@ type PlayerTrackProps = {
 }
 
 export default function PlayerTrack({
+	index,
 	track,
 	isPlaying,
 	buttonAction,
@@ -71,7 +73,7 @@ export default function PlayerTrack({
 		<>
 			{/* Original Player – Hidden */}
 			{isClient && (
-				<div className='absolute'>
+				<div className='absolute -z-5'>
 					<ReactPlayer
 						ref={playerRef}
 						url={track.url}
@@ -86,27 +88,32 @@ export default function PlayerTrack({
 				</div>
 			)}
 			{/* Custom Player */}
+			{index === 0 && <div className='w-full h-[1px] bg-faded-30'></div>}
 			<button
-				className='relative border border-faded-30 p-4'
+				className='relative pt-10 pb-6 px-2'
 				onClick={buttonAction}
+				aria-label={`Play or pause ${track.title}`}
 			>
-				{isPlaying ? <IconPause /> : <IconPlay />}
-			</button>
-			<div>
-				<input
-					type='range'
-					min={0}
-					max={duration}
-					value={playedSeconds}
-					onMouseDown={onSeekMouseDown}
-					onChange={(e) => setPlayedSeconds(parseFloat(e.target.value))}
-					onMouseUp={onSeekMouseUp}
-				/>
-				<span>
-					{formatDuration(playedSeconds)}/{formatDuration(duration)}
+				<span className='absolute left-2 top-2 w-full text-start'>
+					{track.title}
 				</span>
-				<span>{track.title}</span>
-			</div>
+				<div className='flex items-center gap-4 h-full w-full'>
+					{isPlaying ? <IconPause /> : <IconPlay />}
+					<span className=''>{formatDuration(playedSeconds)}</span>
+					<input
+						className=' h-[1px] w-full bg-faded-30 appearance-none'
+						type='range'
+						min={0}
+						max={duration}
+						value={playedSeconds}
+						onMouseDown={onSeekMouseDown}
+						onChange={(e) => setPlayedSeconds(parseFloat(e.target.value))}
+						onMouseUp={onSeekMouseUp}
+					/>
+					<span className=''>{formatDuration(duration)}</span>
+				</div>
+			</button>
+			<div className='w-full h-[1px] bg-faded-30'></div>
 		</>
 	)
 }
