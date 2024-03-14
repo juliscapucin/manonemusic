@@ -38,6 +38,7 @@ export default function PlayerTrackList({ tracks }: PlayerTrackListProps) {
 					isPlaying={currentlyPlaying === track.title}
 				/>
 			))}
+			{/* TODO add Soundcloud logo */}
 		</div>
 	)
 }

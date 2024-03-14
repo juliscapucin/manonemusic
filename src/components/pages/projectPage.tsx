@@ -30,6 +30,8 @@ export default function ProjectPage({
 
 	// TODO refactor to avoid repetition
 	const transitionOnClickBack = (slug: string) => {
+		gsap.registerPlugin(Flip)
+
 		ctx.add(() => {
 			gsap.set(".gsap-projects-page", { display: "block" })
 			gsap.set(".gsap-projects-title", { opacity: 0 })

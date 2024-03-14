@@ -1,22 +1,17 @@
 import { IconArrow } from "../icons"
 
 type ButtonArrowProps = {
-	rotation?: string
 	action: () => void
 	classes?: string
 }
 
-export default function ButtonArrow({
-	rotation,
-	action,
-	classes,
-}: ButtonArrowProps) {
+export default function ButtonArrow({ action, classes }: ButtonArrowProps) {
 	return (
 		<button
-			className={`rotate-${rotation} flex justify-center items-center bg-faded-30 h-8 w-8 ${classes}`}
+			className={`flex justify-center items-center h-16 w-16 opacity-30 hover:opacity-100 transition-opacity duration-300 ${classes}`}
 			onClick={() => action()}
 		>
-			<IconArrow />
+			<IconArrow color={"#B6D1C2"} />
 		</button>
 	)
 }
