@@ -2,7 +2,7 @@
 
 import { useRef } from "react"
 
-import { PageWrapper, Title } from "@/components/ui"
+import { PageWrapper, TitleDisplay } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 import { ReleasesMenu } from "@/components"
 import { Album } from "@/types"
@@ -32,9 +32,9 @@ export default function ReleasesPage({
 	return (
 		<PageWrapper classes={"flex justify-between"}>
 			<div>
-				<Title classes='gsap-releases-title' ref={titleReleasesRef}>
+				<TitleDisplay classes='gsap-releases-title' ref={titleReleasesRef}>
 					{data.page.title}
-				</Title>
+				</TitleDisplay>
 				<p className='max-w-prose'>{data.page.text}</p>
 			</div>
 			<ReleasesMenu albums={data.albums} />

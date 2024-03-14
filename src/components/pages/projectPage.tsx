@@ -6,7 +6,7 @@ import Image from "next/image"
 import gsap from "gsap"
 import Flip from "gsap/Flip"
 
-import { Logo, PageWrapper, Title } from "@/components/ui"
+import { Logo, PageWrapper, TitleDisplay } from "@/components/ui"
 import { Project } from "@/types"
 import { Button } from "@/components/buttons"
 import { ProjectsPage } from "."
@@ -117,9 +117,9 @@ export default function ProjectPage({
 					>
 						Back to Projects
 					</Button>
-					<Title classes='gsap-project-content opacity-0'>
+					<TitleDisplay classes='gsap-project-content opacity-0'>
 						{projectData.title}
-					</Title>
+					</TitleDisplay>
 					<div className='gsap-project-page flex flex-wrap gap-16'>
 						<div className='gsap-flip-project-image relative w-1/4 min-w-[300px] aspect-square overflow-clip'>
 							<Image

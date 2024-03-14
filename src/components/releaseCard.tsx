@@ -21,13 +21,20 @@ export default function ReleaseCard({ album }: ReleasesCardProps) {
 			onClick={() => {
 				handlePanelSlide(2, true, () => router.push(`/releases/${slug}`))
 			}}
-			className='relative w-full aspect-square group focus-visible:border-secondary focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-secondary overflow-hidden'
+			className='relative w-full aspect-square group focus-visible:border-secondary focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-secondary'
 		>
 			{/* <div className='absolute top-0 left-0 w-full h-full bg-faded-30 z-100'></div> */}
 			<Image
 				className={`${
 					pathname.includes(slug) && "gsap-flip-release-card z-50"
-				} object-cover opacity-50 group-hover:opacity-100 transition-opacity duration-300 ease-in-out`}
+				} object-cover`}
+				src={coverImage.url}
+				alt={`${title} album cover`}
+				sizes='50vw'
+				fill
+			/>
+			<Image
+				className={`object-cover`}
 				src={coverImage.url}
 				alt={`${title} album cover`}
 				sizes='50vw'

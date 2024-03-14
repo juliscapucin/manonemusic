@@ -5,7 +5,7 @@ import { useRef } from "react"
 import { ProjectCard } from "@/components"
 
 import { Project } from "@/types"
-import { PageWrapper, Title } from "@/components/ui"
+import { PageWrapper, TitleDisplay } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 
 type Props = { data: Project[]; titleScrollTrigger?: boolean }
@@ -25,9 +25,9 @@ export default function ProjectsPage({ data, titleScrollTrigger }: Props) {
 	return (
 		<PageWrapper>
 			<div className='hidden lg:grid grid-cols-12 grid-rows-3 gap-2 w-full h-full relative'>
-				<Title classes='gsap-projects-title' ref={titleWorkRef}>
+				<TitleDisplay classes='gsap-projects-title' ref={titleWorkRef}>
 					Projects
-				</Title>
+				</TitleDisplay>
 				{gridElements.map((_, index) => {
 					const project = data.find((project) => project.gridPosition == index)
 

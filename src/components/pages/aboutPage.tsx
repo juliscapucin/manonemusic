@@ -3,7 +3,7 @@
 import { useRef } from "react"
 
 import { Copyright } from "@/components"
-import { PageWrapper, Title } from "@/components/ui"
+import { PageWrapper, TitleDisplay } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 
 type AboutData = {
@@ -19,7 +19,7 @@ export default function AboutPnel({ data }: { data: AboutData }) {
 
 	return (
 		<PageWrapper>
-			<Title ref={titleAboutRef}>{data.title}</Title>
+			<TitleDisplay ref={titleAboutRef}>{data.title}</TitleDisplay>
 			<p className='max-w-prose'>{data.text}</p>
 			<Copyright />
 		</PageWrapper>

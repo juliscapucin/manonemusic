@@ -3,7 +3,7 @@
 import { useRef } from "react"
 
 import { Availability, SocialLinks } from "@/components"
-import { PageWrapper, Title } from "@/components/ui"
+import { PageWrapper, TitleDisplay } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 
 type ContactData = {
@@ -33,7 +33,7 @@ export default function ContactPage({ data }: { data: ContactData }) {
 
 	return (
 		<PageWrapper>
-			<Title ref={titleContactRef}>{title}</Title>
+			<TitleDisplay ref={titleContactRef}>{title}</TitleDisplay>
 			<div className='flex flex-row flex-nowrap gap-32'>
 				<Availability availability={availability} />
 				<SocialLinks data={socialsData} />

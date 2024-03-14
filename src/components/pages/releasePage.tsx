@@ -8,7 +8,7 @@ import gsap from "gsap"
 import Flip from "gsap/Flip"
 
 import { PlayerTrackList } from "@/components"
-import { Logo, PageWrapper, Title } from "@/components/ui"
+import { Logo, PageWrapper, TitleHeadline } from "@/components/ui"
 import { Button } from "@/components/buttons"
 import { ReleasesPage } from "@/components/pages"
 
@@ -34,10 +34,10 @@ export default function ReleasePage({
 	// TODO refactor to avoid repetition
 	const transitionOnClickBack = (slug: string) => {
 		gsap.registerPlugin(Flip)
+
 		ctx.add(() => {
-			gsap.set(".gsap-releases-page", { display: "block" })
 			gsap.set(".gsap-releases-title", { opacity: 0 })
-			gsap.to(".gsap-releases-page", { opacity: 1, duration: 0.3 })
+			gsap.to(".gsap-releases-page", { xPercent: 0, duration: 0.3 })
 			gsap.set(".gsap-release-image", { opacity: 0 })
 
 			gsap.to(".gsap-release-content", { opacity: 0, duration: 0.3 })
@@ -71,29 +71,30 @@ export default function ReleasePage({
 			const state = Flip.getState(".gsap-flip-release-image")
 			stateCard = Flip.getState(".gsap-flip-release-card")
 
-			// Position the release card image on the page
-			Flip.fit(".gsap-flip-release-card", state, {
-				scale: true,
-				absolute: true,
+			gsap.to(".gsap-releases-page", {
+				xPercent: () => {
+					return -70
+				},
 				duration: 0.3,
-				ease: "power4.out",
 				onComplete: () => {
-					gsap.to(".gsap-release-image", {
-						opacity: 1,
+					// Position the release card image on the page
+					Flip.fit(".gsap-flip-release-card", state, {
+						scale: true,
+						absolute: true,
 						duration: 0.3,
-						ease: "power4.inOut",
-					})
-					gsap.to(".gsap-release-content", {
-						opacity: 1,
-						duration: 1,
-						stagger: 0.1,
-						ease: "power4.inOut",
-					})
-					gsap.to(".gsap-releases-page", {
-						opacity: 0,
-						duration: 0.3,
+						ease: "power4.out",
 						onComplete: () => {
-							gsap.set(".gsap-releases-page", { display: "none" })
+							gsap.to(".gsap-release-image", {
+								opacity: 1,
+								duration: 0.3,
+								ease: "power4.inOut",
+							})
+							gsap.to(".gsap-release-content", {
+								opacity: 1,
+								duration: 1,
+								stagger: 0.1,
+								ease: "power4.inOut",
+							})
 						},
 					})
 				},
@@ -120,34 +121,29 @@ export default function ReleasePage({
 				</div>
 			)}
 			{/* release Page */}
-			<div className='gsap-release-page w-fit h-screen flex flex-nowrap'>
-				<PageWrapper>
-					{/* Back Button */}
-					<Button
-						classes='absolute z-30'
-						action={() => transitionOnClickBack("/releases")}
-					>
-						Back to releases
-					</Button>
-					<Title classes='gsap-release-content'>{releaseData.title}</Title>
-					<div className='relative w-full flex gap-8'>
-						<div className='gsap-release-page flex flex-wrap gap-16'>
-							<div className='gsap-flip-release-image relative w-1/4 min-w-[300px] aspect-square overflow-clip'>
-								<Image
-									{...{
-										src: releaseData.coverImage.url,
-										alt: `${releaseData.title} album cover`,
-										fill: true,
-										className: "gsap-release-image object-cover",
-										sizes: "50vw",
-									}}
-								/>
-							</div>
-							<div className='gsap-release-content w-1/3 min-w-[300px] space-y-8'></div>
+			<div className='gsap-release-page w-3/4 h-screen p-8 pt-32 ml-auto'>
+				{/* Back Button */}
+				<Button action={() => transitionOnClickBack("/releases")}>
+					Back to releases
+				</Button>
+				<TitleHeadline>{releaseData.title}</TitleHeadline>
+				<div className='relative w-full flex gap-8'>
+					<div className='gsap-release-page flex flex-wrap gap-16'>
+						<div className='gsap-flip-release-image relative w-1/4 min-w-[300px] aspect-square overflow-clip'>
+							<Image
+								{...{
+									src: releaseData.coverImage.url,
+									alt: `${releaseData.title} album cover`,
+									fill: true,
+									className: "gsap-release-image object-cover",
+									sizes: "50vw",
+								}}
+							/>
 						</div>
-						<PlayerTrackList tracks={releaseData.tracksCollection.items} />
+						<div className='gsap-release-content w-1/3 min-w-[300px] space-y-8'></div>
 					</div>
-				</PageWrapper>
+					<PlayerTrackList tracks={releaseData.tracksCollection.items} />
+				</div>
 			</div>
 		</div>
 	)
