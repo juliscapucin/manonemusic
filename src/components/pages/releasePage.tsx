@@ -33,6 +33,7 @@ export default function ReleasePage({
 
 	// TODO refactor to avoid repetition
 	const transitionOnClickBack = (slug: string) => {
+		gsap.registerPlugin(Flip)
 		ctx.add(() => {
 			gsap.set(".gsap-releases-page", { display: "block" })
 			gsap.set(".gsap-releases-title", { opacity: 0 })

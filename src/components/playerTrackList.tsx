@@ -27,7 +27,7 @@ export default function PlayerTrackList({ tracks }: PlayerTrackListProps) {
 	}
 
 	return (
-		<div className='w-full'>
+		<div className='w-full gsap-release-content'>
 			{tracks.map((track, index) => (
 				<PlayerTrack
 					index={index}

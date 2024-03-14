@@ -88,9 +88,10 @@ export default function PlayerTrack({
 				</div>
 			)}
 			{/* Custom Player */}
+			{/* TODO – Improve Custom Player styles */}
 			{index === 0 && <div className='w-full h-[1px] bg-faded-30'></div>}
 			<button
-				className='relative pt-10 pb-6 px-2'
+				className='relative pt-10 pb-6 px-2 w-full'
 				onClick={buttonAction}
 				aria-label={`Play or pause ${track.title}`}
 			>
@@ -98,7 +99,7 @@ export default function PlayerTrack({
 					{track.title}
 				</span>
 				<div className='flex items-center gap-4 h-full w-full'>
-					{isPlaying ? <IconPause /> : <IconPlay />}
+					<div className='w-16'>{isPlaying ? <IconPause /> : <IconPlay />}</div>
 					<span className=''>{formatDuration(playedSeconds)}</span>
 					<input
 						className=' h-[1px] w-full bg-faded-30 appearance-none'
