@@ -10,9 +10,9 @@ type ReleasesMenuProps = {
 
 export default function ReleasesMenu({ albums }: ReleasesMenuProps) {
 	return (
-		<div className='relative w-60 h-full p-4 mr-8 md:mr-64'>
-			<ButtonArrow classes='rotate-270' action={() => console.log("click")} />
-			<div className='overflow-scroll h-full space-y-4'>
+		<div className='absolute flex flex-col align-middle w-64 px-4 left-[60%] top-0 bottom-0 hover:bg-faded-10 transition-colors duration-200'>
+			{/* <ButtonArrow classes='rotate-270' action={() => console.log("click")} /> */}
+			<div className='overflow-y-scroll h-full space-y-4'>
 				{albums.map((album) => (
 					<>
 						<ReleaseCard album={album} key={album.slug} />
@@ -20,7 +20,7 @@ export default function ReleasesMenu({ albums }: ReleasesMenuProps) {
 					</>
 				))}
 			</div>
-			<ButtonArrow classes='rotate-90' action={() => console.log("click")} />
+			{/* <ButtonArrow classes='rotate-90' action={() => console.log("click")} /> */}
 		</div>
 	)
 }

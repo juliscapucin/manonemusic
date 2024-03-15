@@ -30,7 +30,7 @@ export default function ReleasesPage({
 	)
 
 	return (
-		<PageWrapper classes={"flex justify-between"}>
+		<PageWrapper classes={"flex"}>
 			<div>
 				<TitleDisplay classes='gsap-releases-title' ref={titleReleasesRef}>
 					{data.page.title}

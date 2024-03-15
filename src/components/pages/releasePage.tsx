@@ -1,7 +1,7 @@
 "use client"
 
 import { useLayoutEffect, useRef } from "react"
-import { useSearchParams, useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 import Image from "next/image"
 
 import gsap from "gsap"
@@ -26,8 +26,8 @@ export default function ReleasePage({
 	releasesPageData,
 }: releasePageProps) {
 	const router = useRouter()
-	const searchParams = useSearchParams()
 	const containerRef = useRef<HTMLDivElement>(null)
+	const releasePageRef = useRef<HTMLDivElement>(null)
 	let ctx = gsap.context(() => {})
 	let stateCard: Flip.FlipState
 
@@ -73,7 +73,7 @@ export default function ReleasePage({
 
 			gsap.to(".gsap-releases-page", {
 				xPercent: () => {
-					return -70
+					return -60 // margin-left 'left-[60%]' applied to releasesMenu
 				},
 				duration: 0.3,
 				onComplete: () => {
@@ -121,7 +121,10 @@ export default function ReleasePage({
 				</div>
 			)}
 			{/* release Page */}
-			<div className='gsap-release-page w-3/4 h-screen p-8 pt-32 ml-auto'>
+			<div
+				ref={releasePageRef}
+				className='gsap-release-page w-3/4 h-screen p-8 pt-32 ml-auto'
+			>
 				{/* Back Button */}
 				<Button action={() => transitionOnClickBack("/releases")}>
 					Back to releases
