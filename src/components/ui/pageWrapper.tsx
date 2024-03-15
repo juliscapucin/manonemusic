@@ -1,3 +1,5 @@
+"use client"
+
 type PageWrapperProps = {
 	children: React.ReactNode
 	classes?: string
