@@ -12,6 +12,8 @@
 	:root {
 		--color-black: 10 10 15;
 		--color-white: 252 249 248;
+
+		box-sizing: border-box;
 	}
 	:root[data-theme="dark"] {
 		--color-primary: 30 30 30;

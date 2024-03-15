@@ -1,5 +1,6 @@
-import { Project } from "@/types/Project"
 import { Album } from "@/types/Album"
+import { Project } from "@/types/Project"
+import { AboutPage } from "./About"
 
 interface WorkPage {
 	title: string
@@ -24,11 +25,6 @@ interface ReleasesCollection {
 
 interface AlbumCollection {
 	items: Album[]
-}
-
-interface AboutPage {
-	title: string
-	text: string
 }
 
 interface AboutPageCollection {

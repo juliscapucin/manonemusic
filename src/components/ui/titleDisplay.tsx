@@ -14,7 +14,7 @@ export const TitleDisplay = forwardRef(function Title(
 	ref: React.Ref<HTMLDivElement>
 ) {
 	return (
-		<div className={`flip-title mb-16 bg-primary ${classes}`} ref={ref}>
+		<div className={`flip-title ${classes}`} ref={ref}>
 			<Heading
 				tag={"h1"}
 				styles='whitespace-nowrap uppercase'

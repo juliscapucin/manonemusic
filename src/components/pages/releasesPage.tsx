@@ -35,7 +35,7 @@ export default function ReleasesPage({
 				<TitleDisplay classes='gsap-releases-title' ref={titleReleasesRef}>
 					{data.page.title}
 				</TitleDisplay>
-				<p className='max-w-prose'>{data.page.text}</p>
+				<p className='mt-16 max-w-sm lg:max-w-lg'>{data.page.text}</p>
 			</div>
 			<ReleasesMenu albums={data.albums} />
 		</PageWrapper>
