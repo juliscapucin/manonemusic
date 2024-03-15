@@ -2,29 +2,42 @@
 
 import { useRef } from "react"
 
-import { PageWrapperDesktop, PageWrapperMobile, Title } from "@/components/ui"
-import { useTitleScrollTrigger } from "@/hooks"
+import { PageWrapper, TitleDisplay } from "@/components/ui"
+import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
+import { ReleasesMenu } from "@/components"
+import { Album } from "@/types"
 
-type ReleasesData = {
-	title: string
-	text: string
+type ReleasesPageProps = {
+	data: {
+		page: { title: string; text: string }
+		albums: Album[]
+	}
+	titleScrollTrigger?: boolean
 }
 
-export default function ReleasesPage({ data }: { data: ReleasesData }) {
+export default function ReleasesPage({
+	data,
+	titleScrollTrigger,
+}: ReleasesPageProps) {
 	const titleReleasesRef = useRef(null)
+	const { windowAspectRatio } = useWindowDimensions()
 
-	useTitleScrollTrigger(titleReleasesRef, "/releases")
+	useTitleScrollTrigger(
+		titleReleasesRef,
+		"/releases",
+		windowAspectRatio,
+		titleScrollTrigger
+	)
 
 	return (
-		<>
-			<PageWrapperDesktop>
-				<Title ref={titleReleasesRef}>{data.title}</Title>
-				<p className='max-w-prose'>{data.text}</p>
-			</PageWrapperDesktop>
-			<PageWrapperMobile>
-				<Title>{data.title}</Title>
-				<p className='max-w-prose'>{data.text}</p>
-			</PageWrapperMobile>
-		</>
+		<PageWrapper classes={"flex"}>
+			<div>
+				<TitleDisplay classes='gsap-releases-title' ref={titleReleasesRef}>
+					{data.page.title}
+				</TitleDisplay>
+				<p className='max-w-prose'>{data.page.text}</p>
+			</div>
+			<ReleasesMenu albums={data.albums} />
+		</PageWrapper>
 	)
 }

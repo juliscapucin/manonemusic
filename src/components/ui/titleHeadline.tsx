@@ -9,7 +9,7 @@ type TitleProps = {
 	classes?: string
 }
 
-export const Title = forwardRef(function Title(
+export const TitleHeadline = forwardRef(function Title(
 	{ children, classes }: TitleProps,
 	ref: React.Ref<HTMLDivElement>
 ) {
@@ -18,7 +18,7 @@ export const Title = forwardRef(function Title(
 			<Heading
 				tag={"h1"}
 				styles='whitespace-nowrap uppercase'
-				variant='display'
+				variant='headline'
 			>
 				{children}
 			</Heading>

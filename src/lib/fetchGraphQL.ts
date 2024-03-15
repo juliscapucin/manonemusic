@@ -15,7 +15,7 @@ export async function fetchAll(query: string) {
 		.then((json) => json.data)
 }
 
-export async function fetchProject(
+export async function fetchBySlug(
 	query: string,
 	variables: { [key: string]: any } = {}
 ) {

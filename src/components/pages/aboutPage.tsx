@@ -3,13 +3,8 @@
 import { useRef } from "react"
 
 import { Copyright } from "@/components"
-import {
-	PageWrapper,
-	PageWrapperDesktop,
-	PageWrapperMobile,
-	Title,
-} from "@/components/ui"
-import { useTitleScrollTrigger } from "@/hooks"
+import { PageWrapper, TitleDisplay } from "@/components/ui"
+import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 
 type AboutData = {
 	title: string
@@ -18,21 +13,15 @@ type AboutData = {
 
 export default function AboutPnel({ data }: { data: AboutData }) {
 	const titleAboutRef = useRef(null)
+	const { windowAspectRatio } = useWindowDimensions()
 
-	useTitleScrollTrigger(titleAboutRef, "/about")
+	useTitleScrollTrigger(titleAboutRef, "/about", windowAspectRatio)
 
 	return (
-		<>
-			<PageWrapperDesktop>
-				<Title ref={titleAboutRef}>{data.title}</Title>
-				<p className='max-w-prose'>{data.text}</p>
-				<Copyright />
-			</PageWrapperDesktop>
-			<PageWrapperMobile>
-				<Title>{data.title}</Title>
-				<p className='max-w-prose'>{data.text}</p>
-				<Copyright />
-			</PageWrapperMobile>
-		</>
+		<PageWrapper>
+			<TitleDisplay ref={titleAboutRef}>{data.title}</TitleDisplay>
+			<p className='max-w-prose'>{data.text}</p>
+			<Copyright />
+		</PageWrapper>
 	)
 }

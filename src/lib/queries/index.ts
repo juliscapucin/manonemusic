@@ -26,6 +26,17 @@ export const queryAll = `
 				text
 			}
 		}
+		albumCollection {
+			items {
+				title
+				slug
+				coverImage {
+					url
+					width
+					height
+				}
+			}
+		}
 		aboutPageCollection {
 			items {
 				title
@@ -68,3 +79,26 @@ query GetProjectBySlug($slug: String!) {
 	}
  }
 `
+
+export const queryAlbum = `
+query GetAlbumBySlug($slug: String!) {
+	albumCollection(where: {slug: $slug}, limit: 1) {
+	  items {
+		 title
+		 slug
+		 coverImage {
+			url
+			width
+			height
+		 }
+		 tracksCollection {
+			items {
+			  ... on Track {
+					title
+					url
+			  }
+			}
+		 }
+	  }
+	}
+}`

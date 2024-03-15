@@ -19,6 +19,7 @@ export default function HomePage({ data }: { data: HomeData }) {
 	const pathname = usePathname()
 
 	// ScrollTrigger for Page Reveal
+	// TODO add trigger for home page
 	useEffect(() => {
 		if (!homeWrapperRef.current || pathname !== "/") return
 

@@ -1,3 +1,3 @@
-import { fetchAll, fetchProject } from "./fetchGraphQL"
+import { fetchAll, fetchBySlug } from "./fetchGraphQL"
 
-export { fetchAll, fetchProject }
+export { fetchAll, fetchBySlug }

@@ -1,15 +1,15 @@
-export default function IconArrow() {
- return (
-  <svg
-   width='18'
-   height='15'
-   viewBox='0 0 18 15'
-   fill='currentColor'
-   xmlns='http://www.w3.org/2000/svg'
-  >
-   <path d='M15.757 8.18314L9.3138 1.73993L10.0537 1.00002L16.4969 7.44322L15.757 8.18314Z' />
-   <path d='M9.18167 13.3387L15.7591 6.76131L16.499 7.50122L9.92158 14.0787L9.18167 13.3387Z' />
-   <path d='M16 8.00002H0V7.00002H16V8.00002Z' />
-  </svg>
- );
+export default function IconArrow({ color }: { color: string }) {
+	return (
+		<svg
+			width='62'
+			height='55'
+			viewBox='0 0 62 55'
+			fill='none'
+			xmlns='http://www.w3.org/2000/svg'
+		>
+			<path d='M61.2402 27.5987L34.6517 54.1871' stroke={color} />
+			<path d='M61.2227 27.9204L34.3114 1.0091' stroke={color} />
+			<path d='M0.609375 27.5249L60.9979 27.5249' stroke={color} />
+		</svg>
+	)
 }

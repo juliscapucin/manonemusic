@@ -6,7 +6,8 @@ import Header from "./header"
 import PageWrapper from "./pageWrapper"
 import PageWrapperDesktop from "./pageWrapperDesktop"
 import PageWrapperMobile from "./pageWrapperMobile"
-import { Title } from "./title"
+import { TitleDisplay } from "./titleDisplay"
+import { TitleHeadline } from "./titleHeadline"
 import VideoPlayer from "./videoPlayer"
 
 export {
@@ -18,6 +19,7 @@ export {
 	PageWrapper,
 	PageWrapperDesktop,
 	PageWrapperMobile,
-	Title,
+	TitleDisplay,
+	TitleHeadline,
 	VideoPlayer,
 }

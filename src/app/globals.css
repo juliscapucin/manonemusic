@@ -1,110 +1,116 @@
-@import url('https://use.typekit.net/cbg5juo.css');
+@import url("https://use.typekit.net/cbg5juo.css");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-   --font-secondary: 'ff-real-text-pro', sans-serif;
+	--font-secondary: "ff-real-text-pro", sans-serif;
 }
 
 @layer base {
-   :root {
-      --color-black: 10 10 15;
-      --color-white: 252 249 248;
-   }
-   :root[data-theme='dark'] {
-      --color-primary: 3 30 27;
-      --color-secondary: 182 209 194;
-      --color-secondary-rgb: 182, 209, 194;
-      --color-focus: 154, 152, 152;
-   }
-   :root[data-theme='light'] {
-      --color-primary: 249 246 238;
-      --color-secondary: 18 12 15;
-      --color-secondary-rgb: 18, 12, 15;
-      --color-focus: 154, 152, 152;
-   }
+	:root {
+		--color-black: 10 10 15;
+		--color-white: 252 249 248;
+	}
+	:root[data-theme="dark"] {
+		--color-primary: 30 30 30;
+		--color-secondary: 40 209 194;
+		--color-secondary-rgb: 182, 209, 194;
+		--color-focus: 154, 152, 152;
+	}
+	:root[data-theme="light"] {
+		--color-primary: 249 246 238;
+		--color-secondary: 18 12 15;
+		--color-secondary-rgb: 18, 12, 15;
+		--color-focus: 154, 152, 152;
+	}
 
-   ::-webkit-scrollbar {
-      width: 4px;
-      height: 4px;
-   }
-   ::-webkit-scrollbar-track {
-      background-color: rgba(var(--color-secondary-rgb), 0.2);
-      margin-block: 2px;
-   }
-   ::-webkit-scrollbar-thumb {
-      background-color: rgba(var(--color-secondary-rgb), 1);
-      width: 1rem;
-      height: 1rem;
-      border: none;
-   }
+	*::-webkit-scrollbar {
+		width: 6px;
+		height: 6px;
+	}
+	*::-webkit-scrollbar-track {
+		background-color: rgba(var(--color-secondary-rgb), 0.2);
+		-webkit-box-shadow: none;
+	}
+	*::-webkit-scrollbar-thumb {
+		background-color: rgb(var(--color-secondary-rgb), 0.2);
+		width: 1rem;
+		height: 1rem;
+		-webkit-box-shadow: none;
+	}
 
-   @supports (scrollbar-color: #ccc #fff) {
-      & > * {
-         scrollbar-color: #ccc #fff;
-         scrollbar-width: thin;
-      }
-   }
+	/* @supports (scrollbar-color: #ccc #fff) {
+		* {
+			scrollbar-color: rgba(var(--color-secondary-rgb), 0.2)
+				rgba(var(--color-secondary-rgb), 0.2);
+			scrollbar-width: thin;
+			-webkit-box-shadow: none;
+			box-shadow: none;
+		}
+	} */
 
-   p {
-      @apply text-bodyLarge;
-      @apply mb-8;
-   }
+	p {
+		@apply text-bodyLarge;
+		@apply mb-8;
+	}
 
-   /* MAX WIDTH WRAPPER */
+	/* MAX WIDTH WRAPPER */
 
-    .max-width-wrapper{
-      @apply max-w-desktop mx-auto px-4 lg:px-8;
-    }
+	.max-width-wrapper {
+		@apply max-w-desktop mx-auto px-4 lg:px-8;
+	}
 
-   /* KEYBOARD FOCUS */
+	/* PLAYER SLIDER THUMB */
+	input[type="range"]::-webkit-slider-thumb {
+		-webkit-appearance: none;
+		appearance: none;
+		width: 6px; /* width of the thumb */
+		height: 20px; /* height of the thumb */
+		background: rgba(var(--color-secondary-rgb), 1); /* thumb color */
+		cursor: pointer; /* cursor type on hover */
+	}
 
-   *:focus-visible {
-      background-color: rgba(var(--color-focus), 1);
+	input[type="range"]::-moz-range-thumb {
+		width: 20px;
+		height: 20px;
+		background: rgba(var(--color-secondary-rgb), 1);
+		cursor: pointer;
+	}
+
+	/* KEYBOARD FOCUS */
+
+	/* *:focus-visible {
+      background-color: rgba(var(--color-secondary-rgb), 0.3);
       outline: none;
-   }
-
-   button::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 4px solid rgba(var(--color-focus), 1);
-      z-index: 100;
-      opacity: 0;
-      pointer-events: none;
-   }
-
-   button:focus-visible::before {
-      opacity: 1;
-   }
+      > * {
+         color: rgba(var(--color-secondary-rgb), 1);
+      }
+   } */
 }
 
 * {
-   box-sizing: border-box;
-   padding: 0;
-   margin: 0;
+	box-sizing: border-box;
+	padding: 0;
+	margin: 0;
 }
 
 html,
 body {
-   font-weight: 200;
-   -webkit-font-smoothing: antialiased;
-   transition: background-color 0.2s linear;
+	font-weight: 200;
+	-webkit-font-smoothing: antialiased;
+	transition: background-color 0.2s linear;
 }
 
 a {
-   text-decoration: none;
-   color: var(--color-secondary);
-   transition: color 0.2s linear;
+	text-decoration: none;
+	color: var(--color-secondary);
+	transition: color 0.2s linear;
 }
 
 a:hover {
-   color: var(--color-faded);
+	color: var(--color-faded);
 }
 
 h1,
@@ -116,59 +122,74 @@ h6,
 span,
 button,
 a {
-   font-family: var(--font-primary) sans-serif;
-   overflow-wrap: break-word;
+	font-family: var(--font-primary) sans-serif;
+	overflow-wrap: break-word;
 }
 
-
-
 button {
-   cursor: pointer;
+	cursor: pointer;
 }
 
 textarea {
-   resize: none;
+	resize: none;
 }
 
 /* TAILWIND WORKAROUNDS */
 
 .custom-min-h-screen {
-   min-height: 100vh;
-   min-height: 100svh;
+	min-height: 100vh;
+	min-height: 100svh;
 }
 
-.custom-min-w-screen{
-   min-width: 100vw;
+.custom-min-w-screen {
+	min-width: 100vw;
 }
 
 .logo {
-   font-size: 13vw;
+	font-size: 13vw;
 
-   @media screen and (min-width: 768px) {
-      font-size: clamp(3rem, 14vw, 12rem);
-   }
+	@media screen and (min-width: 768px) {
+		font-size: clamp(3rem, 14vw, 12rem);
+	}
+}
+
+/* RELEASES MENU SCROLLBAR */
+.custom-releases-menu::-webkit-scrollbar-thumb {
+	background-color: var(--color-primary);
+}
+
+.custom-releases-menu::-webkit-scrollbar-track {
+	background-color: var(--color-primary);
+}
+
+.custom-releases-menu:hover::-webkit-scrollbar-thumb {
+	background-color: rgb(var(--color-secondary-rgb), 0.3);
+}
+
+.custom-releases-menu:hover::-webkit-scrollbar-track {
+	background-color: rgba(var(--color-secondary-rgb), 0.1);
 }
 
 .navbar-home {
-   @apply bottom-8 right-0 w-1/2 flex flex-col items-start gap-2 z-100;
+	@apply bottom-8 right-0 w-1/2 flex flex-col items-start gap-2 z-100;
 }
 
 .navbar-page {
-   @apply fixed top-0 right-0 w-screen h-screen z-100;
+	@apply fixed top-0 right-0 w-screen h-screen z-100;
 }
 
 .navbar-page :first-child {
-   @apply fixed top-0 left-0;
+	@apply fixed top-0 left-0;
 }
 
 .navbar-page :nth-child(2) {
-   @apply fixed top-0 right-0;
+	@apply fixed top-0 right-0;
 }
 
 .navbar-page :nth-child(3) {
-   @apply fixed bottom-0 left-0;
+	@apply fixed bottom-0 left-0;
 }
 
 .navbar-page :nth-child(4) {
-   @apply fixed bottom-0 right-0;
+	@apply fixed bottom-0 right-0;
 }
