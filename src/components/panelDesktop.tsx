@@ -86,14 +86,17 @@ export default function PanelDesktop({ data, index }: PanelDesktopProps) {
 	}, [])
 
 	return (
-		<div>
+		<>
 			<NavBar navLinks={navLinks} transitionOnClick={handlePanelSlide} />
 
 			{/* <Header handlePanelSlide={handlePanelSlide} /> */}
 
 			{/* Panels */}
 			<div ref={outerContainerRef}>
-				<div ref={panelsContainerRef} className='flex gap-32'>
+				<div
+					ref={panelsContainerRef}
+					className='flex justify-start items-start'
+				>
 					{navLinks.map((section, index) => (
 						<section
 							data-id={`panel-${index}`}
@@ -103,12 +106,14 @@ export default function PanelDesktop({ data, index }: PanelDesktopProps) {
 							<PanelContent data={data} section={section.label.toLowerCase()} />
 
 							{/* Previous/Next Navigation */}
-							<div className='absolute bottom-1/2 right-8 flex gap-8 z-20'>
-								{/* <ButtonScroll
+							<div className='absolute bottom-1/2 left-20 flex gap-8 z-20'>
+								<ButtonScroll
 									action={() =>
 										handlePanelSlide(index - 1 > 0 ? index - 1 : 0, true)
 									}
-								/> */}
+								/>
+							</div>
+							<div className='absolute bottom-1/2 right-4 flex gap-8 z-20'>
 								<ButtonScroll
 									action={() =>
 										handlePanelSlide(
@@ -122,6 +127,6 @@ export default function PanelDesktop({ data, index }: PanelDesktopProps) {
 					))}
 				</div>
 			</div>
-		</div>
+		</>
 	)
 }

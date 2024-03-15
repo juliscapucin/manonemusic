@@ -41,6 +41,12 @@ export const queryAll = `
 			items {
 				title
 				text
+				profilePhoto {
+					url
+					description
+					width
+					height
+				}
 			}
 		}
 		contactPageCollection {
