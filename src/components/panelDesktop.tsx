@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef } from "react"
 import { usePathname } from "next/navigation"
 
 import gsap from "gsap"
@@ -11,7 +11,6 @@ import { navLinks } from "@/constants"
 
 import { AllData } from "@/types"
 import { NavBar, PanelContent } from "@/components"
-import { Header } from "@/components/ui"
 import { ButtonScroll } from "./buttons"
 import { handlePanelSlide } from "@/lib/animations"
 

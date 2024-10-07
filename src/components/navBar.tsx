@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react"
 
 import { NavLink } from "@/components"
 
-type NavLink = { label: string; slug: string; navLinkPosition: string }
+type NavLink = { label: string; slug: string }
 
 type NavLinksProps = {
 	navLinks: NavLink[]

@@ -7,28 +7,34 @@ export const maxWidth = 2000
 export const navLinks = [
 	{ label: "Home", slug: "/", index: 1, navLinkPosition: "" },
 	{
+		label: "Films",
+		slug: "films",
+		index: 2,
+	},
+	{
+		label: "Commercials",
+		slug: "commercials",
+		index: 3,
+	},
+	{
 		label: "Projects",
 		slug: "projects",
-		index: 2,
-		navLinkPosition: "fixed top-0 left-0",
+		index: 4,
 	},
 	{
 		label: "Releases",
 		slug: "releases",
-		index: 3,
-		navLinkPosition: "fixed top-0 right-0",
+		index: 5,
 	},
 	{
 		label: "About",
 		slug: "about",
-		index: 4,
-		navLinkPosition: "fixed bottom-0 left-0",
+		index: 6,
 	},
 	{
 		label: "Contact",
 		slug: "contact",
-		index: 5,
-		navLinkPosition: "fixed bottom-0 right-0",
+		index: 7,
 	},
 ]
 

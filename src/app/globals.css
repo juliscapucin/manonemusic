@@ -10,12 +10,12 @@
 
 @layer base {
 	:root {
-		--color-black: 10 10 15;
-		--color-white: 252 249 248;
+		--color-black: 3 30 27;
+		--color-white: 182 209 194;
 	}
 	:root[data-theme="dark"] {
-		--color-primary: 30 30 30;
-		--color-secondary: 40 209 194;
+		--color-primary: 3 30 27;
+		--color-secondary: 182 209 194;
 		--color-secondary-rgb: 182, 209, 194;
 		--color-focus: 154, 152, 152;
 	}

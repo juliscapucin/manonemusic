@@ -23,14 +23,13 @@ export default function ProjectPage({
 	projectsData,
 }: ProjectPageProps) {
 	const router = useRouter()
-	const searchParams = useSearchParams()
 	const containerRef = useRef<HTMLDivElement>(null)
 	let ctx = gsap.context(() => {})
-	let stateCard: Flip.FlipState
 
 	// TODO refactor to avoid repetition
 	const transitionOnClickBack = (slug: string) => {
 		gsap.registerPlugin(Flip)
+		const stateCard = Flip.getState(".gsap-flip-project-image")
 
 		ctx.add(() => {
 			gsap.set(".gsap-projects-page", { display: "block" })
@@ -64,7 +63,6 @@ export default function ProjectPage({
 
 		ctx.add(() => {
 			const state = Flip.getState(".gsap-flip-project-image")
-			stateCard = Flip.getState(".gsap-flip-project-card")
 
 			// Position the project card image on the page
 			Flip.fit(".gsap-flip-project-card", state, {

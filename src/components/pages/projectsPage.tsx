@@ -31,8 +31,6 @@ export default function ProjectsPage({ data, titleScrollTrigger }: Props) {
 				{gridElements.map((_, index) => {
 					const project = data.find((project) => project.gridPosition == index)
 
-					// console.log(project)
-
 					return project ? (
 						<ProjectCard
 							key={project.slug}

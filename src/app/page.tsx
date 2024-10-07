@@ -10,7 +10,7 @@ export default async function Home() {
 	if (!data) return notFound()
 	return (
 		<main className='w-full lg:h-full'>
-			<Panels data={data} />
+			<Panels data={data} index={data.index} />
 		</main>
 	)
 }
