@@ -1,8 +1,8 @@
 import { Rule } from "sanity"
 
-const projectSchema = {
-	name: "project",
-	title: "Projects",
+const filmSchema = {
+	name: "film",
+	title: "Films",
 	type: "document",
 	fields: [
 		{
@@ -29,8 +29,8 @@ const projectSchema = {
 			validation: (Rule: Rule) => Rule.required().error("Slug is required"),
 		},
 		{
-			name: "projectInfo",
-			title: "Project Info",
+			name: "filmInfo",
+			title: "Film Info",
 			type: "string",
 		},
 	],
@@ -43,4 +43,4 @@ const projectSchema = {
 	],
 }
 
-export default projectSchema
+export default filmSchema

@@ -28,6 +28,13 @@ const headerNavSchema = {
 				Rule.required().error("Order is required"),
 		},
 	],
+	orderings: [
+		{
+			title: "Order by Number",
+			name: "orderAsc",
+			by: [{ field: "order", direction: "asc" }],
+		},
+	],
 }
 
 export default headerNavSchema

@@ -1,8 +1,8 @@
 import { Rule } from "sanity"
 
-const projectSchema = {
-	name: "project",
-	title: "Projects",
+const commercialSchema = {
+	name: "commercial",
+	title: "Commercials",
 	type: "document",
 	fields: [
 		{
@@ -12,11 +12,11 @@ const projectSchema = {
 			validation: (Rule: Rule) => Rule.required().error("Title is required"),
 		},
 		{
-			name: "releaseDate",
-			title: "Release Date (required, used for News page ordering)",
+			name: "commercialDate",
+			title: "Commercial Date (required, used for News page ordering)",
 			type: "date",
 			validation: (Rule: Rule) =>
-				Rule.required().error("Release Date is required"),
+				Rule.required().error("Commercial Date is required"),
 		},
 		{
 			name: "slug",
@@ -29,18 +29,18 @@ const projectSchema = {
 			validation: (Rule: Rule) => Rule.required().error("Slug is required"),
 		},
 		{
-			name: "projectInfo",
-			title: "Project Info",
+			name: "commercialInfo",
+			title: "Commercial Info",
 			type: "string",
 		},
 	],
 	orderings: [
 		{
-			title: "Release Date, New",
-			name: "releaseDateDesc",
-			by: [{ field: "releaseDate", direction: "desc" }],
+			title: "Commercial Date, New",
+			name: "commercialDateDesc",
+			by: [{ field: "commercialDate", direction: "desc" }],
 		},
 	],
 }
 
-export default projectSchema
+export default commercialSchema

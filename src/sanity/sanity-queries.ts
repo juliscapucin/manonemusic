@@ -63,7 +63,7 @@ export async function getAboutPage(): Promise<AboutPage> {
 
 export async function getHeaderNavLinks(): Promise<NavLink[]> {
 	return client.fetch(
-		groq`*[_type == "header"]|order(order) {
+		groq`*[_type == "header"]|order(order asc) {
          title,
          "slug": slug.current,
          order
