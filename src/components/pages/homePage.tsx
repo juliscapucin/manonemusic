@@ -52,7 +52,7 @@ export default function HomePage({ data }: { data: HomeData }) {
 			className='relative w-screen h-screen custom-min-h-screen'
 		>
 			<div className='relative flex mt-48 w-screen pr-16'>
-				<Heading tag='h2' variant='headline' styles='w-1/2'>
+				<Heading tag='h2' variant='headline' classes='w-1/2'>
 					Music & Sound Design
 				</Heading>
 				<Status location='Amsterdam' />

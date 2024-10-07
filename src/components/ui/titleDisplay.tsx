@@ -17,7 +17,7 @@ export const TitleDisplay = forwardRef(function Title(
 		<div className={`flip-title mb-16 bg-primary ${classes}`} ref={ref}>
 			<Heading
 				tag={"h1"}
-				styles='whitespace-nowrap uppercase'
+				classes='whitespace-nowrap uppercase'
 				variant='display'
 			>
 				{children}

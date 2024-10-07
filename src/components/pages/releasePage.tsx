@@ -76,7 +76,6 @@ export default function ReleasePage({
 			gsap.set(".gsap-release-image", { opacity: 0 })
 
 			const state = Flip.getState(".gsap-flip-release-image")
-			stateCard = Flip.getState(".gsap-flip-release-card")
 
 			gsap.to(".gsap-releases-page", {
 				xPercent: () => {
