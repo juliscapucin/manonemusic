@@ -1,6 +1,7 @@
 import {
 	AboutPage,
 	ContactPage,
+	FilmsPage,
 	HomePage,
 	ReleasesPage,
 	ProjectsPage,

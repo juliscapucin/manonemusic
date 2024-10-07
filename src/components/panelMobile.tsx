@@ -1,8 +1,9 @@
+"use client"
+
 import { navLinks } from "@/constants"
 
 import { AllData } from "@/types"
 import { usePathname } from "next/navigation"
-import { Logo } from "@/components/ui"
 import { NavBar, PanelContent } from "@/components"
 
 export default function PanelMobile({ data }: { data: AllData }) {

@@ -1,4 +1,4 @@
-export type Album = {
+export type AboutPage = {
 	title: string
 	slug: string
 	text: string

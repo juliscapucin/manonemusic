@@ -5,7 +5,7 @@ export const breakpoints = {
 export const maxWidth = 2000
 
 export const navLinks = [
-	{ label: "Home", slug: "/", index: 1, navLinkPosition: "" },
+	{ label: "Home", slug: "/", index: 1 },
 	{
 		label: "Films",
 		slug: "films",
