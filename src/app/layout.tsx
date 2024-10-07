@@ -9,11 +9,11 @@ const font = localFont({
 	variable: "--font-primary",
 	src: [
 		{
-			path: "../../public/fonts/PPSupplySans-Regular.otf",
+			path: "../../public/fonts/PPSupplyMono-Regular.otf",
 			weight: "400",
 		},
 		{
-			path: "../../public/fonts/PPSupplySans-Ultralight.otf",
+			path: "../../public/fonts/PPSupplyMono-Ultralight.otf",
 			weight: "200",
 		},
 	],
