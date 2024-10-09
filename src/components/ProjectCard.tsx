@@ -27,7 +27,9 @@ export default function ProjectCard({
 	return (
 		<button
 			onClick={() => {
-				handlePanelSlide(1, true, () => router.push(`/projects/${slug}`))
+				handlePanelSlide("projects", true, () =>
+					router.push(`/projects/${slug}`)
+				)
 			}}
 			className={`w-full h-full relative`}
 		>

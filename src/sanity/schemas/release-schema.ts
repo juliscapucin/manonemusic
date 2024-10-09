@@ -43,7 +43,28 @@ const releaseSchema = {
 			name: "tracklist",
 			title: "Tracklist (required)",
 			type: "array",
-			of: [{ type: "string" }],
+			of: [
+				{
+					type: "object",
+					title: "Track",
+					fields: [
+						{
+							name: "trackname",
+							title: "Track Name",
+							type: "string",
+							validation: (Rule: Rule) =>
+								Rule.required().error("Track name is required"),
+						},
+						{
+							name: "link",
+							title: "Track Link",
+							type: "string",
+							validation: (Rule: Rule) =>
+								Rule.required().error("Track link is required"),
+						},
+					],
+				},
+			],
 			validation: (Rule: Rule) =>
 				Rule.required().error("Tracklist is required"),
 		},

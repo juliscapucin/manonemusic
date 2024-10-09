@@ -5,15 +5,21 @@ import filmSchema from "./film-schema"
 import headerNavSchema from "./header-nav-schema"
 import projectSchema from "./project-schema"
 import releaseSchema from "./release-schema"
+import pagesSchema from "./pages-schema"
+import workSchema from "./work-schema"
+import navigationSchema from "./navigation-schema"
 
 const schemas = [
-	headerNavSchema,
+	pagesSchema,
 	aboutPageSchema,
 	contactPageSchema,
+	workSchema,
 	filmSchema,
 	commercialSchema,
 	projectSchema,
 	releaseSchema,
+	navigationSchema,
+	headerNavSchema,
 ]
 
 export default schemas
