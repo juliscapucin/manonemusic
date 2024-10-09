@@ -12,13 +12,6 @@ const releaseSchema = {
 			validation: (Rule: Rule) => Rule.required().error("Title is required"),
 		},
 		{
-			name: "releaseDate",
-			title: "Release Date (required, used for News page ordering)",
-			type: "date",
-			validation: (Rule: Rule) =>
-				Rule.required().error("Release Date is required"),
-		},
-		{
 			name: "slug",
 			title: "Slug (required)",
 			type: "slug",
@@ -29,9 +22,30 @@ const releaseSchema = {
 			validation: (Rule: Rule) => Rule.required().error("Slug is required"),
 		},
 		{
+			name: "image",
+			title: "Image (required)",
+			type: "image",
+			validation: (Rule: Rule) => Rule.required().error("Image is required"),
+		},
+		{
+			name: "releaseDate",
+			title: "Release Date (required)",
+			type: "date",
+			validation: (Rule: Rule) =>
+				Rule.required().error("Release Date is required"),
+		},
+		{
 			name: "releaseInfo",
 			title: "Release Info",
 			type: "string",
+		},
+		{
+			name: "tracklist",
+			title: "Tracklist (required)",
+			type: "array",
+			of: [{ type: "string" }],
+			validation: (Rule: Rule) =>
+				Rule.required().error("Tracklist is required"),
 		},
 	],
 	orderings: [

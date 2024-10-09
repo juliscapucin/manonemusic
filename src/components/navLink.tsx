@@ -1,6 +1,7 @@
 "use client"
 
 import { usePathname } from "next/navigation"
+import { Button } from "@/components/ui"
 
 interface NavLinkProps {
 	label: string
@@ -21,7 +22,7 @@ export default function NavLink({ label, action, activeState }: NavLinkProps) {
 				</div>
 			) : (
 				<div className='overflow-clip max-h-8 pointer-events-auto'>
-					<button
+					{/* <button
 						className={`${
 							label === "Home" &&
 							pathname === "/" &&
@@ -34,7 +35,14 @@ export default function NavLink({ label, action, activeState }: NavLinkProps) {
 						<span className='underlined-link text-titleSmall md:text-titleMedium uppercase'>
 							{label}
 						</span>
-					</button>
+					</button> */}
+					<Button
+						href={`/${label.toLowerCase()}`}
+						classes='underlined-link text-titleSmall md:text-titleMedium uppercase'
+						transitionOnClick={action}
+					>
+						{label}
+					</Button>
 				</div>
 			)}
 		</div>

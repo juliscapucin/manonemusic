@@ -56,6 +56,7 @@ export default function HomePage({ data }: { data: HomeData }) {
 		<section
 			ref={homeWrapperRef}
 			className='relative w-screen h-screen custom-min-h-screen'
+			data-id='panel-home'
 		>
 			<div className='mt-32 h-40'>
 				<TitleDisplay ref={titleHomeRef}>MAN/ONE MUSIC</TitleDisplay>

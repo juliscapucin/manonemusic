@@ -19,7 +19,7 @@ export default async function Page() {
 
 	return (
 		<main className='w-screen custom-min-w-screen min-w-full h-full'>
-			<Panels data={data} index={2} />
+			<Panels data={data} />
 		</main>
 	)
 }

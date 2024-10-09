@@ -16,10 +16,9 @@ import { handlePanelSlide } from "@/lib/animations"
 
 type PanelDesktopProps = {
 	data: AllData
-	index: number
 }
 
-export default function PanelDesktop({ data, index }: PanelDesktopProps) {
+export default function PanelDesktop({ data }: PanelDesktopProps) {
 	const pathname = usePathname()
 	const outerContainerRef = useRef<HTMLDivElement | null>(null)
 	const panelsContainerRef = useRef<HTMLDivElement | null>(null)
@@ -68,57 +67,65 @@ export default function PanelDesktop({ data, index }: PanelDesktopProps) {
 		}
 	}, [outerContainerRef, panelsContainerRef])
 
-	// Jump to panel on internal page load
+	// TODO Jump to panel on internal page load
 	useEffect(() => {
 		if (!pathname || pathname === "/") return
 
-		// handlePanelSlide(index, false)
+		console.log(pathname)
 
-		const targetPanel = document.querySelector(
-			`[data-id=panel-${index}]`
-		) as HTMLDivElement
-		let y = targetPanel?.offsetLeft
+		handlePanelSlide(pathname, false)
 
-		window.scrollTo({
-			top: y,
-		})
+		// const targetPanel = document.querySelector(
+		// 	`[data-id=panel-${index}]`
+		// ) as HTMLDivElement
+		// let y = targetPanel?.offsetLeft
+
+		// window.scrollTo({
+		// 	top: y,
+		// })
 	}, [])
 
 	return (
 		<div>
 			<NavBar navLinks={navLinks} transitionOnClick={handlePanelSlide} />
 
-			{/* <Header handlePanelSlide={handlePanelSlide} /> */}
-
 			{/* Panels */}
 			<div ref={outerContainerRef}>
 				<div ref={panelsContainerRef} className='flex gap-32'>
-					{navLinks.map((section, index) => (
-						<section
-							data-id={`panel-${index}`}
-							className={`panel custom-min-w-screen h-screen min-h-full pl-8 overflow-clip`}
-							key={`panel-${index}`}
-						>
-							<PanelContent data={data} section={section.label.toLowerCase()} />
+					{navLinks.map((section, index) => {
+						return (
+							<section
+								data-id={`panel-${section.slug}`}
+								className={`panel custom-min-w-screen h-screen min-h-full pl-8 overflow-clip`}
+								key={`panel-${section.slug}`}
+							>
+								<PanelContent
+									data={data}
+									section={section.label.toLowerCase()}
+								/>
 
-							{/* Previous/Next Navigation */}
-							<div className='absolute bottom-1/2 right-8 flex gap-8 z-20'>
-								{/* <ButtonScroll
+								{/* Previous/Next Navigation */}
+								<div className='absolute bottom-1/2 right-8 flex gap-8 z-20'>
+									{/* <ButtonScroll
 									action={() =>
 										handlePanelSlide(index - 1 > 0 ? index - 1 : 0, true)
 									}
 								/> */}
-								<ButtonScroll
-									action={() =>
-										handlePanelSlide(
-											index + 1 > navLinks.length ? navLinks.length : index + 1,
-											true
-										)
-									}
-								/>
-							</div>
-						</section>
-					))}
+									<ButtonScroll
+										action={() => {
+											const nextIndex =
+												index + 1 > navLinks.length
+													? navLinks.length
+													: index + 1
+											const nextSlug = navLinks[nextIndex].slug
+
+											handlePanelSlide(nextSlug, true)
+										}}
+									/>
+								</div>
+							</section>
+						)
+					})}
 				</div>
 			</div>
 		</div>

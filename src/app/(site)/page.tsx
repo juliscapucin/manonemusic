@@ -8,9 +8,10 @@ export default async function Home() {
 	const data = await fetchAll(queryAll)
 
 	if (!data) return notFound()
+
 	return (
 		<main className='w-full lg:h-full'>
-			<Panels data={data} index={data.index} />
+			<Panels data={data} />
 		</main>
 	)
 }

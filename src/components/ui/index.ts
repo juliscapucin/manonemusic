@@ -9,8 +9,10 @@ import PageWrapperMobile from "./pageWrapperMobile"
 import { TitleDisplay } from "./titleDisplay"
 import { TitleHeadline } from "./titleHeadline"
 import VideoPlayer from "./videoPlayer"
+import Button from "./button"
 
 export {
+	Button,
 	Grid,
 	Heading,
 	Loader,
