@@ -7,11 +7,13 @@ import projectSchema from "./project-schema"
 import releaseSchema from "./release-schema"
 import pagesSchema from "./pages-schema"
 import workSchema from "./work-schema"
+import portfolioPageSchema from "./portfolio-page-schema"
 import navigationSchema from "./navigation-schema"
 
 const schemas = [
 	pagesSchema,
 	aboutPageSchema,
+	portfolioPageSchema,
 	contactPageSchema,
 	workSchema,
 	filmSchema,

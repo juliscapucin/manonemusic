@@ -12,11 +12,11 @@ const commercialSchema = {
 			validation: (Rule: Rule) => Rule.required().error("Title is required"),
 		},
 		{
-			name: "commercialDate",
-			title: "Commercial Date (required, used for News page ordering)",
+			name: "releaseDate",
+			title: "Release Date",
 			type: "date",
 			validation: (Rule: Rule) =>
-				Rule.required().error("Commercial Date is required"),
+				Rule.required().error("Release Date is required"),
 		},
 		{
 			name: "slug",
@@ -27,6 +27,27 @@ const commercialSchema = {
 				maxLength: 96,
 			},
 			validation: (Rule: Rule) => Rule.required().error("Slug is required"),
+		},
+		{
+			name: "image",
+			type: "object",
+			title: "Image",
+			fields: [
+				{
+					name: "image",
+					title: "Image",
+					type: "image",
+					validation: (Rule: Rule) =>
+						Rule.required().error("Image is required"),
+				},
+				{
+					name: "imageAlt",
+					title: "Image Alt Text",
+					type: "string",
+					validation: (Rule: Rule) =>
+						Rule.required().error("Image Alt Text is required"),
+				},
+			],
 		},
 		{
 			name: "commercialInfo",

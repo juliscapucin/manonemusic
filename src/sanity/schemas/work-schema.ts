@@ -2,7 +2,7 @@ import { Rule } from "sanity"
 
 const workSchema = {
 	name: "work",
-	title: "----------- Work -----------",
+	title: "----------- Portfolio Items -----------",
 	type: "document",
 	fields: [
 		{

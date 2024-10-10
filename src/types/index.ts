@@ -1,8 +1,7 @@
 import { AboutPage } from "./AboutPage"
-import { Album } from "./Album"
 import { AllData } from "./AllData"
+import { ContactPage } from "./ContactPage"
 import { NavLink } from "./NavLink"
 import { Project } from "./Project"
-import { Track } from "./Track"
 
-export type { AboutPage, Album, AllData, NavLink, Project, Track }
+export type { AboutPage, AllData, ContactPage, NavLink, Project }

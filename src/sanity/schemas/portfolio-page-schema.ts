@@ -1,28 +1,21 @@
 import { Rule } from "sanity"
 
-const aboutPageSchema = {
-	name: "aboutPage",
-	title: "About Page",
+const portfolioPageSchema = {
+	name: "portfolioPage",
+	title: "Portfolio Pages",
 	type: "document",
 	fields: [
 		{
 			name: "title",
-			title: "Title (required)",
+			title: "Title",
 			type: "string",
 			validation: (Rule: Rule) => Rule.required().error("Title is required"),
 		},
 		{
 			name: "subtitle",
 			title: "Subtitle (required)",
-			type: "string",
+			type: "text",
 			validation: (Rule: Rule) => Rule.required().error("Subtitle is required"),
-		},
-		{
-			name: "content",
-			title: "Content (required)",
-			type: "array",
-			of: [{ type: "block" }],
-			validation: (Rule: Rule) => Rule.required().error("Content is required"),
 		},
 		{ name: "metadataTitle", title: "Metadata Title", type: "string" },
 		{
@@ -39,4 +32,4 @@ const aboutPageSchema = {
 	],
 }
 
-export default aboutPageSchema
+export default portfolioPageSchema

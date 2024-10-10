@@ -23,13 +23,28 @@ const releaseSchema = {
 		},
 		{
 			name: "image",
-			title: "Image (required)",
-			type: "image",
-			validation: (Rule: Rule) => Rule.required().error("Image is required"),
+			type: "object",
+			title: "Image",
+			fields: [
+				{
+					name: "image",
+					title: "Image",
+					type: "image",
+					validation: (Rule: Rule) =>
+						Rule.required().error("Image is required"),
+				},
+				{
+					name: "imageAlt",
+					title: "Image Alt Text",
+					type: "string",
+					validation: (Rule: Rule) =>
+						Rule.required().error("Image Alt Text is required"),
+				},
+			],
 		},
 		{
 			name: "releaseDate",
-			title: "Release Date (required)",
+			title: "Release Date",
 			type: "date",
 			validation: (Rule: Rule) =>
 				Rule.required().error("Release Date is required"),

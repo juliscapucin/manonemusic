@@ -1,6 +1,6 @@
 import { createClient, groq } from "next-sanity"
 import clientConfig from "@/sanity/config/client-config"
-import type { AboutPage, NavLink, Project } from "@/types"
+import type { AboutPage, ContactPage, NavLink, Project } from "@/types"
 
 const client = createClient(clientConfig)
 
@@ -8,22 +8,15 @@ export async function getShowreel(): Promise<any> {
 	return client.fetch(groq`*[title == "Showreel Home"][0].images`)
 }
 
-export async function getProjects(): Promise<Project[]> {
+export async function getProjectItems(project: string): Promise<Project[]> {
 	return client.fetch(
-		groq`*[_type == "project"] | order(releaseDate desc){
+		groq`*[name == $project] | order(releaseDate desc){
       _id,
       "slug": slug.current,
-      artist,
-      artistSection,
       title,
-      projectInfo,
-      releaseDate,
-      images,
-      isNews,
-      newsPageSize,
-      addSpaceBefore,
-      addSpaceAfter
-   }`
+      image,
+   }`,
+		{ project }
 	)
 }
 
@@ -57,6 +50,34 @@ export async function getAboutPage(): Promise<AboutPage> {
          email,
          phone
       },
+   }`
+	)
+}
+
+export async function getContactPage(): Promise<ContactPage> {
+	return client.fetch(
+		groq`*[_type == "contactPage"][0] {
+      title,
+      email,
+      socials,
+      love,
+      metadataTitle,
+      metadataDescription,
+      metadataKeywords,
+   }`
+	)
+}
+
+export async function getPortfolioPages(): Promise<ContactPage> {
+	return client.fetch(
+		groq`*[_type == "portfolioPage"][0] {
+      title,
+      email,
+      socials,
+      love,
+      metadataTitle,
+      metadataDescription,
+      metadataKeywords,
    }`
 	)
 }

@@ -1,16 +1,10 @@
+import { BlockContent } from "./BlockContent"
+
 export type AboutPage = {
 	title: string
-	slug: string
-	text: string
-	coverImage: {
-		url: string
-		title: string
-		description: string
-		width: number
-		height: number
-	}
-	videoUrl: string
-	credits: string[]
-	imdbLink: string
-	gridPosition: number
+	subtitle: string
+	content: BlockContent[]
+	metadataTitle?: string
+	metadataDescription?: string
+	metadataKeywords?: string[]
 }

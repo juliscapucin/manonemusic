@@ -1,10 +1,14 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
-import { fetchAll } from "@/lib"
 import { Panels } from "@/components"
 
-import { queryAll } from "@/lib/queries"
+import {
+	getAboutPage,
+	getContactPage,
+	getProjectItems,
+	getPortfolioPages,
+} from "@/sanity/sanity-queries"
 
 export const metadata: Metadata = {
 	title: "Man One Music",
@@ -13,7 +17,15 @@ export const metadata: Metadata = {
 }
 
 export default async function Page() {
-	const data = await fetchAll(queryAll)
+	const data = await Promise.all([
+		getContactPage(),
+		getAboutPage(),
+		getPortfolioPages(),
+		getProjectItems("films"),
+		getProjectItems("commercials"),
+		getProjectItems("releases"),
+		getProjectItems("projects"),
+	])
 
 	if (!data) return notFound()
 

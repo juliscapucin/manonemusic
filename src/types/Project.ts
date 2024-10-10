@@ -1,16 +1,12 @@
+import { ImageField } from "./Image"
+
 export type Project = {
 	title: string
-	slug: string
-	text: string
-	coverImage: {
-		url: string
-		title: string
-		description: string
-		width: number
-		height: number
+	releaseDate: string
+	slug: {
+		_type: string
+		current: string
 	}
-	videoUrl: string
-	credits: string[]
-	imdbLink: string
-	gridPosition: number
+	image: ImageField
+	projectInfo?: string
 }

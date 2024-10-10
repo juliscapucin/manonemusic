@@ -1,3 +1,5 @@
+import { Rule } from "sanity"
+
 const contactPageSchema = {
 	name: "contactPage",
 	title: "Contact Page",
@@ -7,24 +9,13 @@ const contactPageSchema = {
 			name: "title",
 			title: "Title",
 			type: "string",
+			validation: (Rule: Rule) => Rule.required().error("Title is required"),
 		},
-		{ name: "metadataTitle", title: "Metadata Title", type: "string" },
 		{
-			name: "metadataDescription",
-			title: "Metadata Description",
+			name: "email",
+			title: "email",
 			type: "string",
-		},
-		{
-			name: "metadataKeywords",
-			title: "Metadata Keywords",
-			type: "array",
-			of: [{ type: "string" }],
-		},
-		{
-			name: "content",
-			title: "Content",
-			type: "array",
-			of: [{ type: "block" }],
+			validation: (Rule: Rule) => Rule.required().error("Email is required"),
 		},
 		{
 			name: "socials",
@@ -47,6 +38,40 @@ const contactPageSchema = {
 					],
 				},
 			],
+		},
+		{
+			name: "love",
+			title: "Love",
+			type: "array",
+			of: [
+				{
+					type: "object",
+					fields: [
+						{
+							name: "platform",
+							title: "Platform",
+							type: "string",
+						},
+						{
+							name: "link",
+							title: "Link",
+							type: "url",
+						},
+					],
+				},
+			],
+		},
+		{ name: "metadataTitle", title: "Metadata Title", type: "string" },
+		{
+			name: "metadataDescription",
+			title: "Metadata Description",
+			type: "string",
+		},
+		{
+			name: "metadataKeywords",
+			title: "Metadata Keywords",
+			type: "array",
+			of: [{ type: "string" }],
 		},
 	],
 }

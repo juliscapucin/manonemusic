@@ -24,7 +24,6 @@ const filmSchema = {
 		{
 			name: "filmInfo",
 			title: "Film Info",
-
 			type: "object",
 			fields: [
 				{
@@ -66,9 +65,24 @@ const filmSchema = {
 		},
 		{
 			name: "image",
-			title: "Image (required)",
-			type: "image",
-			validation: (Rule: Rule) => Rule.required().error("Image is required"),
+			type: "object",
+			title: "Image",
+			fields: [
+				{
+					name: "image",
+					title: "Image",
+					type: "image",
+					validation: (Rule: Rule) =>
+						Rule.required().error("Image is required"),
+				},
+				{
+					name: "imageAlt",
+					title: "Image Alt Text",
+					type: "string",
+					validation: (Rule: Rule) =>
+						Rule.required().error("Image Alt Text is required"),
+				},
+			],
 		},
 		{ name: "description", title: "Description", type: "text" },
 		{ name: "trailerUrl", title: "Trailer URL", type: "string" },

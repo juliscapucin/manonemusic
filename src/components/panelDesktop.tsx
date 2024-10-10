@@ -67,20 +67,11 @@ export default function PanelDesktop({ data }: PanelDesktopProps) {
 		}
 	}, [outerContainerRef, panelsContainerRef])
 
-	// TODO Jump to panel on internal page load
+	// Jump to panel on internal page load
 	useEffect(() => {
 		if (!pathname || pathname === "/") return
 
 		handlePanelSlide(pathname, false)
-
-		// const targetPanel = document.querySelector(
-		// 	`[data-id=panel-${index}]`
-		// ) as HTMLDivElement
-		// let y = targetPanel?.offsetLeft
-
-		// window.scrollTo({
-		// 	top: y,
-		// })
 	}, [])
 
 	return (
