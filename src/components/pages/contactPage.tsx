@@ -5,38 +5,22 @@ import { useRef } from "react"
 import { Availability, SocialLinks } from "@/components"
 import { PageWrapper, TitleDisplay } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
+import { AllData } from "@/types"
 
-type ContactData = {
-	contactPageCollection: {
-		items: {
-			title: string
-			availability: string
-		}[]
-	}
-	socialLinkCollection: {
-		items: {
-			label: string
-			url: string
-		}[]
-	}
-}
-
-export default function ContactPage({ data }: { data: ContactData }) {
+export default function ContactPage({ data }: { data: AllData }) {
 	const titleContactRef = useRef(null)
-
-	const socialsData = data.socialLinkCollection?.items
-	const availability = data.contactPageCollection?.items[0].availability
-	const title = data.contactPageCollection.items[0].title
 	const { windowAspectRatio } = useWindowDimensions()
 
 	useTitleScrollTrigger(titleContactRef, "/contact", windowAspectRatio)
 
 	return (
 		<PageWrapper>
-			<TitleDisplay ref={titleContactRef}>{title}</TitleDisplay>
+			<TitleDisplay ref={titleContactRef}>
+				{data.contactPage.title}
+			</TitleDisplay>
 			<div className='flex flex-row flex-nowrap gap-32'>
-				<Availability availability={availability} />
-				<SocialLinks data={socialsData} />
+				<Availability availability='' />
+				<SocialLinks data={data.contactPage?.socials} />
 			</div>
 		</PageWrapper>
 	)

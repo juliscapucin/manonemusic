@@ -1,10 +1,6 @@
 import type { Metadata } from "next"
-import { notFound } from "next/navigation"
 
-import { fetchAll } from "@/lib"
-import { Panels } from "@/components"
-
-import { queryAll } from "@/lib/queries"
+import { Panels } from "@/components/server"
 
 export const metadata: Metadata = {
 	title: "Man One Music",
@@ -13,13 +9,9 @@ export const metadata: Metadata = {
 }
 
 export default async function Page() {
-	const data = await fetchAll(queryAll)
-
-	if (!data) return notFound()
-
 	return (
 		<main className='w-screen custom-min-w-screen min-w-full h-full'>
-			<Panels data={data} />
+			<Panels />
 		</main>
 	)
 }

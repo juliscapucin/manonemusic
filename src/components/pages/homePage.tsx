@@ -10,12 +10,9 @@ import { Availability, Copyright, Status } from "@/components"
 import { Heading, TitleDisplay } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 
-type HomeData = {
-	title: string
-	text: string
-}
+import type { HomePage } from "@/types"
 
-export default function HomePage({ data }: { data: HomeData }) {
+export default function HomePage({ data }: { data: HomePage }) {
 	const homeWrapperRef = useRef(null)
 	const titleHomeRef = useRef(null)
 	const pathname = usePathname()
@@ -79,7 +76,7 @@ export default function HomePage({ data }: { data: HomeData }) {
 				</div>
 				<Status location='Amsterdam' />
 			</div>
-			<Availability />
+			{/* <Availability /> */}
 		</section>
 	)
 }

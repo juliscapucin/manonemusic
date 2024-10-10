@@ -5,7 +5,7 @@ type Track = {
 	link: string
 }
 
-type Release = {
+export type Release = {
 	title: string
 	slug: {
 		_type: string
@@ -16,5 +16,3 @@ type Release = {
 	releaseInfo?: string
 	tracklist: Track[]
 }
-
-export default Release

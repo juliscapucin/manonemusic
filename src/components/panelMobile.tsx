@@ -10,15 +10,14 @@ export default function PanelMobile({ data }: { data: AllData }) {
 	const pathname = usePathname()
 	const section = pathname.replace("/", "")
 
-	const handleNavLinkClick = (index: number, pushSlug: boolean) => {
-		const slug = navLinks[index].slug
+	const handleNavLinkClick = (slug: string, pushSlug: boolean) => {
 		if (pushSlug) {
 			window.history.pushState(null, "", `/${slug}`)
 		}
 	}
 
 	return (
-		<>
+		<div className='lg:hidden'>
 			{/* <Logo /> */}
 			<NavBar navLinks={navLinks} transitionOnClick={handleNavLinkClick} />
 			{pathname === "/" ? (
@@ -38,6 +37,6 @@ export default function PanelMobile({ data }: { data: AllData }) {
 					<PanelContent data={data} section={section} />
 				</section>
 			)}
-		</>
+		</div>
 	)
 }

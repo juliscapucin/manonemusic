@@ -1,17 +1,13 @@
 "use client"
 
-import { useMemo, useRef } from "react"
+import { useMemo } from "react"
 import { CopyEmailButton } from "@/components/buttons"
 
-type Props = {
-	availability?: string
-	variant?: string
-	modalOpen?: boolean
+type AvailabilityProps = {
+	availability: string
 }
 
-export default function Availability({ availability }: Props) {
-	const textRef = useRef(null)
-
+export default function Availability({ availability }: AvailabilityProps) {
 	const getNextMonth = useMemo(() => {
 		const currentDate = new Date()
 		return new Date(currentDate.getFullYear(), currentDate.getMonth() + 1)

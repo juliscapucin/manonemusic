@@ -1,22 +1,31 @@
 import { createClient, groq } from "next-sanity"
 import clientConfig from "@/sanity/config/client-config"
-import type { AboutPage, ContactPage, NavLink, Project } from "@/types"
+import type {
+	AboutPage,
+	Commercial,
+	ContactPage,
+	Film,
+	HomePage,
+	NavLink,
+	PortfolioPage,
+	Project,
+	Release,
+} from "@/types"
+import { PortfolioItem } from "@/types/PortfolioItem"
 
 const client = createClient(clientConfig)
 
-export async function getShowreel(): Promise<any> {
-	return client.fetch(groq`*[title == "Showreel Home"][0].images`)
-}
-
-export async function getProjectItems(project: string): Promise<Project[]> {
+export async function getPortfolioItems(
+	section: string
+): Promise<PortfolioItem[]> {
 	return client.fetch(
-		groq`*[name == $project] | order(releaseDate desc){
+		groq`*[_type == $section] | order(releaseDate desc){
       _id,
       "slug": slug.current,
       title,
       image,
    }`,
-		{ project }
+		{ section }
 	)
 }
 
@@ -24,15 +33,37 @@ export async function getProject(slug: string): Promise<Project> {
 	return client.fetch(
 		groq`*[_type == "project" && slug.current == $slug][0]{
       _id,
-      "slug": slug.current,
       title,
-      artist,
       projectInfo,
       releaseDate,
-      images,
-      isNews
    }`,
 		{ slug }
+	)
+}
+
+export async function getFilm(slug: string): Promise<Project> {
+	return client.fetch(
+		groq`*[_type == "film" && slug.current == $slug][0]{
+      _id,
+      "slug": slug.current,
+      title,
+      projectInfo,
+      image,
+      releaseDate,
+   }`,
+		{ slug }
+	)
+}
+
+export async function getHomePage(): Promise<HomePage> {
+	return client.fetch(
+		groq`*[_type == "aboutPage"][0] {
+      title,
+      content,
+      metadataTitle,
+      metadataDescription,
+      metadataKeywords,
+   }`
 	)
 }
 
@@ -40,16 +71,10 @@ export async function getAboutPage(): Promise<AboutPage> {
 	return client.fetch(
 		groq`*[_type == "aboutPage"][0] {
       title,
+      content,
       metadataTitle,
       metadataDescription,
       metadataKeywords,
-      "headerLink": header->slug.current,
-      content,
-      contactAbout[]{
-         name,
-         email,
-         phone
-      },
    }`
 	)
 }
@@ -68,13 +93,11 @@ export async function getContactPage(): Promise<ContactPage> {
 	)
 }
 
-export async function getPortfolioPages(): Promise<ContactPage> {
+export async function getPortfolioPages(): Promise<PortfolioPage[]> {
 	return client.fetch(
-		groq`*[_type == "portfolioPage"][0] {
+		groq`*[_type == "portfolioPage"] {
       title,
-      email,
-      socials,
-      love,
+      subtitle,
       metadataTitle,
       metadataDescription,
       metadataKeywords,
