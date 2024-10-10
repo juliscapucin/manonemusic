@@ -58,10 +58,12 @@ export default function HomePage({ data }: { data: HomeData }) {
 			className='relative w-screen h-screen custom-min-h-screen'
 			data-id='panel-home'
 		>
-			<div className='mt-32 h-40'>
-				<TitleDisplay ref={titleHomeRef}>MAN/ONE MUSIC</TitleDisplay>
+			<div className='mt-32'>
+				<h1 ref={titleHomeRef} className='logo'>
+					MAN/ONE MUSIC
+				</h1>
 			</div>
-			<div className='relative flex w-full'>
+			<div className='relative flex w-full md:mt-8'>
 				<Heading tag='h2' variant='title' classes='w-1/2 uppercase'>
 					Music & Sound Design
 				</Heading>

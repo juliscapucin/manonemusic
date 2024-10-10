@@ -7,7 +7,7 @@ import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 import { ReleasesMenu } from "@/components"
 import { Album } from "@/types"
 
-type FilmsPageProps = {
+type CommercialsPageProps = {
 	data: {
 		page: { title: string; text: string }
 		albums: Album[]
@@ -15,16 +15,16 @@ type FilmsPageProps = {
 	titleScrollTrigger?: boolean
 }
 
-export default function FilmsPage({
+export default function CommercialsPage({
 	data,
 	titleScrollTrigger,
-}: FilmsPageProps) {
-	const titleFilmsRef = useRef(null)
+}: CommercialsPageProps) {
+	const titleCommercialsRef = useRef(null)
 	const { windowAspectRatio } = useWindowDimensions()
 
 	useTitleScrollTrigger(
-		titleFilmsRef,
-		"/films",
+		titleCommercialsRef,
+		"/commercials",
 		windowAspectRatio,
 		titleScrollTrigger
 	)
@@ -32,7 +32,10 @@ export default function FilmsPage({
 	return (
 		<PageWrapper classes={"flex"}>
 			<div>
-				<TitleDisplay classes='gsap-films-title' ref={titleFilmsRef}>
+				<TitleDisplay
+					classes='gsap-commercials-title'
+					ref={titleCommercialsRef}
+				>
 					{data.page.title}
 				</TitleDisplay>
 				<p className='max-w-prose'>{data.page.text}</p>

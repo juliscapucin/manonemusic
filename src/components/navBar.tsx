@@ -1,7 +1,7 @@
 "use client"
 
 import { useRef } from "react"
-import { usePathname, useRouter } from "next/navigation"
+import { usePathname } from "next/navigation"
 
 import { NavLink } from "@/components"
 import { Button } from "@/components/ui"
@@ -19,35 +19,36 @@ type NavLinksProps = {
 
 export default function NavBar({ navLinks, transitionOnClick }: NavLinksProps) {
 	const pathname = usePathname()
-	const router = useRouter()
 	const navRef = useRef<HTMLDivElement | null>(null)
 
 	return (
 		<nav
 			ref={navRef}
-			className='fixed top-8 right-8 w-full flex justify-end gap-16 z-50'
+			className='fixed top-8 right-8 left-8 flex justify-between z-50'
 		>
-			<NavLink
-				label='MAN/ONE MUSIC'
-				activeState={pathname === "/" ? true : false}
-				action={() => {
-					transitionOnClick("/", true)
-				}}
-			/>
+			<Button
+				href='/'
+				classes={`underlined-link text-titleSmall md:text-titleMedium uppercase transition ${pathname === "/" ? "opacity-0 -translate-x-full" : "opacity-100"}`}
+				transitionOnClick={() => transitionOnClick("/", true)}
+			>
+				MAN/ONE MUSIC
+			</Button>
 
-			{navLinks.map(
-				(link, index) =>
-					link.slug !== "/" && (
-						<NavLink
-							label={link.label}
-							key={`panel-button-${index}`}
-							activeState={pathname.includes(`/${link.slug}`) ? true : false}
-							action={() => {
-								transitionOnClick(link.slug, true)
-							}}
-						/>
-					)
-			)}
+			<div className='flex gap-8'>
+				{navLinks.map(
+					(link, index) =>
+						link.slug !== "/" && (
+							<NavLink
+								label={link.label}
+								key={`panel-button-${index}`}
+								activeState={pathname.includes(`/${link.slug}`) ? true : false}
+								action={() => {
+									transitionOnClick(link.slug, true)
+								}}
+							/>
+						)
+				)}
+			</div>
 		</nav>
 	)
 }

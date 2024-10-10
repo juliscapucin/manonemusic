@@ -71,8 +71,6 @@ export default function PanelDesktop({ data }: PanelDesktopProps) {
 	useEffect(() => {
 		if (!pathname || pathname === "/") return
 
-		console.log(pathname)
-
 		handlePanelSlide(pathname, false)
 
 		// const targetPanel = document.querySelector(

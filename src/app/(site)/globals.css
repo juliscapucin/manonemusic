@@ -149,7 +149,8 @@ textarea {
 	font-size: 13vw;
 
 	@media screen and (min-width: 768px) {
-		font-size: clamp(3rem, 14vw, 12rem);
+		font-size: clamp(3rem, 13.5vw, 14rem);
+		line-height: 0.7;
 	}
 }
 
@@ -199,28 +200,4 @@ textarea {
 
 .custom-releases-menu:hover::-webkit-scrollbar-track {
 	background-color: rgba(var(--color-secondary-rgb), 0.1);
-}
-
-.navbar-home {
-	@apply bottom-8 right-0 w-1/2 flex flex-col items-start gap-2 z-100;
-}
-
-.navbar-page {
-	@apply fixed top-0 right-0 w-screen h-screen z-100;
-}
-
-.navbar-page :first-child {
-	@apply fixed top-0 left-0;
-}
-
-.navbar-page :nth-child(2) {
-	@apply fixed top-0 right-0;
-}
-
-.navbar-page :nth-child(3) {
-	@apply fixed bottom-0 left-0;
-}
-
-.navbar-page :nth-child(4) {
-	@apply fixed bottom-0 right-0;
 }

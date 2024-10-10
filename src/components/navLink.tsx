@@ -38,7 +38,7 @@ export default function NavLink({ label, action, activeState }: NavLinkProps) {
 					</button> */}
 					<Button
 						href={`/${label.toLowerCase()}`}
-						classes='underlined-link text-titleSmall md:text-titleMedium uppercase'
+						classes={`underlined-link text-titleSmall md:text-titleMedium uppercase`}
 						transitionOnClick={action}
 					>
 						{label}
