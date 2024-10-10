@@ -44,20 +44,22 @@ export default function Availability({ availability }: Props) {
 	}, [availability, getNextMonth])
 
 	return (
-		<div className='flex flex-col justify-center items-center'>
-			<span className='block text-headlineSmall'>
-				Available {furtherAvailability}
-			</span>
-			<div className='overflow-clip h-28 group'>
-				<a
-					href='mailto:hello@juliscapucin.com'
-					className='flex flex-col text-displaySmall font-normal md:group-hover:-translate-y-1/2 transition-transform duration-200'
-				>
-					<span ref={textRef}>Say Hi :)</span>
-					<span>Say Hi :)</span>
-				</a>
+		<div className='flex items-end md:h-[40vh]'>
+			<div className='w-1/2'></div>
+			<div>
+				<span className='block text-bodyMedium lg:text-bodyLarge'>
+					Available {furtherAvailability}
+				</span>
+				<div className='overflow-clip'>
+					<a
+						href='mailto:hello@juliscapucin.com'
+						className='flex flex-col text-titleSmall md:text-titleMedium lg:text-titleLarge font-light uppercase'
+					>
+						<span>Drop me a message</span>
+					</a>
+				</div>
+				<CopyEmailButton />
 			</div>
-			<CopyEmailButton />
 		</div>
 	)
 }

@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation"
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
-import { Copyright, Status } from "@/components"
+import { Availability, Copyright, Status } from "@/components"
 import { Heading, TitleDisplay } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 
@@ -75,9 +75,9 @@ export default function HomePage({ data }: { data: HomeData }) {
 						of your brand and resonate with your audience.
 					</p>
 				</div>
-				<p className='w-1/2'>Location: Amsterdam</p>
+				<Status location='Amsterdam' />
 			</div>
-			<Status location='Amsterdam' />
+			<Availability />
 		</section>
 	)
 }
