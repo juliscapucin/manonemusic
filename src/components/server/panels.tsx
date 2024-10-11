@@ -32,6 +32,7 @@ export async function Panels() {
 	])
 
 	const data = {
+		homePage,
 		contactPage,
 		aboutPage,
 		portfolioPages,
@@ -42,6 +43,7 @@ export async function Panels() {
 	}
 
 	if (!data) return notFound()
+
 	return (
 		<>
 			<PanelDesktop data={data} />

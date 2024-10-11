@@ -19,9 +19,13 @@ export default function PanelContent({ data, section }: PanelContentProps) {
 	return (
 		<>
 			{section === "home" && <HomePage data={data.homePage} />}
-			{/* {section === "films" && <FilmsPage data={data.films} />}
+			{section === "films" && (
+				<FilmsPage
+					data={data.portfolioPages?.find((page) => page.title === "Films")}
+				/>
+			)}
 
-			{section === "projects" && <ProjectsPage data={data.project} />}
+			{/* {section === "projects" && <ProjectsPage data={data.project} />}
 			{section === "releases" && (
 				<ReleasesPage
 					data={{

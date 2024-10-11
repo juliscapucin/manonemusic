@@ -15,20 +15,6 @@ import { PortfolioItem } from "@/types/PortfolioItem"
 
 const client = createClient(clientConfig)
 
-export async function getPortfolioItems(
-	section: string
-): Promise<PortfolioItem[]> {
-	return client.fetch(
-		groq`*[_type == $section] | order(releaseDate desc){
-      _id,
-      "slug": slug.current,
-      title,
-      image,
-   }`,
-		{ section }
-	)
-}
-
 export async function getProject(slug: string): Promise<Project> {
 	return client.fetch(
 		groq`*[_type == "project" && slug.current == $slug][0]{
@@ -47,8 +33,12 @@ export async function getFilm(slug: string): Promise<Project> {
       _id,
       "slug": slug.current,
       title,
+      description,
       projectInfo,
-      image,
+      "image": {
+         "imageUrl": image.image.asset->url,
+         "imageAlt": image.imageAlt
+         },
       releaseDate,
    }`,
 		{ slug }
@@ -102,6 +92,32 @@ export async function getPortfolioPages(): Promise<PortfolioPage[]> {
       metadataDescription,
       metadataKeywords,
    }`
+	)
+}
+
+export async function getPortfolioPage(
+	section: string
+): Promise<PortfolioPage> {
+	return client.fetch(
+		groq`*[_type == $section] | order(releaseDate desc){
+      title,
+      subtitle,
+   }`,
+		{ section }
+	)
+}
+
+export async function getPortfolioItems(
+	section: string
+): Promise<PortfolioItem[]> {
+	return client.fetch(
+		groq`*[_type == $section] | order(releaseDate desc){
+      _id,
+      "slug": slug.current,
+      title,
+      image,
+   }`,
+		{ section }
 	)
 }
 

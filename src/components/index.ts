@@ -8,6 +8,7 @@ import PanelDesktop from "./panelDesktop"
 import PanelMobile from "./panelMobile"
 import ProjectCard from "./projectCard"
 import ProjectTrailer from "./projectTrailer"
+import ProjectsMenu from "./projectsMenu"
 import ReleaseCard from "./releaseCard"
 import ReleasesMenu from "./releasesMenu"
 import RootLayout from "./rootLayout"
@@ -32,6 +33,7 @@ export {
 	PlayerTrackList,
 	ProjectCard,
 	ProjectTrailer,
+	ProjectsMenu,
 	ReleaseCard,
 	ReleasesMenu,
 	RootLayout,

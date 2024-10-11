@@ -1,33 +1,34 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
-import { fetchBySlug, fetchAll } from "@/lib"
-import { ProjectPage } from "@/components/pages"
+import { FilmPage } from "@/components/pages"
+import {
+	getFilm,
+	getPortfolioItems,
+	getPortfolioPage,
+	getPortfolioPages,
+} from "@/sanity/sanity-queries"
 
 export const metadata: Metadata = {
 	title: "Project",
 	description: "Project description",
 }
 
-import { queryAll, queryProject } from "@/lib/queries"
-
 export default async function Page({ params }: { params: { slug: string } }) {
 	const { slug } = params
-	const variables = { slug }
 
-	const data = await fetchBySlug(queryProject, variables)
-	const projectsData = await fetchAll(queryAll)
-	const projectData = data.projectCollection.items[0]
+	const filmData = await getFilm(slug)
+	const filmsData = await getPortfolioItems("film")
+	const filmsPageData = await getPortfolioPage("film")
 
-	if (!data || !projectsData || data.projectCollection.items.length === 0)
-		return notFound()
+	if (!filmData || !filmsData || !filmsPageData) return notFound()
 
 	return (
-		<ProjectPage
+		<FilmPage
 			{...{
-				projectData,
-				projectsData: projectsData.projectCollection.items,
-				transitionOnEnter: true,
+				filmData,
+				filmsData,
+				filmsPageData,
 			}}
 		/>
 	)

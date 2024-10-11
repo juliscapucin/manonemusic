@@ -4,21 +4,15 @@ import { useRef } from "react"
 
 import { PageWrapper, TitleDisplay } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
-import { ReleasesMenu } from "@/components"
-import { Album } from "@/types"
+import { ProjectsMenu, ReleasesMenu } from "@/components"
+import { PortfolioPage } from "@/types"
 
-type FilmsPageProps = {
-	data: {
-		page: { title: string; text: string }
-		albums: Album[]
-	}
+type FilmPageProps = {
+	data?: PortfolioPage
 	titleScrollTrigger?: boolean
 }
 
-export default function FilmsPage({
-	data,
-	titleScrollTrigger,
-}: FilmsPageProps) {
+export default function FilmsPage({ data, titleScrollTrigger }: FilmPageProps) {
 	const titleFilmsRef = useRef(null)
 	const { windowAspectRatio } = useWindowDimensions()
 
@@ -30,14 +24,15 @@ export default function FilmsPage({
 	)
 
 	return (
-		<PageWrapper classes={"flex"}>
-			<div>
+		data && (
+			<PageWrapper>
 				<TitleDisplay classes='gsap-films-title' ref={titleFilmsRef}>
-					{data.page.title}
+					{data.title}
 				</TitleDisplay>
-				<p className='max-w-prose'>{data.page.text}</p>
-			</div>
-			<ReleasesMenu albums={data.albums} />
-		</PageWrapper>
+				<p className='max-w-prose'>{data.subtitle}</p>
+
+				<ProjectsMenu />
+			</PageWrapper>
+		)
 	)
 }

@@ -1,6 +1,7 @@
 import AboutPage from "./aboutPage"
 import CommercialsPage from "./commercialsPage"
 import ContactPage from "./contactPage"
+import FilmPage from "./filmPage"
 import FilmsPage from "./filmsPage"
 import HomePage from "./homePage"
 import ReleasePage from "./releasePage"
@@ -12,6 +13,7 @@ export {
 	AboutPage,
 	ContactPage,
 	CommercialsPage,
+	FilmPage,
 	FilmsPage,
 	HomePage,
 	ReleasePage,
