@@ -5,7 +5,6 @@ export const handlePanelSlide = (
 	animateSlide: boolean,
 	routerAction?: () => void
 ) => {
-	console.log(targetSlug)
 	const targetPanel =
 		targetSlug === "/"
 			? null

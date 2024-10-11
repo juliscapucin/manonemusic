@@ -61,6 +61,11 @@ export async function getAboutPage(): Promise<AboutPage> {
 	return client.fetch(
 		groq`*[_type == "aboutPage"][0] {
       title,
+      subtitle,
+      "image": {
+         "imageUrl": image.image.asset->url,
+         "imageAlt": image.imageAlt
+      },      
       content,
       metadataTitle,
       metadataDescription,

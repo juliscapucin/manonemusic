@@ -1,27 +1,38 @@
 "use client"
 
 import { useRef } from "react"
+import Image from "next/image"
 
 import { Copyright } from "@/components"
 import { PageWrapper, TitleDisplay } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 
-type AboutData = {
-	title: string
-	text: string
-}
+import type { AboutPage } from "@/types"
 
-export default function AboutPnel({ data }: { data: AboutData }) {
+export default function AboutPage({ data }: { data: AboutPage }) {
 	const titleAboutRef = useRef(null)
 	const { windowAspectRatio } = useWindowDimensions()
 
 	useTitleScrollTrigger(titleAboutRef, "/about", windowAspectRatio)
 
 	return (
-		<PageWrapper>
-			<TitleDisplay ref={titleAboutRef}>{data.title}</TitleDisplay>
-			<p className='max-w-prose'>{data.text}</p>
-			<Copyright />
+		<PageWrapper classes='relative flex items-start justify-between'>
+			<div>
+				<TitleDisplay ref={titleAboutRef}>{data.title}</TitleDisplay>
+				<p className='max-w-prose'>{data.subtitle}</p>
+				<Copyright />
+			</div>
+			<div className='relative w-1/2 aspect-square overflow-clip'>
+				<Image
+					{...{
+						src: data.image.imageUrl,
+						alt: `${data.title} album cover`,
+						fill: true,
+						className: "gsap-film-image object-cover",
+						sizes: "50vw",
+					}}
+				/>
+			</div>
 		</PageWrapper>
 	)
 }

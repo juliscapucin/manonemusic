@@ -51,7 +51,6 @@ export default function useTitleScrollTrigger(
 					// console.log("progress", self.progress)
 
 					if (self.isActive && window.location.pathname !== slug) {
-						console.log(slug)
 						window.history.pushState(null, "", slug)
 					}
 
