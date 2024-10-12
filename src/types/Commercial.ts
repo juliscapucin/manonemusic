@@ -9,4 +9,5 @@ export type Commercial = {
 	}
 	image: ImageField
 	commercialInfo?: string
+	description?: string
 }

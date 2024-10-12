@@ -134,6 +134,43 @@ export async function getFilm(slug: string): Promise<Project> {
 		{ slug }
 	)
 }
+export async function getCommercial(slug: string): Promise<Project> {
+	return client.fetch(
+		groq`*[_type == "commercial" && slug.current == $slug][0]{
+      _id,
+      "slug": slug.current,
+      title,
+      description,
+      projectInfo,
+      "image": {
+         "imageUrl": image.image.asset->url,
+         "imageAlt": image.imageAlt
+         },
+      releaseDate,
+   }`,
+		{ slug }
+	)
+}
+export async function getRelease(slug: string): Promise<Release> {
+	return client.fetch(
+		groq`*[_type == "release" && slug.current == $slug][0]{
+      _id,
+      "slug": slug.current,
+      title,
+      releaseInfo,
+      releaseDate,
+      "image": {
+         "imageUrl": image.image.asset->url,
+         "imageAlt": image.imageAlt
+         },
+      tracklist[]{
+         trackname,
+         link
+         }
+   }`,
+		{ slug }
+	)
+}
 
 export async function getHeaderNavLinks(): Promise<NavLink[]> {
 	return client.fetch(

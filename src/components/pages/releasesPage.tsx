@@ -4,19 +4,17 @@ import { useRef } from "react"
 
 import { PageWrapper, TitleDisplay } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
-import { ReleasesMenu } from "@/components"
-import { Album } from "@/types"
+import { ProjectsMenu, ReleasesMenu } from "@/components"
+import { PortfolioPage, PortfolioItem } from "@/types"
 
 type ReleasesPageProps = {
-	data: {
-		page: { title: string; text: string }
-		albums: Album[]
-	}
+	releasesPageData?: PortfolioPage
+	releases: PortfolioItem[]
 	titleScrollTrigger?: boolean
 }
 
 export default function ReleasesPage({
-	data,
+	releasesPageData: data,
 	titleScrollTrigger,
 }: ReleasesPageProps) {
 	const titleReleasesRef = useRef(null)
@@ -30,14 +28,16 @@ export default function ReleasesPage({
 	)
 
 	return (
-		<PageWrapper classes={"flex"}>
-			<div>
-				<TitleDisplay classes='gsap-releases-title' ref={titleReleasesRef}>
-					{data.page.title}
-				</TitleDisplay>
-				<p className='max-w-prose'>{data.page.text}</p>
-			</div>
-			<ReleasesMenu albums={data.albums} />
-		</PageWrapper>
+		data && (
+			<PageWrapper classes={"flex"}>
+				<div>
+					<TitleDisplay classes='gsap-releases-title' ref={titleReleasesRef}>
+						{data.title}
+					</TitleDisplay>
+					<p className='max-w-prose'>{data.subtitle}</p>
+				</div>
+				<ProjectsMenu />
+			</PageWrapper>
+		)
 	)
 }

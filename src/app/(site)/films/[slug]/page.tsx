@@ -6,7 +6,6 @@ import {
 	getFilm,
 	getPortfolioItems,
 	getPortfolioPage,
-	getPortfolioPages,
 } from "@/sanity/sanity-queries"
 
 export const metadata: Metadata = {

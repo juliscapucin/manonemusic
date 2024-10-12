@@ -85,7 +85,7 @@ const filmSchema = {
 			],
 		},
 		{ name: "description", title: "Description", type: "text" },
-		{ name: "trailerUrl", title: "Trailer URL", type: "string" },
+		{ name: "trailerUrl", title: "Trailer URL", type: "url" },
 		{ name: "link", title: "Link", type: "string" },
 	],
 	orderings: [

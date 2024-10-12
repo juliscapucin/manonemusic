@@ -5,6 +5,7 @@ import {
 	HomePage,
 	ReleasesPage,
 	ProjectsPage,
+	CommercialsPage,
 } from "@/components/pages"
 
 import { AllData } from "@/types"
@@ -24,6 +25,22 @@ export default function PanelContent({ data, section }: PanelContentProps) {
 				/>
 			)}
 
+			{section === "commercials" && (
+				<CommercialsPage
+					data={data.portfolioPages?.find(
+						(page) => page.title === "Commercials"
+					)}
+				/>
+			)}
+
+			{section === "releases" && (
+				<ReleasesPage
+					releasesPageData={data.portfolioPages?.find(
+						(page) => page.title === "Releases"
+					)}
+				/>
+			)}
+
 			{section === "projects" && (
 				<ProjectsPage
 					projectsPage={data.portfolioPages?.find(
@@ -32,11 +49,7 @@ export default function PanelContent({ data, section }: PanelContentProps) {
 					projects={data.projects}
 				/>
 			)}
-			{/* {section === "releases" && (
-				<ReleasesPage
-				{data.portfolioPages?.find((page) => page.title === "Releases")}
-				/>
-			)} */}
+
 			{section === "about" && <AboutPage data={data.aboutPage} />}
 			{section === "contact" && <ContactPage data={data.contactPage} />}
 		</>

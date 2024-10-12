@@ -16,8 +16,6 @@ export default function ProjectCard({ title, image, slug }: ProjectCardProps) {
 	const router = useRouter()
 	const pathname = usePathname()
 
-	console.log(image)
-
 	return (
 		<button
 			onClick={() => {
