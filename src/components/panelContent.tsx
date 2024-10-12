@@ -22,6 +22,7 @@ export default function PanelContent({ data, section }: PanelContentProps) {
 			{section === "films" && (
 				<FilmsPage
 					data={data.portfolioPages?.find((page) => page.title === "Films")}
+					films={data.films}
 				/>
 			)}
 
@@ -30,6 +31,7 @@ export default function PanelContent({ data, section }: PanelContentProps) {
 					data={data.portfolioPages?.find(
 						(page) => page.title === "Commercials"
 					)}
+					commercials={data.commercials}
 				/>
 			)}
 
@@ -38,6 +40,7 @@ export default function PanelContent({ data, section }: PanelContentProps) {
 					releasesPageData={data.portfolioPages?.find(
 						(page) => page.title === "Releases"
 					)}
+					releases={data.releases}
 				/>
 			)}
 

@@ -55,6 +55,7 @@ const config: Config = {
 				100: "100",
 			},
 			letterSpacing: { tightest: "-.075em" },
+			lineHeight: { tightest: "0.1" },
 			scale: {
 				"20": "0.2",
 			},

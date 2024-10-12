@@ -5,15 +5,17 @@ import { useRef } from "react"
 import { PageWrapper, TitleDisplay } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 import { ProjectsMenu, ReleasesMenu } from "@/components"
-import { PortfolioPage } from "@/types"
+import { PortfolioItem, PortfolioPage } from "@/types"
 
 type FilmsPageProps = {
 	data?: PortfolioPage
+	films?: PortfolioItem[]
 	titleScrollTrigger?: boolean
 }
 
 export default function FilmsPage({
 	data,
+	films,
 	titleScrollTrigger,
 }: FilmsPageProps) {
 	const titleFilmsRef = useRef(null)
@@ -34,7 +36,7 @@ export default function FilmsPage({
 				</TitleDisplay>
 				<p className='max-w-prose'>{data.subtitle}</p>
 
-				<ProjectsMenu />
+				{films && <ProjectsMenu projects={films} />}
 			</PageWrapper>
 		)
 	)

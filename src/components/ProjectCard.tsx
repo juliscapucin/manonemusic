@@ -17,28 +17,34 @@ export default function ProjectCard({ title, image, slug }: ProjectCardProps) {
 	const pathname = usePathname()
 
 	return (
-		<button
+		<a
 			onClick={() => {
 				handlePanelSlide("projects", true, () =>
 					router.push(`/projects/${slug}`)
 				)
 			}}
-			className={`w-full h-full relative`}
+			className='w-1/6 relative cursor-pointer'
+			aria-labelledby={`project-title-${slug}`}
 		>
-			<div className='relative w-full h-full'>
-				{image && (
+			{image && (
+				<div className='relative w-full aspect-square overflow-clip'>
 					<Image
 						className={`${
 							pathname.includes(slug) && "gsap-flip-project-card z-100"
-						} object-cover`}
+						} relative w-1/6 aspect-square overflow-clip object-cover`}
 						src={image.imageUrl}
 						alt={image.imageAlt}
 						sizes='50vw'
 						fill
 					/>
-				)}
-			</div>
-			<span>{title}</span>
-		</button>
+				</div>
+			)}
+			<span
+				className='text-labelMedium lg:text-labelLarge uppercase text-left leading-tightest'
+				id={`project-title-${slug}`}
+			>
+				{title}
+			</span>
+		</a>
 	)
 }

@@ -2,7 +2,7 @@
 
 import { useRef } from "react"
 
-import { ProjectCard } from "@/components"
+import { ProjectCard, ProjectsMenu } from "@/components"
 
 import { PageWrapper, TitleDisplay } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
@@ -41,16 +41,7 @@ export default function ProjectsPage({
 						<p className='w-1/2'>{projectsPage.subtitle}</p>
 					</>
 				)}
-				{projects?.map((project) => {
-					return (
-						<ProjectCard
-							key={project.slug}
-							title={project.title}
-							image={project.image}
-							slug={project.slug}
-						/>
-					)
-				})}
+				{projects && <ProjectsMenu projects={projects} />}
 			</div>
 		</PageWrapper>
 	)
