@@ -5,9 +5,9 @@ import { useRef } from "react"
 import { Availability, SocialLinks } from "@/components"
 import { PageWrapper, TitleDisplay } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
-import { AllData } from "@/types"
+import type { ContactPage } from "@/types"
 
-export default function ContactPage({ data }: { data: AllData }) {
+export default function ContactPage({ data }: { data: ContactPage }) {
 	const titleContactRef = useRef(null)
 	const { windowAspectRatio } = useWindowDimensions()
 
@@ -15,12 +15,10 @@ export default function ContactPage({ data }: { data: AllData }) {
 
 	return (
 		<PageWrapper>
-			<TitleDisplay ref={titleContactRef}>
-				{data.contactPage.title}
-			</TitleDisplay>
+			<TitleDisplay ref={titleContactRef}>{data.title}</TitleDisplay>
 			<div className='flex flex-row flex-nowrap gap-32'>
 				<Availability availability='' />
-				<SocialLinks data={data.contactPage?.socials} />
+				<SocialLinks data={data.socials} />
 			</div>
 		</PageWrapper>
 	)

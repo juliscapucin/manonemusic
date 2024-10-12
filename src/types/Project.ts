@@ -8,5 +8,7 @@ export type Project = {
 		current: string
 	}
 	image: ImageField
+	projectLink?: string
+	projectVideo?: string
 	projectInfo?: string
 }

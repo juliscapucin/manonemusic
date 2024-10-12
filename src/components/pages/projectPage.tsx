@@ -7,20 +7,22 @@ import gsap from "gsap"
 import Flip from "gsap/Flip"
 
 import { Logo, PageWrapper, TitleDisplay } from "@/components/ui"
-import { Project } from "@/types"
+import { PortfolioItem, PortfolioPage, Project } from "@/types"
 import { Button } from "@/components/buttons"
 import { ProjectsPage } from "."
 import { useLayoutEffect, useRef } from "react"
 import { ProjectTrailer } from ".."
 
 type ProjectPageProps = {
-	projectData: Project
-	projectsData?: Project[]
+	projectPageData: Project
+	projectsData?: PortfolioItem[]
+	projectsPageData?: PortfolioPage
 }
 
 export default function ProjectPage({
-	projectData,
+	projectPageData,
 	projectsData,
+	projectsPageData,
 }: ProjectPageProps) {
 	const router = useRouter()
 	const containerRef = useRef<HTMLDivElement>(null)
@@ -102,7 +104,11 @@ export default function ProjectPage({
 			{/* Projects Page copy for seamless page transition */}
 			{projectsData && (
 				<div className='gsap-projects-page absolute top-0 left-8 pb-8'>
-					<ProjectsPage data={projectsData} titleScrollTrigger={false} />
+					<ProjectsPage
+						projectsPage={projectsPageData}
+						projects={projectsData}
+						titleScrollTrigger={false}
+					/>
 				</div>
 			)}
 			{/* Project Page */}
@@ -116,32 +122,34 @@ export default function ProjectPage({
 						Back to Projects
 					</Button>
 					<TitleDisplay classes='gsap-project-content opacity-0'>
-						{projectData.title}
+						{projectPageData.title}
 					</TitleDisplay>
 					<div className='gsap-project-page flex flex-wrap gap-16'>
 						<div className='gsap-flip-project-image relative w-1/4 min-w-[300px] aspect-square overflow-clip'>
-							<Image
-								{...{
-									src: projectData.coverImage.url,
-									alt: projectData.coverImage.description,
-									fill: true,
-									className: "gsap-project-image opacity-0 object-cover",
-									sizes: "50vw",
-								}}
-							/>
+							{projectPageData.image && (
+								<Image
+									{...{
+										src: projectPageData.image.imageUrl,
+										alt: projectPageData.image.imageAlt,
+										fill: true,
+										className: "gsap-project-image opacity-0 object-cover",
+										sizes: "50vw",
+									}}
+								/>
+							)}
 						</div>
 						<div className='gsap-project-content opacity-0 w-1/3 min-w-[300px] space-y-8'>
 							{/* Credits */}
-							<ul className='text-labelLarge'>
-								{projectData.credits &&
-									projectData.credits.map((credit, index) => (
+							{/* <ul className='text-labelLarge'>
+								{projectPageData.credits &&
+									projectPageData.credits.map((credit, index) => (
 										<li key={index}>{credit}</li>
 									))}
-							</ul>
-							<p>{projectData.text}</p>
+							</ul> */}
+							<p>{projectPageData?.projectInfo}</p>
 							{/* Buttons / Links */}
 							<div className='flex flex-col items-start'>
-								{projectData.videoUrl && (
+								{projectPageData.projectVideo && (
 									<Button
 										action={() =>
 											gsap.to(".gsap-project-page", {
@@ -154,13 +162,13 @@ export default function ProjectPage({
 										View Trailer
 									</Button>
 								)}
-								{projectData.imdbLink && (
+								{projectPageData.projectLink && (
 									<a
 										className='block underline'
-										href={projectData.imdbLink}
+										href={projectPageData.projectLink}
 										target='_blank'
 									>
-										View on IMDB
+										View project
 									</a>
 								)}
 							</div>
@@ -169,7 +177,7 @@ export default function ProjectPage({
 				</PageWrapper>
 
 				{/* Trailer */}
-				{projectData.videoUrl && (
+				{projectPageData.projectVideo && (
 					<PageWrapper>
 						<ProjectTrailer
 							videoUrl='https://player.vimeo.com/video/371168497'

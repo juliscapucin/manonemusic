@@ -54,6 +54,16 @@ const projectSchema = {
 			title: "Project Info",
 			type: "string",
 		},
+		{
+			name: "projectLink",
+			title: "Project Link",
+			type: "url",
+		},
+		{
+			name: "projectVideo",
+			title: "Project Video",
+			type: "url",
+		},
 	],
 	orderings: [
 		{

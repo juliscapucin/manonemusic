@@ -17,16 +17,16 @@ export const metadata: Metadata = {
 export default async function Page({ params }: { params: { slug: string } }) {
 	const { slug } = params
 
-	const filmData = await getFilm(slug)
+	const filmPageData = await getFilm(slug)
 	const filmsData = await getPortfolioItems("film")
 	const filmsPageData = await getPortfolioPage("film")
 
-	if (!filmData || !filmsData || !filmsPageData) return notFound()
+	if (!filmPageData || !filmsData || !filmsPageData) return notFound()
 
 	return (
 		<FilmPage
 			{...{
-				filmData,
+				filmPageData,
 				filmsData,
 				filmsPageData,
 			}}

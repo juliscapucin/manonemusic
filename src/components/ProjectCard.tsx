@@ -4,25 +4,19 @@ import Image from "next/image"
 import { usePathname, useRouter } from "next/navigation"
 
 import { handlePanelSlide } from "@/lib/animations"
+import { ImageField } from "@/types/Image"
 
 type ProjectCardProps = {
 	title: string
-	coverImage: {
-		url: string
-		description: string
-		width: number
-		height: number
-	}
+	image: ImageField
 	slug: string
 }
 
-export default function ProjectCard({
-	title,
-	coverImage,
-	slug,
-}: ProjectCardProps) {
+export default function ProjectCard({ title, image, slug }: ProjectCardProps) {
 	const router = useRouter()
 	const pathname = usePathname()
+
+	console.log(image)
 
 	return (
 		<button
@@ -34,15 +28,17 @@ export default function ProjectCard({
 			className={`w-full h-full relative`}
 		>
 			<div className='relative w-full h-full'>
-				<Image
-					className={`${
-						pathname.includes(slug) && "gsap-flip-project-card z-100"
-					} object-cover`}
-					src={coverImage.url}
-					alt={coverImage.description}
-					sizes='50vw'
-					fill
-				/>
+				{image && (
+					<Image
+						className={`${
+							pathname.includes(slug) && "gsap-flip-project-card z-100"
+						} object-cover`}
+						src={image.imageUrl}
+						alt={image.imageAlt}
+						sizes='50vw'
+						fill
+					/>
+				)}
 			</div>
 			<span>{title}</span>
 		</button>

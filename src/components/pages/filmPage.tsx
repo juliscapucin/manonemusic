@@ -13,13 +13,13 @@ import { FilmsPage } from "@/components/pages"
 import { Film, PortfolioItem, PortfolioPage } from "@/types"
 
 type filmPageProps = {
-	filmData: Film
+	filmPageData: Film
 	filmsData: PortfolioItem[]
 	filmsPageData: PortfolioPage
 }
 
 export default function FilmPage({
-	filmData,
+	filmPageData,
 	filmsData,
 	filmsPageData,
 }: filmPageProps) {
@@ -133,14 +133,14 @@ export default function FilmPage({
 				>
 					Back to films
 				</Button>
-				<TitleHeadline classes='mt-6'>{filmData.title}</TitleHeadline>
+				<TitleHeadline classes='mt-6'>{filmPageData.title}</TitleHeadline>
 				<div className='relative w-full flex gap-8'>
 					<div className='gsap-film-page flex flex-wrap gap-16'>
 						<div className='gsap-flip-film-image relative w-1/4 min-w-[300px] aspect-square overflow-clip'>
 							<Image
 								{...{
-									src: filmData.image.imageUrl,
-									alt: `${filmData.title} album cover`,
+									src: filmPageData.image.imageUrl,
+									alt: `${filmPageData.title} album cover`,
 									fill: true,
 									className: "gsap-film-image object-cover",
 									sizes: "50vw",
@@ -148,7 +148,7 @@ export default function FilmPage({
 							/>
 						</div>
 						<div className='gsap-film-content w-1/3 min-w-[300px] space-y-8'>
-							{filmData.description}
+							{filmPageData.description}
 						</div>
 					</div>
 				</div>

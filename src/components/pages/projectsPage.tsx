@@ -4,15 +4,23 @@ import { useRef } from "react"
 
 import { ProjectCard } from "@/components"
 
-import { Project } from "@/types"
 import { PageWrapper, TitleDisplay } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 
-type Props = { data: Project[]; titleScrollTrigger?: boolean }
+import { PortfolioItem, PortfolioPage } from "@/types"
 
-export default function ProjectsPage({ data, titleScrollTrigger }: Props) {
+type ProjectPageProps = {
+	projectsPage?: PortfolioPage
+	projects?: PortfolioItem[]
+	titleScrollTrigger?: boolean
+}
+
+export default function ProjectsPage({
+	projectsPage,
+	projects,
+	titleScrollTrigger,
+}: ProjectPageProps) {
 	const titleWorkRef = useRef(null)
-	const gridElements = new Array(36).fill(0)
 	const { windowAspectRatio } = useWindowDimensions()
 
 	useTitleScrollTrigger(
@@ -24,22 +32,23 @@ export default function ProjectsPage({ data, titleScrollTrigger }: Props) {
 
 	return (
 		<PageWrapper>
-			<div className='hidden lg:grid grid-cols-12 grid-rows-3 gap-2 w-full h-full relative'>
-				<TitleDisplay classes='gsap-projects-title' ref={titleWorkRef}>
-					Projects
-				</TitleDisplay>
-				{gridElements.map((_, index) => {
-					const project = data.find((project) => project.gridPosition == index)
-
-					return project ? (
+			<div className='block w-full h-full relative'>
+				{projectsPage && (
+					<>
+						<TitleDisplay classes='gsap-projects-title' ref={titleWorkRef}>
+							{projectsPage.title}
+						</TitleDisplay>
+						<p className='w-1/2'>{projectsPage.subtitle}</p>
+					</>
+				)}
+				{projects?.map((project) => {
+					return (
 						<ProjectCard
 							key={project.slug}
 							title={project.title}
-							coverImage={project.coverImage}
+							image={project.image}
 							slug={project.slug}
 						/>
-					) : (
-						<div key={index} className='w-full h-full'></div>
 					)
 				})}
 			</div>

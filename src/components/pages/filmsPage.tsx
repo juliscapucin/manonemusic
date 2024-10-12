@@ -7,12 +7,15 @@ import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 import { ProjectsMenu, ReleasesMenu } from "@/components"
 import { PortfolioPage } from "@/types"
 
-type FilmPageProps = {
+type FilmsPageProps = {
 	data?: PortfolioPage
 	titleScrollTrigger?: boolean
 }
 
-export default function FilmsPage({ data, titleScrollTrigger }: FilmPageProps) {
+export default function FilmsPage({
+	data,
+	titleScrollTrigger,
+}: FilmsPageProps) {
 	const titleFilmsRef = useRef(null)
 	const { windowAspectRatio } = useWindowDimensions()
 

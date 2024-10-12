@@ -15,36 +15,6 @@ import { PortfolioItem } from "@/types/PortfolioItem"
 
 const client = createClient(clientConfig)
 
-export async function getProject(slug: string): Promise<Project> {
-	return client.fetch(
-		groq`*[_type == "project" && slug.current == $slug][0]{
-      _id,
-      title,
-      projectInfo,
-      releaseDate,
-   }`,
-		{ slug }
-	)
-}
-
-export async function getFilm(slug: string): Promise<Project> {
-	return client.fetch(
-		groq`*[_type == "film" && slug.current == $slug][0]{
-      _id,
-      "slug": slug.current,
-      title,
-      description,
-      projectInfo,
-      "image": {
-         "imageUrl": image.image.asset->url,
-         "imageAlt": image.imageAlt
-         },
-      releaseDate,
-   }`,
-		{ slug }
-	)
-}
-
 export async function getHomePage(): Promise<HomePage> {
 	return client.fetch(
 		groq`*[_type == "aboutPage"][0] {
@@ -119,10 +89,49 @@ export async function getPortfolioItems(
 		groq`*[_type == $section] | order(releaseDate desc){
       _id,
       "slug": slug.current,
+      "image": {
+         "imageUrl": image.image.asset->url,
+         "imageAlt": image.imageAlt
+         },
       title,
-      image,
    }`,
 		{ section }
+	)
+}
+
+export async function getProject(slug: string): Promise<Project> {
+	return client.fetch(
+		groq`*[_type == "project" && slug.current == $slug][0]{
+      _id,
+      title,
+      releaseDate,
+      "image": {
+         "imageUrl": image.image.asset->url,
+         "imageAlt": image.imageAlt
+         },
+      projectInfo,
+      projectLink,
+      projectVideo
+      }`,
+		{ slug }
+	)
+}
+
+export async function getFilm(slug: string): Promise<Project> {
+	return client.fetch(
+		groq`*[_type == "film" && slug.current == $slug][0]{
+      _id,
+      "slug": slug.current,
+      title,
+      description,
+      projectInfo,
+      "image": {
+         "imageUrl": image.image.asset->url,
+         "imageAlt": image.imageAlt
+         },
+      releaseDate,
+   }`,
+		{ slug }
 	)
 }
 
