@@ -69,7 +69,7 @@ export default function HomePage({ data }: { data: HomePage }) {
 
 			<div className='w-full flex justify-between mt-32 md:mt-16'>
 				<div className='w-1/2'>
-					<p className='max-w-prose'>
+					<p className='text-balance max-w-prose'>
 						Tailored sound design and audio identities that capture the spirit
 						of your brand and resonate with your audience.
 					</p>

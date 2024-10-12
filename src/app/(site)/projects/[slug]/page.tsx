@@ -2,7 +2,11 @@ import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
 import { ProjectPage } from "@/components/pages"
-import { getPortfolioItems, getProject } from "@/sanity/sanity-queries"
+import {
+	getPortfolioItems,
+	getPortfolioPage,
+	getProject,
+} from "@/sanity/sanity-queries"
 
 export const metadata: Metadata = {
 	title: "Project",
@@ -11,11 +15,10 @@ export const metadata: Metadata = {
 
 export default async function Page({ params }: { params: { slug: string } }) {
 	const { slug } = params
-	const variables = { slug }
 
 	const projectPageData = await getProject(slug)
 	const projectsData = await getPortfolioItems("project")
-	const projectsPageData = await getPortfolioItems("projects")
+	const projectsPageData = await getPortfolioPage("Projects")
 
 	if (!projectPageData || !projectsData || !projectsPageData) return notFound()
 

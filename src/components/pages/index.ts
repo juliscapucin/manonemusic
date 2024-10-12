@@ -1,4 +1,5 @@
 import AboutPage from "./aboutPage"
+import CommercialPage from "./commercialPage"
 import CommercialsPage from "./commercialsPage"
 import ContactPage from "./contactPage"
 import FilmPage from "./filmPage"
@@ -12,6 +13,7 @@ import ProjectPage from "./projectPage"
 export {
 	AboutPage,
 	ContactPage,
+	CommercialPage,
 	CommercialsPage,
 	FilmPage,
 	FilmsPage,

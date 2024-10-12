@@ -59,57 +59,6 @@ export default function CommercialPage({
 		})
 	}
 
-	// TODO refactor to avoid repetition
-	// TODO implement a way to avoid this animation on page reload
-	// Transition on enter
-	useLayoutEffect(() => {
-		gsap.registerPlugin(Flip)
-
-		const container = containerRef.current
-
-		if (!container) return
-
-		ctx.add(() => {
-			gsap.set(".gsap-commercial-content", { opacity: 0 })
-			gsap.set(".gsap-commercial-image", { opacity: 0 })
-
-			const state = Flip.getState(".gsap-flip-commercial-image")
-
-			gsap.to(".gsap-commercials-page", {
-				xPercent: () => {
-					return -60 // margin-left 'left-[60%]' applied to commercialsMenu
-				},
-				duration: 0.3,
-				onComplete: () => {
-					// Position the commercial card image on the page
-					Flip.fit(".gsap-flip-project-card", state, {
-						scale: true,
-						absolute: true,
-						duration: 0.3,
-						ease: "power4.out",
-						onComplete: () => {
-							gsap.to(".gsap-commercial-image", {
-								opacity: 1,
-								duration: 0.3,
-								ease: "power4.inOut",
-							})
-							gsap.to(".gsap-commercial-content", {
-								opacity: 1,
-								duration: 1,
-								stagger: 0.1,
-								ease: "power4.inOut",
-							})
-						},
-					})
-				},
-			})
-		}, [container])
-
-		return () => {
-			ctx.revert()
-		}
-	}, [])
-
 	return (
 		<div
 			ref={containerRef}

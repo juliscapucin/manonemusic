@@ -53,56 +53,13 @@ export default function ProjectPage({
 		})
 	}
 
-	// TODO refactor to avoid repetition
-	// TODO implement a way to avoid this animation on page reload
-	// Transition on enter
-	useLayoutEffect(() => {
-		gsap.registerPlugin(Flip)
-
-		const container = containerRef.current
-
-		if (!container) return
-
-		ctx.add(() => {
-			const state = Flip.getState(".gsap-flip-project-image")
-
-			// Position the project card image on the page
-			Flip.fit(".gsap-flip-project-card", state, {
-				scale: true,
-				absolute: true,
-				duration: 0.3,
-				ease: "power4.out",
-				onComplete: () => {
-					gsap.set(".gsap-project-image", { opacity: 1 })
-					gsap.to(".gsap-project-content", {
-						opacity: 1,
-						duration: 0.6,
-						delay: 0.2,
-						stagger: 0.3,
-					})
-					gsap.to(".gsap-projects-page", {
-						opacity: 0,
-						duration: 0.3,
-						onComplete: () => {
-							gsap.set(".gsap-projects-page", { display: "none" })
-						},
-					})
-				},
-			})
-		}, [container])
-
-		return () => {
-			ctx.revert()
-		}
-	}, [])
-
 	return (
 		<div
 			ref={containerRef}
 			className='relative w-screen h-screen overflow-clip'
 		>
 			{/* Projects Page copy for seamless page transition */}
-			{projectsData && (
+			{projectsPageData && (
 				<div className='gsap-projects-page absolute top-0 left-8 pb-8'>
 					<ProjectsPage
 						projectsPage={projectsPageData}

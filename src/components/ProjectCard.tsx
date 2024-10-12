@@ -7,20 +7,26 @@ import { handlePanelSlide } from "@/lib/animations"
 import { ImageField } from "@/types/Image"
 
 type ProjectCardProps = {
+	section: string
 	title: string
 	image: ImageField
 	slug: string
 }
 
-export default function ProjectCard({ title, image, slug }: ProjectCardProps) {
+export default function ProjectCard({
+	section,
+	title,
+	image,
+	slug,
+}: ProjectCardProps) {
 	const router = useRouter()
 	const pathname = usePathname()
 
 	return (
 		<a
 			onClick={() => {
-				handlePanelSlide("projects", true, () =>
-					router.push(`/projects/${slug}`)
+				handlePanelSlide(section, true, () =>
+					router.push(`/${section}/${slug}`)
 				)
 			}}
 			className='w-1/6 relative cursor-pointer'
@@ -40,7 +46,7 @@ export default function ProjectCard({ title, image, slug }: ProjectCardProps) {
 				</div>
 			)}
 			<span
-				className='text-labelMedium lg:text-labelLarge uppercase text-left leading-tightest'
+				className='text-labelMedium lg:text-labelLarge uppercase text-left leading-7'
 				id={`project-title-${slug}`}
 			>
 				{title}

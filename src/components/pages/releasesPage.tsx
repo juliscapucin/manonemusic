@@ -37,7 +37,12 @@ export default function ReleasesPage({
 					</TitleDisplay>
 					<p className='max-w-prose'>{data.subtitle}</p>
 				</div>
-				{releases && <ProjectsMenu projects={releases} />}
+				{releases && (
+					<ProjectsMenu
+						section={data.title.toLowerCase().replace(/\s/g, "-")}
+						projects={releases}
+					/>
+				)}
 			</PageWrapper>
 		)
 	)

@@ -39,7 +39,12 @@ export default function CommercialsPage({
 				</TitleDisplay>
 				<p className='max-w-prose'>{data.subtitle}</p>
 
-				{commercials && <ProjectsMenu projects={commercials} />}
+				{commercials && (
+					<ProjectsMenu
+						section={data.title.toLowerCase().replace(/\s/g, "-")}
+						projects={commercials}
+					/>
+				)}
 			</PageWrapper>
 		)
 	)

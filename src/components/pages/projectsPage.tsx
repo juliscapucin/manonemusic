@@ -2,7 +2,7 @@
 
 import { useRef } from "react"
 
-import { ProjectCard, ProjectsMenu } from "@/components"
+import { ProjectsMenu } from "@/components"
 
 import { PageWrapper, TitleDisplay } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
@@ -30,19 +30,26 @@ export default function ProjectsPage({
 		titleScrollTrigger
 	)
 
+	console.log(projectsPage?.title)
+
 	return (
-		<PageWrapper>
-			<div className='block w-full h-full relative'>
-				{projectsPage && (
+		projectsPage && (
+			<PageWrapper>
+				<div className='block w-full h-full relative'>
 					<>
 						<TitleDisplay classes='gsap-projects-title' ref={titleWorkRef}>
 							{projectsPage.title}
 						</TitleDisplay>
 						<p className='w-1/2'>{projectsPage.subtitle}</p>
+						{projects && projectsPage.title && (
+							<ProjectsMenu
+								section={projectsPage.title.toLowerCase().replace(/\s/g, "-")}
+								projects={projects}
+							/>
+						)}
 					</>
-				)}
-				{projects && <ProjectsMenu projects={projects} />}
-			</div>
-		</PageWrapper>
+				</div>
+			</PageWrapper>
+		)
 	)
 }

@@ -18,7 +18,7 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
 	const releasePageData = await getRelease(slug)
 	const releasesData = await getPortfolioItems("release")
-	const releasesPageData = await getPortfolioPage("release")
+	const releasesPageData = await getPortfolioPage("Releases")
 
 	if (!releasePageData || !releasesData || !releasesPageData) return notFound()
 

@@ -1,33 +1,34 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
-import { fetchBySlug, fetchAll } from "@/lib"
-import { ProjectPage } from "@/components/pages"
+import { CommercialPage } from "@/components/pages"
+import {
+	getCommercial,
+	getPortfolioItems,
+	getPortfolioPage,
+} from "@/sanity/sanity-queries"
 
 export const metadata: Metadata = {
 	title: "Project",
 	description: "Project description",
 }
 
-import { queryAll, queryProject } from "@/lib/queries"
-
 export default async function Page({ params }: { params: { slug: string } }) {
 	const { slug } = params
-	const variables = { slug }
 
-	const data = await fetchBySlug(queryProject, variables)
-	const projectsData = await fetchAll(queryAll)
-	const projectData = data.projectCollection.items[0]
+	const commercialPageData = await getCommercial(slug)
+	const commercialsData = await getPortfolioItems("commercial")
+	const commercialsPageData = await getPortfolioPage("Commercials")
 
-	if (!data || !projectsData || data.projectCollection.items.length === 0)
+	if (!commercialPageData || !commercialsData || !commercialsPageData)
 		return notFound()
 
 	return (
-		<ProjectPage
+		<CommercialPage
 			{...{
-				projectData,
-				projectsData: projectsData.projectCollection.items,
-				transitionOnEnter: true,
+				commercialPageData,
+				commercialsData,
+				commercialsPageData,
 			}}
 		/>
 	)

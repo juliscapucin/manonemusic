@@ -36,7 +36,12 @@ export default function FilmsPage({
 				</TitleDisplay>
 				<p className='max-w-prose'>{data.subtitle}</p>
 
-				{films && <ProjectsMenu projects={films} />}
+				{films && (
+					<ProjectsMenu
+						section={data.title.toLowerCase().replace(/\s/g, "-")}
+						projects={films}
+					/>
+				)}
 			</PageWrapper>
 		)
 	)
