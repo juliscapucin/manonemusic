@@ -31,7 +31,7 @@ export default function FilmsPage({
 	return (
 		data && (
 			<PageWrapper>
-				<TitleDisplay classes='gsap-films-title' ref={titleFilmsRef}>
+				<TitleDisplay classes='gsap-projects-title' ref={titleFilmsRef}>
 					{data.title}
 				</TitleDisplay>
 				<p className='max-w-prose'>{data.subtitle}</p>

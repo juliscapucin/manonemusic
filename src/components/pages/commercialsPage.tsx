@@ -31,10 +31,7 @@ export default function CommercialsPage({
 	return (
 		data && (
 			<PageWrapper>
-				<TitleDisplay
-					classes='gsap-commercials-title'
-					ref={titleCommercialsRef}
-				>
+				<TitleDisplay classes='gsap-projects-title' ref={titleCommercialsRef}>
 					{data.title}
 				</TitleDisplay>
 				<p className='max-w-prose'>{data.subtitle}</p>

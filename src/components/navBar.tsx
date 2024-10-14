@@ -24,7 +24,7 @@ export default function NavBar({ navLinks, transitionOnClick }: NavLinksProps) {
 	return (
 		<nav
 			ref={navRef}
-			className='fixed top-8 right-8 left-8 flex justify-between z-50'
+			className='fixed top-8 right-8 left-8 flex justify-between z-header'
 		>
 			<Button
 				href='/'

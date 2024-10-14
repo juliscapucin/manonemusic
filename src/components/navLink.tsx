@@ -21,21 +21,7 @@ export default function NavLink({ label, action, activeState }: NavLinkProps) {
 					</span>
 				</div>
 			) : (
-				<div className='overflow-clip max-h-8 pointer-events-auto'>
-					{/* <button
-						className={`${
-							label === "Home" &&
-							pathname === "/" &&
-							"translate-y-full pointer-events-none"
-						}`}
-						onClick={action}
-						aria-hidden={pathname === "/" && label === "Home"}
-						tabIndex={pathname === "/" && label === "Home" ? -1 : 0}
-					>
-						<span className='underlined-link text-titleSmall md:text-titleMedium uppercase'>
-							{label}
-						</span>
-					</button> */}
+				<div className='overflow-clip max-h-8'>
 					<Button
 						href={`/${label.toLowerCase()}`}
 						classes={`underlined-link text-titleSmall md:text-titleMedium uppercase`}
