@@ -74,7 +74,7 @@ export async function getPortfolioPage(
 	section: string
 ): Promise<PortfolioPage> {
 	return client.fetch(
-		groq`*[_type == "portfolioPage" && title == $section] | order(releaseDate desc){
+		groq`*[_type == "portfolioPage" && title == $section] | order(releaseDate desc)[0]{
       title,
       subtitle,
    }`,

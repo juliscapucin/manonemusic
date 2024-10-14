@@ -1,9 +1,6 @@
 import { ImageField } from "./Image"
 
-type Track = {
-	trackname: string
-	link: string
-}
+import { Track } from "./Track"
 
 export type Release = {
 	title: string

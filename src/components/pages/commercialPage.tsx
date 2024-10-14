@@ -11,6 +11,7 @@ import { Logo, PageWrapper, TitleHeadline } from "@/components/ui"
 import { Button } from "@/components/buttons"
 import { CommercialsPage } from "@/components/pages"
 import { Commercial, PortfolioItem, PortfolioPage } from "@/types"
+import { transitionOnClickBack } from "@/lib/animations"
 
 type commercialPageProps = {
 	commercialPageData: Commercial
@@ -28,36 +29,6 @@ export default function CommercialPage({
 	const commercialPageRef = useRef<HTMLDivElement>(null)
 	let ctx = gsap.context(() => {})
 	let stateCard: Flip.FlipState
-
-	// TODO refactor to avoid repetition
-	const transitionOnClickBack = (slug: string) => {
-		gsap.registerPlugin(Flip)
-
-		ctx.add(() => {
-			gsap.set(".gsap-commercials-title", { opacity: 0 })
-			gsap.to(".gsap-commercials-page", { xPercent: 0, duration: 0.3 })
-			gsap.set(".gsap-commercial-image", { opacity: 0 })
-
-			gsap.to(".gsap-commercial-content", {
-				opacity: 0,
-				duration: 0.3,
-				onComplete: () => {
-					router.push(slug)
-				},
-			})
-
-			// TODO - delete if unused
-			// Flip.fit(".gsap-flip-commercial-card", stateCard, {
-			// 	scale: true,
-			// 	absolute: true,
-			// 	duration: 0.6,
-			// 	ease: "power4.out",
-			// 	onComplete: () => {
-			// 		router.push(slug)
-			// 	},
-			// })
-		})
-	}
 
 	return (
 		<div
@@ -81,7 +52,9 @@ export default function CommercialPage({
 				{/* Back Button */}
 				<Button
 					classes='absolute'
-					action={() => transitionOnClickBack("/commercials")}
+					action={() =>
+						transitionOnClickBack(ctx, () => router.push("/releases"))
+					}
 				>
 					Back to commercials
 				</Button>

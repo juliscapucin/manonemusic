@@ -1,22 +1,23 @@
 "use client"
 
-import { useSearchParams, useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 import Image from "next/image"
 
 import gsap from "gsap"
-import Flip from "gsap/Flip"
 
 import { Logo, PageWrapper, TitleDisplay } from "@/components/ui"
 import { PortfolioItem, PortfolioPage, Project } from "@/types"
 import { Button } from "@/components/buttons"
 import { ProjectsPage } from "."
 import { useLayoutEffect, useRef } from "react"
-import { ProjectTrailer } from ".."
+import { ProjectTrailer, ProjectsMenu } from "@/components"
+import { transitionOnClickBack } from "@/lib/animations"
+import { useTransitionOnEnter } from "@/hooks"
 
 type ProjectPageProps = {
 	projectPageData: Project
-	projectsData?: PortfolioItem[]
-	projectsPageData?: PortfolioPage
+	projectsData: PortfolioItem[]
+	projectsPageData: PortfolioPage
 }
 
 export default function ProjectPage({
@@ -25,37 +26,14 @@ export default function ProjectPage({
 	projectsPageData,
 }: ProjectPageProps) {
 	const router = useRouter()
-	const containerRef = useRef<HTMLDivElement>(null)
+	const containerProjectRef = useRef<HTMLDivElement>(null)
 	let ctx = gsap.context(() => {})
 
-	// TODO refactor to avoid repetition
-	const transitionOnClickBack = (slug: string) => {
-		gsap.registerPlugin(Flip)
-		const stateCard = Flip.getState(".gsap-flip-project-image")
-
-		ctx.add(() => {
-			gsap.set(".gsap-projects-page", { display: "block" })
-			gsap.set(".gsap-projects-title", { opacity: 0 })
-			gsap.to(".gsap-projects-page", { opacity: 1, duration: 0.3 })
-			gsap.set(".gsap-project-image", { opacity: 0 })
-
-			gsap.to(".gsap-project-content", { opacity: 0, duration: 0.3 })
-
-			Flip.fit(".gsap-flip-project-card", stateCard, {
-				scale: true,
-				absolute: true,
-				duration: 0.6,
-				ease: "power4.out",
-				onComplete: () => {
-					router.push(slug)
-				},
-			})
-		})
-	}
+	useTransitionOnEnter(ctx)
 
 	return (
 		<div
-			ref={containerRef}
+			ref={containerProjectRef}
 			className='relative w-screen h-screen overflow-clip'
 		>
 			{/* Projects Page copy for seamless page transition */}
@@ -69,12 +47,14 @@ export default function ProjectPage({
 				</div>
 			)}
 			{/* Project Page */}
-			<div className='gsap-project-page w-fit h-screen flex flex-nowrap'>
+			<div className='gsap-project-page w-fit h-screen flex flex-nowrap opacity-0'>
 				<PageWrapper>
 					{/* Back Button */}
 					<Button
 						classes='absolute z-30'
-						action={() => transitionOnClickBack("/projects")}
+						action={() =>
+							transitionOnClickBack(ctx, () => router.push("/projects"))
+						}
 					>
 						Back to Projects
 					</Button>
@@ -82,20 +62,20 @@ export default function ProjectPage({
 						{projectPageData.title}
 					</TitleDisplay>
 					<div className='gsap-project-page flex flex-wrap gap-16'>
-						<div className='gsap-flip-project-image relative w-1/4 min-w-[300px] aspect-square overflow-clip'>
+						<div className='gsap-project-image relative w-1/4 min-w-[300px] aspect-square overflow-clip opacity-0'>
 							{projectPageData.image && (
 								<Image
 									{...{
 										src: projectPageData.image.imageUrl,
 										alt: projectPageData.image.imageAlt,
 										fill: true,
-										className: "gsap-project-image opacity-0 object-cover",
+										className: "gsap-project-image object-cover",
 										sizes: "50vw",
 									}}
 								/>
 							)}
 						</div>
-						<div className='gsap-project-content opacity-0 w-1/3 min-w-[300px] space-y-8'>
+						<div className='gsap-project-content w-1/3 min-w-[300px] space-y-8 opacity-0'>
 							{/* Credits */}
 							{/* <ul className='text-labelLarge'>
 								{projectPageData.credits &&
@@ -132,23 +112,22 @@ export default function ProjectPage({
 						</div>
 					</div>
 				</PageWrapper>
-
-				{/* Trailer */}
-				{projectPageData.projectVideo && (
-					<PageWrapper>
-						<ProjectTrailer
-							videoUrl='https://player.vimeo.com/video/371168497'
-							backToProject={() =>
-								gsap.to(".gsap-project-page", {
-									xPercent: 0,
-									duration: 1,
-									ease: "power4.out",
-								})
-							}
-						/>
-					</PageWrapper>
-				)}
 			</div>
+			{/* Trailer */}
+			{projectPageData.projectVideo && (
+				<PageWrapper>
+					<ProjectTrailer
+						videoUrl='https://player.vimeo.com/video/371168497'
+						backToProject={() =>
+							gsap.to(".gsap-project-page", {
+								xPercent: 0,
+								duration: 1,
+								ease: "power4.out",
+							})
+						}
+					/>
+				</PageWrapper>
+			)}
 		</div>
 	)
 }

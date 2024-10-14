@@ -9,6 +9,7 @@ import { PortfolioItem } from "./PortfolioItem"
 import { PortfolioPage } from "./PortfolioPage"
 import { Project } from "./Project"
 import { Release } from "./Release"
+import { Track } from "./Track"
 
 export type {
 	AboutPage,
@@ -22,4 +23,5 @@ export type {
 	PortfolioPage,
 	Project,
 	Release,
+	Track,
 }

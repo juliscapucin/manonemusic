@@ -30,8 +30,6 @@ export default function ProjectsPage({
 		titleScrollTrigger
 	)
 
-	console.log(projectsPage?.title)
-
 	return (
 		projectsPage && (
 			<PageWrapper>

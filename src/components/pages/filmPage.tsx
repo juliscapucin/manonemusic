@@ -11,6 +11,7 @@ import { Logo, PageWrapper, TitleHeadline } from "@/components/ui"
 import { Button } from "@/components/buttons"
 import { FilmsPage } from "@/components/pages"
 import { Film, PortfolioItem, PortfolioPage } from "@/types"
+import { transitionOnClickBack } from "@/lib/animations"
 
 type filmPageProps = {
 	filmPageData: Film
@@ -27,37 +28,6 @@ export default function FilmPage({
 	const containerRef = useRef<HTMLDivElement>(null)
 	const filmPageRef = useRef<HTMLDivElement>(null)
 	let ctx = gsap.context(() => {})
-	let stateCard: Flip.FlipState
-
-	// TODO refactor to avoid repetition
-	const transitionOnClickBack = (slug: string) => {
-		gsap.registerPlugin(Flip)
-
-		ctx.add(() => {
-			gsap.set(".gsap-films-title", { opacity: 0 })
-			gsap.to(".gsap-films-page", { xPercent: 0, duration: 0.3 })
-			gsap.set(".gsap-film-image", { opacity: 0 })
-
-			gsap.to(".gsap-film-content", {
-				opacity: 0,
-				duration: 0.3,
-				onComplete: () => {
-					router.push(slug)
-				},
-			})
-
-			// TODO - delete if unused
-			// Flip.fit(".gsap-flip-film-card", stateCard, {
-			// 	scale: true,
-			// 	absolute: true,
-			// 	duration: 0.6,
-			// 	ease: "power4.out",
-			// 	onComplete: () => {
-			// 		router.push(slug)
-			// 	},
-			// })
-		})
-	}
 
 	// TODO refactor to avoid repetition
 	// TODO implement a way to avoid this animation on page reload
@@ -129,7 +99,9 @@ export default function FilmPage({
 				{/* Back Button */}
 				<Button
 					classes='absolute'
-					action={() => transitionOnClickBack("/films")}
+					action={() =>
+						transitionOnClickBack(ctx, () => router.push("/releases"))
+					}
 				>
 					Back to films
 				</Button>

@@ -32,7 +32,7 @@ export default function ReleasesPage({
 		data && (
 			<PageWrapper>
 				<div>
-					<TitleDisplay classes='gsap-releases-title' ref={titleReleasesRef}>
+					<TitleDisplay classes='gsap-projects-title' ref={titleReleasesRef}>
 						{data.title}
 					</TitleDisplay>
 					<p className='max-w-prose'>{data.subtitle}</p>

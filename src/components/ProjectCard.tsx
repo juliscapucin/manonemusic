@@ -29,7 +29,7 @@ export default function ProjectCard({
 					router.push(`/${section}/${slug}`)
 				)
 			}}
-			className='w-1/6 relative cursor-pointer'
+			className='gsap-flip-project-card w-1/6 relative cursor-pointer'
 			aria-labelledby={`project-title-${slug}`}
 		>
 			{image && (
