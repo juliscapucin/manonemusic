@@ -52,9 +52,7 @@ export default function ReleasePage({
 					{/* Back Button */}
 					<Button
 						classes='absolute'
-						action={() =>
-							transitionOnClickBack(ctx, () => router.push("/releases"))
-						}
+						action={() => transitionOnClickBack(ctx, () => router.back())}
 					>
 						Back to releases
 					</Button>

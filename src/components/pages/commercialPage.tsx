@@ -54,9 +54,7 @@ export default function CommercialPage({
 				{/* Back Button */}
 				<Button
 					classes='absolute'
-					action={() =>
-						transitionOnClickBack(ctx, () => router.push("/commercials"))
-					}
+					action={() => transitionOnClickBack(ctx, () => router.back())}
 				>
 					Back to commercials
 				</Button>

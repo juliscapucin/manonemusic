@@ -1,4 +1,5 @@
 import { useLayoutEffect, useEffect } from "react"
+import { usePathname } from "next/navigation"
 
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -11,11 +12,13 @@ export default function useTitleScrollTrigger(
 	windowAspectRatio: string,
 	runTrigger?: boolean
 ) {
+	const pathname = usePathname()
 	let ctx = gsap.context(() => {})
 
 	useLayoutEffect(() => {
 		// Start ScrollTrigger when window is in landscape mode
 		if (
+			pathname === slug ||
 			!elementRef.current ||
 			windowAspectRatio === "portrait" ||
 			runTrigger == false

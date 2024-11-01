@@ -52,9 +52,7 @@ export default function ProjectPage({
 					{/* Back Button */}
 					<Button
 						classes='absolute z-30'
-						action={() =>
-							transitionOnClickBack(ctx, () => router.push("/projects"))
-						}
+						action={() => transitionOnClickBack(ctx, () => router.back())}
 					>
 						Back to Projects
 					</Button>

@@ -51,7 +51,7 @@ export default function FilmPage({
 				{/* Back Button */}
 				<Button
 					classes='absolute'
-					action={() => transitionOnClickBack(ctx, () => router.push("/films"))}
+					action={() => transitionOnClickBack(ctx, () => router.back())}
 				>
 					Back to films
 				</Button>
