@@ -4,6 +4,7 @@ import { ProjectCard } from "@/components"
 type ProjectsMenuProps = {
 	projects: PortfolioItem[]
 	section: string
+	variant: "section" | "page"
 }
 
 export default function ProjectsMenu({ projects, section }: ProjectsMenuProps) {

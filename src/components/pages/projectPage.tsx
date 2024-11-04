@@ -48,7 +48,7 @@ export default function ProjectPage({
 				</div>
 			)}
 			{/* Project Page */}
-			<div className='gsap-project-page w-fit h-screen flex flex-nowrap opacity-0'>
+			<div className='gsap-project-page opacity-0'>
 				<PageWrapper>
 					{/* Back Button */}
 					<Button

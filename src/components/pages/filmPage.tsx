@@ -48,38 +48,37 @@ export default function FilmPage({
 				</div>
 			)}
 			{/* film Page */}
-			<div
-				ref={filmPageRef}
-				className='gsap-project-page w-3/4 h-screen p-8 pt-32 ml-auto'
-			>
-				{/* Back Button */}
-				<Button
-					classes='absolute'
-					action={() => transitionOnClickBack(ctx, () => router.back())}
-				>
-					Back to films
-				</Button>
-				<TitleHeadline classes='gsap-project-content mt-6'>
-					{filmPageData.title}
-				</TitleHeadline>
-				<div className='relative w-full flex gap-8'>
-					<div className='gsap-project-page flex flex-wrap gap-16'>
-						<div className='gsap-project-image relative w-1/4 min-w-[300px] aspect-square overflow-clip opacity-0'>
-							<Image
-								{...{
-									src: filmPageData.image.imageUrl,
-									alt: `${filmPageData.title} album cover`,
-									fill: true,
-									className: "gsap-film-image object-cover",
-									sizes: "50vw",
-								}}
-							/>
-						</div>
-						<div className='gsap-project-content w-1/3 min-w-[300px] space-y-8'>
-							{filmPageData.description}
+			<div ref={filmPageRef} className='gsap-project-page opacity-0'>
+				<PageWrapper>
+					{/* Back Button */}
+					<Button
+						classes='absolute'
+						action={() => transitionOnClickBack(ctx, () => router.back())}
+					>
+						Back to films
+					</Button>
+					<TitleHeadline classes='gsap-project-content mt-6'>
+						{filmPageData.title}
+					</TitleHeadline>
+					<div className='relative w-full flex gap-8'>
+						<div className='gsap-project-page flex flex-wrap gap-16'>
+							<div className='gsap-project-image relative w-1/4 min-w-[300px] aspect-square overflow-clip opacity-0'>
+								<Image
+									{...{
+										src: filmPageData.image.imageUrl,
+										alt: `${filmPageData.title} album cover`,
+										fill: true,
+										className: "gsap-film-image object-cover",
+										sizes: "50vw",
+									}}
+								/>
+							</div>
+							<div className='gsap-project-content w-1/3 min-w-[300px] space-y-8'>
+								{filmPageData.description}
+							</div>
 						</div>
 					</div>
-				</div>
+				</PageWrapper>
 			</div>
 		</div>
 	)

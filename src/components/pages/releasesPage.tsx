@@ -42,6 +42,7 @@ export default function ReleasesPage({
 				</div>
 				{releases && (
 					<ProjectsMenu
+						variant='section'
 						section={data.title.toLowerCase().replace(/\s/g, "-")}
 						projects={releases}
 					/>

@@ -48,36 +48,37 @@ export default function CommercialPage({
 				</div>
 			)}
 			{/* commercial Page */}
-			<div
-				ref={commercialPageRef}
-				className='gsap-project-page w-3/4 h-screen p-8 pt-32 ml-auto'
-			>
-				{/* Back Button */}
-				<Button
-					classes='absolute'
-					action={() => transitionOnClickBack(ctx, () => router.back())}
-				>
-					Back to commercials
-				</Button>
-				<TitleHeadline classes='mt-6'>{commercialPageData.title}</TitleHeadline>
-				<div className='relative w-full flex gap-8'>
-					<div className='gsap-project-page flex flex-wrap gap-16'>
-						<div className='gsap-flip-commercial-image relative w-1/4 min-w-[300px] aspect-square overflow-clip'>
-							<Image
-								{...{
-									src: commercialPageData.image.imageUrl,
-									alt: `${commercialPageData.title} album cover`,
-									fill: true,
-									className: "gsap-project-image object-cover",
-									sizes: "50vw",
-								}}
-							/>
-						</div>
-						<div className='gsap-project-content w-1/3 min-w-[300px] space-y-8'>
-							{commercialPageData.description}
+			<div ref={commercialPageRef} className='gsap-project-page opacity-0'>
+				<PageWrapper>
+					{/* Back Button */}
+					<Button
+						classes='absolute'
+						action={() => transitionOnClickBack(ctx, () => router.back())}
+					>
+						Back to commercials
+					</Button>
+					<TitleHeadline classes='mt-6'>
+						{commercialPageData.title}
+					</TitleHeadline>
+					<div className='relative w-full flex gap-8'>
+						<div className='gsap-project-page flex flex-wrap gap-16'>
+							<div className='gsap-flip-commercial-image relative w-1/4 min-w-[300px] aspect-square overflow-clip'>
+								<Image
+									{...{
+										src: commercialPageData.image.imageUrl,
+										alt: `${commercialPageData.title} album cover`,
+										fill: true,
+										className: "gsap-project-image object-cover",
+										sizes: "50vw",
+									}}
+								/>
+							</div>
+							<div className='gsap-project-content w-1/3 min-w-[300px] space-y-8'>
+								{commercialPageData.description}
+							</div>
 						</div>
 					</div>
-				</div>
+				</PageWrapper>
 			</div>
 		</div>
 	)

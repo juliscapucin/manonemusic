@@ -10,7 +10,7 @@ import { Button } from "@/components/ui"
 import Link from "next/link"
 
 type ProjectCardProps = {
-	variant: string
+	variant: "section" | "page"
 	section: string
 	title: string
 	image: ImageField

@@ -1,13 +1,13 @@
 "use client"
 
-import { useLayoutEffect, useRef, useTransition } from "react"
+import { useRef } from "react"
 import { useRouter } from "next/navigation"
 import Image from "next/image"
 
 import gsap from "gsap"
 
-import { PlayerTrackList } from "@/components"
-import { Logo, PageWrapper, TitleHeadline } from "@/components/ui"
+import { PlayerTrackList, ProjectsMenu } from "@/components"
+import { PageWrapper, TitleHeadline } from "@/components/ui"
 import { Button } from "@/components/buttons"
 import { ReleasesPage } from "@/components/pages"
 import { PortfolioItem, PortfolioPage, Release } from "@/types"
@@ -48,7 +48,7 @@ export default function ReleasePage({
 				</div>
 			)}
 			{/* release Page */}
-			<div className='gsap-project-page h-screen p-8 pt-32 opacity-0'>
+			<div className='gsap-project-page opacity-0'>
 				<PageWrapper>
 					{/* Back Button */}
 					<Button
@@ -77,6 +77,7 @@ export default function ReleasePage({
 						</div>
 						<PlayerTrackList tracks={releasePageData.tracklist} />
 					</div>
+					<ProjectsMenu variant='page' projects={releasesData} section={""} />
 				</PageWrapper>
 			</div>
 		</div>

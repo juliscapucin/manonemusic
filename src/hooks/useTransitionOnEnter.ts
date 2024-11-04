@@ -13,7 +13,7 @@ export default function useTransitionOnEnter(ctx: gsap.Context) {
 
 			// Move the projects page to left
 			tl.to(".gsap-projects-page", {
-				xPercent: -60,
+				xPercent: -100,
 				duration: 0.3,
 			})
 				// Bring the project page into view
