@@ -40,6 +40,7 @@ export default function CommercialsPage({
 
 				{commercials && (
 					<ProjectsMenu
+						variant='section'
 						section={data.title.toLowerCase().replace(/\s/g, "-")}
 						projects={commercials}
 					/>

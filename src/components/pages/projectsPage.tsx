@@ -46,6 +46,7 @@ export default function ProjectsPage({
 						/>
 						{projects && projectsPage.title && (
 							<ProjectsMenu
+								variant='section'
 								section={projectsPage.title.toLowerCase().replace(/\s/g, "-")}
 								projects={projects}
 							/>

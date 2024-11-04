@@ -27,7 +27,11 @@ export default function NavBar({ variant, navLinks }: NavLinksProps) {
 			<Button
 				href='/'
 				classes={`underlined-link text-titleSmall md:text-titleMedium uppercase transition ${pathname === "/" ? "opacity-0 -translate-x-full" : "opacity-100"}`}
-				transitionOnClick={() => handlePanelSlide("/", true)}
+				transitionOnClick={
+					variant === "section"
+						? () => handlePanelSlide("/", true) // if in first level, slide to home
+						: () => projectExit(() => router.push("/")) // if in second level, exit and navigate to home
+				}
 			>
 				MAN/ONE MUSIC
 			</Button>

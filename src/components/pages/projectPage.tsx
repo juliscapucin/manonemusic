@@ -48,15 +48,8 @@ export default function ProjectPage({
 				</div>
 			)}
 			{/* Project Page */}
-			<PageWrapper>
+			<PageWrapper hasMenu={true}>
 				<div className='gsap-project-page opacity-0'>
-					{/* Back Button */}
-					<Button
-						classes='absolute z-30'
-						action={() => transitionOnClickBack(ctx, () => router.back())}
-					>
-						Back to Projects
-					</Button>
 					<TitleDisplay classes='gsap-project-content opacity-0'>
 						{projectPageData.title}
 					</TitleDisplay>

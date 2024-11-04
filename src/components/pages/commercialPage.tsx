@@ -48,15 +48,8 @@ export default function CommercialPage({
 				</div>
 			)}
 			{/* commercial Page */}
-			<PageWrapper>
+			<PageWrapper hasMenu={true}>
 				<div ref={commercialPageRef} className='gsap-project-page opacity-0'>
-					{/* Back Button */}
-					<Button
-						classes='absolute'
-						action={() => transitionOnClickBack(ctx, () => router.back())}
-					>
-						Back to commercials
-					</Button>
 					<TitleHeadline classes='mt-6'>
 						{commercialPageData.title}
 					</TitleHeadline>

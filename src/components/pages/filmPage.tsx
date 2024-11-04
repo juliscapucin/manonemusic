@@ -48,15 +48,8 @@ export default function FilmPage({
 				</div>
 			)}
 			{/* film Page */}
-			<PageWrapper>
+			<PageWrapper hasMenu={true}>
 				<div ref={filmPageRef} className='gsap-project-page opacity-0'>
-					{/* Back Button */}
-					<Button
-						classes='absolute'
-						action={() => transitionOnClickBack(ctx, () => router.back())}
-					>
-						Back to films
-					</Button>
 					<TitleHeadline classes='gsap-project-content mt-6'>
 						{filmPageData.title}
 					</TitleHeadline>
