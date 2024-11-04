@@ -4,7 +4,7 @@ import { useRef } from "react"
 import Image from "next/image"
 
 import { Copyright } from "@/components"
-import { PageWrapper, TitleDisplay } from "@/components/ui"
+import { PageWrapper, Subtitle, TitleDisplay } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 
 import type { AboutPage } from "@/types"
@@ -19,7 +19,7 @@ export default function AboutPage({ data }: { data: AboutPage }) {
 		<PageWrapper classes='relative flex items-start justify-between'>
 			<div>
 				<TitleDisplay ref={titleAboutRef}>{data.title}</TitleDisplay>
-				<p className='max-w-prose'>{data.subtitle}</p>
+				<Subtitle subtitle={data.subtitle} />
 				<Copyright />
 			</div>
 			<div className='relative w-1/2 aspect-square overflow-clip'>

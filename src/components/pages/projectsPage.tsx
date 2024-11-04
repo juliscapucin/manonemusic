@@ -4,7 +4,7 @@ import { useRef } from "react"
 
 import { ProjectsMenu } from "@/components"
 
-import { PageWrapper, TitleDisplay } from "@/components/ui"
+import { PageWrapper, Subtitle, TitleDisplay } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 
 import { PortfolioItem, PortfolioPage } from "@/types"
@@ -38,7 +38,7 @@ export default function ProjectsPage({
 						<TitleDisplay classes='gsap-projects-title' ref={titleWorkRef}>
 							{projectsPage.title}
 						</TitleDisplay>
-						<p className='w-1/2'>{projectsPage.subtitle}</p>
+						<Subtitle subtitle={projectsPage.subtitle} />
 						{projects && projectsPage.title && (
 							<ProjectsMenu
 								section={projectsPage.title.toLowerCase().replace(/\s/g, "-")}

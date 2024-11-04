@@ -2,7 +2,7 @@
 
 import { useRef } from "react"
 
-import { PageWrapper, TitleDisplay } from "@/components/ui"
+import { PageWrapper, Subtitle, TitleDisplay } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 import { ProjectCard, ProjectsMenu, ReleasesMenu } from "@/components"
 import { PortfolioPage, PortfolioItem } from "@/types"
@@ -35,7 +35,7 @@ export default function ReleasesPage({
 					<TitleDisplay classes='gsap-projects-title' ref={titleReleasesRef}>
 						{data.title}
 					</TitleDisplay>
-					<p className='max-w-prose'>{data.subtitle}</p>
+					<Subtitle subtitle={data.subtitle} />
 				</div>
 				{releases && (
 					<ProjectsMenu

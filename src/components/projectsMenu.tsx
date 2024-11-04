@@ -12,6 +12,7 @@ export default function ProjectsMenu({ projects, section }: ProjectsMenuProps) {
 			{projects?.map((project: PortfolioItem) => {
 				return (
 					<ProjectCard
+						variant='section'
 						section={section}
 						key={project.slug}
 						title={project.title}
