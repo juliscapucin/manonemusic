@@ -48,8 +48,8 @@ export default function ProjectPage({
 				</div>
 			)}
 			{/* Project Page */}
-			<div className='gsap-project-page opacity-0'>
-				<PageWrapper>
+			<PageWrapper>
+				<div className='gsap-project-page opacity-0'>
 					{/* Back Button */}
 					<Button
 						classes='absolute z-30'
@@ -110,8 +110,8 @@ export default function ProjectPage({
 							</div>
 						</div>
 					</div>
-				</PageWrapper>
-			</div>
+				</div>
+			</PageWrapper>
 			{/* Trailer */}
 			{projectPageData.projectVideo && (
 				<PageWrapper>

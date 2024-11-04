@@ -48,8 +48,8 @@ export default function CommercialPage({
 				</div>
 			)}
 			{/* commercial Page */}
-			<div ref={commercialPageRef} className='gsap-project-page opacity-0'>
-				<PageWrapper>
+			<PageWrapper>
+				<div ref={commercialPageRef} className='gsap-project-page opacity-0'>
 					{/* Back Button */}
 					<Button
 						classes='absolute'
@@ -78,8 +78,8 @@ export default function CommercialPage({
 							</div>
 						</div>
 					</div>
-				</PageWrapper>
-			</div>
+				</div>
+			</PageWrapper>
 		</div>
 	)
 }

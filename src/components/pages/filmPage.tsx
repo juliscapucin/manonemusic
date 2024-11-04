@@ -48,8 +48,8 @@ export default function FilmPage({
 				</div>
 			)}
 			{/* film Page */}
-			<div ref={filmPageRef} className='gsap-project-page opacity-0'>
-				<PageWrapper>
+			<PageWrapper>
+				<div ref={filmPageRef} className='gsap-project-page opacity-0'>
 					{/* Back Button */}
 					<Button
 						classes='absolute'
@@ -78,8 +78,8 @@ export default function FilmPage({
 							</div>
 						</div>
 					</div>
-				</PageWrapper>
-			</div>
+				</div>
+			</PageWrapper>
 		</div>
 	)
 }

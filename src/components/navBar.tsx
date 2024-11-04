@@ -1,24 +1,22 @@
 "use client"
 
 import { useRef } from "react"
-import { usePathname } from "next/navigation"
+import { usePathname, useRouter } from "next/navigation"
 
 import { NavLink } from "@/components"
 import { Button } from "@/components/ui"
+import { handlePanelSlide, projectExit } from "@/lib/animations"
 
 type NavLink = { label: string; slug: string }
 
 type NavLinksProps = {
+	variant?: "section" | "page"
 	navLinks: NavLink[]
-	transitionOnClick: (
-		slug: string,
-		pushSlug: boolean,
-		routerAction?: () => void
-	) => void
 }
 
-export default function NavBar({ navLinks, transitionOnClick }: NavLinksProps) {
+export default function NavBar({ variant, navLinks }: NavLinksProps) {
 	const pathname = usePathname()
+	const router = useRouter()
 	const navRef = useRef<HTMLDivElement | null>(null)
 
 	return (
@@ -29,7 +27,7 @@ export default function NavBar({ navLinks, transitionOnClick }: NavLinksProps) {
 			<Button
 				href='/'
 				classes={`underlined-link text-titleSmall md:text-titleMedium uppercase transition ${pathname === "/" ? "opacity-0 -translate-x-full" : "opacity-100"}`}
-				transitionOnClick={() => transitionOnClick("/", true)}
+				transitionOnClick={() => handlePanelSlide("/", true)}
 			>
 				MAN/ONE MUSIC
 			</Button>
@@ -43,7 +41,9 @@ export default function NavBar({ navLinks, transitionOnClick }: NavLinksProps) {
 								key={`panel-button-${index}`}
 								activeState={pathname.includes(`/${link.slug}`) ? true : false}
 								action={() => {
-									transitionOnClick(link.slug, true)
+									variant === "section"
+										? handlePanelSlide(link.slug, true)
+										: projectExit(() => router.push(`/${link.slug}`))
 								}}
 							/>
 						)

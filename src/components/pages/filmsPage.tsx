@@ -4,7 +4,7 @@ import { useRef } from "react"
 
 import { PageWrapper, Subtitle, TitleDisplay } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
-import { ProjectsMenu, ReleasesMenu } from "@/components"
+import { ProjectsMenu } from "@/components"
 import { PortfolioItem, PortfolioPage } from "@/types"
 
 type FilmsPageProps = {
@@ -40,6 +40,7 @@ export default function FilmsPage({
 
 				{films && (
 					<ProjectsMenu
+						variant='section'
 						section={data.title.toLowerCase().replace(/\s/g, "-")}
 						projects={films}
 					/>

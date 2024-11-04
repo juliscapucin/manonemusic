@@ -76,7 +76,7 @@ export default function PanelDesktop({ data }: PanelDesktopProps) {
 
 	return (
 		<div className='hidden lg:block'>
-			<NavBar navLinks={navLinks} transitionOnClick={handlePanelSlide} />
+			<NavBar navLinks={navLinks} variant='section' />
 
 			{/* Panels */}
 			<div ref={outerContainerRef}>

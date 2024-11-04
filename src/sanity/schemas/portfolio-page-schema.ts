@@ -17,6 +17,16 @@ const portfolioPageSchema = {
 			type: "text",
 			validation: (Rule: Rule) => Rule.required().error("Subtitle is required"),
 		},
+		{
+			name: "slug",
+			title: "Slug",
+			type: "slug",
+			options: {
+				source: "title",
+				maxLength: 96,
+			},
+			validation: (Rule: Rule) => Rule.required().error("Slug is required"),
+		},
 		{ name: "metadataTitle", title: "Metadata Title", type: "string" },
 		{
 			name: "metadataDescription",

@@ -3,17 +3,21 @@ import { ProjectCard } from "@/components"
 
 type ProjectsMenuProps = {
 	projects: PortfolioItem[]
-	section: string
 	variant: "section" | "page"
+	section: string
 }
 
-export default function ProjectsMenu({ projects, section }: ProjectsMenuProps) {
+export default function ProjectsMenu({
+	projects,
+	section,
+	variant,
+}: ProjectsMenuProps) {
 	return (
 		<div className='flex items-start gap-4'>
 			{projects?.map((project: PortfolioItem) => {
 				return (
 					<ProjectCard
-						variant='section'
+						variant={variant}
 						section={section}
 						key={project.slug}
 						title={project.title}

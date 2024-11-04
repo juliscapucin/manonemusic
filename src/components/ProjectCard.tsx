@@ -3,11 +3,12 @@
 import Image from "next/image"
 import { usePathname, useRouter } from "next/navigation"
 
-import { handlePanelSlide } from "@/lib/animations"
+import gsap from "gsap"
+
+import { handlePanelSlide, projectExit } from "@/lib/animations"
 import { ImageField } from "@/types/Image"
 
 import { Button } from "@/components/ui"
-import Link from "next/link"
 
 type ProjectCardProps = {
 	variant: "section" | "page"
@@ -30,12 +31,14 @@ export default function ProjectCard({
 	return (
 		<Button
 			transitionOnClick={() => {
-				handlePanelSlide(section, true, () =>
-					router.push(`/${section}/${slug}`)
-				)
+				variant === "section"
+					? handlePanelSlide(section, true, () =>
+							router.push(`/${section}/${slug}`)
+						)
+					: projectExit(() => router.push(`/${section}/${slug}`))
 			}}
 			href={`/${section}/${slug}`}
-			classes={`gsap-project-card w-1/6 relative group ${variant === "section" ? "lg:w-64" : "lg:w-32"}`}
+			classes={`gsap-project-card relative group ${variant === "section" ? "lg:w-64" : "w-16 lg:w-24"}`}
 			aria-labelledby={`project-title-${slug}`}
 		>
 			{image && (
@@ -43,7 +46,7 @@ export default function ProjectCard({
 					<Image
 						className={`${
 							pathname.includes(slug) && "gsap-project-card z-100"
-						} relative w-1/6 aspect-square overflow-clip object-cover group-hover:scale-105 transition-transform duration-300`}
+						} relative w-full aspect-square overflow-clip object-cover group-hover:scale-105 transition-transform duration-300`}
 						src={image.imageUrl}
 						alt={image.imageAlt}
 						sizes='50vw'

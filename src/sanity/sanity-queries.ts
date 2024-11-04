@@ -77,6 +77,7 @@ export async function getPortfolioPage(
 		groq`*[_type == "portfolioPage" && title == $section] | order(releaseDate desc)[0]{
       title,
       subtitle,
+      "slug": slug.current
    }`,
 		{ section }
 	)

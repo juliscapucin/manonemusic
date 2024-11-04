@@ -37,7 +37,7 @@ export default function ReleasePage({
 			className='relative w-screen h-screen overflow-clip'
 		>
 			{/* releases Page copy for seamless page transition */}
-			{releasesPageData && (
+			{/* {releasesPageData && (
 				<div className='gsap-projects-page absolute top-0 left-8 pb-8'>
 					<ReleasesPage
 						releasesPageData={releasesPageData}
@@ -46,17 +46,17 @@ export default function ReleasePage({
 						isTransition={true}
 					/>
 				</div>
-			)}
+			)} */}
 			{/* release Page */}
-			<div className='gsap-project-page opacity-0'>
-				<PageWrapper>
+			<PageWrapper hasMenu={true}>
+				<div className='gsap-project-page opacity-0'>
 					{/* Back Button */}
-					<Button
+					{/* <Button
 						classes='absolute'
 						action={() => transitionOnClickBack(ctx, () => router.back())}
 					>
 						Back to releases
-					</Button>
+					</Button> */}
 					<TitleHeadline classes='gsap-projects-title mt-6 gsap-project-content'>
 						{releasePageData.title}
 					</TitleHeadline>
@@ -77,9 +77,13 @@ export default function ReleasePage({
 						</div>
 						<PlayerTrackList tracks={releasePageData.tracklist} />
 					</div>
-					<ProjectsMenu variant='page' projects={releasesData} section={""} />
-				</PageWrapper>
-			</div>
+					<ProjectsMenu
+						variant='page'
+						projects={releasesData}
+						section={releasesPageData.slug}
+					/>
+				</div>
+			</PageWrapper>
 		</div>
 	)
 }
