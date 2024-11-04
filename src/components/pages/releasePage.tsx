@@ -43,6 +43,7 @@ export default function ReleasePage({
 						releasesPageData={releasesPageData}
 						releases={releasesData}
 						titleScrollTrigger={false}
+						isTransition={true}
 					/>
 				</div>
 			)}

@@ -11,12 +11,14 @@ type ReleasesPageProps = {
 	releasesPageData?: PortfolioPage
 	releases: PortfolioItem[]
 	titleScrollTrigger?: boolean
+	isTransition?: boolean
 }
 
 export default function ReleasesPage({
 	releasesPageData: data,
 	releases,
 	titleScrollTrigger,
+	isTransition,
 }: ReleasesPageProps) {
 	const titleReleasesRef = useRef(null)
 	const { windowAspectRatio } = useWindowDimensions()
@@ -35,7 +37,8 @@ export default function ReleasesPage({
 					<TitleDisplay classes='gsap-projects-title' ref={titleReleasesRef}>
 						{data.title}
 					</TitleDisplay>
-					<Subtitle subtitle={data.subtitle} />
+
+					<Subtitle subtitle={data.subtitle} isTransition={isTransition} />
 				</div>
 				{releases && (
 					<ProjectsMenu

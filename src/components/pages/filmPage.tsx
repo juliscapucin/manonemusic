@@ -40,7 +40,11 @@ export default function FilmPage({
 			{/* films Page copy for seamless page transition */}
 			{filmsPageData && (
 				<div className='gsap-projects-page absolute top-0 left-8 pb-8'>
-					<FilmsPage data={filmsPageData} titleScrollTrigger={false} />
+					<FilmsPage
+						data={filmsPageData}
+						titleScrollTrigger={false}
+						isTransition={true}
+					/>
 				</div>
 			)}
 			{/* film Page */}

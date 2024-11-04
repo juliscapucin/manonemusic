@@ -43,6 +43,7 @@ export default function CommercialPage({
 					<CommercialsPage
 						data={commercialsPageData}
 						titleScrollTrigger={false}
+						isTransition={true}
 					/>
 				</div>
 			)}

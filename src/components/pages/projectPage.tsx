@@ -43,6 +43,7 @@ export default function ProjectPage({
 						projectsPage={projectsPageData}
 						projects={projectsData}
 						titleScrollTrigger={false}
+						isTransition={true}
 					/>
 				</div>
 			)}
