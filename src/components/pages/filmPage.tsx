@@ -1,17 +1,14 @@
 "use client"
 
-import { useLayoutEffect, useRef } from "react"
-import { useRouter } from "next/navigation"
+import { useRef } from "react"
 import Image from "next/image"
 
 import gsap from "gsap"
-import Flip from "gsap/Flip"
 
-import { Logo, PageWrapper, TitleHeadline } from "@/components/ui"
-import { Button } from "@/components/buttons"
+import { PageWrapper, TitleHeadline } from "@/components/ui"
+import { ButtonBack } from "@/components/buttons"
 import { FilmsPage } from "@/components/pages"
 import { Film, PortfolioItem, PortfolioPage } from "@/types"
-import { transitionOnClickBack } from "@/lib/animations"
 import { useTransitionOnEnter } from "@/hooks"
 
 type filmPageProps = {
@@ -25,7 +22,6 @@ export default function FilmPage({
 	filmsData,
 	filmsPageData,
 }: filmPageProps) {
-	const router = useRouter()
 	const containerRef = useRef<HTMLDivElement>(null)
 	const filmPageRef = useRef<HTMLDivElement>(null)
 	let ctx = gsap.context(() => {})
@@ -50,6 +46,8 @@ export default function FilmPage({
 			{/* film Page */}
 			<PageWrapper hasMenu={true}>
 				<div ref={filmPageRef} className='gsap-project-page opacity-0'>
+					<ButtonBack ctx={ctx} slug={filmsPageData.slug} />
+
 					<TitleHeadline classes='gsap-project-content mt-6'>
 						{filmPageData.title}
 					</TitleHeadline>

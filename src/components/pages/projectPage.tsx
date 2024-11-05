@@ -1,17 +1,15 @@
 "use client"
 
-import { useRouter } from "next/navigation"
 import Image from "next/image"
+import { useRef } from "react"
 
 import gsap from "gsap"
 
-import { Logo, PageWrapper, TitleDisplay } from "@/components/ui"
+import { PageWrapper, TitleDisplay } from "@/components/ui"
 import { PortfolioItem, PortfolioPage, Project } from "@/types"
-import { Button } from "@/components/buttons"
+import { Button, ButtonBack } from "@/components/buttons"
 import { ProjectsPage } from "."
-import { useLayoutEffect, useRef } from "react"
 import { ProjectTrailer, ProjectsMenu } from "@/components"
-import { transitionOnClickBack } from "@/lib/animations"
 import { useTransitionOnEnter } from "@/hooks"
 
 type ProjectPageProps = {
@@ -25,7 +23,6 @@ export default function ProjectPage({
 	projectsData,
 	projectsPageData,
 }: ProjectPageProps) {
-	const router = useRouter()
 	const containerProjectRef = useRef<HTMLDivElement>(null)
 	let ctx = gsap.context(() => {})
 
@@ -50,6 +47,8 @@ export default function ProjectPage({
 			{/* Project Page */}
 			<PageWrapper hasMenu={true}>
 				<div className='gsap-project-page opacity-0'>
+					<ButtonBack ctx={ctx} slug={projectsPageData.slug} />
+
 					<TitleDisplay classes='gsap-project-content opacity-0'>
 						{projectPageData.title}
 					</TitleDisplay>

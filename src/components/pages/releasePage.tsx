@@ -1,17 +1,15 @@
 "use client"
 
 import { useRef } from "react"
-import { useRouter } from "next/navigation"
 import Image from "next/image"
 
 import gsap from "gsap"
 
 import { PlayerTrackList, ProjectsMenu } from "@/components"
 import { PageWrapper, TitleHeadline } from "@/components/ui"
-import { Button } from "@/components/buttons"
+import { ButtonBack } from "@/components/buttons"
 import { ReleasesPage } from "@/components/pages"
 import { PortfolioItem, PortfolioPage, Release } from "@/types"
-import { transitionOnClickBack } from "@/lib/animations"
 import { useTransitionOnEnter } from "@/hooks"
 
 type releasePageProps = {
@@ -25,7 +23,6 @@ export default function ReleasePage({
 	releasesData,
 	releasesPageData,
 }: releasePageProps) {
-	const router = useRouter()
 	const containerReleaseRef = useRef<HTMLDivElement>(null)
 	let ctx = gsap.context(() => {})
 
@@ -50,14 +47,8 @@ export default function ReleasePage({
 			{/* release Page */}
 			<PageWrapper hasMenu={true}>
 				<div className='gsap-project-page opacity-0'>
-					{/* Back Button */}
-					{/* <Button
-						classes='absolute'
-						action={() => transitionOnClickBack(ctx, () => router.back())}
-					>
-						Back to releases
-					</Button> */}
-					<TitleHeadline classes='gsap-projects-title mt-6 gsap-project-content'>
+					<ButtonBack ctx={ctx} slug={releasesPageData.slug} />
+					<TitleHeadline classes='gsap-projects-title mt-4 gsap-project-content'>
 						{releasePageData.title}
 					</TitleHeadline>
 					<div className='relative w-full flex gap-8'>
