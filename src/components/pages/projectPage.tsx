@@ -37,7 +37,7 @@ export default function ProjectPage({
 			className='relative w-screen h-screen overflow-clip'
 		>
 			{/* Projects Page copy for seamless page transition */}
-			{projectsPageData && (
+			{/* {projectsPageData && (
 				<div className='gsap-projects-page absolute top-0 left-8 pb-8'>
 					<ProjectsPage
 						projectsPage={projectsPageData}
@@ -46,7 +46,7 @@ export default function ProjectPage({
 						isTransition={true}
 					/>
 				</div>
-			)}
+			)} */}
 			{/* Project Page */}
 			<PageWrapper hasMenu={true}>
 				<div className='gsap-project-page opacity-0'>

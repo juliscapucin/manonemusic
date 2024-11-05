@@ -38,7 +38,7 @@ export default function FilmPage({
 			className='relative w-screen h-screen overflow-clip'
 		>
 			{/* films Page copy for seamless page transition */}
-			{filmsPageData && (
+			{/* {filmsPageData && (
 				<div className='gsap-projects-page absolute top-0 left-8 pb-8'>
 					<FilmsPage
 						data={filmsPageData}
@@ -46,7 +46,7 @@ export default function FilmPage({
 						isTransition={true}
 					/>
 				</div>
-			)}
+			)} */}
 			{/* film Page */}
 			<PageWrapper hasMenu={true}>
 				<div ref={filmPageRef} className='gsap-project-page opacity-0'>

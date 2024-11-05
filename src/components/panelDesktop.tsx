@@ -12,7 +12,7 @@ import { navLinks } from "@/constants"
 import { AllData } from "@/types"
 import { NavBar, PanelContent } from "@/components"
 import { ButtonScroll } from "./buttons"
-import { handlePanelSlide } from "@/lib/animations"
+import { handlePanelSlide, panelsEnter } from "@/lib/animations"
 
 type PanelDesktopProps = {
 	data: AllData
@@ -69,9 +69,12 @@ export default function PanelDesktop({ data }: PanelDesktopProps) {
 
 	// Jump to panel on internal page load
 	useEffect(() => {
-		if (!pathname || pathname === "/") return
+		if (!pathname || !outerContainerRef.current) return
 
-		handlePanelSlide(pathname, false)
+		if (pathname !== "/") {
+			handlePanelSlide(pathname, false)
+		}
+		panelsEnter(outerContainerRef.current)
 	}, [])
 
 	return (
@@ -79,7 +82,7 @@ export default function PanelDesktop({ data }: PanelDesktopProps) {
 			<NavBar navLinks={navLinks} variant='section' />
 
 			{/* Panels */}
-			<div ref={outerContainerRef}>
+			<div ref={outerContainerRef} className='gsap-panels-container opacity-0'>
 				<div ref={panelsContainerRef} className='flex gap-32'>
 					{navLinks.map((section, index) => {
 						return (

@@ -5,7 +5,7 @@ import { usePathname, useRouter } from "next/navigation"
 
 import gsap from "gsap"
 
-import { handlePanelSlide, projectExit } from "@/lib/animations"
+import { handlePanelSlide, projectExit, panelsExit } from "@/lib/animations"
 import { ImageField } from "@/types/Image"
 
 import { Button } from "@/components/ui"
@@ -32,9 +32,7 @@ export default function ProjectCard({
 		<Button
 			transitionOnClick={() => {
 				variant === "section"
-					? handlePanelSlide(section, true, () =>
-							router.push(`/${section}/${slug}`)
-						)
+					? panelsExit(() => router.push(`/${section}/${slug}`))
 					: projectExit(() => router.push(`/${section}/${slug}`))
 			}}
 			href={`/${section}/${slug}`}

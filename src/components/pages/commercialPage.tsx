@@ -38,7 +38,7 @@ export default function CommercialPage({
 			className='relative w-screen h-screen overflow-clip'
 		>
 			{/* commercials Page copy for seamless page transition */}
-			{commercialsPageData && (
+			{/* {commercialsPageData && (
 				<div className='gsap-projects-page absolute top-0 left-8 pb-8'>
 					<CommercialsPage
 						data={commercialsPageData}
@@ -46,7 +46,7 @@ export default function CommercialPage({
 						isTransition={true}
 					/>
 				</div>
-			)}
+			)} */}
 			{/* commercial Page */}
 			<PageWrapper hasMenu={true}>
 				<div ref={commercialPageRef} className='gsap-project-page opacity-0'>

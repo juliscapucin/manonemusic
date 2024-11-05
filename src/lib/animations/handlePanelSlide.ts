@@ -3,7 +3,8 @@ import gsap from "gsap"
 export const handlePanelSlide = (
 	targetSlug: string,
 	animateSlide: boolean,
-	routerAction?: () => void
+	routerAction?: () => void,
+	panelsContainer?: HTMLDivElement
 ) => {
 	const targetPanel =
 		targetSlug === "/"
@@ -19,11 +20,17 @@ export const handlePanelSlide = (
 				y: y,
 				autoKill: false,
 			},
-			duration: 0.8,
+			duration: 0.5,
 			onComplete: () => {
 				targetSlug === "/"
 					? window.history.pushState(null, "", "/")
 					: window.history.pushState(null, "", `/${targetSlug}`)
+				if (panelsContainer) {
+					gsap.to(panelsContainer, {
+						yPercent: -50,
+						duration: 0.5,
+					})
+				}
 				routerAction && routerAction()
 			},
 		})
