@@ -5,9 +5,9 @@ import Image from "next/image"
 
 import gsap from "gsap"
 
+import { ProjectsMenuPage } from "@/components"
 import { PageWrapper, TitleHeadline } from "@/components/ui"
 import { ButtonBack } from "@/components/buttons"
-import { FilmsPage } from "@/components/pages"
 import { Film, PortfolioItem, PortfolioPage } from "@/types"
 import { useTransitionOnEnter } from "@/hooks"
 
@@ -33,18 +33,9 @@ export default function FilmPage({
 			ref={containerRef}
 			className='relative w-screen h-screen overflow-clip'
 		>
-			{/* films Page copy for seamless page transition */}
-			{/* {filmsPageData && (
-				<div className='gsap-projects-page absolute top-0 left-8 pb-8'>
-					<FilmsPage
-						data={filmsPageData}
-						titleScrollTrigger={false}
-						isTransition={true}
-					/>
-				</div>
-			)} */}
-			{/* film Page */}
 			<PageWrapper hasMenu={true}>
+				<ProjectsMenuPage projectsData={filmsData} pageData={filmsPageData} />
+
 				<div ref={filmPageRef} className='gsap-project-page opacity-0'>
 					<ButtonBack ctx={ctx} slug={filmsPageData.slug} />
 

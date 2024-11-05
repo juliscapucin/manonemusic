@@ -13,7 +13,9 @@ export default function ProjectsMenu({
 	variant,
 }: ProjectsMenuProps) {
 	return (
-		<div className='flex items-start gap-4'>
+		<div
+			className={`flex items-start justify-start gap-4 ${variant === "page" && "flex-col"}`}
+		>
 			{projects?.map((project: PortfolioItem) => {
 				return (
 					<ProjectCard

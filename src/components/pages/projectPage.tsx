@@ -8,8 +8,7 @@ import gsap from "gsap"
 import { PageWrapper, TitleDisplay } from "@/components/ui"
 import { PortfolioItem, PortfolioPage, Project } from "@/types"
 import { Button, ButtonBack } from "@/components/buttons"
-import { ProjectsPage } from "."
-import { ProjectTrailer, ProjectsMenu } from "@/components"
+import { ProjectTrailer, ProjectsMenu, ProjectsMenuPage } from "@/components"
 import { useTransitionOnEnter } from "@/hooks"
 
 type ProjectPageProps = {
@@ -33,19 +32,11 @@ export default function ProjectPage({
 			ref={containerProjectRef}
 			className='relative w-screen h-screen overflow-clip'
 		>
-			{/* Projects Page copy for seamless page transition */}
-			{/* {projectsPageData && (
-				<div className='gsap-projects-page absolute top-0 left-8 pb-8'>
-					<ProjectsPage
-						projectsPage={projectsPageData}
-						projects={projectsData}
-						titleScrollTrigger={false}
-						isTransition={true}
-					/>
-				</div>
-			)} */}
-			{/* Project Page */}
 			<PageWrapper hasMenu={true}>
+				<ProjectsMenuPage
+					projectsData={projectsData}
+					pageData={projectsPageData}
+				/>
 				<div className='gsap-project-page opacity-0'>
 					<ButtonBack ctx={ctx} slug={projectsPageData.slug} />
 

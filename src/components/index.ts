@@ -9,6 +9,7 @@ import PanelMobile from "./panelMobile"
 import ProjectCard from "./projectCard"
 import ProjectTrailer from "./projectTrailer"
 import ProjectsMenu from "./projectsMenu"
+import ProjectsMenuPage from "./projectsMenuPage"
 import ReleaseCard from "./releaseCard"
 import ReleasesMenu from "./releasesMenu"
 import RootLayout from "./rootLayout"
@@ -34,6 +35,7 @@ export {
 	ProjectCard,
 	ProjectTrailer,
 	ProjectsMenu,
+	ProjectsMenuPage,
 	ReleaseCard,
 	ReleasesMenu,
 	RootLayout,

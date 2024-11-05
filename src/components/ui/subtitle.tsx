@@ -17,15 +17,14 @@ const animateSubtitle = (element: HTMLParagraphElement, duration: number) => {
 
 type SubtitleProps = {
 	subtitle: string
-	isTransition?: boolean
 }
 
-export default function Subtitle({ subtitle, isTransition }: SubtitleProps) {
+export default function Subtitle({ subtitle }: SubtitleProps) {
 	const subtitleRef = useRef<HTMLParagraphElement | null>(null)
 	const ctx = gsap.context(() => {})
 
 	useLayoutEffect(() => {
-		if (!subtitleRef.current || isTransition) return
+		if (!subtitleRef.current) return
 
 		gsap.registerPlugin(ScrollTrigger)
 

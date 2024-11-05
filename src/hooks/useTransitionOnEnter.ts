@@ -11,17 +11,12 @@ export default function useTransitionOnEnter(ctx: gsap.Context) {
 
 			const tl = gsap.timeline({ ease: "power4.out" })
 
-			// Move the projects page to left
-			tl.to(".gsap-projects-page", {
-				xPercent: -100,
+			// Bring the project page into view
+			tl.to(".gsap-project-page", {
+				xPercent: 0,
+				opacity: 1,
 				duration: 0.3,
 			})
-				// Bring the project page into view
-				.to(".gsap-project-page", {
-					xPercent: 0,
-					opacity: 1,
-					duration: 0.3,
-				})
 				// Animate the project image
 				.to(".gsap-project-image", {
 					opacity: 1,

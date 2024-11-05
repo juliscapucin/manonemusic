@@ -52,12 +52,14 @@ export default function ProjectCard({
 					/>
 				</div>
 			)}
-			<span
-				className='block text-labelMedium lg:text-labelLarge uppercase text-left leading-none opacity-0 -translate-y-full group-hover:opacity-100 group-hover:translate-y-4 transition-all duration-300'
-				id={`project-title-${slug}`}
-			>
-				{title}
-			</span>
+			{variant === "section" && (
+				<span
+					className='absolute text-labelMedium lg:text-labelLarge uppercase text-left leading-none opacity-0 -translate-y-full group-hover:opacity-100 group-hover:translate-y-4 transition-all duration-300'
+					id={`project-title-${slug}`}
+				>
+					{title}
+				</span>
+			)}
 		</Button>
 	)
 }

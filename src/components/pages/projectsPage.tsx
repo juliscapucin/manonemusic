@@ -13,14 +13,12 @@ type ProjectPageProps = {
 	projectsPage?: PortfolioPage
 	projects?: PortfolioItem[]
 	titleScrollTrigger?: boolean
-	isTransition?: boolean
 }
 
 export default function ProjectsPage({
 	projectsPage,
 	projects,
 	titleScrollTrigger,
-	isTransition,
 }: ProjectPageProps) {
 	const titleWorkRef = useRef(null)
 	const { windowAspectRatio } = useWindowDimensions()
@@ -40,10 +38,7 @@ export default function ProjectsPage({
 						<TitleDisplay classes='gsap-projects-title' ref={titleWorkRef}>
 							{projectsPage.title}
 						</TitleDisplay>
-						<Subtitle
-							subtitle={projectsPage.subtitle}
-							isTransition={isTransition}
-						/>
+						<Subtitle subtitle={projectsPage.subtitle} />
 						{projects && projectsPage.title && (
 							<ProjectsMenu
 								variant='section'

@@ -11,14 +11,12 @@ type CommercialsPageProps = {
 	data?: PortfolioPage
 	commercials?: PortfolioItem[]
 	titleScrollTrigger?: boolean
-	isTransition?: boolean
 }
 
 export default function CommercialsPage({
 	data,
 	commercials,
 	titleScrollTrigger,
-	isTransition,
 }: CommercialsPageProps) {
 	const titleCommercialsRef = useRef(null)
 	const { windowAspectRatio } = useWindowDimensions()
@@ -36,7 +34,7 @@ export default function CommercialsPage({
 				<TitleDisplay classes='gsap-projects-title' ref={titleCommercialsRef}>
 					{data.title}
 				</TitleDisplay>
-				<Subtitle subtitle={data.subtitle} isTransition={isTransition} />
+				<Subtitle subtitle={data.subtitle} />
 
 				{commercials && (
 					<ProjectsMenu

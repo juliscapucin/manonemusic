@@ -11,14 +11,12 @@ type FilmsPageProps = {
 	data?: PortfolioPage
 	films?: PortfolioItem[]
 	titleScrollTrigger?: boolean
-	isTransition?: boolean
 }
 
 export default function FilmsPage({
 	data,
 	films,
 	titleScrollTrigger,
-	isTransition,
 }: FilmsPageProps) {
 	const titleFilmsRef = useRef(null)
 	const { windowAspectRatio } = useWindowDimensions()
@@ -36,7 +34,7 @@ export default function FilmsPage({
 				<TitleDisplay classes='gsap-projects-title' ref={titleFilmsRef}>
 					{data.title}
 				</TitleDisplay>
-				<Subtitle subtitle={data.subtitle} isTransition={isTransition} />
+				<Subtitle subtitle={data.subtitle} />
 
 				{films && (
 					<ProjectsMenu

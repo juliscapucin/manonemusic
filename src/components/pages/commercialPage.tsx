@@ -5,9 +5,9 @@ import Image from "next/image"
 
 import gsap from "gsap"
 
+import { ProjectsMenuPage } from "@/components"
 import { PageWrapper, TitleHeadline } from "@/components/ui"
 import { ButtonBack } from "@/components/buttons"
-import { CommercialsPage } from "@/components/pages"
 import { Commercial, PortfolioItem, PortfolioPage } from "@/types"
 import { useTransitionOnEnter } from "@/hooks"
 
@@ -33,18 +33,12 @@ export default function CommercialPage({
 			ref={containerRef}
 			className='relative w-screen h-screen overflow-clip'
 		>
-			{/* commercials Page copy for seamless page transition */}
-			{/* {commercialsPageData && (
-				<div className='gsap-projects-page absolute top-0 left-8 pb-8'>
-					<CommercialsPage
-						data={commercialsPageData}
-						titleScrollTrigger={false}
-						isTransition={true}
-					/>
-				</div>
-			)} */}
-			{/* commercial Page */}
 			<PageWrapper hasMenu={true}>
+				<ProjectsMenuPage
+					projectsData={commercialsData}
+					pageData={commercialsPageData}
+				/>
+
 				<div ref={commercialPageRef} className='gsap-project-page opacity-0'>
 					<ButtonBack ctx={ctx} slug={commercialsPageData.slug} />
 

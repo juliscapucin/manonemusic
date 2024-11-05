@@ -5,7 +5,7 @@ import Image from "next/image"
 
 import gsap from "gsap"
 
-import { PlayerTrackList, ProjectsMenu } from "@/components"
+import { PlayerTrackList, ProjectsMenu, ProjectsMenuPage } from "@/components"
 import { PageWrapper, TitleHeadline } from "@/components/ui"
 import { ButtonBack } from "@/components/buttons"
 import { ReleasesPage } from "@/components/pages"
@@ -33,19 +33,11 @@ export default function ReleasePage({
 			ref={containerReleaseRef}
 			className='relative w-screen h-screen overflow-clip'
 		>
-			{/* releases Page copy for seamless page transition */}
-			{/* {releasesPageData && (
-				<div className='gsap-projects-page absolute top-0 left-8 pb-8'>
-					<ReleasesPage
-						releasesPageData={releasesPageData}
-						releases={releasesData}
-						titleScrollTrigger={false}
-						isTransition={true}
-					/>
-				</div>
-			)} */}
-			{/* release Page */}
 			<PageWrapper hasMenu={true}>
+				<ProjectsMenuPage
+					projectsData={releasesData}
+					pageData={releasesPageData}
+				/>
 				<div className='gsap-project-page opacity-0'>
 					<ButtonBack ctx={ctx} slug={releasesPageData.slug} />
 					<TitleHeadline classes='gsap-projects-title mt-4 gsap-project-content'>
@@ -64,15 +56,9 @@ export default function ReleasePage({
 									}}
 								/>
 							</div>
-							<div className='w-1/3 min-w-[300px] space-y-8 opacity-0'></div>
 						</div>
 						<PlayerTrackList tracks={releasePageData.tracklist} />
 					</div>
-					<ProjectsMenu
-						variant='page'
-						projects={releasesData}
-						section={releasesPageData.slug}
-					/>
 				</div>
 			</PageWrapper>
 		</div>
