@@ -1,58 +1,25 @@
 "use client"
 
-import { useEffect, useRef } from "react"
-import { usePathname } from "next/navigation"
+import { useRef } from "react"
 
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { location } from "@/constants"
 
-import { Availability, Copyright, Status } from "@/components"
-import { Heading, TitleDisplay } from "@/components/ui"
+import { Copyright, Status } from "@/components"
+import { Heading } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 
 import type { HomePage } from "@/types"
 
 export default function HomePage({ data }: { data: HomePage }) {
-	const homeWrapperRef = useRef(null)
 	const titleHomeRef = useRef(null)
-	const pathname = usePathname()
 
 	const { windowAspectRatio } = useWindowDimensions()
 
 	useTitleScrollTrigger(titleHomeRef, "/", windowAspectRatio)
 
-	// ScrollTrigger for Page Reveal
-	// TODO add trigger for home page
-	useEffect(() => {
-		if (!homeWrapperRef.current || pathname !== "/") return
-
-		gsap.registerPlugin(ScrollTrigger)
-		const homeWrapper = homeWrapperRef.current as HTMLDivElement
-
-		const offsetLeft = () => homeWrapper!.offsetLeft
-		const width = () => homeWrapper!.offsetWidth
-
-		let ctx = gsap.context(() => {
-			ScrollTrigger.create({
-				trigger: homeWrapper,
-				start: () => `${offsetLeft()}px bottom`,
-				end: () => `+=${width()}`,
-				toggleActions: "play none none reverse",
-				onUpdate: (self) => {
-					if (self.isActive && window.location.pathname !== "/") {
-						window.history.pushState(null, "", "/")
-					}
-				},
-			})
-		})
-
-		return () => ctx.revert()
-	}, [homeWrapperRef])
-
 	return (
 		<section
-			ref={homeWrapperRef}
-			className='relative w-screen h-screen custom-min-h-screen'
+			className='relative w-screen h-screen min-h-svh custom-min-w-screen max-w-desktop pb-8 overflow-x-clip'
 			data-id='panel-home'
 		>
 			<div className='mt-32'>
@@ -64,7 +31,6 @@ export default function HomePage({ data }: { data: HomePage }) {
 				<Heading tag='h2' variant='title' classes='w-1/2 uppercase'>
 					Music & Sound Design
 				</Heading>
-				<Copyright />
 			</div>
 
 			<div className='w-full flex justify-between mt-32 md:mt-16'>
@@ -74,8 +40,9 @@ export default function HomePage({ data }: { data: HomePage }) {
 						of your brand and resonate with your audience.
 					</p>
 				</div>
-				<Status location='Amsterdam' />
+				<Status location={location} />
 			</div>
+			<Copyright hasCredits={false} />
 			{/* <Availability /> */}
 		</section>
 	)

@@ -19,12 +19,12 @@ export default function SocialLinks({ data }: SocialLinksProps) {
 	return (
 		<>
 			{data && (
-				<div ref={wrapperRef} className='overflow-hidden'>
-					<span>Socials</span>
+				<div ref={wrapperRef} className='overflow-hidden w-1/2'>
+					<h3>Listen & Follow</h3>
 					{data.map((item) => {
 						return (
 							<div
-								className='relative max-h-32 min-h-32 flex justify-start items-start'
+								className='relative flex justify-start items-start'
 								key={item.platform}
 							>
 								<Link

@@ -2,7 +2,7 @@
 
 import { useRef } from "react"
 
-import { Availability, SocialLinks } from "@/components"
+import { Availability, Copyright, SocialLinks } from "@/components"
 import { PageWrapper, TitleDisplay } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 import type { ContactPage } from "@/types"
@@ -16,10 +16,11 @@ export default function ContactPage({ data }: { data: ContactPage }) {
 	return (
 		<PageWrapper>
 			<TitleDisplay ref={titleContactRef}>{data.title}</TitleDisplay>
-			<div className='flex flex-row flex-nowrap gap-32'>
+			<div className='flex justify-between mt-32'>
 				<Availability availability='' />
 				<SocialLinks data={data.socials} />
 			</div>
+			<Copyright />
 		</PageWrapper>
 	)
 }
