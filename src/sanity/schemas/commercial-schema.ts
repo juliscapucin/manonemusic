@@ -50,8 +50,8 @@ const commercialSchema = {
 			],
 		},
 		{
-			name: "commercialInfo",
-			title: "Commercial Info",
+			name: "info",
+			title: "Info",
 			type: "string",
 		},
 		{ name: "description", title: "Description", type: "text" },

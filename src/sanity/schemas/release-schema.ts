@@ -50,8 +50,8 @@ const releaseSchema = {
 				Rule.required().error("Release Date is required"),
 		},
 		{
-			name: "releaseInfo",
-			title: "Release Info",
+			name: "info",
+			title: "Info",
 			type: "string",
 		},
 		{

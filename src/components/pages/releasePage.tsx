@@ -1,21 +1,10 @@
 "use client"
 
-import { useRef } from "react"
-import Image from "next/image"
-
 import gsap from "gsap"
 
-import {
-	PlayerTrackList,
-	ProjectInfo,
-	ProjectPageContent,
-	ProjectPageImage,
-	ProjectsMenu,
-	ProjectsMenuPage,
-} from "@/components"
+import { ProjectInfo, ProjectPageContent, ProjectsMenuPage } from "@/components"
 import { PageWrapper, TitleHeadline } from "@/components/ui"
 import { ButtonBack } from "@/components/buttons"
-import { ReleasesPage } from "@/components/pages"
 import { PortfolioItem, PortfolioPage, Release } from "@/types"
 import { useTransitionOnEnter } from "@/hooks"
 
@@ -30,16 +19,12 @@ export default function ReleasePage({
 	releasesData,
 	releasesPageData,
 }: releasePageProps) {
-	const containerReleaseRef = useRef<HTMLDivElement>(null)
 	let ctx = gsap.context(() => {})
 
 	useTransitionOnEnter(ctx)
 
 	return (
-		<div
-			ref={containerReleaseRef}
-			className='relative w-screen h-screen overflow-clip'
-		>
+		<div className='relative w-screen h-screen overflow-clip'>
 			<PageWrapper hasMenu={true}>
 				<ProjectsMenuPage
 					projectsData={releasesData}

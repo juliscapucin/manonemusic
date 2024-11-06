@@ -50,10 +50,11 @@ const projectSchema = {
 			],
 		},
 		{
-			name: "projectInfo",
-			title: "Project Info",
+			name: "info",
+			title: "Info",
 			type: "string",
 		},
+		{ name: "description", title: "Description", type: "text" },
 		{
 			name: "projectLink",
 			title: "Project Link",

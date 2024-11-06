@@ -10,6 +10,6 @@ export type Release = {
 	}
 	image: ImageField
 	releaseDate: string
-	releaseInfo?: string
+	info?: string
 	tracklist: Track[]
 }

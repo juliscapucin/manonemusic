@@ -15,7 +15,8 @@ export type Film = {
 		_type: string
 		current: string
 	}
-	filmInfo?: FilmInfo
+	releaseDate: string
+	info?: string
 	image: ImageField
 	description?: string
 	trailerUrl?: string

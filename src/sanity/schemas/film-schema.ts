@@ -22,46 +22,20 @@ const filmSchema = {
 			validation: (Rule: Rule) => Rule.required().error("Slug is required"),
 		},
 		{
-			name: "filmInfo",
-			title: "Film Info",
-			type: "object",
-			fields: [
-				{
-					name: "genre",
-					title: "Genre",
-					type: "string",
-				},
-				{
-					name: "duration",
-					title: "Duration",
-					type: "string",
-					description: "Duration of the movie in MMm format (ex: 150m)",
-				},
-				{
-					name: "releaseDate",
-					title: "Release Date",
-					type: "date",
-					options: {
-						dateFormat: "YYYY-MM-DD",
-						calendarTodayLabel: "Today",
-					},
-				},
-				{
-					name: "director",
-					title: "Director",
-					type: "string",
-				},
-				{
-					name: "writer",
-					title: "Writer",
-					type: "string",
-				},
-				{
-					name: "music",
-					title: "Music",
-					type: "string",
-				},
-			],
+			name: "releaseDate",
+			title: "Release Date",
+			type: "date",
+			options: {
+				dateFormat: "YYYY-MM-DD",
+				calendarTodayLabel: "Today",
+			},
+			validation: (Rule: Rule) =>
+				Rule.required().error("Release Date is required"),
+		},
+		{
+			name: "info",
+			title: "Info",
+			type: "string",
 		},
 		{
 			name: "image",

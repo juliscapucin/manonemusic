@@ -110,7 +110,8 @@ export async function getProject(slug: string): Promise<Project> {
          "imageUrl": image.image.asset->url,
          "imageAlt": image.imageAlt
          },
-      projectInfo,
+      info,
+      description,
       projectLink,
       projectVideo
       }`,
@@ -124,13 +125,15 @@ export async function getFilm(slug: string): Promise<Project> {
       _id,
       "slug": slug.current,
       title,
-      description,
-      projectInfo,
+      releaseDate,
+      info,
       "image": {
          "imageUrl": image.image.asset->url,
          "imageAlt": image.imageAlt
          },
-      releaseDate,
+      description,
+      projectLink,
+      trailerUrl
    }`,
 		{ slug }
 	)
@@ -141,13 +144,13 @@ export async function getCommercial(slug: string): Promise<Project> {
       _id,
       "slug": slug.current,
       title,
-      description,
-      projectInfo,
+      releaseDate,
+      info,
       "image": {
          "imageUrl": image.image.asset->url,
          "imageAlt": image.imageAlt
          },
-      releaseDate,
+      description,
    }`,
 		{ slug }
 	)
@@ -158,7 +161,7 @@ export async function getRelease(slug: string): Promise<Release> {
       _id,
       "slug": slug.current,
       title,
-      releaseInfo,
+      info,
       releaseDate,
       "image": {
          "imageUrl": image.image.asset->url,

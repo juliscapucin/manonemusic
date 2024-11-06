@@ -1,11 +1,10 @@
 "use client"
 
 import { useRef } from "react"
-import Image from "next/image"
 
 import gsap from "gsap"
 
-import { ProjectsMenuPage } from "@/components"
+import { ProjectInfo, ProjectPageContent, ProjectsMenuPage } from "@/components"
 import { PageWrapper, TitleHeadline } from "@/components/ui"
 import { ButtonBack } from "@/components/buttons"
 import { Film, PortfolioItem, PortfolioPage } from "@/types"
@@ -39,27 +38,21 @@ export default function FilmPage({
 				<div ref={filmPageRef} className='gsap-project-page opacity-0'>
 					<ButtonBack ctx={ctx} slug={filmsPageData.slug} />
 
-					<TitleHeadline classes='gsap-project-content mt-6'>
-						{filmPageData.title}
-					</TitleHeadline>
-					<div className='relative w-full flex gap-8'>
-						<div className='gsap-project-page flex flex-wrap gap-16'>
-							<div className='gsap-project-image relative w-1/4 min-w-[300px] aspect-square overflow-clip opacity-0'>
-								<Image
-									{...{
-										src: filmPageData.image.imageUrl,
-										alt: `${filmPageData.title} album cover`,
-										fill: true,
-										className: "gsap-film-image object-cover",
-										sizes: "50vw",
-									}}
-								/>
-							</div>
-							<div className='gsap-project-content w-1/3 min-w-[300px] space-y-8'>
-								{filmPageData.description}
-							</div>
-						</div>
-					</div>
+					<TitleHeadline>{filmPageData.title}</TitleHeadline>
+					<ProjectInfo
+						projectInfo={{
+							info: filmPageData.info,
+							releaseDate: filmPageData.releaseDate,
+						}}
+					/>
+
+					<ProjectPageContent
+						img={{
+							imgUrl: filmPageData.image.imageUrl,
+							imgAlt: `${filmPageData.title} album cover`,
+						}}
+						description={filmPageData.description}
+					/>
 				</div>
 			</PageWrapper>
 		</div>

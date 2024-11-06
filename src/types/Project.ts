@@ -2,13 +2,14 @@ import { ImageField } from "./Image"
 
 export type Project = {
 	title: string
-	releaseDate: string
 	slug: {
 		_type: string
 		current: string
 	}
+	releaseDate: string
+	info?: string
 	image: ImageField
+	description?: string
 	projectLink?: string
 	projectVideo?: string
-	projectInfo?: string
 }
