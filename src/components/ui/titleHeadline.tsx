@@ -14,7 +14,10 @@ export const TitleHeadline = forwardRef(function Title(
 	ref: React.Ref<HTMLDivElement>
 ) {
 	return (
-		<div className={`flip-title mb-16 bg-primary ${classes}`} ref={ref}>
+		<div
+			className={`gsap-projects-title gsap-project-content bg-primary ${classes}`}
+			ref={ref}
+		>
 			<Heading
 				tag={"h1"}
 				classes='whitespace-nowrap uppercase'

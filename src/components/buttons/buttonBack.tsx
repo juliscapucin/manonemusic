@@ -12,6 +12,7 @@ export default function ButtonBack({ ctx, slug }: ButtonBackProps) {
 	const router = useRouter()
 	return (
 		<Button
+			classes='mb-8'
 			action={() => transitionOnClickBack(ctx, () => router.push(`/${slug}`))}
 		>
 			Back to releases
