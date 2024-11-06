@@ -10,6 +10,7 @@ type ButtonBackProps = {
 
 export default function ButtonBack({ ctx, slug }: ButtonBackProps) {
 	const router = useRouter()
+
 	return (
 		<Button
 			classes='mb-8'

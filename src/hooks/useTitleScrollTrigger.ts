@@ -1,5 +1,4 @@
 import { useLayoutEffect, useEffect } from "react"
-import { usePathname } from "next/navigation"
 
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -9,21 +8,13 @@ import { animateSplitText } from "@/animations"
 export default function useTitleScrollTrigger(
 	elementRef: React.RefObject<HTMLDivElement>,
 	slug: string,
-	windowAspectRatio: string,
-	runTrigger?: boolean
+	windowAspectRatio: string
 ) {
-	const pathname = usePathname()
 	let ctx = gsap.context(() => {})
 
 	useLayoutEffect(() => {
 		// Start ScrollTrigger when window is in landscape mode
-		if (
-			pathname === slug ||
-			!elementRef.current ||
-			windowAspectRatio === "portrait" ||
-			runTrigger == false
-		)
-			return
+		if (!elementRef.current || windowAspectRatio === "portrait") return
 
 		gsap.registerPlugin(ScrollTrigger)
 		const element = elementRef.current as HTMLDivElement

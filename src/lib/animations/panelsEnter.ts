@@ -5,12 +5,12 @@ export const panelsEnter = (element: HTMLElement) => {
 		element,
 		{
 			opacity: 0,
-			xPercent: 50,
+			xPercent: 20,
 		},
 		{
 			opacity: 1,
 			xPercent: 0,
-			duration: 0.5,
+			duration: 0.8,
 		}
 	)
 }

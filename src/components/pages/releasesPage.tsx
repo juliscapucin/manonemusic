@@ -4,7 +4,7 @@ import { useRef } from "react"
 
 import { PageWrapper, Subtitle, TitleDisplay } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
-import { ProjectCard, ProjectsMenu, ReleasesMenu } from "@/components"
+import { ProjectsMenu } from "@/components"
 import { PortfolioPage, PortfolioItem } from "@/types"
 
 type ReleasesPageProps = {
@@ -16,17 +16,11 @@ type ReleasesPageProps = {
 export default function ReleasesPage({
 	releasesPageData: data,
 	releases,
-	titleScrollTrigger,
 }: ReleasesPageProps) {
 	const titleReleasesRef = useRef(null)
 	const { windowAspectRatio } = useWindowDimensions()
 
-	useTitleScrollTrigger(
-		titleReleasesRef,
-		"/releases",
-		windowAspectRatio,
-		titleScrollTrigger
-	)
+	useTitleScrollTrigger(titleReleasesRef, "/releases", windowAspectRatio)
 
 	return (
 		data && (
