@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useEffect, useRef, useState } from "react"
+import React, { useEffect, useRef } from "react"
 import { usePathname } from "next/navigation"
 
 import gsap from "gsap"
@@ -11,16 +11,14 @@ import { navLinks } from "@/constants"
 
 import { AllData } from "@/types"
 import { NavBar, PanelContent } from "@/components"
-import { Header } from "@/components/ui"
 import { ButtonScroll } from "./buttons"
-import { handlePanelSlide } from "@/lib/animations"
+import { handlePanelSlide, panelsEnter } from "@/lib/animations"
 
 type PanelDesktopProps = {
 	data: AllData
-	index: number
 }
 
-export default function PanelDesktop({ data, index }: PanelDesktopProps) {
+export default function PanelDesktop({ data }: PanelDesktopProps) {
 	const pathname = usePathname()
 	const outerContainerRef = useRef<HTMLDivElement | null>(null)
 	const panelsContainerRef = useRef<HTMLDivElement | null>(null)
@@ -71,59 +69,57 @@ export default function PanelDesktop({ data, index }: PanelDesktopProps) {
 
 	// Jump to panel on internal page load
 	useEffect(() => {
-		if (!pathname || pathname === "/") return
+		if (!pathname || !outerContainerRef.current) return
 
-		// handlePanelSlide(index, false)
-
-		const targetPanel = document.querySelector(
-			`[data-id=panel-${index}]`
-		) as HTMLDivElement
-		let y = targetPanel?.offsetLeft
-
-		window.scrollTo({
-			top: y,
-		})
+		if (pathname !== "/") {
+			handlePanelSlide(pathname, false)
+		}
+		panelsEnter(outerContainerRef.current)
 	}, [])
 
 	return (
-		<>
-			<NavBar navLinks={navLinks} transitionOnClick={handlePanelSlide} />
-
-			{/* <Header handlePanelSlide={handlePanelSlide} /> */}
+		<div className='hidden lg:block'>
+			<NavBar navLinks={navLinks} variant='section' />
 
 			{/* Panels */}
-			<div ref={outerContainerRef}>
-				<div ref={panelsContainerRef} className='flex'>
-					{navLinks.map((section, index) => (
-						<section
-							data-id={`panel-${index}`}
-							className={`panel custom-min-w-screen h-screen min-h-full pl-8 overflow-clip`}
-							key={`panel-${index}`}
-						>
-							<PanelContent data={data} section={section.label.toLowerCase()} />
+			<div ref={outerContainerRef} className='gsap-panels-container opacity-0'>
+				<div ref={panelsContainerRef} className='flex gap-32'>
+					{navLinks.map((section, index) => {
+						return (
+							<section
+								data-id={`panel-${section.slug}`}
+								className={`panel custom-min-w-screen h-screen min-h-full pl-8 overflow-clip`}
+								key={`panel-${section.slug}`}
+							>
+								<PanelContent
+									data={data}
+									section={section.label.toLowerCase()}
+								/>
 
-							{/* Previous/Next Navigation */}
-							<div className='absolute bottom-1/2 left-20 flex gap-8 z-20 rotate-180'>
-								<ButtonScroll
+								{/* Previous/Next Navigation */}
+								<div className='absolute bottom-1/2 right-8 flex gap-8 z-20'>
+									{/* <ButtonScroll
 									action={() =>
 										handlePanelSlide(index - 1 > 0 ? index - 1 : 0, true)
 									}
-								/>
-							</div>
-							<div className='absolute bottom-1/2 right-4 flex gap-8 z-20'>
-								<ButtonScroll
-									action={() =>
-										handlePanelSlide(
-											index + 1 > navLinks.length ? navLinks.length : index + 1,
-											true
-										)
-									}
-								/>
-							</div>
-						</section>
-					))}
+								/> */}
+									<ButtonScroll
+										action={() => {
+											const nextIndex =
+												index + 1 > navLinks.length
+													? navLinks.length
+													: index + 1
+											const nextSlug = navLinks[nextIndex].slug
+
+											handlePanelSlide(nextSlug, true)
+										}}
+									/>
+								</div>
+							</section>
+						)
+					})}
 				</div>
 			</div>
-		</>
+		</div>
 	)
 }

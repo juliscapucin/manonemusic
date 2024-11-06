@@ -8,19 +8,13 @@ import { animateSplitText } from "@/animations"
 export default function useTitleScrollTrigger(
 	elementRef: React.RefObject<HTMLDivElement>,
 	slug: string,
-	windowAspectRatio: string,
-	runTrigger?: boolean
+	windowAspectRatio: string
 ) {
 	let ctx = gsap.context(() => {})
 
 	useLayoutEffect(() => {
 		// Start ScrollTrigger when window is in landscape mode
-		if (
-			!elementRef.current ||
-			windowAspectRatio === "portrait" ||
-			runTrigger == false
-		)
-			return
+		if (!elementRef.current || windowAspectRatio === "portrait") return
 
 		gsap.registerPlugin(ScrollTrigger)
 		const element = elementRef.current as HTMLDivElement
@@ -51,7 +45,6 @@ export default function useTitleScrollTrigger(
 					// console.log("progress", self.progress)
 
 					if (self.isActive && window.location.pathname !== slug) {
-						console.log(slug)
 						window.history.pushState(null, "", slug)
 					}
 

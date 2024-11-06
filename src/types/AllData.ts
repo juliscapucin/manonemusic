@@ -1,60 +1,13 @@
-import { Album } from "@/types/Album"
-import { Project } from "@/types/Project"
-import { AboutPage } from "./About"
+import { AboutPage, ContactPage, HomePage, PortfolioPage } from "@/types"
+import { PortfolioItem } from "./PortfolioItem"
 
-interface WorkPage {
-	title: string
-}
-
-interface WorkPageCollection {
-	items: WorkPage[]
-}
-
-interface ProjectCollection {
-	items: Project[]
-}
-
-interface Release {
-	title: string
-	text: string
-}
-
-interface ReleasesCollection {
-	items: Release[]
-}
-
-interface AlbumCollection {
-	items: Album[]
-}
-
-interface AboutPageCollection {
-	items: AboutPage[]
-}
-
-interface ContactPage {
-	title: string
-	availability: string
-}
-
-interface ContactPageCollection {
-	items: ContactPage[]
-}
-
-interface SocialLink {
-	label: string
-	url: string
-}
-
-interface SocialLinkCollection {
-	items: SocialLink[]
-}
-
-export interface AllData {
-	workPageCollection: WorkPageCollection
-	projectCollection: ProjectCollection
-	releasesCollection: ReleasesCollection
-	albumCollection: AlbumCollection
-	aboutPageCollection: AboutPageCollection
-	contactPageCollection: ContactPageCollection
-	socialLinkCollection: SocialLinkCollection
+export type AllData = {
+	homePage: HomePage
+	contactPage: ContactPage
+	aboutPage: AboutPage
+	portfolioPages: PortfolioPage[]
+	films: PortfolioItem[]
+	commercials: PortfolioItem[]
+	releases: PortfolioItem[]
+	projects: PortfolioItem[]
 }

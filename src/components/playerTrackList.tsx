@@ -27,15 +27,15 @@ export default function PlayerTrackList({ tracks }: PlayerTrackListProps) {
 	}
 
 	return (
-		<div className='w-full gsap-release-content'>
+		<div className='gsap-project-content flex-1 max-w-[800px]'>
 			{tracks.map((track, index) => (
 				<PlayerTrack
 					index={index}
-					key={track.title}
+					key={track.trackname}
 					track={track}
-					buttonAction={() => handleTrackClick(track.title)}
-					sliderAction={() => handleSlideClick(track.title)}
-					isPlaying={currentlyPlaying === track.title}
+					buttonAction={() => handleTrackClick(track.trackname)}
+					sliderAction={() => handleSlideClick(track.trackname)}
+					isPlaying={currentlyPlaying === track.trackname}
 				/>
 			))}
 			{/* TODO add Soundcloud logo */}

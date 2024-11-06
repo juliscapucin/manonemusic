@@ -19,7 +19,9 @@ export default function ReleaseCard({ album }: ReleasesCardProps) {
 	return (
 		<button
 			onClick={() => {
-				handlePanelSlide(2, true, () => router.push(`/releases/${slug}`))
+				handlePanelSlide("releases", true, () =>
+					router.push(`/releases/${slug}`)
+				)
 			}}
 			className='relative w-full aspect-square group focus-visible:border-secondary focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-secondary'
 		>

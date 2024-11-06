@@ -19,7 +19,7 @@ export default function CopyEmailButton() {
 	}
 
 	return (
-		<div className='relative h-16 mt-16'>
+		<div className='relative h-16 mt-4'>
 			{showCopyFeedback && (
 				<div
 					ref={labelRef}
@@ -30,8 +30,11 @@ export default function CopyEmailButton() {
 					</span>
 				</div>
 			)}
-			<button className='group overflow-clip max-h-8' onClick={copyToClipboard}>
-				<div className='flex flex-col group-hover:-translate-y-1/2 transition-transform duration-200'>
+			<button
+				className='group overflow-clip h-6 cursor-pointer'
+				onClick={copyToClipboard}
+			>
+				<div className='flex flex-col group-hover:-translate-y-1/2 transition-transform duration-200 text-labelLarge uppercase'>
 					<span>Copy email address</span>
 					<span>Copy email address</span>
 				</div>

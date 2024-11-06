@@ -1,25 +1,25 @@
+"use client"
+
 import { navLinks } from "@/constants"
 
 import { AllData } from "@/types"
 import { usePathname } from "next/navigation"
-import { Logo } from "@/components/ui"
 import { NavBar, PanelContent } from "@/components"
 
 export default function PanelMobile({ data }: { data: AllData }) {
 	const pathname = usePathname()
 	const section = pathname.replace("/", "")
 
-	const handleNavLinkClick = (index: number, pushSlug: boolean) => {
-		const slug = navLinks[index].slug
+	const handleNavLinkClick = (slug: string, pushSlug: boolean) => {
 		if (pushSlug) {
 			window.history.pushState(null, "", `/${slug}`)
 		}
 	}
 
 	return (
-		<>
+		<div className='lg:hidden'>
 			{/* <Logo /> */}
-			<NavBar navLinks={navLinks} transitionOnClick={handleNavLinkClick} />
+			<NavBar navLinks={navLinks} sectionTransition={handleNavLinkClick} />
 			{pathname === "/" ? (
 				navLinks.map((section, index) => (
 					<section
@@ -37,6 +37,6 @@ export default function PanelMobile({ data }: { data: AllData }) {
 					<PanelContent data={data} section={section} />
 				</section>
 			)}
-		</>
+		</div>
 	)
 }

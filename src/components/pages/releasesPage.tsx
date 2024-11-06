@@ -2,42 +2,44 @@
 
 import { useRef } from "react"
 
-import { PageWrapper, TitleDisplay } from "@/components/ui"
+import { PageWrapper, Subtitle, TitleDisplay } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
-import { ReleasesMenu } from "@/components"
-import { Album } from "@/types"
+import { ProjectsMenu } from "@/components"
+import { PortfolioPage, PortfolioItem } from "@/types"
 
 type ReleasesPageProps = {
-	data: {
-		page: { title: string; text: string }
-		albums: Album[]
-	}
+	releasesPageData?: PortfolioPage
+	releases: PortfolioItem[]
 	titleScrollTrigger?: boolean
 }
 
 export default function ReleasesPage({
-	data,
-	titleScrollTrigger,
+	releasesPageData: data,
+	releases,
 }: ReleasesPageProps) {
 	const titleReleasesRef = useRef(null)
 	const { windowAspectRatio } = useWindowDimensions()
 
-	useTitleScrollTrigger(
-		titleReleasesRef,
-		"/releases",
-		windowAspectRatio,
-		titleScrollTrigger
-	)
+	useTitleScrollTrigger(titleReleasesRef, "/releases", windowAspectRatio)
 
 	return (
-		<PageWrapper classes={"flex"}>
-			<div>
-				<TitleDisplay classes='gsap-releases-title' ref={titleReleasesRef}>
-					{data.page.title}
-				</TitleDisplay>
-				<p className='mt-16 max-w-sm lg:max-w-lg'>{data.page.text}</p>
-			</div>
-			<ReleasesMenu albums={data.albums} />
-		</PageWrapper>
+		data && (
+			<PageWrapper>
+				<div>
+					<TitleDisplay classes='gsap-projects-title' ref={titleReleasesRef}>
+						{data.title}
+					</TitleDisplay>
+
+					<Subtitle subtitle={data.subtitle} />
+				</div>
+				{releases && (
+					<ProjectsMenu
+						variant='section'
+						section={data.title.toLowerCase().replace(/\s/g, "-")}
+						projects={releases}
+					/>
+				)}
+			</PageWrapper>
+		)
 	)
 }

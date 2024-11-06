@@ -1,9 +1,11 @@
 import {
 	AboutPage,
 	ContactPage,
+	FilmsPage,
 	HomePage,
 	ReleasesPage,
 	ProjectsPage,
+	CommercialsPage,
 } from "@/components/pages"
 
 import { AllData } from "@/types"
@@ -16,25 +18,43 @@ type PanelContentProps = {
 export default function PanelContent({ data, section }: PanelContentProps) {
 	return (
 		<>
-			{section === "home" && (
-				<HomePage data={data.aboutPageCollection.items[0]} />
+			{section === "home" && <HomePage data={data.homePage} />}
+			{section === "films" && (
+				<FilmsPage
+					data={data.portfolioPages?.find((page) => page.title === "Films")}
+					films={data.films}
+				/>
+			)}
+
+			{section === "commercials" && (
+				<CommercialsPage
+					data={data.portfolioPages?.find(
+						(page) => page.title === "Commercials"
+					)}
+					commercials={data.commercials}
+				/>
+			)}
+
+			{section === "releases" && (
+				<ReleasesPage
+					releasesPageData={data.portfolioPages?.find(
+						(page) => page.title === "Releases"
+					)}
+					releases={data.releases}
+				/>
 			)}
 
 			{section === "projects" && (
-				<ProjectsPage data={data.projectCollection.items} />
-			)}
-			{section === "releases" && (
-				<ReleasesPage
-					data={{
-						page: data.releasesCollection.items[0],
-						albums: data.albumCollection.items,
-					}}
+				<ProjectsPage
+					projectsPage={data.portfolioPages?.find(
+						(page) => page.title === "Projects"
+					)}
+					projects={data.projects}
 				/>
 			)}
-			{section === "about" && (
-				<AboutPage data={data.aboutPageCollection.items[0]} />
-			)}
-			{section === "contact" && <ContactPage data={data} />}
+
+			{section === "about" && <AboutPage data={data.aboutPage} />}
+			{section === "contact" && <ContactPage data={data.contactPage} />}
 		</>
 	)
 }

@@ -1,13 +1,13 @@
 type HeadingProps = {
 	tag: string
-	styles?: string
+	classes?: string
 	children: string
 	variant: "display" | "headline" | "title"
 }
 
 export default function Heading({
 	tag,
-	styles,
+	classes,
 	children,
 	variant,
 }: HeadingProps) {
@@ -33,7 +33,11 @@ export default function Heading({
 	}
 
 	return (
-		<Tag className={`${styles} ${headingStyles} leading-none tracking-tight`}>
+		<Tag
+			className={`${
+				classes ? classes : ""
+			} ${headingStyles} leading-none tracking-tight`}
+		>
 			{children}
 		</Tag>
 	)

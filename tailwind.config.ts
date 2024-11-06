@@ -53,8 +53,10 @@ const config: Config = {
 				8: "8",
 				15: "15",
 				100: "100",
+				header: "1000",
 			},
 			letterSpacing: { tightest: "-.075em" },
+			lineHeight: { tightest: "0.1" },
 			scale: {
 				"20": "0.2",
 			},

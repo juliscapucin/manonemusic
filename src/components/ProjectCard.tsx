@@ -1,48 +1,64 @@
 "use client"
 
 import Image from "next/image"
-import { usePathname, useRouter } from "next/navigation"
+import { useRouter } from "next/navigation"
 
-import { handlePanelSlide } from "@/lib/animations"
+import { projectExit, panelsExit } from "@/lib/animations"
+import { ImageField } from "@/types/Image"
+
+import { Button } from "@/components/ui"
 
 type ProjectCardProps = {
+	variant: "section" | "page"
+	section: string
 	title: string
-	coverImage: {
-		url: string
-		description: string
-		width: number
-		height: number
-	}
+	image: ImageField
 	slug: string
 }
 
 export default function ProjectCard({
+	variant,
+	section,
 	title,
-	coverImage,
+	image,
 	slug,
 }: ProjectCardProps) {
 	const router = useRouter()
-	const pathname = usePathname()
 
 	return (
-		<button
-			onClick={() => {
-				handlePanelSlide(1, true, () => router.push(`/projects/${slug}`))
+		<Button
+			transitionOnClick={() => {
+				variant === "section"
+					? panelsExit(() => router.push(`/${section}/${slug}`))
+					: projectExit(() => router.push(`/${section}/${slug}`))
 			}}
-			className={`w-full h-full relative`}
+			href={`/${section}/${slug}`}
+			classes={`gsap-project-card relative group opacity-90 ${variant === "section" ? "lg:w-64" : "w-16 lg:w-24"}`}
+			aria-labelledby={`project-title-${slug}`}
 		>
-			<div className='relative w-full h-full'>
-				<Image
-					className={`${
-						pathname.includes(slug) && "gsap-flip-project-card z-100"
-					} object-cover`}
-					src={coverImage.url}
-					alt={coverImage.description}
-					sizes='50vw'
-					fill
-				/>
-			</div>
-			<span>{title}</span>
-		</button>
+			{/* Overlay */}
+			<div className='absolute w-full h-full top-0 left-0 bg-colorBlack opacity-50 z-10 group-hover:opacity-0 transi transition-opacity duration-300'></div>
+
+			{/* Image */}
+			{image && (
+				<div className='relative w-full aspect-square rounded-sm overflow-clip z-5'>
+					<Image
+						className='relative w-full aspect-square overflow-clip object-cover group-hover:scale-105 transition-transform duration-300'
+						src={image.imageUrl}
+						alt={image.imageAlt}
+						sizes='50vw'
+						fill
+					/>
+				</div>
+			)}
+			{variant === "section" && (
+				<span
+					className='absolute top-full text-labelMedium lg:text-labelLarge uppercase text-left leading-none opacity-0 -translate-y-full group-hover:opacity-100 group-hover:translate-y-4 transition-all duration-300 z-15'
+					id={`project-title-${slug}`}
+				>
+					{title}
+				</span>
+			)}
+		</Button>
 	)
 }

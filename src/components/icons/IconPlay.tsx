@@ -11,7 +11,7 @@ export default function IconPlay() {
 				<path
 					d='M0.918335 1.06399L57.3203 33.6277L0.918332 66.1914L0.918335 1.06399Z'
 					stroke='currentColor'
-					stroke-opacity='0.3'
+					strokeOpacity='0.3'
 				/>
 			</svg>
 		</div>
