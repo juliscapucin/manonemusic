@@ -26,8 +26,6 @@ export default function PlayerTrack({
 	const [seeking, setSeeking] = useState(false) // Track whether the user is currently seeking
 	const playerRef = useRef<ReactPlayer | null>(null)
 
-	const url = "https://soundcloud.com/ixamusic/ixa-selfies-at-disneyland"
-
 	const formatDuration = (data: number) => {
 		const minutes = Math.floor(data / 60)
 		const seconds = Math.floor(data % 60)
@@ -76,7 +74,7 @@ export default function PlayerTrack({
 				<div className='absolute -z-5'>
 					<ReactPlayer
 						ref={playerRef}
-						url={url}
+						url={track.link}
 						playing={isPlaying}
 						onDuration={handleDuration}
 						onProgress={handleProgress}
@@ -93,10 +91,10 @@ export default function PlayerTrack({
 			<button
 				className='relative pt-10 pb-6 px-2 w-full hover:bg-faded-5 transition-colors duration-300'
 				onClick={buttonAction}
-				aria-label={`Play or pause ${"track.title"}`}
+				aria-label={`Play or pause ${track.trackname}`}
 			>
 				<span className='absolute left-2 top-2 w-full text-start'>
-					{"track.title"}
+					{track.trackname}
 				</span>
 				<div className='flex items-center gap-4 h-full w-full'>
 					<div className='w-16'>{isPlaying ? <IconPause /> : <IconPlay />}</div>
