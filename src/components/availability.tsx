@@ -4,7 +4,7 @@ import { useMemo } from "react"
 import { CopyEmailButton } from "@/components/buttons"
 
 type AvailabilityProps = {
-	availability: string
+	availability?: string
 }
 
 export default function Availability({ availability }: AvailabilityProps) {
