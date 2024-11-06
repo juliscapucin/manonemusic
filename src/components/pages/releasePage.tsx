@@ -8,6 +8,8 @@ import gsap from "gsap"
 import {
 	PlayerTrackList,
 	ProjectInfo,
+	ProjectPageContent,
+	ProjectPageImage,
 	ProjectsMenu,
 	ProjectsMenuPage,
 } from "@/components"
@@ -52,20 +54,13 @@ export default function ReleasePage({
 							info: releasePageData.releaseInfo,
 						}}
 					/>
-					<div className='relative w-full flex gap-8 mt-8'>
-						<div className='gsap-project-image relative w-1/4 min-w-[300px] aspect-square overflow-clip opacity-0'>
-							<Image
-								{...{
-									src: releasePageData.image.imageUrl,
-									alt: `${releasePageData.title} album cover`,
-									fill: true,
-									className: "gsap-release-image object-cover",
-									sizes: "50vw",
-								}}
-							/>
-						</div>
-						<PlayerTrackList tracks={releasePageData.tracklist} />
-					</div>
+					<ProjectPageContent
+						img={{
+							imgUrl: releasePageData.image.imageUrl,
+							imgAlt: `${releasePageData.title} album cover`,
+						}}
+						tracklist={releasePageData.tracklist}
+					/>
 				</div>
 			</PageWrapper>
 		</div>

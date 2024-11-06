@@ -1,14 +1,18 @@
 "use client"
 
-import Image from "next/image"
-import { useRef } from "react"
+import { useRef, useState } from "react"
 
 import gsap from "gsap"
 
-import { PageWrapper, TitleDisplay } from "@/components/ui"
+import { PageWrapper, TitleHeadline } from "@/components/ui"
 import { PortfolioItem, PortfolioPage, Project } from "@/types"
 import { Button, ButtonBack } from "@/components/buttons"
-import { ProjectTrailer, ProjectsMenu, ProjectsMenuPage } from "@/components"
+import {
+	ProjectInfo,
+	ProjectPageContent,
+	ProjectTrailer,
+	ProjectsMenuPage,
+} from "@/components"
 import { useTransitionOnEnter } from "@/hooks"
 
 type ProjectPageProps = {
@@ -22,6 +26,7 @@ export default function ProjectPage({
 	projectsData,
 	projectsPageData,
 }: ProjectPageProps) {
+	const [isTrailerActive, setIsTrailerActive] = useState(false)
 	const containerProjectRef = useRef<HTMLDivElement>(null)
 	let ctx = gsap.context(() => {})
 
@@ -33,80 +38,57 @@ export default function ProjectPage({
 			className='relative w-screen h-screen overflow-clip'
 		>
 			<PageWrapper hasMenu={true}>
+				{/* Projects Menu */}
 				<ProjectsMenuPage
 					projectsData={projectsData}
 					pageData={projectsPageData}
 				/>
+
+				{/* Project Page */}
 				<div className='gsap-project-page opacity-0'>
 					<ButtonBack ctx={ctx} slug={projectsPageData.slug} />
 
-					<TitleDisplay classes='gsap-project-content opacity-0'>
-						{projectPageData.title}
-					</TitleDisplay>
-					<div className='gsap-project-page flex flex-wrap gap-16'>
-						<div className='gsap-project-image relative w-1/4 min-w-[300px] aspect-square overflow-clip opacity-0'>
-							{projectPageData.image && (
-								<Image
-									{...{
-										src: projectPageData.image.imageUrl,
-										alt: projectPageData.image.imageAlt,
-										fill: true,
-										className: "gsap-project-image object-cover",
-										sizes: "50vw",
-									}}
-								/>
-							)}
-						</div>
-						<div className='gsap-project-content w-1/3 min-w-[300px] space-y-8 opacity-0'>
-							{/* Credits */}
-							{/* <ul className='text-labelLarge'>
-								{projectPageData.credits &&
-									projectPageData.credits.map((credit, index) => (
-										<li key={index}>{credit}</li>
-									))}
-							</ul> */}
-							<p>{projectPageData?.projectInfo}</p>
-							{/* Buttons / Links */}
-							<div className='flex flex-col items-start'>
-								{projectPageData.projectVideo && (
-									<Button
-										action={() =>
-											gsap.to(".gsap-project-page", {
-												xPercent: -50,
-												duration: 1,
-												ease: "power4.out",
-											})
-										}
-									>
-										View Trailer
-									</Button>
-								)}
-								{projectPageData.projectLink && (
-									<a
-										className='block underline'
-										href={projectPageData.projectLink}
-										target='_blank'
-									>
-										View project
-									</a>
-								)}
-							</div>
-						</div>
+					<TitleHeadline>{projectPageData.title}</TitleHeadline>
+					<ProjectInfo
+						projectInfo={{
+							releaseDate: projectPageData.releaseDate,
+							info: projectPageData.projectInfo,
+						}}
+					/>
+					<ProjectPageContent
+						img={{
+							imgUrl: projectPageData.image.imageUrl,
+							imgAlt: `${projectPageData.title} project image`,
+						}}
+					/>
+
+					{/* Buttons / Links */}
+					<div className='flex flex-col items-start'>
+						{projectPageData.projectVideo && (
+							<Button action={() => setIsTrailerActive(true)}>
+								View Trailer
+							</Button>
+						)}
+						{projectPageData.projectLink && (
+							<a
+								className='block underline'
+								href={projectPageData.projectLink}
+								target='_blank'
+							>
+								View project
+							</a>
+						)}
 					</div>
 				</div>
 			</PageWrapper>
+
 			{/* Trailer */}
 			{projectPageData.projectVideo && (
 				<PageWrapper>
 					<ProjectTrailer
-						videoUrl='https://player.vimeo.com/video/371168497'
-						backToProject={() =>
-							gsap.to(".gsap-project-page", {
-								xPercent: 0,
-								duration: 1,
-								ease: "power4.out",
-							})
-						}
+						videoUrl='https://player.vimeo.com/video/844715489?title=0&byline=0&portrait=0&muted=1&autoplay=1&controls=0&loop=1'
+						isTrailerActive={isTrailerActive}
+						setIsTrailerActive={setIsTrailerActive}
 					/>
 				</PageWrapper>
 			)}

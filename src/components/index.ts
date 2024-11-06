@@ -8,6 +8,8 @@ import PanelDesktop from "./panelDesktop"
 import PanelMobile from "./panelMobile"
 import ProjectCard from "./projectCard"
 import ProjectInfo from "./projectInfo"
+import ProjectPageContent from "./projectPageContent"
+import ProjectPageImage from "./projectPageImage"
 import ProjectTrailer from "./projectTrailer"
 import ProjectsMenu from "./projectsMenu"
 import ProjectsMenuPage from "./projectsMenuPage"
@@ -35,6 +37,8 @@ export {
 	PlayerTrackList,
 	ProjectCard,
 	ProjectInfo,
+	ProjectPageContent,
+	ProjectPageImage,
 	ProjectTrailer,
 	ProjectsMenu,
 	ProjectsMenuPage,
