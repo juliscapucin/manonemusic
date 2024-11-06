@@ -19,7 +19,7 @@ export default function PanelMobile({ data }: { data: AllData }) {
 	return (
 		<div className='lg:hidden'>
 			{/* <Logo /> */}
-			<NavBar navLinks={navLinks} sectionTransition={handleNavLinkClick} />
+			<NavBar navLinks={navLinks} />
 			{pathname === "/" ? (
 				navLinks.map((section, index) => (
 					<section

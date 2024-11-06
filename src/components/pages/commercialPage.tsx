@@ -37,7 +37,7 @@ export default function CommercialPage({
 					<TitleHeadline>{commercialPageData.title}</TitleHeadline>
 					<ProjectInfo
 						projectInfo={{
-							info: commercialPageData.commercialInfo,
+							info: commercialPageData.info,
 							releaseDate: commercialPageData.releaseDate,
 						}}
 					/>

@@ -18,17 +18,11 @@ type ProjectPageProps = {
 export default function ProjectsPage({
 	projectsPage,
 	projects,
-	titleScrollTrigger,
 }: ProjectPageProps) {
 	const titleWorkRef = useRef(null)
 	const { windowAspectRatio } = useWindowDimensions()
 
-	useTitleScrollTrigger(
-		titleWorkRef,
-		"/projects",
-		windowAspectRatio,
-		titleScrollTrigger
-	)
+	useTitleScrollTrigger(titleWorkRef, "/projects", windowAspectRatio)
 
 	return (
 		projectsPage && (

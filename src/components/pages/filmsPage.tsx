@@ -10,23 +10,13 @@ import { PortfolioItem, PortfolioPage } from "@/types"
 type FilmsPageProps = {
 	data?: PortfolioPage
 	films?: PortfolioItem[]
-	titleScrollTrigger?: boolean
 }
 
-export default function FilmsPage({
-	data,
-	films,
-	titleScrollTrigger,
-}: FilmsPageProps) {
+export default function FilmsPage({ data, films }: FilmsPageProps) {
 	const titleFilmsRef = useRef(null)
 	const { windowAspectRatio } = useWindowDimensions()
 
-	useTitleScrollTrigger(
-		titleFilmsRef,
-		"/films",
-		windowAspectRatio,
-		titleScrollTrigger
-	)
+	useTitleScrollTrigger(titleFilmsRef, "/films", windowAspectRatio)
 
 	return (
 		data && (

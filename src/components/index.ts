@@ -13,13 +13,10 @@ import ProjectPageImage from "./projectPageImage"
 import ProjectTrailer from "./projectTrailer"
 import ProjectsMenu from "./projectsMenu"
 import ProjectsMenuPage from "./projectsMenuPage"
-import ReleaseCard from "./releaseCard"
-import ReleasesMenu from "./releasesMenu"
 import RootLayout from "./rootLayout"
 import SocialLinks from "./socialLinks"
 import Status from "./status"
 import ThemeSwitcher from "./themeSwitcher"
-import Player from "./player"
 import PlayerTrack from "./playerTrack"
 import PlayerTrackList from "./playerTrackList"
 
@@ -32,7 +29,6 @@ export {
 	Panels,
 	PanelDesktop,
 	PanelMobile,
-	Player,
 	PlayerTrack,
 	PlayerTrackList,
 	ProjectCard,
@@ -42,8 +38,6 @@ export {
 	ProjectTrailer,
 	ProjectsMenu,
 	ProjectsMenuPage,
-	ReleaseCard,
-	ReleasesMenu,
 	RootLayout,
 	SocialLinks,
 	Status,

@@ -4,29 +4,22 @@ import { useRef } from "react"
 
 import { PageWrapper, Subtitle, TitleDisplay } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
-import { ProjectsMenu, ReleasesMenu } from "@/components"
+import { ProjectsMenu } from "@/components"
 import { PortfolioItem, PortfolioPage } from "@/types"
 
 type CommercialsPageProps = {
 	data?: PortfolioPage
 	commercials?: PortfolioItem[]
-	titleScrollTrigger?: boolean
 }
 
 export default function CommercialsPage({
 	data,
 	commercials,
-	titleScrollTrigger,
 }: CommercialsPageProps) {
 	const titleCommercialsRef = useRef(null)
 	const { windowAspectRatio } = useWindowDimensions()
 
-	useTitleScrollTrigger(
-		titleCommercialsRef,
-		"/commercials",
-		windowAspectRatio,
-		titleScrollTrigger
-	)
+	useTitleScrollTrigger(titleCommercialsRef, "/commercials", windowAspectRatio)
 
 	return (
 		data && (
