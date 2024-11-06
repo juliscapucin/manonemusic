@@ -27,7 +27,7 @@ export default function ProjectTrailer({
 		if (isTrailerActive) {
 			const tl = gsap.timeline()
 			tl.to(trailerContainerRef.current, {
-				duration: 0.5,
+				duration: 0.3,
 				xPercent: -100,
 			})
 		} else {
