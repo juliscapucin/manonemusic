@@ -17,10 +17,9 @@ export default function PageWrapper({
 }: PageWrapperProps) {
 	return (
 		<div
-			className={`relative w-screen h-screen min-h-svh custom-min-w-screen max-w-desktop pt-32 pb-8 px-32 overflow-x-clip ${classes}`}
+			className={`relative w-screen h-screen min-h-svh max-w-desktop pt-32 pb-8 px-32 overflow-x-clip ${classes}`}
 		>
 			{hasMenu && <NavBar navLinks={navLinks} variant='page' />}
-
 			{children}
 		</div>
 	)

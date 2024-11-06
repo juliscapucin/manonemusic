@@ -18,32 +18,25 @@ export default function HomePage({ data }: { data: HomePage }) {
 	useTitleScrollTrigger(titleHomeRef, "/", windowAspectRatio)
 
 	return (
-		<section
-			className='relative w-screen h-screen min-h-svh custom-min-w-screen max-w-desktop pb-8 overflow-x-clip'
+		<div
+			className='relative w-screen h-screen min-h-svh max-w-desktop pt-32 pb-16 overflow-x-clip'
 			data-id='panel-home'
 		>
-			<div className='mt-32'>
-				<h1 ref={titleHomeRef} className='logo'>
-					MAN/ONE MUSIC
-				</h1>
-			</div>
-			<div className='relative flex w-full md:mt-8'>
-				<Heading tag='h2' variant='title' classes='w-1/2 uppercase'>
-					Music & Sound Design
-				</Heading>
-			</div>
-
+			<Copyright hasCredits={false} />
+			<h1 ref={titleHomeRef} className='logo'>
+				MAN/ONE MUSIC
+			</h1>
+			<Heading tag='h2' variant='title' classes='w-1/2 mt-8 uppercase'>
+				Music & Sound Design
+			</Heading>
 			<div className='w-full flex justify-between mt-32 md:mt-16'>
-				<div className='w-1/2'>
-					<p className='text-balance max-w-prose'>
-						Tailored sound design and audio identities that capture the spirit
-						of your brand and resonate with your audience.
-					</p>
-				</div>
+				<p className='text-balance max-w-prose'>
+					Tailored sound design and audio identities that capture the spirit of
+					your brand and resonate with your audience.
+				</p>
 				<Status location={location} />
 			</div>
-			<Copyright hasCredits={false} />
 			{/* <Availability /> */}
-		</section>
+		</div>
 	)
 }
