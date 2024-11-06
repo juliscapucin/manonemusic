@@ -16,7 +16,7 @@ export default function ButtonBack({ ctx, slug }: ButtonBackProps) {
 			classes='mb-8'
 			action={() => transitionOnClickBack(ctx, () => router.push(`/${slug}`))}
 		>
-			Back to releases
+			Back to {slug.charAt(0).toUpperCase() + slug.slice(1)}
 		</Button>
 	)
 }

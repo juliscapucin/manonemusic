@@ -46,6 +46,9 @@ const releaseSchema = {
 			name: "releaseDate",
 			title: "Release Date",
 			type: "date",
+			options: {
+				dateFormat: "MM/YYYY",
+			},
 			validation: (Rule: Rule) =>
 				Rule.required().error("Release Date is required"),
 		},

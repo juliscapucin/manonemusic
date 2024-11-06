@@ -36,7 +36,7 @@ export default function ReleasePage({
 					<ProjectInfo
 						projectInfo={{
 							releaseDate: releasePageData.releaseDate,
-							info: releasePageData.releaseInfo,
+							info: releasePageData.info,
 						}}
 					/>
 					<ProjectPageContent

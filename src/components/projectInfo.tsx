@@ -10,7 +10,13 @@ type ProjectInfoProps = {
 export default function ProjectInfo({ projectInfo }: ProjectInfoProps) {
 	return (
 		<div className='gsap-project-content mt-4'>
-			<p>Released {projectInfo.releaseDate}</p>
+			<p>
+				Released{" "}
+				{new Date(projectInfo.releaseDate).toLocaleDateString("en-US", {
+					month: "long",
+					year: "numeric",
+				})}
+			</p>
 			{projectInfo.info && <p>{projectInfo.info}</p>}
 		</div>
 	)
