@@ -1,7 +1,7 @@
 "use client"
 
 import Image from "next/image"
-import { useRouter } from "next/navigation"
+import { useRouter, usePathname } from "next/navigation"
 
 import { projectExit, panelsExit } from "@/lib/animations"
 import { ImageField } from "@/types/Image"
@@ -24,6 +24,7 @@ export default function ProjectCard({
 	slug,
 }: ProjectCardProps) {
 	const router = useRouter()
+	const pathname = usePathname()
 
 	return (
 		<Button
@@ -35,9 +36,12 @@ export default function ProjectCard({
 			href={`/${section}/${slug}`}
 			classes={`gsap-project-card relative group opacity-90 ${variant === "section" ? "lg:w-64" : "w-16 lg:w-24"}`}
 			aria-labelledby={`project-title-${slug}`}
+			isDisabled={pathname.includes(slug)}
 		>
 			{/* Overlay */}
-			<div className='absolute w-full h-full top-0 left-0 bg-colorBlack opacity-50 z-10 group-hover:opacity-0 transi transition-opacity duration-300'></div>
+			<div
+				className={`absolute w-full h-full top-0 left-0 bg-colorBlack z-10 group-hover:opacity-0 transi transition-opacity duration-300 ${pathname.includes(slug) ? "opacity-0" : "opacity-70"}`}
+			></div>
 
 			{/* Image */}
 			{image && (
