@@ -55,7 +55,8 @@ const commercialSchema = {
 			type: "string",
 		},
 		{ name: "description", title: "Description", type: "text" },
-		{ name: "videoUrl", title: "Video URL", type: "url" },
+		{ name: "projectVideo", title: "Project Video", type: "url" },
+		{ name: "projectLink", title: "Project Link", type: "url" },
 	],
 	orderings: [
 		{

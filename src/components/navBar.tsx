@@ -22,7 +22,7 @@ export default function NavBar({ variant, navLinks }: NavLinksProps) {
 	return (
 		<nav
 			ref={navRef}
-			className='fixed top-8 right-8 left-8 flex justify-between z-header'
+			className='fixed top-0 right-0 left-0 p-8 flex justify-between bg-colorBlack z-header'
 		>
 			<Button
 				href='/'

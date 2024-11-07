@@ -6,7 +6,7 @@ import gsap from "gsap"
 
 import { PageWrapper, TitleHeadline } from "@/components/ui"
 import { PortfolioItem, PortfolioPage, Project } from "@/types"
-import { Button, ButtonBack } from "@/components/buttons"
+import { ButtonBack } from "@/components/buttons"
 import {
 	ProjectInfo,
 	ProjectPageContent,
@@ -60,25 +60,11 @@ export default function ProjectPage({
 							imgUrl: projectPageData.image.imageUrl,
 							imgAlt: `${projectPageData.title} project image`,
 						}}
+						description={projectPageData.description}
+						setIsTrailerActive={setIsTrailerActive}
+						projectLink={projectPageData.projectLink}
+						projectVideo={projectPageData.projectVideo}
 					/>
-
-					{/* Buttons / Links */}
-					<div className='flex flex-col items-start'>
-						{projectPageData.projectVideo && (
-							<Button action={() => setIsTrailerActive(true)}>
-								View Trailer
-							</Button>
-						)}
-						{projectPageData.projectLink && (
-							<a
-								className='block underline'
-								href={projectPageData.projectLink}
-								target='_blank'
-							>
-								View project
-							</a>
-						)}
-					</div>
 				</div>
 			</PageWrapper>
 

@@ -49,7 +49,7 @@ export default function Availability({ availability }: AvailabilityProps) {
 					href='mailto:hello@juliscapucin.com'
 					className='flex flex-col text-titleSmall md:text-titleMedium lg:text-titleLarge font-light uppercase'
 				>
-					<span>Drop me a message</span>
+					<span>Get in touch</span>
 				</a>
 			</div>
 			<CopyEmailButton />

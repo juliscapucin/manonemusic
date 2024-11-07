@@ -1,5 +1,6 @@
 export type ContactPage = {
 	title: string
+	subtitle: string
 	email: string
 	socials: [
 		{

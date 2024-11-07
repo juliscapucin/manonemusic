@@ -21,10 +21,10 @@ export default function FilmsPage({ data, films }: FilmsPageProps) {
 	return (
 		data && (
 			<PageWrapper>
+				<Subtitle subtitle={data.subtitle} />
 				<TitleDisplay classes='gsap-projects-title' ref={titleFilmsRef}>
 					{data.title}
 				</TitleDisplay>
-				<Subtitle subtitle={data.subtitle} />
 
 				{films && (
 					<ProjectsMenu

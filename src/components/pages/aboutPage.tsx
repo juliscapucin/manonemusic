@@ -18,13 +18,13 @@ export default function AboutPage({ data }: { data: AboutPage }) {
 	return (
 		<PageWrapper classes='flex justify-between items-start gap-32'>
 			<div>
+				<Subtitle subtitle={data.subtitle} />
 				<TitleDisplay ref={titleAboutRef}>{data.title}</TitleDisplay>
-				{/* <Subtitle subtitle={data.subtitle} /> */}
-				<div className='max-w-prose'>
+				<div className='ml-[25%] max-w-prose'>
 					<PortableText value={data.content} />
 				</div>
 			</div>
-			<div className='relative w-1/2 aspect-square overflow-clip'>
+			<div className='relative w-1/3 aspect-square mt-16 rounded-sm overflow-clip'>
 				<Image
 					{...{
 						src: data.image.imageUrl,

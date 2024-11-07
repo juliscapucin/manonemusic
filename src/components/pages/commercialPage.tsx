@@ -7,6 +7,7 @@ import { PageWrapper, TitleHeadline } from "@/components/ui"
 import { ButtonBack } from "@/components/buttons"
 import { Commercial, PortfolioItem, PortfolioPage } from "@/types"
 import { useTransitionOnEnter } from "@/hooks"
+import { useState } from "react"
 
 type commercialPageProps = {
 	commercialPageData: Commercial
@@ -19,6 +20,8 @@ export default function CommercialPage({
 	commercialsData,
 	commercialsPageData,
 }: commercialPageProps) {
+	const [isTrailerActive, setIsTrailerActive] = useState(false)
+
 	let ctx = gsap.context(() => {})
 
 	useTransitionOnEnter(ctx)
@@ -48,6 +51,9 @@ export default function CommercialPage({
 							imgAlt: `${commercialPageData.title} album cover`,
 						}}
 						description={commercialPageData.description}
+						setIsTrailerActive={setIsTrailerActive}
+						projectLink={commercialPageData.projectLink}
+						projectVideo={commercialPageData.projectVideo}
 					/>
 				</div>
 			</PageWrapper>

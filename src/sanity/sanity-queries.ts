@@ -2,9 +2,7 @@ import { createClient, groq } from "next-sanity"
 import clientConfig from "@/sanity/config/client-config"
 import type {
 	AboutPage,
-	Commercial,
 	ContactPage,
-	Film,
 	HomePage,
 	NavLink,
 	PortfolioPage,
@@ -48,6 +46,7 @@ export async function getContactPage(): Promise<ContactPage> {
 	return client.fetch(
 		groq`*[_type == "contactPage"][0] {
       title,
+      subtitle,
       email,
       socials,
       love,
@@ -133,7 +132,7 @@ export async function getFilm(slug: string): Promise<Project> {
          },
       description,
       projectLink,
-      trailerUrl
+      projectVideo
    }`,
 		{ slug }
 	)
@@ -151,6 +150,8 @@ export async function getCommercial(slug: string): Promise<Project> {
          "imageAlt": image.imageAlt
          },
       description,
+      projectLink,
+      projectVideo
    }`,
 		{ slug }
 	)

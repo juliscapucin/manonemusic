@@ -19,6 +19,6 @@ export type Film = {
 	info?: string
 	image: ImageField
 	description?: string
-	trailerUrl?: string
-	link?: string
+	projectLink?: string
+	projectVideo?: string
 }

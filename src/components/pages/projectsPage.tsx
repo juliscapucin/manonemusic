@@ -28,19 +28,17 @@ export default function ProjectsPage({
 		projectsPage && (
 			<PageWrapper>
 				<div className='block w-full h-full relative'>
-					<>
-						<TitleDisplay classes='gsap-projects-title' ref={titleWorkRef}>
-							{projectsPage.title}
-						</TitleDisplay>
-						<Subtitle subtitle={projectsPage.subtitle} />
-						{projects && projectsPage.title && (
-							<ProjectsMenu
-								variant='section'
-								section={projectsPage.title.toLowerCase().replace(/\s/g, "-")}
-								projects={projects}
-							/>
-						)}
-					</>
+					<Subtitle subtitle={projectsPage.subtitle} />
+					<TitleDisplay classes='gsap-projects-title' ref={titleWorkRef}>
+						{projectsPage.title}
+					</TitleDisplay>
+					{projects && projectsPage.title && (
+						<ProjectsMenu
+							variant='section'
+							section={projectsPage.title.toLowerCase().replace(/\s/g, "-")}
+							projects={projects}
+						/>
+					)}
 				</div>
 			</PageWrapper>
 		)

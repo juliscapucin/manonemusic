@@ -10,4 +10,6 @@ export type Commercial = {
 	releaseDate: string
 	info?: string
 	description?: string
+	projectLink?: string
+	projectVideo?: string
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef } from "react"
+import { useRef, useState } from "react"
 
 import gsap from "gsap"
 
@@ -21,8 +21,11 @@ export default function FilmPage({
 	filmsData,
 	filmsPageData,
 }: filmPageProps) {
+	const [isTrailerActive, setIsTrailerActive] = useState(false)
+
 	const containerRef = useRef<HTMLDivElement>(null)
 	const filmPageRef = useRef<HTMLDivElement>(null)
+
 	let ctx = gsap.context(() => {})
 
 	useTransitionOnEnter(ctx)
@@ -52,6 +55,9 @@ export default function FilmPage({
 							imgAlt: `${filmPageData.title} album cover`,
 						}}
 						description={filmPageData.description}
+						projectLink={filmPageData.projectLink}
+						projectVideo={filmPageData.projectVideo}
+						setIsTrailerActive={setIsTrailerActive}
 					/>
 				</div>
 			</PageWrapper>

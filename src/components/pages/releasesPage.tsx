@@ -25,13 +25,10 @@ export default function ReleasesPage({
 	return (
 		data && (
 			<PageWrapper>
-				<div>
-					<TitleDisplay classes='gsap-projects-title' ref={titleReleasesRef}>
-						{data.title}
-					</TitleDisplay>
-
-					<Subtitle subtitle={data.subtitle} />
-				</div>
+				<Subtitle subtitle={data.subtitle} />
+				<TitleDisplay classes='gsap-projects-title' ref={titleReleasesRef}>
+					{data.title}
+				</TitleDisplay>
 				{releases && (
 					<ProjectsMenu
 						variant='section'
