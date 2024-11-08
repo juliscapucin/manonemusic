@@ -23,4 +23,6 @@ const PageWrapper = forwardRef<HTMLDivElement, PageWrapperProps>(
 	}
 )
 
+PageWrapper.displayName = "PageWrapper"
+
 export default PageWrapper
