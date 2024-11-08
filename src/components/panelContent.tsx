@@ -16,38 +16,30 @@ type PanelContentProps = {
 }
 
 export default function PanelContent({ data, section }: PanelContentProps) {
-	console.log(data.portfolioPages)
 	return (
 		<>
 			{section === "/" && <HomePage data={data.homePage} />}
 			{section === "film" && (
-				<FilmsPage
-					data={data.portfolioPages.find((page) => page.slug === section)}
-					films={data.films}
-				/>
+				<FilmsPage data={data.portfolioSections[section]} films={data.films} />
 			)}
 
 			{section === "commercial" && (
 				<CommercialsPage
-					data={data.portfolioPages.find((page) => page.slug === section)}
+					data={data.portfolioSections[section]}
 					commercials={data.commercials}
 				/>
 			)}
 
 			{section === "release" && (
 				<ReleasesPage
-					releasesPageData={data.portfolioPages.find(
-						(page) => page.slug === section
-					)}
+					releasesPageData={data.portfolioSections[section]}
 					releases={data.releases}
 				/>
 			)}
 
 			{section === "project" && (
 				<ProjectsPage
-					projectsPage={data.portfolioPages.find(
-						(page) => page.slug === section
-					)}
+					projectsPage={data.portfolioSections[section]}
 					projects={data.projects}
 				/>
 			)}

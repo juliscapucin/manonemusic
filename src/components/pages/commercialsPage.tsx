@@ -8,7 +8,7 @@ import { ProjectsMenu } from "@/components"
 import { PortfolioItem, PortfolioPage } from "@/types"
 
 type CommercialsPageProps = {
-	data?: PortfolioPage
+	data: PortfolioPage
 	commercials?: PortfolioItem[]
 }
 
@@ -18,8 +18,6 @@ export default function CommercialsPage({
 }: CommercialsPageProps) {
 	const titleCommercialsRef = useRef(null)
 	const { windowAspectRatio } = useWindowDimensions()
-
-	if (!data) return null
 
 	useTitleScrollTrigger(titleCommercialsRef, data.slug, windowAspectRatio)
 

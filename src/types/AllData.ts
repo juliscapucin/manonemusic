@@ -12,7 +12,7 @@ export type AllData = {
 	homePage: HomePage
 	contactPage: ContactPage
 	aboutPage: AboutPage
-	portfolioPages: PortfolioPage[]
+	portfolioSections: { [key: string]: PortfolioPage }
 	films: PortfolioItem[]
 	commercials: PortfolioItem[]
 	releases: PortfolioItem[]

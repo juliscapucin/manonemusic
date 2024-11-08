@@ -5,7 +5,7 @@ import {
 	getAboutPage,
 	getContactPage,
 	getPortfolioItems,
-	getPortfolioPages,
+	getPortfolioSections,
 	getHeaderNavLinks,
 } from "@/sanity/sanity-queries"
 
@@ -17,7 +17,7 @@ export async function Panels() {
 		homePage,
 		contactPage,
 		aboutPage,
-		portfolioPages,
+		sections,
 		films,
 		commercials,
 		releases,
@@ -27,19 +27,27 @@ export async function Panels() {
 		getHomePage(),
 		getContactPage(),
 		getAboutPage(),
-		getPortfolioPages(),
+		getPortfolioSections(),
 		getPortfolioItems("film"),
 		getPortfolioItems("commercial"),
 		getPortfolioItems("release"),
 		getPortfolioItems("project"),
 	])
 
+	const portfolioSections = sections.reduce(
+		(acc: { [key: string]: (typeof sections)[0] }, item) => {
+			acc[item.slug] = item
+			return acc
+		},
+		{}
+	)
+
 	const data = {
 		headerNavLinks,
 		homePage,
 		contactPage,
 		aboutPage,
-		portfolioPages,
+		portfolioSections,
 		films,
 		commercials,
 		releases,
@@ -52,7 +60,7 @@ export async function Panels() {
 		!data.homePage ||
 		!data.contactPage ||
 		!data.aboutPage ||
-		!data.portfolioPages ||
+		!data.portfolioSections ||
 		!data.films ||
 		!data.commercials ||
 		!data.releases ||

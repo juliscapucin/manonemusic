@@ -57,7 +57,7 @@ export async function getContactPage(): Promise<ContactPage> {
 	)
 }
 
-export async function getPortfolioPages(): Promise<PortfolioPage[]> {
+export async function getPortfolioSections(): Promise<PortfolioPage[]> {
 	return client.fetch(
 		groq`*[_type == "portfolioPage"] {
       title,

@@ -8,15 +8,13 @@ import { ProjectsMenu } from "@/components"
 import { PortfolioItem, PortfolioPage } from "@/types"
 
 type FilmsPageProps = {
-	data?: PortfolioPage
+	data: PortfolioPage
 	films?: PortfolioItem[]
 }
 
 export default function FilmsPage({ data, films }: FilmsPageProps) {
 	const titleFilmsRef = useRef(null)
 	const { windowAspectRatio } = useWindowDimensions()
-
-	if (!data) return null
 
 	useTitleScrollTrigger(titleFilmsRef, data.slug, windowAspectRatio)
 

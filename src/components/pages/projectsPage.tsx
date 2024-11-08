@@ -10,7 +10,7 @@ import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 import { PortfolioItem, PortfolioPage } from "@/types"
 
 type ProjectPageProps = {
-	projectsPage?: PortfolioPage
+	projectsPage: PortfolioPage
 	projects?: PortfolioItem[]
 	titleScrollTrigger?: boolean
 }
@@ -21,8 +21,6 @@ export default function ProjectsPage({
 }: ProjectPageProps) {
 	const titleWorkRef = useRef(null)
 	const { windowAspectRatio } = useWindowDimensions()
-
-	if (!projectsPage) return null
 
 	useTitleScrollTrigger(titleWorkRef, projectsPage.slug, windowAspectRatio)
 

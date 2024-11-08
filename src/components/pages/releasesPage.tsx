@@ -8,7 +8,7 @@ import { ProjectsMenu } from "@/components"
 import { PortfolioPage, PortfolioItem } from "@/types"
 
 type ReleasesPageProps = {
-	releasesPageData?: PortfolioPage
+	releasesPageData: PortfolioPage
 	releases: PortfolioItem[]
 	titleScrollTrigger?: boolean
 }
@@ -19,8 +19,6 @@ export default function ReleasesPage({
 }: ReleasesPageProps) {
 	const titleReleasesRef = useRef(null)
 	const { windowAspectRatio } = useWindowDimensions()
-
-	if (!data) return null
 
 	useTitleScrollTrigger(titleReleasesRef, data.slug, windowAspectRatio)
 
