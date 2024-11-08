@@ -4,6 +4,10 @@ export const breakpoints = {
 
 export const maxWidth = 2000
 
+export const colors = {
+	colorWhite: "#B6D1C2",
+}
+
 export const navLinks = [
 	{ label: "Home", slug: "/" },
 	{

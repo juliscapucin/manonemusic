@@ -98,22 +98,21 @@ export default function PanelDesktop({ data }: PanelDesktopProps) {
 
 								{/* Previous/Next Navigation */}
 								<div className='absolute bottom-1/2 right-8 flex gap-8 z-20'>
-									{/* <ButtonScroll
-									action={() =>
-										handlePanelSlide(index - 1 > 0 ? index - 1 : 0, true)
-									}
-								/> */}
-									<ButtonScroll
-										action={() => {
-											const nextIndex =
-												index + 1 > navLinks.length
-													? navLinks.length
-													: index + 1
-											const nextSlug = navLinks[nextIndex].slug
+									{navLinks.length - 1 !== index && (
+										<ButtonScroll
+											index={index}
+											total={navLinks.length}
+											action={() => {
+												const nextIndex =
+													index + 1 > navLinks.length
+														? navLinks.length
+														: index + 1
+												const nextSlug = navLinks[nextIndex].slug
 
-											handlePanelSlide(nextSlug, true)
-										}}
-									/>
+												handlePanelSlide(nextSlug, true)
+											}}
+										/>
+									)}
 								</div>
 							</section>
 						)
