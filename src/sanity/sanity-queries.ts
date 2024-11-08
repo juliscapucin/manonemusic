@@ -74,7 +74,7 @@ export async function getPortfolioPage(
 	section: string
 ): Promise<PortfolioPage> {
 	return client.fetch(
-		groq`*[_type == "portfolioPage" && title == $section] | order(releaseDate desc)[0]{
+		groq`*[_type == "portfolioPage" && slug.current == $section] | order(releaseDate desc)[0]{
       title,
       subtitle,
       "slug": slug.current
@@ -100,11 +100,15 @@ export async function getPortfolioItems(
 	)
 }
 
-export async function getProject(slug: string): Promise<Project> {
+export async function getProject(
+	section: string,
+	slug: string
+): Promise<Project> {
 	return client.fetch(
-		groq`*[_type == "project" && slug.current == $slug][0]{
+		groq`*[_type == $section && slug.current == $slug][0]{
       _id,
       title,
+      "slug": slug.current,
       releaseDate,
       "image": {
          "imageUrl": image.image.asset->url,
@@ -113,9 +117,13 @@ export async function getProject(slug: string): Promise<Project> {
       info,
       description,
       projectLink,
-      projectVideo
+      projectVideo,
+      tracklist[]{
+         trackname,
+         link
+         }
       }`,
-		{ slug }
+		{ slug, section }
 	)
 }
 

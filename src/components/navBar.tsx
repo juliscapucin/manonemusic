@@ -23,7 +23,7 @@ export default function NavBar({ navLinks }: NavLinksProps) {
 		const pathSegments = pathname.split("/").filter(Boolean)
 
 		// Check if the path is first-level (e.g., "/commercial")
-		if (pathSegments.length === 1) setVariant("section")
+		if (pathSegments.length <= 1) setVariant("section")
 		else setVariant("page")
 	}, [pathname])
 
@@ -45,9 +45,8 @@ export default function NavBar({ navLinks }: NavLinksProps) {
 			</Button>
 
 			<div className='flex gap-8'>
-				{navLinks.map((link, index) => {
-					console.log(link.slug)
-					return (
+				{navLinks.map(
+					(link, index) =>
 						link.slug !== "/" && (
 							<NavLink
 								label={link.title}
@@ -61,8 +60,7 @@ export default function NavBar({ navLinks }: NavLinksProps) {
 								}}
 							/>
 						)
-					)
-				})}
+				)}
 			</div>
 		</nav>
 	)
