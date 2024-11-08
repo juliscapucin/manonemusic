@@ -1,4 +1,5 @@
 import { ImageField } from "./Image"
+import { Track } from "./Track"
 
 export type Project = {
 	title: string
@@ -12,4 +13,5 @@ export type Project = {
 	description?: string
 	projectLink?: string
 	projectVideo?: string
+	tracklist?: Track[]
 }

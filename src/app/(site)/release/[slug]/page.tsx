@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
-import { ReleasePage } from "@/components/pages"
+import { ProjectPage, ReleasePage } from "@/components/pages"
 import {
 	getRelease,
 	getPortfolioItems,
@@ -23,11 +23,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
 	if (!releasePageData || !releasesData || !releasesPageData) return notFound()
 
 	return (
-		<ReleasePage
+		<ProjectPage
 			{...{
-				releasePageData,
-				releasesData,
-				releasesPageData,
+				projectPageData: releasePageData,
+				projectsData: releasesData,
+				projectsPageData: releasesPageData,
 			}}
 		/>
 	)

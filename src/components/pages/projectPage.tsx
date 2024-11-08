@@ -61,6 +61,7 @@ export default function ProjectPage({
 							imgAlt: `${projectPageData.title} project image`,
 						}}
 						description={projectPageData.description}
+						tracklist={projectPageData.tracklist}
 						setIsTrailerActive={setIsTrailerActive}
 						projectLink={projectPageData.projectLink}
 						projectVideo={projectPageData.projectVideo}
