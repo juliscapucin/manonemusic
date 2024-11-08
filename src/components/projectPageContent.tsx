@@ -11,7 +11,7 @@ type ProjectPageContentProps = {
 	description?: string
 	projectVideo?: string
 	projectLink?: string
-	setIsTrailerActive: (value: boolean) => void
+	setIsTrailerActive?: (value: boolean) => void
 }
 
 export default function ProjectPageContent({
@@ -30,7 +30,7 @@ export default function ProjectPageContent({
 				{description && <p className='max-w-prose'>{description}</p>}
 				{/* Links */}
 				<div className='mt-8 space-y-1'>
-					{projectVideo && (
+					{projectVideo && setIsTrailerActive && (
 						<Button action={() => setIsTrailerActive(true)}>
 							View Trailer
 						</Button>

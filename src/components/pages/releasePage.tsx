@@ -25,7 +25,7 @@ export default function ReleasePage({
 
 	return (
 		<div className='relative w-screen h-screen overflow-clip'>
-			<PageWrapper hasMenu={true}>
+			<PageWrapper>
 				<ProjectsMenuPage
 					projectsData={releasesData}
 					pageData={releasesPageData}

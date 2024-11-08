@@ -61,6 +61,7 @@ export async function getPortfolioPages(): Promise<PortfolioPage[]> {
 	return client.fetch(
 		groq`*[_type == "portfolioPage"] {
       title,
+      "slug": slug.current,
       subtitle,
       metadataTitle,
       metadataDescription,

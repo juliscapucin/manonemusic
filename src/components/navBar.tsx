@@ -6,12 +6,11 @@ import { usePathname, useRouter } from "next/navigation"
 import { NavLink } from "@/components"
 import { Button } from "@/components/ui"
 import { handlePanelSlide, projectExit } from "@/lib/animations"
-
-type NavLink = { label: string; slug: string }
+import { NavLink as NavLinkType } from "@/types"
 
 type NavLinksProps = {
 	variant?: "section" | "page"
-	navLinks: NavLink[]
+	navLinks: NavLinkType[]
 }
 
 export default function NavBar({ variant, navLinks }: NavLinksProps) {
@@ -41,7 +40,8 @@ export default function NavBar({ variant, navLinks }: NavLinksProps) {
 					(link, index) =>
 						link.slug !== "/" && (
 							<NavLink
-								label={link.label}
+								label={link.title}
+								slug={link.slug}
 								key={`panel-button-${index}`}
 								activeState={pathname.includes(`/${link.slug}`) ? true : false}
 								action={() => {

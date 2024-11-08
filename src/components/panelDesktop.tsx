@@ -7,10 +7,8 @@ import gsap from "gsap"
 import { ScrollToPlugin } from "gsap/ScrollToPlugin"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
-import { navLinks } from "@/constants"
-
 import { AllData } from "@/types"
-import { NavBar, PanelContent } from "@/components"
+import { PanelContent } from "@/components"
 import { ButtonScroll } from "./buttons"
 import { handlePanelSlide, panelsEnter } from "@/lib/animations"
 
@@ -23,6 +21,11 @@ export default function PanelDesktop({ data }: PanelDesktopProps) {
 	const outerContainerRef = useRef<HTMLDivElement | null>(null)
 	const panelsContainerRef = useRef<HTMLDivElement | null>(null)
 	let tween: gsap.core.Tween
+
+	const headerNavLinks = [
+		{ title: "Home", slug: "/", order: 0 },
+		...data.headerNavLinks,
+	]
 
 	// ScrollTrigger + Panel animation
 	useEffect(() => {
@@ -79,35 +82,30 @@ export default function PanelDesktop({ data }: PanelDesktopProps) {
 
 	return (
 		<div className='hidden lg:block'>
-			<NavBar navLinks={navLinks} variant='section' />
-
 			{/* Panels */}
 			<div ref={outerContainerRef} className='gsap-panels-container opacity-0'>
 				<div ref={panelsContainerRef} className='flex gap-32'>
-					{navLinks.map((section, index) => {
+					{headerNavLinks.map((section, index) => {
 						return (
 							<section
 								data-id={`panel-${section.slug}`}
 								className={`panel custom-min-w-screen h-screen min-h-full pl-8 overflow-clip`}
 								key={`panel-${section.slug}`}
 							>
-								<PanelContent
-									data={data}
-									section={section.label.toLowerCase()}
-								/>
+								<PanelContent data={data} section={section.slug} />
 
 								{/* Previous/Next Navigation */}
 								<div className='absolute bottom-1/2 right-8 flex gap-8 z-20'>
-									{navLinks.length - 1 !== index && (
+									{headerNavLinks.length - 1 !== index && (
 										<ButtonScroll
 											index={index}
-											total={navLinks.length}
+											total={headerNavLinks.length}
 											action={() => {
 												const nextIndex =
-													index + 1 > navLinks.length
-														? navLinks.length
+													index + 1 > headerNavLinks.length
+														? headerNavLinks.length
 														: index + 1
-												const nextSlug = navLinks[nextIndex].slug
+												const nextSlug = headerNavLinks[nextIndex].slug
 
 												handlePanelSlide(nextSlug, true)
 											}}

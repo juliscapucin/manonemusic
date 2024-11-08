@@ -22,7 +22,9 @@ export default function ProjectsPage({
 	const titleWorkRef = useRef(null)
 	const { windowAspectRatio } = useWindowDimensions()
 
-	useTitleScrollTrigger(titleWorkRef, "/projects", windowAspectRatio)
+	if (!projectsPage) return null
+
+	useTitleScrollTrigger(titleWorkRef, projectsPage.slug, windowAspectRatio)
 
 	return (
 		projectsPage && (

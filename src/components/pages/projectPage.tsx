@@ -37,7 +37,7 @@ export default function ProjectPage({
 			ref={containerProjectRef}
 			className='relative w-screen h-screen overflow-clip'
 		>
-			<PageWrapper hasMenu={true}>
+			<PageWrapper>
 				{/* Projects Menu */}
 				<ProjectsMenuPage
 					projectsData={projectsData}

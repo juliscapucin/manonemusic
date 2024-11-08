@@ -19,7 +19,9 @@ export default function CommercialsPage({
 	const titleCommercialsRef = useRef(null)
 	const { windowAspectRatio } = useWindowDimensions()
 
-	useTitleScrollTrigger(titleCommercialsRef, "/commercials", windowAspectRatio)
+	if (!data) return null
+
+	useTitleScrollTrigger(titleCommercialsRef, data.slug, windowAspectRatio)
 
 	return (
 		data && (

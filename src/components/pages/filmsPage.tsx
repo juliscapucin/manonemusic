@@ -16,7 +16,9 @@ export default function FilmsPage({ data, films }: FilmsPageProps) {
 	const titleFilmsRef = useRef(null)
 	const { windowAspectRatio } = useWindowDimensions()
 
-	useTitleScrollTrigger(titleFilmsRef, "/films", windowAspectRatio)
+	if (!data) return null
+
+	useTitleScrollTrigger(titleFilmsRef, data.slug, windowAspectRatio)
 
 	return (
 		data && (

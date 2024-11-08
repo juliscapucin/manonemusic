@@ -28,7 +28,7 @@ export default function CommercialPage({
 
 	return (
 		<div className='relative w-screen h-screen overflow-clip'>
-			<PageWrapper hasMenu={true}>
+			<PageWrapper>
 				<ProjectsMenuPage
 					projectsData={commercialsData}
 					pageData={commercialsPageData}

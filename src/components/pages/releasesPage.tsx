@@ -20,7 +20,9 @@ export default function ReleasesPage({
 	const titleReleasesRef = useRef(null)
 	const { windowAspectRatio } = useWindowDimensions()
 
-	useTitleScrollTrigger(titleReleasesRef, "/releases", windowAspectRatio)
+	if (!data) return null
+
+	useTitleScrollTrigger(titleReleasesRef, data.slug, windowAspectRatio)
 
 	return (
 		data && (

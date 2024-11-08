@@ -2,7 +2,8 @@ import type { Metadata } from "next"
 import localFont from "next/font/local"
 import "./globals.css"
 
-import { RootLayout } from "@/components"
+import { NavBar, RootLayout } from "@/components"
+import { getHeaderNavLinks } from "@/sanity/sanity-queries"
 
 // Load custom font //
 const font = localFont({
@@ -25,12 +26,18 @@ export const metadata: Metadata = {
 		"We create tailored sound design and audio identities that captures the spirit of your brand and resonate with your audience. Let's elevate your identity through sound.",
 }
 
-export default function Layout({ children }: { children: React.ReactNode }) {
+export default async function Layout({
+	children,
+}: {
+	children: React.ReactNode
+}) {
+	const navLinks = await getHeaderNavLinks()
 	return (
 		<RootLayout>
 			<body
 				className={`${font.className} relative w-screen max-w-desktop md:h-screen custom-min-h-screen overflow-x-clip`}
 			>
+				<NavBar navLinks={navLinks} variant='section' />
 				{children}
 			</body>
 		</RootLayout>

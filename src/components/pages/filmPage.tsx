@@ -35,7 +35,7 @@ export default function FilmPage({
 			ref={containerRef}
 			className='relative w-screen h-screen overflow-clip'
 		>
-			<PageWrapper hasMenu={true}>
+			<PageWrapper>
 				<ProjectsMenuPage projectsData={filmsData} pageData={filmsPageData} />
 
 				<div ref={filmPageRef} className='gsap-project-page opacity-0'>
