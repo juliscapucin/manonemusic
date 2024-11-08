@@ -24,7 +24,7 @@ export default function useTitleScrollTrigger(
 		const offsetLeft = () => parentElement!.offsetLeft
 		const width = () => parentElement!.offsetWidth
 
-		let fastScrollEnd = true
+		let fastScrollEnd = false
 
 		ctx.add(() => {
 			ScrollTrigger.create({

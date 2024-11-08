@@ -16,6 +16,7 @@ export default function VideoPlayer({ src, title }: VideoPlayerProps) {
 			allow='autoplay; fullscreen'
 			height={height * 0.7}
 			width={width * 0.7}
+			className='bg-faded-5 mx-auto'
 		/>
 	)
 }

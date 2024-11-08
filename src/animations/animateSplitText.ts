@@ -30,7 +30,7 @@ export const animateSplitText = (
 			duration: 0.5,
 			delay: delay || 0,
 			stagger: 0.05,
-			ease: "expo.out",
+			ease: "hohoho",
 		}
 	)
 }

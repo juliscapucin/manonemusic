@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useLayoutEffect, useRef, useState } from "react"
 
 import gsap from "gsap"
 
@@ -27,17 +27,37 @@ export default function ProjectPage({
 	projectsPageData,
 }: ProjectPageProps) {
 	const [isTrailerActive, setIsTrailerActive] = useState(false)
+	const [isPageDisplaced, setIsPageDisplaced] = useState(false)
 	const containerProjectRef = useRef<HTMLDivElement>(null)
+	const pageWrapperRef = useRef<HTMLDivElement>(null)
 	let ctx = gsap.context(() => {})
 
 	useTransitionOnEnter(ctx)
+
+	useLayoutEffect(() => {
+		if (isPageDisplaced) {
+			const tl = gsap.timeline()
+			tl.to(pageWrapperRef.current, {
+				duration: 0.6,
+				yPercent: -30,
+				opacity: 0,
+			})
+		} else {
+			const tl = gsap.timeline()
+			tl.to(pageWrapperRef.current, {
+				duration: 0.4,
+				yPercent: 0,
+				opacity: 1,
+			})
+		}
+	}, [isPageDisplaced])
 
 	return (
 		<div
 			ref={containerProjectRef}
 			className='relative w-screen h-screen overflow-clip'
 		>
-			<PageWrapper>
+			<PageWrapper ref={pageWrapperRef}>
 				{/* Projects Menu */}
 				<ProjectsMenuPage
 					projectsData={projectsData}
@@ -63,6 +83,7 @@ export default function ProjectPage({
 						description={projectPageData.description}
 						tracklist={projectPageData.tracklist}
 						setIsTrailerActive={setIsTrailerActive}
+						setIsPageDisplaced={setIsPageDisplaced}
 						projectLink={projectPageData.projectLink}
 						projectVideo={projectPageData.projectVideo}
 					/>
@@ -71,13 +92,12 @@ export default function ProjectPage({
 
 			{/* Trailer */}
 			{projectPageData.projectVideo && isTrailerActive && (
-				<PageWrapper>
-					<ProjectTrailer
-						videoUrl={projectPageData.projectVideo}
-						isTrailerActive={isTrailerActive}
-						setIsTrailerActive={setIsTrailerActive}
-					/>
-				</PageWrapper>
+				<ProjectTrailer
+					videoUrl={projectPageData.projectVideo}
+					isTrailerActive={isTrailerActive}
+					setIsTrailerActive={setIsTrailerActive}
+					setIsPageDisplaced={setIsPageDisplaced}
+				/>
 			)}
 		</div>
 	)

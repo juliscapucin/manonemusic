@@ -11,7 +11,8 @@ type ProjectPageContentProps = {
 	description?: string
 	projectVideo?: string
 	projectLink?: string
-	setIsTrailerActive?: (value: boolean) => void
+	setIsTrailerActive: (value: boolean) => void
+	setIsPageDisplaced: (value: boolean) => void
 }
 
 export default function ProjectPageContent({
@@ -21,6 +22,7 @@ export default function ProjectPageContent({
 	projectVideo,
 	projectLink,
 	setIsTrailerActive,
+	setIsPageDisplaced,
 }: ProjectPageContentProps) {
 	return (
 		<div className='relative w-full flex gap-8 mt-12'>
@@ -31,7 +33,12 @@ export default function ProjectPageContent({
 				{/* Links */}
 				<div className='mt-8 space-y-1'>
 					{projectVideo && setIsTrailerActive && (
-						<Button action={() => setIsTrailerActive(true)}>
+						<Button
+							action={() => {
+								setIsTrailerActive(true)
+								setIsPageDisplaced(true)
+							}}
+						>
 							View Trailer
 						</Button>
 					)}
