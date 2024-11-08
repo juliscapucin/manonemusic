@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
-import { CommercialPage } from "@/components/pages"
+import { CommercialPage, ProjectPage } from "@/components/pages"
 import {
 	getCommercial,
 	getPortfolioItems,
@@ -24,11 +24,11 @@ export default async function Page({ params }: { params: { slug: string } }) {
 		return notFound()
 
 	return (
-		<CommercialPage
+		<ProjectPage
 			{...{
-				commercialPageData,
-				commercialsData,
-				commercialsPageData,
+				projectPageData: commercialPageData,
+				projectsData: commercialsData,
+				projectsPageData: commercialsPageData,
 			}}
 		/>
 	)

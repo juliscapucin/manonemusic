@@ -69,10 +69,10 @@ export default function ProjectPage({
 			</PageWrapper>
 
 			{/* Trailer */}
-			{projectPageData.projectVideo && (
+			{projectPageData.projectVideo && isTrailerActive && (
 				<PageWrapper>
 					<ProjectTrailer
-						videoUrl='https://player.vimeo.com/video/844715489?title=0&byline=0&portrait=0&muted=1&autoplay=1&controls=0&loop=1'
+						videoUrl={projectPageData.projectVideo}
 						isTrailerActive={isTrailerActive}
 						setIsTrailerActive={setIsTrailerActive}
 					/>

@@ -1,7 +1,7 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
-import { FilmPage } from "@/components/pages"
+import { ProjectPage } from "@/components/pages"
 import {
 	getFilm,
 	getPortfolioItems,
@@ -18,16 +18,16 @@ export default async function Page({ params }: { params: { slug: string } }) {
 
 	const filmPageData = await getFilm(slug)
 	const filmsData = await getPortfolioItems("film")
-	const filmsPageData = await getPortfolioPage("Films")
+	const filmsPageData = await getPortfolioPage(slug)
 
 	if (!filmPageData || !filmsData || !filmsPageData) return notFound()
 
 	return (
-		<FilmPage
+		<ProjectPage
 			{...{
-				filmPageData,
-				filmsData,
-				filmsPageData,
+				projectPageData: filmPageData,
+				projectsData: filmsData,
+				projectsPageData: filmsPageData,
 			}}
 		/>
 	)

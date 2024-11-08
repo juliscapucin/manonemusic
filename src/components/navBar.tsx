@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { usePathname, useRouter } from "next/navigation"
 
 import { NavLink } from "@/components"
@@ -9,14 +9,23 @@ import { handlePanelSlide, projectExit } from "@/lib/animations"
 import { NavLink as NavLinkType } from "@/types"
 
 type NavLinksProps = {
-	variant?: "section" | "page"
 	navLinks: NavLinkType[]
 }
 
-export default function NavBar({ variant, navLinks }: NavLinksProps) {
+export default function NavBar({ navLinks }: NavLinksProps) {
+	const [variant, setVariant] = useState<"section" | "page">("section")
 	const pathname = usePathname()
 	const router = useRouter()
 	const navRef = useRef<HTMLDivElement | null>(null)
+
+	useEffect(() => {
+		// Split the pathname and filter out empty segments
+		const pathSegments = pathname.split("/").filter(Boolean)
+
+		// Check if the path is first-level (e.g., "/commercial")
+		if (pathSegments.length === 1) setVariant("section")
+		else setVariant("page")
+	}, [pathname])
 
 	return (
 		<nav
@@ -36,8 +45,9 @@ export default function NavBar({ variant, navLinks }: NavLinksProps) {
 			</Button>
 
 			<div className='flex gap-8'>
-				{navLinks.map(
-					(link, index) =>
+				{navLinks.map((link, index) => {
+					console.log(link.slug)
+					return (
 						link.slug !== "/" && (
 							<NavLink
 								label={link.title}
@@ -51,7 +61,8 @@ export default function NavBar({ variant, navLinks }: NavLinksProps) {
 								}}
 							/>
 						)
-				)}
+					)
+				})}
 			</div>
 		</nav>
 	)

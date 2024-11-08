@@ -20,32 +20,31 @@ export default function ProjectTrailer({
 	const trailerContainerRef = useRef<HTMLDivElement>(null)
 
 	const backToProject = () => {
-		setIsTrailerActive(false)
+		const tl = gsap.timeline()
+		tl.to(trailerContainerRef.current, {
+			duration: 0.8,
+			xPercent: 100,
+			onComplete: () => setIsTrailerActive(false),
+		})
 	}
 
 	useLayoutEffect(() => {
-		if (isTrailerActive) {
-			const tl = gsap.timeline()
-			tl.to(trailerContainerRef.current, {
-				duration: 0.3,
-				xPercent: -100,
-			})
-		} else {
-			const tl = gsap.timeline()
-			tl.to(trailerContainerRef.current, {
-				duration: 0.5,
-				xPercent: 0,
-			})
-		}
+		if (!isTrailerActive) return
+
+		const tl = gsap.timeline()
+		tl.to(trailerContainerRef.current, {
+			duration: 0.3,
+			xPercent: -100,
+		})
 	}, [isTrailerActive])
 
 	return (
 		<div
 			ref={trailerContainerRef}
-			className={`w-screen h-screen overflow-clip bg-colorWhite fixed top-0 left-full ${isTrailerActive ? "pointer-events-auto" : "pointer-events-none"}`}
+			className={`fixed top-0 left-full w-screen h-screen flex items-center justify-center overflow-clip bg-colorBlack  ${isTrailerActive ? "pointer-events-auto" : "pointer-events-none"}`}
 		>
-			<div className='absolute flex justify-center items-center w-screen h-screen bg-primary z-50'>
-				<Button classes='absolute top-16 left-8' action={() => backToProject()}>
+			<div>
+				<Button classes='mb-4' action={() => backToProject()}>
 					Back to Project
 				</Button>
 				<VideoPlayer src={videoUrl} title='Trailer Video' />
