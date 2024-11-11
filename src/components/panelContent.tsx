@@ -30,14 +30,14 @@ export default function PanelContent({ data, section }: PanelContentProps) {
 				/>
 			)}
 
-			{section === "release" && (
+			{section === "releases" && (
 				<ReleasesPage
 					releasesPageData={data.portfolioSections[section]}
 					releases={data.releases}
 				/>
 			)}
 
-			{section === "project" && (
+			{section === "projects" && (
 				<ProjectsPage
 					projectsPage={data.portfolioSections[section]}
 					projects={data.projects}
