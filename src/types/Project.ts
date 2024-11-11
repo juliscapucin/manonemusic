@@ -12,6 +12,7 @@ export type Project = {
 	image: ImageField
 	description?: string
 	projectLink?: string
+	releaseLink?: string
 	projectVideo?: string
 	tracklist?: Track[]
 }

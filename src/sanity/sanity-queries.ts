@@ -117,6 +117,7 @@ export async function getProject(
       info,
       description,
       projectLink,
+      releaseLink,
       projectVideo,
       tracklist[]{
          trackname,

@@ -28,7 +28,7 @@ export default async function Page({
 
 	const projectPageData = await getProject(sectionWithoutS, slug)
 	const projectsData = await getPortfolioItems(sectionWithoutS)
-	const projectsPageData = await getPortfolioPage(sectionWithoutS)
+	const projectsPageData = await getPortfolioPage(section)
 
 	if (!projectPageData || !projectsData || !projectsPageData) return notFound()
 
