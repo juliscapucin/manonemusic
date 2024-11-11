@@ -6,7 +6,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { animateSplitText } from "@/animations"
 
 export default function useTitleScrollTrigger(
-	elementRef: React.RefObject<HTMLDivElement>,
+	elementRef: React.RefObject<HTMLDivElement | null>,
 	slug: string,
 	windowAspectRatio: string
 ) {
