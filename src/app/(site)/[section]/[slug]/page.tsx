@@ -23,9 +23,12 @@ export default async function Page({
 }) {
 	const { section, slug } = params
 
-	const projectPageData = await getProject(section, slug)
-	const projectsData = await getPortfolioItems(section)
-	const projectsPageData = await getPortfolioPage(section)
+	// Because all sections are singular in the schema but vary in the header nav / slug
+	const sectionWithoutS = section.endsWith("s") ? section.slice(0, -1) : section
+
+	const projectPageData = await getProject(sectionWithoutS, slug)
+	const projectsData = await getPortfolioItems(sectionWithoutS)
+	const projectsPageData = await getPortfolioPage(sectionWithoutS)
 
 	if (!projectPageData || !projectsData || !projectsPageData) return notFound()
 

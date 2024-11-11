@@ -12,4 +12,5 @@ export type Release = {
 	releaseDate: string
 	info?: string
 	tracklist: Track[]
+	releaseLink?: string
 }

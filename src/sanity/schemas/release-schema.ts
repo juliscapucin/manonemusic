@@ -56,6 +56,8 @@ const releaseSchema = {
 			name: "info",
 			title: "Info",
 			type: "string",
+			description: "(Ex: 'Purple Sun Records')",
+			rows: 1,
 		},
 		{
 			name: "tracklist",
@@ -85,6 +87,12 @@ const releaseSchema = {
 			],
 			validation: (Rule: Rule) =>
 				Rule.required().error("Tracklist is required"),
+		},
+		{
+			name: "releaseLink",
+			title: "Release Link",
+			type: "url",
+			description: "(Link to album on Spotify)",
 		},
 	],
 	orderings: [

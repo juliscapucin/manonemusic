@@ -1,6 +1,7 @@
 import { Track } from "@/types"
 import { PlayerTrackList, ProjectPageImage } from "@/components"
 import { Button } from "@/components/buttons"
+import { release } from "os"
 
 type ProjectPageContentProps = {
 	img: {
@@ -11,6 +12,7 @@ type ProjectPageContentProps = {
 	description?: string
 	projectVideo?: string
 	projectLink?: string
+	releaseLink?: string
 	setIsTrailerActive: (value: boolean) => void
 	setIsPageDisplaced: (value: boolean) => void
 }
@@ -21,6 +23,7 @@ export default function ProjectPageContent({
 	tracklist,
 	projectVideo,
 	projectLink,
+	releaseLink,
 	setIsTrailerActive,
 	setIsPageDisplaced,
 }: ProjectPageContentProps) {
@@ -45,6 +48,11 @@ export default function ProjectPageContent({
 					{projectLink && (
 						<a className='block underline' href={projectLink} target='_blank'>
 							View project
+						</a>
+					)}
+					{releaseLink && (
+						<a className='block underline' href={releaseLink} target='_blank'>
+							View release
 						</a>
 					)}
 				</div>
