@@ -5,9 +5,6 @@ import "./globals.css"
 import { NavBar, RootLayout } from "@/components"
 import { getHeaderNavLinks } from "@/sanity/sanity-queries"
 
-// Opt out of caching for all data requests in the route segment
-export const dynamic = "force-dynamic"
-
 // Load custom font //
 const font = localFont({
 	variable: "--font-primary",
