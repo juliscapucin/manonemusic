@@ -15,6 +15,7 @@ const portfolioPageSchema = {
 			name: "subtitle",
 			title: "Subtitle (required)",
 			type: "text",
+			rows: 3,
 			validation: (Rule: Rule) => Rule.required().error("Subtitle is required"),
 		},
 		{

@@ -1,6 +1,6 @@
 type ButtonProps = {
 	children: React.ReactNode
-	action: () => void
+	action?: () => void
 	classes?: string
 }
 

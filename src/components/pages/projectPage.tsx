@@ -86,6 +86,7 @@ export default function ProjectPage({
 						setIsPageDisplaced={setIsPageDisplaced}
 						projectLink={projectPageData.projectLink}
 						projectVideo={projectPageData.projectVideo}
+						releaseLink={projectPageData.releaseLink}
 					/>
 				</div>
 			</PageWrapper>

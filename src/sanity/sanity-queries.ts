@@ -117,6 +117,7 @@ export async function getProject(
       info,
       description,
       projectLink,
+      releaseLink,
       projectVideo,
       tracklist[]{
          trackname,
@@ -124,65 +125,6 @@ export async function getProject(
          }
       }`,
 		{ slug, section }
-	)
-}
-
-export async function getFilm(slug: string): Promise<Project> {
-	return client.fetch(
-		groq`*[_type == "film" && slug.current == $slug][0]{
-      _id,
-      "slug": slug.current,
-      title,
-      releaseDate,
-      info,
-      "image": {
-         "imageUrl": image.image.asset->url,
-         "imageAlt": image.imageAlt
-         },
-      description,
-      projectLink,
-      projectVideo
-   }`,
-		{ slug }
-	)
-}
-export async function getCommercial(slug: string): Promise<Project> {
-	return client.fetch(
-		groq`*[_type == "commercial" && slug.current == $slug][0]{
-      _id,
-      "slug": slug.current,
-      title,
-      releaseDate,
-      info,
-      "image": {
-         "imageUrl": image.image.asset->url,
-         "imageAlt": image.imageAlt
-         },
-      description,
-      projectLink,
-      projectVideo
-   }`,
-		{ slug }
-	)
-}
-export async function getRelease(slug: string): Promise<Release> {
-	return client.fetch(
-		groq`*[_type == "release" && slug.current == $slug][0]{
-      _id,
-      "slug": slug.current,
-      title,
-      info,
-      releaseDate,
-      "image": {
-         "imageUrl": image.image.asset->url,
-         "imageAlt": image.imageAlt
-         },
-      tracklist[]{
-         trackname,
-         link
-         }
-   }`,
-		{ slug }
 	)
 }
 

@@ -9,6 +9,9 @@ import {
 	getHeaderNavLinks,
 } from "@/sanity/sanity-queries"
 
+// Opt out of caching for all data requests in the route segment
+export const dynamic = "force-dynamic"
+
 import { PanelDesktop, PanelMobile } from "@/components"
 
 export async function Panels() {
