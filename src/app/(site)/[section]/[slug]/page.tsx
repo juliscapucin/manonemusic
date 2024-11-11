@@ -8,6 +8,9 @@ import {
 	getProject,
 } from "@/sanity/sanity-queries"
 
+// Opt out of caching for all data requests in the route segment
+export const dynamic = "force-dynamic"
+
 export const metadata: Metadata = {
 	title: "Project",
 	description: "Project description",
@@ -19,8 +22,6 @@ export default async function Page({
 	params: { section: string; slug: string }
 }) {
 	const { section, slug } = params
-
-	console.log(section, slug)
 
 	const projectPageData = await getProject(section, slug)
 	const projectsData = await getPortfolioItems(section)
