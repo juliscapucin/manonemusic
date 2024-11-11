@@ -36,6 +36,7 @@ const filmSchema = {
 			name: "info",
 			title: "Info",
 			type: "string",
+			description: "Director: John Doe, Producer: Jane Doe, Duration: 1h 30m",
 		},
 		{
 			name: "image",
@@ -58,9 +59,24 @@ const filmSchema = {
 				},
 			],
 		},
-		{ name: "description", title: "Description", type: "text" },
-		{ name: "projectVideo", title: "Project Video", type: "url" },
-		{ name: "projectLink", title: "Project Link", type: "url" },
+		{
+			name: "description",
+			title: "Description",
+			type: "text",
+			description: "Describe the project in a couple of paragraphs",
+		},
+		{
+			name: "projectVideo",
+			title: "Project Video",
+			type: "url",
+			description: "Vimeo link",
+		},
+		{
+			name: "projectLink",
+			title: "Project Link",
+			type: "url",
+			description: "IMDB link",
+		},
 	],
 	orderings: [
 		{

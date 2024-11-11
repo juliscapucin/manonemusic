@@ -17,9 +17,13 @@ const animateSubtitle = (element: HTMLParagraphElement, duration: number) => {
 
 type SubtitleProps = {
 	subtitle: string
+	hasMarginLeft?: boolean
 }
 
-export default function Subtitle({ subtitle }: SubtitleProps) {
+export default function Subtitle({
+	subtitle,
+	hasMarginLeft = true,
+}: SubtitleProps) {
 	const subtitleRef = useRef<HTMLParagraphElement | null>(null)
 	const ctx = gsap.context(() => {})
 
@@ -59,7 +63,7 @@ export default function Subtitle({ subtitle }: SubtitleProps) {
 	}, [])
 	return (
 		<p
-			className='block ml-[25%] mt-16 mb-8 max-w-prose opacity-0'
+			className={`block mt-16 mb-8 max-w-prose opacity-0 ${hasMarginLeft && "ml-[25%]"}`}
 			ref={subtitleRef}
 		>
 			{subtitle}
