@@ -13,12 +13,18 @@ export const metadata: Metadata = {
 	description: "Project description",
 }
 
-export default async function Page({ params }: { params: { slug: string } }) {
-	const { slug } = params
+export default async function Page({
+	params,
+}: {
+	params: { section: string; slug: string }
+}) {
+	const { section, slug } = params
 
-	const projectPageData = await getProject(slug)
-	const projectsData = await getPortfolioItems("project")
-	const projectsPageData = await getPortfolioPage("Projects")
+	console.log(section, slug)
+
+	const projectPageData = await getProject(section, slug)
+	const projectsData = await getPortfolioItems(section)
+	const projectsPageData = await getPortfolioPage(section)
 
 	if (!projectPageData || !projectsData || !projectsPageData) return notFound()
 

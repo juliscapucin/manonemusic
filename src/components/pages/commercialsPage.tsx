@@ -8,7 +8,7 @@ import { ProjectsMenu } from "@/components"
 import { PortfolioItem, PortfolioPage } from "@/types"
 
 type CommercialsPageProps = {
-	data?: PortfolioPage
+	data: PortfolioPage
 	commercials?: PortfolioItem[]
 }
 
@@ -19,15 +19,15 @@ export default function CommercialsPage({
 	const titleCommercialsRef = useRef(null)
 	const { windowAspectRatio } = useWindowDimensions()
 
-	useTitleScrollTrigger(titleCommercialsRef, "/commercials", windowAspectRatio)
+	useTitleScrollTrigger(titleCommercialsRef, data.slug, windowAspectRatio)
 
 	return (
 		data && (
 			<PageWrapper>
+				<Subtitle subtitle={data.subtitle} />
 				<TitleDisplay classes='gsap-projects-title' ref={titleCommercialsRef}>
 					{data.title}
 				</TitleDisplay>
-				<Subtitle subtitle={data.subtitle} />
 
 				{commercials && (
 					<ProjectsMenu

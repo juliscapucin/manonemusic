@@ -1,28 +1,36 @@
 "use client"
 
-import { useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 import { usePathname, useRouter } from "next/navigation"
 
 import { NavLink } from "@/components"
 import { Button } from "@/components/ui"
 import { handlePanelSlide, projectExit } from "@/lib/animations"
-
-type NavLink = { label: string; slug: string }
+import { NavLink as NavLinkType } from "@/types"
 
 type NavLinksProps = {
-	variant?: "section" | "page"
-	navLinks: NavLink[]
+	navLinks: NavLinkType[]
 }
 
-export default function NavBar({ variant, navLinks }: NavLinksProps) {
+export default function NavBar({ navLinks }: NavLinksProps) {
+	const [variant, setVariant] = useState<"section" | "page">("section")
 	const pathname = usePathname()
 	const router = useRouter()
 	const navRef = useRef<HTMLDivElement | null>(null)
 
+	useEffect(() => {
+		// Split the pathname and filter out empty segments
+		const pathSegments = pathname.split("/").filter(Boolean)
+
+		// Check if the path is first-level (e.g., "/commercial")
+		if (pathSegments.length <= 1) setVariant("section")
+		else setVariant("page")
+	}, [pathname])
+
 	return (
 		<nav
 			ref={navRef}
-			className='fixed top-8 right-8 left-8 flex justify-between z-header'
+			className='fixed top-0 right-0 left-0 p-8 flex justify-between bg-colorBlack z-header'
 		>
 			<Button
 				href='/'
@@ -41,7 +49,8 @@ export default function NavBar({ variant, navLinks }: NavLinksProps) {
 					(link, index) =>
 						link.slug !== "/" && (
 							<NavLink
-								label={link.label}
+								label={link.title}
+								slug={link.slug}
 								key={`panel-button-${index}`}
 								activeState={pathname.includes(`/${link.slug}`) ? true : false}
 								action={() => {

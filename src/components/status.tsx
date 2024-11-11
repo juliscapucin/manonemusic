@@ -38,7 +38,7 @@ function Status({ location }: StatusProps) {
 		return () => {
 			ctx.revert()
 		}
-	}, [statusWrapperRef.current])
+	}, [])
 
 	const dayOfWeek = currentDate.toLocaleDateString("en-US", { weekday: "long" })
 	const dayOfMonth = currentDate.toLocaleDateString("en-US", { day: "numeric" })

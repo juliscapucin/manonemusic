@@ -1,14 +1,14 @@
 "use client"
 
-import { navLinks } from "@/constants"
-
 import { AllData } from "@/types"
 import { usePathname } from "next/navigation"
-import { NavBar, PanelContent } from "@/components"
+import { PanelContent } from "@/components"
 
 export default function PanelMobile({ data }: { data: AllData }) {
 	const pathname = usePathname()
 	const section = pathname.replace("/", "")
+
+	const navLinks = data.headerNavLinks
 
 	const handleNavLinkClick = (slug: string, pushSlug: boolean) => {
 		if (pushSlug) {
@@ -18,8 +18,6 @@ export default function PanelMobile({ data }: { data: AllData }) {
 
 	return (
 		<div className='lg:hidden'>
-			{/* <Logo /> */}
-			<NavBar navLinks={navLinks} />
 			{pathname === "/" ? (
 				navLinks.map((section, index) => (
 					<section
@@ -27,7 +25,7 @@ export default function PanelMobile({ data }: { data: AllData }) {
 						className={`panel w-screen h-screen min-h-full pl-8 overflow-clip`}
 						key={`panel-${index}`}
 					>
-						<PanelContent data={data} section={section.label.toLowerCase()} />
+						<PanelContent data={data} section={section.slug} />
 					</section>
 				))
 			) : (

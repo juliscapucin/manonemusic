@@ -8,7 +8,7 @@ import { ProjectsMenu } from "@/components"
 import { PortfolioPage, PortfolioItem } from "@/types"
 
 type ReleasesPageProps = {
-	releasesPageData?: PortfolioPage
+	releasesPageData: PortfolioPage
 	releases: PortfolioItem[]
 	titleScrollTrigger?: boolean
 }
@@ -20,18 +20,15 @@ export default function ReleasesPage({
 	const titleReleasesRef = useRef(null)
 	const { windowAspectRatio } = useWindowDimensions()
 
-	useTitleScrollTrigger(titleReleasesRef, "/releases", windowAspectRatio)
+	useTitleScrollTrigger(titleReleasesRef, data.slug, windowAspectRatio)
 
 	return (
 		data && (
 			<PageWrapper>
-				<div>
-					<TitleDisplay classes='gsap-projects-title' ref={titleReleasesRef}>
-						{data.title}
-					</TitleDisplay>
-
-					<Subtitle subtitle={data.subtitle} />
-				</div>
+				<Subtitle subtitle={data.subtitle} />
+				<TitleDisplay classes='gsap-projects-title' ref={titleReleasesRef}>
+					{data.title}
+				</TitleDisplay>
 				{releases && (
 					<ProjectsMenu
 						variant='section'

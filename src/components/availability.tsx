@@ -40,22 +40,19 @@ export default function Availability({ availability }: AvailabilityProps) {
 	}, [availability, getNextMonth])
 
 	return (
-		<div className='flex items-end md:h-[40vh]'>
-			<div className='w-1/2'></div>
-			<div>
-				<span className='block text-bodyMedium lg:text-bodyLarge'>
-					Available {furtherAvailability}
-				</span>
-				<div className='overflow-clip'>
-					<a
-						href='mailto:hello@juliscapucin.com'
-						className='flex flex-col text-titleSmall md:text-titleMedium lg:text-titleLarge font-light uppercase'
-					>
-						<span>Drop me a message</span>
-					</a>
-				</div>
-				<CopyEmailButton />
+		<div>
+			<span className='block text-bodyMedium lg:text-bodyLarge'>
+				Available {furtherAvailability}
+			</span>
+			<div className='overflow-clip'>
+				<a
+					href='mailto:hello@juliscapucin.com'
+					className='flex flex-col text-titleSmall md:text-titleMedium lg:text-titleLarge font-light uppercase'
+				>
+					<span>Get in touch</span>
+				</a>
 			</div>
+			<CopyEmailButton />
 		</div>
 	)
 }

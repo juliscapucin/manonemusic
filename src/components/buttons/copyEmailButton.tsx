@@ -25,7 +25,7 @@ export default function CopyEmailButton() {
 					ref={labelRef}
 					className='absolute -top-8 w-full flex justify-center'
 				>
-					<span className='bg-secondary px-2 text-primary text-labelSmall uppercase'>
+					<span className='bg-secondary px-2 text-primary text-labelSmall'>
 						Copied to clipboard!
 					</span>
 				</div>
@@ -34,7 +34,7 @@ export default function CopyEmailButton() {
 				className='group overflow-clip h-6 cursor-pointer'
 				onClick={copyToClipboard}
 			>
-				<div className='flex flex-col group-hover:-translate-y-1/2 transition-transform duration-200 text-labelLarge uppercase'>
+				<div className='flex flex-col group-hover:-translate-y-1/2 transition-transform duration-200 text-labelLarge'>
 					<span>Copy email address</span>
 					<span>Copy email address</span>
 				</div>

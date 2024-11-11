@@ -5,11 +5,17 @@ import { Button } from "@/components/ui"
 
 interface NavLinkProps {
 	label: string
+	slug: string
 	action: () => void
 	activeState?: boolean
 }
 
-export default function NavLink({ label, action, activeState }: NavLinkProps) {
+export default function NavLink({
+	label,
+	slug,
+	action,
+	activeState,
+}: NavLinkProps) {
 	const pathname = usePathname()
 
 	return (
@@ -23,7 +29,7 @@ export default function NavLink({ label, action, activeState }: NavLinkProps) {
 			) : (
 				<div className='overflow-clip max-h-8'>
 					<Button
-						href={`/${label.toLowerCase()}`}
+						href={`/${slug}`}
 						classes={`underlined-link text-titleSmall md:text-titleMedium uppercase`}
 						transitionOnClick={action}
 					>

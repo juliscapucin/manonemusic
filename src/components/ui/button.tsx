@@ -1,6 +1,5 @@
 "use client"
 
-import React, { forwardRef } from "react"
 import Link from "next/link"
 
 // Define the props type for MyButton
@@ -9,6 +8,7 @@ type ButtonProps = {
 	classes?: string
 	children?: React.ReactNode
 	transitionOnClick: (slug: string) => void
+	isDisabled?: boolean
 }
 
 const Button = ({
@@ -16,6 +16,7 @@ const Button = ({
 	classes,
 	children,
 	transitionOnClick,
+	isDisabled = false,
 }: ButtonProps) => {
 	const slug =
 		href && href.length > 0
@@ -24,7 +25,9 @@ const Button = ({
 				: href
 			: "/"
 
-	return (
+	return isDisabled ? (
+		<div className={`${classes}`}>{children}</div>
+	) : (
 		<Link href={href} passHref legacyBehavior>
 			<a
 				className={`${classes}`}

@@ -2,8 +2,8 @@
 
 import { useRef } from "react"
 import Image from "next/image"
+import { PortableText } from "next-sanity"
 
-import { Copyright } from "@/components"
 import { PageWrapper, Subtitle, TitleDisplay } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 
@@ -16,13 +16,15 @@ export default function AboutPage({ data }: { data: AboutPage }) {
 	useTitleScrollTrigger(titleAboutRef, "/about", windowAspectRatio)
 
 	return (
-		<PageWrapper classes='relative flex items-start justify-between'>
+		<PageWrapper classes='flex justify-between items-start gap-32'>
 			<div>
-				<TitleDisplay ref={titleAboutRef}>{data.title}</TitleDisplay>
 				<Subtitle subtitle={data.subtitle} />
-				<Copyright />
+				<TitleDisplay ref={titleAboutRef}>{data.title}</TitleDisplay>
+				<div className='ml-[25%] max-w-prose'>
+					<PortableText value={data.content} />
+				</div>
 			</div>
-			<div className='relative w-1/2 aspect-square overflow-clip'>
+			<div className='relative w-1/3 aspect-square mt-16 rounded-sm overflow-clip'>
 				<Image
 					{...{
 						src: data.image.imageUrl,

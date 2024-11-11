@@ -3,7 +3,6 @@ import Copyright from "./copyright"
 import NavBar from "./navBar"
 import NavLink from "./navLink"
 import PanelContent from "./panelContent"
-import Panels from "./panels"
 import PanelDesktop from "./panelDesktop"
 import PanelMobile from "./panelMobile"
 import ProjectCard from "./projectCard"
@@ -26,7 +25,6 @@ export {
 	NavBar,
 	NavLink,
 	PanelContent,
-	Panels,
 	PanelDesktop,
 	PanelMobile,
 	PlayerTrack,

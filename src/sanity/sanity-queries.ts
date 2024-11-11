@@ -2,9 +2,7 @@ import { createClient, groq } from "next-sanity"
 import clientConfig from "@/sanity/config/client-config"
 import type {
 	AboutPage,
-	Commercial,
 	ContactPage,
-	Film,
 	HomePage,
 	NavLink,
 	PortfolioPage,
@@ -48,6 +46,7 @@ export async function getContactPage(): Promise<ContactPage> {
 	return client.fetch(
 		groq`*[_type == "contactPage"][0] {
       title,
+      subtitle,
       email,
       socials,
       love,
@@ -58,10 +57,11 @@ export async function getContactPage(): Promise<ContactPage> {
 	)
 }
 
-export async function getPortfolioPages(): Promise<PortfolioPage[]> {
+export async function getPortfolioSections(): Promise<PortfolioPage[]> {
 	return client.fetch(
 		groq`*[_type == "portfolioPage"] {
       title,
+      "slug": slug.current,
       subtitle,
       metadataTitle,
       metadataDescription,
@@ -74,7 +74,7 @@ export async function getPortfolioPage(
 	section: string
 ): Promise<PortfolioPage> {
 	return client.fetch(
-		groq`*[_type == "portfolioPage" && title == $section] | order(releaseDate desc)[0]{
+		groq`*[_type == "portfolioPage" && slug.current == $section] | order(releaseDate desc)[0]{
       title,
       subtitle,
       "slug": slug.current
@@ -100,11 +100,15 @@ export async function getPortfolioItems(
 	)
 }
 
-export async function getProject(slug: string): Promise<Project> {
+export async function getProject(
+	section: string,
+	slug: string
+): Promise<Project> {
 	return client.fetch(
-		groq`*[_type == "project" && slug.current == $slug][0]{
+		groq`*[_type == $section && slug.current == $slug][0]{
       _id,
       title,
+      "slug": slug.current,
       releaseDate,
       "image": {
          "imageUrl": image.image.asset->url,
@@ -113,9 +117,13 @@ export async function getProject(slug: string): Promise<Project> {
       info,
       description,
       projectLink,
-      projectVideo
+      projectVideo,
+      tracklist[]{
+         trackname,
+         link
+         }
       }`,
-		{ slug }
+		{ slug, section }
 	)
 }
 
@@ -133,7 +141,7 @@ export async function getFilm(slug: string): Promise<Project> {
          },
       description,
       projectLink,
-      trailerUrl
+      projectVideo
    }`,
 		{ slug }
 	)
@@ -151,6 +159,8 @@ export async function getCommercial(slug: string): Promise<Project> {
          "imageAlt": image.imageAlt
          },
       description,
+      projectLink,
+      projectVideo
    }`,
 		{ slug }
 	)

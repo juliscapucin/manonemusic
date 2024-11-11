@@ -11,7 +11,7 @@ export default function ButtonArrow({ action, classes }: ButtonArrowProps) {
 			className={`flex justify-center items-center h-16 w-16 opacity-30 hover:opacity-100 transition-opacity duration-300 ${classes}`}
 			onClick={() => action()}
 		>
-			<IconArrow color={"#B6D1C2"} />
+			<IconArrow />
 		</button>
 	)
 }

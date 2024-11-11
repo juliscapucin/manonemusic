@@ -5,44 +5,68 @@ import {
 	getAboutPage,
 	getContactPage,
 	getPortfolioItems,
-	getPortfolioPages,
+	getPortfolioSections,
+	getHeaderNavLinks,
 } from "@/sanity/sanity-queries"
 
 import { PanelDesktop, PanelMobile } from "@/components"
 
 export async function Panels() {
 	const [
+		headerNavLinks,
 		homePage,
 		contactPage,
 		aboutPage,
-		portfolioPages,
+		sections,
 		films,
 		commercials,
 		releases,
 		projects,
 	] = await Promise.all([
+		getHeaderNavLinks(),
 		getHomePage(),
 		getContactPage(),
 		getAboutPage(),
-		getPortfolioPages(),
+		getPortfolioSections(),
 		getPortfolioItems("film"),
 		getPortfolioItems("commercial"),
 		getPortfolioItems("release"),
 		getPortfolioItems("project"),
 	])
 
+	const portfolioSections = sections.reduce(
+		(acc: { [key: string]: (typeof sections)[0] }, item) => {
+			acc[item.slug] = item
+			return acc
+		},
+		{}
+	)
+
 	const data = {
+		headerNavLinks,
 		homePage,
 		contactPage,
 		aboutPage,
-		portfolioPages,
+		portfolioSections,
 		films,
 		commercials,
 		releases,
 		projects,
 	}
 
-	if (!data) return notFound()
+	if (
+		!data ||
+		!data.headerNavLinks ||
+		!data.homePage ||
+		!data.contactPage ||
+		!data.aboutPage ||
+		!data.portfolioSections ||
+		!data.films ||
+		!data.commercials ||
+		!data.releases ||
+		!data.projects
+	)
+		return notFound()
 
 	return (
 		<>

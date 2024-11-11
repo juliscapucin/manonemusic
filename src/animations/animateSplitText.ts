@@ -1,7 +1,10 @@
 import gsap from "gsap"
+import { CustomEase } from "gsap/dist/CustomEase"
 import { SplitText } from "gsap/dist/SplitText"
 
-gsap.registerPlugin(SplitText)
+import { customEase } from "@/constants"
+
+gsap.registerPlugin(SplitText, CustomEase)
 
 export const animateSplitText = (
 	textElement: HTMLElement,
@@ -27,10 +30,10 @@ export const animateSplitText = (
 		{
 			opacity: 1,
 			xPercent: 0,
-			duration: 0.5,
+			duration: 0.8,
 			delay: delay || 0,
 			stagger: 0.05,
-			ease: "expo.out",
+			ease: CustomEase.create("custom", customEase),
 		}
 	)
 }
