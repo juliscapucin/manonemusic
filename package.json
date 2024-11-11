@@ -9,13 +9,15 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@sanity/image-url": "^1.0.2",
+    "@sanity/image-url": "^1.1.0",
     "gsap": "npm:@gsap/shockingly@^3.12.3",
     "next": "15.0.3",
     "next-sanity": "^9.8.10",
     "react": "19.0.0-rc-66855b96-20241106",
     "react-dom": "19.0.0-rc-66855b96-20241106",
-    "react-player": "^2.15.1"
+    "react-player": "^2.15.1",
+    "sanity": "^3.63.0",
+    "styled-components": "^6.1.13"
   },
   "devDependencies": {
     "@types/node": "^20",
