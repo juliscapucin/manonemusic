@@ -2,7 +2,6 @@
 
 import { useEffect, useState, useRef } from "react"
 import { Track } from "@/types"
-import ReactPlayer from "react-player/soundcloud"
 import { IconPause, IconPlay } from "@/components/icons"
 
 type PlayerTrackProps = {
@@ -24,7 +23,7 @@ export default function PlayerTrack({
 	const [duration, setDuration] = useState(0) // Store duration in seconds
 	const [playedSeconds, setPlayedSeconds] = useState(0) // Track played time in seconds
 	const [seeking, setSeeking] = useState(false) // Track whether the user is currently seeking
-	const playerRef = useRef<ReactPlayer | null>(null)
+	// const playerRef = useRef<ReactPlayer | null>(null)
 
 	const formatDuration = (data: number) => {
 		const minutes = Math.floor(data / 60)
@@ -57,7 +56,7 @@ export default function PlayerTrack({
 	const onSeekMouseUp = (e: React.MouseEvent<HTMLInputElement, MouseEvent>) => {
 		const newTime = parseFloat((e.target as HTMLInputElement).value)
 		setSeeking(false)
-		playerRef.current?.seekTo(newTime)
+		// playerRef.current?.seekTo(newTime)
 		setPlayedSeconds(newTime)
 		sliderAction()
 	}
@@ -72,7 +71,7 @@ export default function PlayerTrack({
 			{/* Original Player – Hidden */}
 			{isClient && (
 				<div className='absolute -z-5'>
-					<ReactPlayer
+					{/* <ReactPlayer
 						ref={playerRef}
 						url={track.link}
 						playing={isPlaying}
@@ -82,7 +81,7 @@ export default function PlayerTrack({
 						width={"100%"}
 						height={100}
 						style={{ opacity: 0, pointerEvents: "none" }}
-					/>
+					/> */}
 				</div>
 			)}
 			{/* Custom Player */}
