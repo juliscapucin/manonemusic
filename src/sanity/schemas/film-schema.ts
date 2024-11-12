@@ -2,7 +2,7 @@ import { Rule } from "sanity"
 
 const filmSchema = {
 	name: "film",
-	title: "Films",
+	title: "Film",
 	type: "document",
 	fields: [
 		{
@@ -58,7 +58,12 @@ const filmSchema = {
 				},
 			],
 		},
-		{ name: "description", title: "Description", type: "text" },
+		{
+			name: "description",
+			title: "Description",
+			type: "array",
+			of: [{ type: "block" }],
+		},
 		{ name: "projectVideo", title: "Project Video", type: "url" },
 		{ name: "projectLink", title: "Project Link", type: "url" },
 	],
