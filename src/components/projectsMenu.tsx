@@ -14,6 +14,7 @@ export default function ProjectsMenu({
 }: ProjectsMenuProps) {
 	return (
 		<div
+			id='projects-menu'
 			className={`flex items-start justify-start gap-4 ${variant === "page" && "flex-col"}`}
 		>
 			{projects?.map((project: PortfolioItem) => {

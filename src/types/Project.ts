@@ -1,3 +1,4 @@
+import { PortableTextBlock } from "next-sanity"
 import { ImageField } from "./Image"
 import { Track } from "./Track"
 
@@ -10,7 +11,7 @@ export type Project = {
 	releaseDate: string
 	info?: string
 	image: ImageField
-	description?: string
+	description?: PortableTextBlock[]
 	projectLink?: string
 	releaseLink?: string
 	projectVideo?: string

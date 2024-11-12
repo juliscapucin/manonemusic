@@ -4,7 +4,7 @@ import { useRef } from "react"
 import Image from "next/image"
 import { PortableText } from "next-sanity"
 
-import { PageWrapper, Subtitle, TitleDisplay } from "@/components/ui"
+import { SectionWrapper, Subtitle, TitleDisplay } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 
 import type { AboutPage } from "@/types"
@@ -16,7 +16,7 @@ export default function AboutPage({ data }: { data: AboutPage }) {
 	useTitleScrollTrigger(titleAboutRef, "/about", windowAspectRatio)
 
 	return (
-		<PageWrapper classes='flex justify-between items-start gap-32'>
+		<SectionWrapper classes='flex justify-between items-start gap-32'>
 			<div>
 				<Subtitle subtitle={data.subtitle} />
 				<TitleDisplay ref={titleAboutRef}>{data.title}</TitleDisplay>
@@ -35,6 +35,6 @@ export default function AboutPage({ data }: { data: AboutPage }) {
 					}}
 				/>
 			</div>
-		</PageWrapper>
+		</SectionWrapper>
 	)
 }
