@@ -1,4 +1,5 @@
 import { useLayoutEffect, useEffect } from "react"
+import { usePathname } from "next/navigation"
 
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -10,6 +11,7 @@ export default function useTitleScrollTrigger(
 	slug: string,
 	windowAspectRatio: string
 ) {
+	const pathname = usePathname()
 	let ctx = gsap.context(() => {})
 
 	useLayoutEffect(() => {
@@ -26,6 +28,21 @@ export default function useTitleScrollTrigger(
 
 		let fastScrollEnd = false
 
+		// Debounce function to limit the frequency of updates
+		const debounce = (func: Function, wait: number) => {
+			let timeout: NodeJS.Timeout
+			return (...args: any[]) => {
+				clearTimeout(timeout)
+				timeout = setTimeout(() => func(...args), wait)
+			}
+		}
+
+		const updatePathname = debounce((self: ScrollTrigger) => {
+			if (self.isActive && pathname !== slug) {
+				window.history.pushState(null, "", slug)
+			}
+		}, 100)
+
 		ctx.add(() => {
 			ScrollTrigger.create({
 				trigger: titleElement,
@@ -35,18 +52,14 @@ export default function useTitleScrollTrigger(
 				animation: animateSplitText(titleElement, 2000),
 				toggleActions: "play none none reverse",
 				fastScrollEnd: fastScrollEnd,
-				// markers: true,
 				onUpdate: (self) => {
 					// define fastScrollEnd depending on scroll direction
-					self.direction === 1
-						? (fastScrollEnd = true)
-						: (fastScrollEnd = false)
-
+					// self.direction === 1
+					// 	? (fastScrollEnd = true)
+					// 	: (fastScrollEnd = false)
 					// console.log("progress", self.progress)
 
-					if (self.isActive && window.location.pathname !== slug) {
-						window.history.pushState(null, "", slug)
-					}
+					updatePathname(self)
 
 					// console.log("fastScrollEnd", fastScrollEnd)
 					// console.log(
