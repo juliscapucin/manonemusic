@@ -1,9 +1,9 @@
 import Link from "next/link"
+import { PortableText } from "@portabletext/react"
 
-import { Project, Track } from "@/types"
+import { Project } from "@/types"
 import { PlayerTrackList, ProjectPageImage } from "@/components"
 import { Button } from "@/components/buttons"
-import { PortableText } from "@portabletext/react"
 
 type ProjectPageContentProps = Project & {
 	setIsTrailerActive: (value: boolean) => void
@@ -27,9 +27,10 @@ export default function ProjectPageContent({
 				{tracklist && <PlayerTrackList tracks={tracklist} />}
 				{description && <PortableText value={description} />}
 				{/* Links */}
-				<div className='mt-8 space-y-1'>
+				<div className='mt-8 space-x-4'>
 					{projectVideo && setIsTrailerActive && (
 						<Button
+							classes='underlined-link'
 							action={() => {
 								setIsTrailerActive(true)
 								setIsPageDisplaced(true)
@@ -39,12 +40,20 @@ export default function ProjectPageContent({
 						</Button>
 					)}
 					{projectLink && (
-						<Link href={projectLink} target='_blank'>
-							View project
+						<Link
+							className='underlined-link'
+							href={projectLink}
+							target='_blank'
+						>
+							Visit Project
 						</Link>
 					)}
 					{releaseLink && (
-						<Link href={releaseLink} target='_blank'>
+						<Link
+							className='underlined-link'
+							href={releaseLink}
+							target='_blank'
+						>
 							View release
 						</Link>
 					)}

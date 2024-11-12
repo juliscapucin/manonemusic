@@ -15,7 +15,7 @@ export default function ButtonBack({ ctx, slug }: ButtonBackProps) {
 
 	return (
 		<Button
-			classes='mb-8'
+			classes='underlined-link mb-8'
 			action={() => transitionOnClickBack(ctx, () => router.push(`/${slug}`))}
 		>
 			Back to {slug.charAt(0).toUpperCase() + slug.slice(1)}
