@@ -68,6 +68,7 @@ const projectSchema = {
 		{
 			name: "projectVideo",
 			title: "Project Video",
+			description: "(ex: https://vimeo.com/68111130)",
 			type: "url",
 		},
 	],

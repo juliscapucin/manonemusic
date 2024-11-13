@@ -64,7 +64,12 @@ const filmSchema = {
 			type: "array",
 			of: [{ type: "block" }],
 		},
-		{ name: "projectVideo", title: "Project Video", type: "url" },
+		{
+			name: "projectVideo",
+			title: "Project Video",
+			description: "(ex: https://vimeo.com/68111130)",
+			type: "url",
+		},
 		{ name: "projectLink", title: "Project Link", type: "url" },
 	],
 	orderings: [

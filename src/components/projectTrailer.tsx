@@ -1,11 +1,10 @@
 "use client"
 
 import gsap from "gsap"
-import { CustomEase } from "gsap/all"
 
 import { VideoPlayer } from "@/components/ui"
 import { Button } from "@/components/buttons"
-import { useEffect, useLayoutEffect, useRef } from "react"
+import { useLayoutEffect, useRef } from "react"
 
 type ProjectTrailerProps = {
 	videoUrl: string
@@ -54,7 +53,7 @@ export default function ProjectTrailer({
 				<Button classes='mb-4' action={() => backToProject()}>
 					Back
 				</Button>
-				<VideoPlayer src={videoUrl} title='Trailer Video' />
+				<VideoPlayer src={videoUrl.split("/").pop() || ""} />
 			</div>
 		</div>
 	)
