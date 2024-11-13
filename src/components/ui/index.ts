@@ -6,6 +6,7 @@ import Header from "./header"
 import PageWrapper from "./pageWrapper"
 import PageWrapperDesktop from "./pageWrapperDesktop"
 import PageWrapperMobile from "./pageWrapperMobile"
+import SectionWrapper from "./sectionWrapper"
 import Subtitle from "./subtitle"
 import { TitleDisplay } from "./titleDisplay"
 import { TitleHeadline } from "./titleHeadline"
@@ -22,6 +23,7 @@ export {
 	PageWrapper,
 	PageWrapperDesktop,
 	PageWrapperMobile,
+	SectionWrapper,
 	Subtitle,
 	TitleDisplay,
 	TitleHeadline,

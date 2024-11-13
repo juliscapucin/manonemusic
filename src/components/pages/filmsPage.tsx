@@ -2,7 +2,7 @@
 
 import { useRef } from "react"
 
-import { PageWrapper, Subtitle, TitleDisplay } from "@/components/ui"
+import { SectionWrapper, Subtitle, TitleDisplay } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 import { ProjectsMenu } from "@/components"
 import { PortfolioItem, PortfolioPage } from "@/types"
@@ -20,7 +20,7 @@ export default function FilmsPage({ data, films }: FilmsPageProps) {
 
 	return (
 		data && (
-			<PageWrapper>
+			<SectionWrapper>
 				<Subtitle subtitle={data.subtitle} />
 				<TitleDisplay classes='gsap-projects-title' ref={titleFilmsRef}>
 					{data.title}
@@ -33,7 +33,7 @@ export default function FilmsPage({ data, films }: FilmsPageProps) {
 						projects={films}
 					/>
 				)}
-			</PageWrapper>
+			</SectionWrapper>
 		)
 	)
 }

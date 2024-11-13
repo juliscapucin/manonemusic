@@ -57,13 +57,11 @@ export default function ProjectPage({
 			ref={containerProjectRef}
 			className='relative w-screen h-screen overflow-clip'
 		>
+			<ProjectsMenuPage
+				projectsData={projectsData}
+				pageData={projectsPageData}
+			/>
 			<PageWrapper ref={pageWrapperRef}>
-				{/* Projects Menu */}
-				<ProjectsMenuPage
-					projectsData={projectsData}
-					pageData={projectsPageData}
-				/>
-
 				{/* Project Page */}
 				<div className='gsap-project-page opacity-0'>
 					<ButtonBack ctx={ctx} slug={projectsPageData.slug} />
@@ -76,17 +74,9 @@ export default function ProjectPage({
 						}}
 					/>
 					<ProjectPageContent
-						img={{
-							imgUrl: projectPageData.image.imageUrl,
-							imgAlt: `${projectPageData.title} project image`,
-						}}
-						description={projectPageData.description}
-						tracklist={projectPageData.tracklist}
+						{...projectPageData}
 						setIsTrailerActive={setIsTrailerActive}
 						setIsPageDisplaced={setIsPageDisplaced}
-						projectLink={projectPageData.projectLink}
-						projectVideo={projectPageData.projectVideo}
-						releaseLink={projectPageData.releaseLink}
 					/>
 				</div>
 			</PageWrapper>
@@ -94,10 +84,12 @@ export default function ProjectPage({
 			{/* Trailer */}
 			{projectPageData.projectVideo && isTrailerActive && (
 				<ProjectTrailer
-					videoUrl={projectPageData.projectVideo}
-					isTrailerActive={isTrailerActive}
-					setIsTrailerActive={setIsTrailerActive}
-					setIsPageDisplaced={setIsPageDisplaced}
+					{...{
+						videoUrl: projectPageData.projectVideo,
+						isTrailerActive,
+						setIsTrailerActive,
+						setIsPageDisplaced,
+					}}
 				/>
 			)}
 		</div>

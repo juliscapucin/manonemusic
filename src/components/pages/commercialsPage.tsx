@@ -2,7 +2,7 @@
 
 import { useRef } from "react"
 
-import { PageWrapper, Subtitle, TitleDisplay } from "@/components/ui"
+import { SectionWrapper, Subtitle, TitleDisplay } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 import { ProjectsMenu } from "@/components"
 import { PortfolioItem, PortfolioPage } from "@/types"
@@ -23,7 +23,7 @@ export default function CommercialsPage({
 
 	return (
 		data && (
-			<PageWrapper>
+			<SectionWrapper>
 				<Subtitle subtitle={data.subtitle} />
 				<TitleDisplay classes='gsap-projects-title' ref={titleCommercialsRef}>
 					{data.title}
@@ -36,7 +36,7 @@ export default function CommercialsPage({
 						projects={commercials}
 					/>
 				)}
-			</PageWrapper>
+			</SectionWrapper>
 		)
 	)
 }

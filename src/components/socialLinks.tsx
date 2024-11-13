@@ -20,7 +20,7 @@ export default function SocialLinks({ data }: SocialLinksProps) {
 		<>
 			{data && (
 				<div ref={wrapperRef} className='overflow-hidden w-1/2'>
-					<h3>Listen & Follow</h3>
+					<h3 className='mb-4'>Listen & Follow</h3>
 					{data.map((item) => {
 						return (
 							<div
@@ -28,19 +28,11 @@ export default function SocialLinks({ data }: SocialLinksProps) {
 								key={item.platform}
 							>
 								<Link
-									className='block h-11 group overflow-hidden'
+									className='underlined-link block text-titleSmall md:text-titleMedium lg:text-titleLarge uppercase'
 									href={item.link}
 									target='_blank'
 								>
-									{/* Animated Label */}
-									<div className='flex flex-col justify-start items-start group-hover:-translate-y-1/2 transition'>
-										<span className='font-headline text-headlineSmall uppercase text-secondary'>
-											{item.platform}
-										</span>
-										<span className='font-headline text-headlineSmall uppercase text-secondary'>
-											{item.platform}
-										</span>
-									</div>
+									{item.platform}
 								</Link>
 							</div>
 						)

@@ -41,15 +41,15 @@ export default function Availability({ availability }: AvailabilityProps) {
 
 	return (
 		<div>
-			<span className='block text-bodyMedium lg:text-bodyLarge'>
+			<p className='block mb-4 text-bodyMedium lg:text-bodyLarge'>
 				Available {furtherAvailability}
-			</span>
+			</p>
 			<div className='overflow-clip'>
 				<a
 					href='mailto:hello@juliscapucin.com'
-					className='flex flex-col text-titleSmall md:text-titleMedium lg:text-titleLarge font-light uppercase'
+					className='underlined-link flex flex-col text-titleSmall md:text-titleMedium lg:text-titleLarge font-light uppercase'
 				>
-					<span>Get in touch</span>
+					Get in touch
 				</a>
 			</div>
 			<CopyEmailButton />

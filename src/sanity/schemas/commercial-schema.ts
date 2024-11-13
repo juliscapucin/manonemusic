@@ -54,7 +54,12 @@ const commercialSchema = {
 			title: "Info",
 			type: "string",
 		},
-		{ name: "description", title: "Description", type: "text" },
+		{
+			name: "description",
+			title: "Description",
+			type: "array",
+			of: [{ type: "block" }],
+		},
 		{ name: "projectVideo", title: "Project Video", type: "url" },
 		{ name: "projectLink", title: "Project Link", type: "url" },
 	],
