@@ -18,7 +18,7 @@ export default function AboutPage({ data }: { data: AboutPage }) {
 	return (
 		<SectionWrapper classes='flex justify-between items-start gap-32'>
 			<div>
-				<Subtitle subtitle={data.subtitle} />
+				{/* <Subtitle subtitle={data.subtitle} /> */}
 				<TitleDisplay ref={titleAboutRef}>{data.title}</TitleDisplay>
 				<div className='ml-[25%] max-w-prose'>
 					<PortableText value={data.content} onMissingComponent={false} />

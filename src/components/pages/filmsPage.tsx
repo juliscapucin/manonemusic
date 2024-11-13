@@ -21,7 +21,7 @@ export default function FilmsPage({ data, films }: FilmsPageProps) {
 	return (
 		data && (
 			<SectionWrapper>
-				<Subtitle subtitle={data.subtitle} />
+				{/* <Subtitle subtitle={data.subtitle} /> */}
 				<TitleDisplay classes='gsap-projects-title' ref={titleFilmsRef}>
 					{data.title}
 				</TitleDisplay>

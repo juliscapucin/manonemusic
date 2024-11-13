@@ -15,7 +15,7 @@ const SectionWrapper = forwardRef<HTMLDivElement, SectionWrapperProps>(
 		return (
 			<div
 				ref={ref}
-				className={`relative w-screen h-screen min-h-svh max-w-desktop pt-32 pb-8 px-32 overflow-x-clip ${classes}`}
+				className={`relative min-w-screen h-screen min-h-svh max-w-desktop pt-32 pb-8 px-32 overflow-x-clip ${classes}`}
 			>
 				{children}
 			</div>

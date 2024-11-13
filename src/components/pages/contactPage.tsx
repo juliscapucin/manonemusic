@@ -15,7 +15,7 @@ export default function ContactPage({ data }: { data: ContactPage }) {
 
 	return (
 		<SectionWrapper>
-			<Subtitle subtitle={data.subtitle} />
+			{/* <Subtitle subtitle={data.subtitle} /> */}
 			<TitleDisplay ref={titleContactRef}>{data.title}</TitleDisplay>
 			<div className='flex justify-between mt-16 ml-[25%]'>
 				<Availability availability='' />

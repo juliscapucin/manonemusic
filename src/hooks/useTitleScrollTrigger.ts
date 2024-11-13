@@ -41,7 +41,7 @@ export default function useTitleScrollTrigger(
 			if (self.isActive && pathname !== slug) {
 				window.history.pushState(null, "", slug)
 			}
-		}, 100)
+		}, 10)
 
 		ctx.add(() => {
 			ScrollTrigger.create({

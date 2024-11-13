@@ -15,7 +15,7 @@ export default function ProjectsMenu({
 	return (
 		<div
 			id='projects-menu'
-			className={`flex items-start justify-start gap-4 ${variant === "page" && "flex-col"}`}
+			className={`relative w-fit flex items-start justify-start gap-4 ${variant === "page" ? "flex-col" : "h-2/5"}`}
 		>
 			{projects?.map((project: PortfolioItem) => {
 				return (

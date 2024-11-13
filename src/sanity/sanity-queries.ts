@@ -92,7 +92,9 @@ export async function getPortfolioItems(
       "slug": slug.current,
       "image": {
          "imageUrl": image.image.asset->url,
-         "imageAlt": image.imageAlt
+         "imageAlt": image.imageAlt,
+         "imageWidth": image.image.asset->metadata.dimensions.width,
+         "imageHeight": image.image.asset->metadata.dimensions.height
          },
       title,
    }`,

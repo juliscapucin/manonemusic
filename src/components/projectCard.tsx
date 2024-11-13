@@ -34,26 +34,24 @@ export default function ProjectCard({
 					: projectExit(() => router.push(`/${section}/${slug}`))
 			}}
 			href={`/${section}/${slug}`}
-			classes={`gsap-project-card relative group opacity-90 ${variant === "section" ? "lg:w-64" : "w-16 lg:w-24"}`}
+			classes={`gsap-project-card group ${variant === "section" ? "h-full" : "w-16 lg:w-24 aspect-square"}`}
 			aria-labelledby={`project-title-${slug}`}
 			isDisabled={pathname.includes(slug)}
 		>
 			{/* Overlay */}
-			<div
+			{/* <div
 				className={`absolute w-full h-full top-0 left-0 bg-colorBlack z-10 group-hover:opacity-0 transi transition-opacity duration-300 ${pathname.includes(slug) ? "opacity-0" : "opacity-70"}`}
-			></div>
+			></div> */}
 
-			{/* Image */}
 			{image && (
-				<div className='relative w-full aspect-square rounded-sm overflow-clip z-5'>
-					<Image
-						className='relative w-full aspect-square overflow-clip object-cover group-hover:scale-105 transition-transform duration-300'
-						src={image.imageUrl}
-						alt={image.imageAlt}
-						sizes='50vw'
-						fill
-					/>
-				</div>
+				<Image
+					className='object-cover h-full w-full group-hover:scale-105 transition-transform duration-300'
+					src={image.imageUrl}
+					alt={image.imageAlt}
+					sizes='30vw'
+					width={image.imageWidth}
+					height={image.imageHeight}
+				/>
 			)}
 			{variant === "section" && (
 				<span
