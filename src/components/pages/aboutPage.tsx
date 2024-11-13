@@ -21,7 +21,7 @@ export default function AboutPage({ data }: { data: AboutPage }) {
 				<Subtitle subtitle={data.subtitle} />
 				<TitleDisplay ref={titleAboutRef}>{data.title}</TitleDisplay>
 				<div className='ml-[25%] max-w-prose'>
-					<PortableText value={data.content} />
+					<PortableText value={data.content} onMissingComponent={false} />
 				</div>
 			</div>
 			<div className='relative w-1/3 aspect-square mt-16 rounded-sm overflow-clip'>
