@@ -1,4 +1,4 @@
-import { Rule } from "sanity"
+import { Rule, validation } from "sanity"
 
 const filmSchema = {
 	name: "film",
@@ -40,14 +40,14 @@ const filmSchema = {
 		{
 			name: "image",
 			type: "object",
-			title: "Image",
+			title: "Image (required)",
 			fields: [
 				{
 					name: "image",
 					title: "Image",
 					type: "image",
 					validation: (Rule: Rule) =>
-						Rule.required().error("Image is required"),
+						Rule.required().error("Image file is required"),
 				},
 				{
 					name: "imageAlt",
@@ -57,6 +57,7 @@ const filmSchema = {
 						Rule.required().error("Image Alt Text is required"),
 				},
 			],
+			validation: (Rule: Rule) => Rule.required().error("Image is required"),
 		},
 		{
 			name: "description",

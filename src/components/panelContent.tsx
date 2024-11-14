@@ -10,46 +10,56 @@ import {
 
 import { AllData } from "@/types"
 
-const sectionComponents: { [key: string]: React.ComponentType<any> } = {
-	"/": HomePage,
-	film: FilmsPage,
-	commercial: CommercialsPage,
-	releases: ReleasesPage,
-	about: AboutPage,
-	contact: ContactPage,
-	projects: ProjectsPage,
-}
-
 type PanelContentProps = {
 	data: AllData
 	section: string
 }
 
 export default function PanelContent({ data, section }: PanelContentProps) {
-	const SectionComponent = sectionComponents[section]
+	let content
 
-	if (!SectionComponent) {
-		return null // or handle the case where the section is not found
+	switch (section) {
+		case "/":
+			content = <HomePage data={data.homePage} />
+			break
+		case "film":
+			content = (
+				<FilmsPage data={data.portfolioSections[section]} films={data.films} />
+			)
+			break
+		case "commercial":
+			content = (
+				<CommercialsPage
+					data={data.portfolioSections[section]}
+					commercials={data.commercials}
+				/>
+			)
+			break
+		case "releases":
+			content = (
+				<ReleasesPage
+					releasesPageData={data.portfolioSections[section]}
+					releases={data.releases}
+				/>
+			)
+			break
+		case "projects":
+			content = (
+				<ProjectsPage
+					projectsPageData={data.portfolioSections[section]}
+					projects={data.projects}
+				/>
+			)
+			break
+		case "about":
+			content = <AboutPage {...data.aboutPage} />
+			break
+		case "contact":
+			content = <ContactPage {...data.contactPage} />
+			break
+		default:
+			content = null
 	}
 
-	const sectionData: { [key: string]: any } = {
-		"/": data.homePage,
-		film: { data: data.portfolioSections[section], films: data.films },
-		commercial: {
-			data: data.portfolioSections[section],
-			commercials: data.commercials,
-		},
-		releases: {
-			releasesPageData: data.portfolioSections[section],
-			releases: data.releases,
-		},
-		projects: {
-			projectsPageData: data.portfolioSections[section],
-			projects: data.projects,
-		},
-		about: data.aboutPage,
-		contact: data.contactPage,
-	}
-
-	return <SectionComponent {...sectionData[section]} />
+	return <>{content}</>
 }
