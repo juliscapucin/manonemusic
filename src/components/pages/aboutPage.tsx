@@ -2,9 +2,13 @@
 
 import { useRef } from "react"
 import Image from "next/image"
-import { PortableText } from "next-sanity"
 
-import { SectionWrapper, Subtitle, TitleDisplay } from "@/components/ui"
+import {
+	SectionWrapper,
+	Subtitle,
+	TextBlock,
+	TitleDisplay,
+} from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 
 import type { AboutPage } from "@/types"
@@ -25,8 +29,8 @@ export default function AboutPage({
 			<div>
 				{subtitle && <Subtitle subtitle={subtitle} />}
 				<TitleDisplay ref={titleAboutRef}>{title}</TitleDisplay>
-				<div className='ml-[25%] max-w-prose'>
-					<PortableText value={content} onMissingComponent={false} />
+				<div className='ml-[25%]'>
+					{content && <TextBlock text={content} />}
 				</div>
 			</div>
 			<div className='relative w-1/3 aspect-square mt-16 rounded-sm overflow-clip'>

@@ -1,9 +1,9 @@
 import Link from "next/link"
-import { PortableText } from "@portabletext/react"
 
 import { Project } from "@/types"
 import { PlayerTrackList, ProjectPageImage } from "@/components"
 import { Button } from "@/components/buttons"
+import { TextBlock } from "@/components/ui"
 
 type ProjectPageContentProps = Project & {
 	setIsTrailerActive: (value: boolean) => void
@@ -25,9 +25,7 @@ export default function ProjectPageContent({
 			<ProjectPageImage imgSrc={image.imageUrl} imgAlt={image.imageAlt} />
 			<div className='mt-2 pr-8 flex-1 max-w-prose'>
 				{tracklist && <PlayerTrackList tracks={tracklist} />}
-				{description && (
-					<PortableText value={description} onMissingComponent={false} />
-				)}
+				{description && <TextBlock text={description} />}
 				{/* Links */}
 				<div className='mt-8 space-x-4'>
 					{projectVideo && setIsTrailerActive && (

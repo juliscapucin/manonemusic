@@ -6,6 +6,7 @@ import Header from "./header"
 import PageWrapper from "./pageWrapper"
 import SectionWrapper from "./sectionWrapper"
 import Subtitle from "./subtitle"
+import TextBlock from "./textBlock"
 import { TitleDisplay } from "./titleDisplay"
 import { TitleHeadline } from "./titleHeadline"
 import VideoPlayer from "./videoPlayer"
@@ -19,6 +20,7 @@ export {
 	Header,
 	Logo,
 	PageWrapper,
+	TextBlock,
 	SectionWrapper,
 	Subtitle,
 	TitleDisplay,
