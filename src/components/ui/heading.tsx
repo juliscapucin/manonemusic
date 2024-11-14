@@ -17,7 +17,7 @@ export default function Heading({
 	switch (variant) {
 		case "display":
 			headingStyles =
-				"text-displaySmall md:text-displayMedium lg:text-displayLarge font-normal"
+				"text-displaySmall md:text-displayMedium lg:text-displayLarge"
 			break
 		case "headline":
 			headingStyles =
