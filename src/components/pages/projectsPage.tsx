@@ -27,7 +27,7 @@ export default function ProjectsPage({
 	return (
 		projectsPage && (
 			<SectionWrapper>
-				{/* <Subtitle subtitle={projectsPage.subtitle} /> */}
+				{projectsPage.subtitle && <Subtitle subtitle={projectsPage.subtitle} />}
 				<TitleDisplay classes='gsap-projects-title' ref={titleWorkRef}>
 					{projectsPage.title}
 				</TitleDisplay>
