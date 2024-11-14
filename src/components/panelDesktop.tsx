@@ -27,14 +27,14 @@ export default function PanelDesktop({ data }: PanelDesktopProps) {
 		...data.headerNavLinks,
 	]
 
-	// ScrollTrigger + Panel animation
+	// ScrollTrigger + Horizontal Panel animation
 	useEffect(() => {
 		if (!panelsContainerRef.current) return
 		gsap.registerPlugin(ScrollToPlugin, ScrollTrigger)
 
 		/* Panels */
 		const container = panelsContainerRef.current
-		const panels = gsap.utils.toArray(".panel")
+		const panels = gsap.utils.toArray(".gsap-panel")
 
 		let ctx = gsap.context(() => {
 			tween = gsap.to(panels, {
@@ -62,6 +62,30 @@ export default function PanelDesktop({ data }: PanelDesktopProps) {
 						// )
 					},
 				},
+			})
+
+			// Title Animation on long sections
+			const sectionTitles = container.querySelectorAll(".gsap-section-title")
+
+			sectionTitles.forEach((title) => {
+				const projectsMenu = title.nextElementSibling as HTMLDivElement
+				const projectsMenuWidth = projectsMenu?.offsetWidth
+
+				if (!projectsMenuWidth || projectsMenuWidth < window.innerWidth) return
+
+				gsap.to(title, {
+					scrollTrigger: {
+						scrub: true,
+						trigger: projectsMenu,
+						start: "left-=30 left",
+						end: () => "+=" + (projectsMenuWidth - window.innerWidth),
+						invalidateOnRefresh: true,
+						// markers: true,
+						containerAnimation: tween,
+					},
+					x: () => "+=" + (projectsMenuWidth - window.innerWidth),
+					ease: "none",
+				})
 			})
 		}, container)
 
@@ -91,7 +115,7 @@ export default function PanelDesktop({ data }: PanelDesktopProps) {
 					return (
 						<section
 							data-id={`panel-${section.slug}`}
-							className='panel h-screen min-h-full pl-8 min-w-fit w-fit'
+							className='gsap-panel h-screen min-h-full pl-8 min-w-fit w-fit'
 							key={`panel-${section.slug}`}
 						>
 							<PanelContent data={data} section={section.slug} />

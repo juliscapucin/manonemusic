@@ -14,7 +14,10 @@ export const TitleDisplay = forwardRef(function Title(
 	ref: React.Ref<HTMLDivElement>
 ) {
 	return (
-		<div className={`mt-32 mb-8 bg-primary ${classes}`} ref={ref}>
+		<div
+			className={`gsap-section-title mt-32 mb-8 bg-primary ${classes}`}
+			ref={ref}
+		>
 			<Heading
 				tag={"h1"}
 				classes='whitespace-nowrap uppercase'

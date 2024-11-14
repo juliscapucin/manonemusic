@@ -25,9 +25,7 @@ export default function CommercialsPage({
 		data && (
 			<SectionWrapper>
 				{data.subtitle && <Subtitle subtitle={data.subtitle} />}
-				<TitleDisplay classes='gsap-projects-title' ref={titleCommercialsRef}>
-					{data.title}
-				</TitleDisplay>
+				<TitleDisplay ref={titleCommercialsRef}>{data.title}</TitleDisplay>
 
 				{commercials && (
 					<ProjectsMenu
