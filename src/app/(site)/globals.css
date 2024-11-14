@@ -168,8 +168,8 @@ textarea {
 	position: relative;
 	display: inline-block;
 	overflow-x: clip;
-	text-decoration: none;
 	width: fit-content;
+	text-transform: uppercase;
 	color: var(--color-secondary);
 }
 

@@ -3,7 +3,7 @@ import Link from "next/link"
 import { Project } from "@/types"
 import { PlayerTrackList, ProjectPageImage } from "@/components"
 import { Button } from "@/components/buttons"
-import { TextBlock } from "@/components/ui"
+import { CustomLink, TextBlock } from "@/components/ui"
 
 type ProjectPageContentProps = Project & {
 	setIsTrailerActive: (value: boolean) => void
@@ -40,22 +40,10 @@ export default function ProjectPageContent({
 						</Button>
 					)}
 					{projectLink && (
-						<Link
-							className='underlined-link'
-							href={projectLink}
-							target='_blank'
-						>
-							Visit Project
-						</Link>
+						<CustomLink href={projectLink} label='View Project' />
 					)}
 					{releaseLink && (
-						<Link
-							className='underlined-link'
-							href={releaseLink}
-							target='_blank'
-						>
-							View release
-						</Link>
+						<CustomLink href={releaseLink} label='View Release' />
 					)}
 				</div>
 			</div>

@@ -1,3 +1,5 @@
+import Button from "./button"
+import CustomLink from "./customLink"
 import Grid from "./grid"
 import Heading from "./heading"
 import Loader from "./loader"
@@ -10,10 +12,10 @@ import TextBlock from "./textBlock"
 import { TitleDisplay } from "./titleDisplay"
 import { TitleHeadline } from "./titleHeadline"
 import VideoPlayer from "./videoPlayer"
-import Button from "./button"
 
 export {
 	Button,
+	CustomLink,
 	Grid,
 	Heading,
 	Loader,
