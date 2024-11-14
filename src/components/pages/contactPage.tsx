@@ -7,7 +7,7 @@ import { SectionWrapper, Subtitle, TitleDisplay } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 import type { ContactPage } from "@/types"
 
-export default function ContactPage({ data }: { data: ContactPage }) {
+export default function ContactPage({ title, subtitle, socials }: ContactPage) {
 	const titleContactRef = useRef(null)
 	const { windowAspectRatio } = useWindowDimensions()
 
@@ -15,11 +15,11 @@ export default function ContactPage({ data }: { data: ContactPage }) {
 
 	return (
 		<SectionWrapper>
-			{data.subtitle && <Subtitle subtitle={data.subtitle} />}
-			<TitleDisplay ref={titleContactRef}>{data.title}</TitleDisplay>
+			{subtitle && <Subtitle subtitle={subtitle} />}
+			<TitleDisplay ref={titleContactRef}>{title}</TitleDisplay>
 			<div className='flex justify-between mt-16 ml-[25%]'>
 				<Availability availability='' />
-				<SocialLinks data={data.socials} />
+				<SocialLinks data={socials} />
 			</div>
 			<Copyright />
 		</SectionWrapper>

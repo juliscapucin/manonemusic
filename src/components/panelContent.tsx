@@ -10,42 +10,46 @@ import {
 
 import { AllData } from "@/types"
 
+const sectionComponents: { [key: string]: React.ComponentType<any> } = {
+	"/": HomePage,
+	film: FilmsPage,
+	commercial: CommercialsPage,
+	releases: ReleasesPage,
+	about: AboutPage,
+	contact: ContactPage,
+	projects: ProjectsPage,
+}
+
 type PanelContentProps = {
 	data: AllData
 	section: string
 }
 
 export default function PanelContent({ data, section }: PanelContentProps) {
-	return (
-		<>
-			{section === "/" && <HomePage data={data.homePage} />}
-			{section === "film" && (
-				<FilmsPage data={data.portfolioSections[section]} films={data.films} />
-			)}
+	const SectionComponent = sectionComponents[section]
 
-			{section === "commercial" && (
-				<CommercialsPage
-					data={data.portfolioSections[section]}
-					commercials={data.commercials}
-				/>
-			)}
+	if (!SectionComponent) {
+		return null // or handle the case where the section is not found
+	}
 
-			{section === "releases" && (
-				<ReleasesPage
-					releasesPageData={data.portfolioSections[section]}
-					releases={data.releases}
-				/>
-			)}
+	const sectionData: { [key: string]: any } = {
+		"/": data.homePage,
+		film: { data: data.portfolioSections[section], films: data.films },
+		commercial: {
+			data: data.portfolioSections[section],
+			commercials: data.commercials,
+		},
+		releases: {
+			releasesPageData: data.portfolioSections[section],
+			releases: data.releases,
+		},
+		projects: {
+			projectsPageData: data.portfolioSections[section],
+			projects: data.projects,
+		},
+		about: data.aboutPage,
+		contact: data.contactPage,
+	}
 
-			{section === "projects" && (
-				<ProjectsPage
-					projectsPage={data.portfolioSections[section]}
-					projects={data.projects}
-				/>
-			)}
-
-			{section === "about" && <AboutPage data={data.aboutPage} />}
-			{section === "contact" && <ContactPage data={data.contactPage} />}
-		</>
-	)
+	return <SectionComponent {...sectionData[section]} />
 }

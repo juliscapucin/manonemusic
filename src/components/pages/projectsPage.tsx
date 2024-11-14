@@ -10,31 +10,33 @@ import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 import { PortfolioItem, PortfolioPage } from "@/types"
 
 type ProjectPageProps = {
-	projectsPage: PortfolioPage
+	projectsPageData: PortfolioPage
 	projects?: PortfolioItem[]
 	titleScrollTrigger?: boolean
 }
 
 export default function ProjectsPage({
-	projectsPage,
+	projectsPageData,
 	projects,
 }: ProjectPageProps) {
 	const titleWorkRef = useRef(null)
 	const { windowAspectRatio } = useWindowDimensions()
 
-	useTitleScrollTrigger(titleWorkRef, projectsPage.slug, windowAspectRatio)
+	useTitleScrollTrigger(titleWorkRef, projectsPageData.slug, windowAspectRatio)
 
 	return (
-		projectsPage && (
+		projectsPageData && (
 			<SectionWrapper>
-				{projectsPage.subtitle && <Subtitle subtitle={projectsPage.subtitle} />}
+				{projectsPageData.subtitle && (
+					<Subtitle subtitle={projectsPageData.subtitle} />
+				)}
 				<TitleDisplay classes='gsap-projects-title' ref={titleWorkRef}>
-					{projectsPage.title}
+					{projectsPageData.title}
 				</TitleDisplay>
-				{projects && projectsPage.title && (
+				{projects && projectsPageData.title && (
 					<ProjectsMenu
 						variant='section'
-						section={projectsPage.title.toLowerCase().replace(/\s/g, "-")}
+						section={projectsPageData.title.toLowerCase().replace(/\s/g, "-")}
 						projects={projects}
 					/>
 				)}

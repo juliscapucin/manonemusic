@@ -13,9 +13,8 @@ const aboutPageSchema = {
 		},
 		{
 			name: "subtitle",
-			title: "Subtitle (required)",
+			title: "Subtitle",
 			type: "string",
-			validation: (Rule: Rule) => Rule.required().error("Subtitle is required"),
 		},
 		{
 			name: "image",

@@ -13,7 +13,7 @@ const portfolioPageSchema = {
 		},
 		{
 			name: "subtitle",
-			title: "Subtitle (required)",
+			title: "Subtitle",
 			type: "text",
 			rows: 3,
 		},

@@ -15,7 +15,6 @@ const contactPageSchema = {
 			name: "subtitle",
 			title: "Subtitle",
 			type: "string",
-			validation: (Rule: Rule) => Rule.required().error("Title is required"),
 		},
 		{
 			name: "email",

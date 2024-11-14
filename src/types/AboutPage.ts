@@ -3,7 +3,7 @@ import { ImageField } from "./Image"
 
 export type AboutPage = {
 	title: string
-	subtitle: string
+	subtitle?: string
 	image: ImageField
 	content: BlockContent[]
 	metadataTitle?: string
