@@ -19,7 +19,7 @@ export default function HomePage({ data }: { data: HomePage }) {
 
 	return (
 		<div
-			className='relative w-screen h-screen min-h-svh max-w-desktop pt-32 pb-16 overflow-x-clip'
+			className='relative h-screen min-h-svh pt-32 pb-16 overflow-x-clip'
 			data-id='panel-home'
 		>
 			<Copyright hasCredits={false} />

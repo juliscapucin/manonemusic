@@ -26,6 +26,8 @@ export default function ProjectCard({
 	const router = useRouter()
 	const pathname = usePathname()
 
+	const aspectRatio = image.imageWidth / image.imageHeight
+
 	return (
 		<Button
 			transitionOnClick={() => {
@@ -34,18 +36,14 @@ export default function ProjectCard({
 					: projectExit(() => router.push(`/${section}/${slug}`))
 			}}
 			href={`/${section}/${slug}`}
-			classes={`gsap-project-card group ${variant === "section" ? "h-full" : "w-16 lg:w-24 aspect-square"}`}
+			classes={`relative gsap-project-card group ${variant === "section" ? "h-full" : "w-16 lg:w-24 aspect-square"}`}
+			style={{ aspectRatio }}
 			aria-labelledby={`project-title-${slug}`}
 			isDisabled={pathname.includes(slug)}
 		>
-			{/* Overlay */}
-			{/* <div
-				className={`absolute w-full h-full top-0 left-0 bg-colorBlack z-10 group-hover:opacity-0 transi transition-opacity duration-300 ${pathname.includes(slug) ? "opacity-0" : "opacity-70"}`}
-			></div> */}
-
 			{image && (
 				<Image
-					className='object-cover h-full w-full group-hover:scale-105 transition-transform duration-300'
+					className='h-full w-full object-cover group-hover:scale-105 transition-transform duration-300'
 					src={image.imageUrl}
 					alt={image.imageAlt}
 					sizes='30vw'

@@ -6,6 +6,7 @@ import Link from "next/link"
 type ButtonProps = {
 	href: string
 	classes?: string
+	style?: React.CSSProperties
 	children?: React.ReactNode
 	transitionOnClick: (slug: string) => void
 	isDisabled?: boolean
@@ -14,6 +15,7 @@ type ButtonProps = {
 const Button = ({
 	href,
 	classes,
+	style,
 	children,
 	transitionOnClick,
 	isDisabled = false,
@@ -26,11 +28,14 @@ const Button = ({
 			: "/"
 
 	return isDisabled ? (
-		<div className={`${classes}`}>{children}</div>
+		<div className={`${classes}`} style={style}>
+			{children}
+		</div>
 	) : (
 		<Link href={href} passHref legacyBehavior>
 			<a
 				className={`${classes}`}
+				style={style}
 				href={href}
 				onClick={(e) => {
 					e.preventDefault()

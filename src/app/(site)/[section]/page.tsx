@@ -13,9 +13,5 @@ export const metadata: Metadata = {
 }
 
 export default async function Page() {
-	return (
-		<main className='w-screen custom-min-w-screen min-w-full h-full'>
-			<Panels />
-		</main>
-	)
+	return <Panels />
 }

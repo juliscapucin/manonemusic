@@ -17,7 +17,7 @@ export default function PanelMobile({ data }: { data: AllData }) {
 	}
 
 	return (
-		<div className='lg:hidden'>
+		<main className='lg:hidden'>
 			{pathname === "/" ? (
 				navLinks.map((section, index) => (
 					<section
@@ -35,6 +35,6 @@ export default function PanelMobile({ data }: { data: AllData }) {
 					<PanelContent data={data} section={section} />
 				</section>
 			)}
-		</div>
+		</main>
 	)
 }

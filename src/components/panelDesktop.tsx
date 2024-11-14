@@ -18,7 +18,7 @@ type PanelDesktopProps = {
 
 export default function PanelDesktop({ data }: PanelDesktopProps) {
 	const pathname = usePathname()
-	const outerContainerRef = useRef<HTMLDivElement | null>(null)
+	// const outerContainerRef = useRef<HTMLDivElement | null>(null)
 	const panelsContainerRef = useRef<HTMLDivElement | null>(null)
 	let tween: gsap.core.Tween
 
@@ -29,7 +29,7 @@ export default function PanelDesktop({ data }: PanelDesktopProps) {
 
 	// ScrollTrigger + Panel animation
 	useEffect(() => {
-		if (!outerContainerRef.current || !panelsContainerRef.current) return
+		if (!panelsContainerRef.current) return
 		gsap.registerPlugin(ScrollToPlugin, ScrollTrigger)
 
 		/* Panels */
@@ -41,7 +41,7 @@ export default function PanelDesktop({ data }: PanelDesktopProps) {
 				x: () => -1 * (container.scrollWidth - innerWidth),
 				ease: "none",
 				scrollTrigger: {
-					trigger: outerContainerRef.current,
+					trigger: container,
 					pin: true,
 					start: "top top",
 					scrub: 1,
@@ -68,55 +68,56 @@ export default function PanelDesktop({ data }: PanelDesktopProps) {
 		return () => {
 			ctx.revert()
 		}
-	}, [outerContainerRef, panelsContainerRef])
+	}, [panelsContainerRef])
 
 	// Jump to panel on internal page load
 	useEffect(() => {
-		if (!pathname || !outerContainerRef.current) return
+		if (!pathname || !panelsContainerRef.current) return
 
 		if (pathname !== "/") {
 			handlePanelSlide(pathname, false)
 		}
-		panelsEnter(outerContainerRef.current)
+		panelsEnter(panelsContainerRef.current)
 	}, [])
 
 	return (
-		<div className='hidden lg:block'>
+		<main className='hidden lg:block'>
 			{/* Panels */}
-			<div ref={outerContainerRef} className='gsap-panels-container opacity-0'>
-				<div ref={panelsContainerRef} className='flex gap-32'>
-					{headerNavLinks.map((section, index) => {
-						return (
-							<section
-								data-id={`panel-${section.slug}`}
-								className={`panel custom-min-w-screen h-screen min-h-full pl-8 overflow-clip`}
-								key={`panel-${section.slug}`}
-							>
-								<PanelContent data={data} section={section.slug} />
+			<div
+				ref={panelsContainerRef}
+				className='gsap-panels-container opacity-0 flex gap-32'
+			>
+				{headerNavLinks.map((section, index) => {
+					return (
+						<section
+							data-id={`panel-${section.slug}`}
+							className='panel h-screen min-h-full pl-8 min-w-fit w-fit'
+							key={`panel-${section.slug}`}
+						>
+							<PanelContent data={data} section={section.slug} />
 
-								{/* Previous/Next Navigation */}
-								<div className='absolute bottom-1/2 right-8 flex gap-8 z-20'>
-									{headerNavLinks.length - 1 !== index && (
-										<ButtonScroll
-											index={index}
-											total={headerNavLinks.length}
-											action={() => {
-												const nextIndex =
-													index + 1 > headerNavLinks.length
-														? headerNavLinks.length
-														: index + 1
-												const nextSlug = headerNavLinks[nextIndex].slug
+							{/* Previous/Next Navigation */}
+							<div className='absolute bottom-8 right-8 flex gap-8 z-20'>
+								{headerNavLinks.length - 1 !== index && (
+									<ButtonScroll
+										index={index}
+										total={headerNavLinks.length}
+										action={() => {
+											const nextIndex =
+												index + 1 > headerNavLinks.length
+													? headerNavLinks.length
+													: index + 1
+											const nextSlug = headerNavLinks[nextIndex].slug
 
-												handlePanelSlide(nextSlug, true)
-											}}
-										/>
-									)}
-								</div>
-							</section>
-						)
-					})}
-				</div>
+											handlePanelSlide(nextSlug, true)
+										}}
+									/>
+								)}
+							</div>
+						</section>
+					)
+				})}
 			</div>
-		</div>
+		</main>
 	)
 }

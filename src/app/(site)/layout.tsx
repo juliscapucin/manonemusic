@@ -35,7 +35,7 @@ export default async function Layout({
 	return (
 		<RootLayout>
 			<body
-				className={`${font.className} relative w-screen max-w-desktop md:h-screen custom-min-h-screen overflow-x-clip`}
+				className={`${font.className} relative w-screen md:h-screen overflow-x-clip`}
 			>
 				<NavBar navLinks={navLinks} />
 				{children}

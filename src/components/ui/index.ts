@@ -4,8 +4,6 @@ import Loader from "./loader"
 import Logo from "./logo"
 import Header from "./header"
 import PageWrapper from "./pageWrapper"
-import PageWrapperDesktop from "./pageWrapperDesktop"
-import PageWrapperMobile from "./pageWrapperMobile"
 import SectionWrapper from "./sectionWrapper"
 import Subtitle from "./subtitle"
 import { TitleDisplay } from "./titleDisplay"
@@ -21,8 +19,6 @@ export {
 	Header,
 	Logo,
 	PageWrapper,
-	PageWrapperDesktop,
-	PageWrapperMobile,
 	SectionWrapper,
 	Subtitle,
 	TitleDisplay,
