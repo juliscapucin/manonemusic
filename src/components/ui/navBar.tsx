@@ -3,8 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { usePathname, useRouter } from "next/navigation"
 
-import { NavLink } from "@/components"
-import { Button } from "@/components/ui"
+import { Button, NavLink } from "@/components/ui"
 import { handlePanelSlide, projectExit } from "@/lib/animations"
 import { NavLink as NavLinkType } from "@/types"
 
@@ -30,7 +29,7 @@ export default function NavBar({ navLinks }: NavLinksProps) {
 	return (
 		<nav
 			ref={navRef}
-			className='fixed top-0 right-0 left-0 p-8 flex justify-between bg-colorBlack z-header'
+			className='hidden lg:flex fixed top-0 right-0 left-0 p-8 justify-between bg-colorBlack z-header'
 		>
 			<Button
 				href='/'
@@ -44,7 +43,7 @@ export default function NavBar({ navLinks }: NavLinksProps) {
 				MAN/ONE MUSIC
 			</Button>
 
-			<div className='flex gap-8'>
+			<div className='hidden lg:flex gap-8'>
 				{navLinks.map(
 					(link, index) =>
 						link.slug !== "/" && (

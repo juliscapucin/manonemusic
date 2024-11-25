@@ -1,7 +1,5 @@
 import Availability from "./availability"
 import Copyright from "./copyright"
-import NavBar from "./navBar"
-import NavLink from "./navLink"
 import PanelContent from "./panelContent"
 import PanelDesktop from "./panelDesktop"
 import PanelMobile from "./panelMobile"
@@ -22,8 +20,6 @@ import PlayerTrackList from "./playerTrackList"
 export {
 	Availability,
 	Copyright,
-	NavBar,
-	NavLink,
 	PanelContent,
 	PanelDesktop,
 	PanelMobile,

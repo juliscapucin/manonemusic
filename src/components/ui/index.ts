@@ -4,7 +4,9 @@ import Grid from "./grid"
 import Heading from "./heading"
 import Loader from "./loader"
 import Logo from "./logo"
-import Header from "./header"
+import MenuMobile from "./menuMobile"
+import NavBar from "./navBar"
+import NavLink from "./navLink"
 import PageWrapper from "./pageWrapper"
 import SectionWrapper from "./sectionWrapper"
 import Subtitle from "./subtitle"
@@ -19,8 +21,10 @@ export {
 	Grid,
 	Heading,
 	Loader,
-	Header,
 	Logo,
+	MenuMobile,
+	NavBar,
+	NavLink,
 	PageWrapper,
 	TextBlock,
 	SectionWrapper,

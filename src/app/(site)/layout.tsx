@@ -2,8 +2,9 @@ import type { Metadata } from "next"
 import localFont from "next/font/local"
 import "./globals.css"
 
-import { NavBar, RootLayout } from "@/components"
+import { RootLayout } from "@/components"
 import { getHeaderNavLinks } from "@/sanity/sanity-queries"
+import { NavBar, MenuMobile } from "@/components/ui"
 
 // Load custom font //
 const font = localFont({
@@ -38,6 +39,7 @@ export default async function Layout({
 				className={`${font.className} relative w-screen h-fit lg:h-screen overflow-x-clip`}
 			>
 				<NavBar navLinks={navLinks} />
+				<MenuMobile navLinks={navLinks} />
 				{children}
 			</body>
 		</RootLayout>

@@ -54,6 +54,8 @@ const config: Config = {
 				15: "15",
 				100: "100",
 				header: "1000",
+				burger: "2000",
+				mobile: "2500",
 			},
 			letterSpacing: { tightest: "-.075em" },
 			lineHeight: { tightest: "0.1" },

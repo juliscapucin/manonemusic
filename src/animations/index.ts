@@ -4,7 +4,7 @@ import {
 } from "./pageTransitions"
 
 import { animateEnterHorizontal } from "./animateEnterHorizontal"
-import { animateMobileMenu } from "./mobileMenu"
+import { animateMobileMenu } from "./animateMobileMenu"
 import { animateProjectsMenu } from "./projectsMenu"
 import { animateSplitText } from "./animateSplitText"
 import { animateStaggerText } from "./animateStaggerText"
