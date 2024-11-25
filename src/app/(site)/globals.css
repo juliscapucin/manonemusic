@@ -68,7 +68,7 @@
 	} */
 
 	p {
-		@apply text-bodyLarge;
+		@apply text-bodyMedium;
 	}
 
 	/* MAX WIDTH WRAPPER */
