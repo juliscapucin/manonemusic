@@ -15,7 +15,7 @@ export default function ProjectsMenu({
 	return (
 		<div
 			id='projects-menu'
-			className={`gsap-projects-menu relative w-fit flex items-start justify-start gap-4 ${variant === "page" ? "flex-col" : "h-2/5"}`}
+			className={`gsap-projects-menu relative w-full md:w-fit flex items-start justify-start gap-4 ${variant === "page" ? "flex-col" : "flex-wrap lg:h-2/5 lg:flex-nowrap"}`}
 		>
 			{projects?.map((project: PortfolioItem) => {
 				return (

@@ -30,8 +30,8 @@ export default function AboutPage({
 				<TitleDisplay ref={titleAboutRef}>{title}</TitleDisplay>
 				{subtitle && <Subtitle subtitle={subtitle} />}
 			</div>
-			<div className='md:w-1/2 xl:w-2/3 mt-16 md:flex flex-col xl:flex-row items-start gap-16'>
-				<div className='relative flex-1 w-full aspect-square rounded-sm overflow-clip'>
+			<div className='w-full lg:w-1/2 xl:w-2/3 mt-16 md:flex items-start gap-16'>
+				<div className='relative w-full sm:w-2/3 lg:w-full flex-1 aspect-square rounded-sm overflow-clip'>
 					<Image
 						{...{
 							src: image.imageUrl,
@@ -42,7 +42,9 @@ export default function AboutPage({
 						}}
 					/>
 				</div>
-				<div className='flex-1'>{content && <TextBlock text={content} />}</div>
+				<div className='w-full sm:w-3/2 lg:w-full flex-1'>
+					{content && <TextBlock text={content} />}
+				</div>
 			</div>
 		</SectionWrapper>
 	)

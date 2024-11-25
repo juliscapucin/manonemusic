@@ -8,7 +8,10 @@ export default function PanelMobile({ data }: { data: AllData }) {
 	const pathname = usePathname()
 	const section = pathname.replace("/", "")
 
-	const navLinks = data.headerNavLinks
+	const navLinks = [
+		{ title: "Home", slug: "/", order: 0 },
+		...data.headerNavLinks,
+	]
 
 	const handleNavLinkClick = (slug: string, pushSlug: boolean) => {
 		if (pushSlug) {
@@ -18,23 +21,15 @@ export default function PanelMobile({ data }: { data: AllData }) {
 
 	return (
 		<main className='lg:hidden'>
-			{pathname === "/" ? (
-				navLinks.map((section, index) => (
-					<section
-						data-id={`panel-${index}`}
-						className={`panel w-screen h-screen min-h-full pl-8 overflow-clip`}
-						key={`panel-${index}`}
-					>
-						<PanelContent data={data} section={section.slug} />
-					</section>
-				))
-			) : (
+			{navLinks.map((section, index) => (
 				<section
-					className={`panel w-screen h-screen min-h-full pl-8 overflow-clip`}
+					data-id={`panel-${index}`}
+					className={`panel w-screen min-h-svh pl-8 overflow-x-clip`}
+					key={`panel-${index}`}
 				>
-					<PanelContent data={data} section={section} />
+					<PanelContent data={data} section={section.slug} />
 				</section>
-			)}
+			))}
 		</main>
 	)
 }

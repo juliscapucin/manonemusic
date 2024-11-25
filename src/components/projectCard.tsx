@@ -36,20 +36,22 @@ export default function ProjectCard({
 					: projectExit(() => router.push(`/${section}/${slug}`))
 			}}
 			href={`/${section}/${slug}`}
-			classes={`relative gsap-project-card group ${variant === "section" ? "h-full" : "w-16 lg:w-24 aspect-square"}`}
+			classes={`relative gsap-project-card group ${variant === "section" ? "h-full w-[calc((100%/3)-1rem)] lg:w-fit" : "w-16 lg:w-24 aspect-square"}`}
 			style={{ aspectRatio }}
 			aria-labelledby={`project-title-${slug}`}
 			isDisabled={pathname.includes(slug)}
 		>
 			{image && (
-				<Image
-					className='h-full w-full object-cover group-hover:scale-105 transition-transform duration-300'
-					src={image.imageUrl}
-					alt={image.imageAlt}
-					sizes='30vw'
-					width={image.imageWidth}
-					height={image.imageHeight}
-				/>
+				<div className='rounded-sm'>
+					<Image
+						className='h-full w-full object-cover group-hover:scale-105 transition-transform duration-300'
+						src={image.imageUrl}
+						alt={image.imageAlt}
+						sizes='30vw'
+						width={image.imageWidth}
+						height={image.imageHeight}
+					/>
+				</div>
 			)}
 			{variant === "section" && (
 				<span
