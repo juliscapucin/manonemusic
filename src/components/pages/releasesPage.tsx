@@ -4,7 +4,7 @@ import { useRef } from "react"
 
 import { SectionWrapper, Subtitle, TitleDisplay } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
-import { ProjectsMenu } from "@/components"
+import { ProjectsMenuPage } from "@/components"
 import { PortfolioPage, PortfolioItem } from "@/types"
 
 type ReleasesPageProps = {
@@ -30,11 +30,7 @@ export default function ReleasesPage({
 					{data.title}
 				</TitleDisplay>
 				{releases && (
-					<ProjectsMenu
-						variant='section'
-						section={data.title.toLowerCase().replace(/\s/g, "-")}
-						projects={releases}
-					/>
+					<ProjectsMenuPage pageData={data} projectsData={releases} />
 				)}
 			</SectionWrapper>
 		)

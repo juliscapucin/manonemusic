@@ -4,7 +4,7 @@ import { useRef } from "react"
 
 import { SectionWrapper, Subtitle, TitleDisplay } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
-import { ProjectsMenu } from "@/components"
+import { ProjectsMenu, ProjectsMenuPage } from "@/components"
 import { PortfolioItem, PortfolioPage } from "@/types"
 
 type CommercialsPageProps = {
@@ -28,11 +28,7 @@ export default function CommercialsPage({
 				<TitleDisplay ref={titleCommercialsRef}>{data.title}</TitleDisplay>
 
 				{commercials && (
-					<ProjectsMenu
-						variant='section'
-						section={data.title.toLowerCase().replace(/\s/g, "-")}
-						projects={commercials}
-					/>
+					<ProjectsMenuPage pageData={data} projectsData={commercials} />
 				)}
 			</SectionWrapper>
 		)
