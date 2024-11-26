@@ -22,7 +22,7 @@ export default function PanelMobile({ data }: { data: AllData }) {
 		gsap.to(window, {
 			scrollTo: {
 				y: `#panel-${pathname.split("/")[1]}`,
-				offsetY: 100,
+				offsetY: 0,
 			},
 			duration: 0.5,
 		})

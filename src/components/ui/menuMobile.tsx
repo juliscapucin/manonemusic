@@ -21,7 +21,7 @@ export default function MenuMobile({ navLinks }: NavLinksProps) {
 	return (
 		<>
 			{navLinks && (
-				<div className='fixed top-0 right-0 left-0 block lg:hidden h-svh z-mobile'>
+				<div className='fixed top-0 right-0 left-0 block landscape:hidden h-svh z-mobile'>
 					<div className='absolute max-w-full top-4 right-4 flex justify-end items-center z-burger'>
 						{/* Burger Button */}
 						<ButtonBurger

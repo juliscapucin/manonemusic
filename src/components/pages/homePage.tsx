@@ -29,8 +29,8 @@ export default function HomePage({ data }: { data: HomePage }) {
 			<Heading tag='h2' variant='title' classes='w-1/2 mt-8 uppercase'>
 				Music & Sound Design
 			</Heading>
-			<div className='w-full lg:flex justify-between mt-32 md:mt-16'>
-				<p className='text-balance max-w-prose mb-16 lg:mb-0'>
+			<div className='w-full landscape:flex justify-between mt-32 md:mt-16'>
+				<p className='text-balance max-w-prose mb-16 landscape:mb-0'>
 					Tailored sound design and audio identities that capture the spirit of
 					your brand and resonate with your audience.
 				</p>

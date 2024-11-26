@@ -6,7 +6,7 @@ import { useWindowDimensions } from "@/hooks"
 
 import { AllData } from "@/types"
 
-export default function panels({ data }: { data: AllData }) {
+export default function Panels({ data }: { data: AllData }) {
 	const { windowAspectRatio } = useWindowDimensions()
 
 	return windowAspectRatio === "landscape" ? (

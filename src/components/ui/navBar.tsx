@@ -29,7 +29,7 @@ export default function NavBar({ navLinks }: NavLinksProps) {
 	return (
 		<nav
 			ref={navRef}
-			className='hidden lg:flex fixed top-0 right-0 left-0 p-8 justify-between bg-colorBlack z-header'
+			className='hidden landscape:flex fixed top-0 right-0 left-0 p-8 justify-between bg-colorBlack z-header'
 		>
 			<Button
 				href='/'
@@ -43,7 +43,7 @@ export default function NavBar({ navLinks }: NavLinksProps) {
 				MAN/ONE MUSIC
 			</Button>
 
-			<div className='hidden lg:flex gap-8'>
+			<div className='hidden landscape:flex gap-8'>
 				{navLinks.map(
 					(link, index) =>
 						link.slug !== "/" && (

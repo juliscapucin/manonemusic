@@ -36,7 +36,7 @@ export default async function Layout({
 	return (
 		<RootLayout>
 			<body
-				className={`${font.className} relative w-screen lg:h-screen overflow-x-clip`}
+				className={`${font.className} relative w-screen landscape:h-screen overflow-x-clip`}
 			>
 				<NavBar navLinks={navLinks} />
 				<MenuMobile navLinks={navLinks} />

@@ -6,7 +6,7 @@ export const fetchCache = "force-no-store"
 
 export default async function Home() {
 	return (
-		<main className='w-full lg:h-full'>
+		<main className='w-full landscape:h-full'>
 			<Panels />
 		</main>
 	)
