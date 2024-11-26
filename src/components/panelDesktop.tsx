@@ -18,7 +18,6 @@ type PanelDesktopProps = {
 
 export default function PanelDesktop({ data }: PanelDesktopProps) {
 	const pathname = usePathname()
-	// const outerContainerRef = useRef<HTMLDivElement | null>(null)
 	const panelsContainerRef = useRef<HTMLDivElement | null>(null)
 	let tween: gsap.core.Tween
 
@@ -105,7 +104,7 @@ export default function PanelDesktop({ data }: PanelDesktopProps) {
 	}, [])
 
 	return (
-		<main className='hidden lg:block'>
+		<main>
 			{/* Panels */}
 			<div
 				ref={panelsContainerRef}

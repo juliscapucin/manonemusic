@@ -118,10 +118,6 @@ body {
 	transition: background-color 0.2s linear;
 }
 
-/* a {
-	text-decoration: none;
-} */
-
 button {
 	cursor: pointer;
 }

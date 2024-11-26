@@ -3,6 +3,7 @@ import Copyright from "./copyright"
 import PanelContent from "./panelContent"
 import PanelDesktop from "./panelDesktop"
 import PanelMobile from "./panelMobile"
+import Panels from "./panels"
 import ProjectCard from "./projectCard"
 import ProjectInfo from "./projectInfo"
 import ProjectPageContent from "./projectPageContent"
@@ -23,6 +24,7 @@ export {
 	PanelContent,
 	PanelDesktop,
 	PanelMobile,
+	Panels,
 	PlayerTrack,
 	PlayerTrackList,
 	ProjectCard,
