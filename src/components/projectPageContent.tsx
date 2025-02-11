@@ -1,5 +1,3 @@
-import Link from "next/link"
-
 import { Project } from "@/types"
 import { PlayerTrackList, ProjectPageImage } from "@/components"
 import { Button } from "@/components/buttons"

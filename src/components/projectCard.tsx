@@ -6,7 +6,7 @@ import { useRouter, usePathname } from "next/navigation"
 import { projectExit, panelsExit } from "@/lib/animations"
 import { ImageField } from "@/types/Image"
 
-import { Button } from "@/components/ui"
+import { CustomButton } from "@/components/ui"
 
 type ProjectCardProps = {
 	variant: "section" | "page"
@@ -29,7 +29,7 @@ export default function ProjectCard({
 	const aspectRatio = image.imageWidth / image.imageHeight
 
 	return (
-		<Button
+		<CustomButton
 			transitionOnClick={() => {
 				variant === "section"
 					? panelsExit(() => router.push(`/${section}/${slug}`))
@@ -61,6 +61,6 @@ export default function ProjectCard({
 					{title}
 				</span>
 			)}
-		</Button>
+		</CustomButton>
 	)
 }

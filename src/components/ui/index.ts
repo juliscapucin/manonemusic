@@ -1,4 +1,4 @@
-import Button from "./button"
+import CustomButton from "./customButton"
 import CustomLink from "./customLink"
 import Grid from "./grid"
 import Heading from "./heading"
@@ -16,7 +16,7 @@ import { TitleHeadline } from "./titleHeadline"
 import VideoPlayer from "./videoPlayer"
 
 export {
-	Button,
+	CustomButton,
 	CustomLink,
 	Grid,
 	Heading,
