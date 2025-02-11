@@ -1,11 +1,8 @@
 import {
 	AboutPage,
 	ContactPage,
-	FilmsPage,
 	HomePage,
-	ReleasesPage,
 	ProjectsPage,
-	CommercialsPage,
 } from "@/components/pages"
 
 import { AllData } from "@/types"
@@ -18,44 +15,35 @@ type PanelContentProps = {
 export default function PanelContent({ data, section }: PanelContentProps) {
 	let content
 
+	console.log(section)
+
 	switch (section) {
 		case "/":
 			content = <HomePage data={data.homePage} />
-			break
-		case "film":
-			content = (
-				<FilmsPage data={data.portfolioSections[section]} films={data.films} />
-			)
-			break
-		case "commercial":
-			content = (
-				<CommercialsPage
-					data={data.portfolioSections[section]}
-					commercials={data.commercials}
-				/>
-			)
-			break
-		case "releases":
-			content = (
-				<ReleasesPage
-					releasesPageData={data.portfolioSections[section]}
-					releases={data.releases}
-				/>
-			)
-			break
-		case "projects":
-			content = (
-				<ProjectsPage
-					projectsPageData={data.portfolioSections[section]}
-					projects={data.projects}
-				/>
-			)
 			break
 		case "about":
 			content = <AboutPage {...data.aboutPage} />
 			break
 		case "contact":
 			content = <ContactPage {...data.contactPage} />
+			break
+		case "film":
+		case "commercial":
+			content = (
+				<ProjectsPage
+					projectsPageData={data.portfolioSections[section]}
+					projects={data[`${section}s`]}
+				/>
+			)
+			break
+		case "releases":
+		case "projects":
+			content = (
+				<ProjectsPage
+					projectsPageData={data.portfolioSections[section]}
+					projects={data[section]}
+				/>
+			)
 			break
 		default:
 			content = null
