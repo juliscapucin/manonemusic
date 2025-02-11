@@ -12,7 +12,10 @@ export const handlePanelSlide = (
 			: (document.querySelector(
 					`[data-id=panel-${targetSlug.includes("/") ? targetSlug.split("/")[1] : targetSlug}]`
 				) as HTMLDivElement)
-	let y = targetPanel?.offsetLeft || 0
+
+	let y = targetPanel ? targetPanel.offsetLeft : 0
+
+	console.log(y)
 
 	if (animateSlide === true) {
 		gsap.to(window, {

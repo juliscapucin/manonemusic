@@ -14,7 +14,8 @@ const aboutPageSchema = {
 		{
 			name: "subtitle",
 			title: "Subtitle",
-			type: "string",
+			type: "text",
+			rows: 3,
 		},
 		{
 			name: "image",

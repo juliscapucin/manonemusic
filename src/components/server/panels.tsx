@@ -10,10 +10,10 @@ import {
 } from "@/sanity/sanity-queries"
 
 // Opt out of caching for all data requests in the route segment
-export const dynamic = "force-dynamic"
-export const fetchCache = "force-no-store"
+// export const dynamic = "force-dynamic"
+// export const fetchCache = "force-no-store"
 
-import { PanelDesktop, PanelMobile } from "@/components"
+import { Panels as PanelsClient } from "@/components"
 
 export async function Panels() {
 	const [
@@ -72,10 +72,5 @@ export async function Panels() {
 	)
 		return notFound()
 
-	return (
-		<>
-			<PanelDesktop data={data} />
-			<PanelMobile data={data} />
-		</>
-	)
+	return <PanelsClient data={data} />
 }

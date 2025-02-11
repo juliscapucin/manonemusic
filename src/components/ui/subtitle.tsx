@@ -59,7 +59,7 @@ export default function Subtitle({ subtitle }: SubtitleProps) {
 	}, [])
 	return (
 		<p
-			className='block ml-[25%] mt-16 mb-8 max-w-prose opacity-0'
+			className='block mt-16 mb-8 text-titleLarge max-w-prose opacity-0'
 			ref={subtitleRef}
 		>
 			{subtitle}

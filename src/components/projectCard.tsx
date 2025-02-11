@@ -6,7 +6,7 @@ import { useRouter, usePathname } from "next/navigation"
 import { projectExit, panelsExit } from "@/lib/animations"
 import { ImageField } from "@/types/Image"
 
-import { Button } from "@/components/ui"
+import { CustomButton } from "@/components/ui"
 
 type ProjectCardProps = {
 	variant: "section" | "page"
@@ -29,27 +29,29 @@ export default function ProjectCard({
 	const aspectRatio = image.imageWidth / image.imageHeight
 
 	return (
-		<Button
+		<CustomButton
 			transitionOnClick={() => {
 				variant === "section"
 					? panelsExit(() => router.push(`/${section}/${slug}`))
 					: projectExit(() => router.push(`/${section}/${slug}`))
 			}}
 			href={`/${section}/${slug}`}
-			classes={`relative gsap-project-card group ${variant === "section" ? "h-full" : "w-16 lg:w-24 aspect-square"}`}
+			classes={`relative gsap-project-card group ${variant === "section" ? "h-full w-[calc((100%/2)-0.5rem)] md:w-[calc((100%/3)-0.5rem)] landscape:w-fit" : "w-16 landscape:w-24 aspect-square"}`}
 			style={{ aspectRatio }}
 			aria-labelledby={`project-title-${slug}`}
 			isDisabled={pathname.includes(slug)}
 		>
 			{image && (
-				<Image
-					className='h-full w-full object-cover group-hover:scale-105 transition-transform duration-300'
-					src={image.imageUrl}
-					alt={image.imageAlt}
-					sizes='30vw'
-					width={image.imageWidth}
-					height={image.imageHeight}
-				/>
+				<div className='rounded-sm'>
+					<Image
+						className='h-full w-full object-cover group-hover:scale-105 transition-transform duration-300'
+						src={image.imageUrl}
+						alt={image.imageAlt}
+						sizes='30vw'
+						width={image.imageWidth}
+						height={image.imageHeight}
+					/>
+				</div>
 			)}
 			{variant === "section" && (
 				<span
@@ -59,6 +61,6 @@ export default function ProjectCard({
 					{title}
 				</span>
 			)}
-		</Button>
+		</CustomButton>
 	)
 }

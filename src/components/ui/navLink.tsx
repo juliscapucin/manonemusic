@@ -1,7 +1,7 @@
 "use client"
 
 import { usePathname } from "next/navigation"
-import { Button } from "@/components/ui"
+import { CustomButton } from "@/components/ui"
 
 interface NavLinkProps {
 	label: string
@@ -28,13 +28,13 @@ export default function NavLink({
 				</div>
 			) : (
 				<div className='overflow-clip max-h-8'>
-					<Button
+					<CustomButton
 						href={`/${slug}`}
 						classes={`underlined-link text-titleSmall md:text-titleMedium uppercase`}
 						transitionOnClick={action}
 					>
 						{label}
-					</Button>
+					</CustomButton>
 				</div>
 			)}
 		</div>

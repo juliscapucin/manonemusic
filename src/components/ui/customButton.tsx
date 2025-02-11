@@ -12,7 +12,7 @@ type ButtonProps = {
 	isDisabled?: boolean
 }
 
-const Button = ({
+const CustomButton = ({
 	href,
 	classes,
 	style,
@@ -49,6 +49,6 @@ const Button = ({
 }
 
 // Set displayName for better debugging and error messages
-Button.displayName = "Button"
+CustomButton.displayName = "Button"
 
-export default Button
+export default CustomButton

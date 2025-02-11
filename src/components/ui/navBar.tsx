@@ -3,8 +3,7 @@
 import { useEffect, useRef, useState } from "react"
 import { usePathname, useRouter } from "next/navigation"
 
-import { NavLink } from "@/components"
-import { Button } from "@/components/ui"
+import { CustomButton, NavLink } from "@/components/ui"
 import { handlePanelSlide, projectExit } from "@/lib/animations"
 import { NavLink as NavLinkType } from "@/types"
 
@@ -30,9 +29,9 @@ export default function NavBar({ navLinks }: NavLinksProps) {
 	return (
 		<nav
 			ref={navRef}
-			className='fixed top-0 right-0 left-0 p-8 flex justify-between bg-colorBlack z-header'
+			className='hidden landscape:flex fixed top-0 right-0 left-0 p-8 justify-between bg-colorBlack z-header'
 		>
-			<Button
+			<CustomButton
 				href='/'
 				classes={`underlined-link text-titleSmall md:text-titleMedium uppercase transition ${pathname === "/" ? "opacity-0 -translate-x-full" : "opacity-100"}`}
 				transitionOnClick={
@@ -42,9 +41,9 @@ export default function NavBar({ navLinks }: NavLinksProps) {
 				}
 			>
 				MAN/ONE MUSIC
-			</Button>
+			</CustomButton>
 
-			<div className='flex gap-8'>
+			<div className='hidden landscape:flex gap-8'>
 				{navLinks.map(
 					(link, index) =>
 						link.slug !== "/" && (

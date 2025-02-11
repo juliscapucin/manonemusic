@@ -38,6 +38,10 @@ const config: Config = {
 			animation: {
 				"fade-in": "fadeIn 1s linear forwards",
 			},
+			screens: {
+				landscape: { raw: "(min-width: 0) and (orientation: landscape)" },
+				portrait: { raw: "(min-width: 0) and (orientation: portrait)" },
+			},
 			maxWidth: {
 				desktop: "2000px",
 			},
@@ -54,6 +58,8 @@ const config: Config = {
 				15: "15",
 				100: "100",
 				header: "1000",
+				burger: "2000",
+				mobile: "2500",
 			},
 			letterSpacing: { tightest: "-.075em" },
 			lineHeight: { tightest: "0.1" },
