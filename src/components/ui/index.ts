@@ -1,5 +1,6 @@
 import CustomButton from "./customButton"
 import CustomLink from "./customLink"
+import Footer from "./footer"
 import Grid from "./grid"
 import Heading from "./heading"
 import Loader from "./loader"
@@ -8,6 +9,7 @@ import MenuMobile from "./menuMobile"
 import NavBar from "./navBar"
 import NavLink from "./navLink"
 import PageWrapper from "./pageWrapper"
+import Pagination from "./pagination"
 import SectionWrapper from "./sectionWrapper"
 import Subtitle from "./subtitle"
 import TextBlock from "./textBlock"
@@ -18,6 +20,7 @@ import VideoPlayer from "./videoPlayer"
 export {
 	CustomButton,
 	CustomLink,
+	Footer,
 	Grid,
 	Heading,
 	Loader,
@@ -26,6 +29,7 @@ export {
 	NavBar,
 	NavLink,
 	PageWrapper,
+	Pagination,
 	TextBlock,
 	SectionWrapper,
 	Subtitle,

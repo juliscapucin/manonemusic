@@ -9,7 +9,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 import { AllData } from "@/types"
 import { PanelContent } from "@/components"
-import { ButtonScroll } from "./buttons"
 import { handlePanelSlide, panelsEnter } from "@/lib/animations"
 
 type PanelDesktopProps = {
@@ -118,25 +117,6 @@ export default function PanelDesktop({ data }: PanelDesktopProps) {
 							key={`panel-${section.slug}`}
 						>
 							<PanelContent data={data} section={section.slug} />
-
-							{/* Previous/Next Navigation */}
-							<div className='absolute bottom-8 right-8 flex gap-8 z-20'>
-								{headerNavLinks.length - 1 !== index && (
-									<ButtonScroll
-										index={index}
-										total={headerNavLinks.length}
-										action={() => {
-											const nextIndex =
-												index + 1 > headerNavLinks.length
-													? headerNavLinks.length
-													: index + 1
-											const nextSlug = headerNavLinks[nextIndex].slug
-
-											handlePanelSlide(nextSlug, true)
-										}}
-									/>
-								)}
-							</div>
 						</section>
 					)
 				})}

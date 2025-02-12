@@ -15,8 +15,6 @@ type PanelContentProps = {
 export default function PanelContent({ data, section }: PanelContentProps) {
 	let content
 
-	console.log(section)
-
 	switch (section) {
 		case "/":
 			content = <HomePage data={data.homePage} />
