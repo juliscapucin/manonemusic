@@ -19,7 +19,7 @@ export default function SocialLinks({ data }: SocialLinksProps) {
 	return (
 		<>
 			{data && (
-				<div ref={wrapperRef} className='overflow-hidden w-1/2'>
+				<div ref={wrapperRef} className='overflow-hidden'>
 					<h3 className='mb-4'>Listen & Follow</h3>
 					{data.map((item) => {
 						return (

@@ -1,7 +1,6 @@
 "use client"
 
 import { useMemo } from "react"
-import { CopyEmailButton } from "@/components/buttons"
 
 type AvailabilityProps = {
 	availability?: string
@@ -40,19 +39,13 @@ export default function Availability({ availability }: AvailabilityProps) {
 	}, [availability, getNextMonth])
 
 	return (
-		<div>
-			<p className='block mb-4 text-bodyMedium lg:text-bodyLarge'>
+		<div className='flex items-center gap-4'>
+			<p className='block text-bodyMedium lg:text-bodyLarge uppercase'>
 				Available {furtherAvailability}
 			</p>
-			<div className='overflow-clip'>
-				<a
-					href='mailto:hello@juliscapucin.com'
-					className='underlined-link flex flex-col text-titleSmall md:text-titleMedium lg:text-titleLarge font-light uppercase'
-				>
-					Get in touch
-				</a>
-			</div>
-			<CopyEmailButton />
+			<button className='text-bodyMedium lg:text-bodyLarge uppercase rounded-full border border-secondary px-3 py-1'>
+				Contact me
+			</button>
 		</div>
 	)
 }

@@ -36,7 +36,6 @@ export default function HomePage({ data }: { data: HomePage }) {
 				</p>
 				<Status location={location} />
 			</div>
-			{/* <Availability /> */}
 		</div>
 	)
 }

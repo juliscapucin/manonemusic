@@ -19,17 +19,16 @@ export default function CopyEmailButton() {
 	}
 
 	return (
-		<div className='relative h-16'>
+		<div className='relative'>
 			<div
 				ref={labelRef}
 				className='relative w-fit h-4 flex items-center overflow-clip'
 			>
-				<span className='px-2 text-primary text-labelSmall'>
+				<span
+					className={`text-labelSmall transition-transform duration-150 ${showCopyFeedback ? "translate-x-0" : "-translate-x-full"}`}
+				>
 					Copied to clipboard!
 				</span>
-				<div
-					className={`absolute top-0 left-0 right-1 w-full h-4 bg-secondary transition-transform duration-100 -z-5 ${showCopyFeedback ? "translate-x-0" : "-translate-x-[95%]"}`}
-				></div>
 			</div>
 
 			<button

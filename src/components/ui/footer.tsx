@@ -9,6 +9,7 @@ import { IconArrow } from "@/components/icons"
 
 import { handlePanelSlide } from "@/lib/animations"
 import { Button, ButtonScroll } from "../buttons"
+import Availability from "../availability"
 
 type FooterProps = {
 	navLinks: NavLink[]
@@ -39,14 +40,16 @@ export default function Footer({ navLinks }: FooterProps) {
 	}
 
 	return (
-		<footer className='fixed bottom-0 w-full p-8 flex justify-between text-white text-center'>
-			<Pagination index={index + 1} navLinks={sections} />
+		<footer className='fixed bottom-0 w-full p-8 flex justify-between items-center text-white text-center'>
+			<Availability />
 
 			<ButtonScroll
 				sectionsTotal={sections.length}
 				action={handleNavigation}
 				index={index}
 			/>
+
+			<Pagination index={index + 1} navLinks={sections} />
 		</footer>
 	)
 }
