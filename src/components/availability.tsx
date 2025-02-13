@@ -43,9 +43,7 @@ export default function Availability({ availability }: AvailabilityProps) {
 			<p className='block text-bodyMedium lg:text-bodyLarge uppercase'>
 				Available {furtherAvailability}
 			</p>
-			<button className='text-bodyMedium lg:text-bodyLarge uppercase rounded-full border border-secondary px-3 py-1'>
-				Contact me
-			</button>
+			<button className='custom-rounded-button'>Contact me</button>
 		</div>
 	)
 }

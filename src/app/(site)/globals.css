@@ -189,3 +189,7 @@ textarea {
 .active.underlined-link::after {
 	transform: translateX(0%);
 }
+
+.custom-rounded-button {
+	@apply text-bodyMedium lg:text-bodyLarge uppercase rounded-full border border-secondary px-3 py-1;
+}

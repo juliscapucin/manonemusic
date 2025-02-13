@@ -17,7 +17,7 @@ export default function SocialLinks({ data }: SocialLinksProps) {
 	useLinkReveal(wrapperRef)
 
 	return (
-		<>
+		<div className='flex-1'>
 			{data && (
 				<div ref={wrapperRef} className='overflow-hidden'>
 					<h3 className='mb-4'>Listen & Follow</h3>
@@ -39,6 +39,6 @@ export default function SocialLinks({ data }: SocialLinksProps) {
 					})}
 				</div>
 			)}
-		</>
+		</div>
 	)
 }

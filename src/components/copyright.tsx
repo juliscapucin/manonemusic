@@ -6,7 +6,7 @@ export default function Copyright({ hasCredits = true }: CopyrightProps) {
 	const year = new Date().getFullYear()
 
 	return (
-		<div>
+		<div className='flex-1'>
 			<h3>©2017–{year}</h3>
 			{hasCredits && (
 				<a
