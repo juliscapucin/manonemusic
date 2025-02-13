@@ -33,6 +33,7 @@ export default async function Layout({
 	children: React.ReactNode
 }) {
 	const navLinks = await getHeaderNavLinks()
+
 	return (
 		<RootLayout>
 			<body

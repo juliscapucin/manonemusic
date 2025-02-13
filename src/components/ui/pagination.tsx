@@ -14,28 +14,34 @@ type PaginationProps = {
 export default function Pagination({ navLinks }: PaginationProps) {
 	const pathname = usePathname()
 	const [index, setIndex] = useState(0)
-	const [pages, setPages] = useState<NavLink[]>([])
+
+	const homeLink = { title: "Home", slug: "" }
+	const sections = [homeLink, ...navLinks]
 
 	useEffect(() => {
-		const foundPage = pages.find((link) => `/${link.slug}` === pathname)
+		const foundPage = sections.find((link) => `/${link.slug}` === pathname)
+		console.log(foundPage)
 		const newIndex = foundPage ? navLinks.indexOf(foundPage) + 1 : 0
 		setIndex(newIndex)
-	}, [pathname, pages])
-
-	useEffect(() => {
-		const homeLink = { title: "Home", slug: "" }
-		const updatedPages = [homeLink, ...navLinks]
-		setPages(updatedPages)
-	}, [navLinks])
+	}, [pathname, sections])
 
 	return (
 		<div className='fixed bottom-8 left-8 flex justify-center items-center w-full px-4 py-2'>
+			<span>
+				[0{index + 1}/0{navLinks.length + 1}]
+			</span>
 			<ButtonScroll
-				index={index}
-				total={navLinks.length + 1}
-				action={() => {
+				actionLeft={() => {
+					const previousIndex = index - 1 < 1 ? 1 : index
+					const previousSlug = navLinks[previousIndex].slug
+
+					console.log(previousSlug)
+
+					handlePanelSlide(previousSlug, true)
+				}}
+				actionRight={() => {
 					const nextIndex =
-						index + 1 > navLinks.length ? navLinks.length : index + 1
+						index + 1 > navLinks.length + 1 ? navLinks.length : index
 					const nextSlug = navLinks[nextIndex].slug
 
 					handlePanelSlide(nextSlug, true)

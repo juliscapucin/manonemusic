@@ -1,27 +1,31 @@
 import { IconArrow } from "../icons"
 
 type ButtonScrollProps = {
-	index: number
-	total: number
-	action: () => void
+	actionRight: () => void
+	actionLeft: () => void
 }
 
 export default function ButtonScroll({
-	action,
-	index,
-	total,
+	actionLeft,
+	actionRight,
 }: ButtonScrollProps) {
 	return (
-		<button
-			// className='sr-only focus:not-sr-only'
-			className='flex items-center gap-2'
-			onClick={action}
-			aria-label='Scroll to next page'
-		>
-			<span>
-				[0{index + 1}/0{total}]
-			</span>
-			<IconArrow />
-		</button>
+		<div className='flex gap-8'>
+			<button
+				className='flex items-center gap-2 rotate-180'
+				onClick={actionLeft}
+				aria-label='Scroll to previous page'
+			>
+				<IconArrow />
+			</button>
+			<p>Scroll</p>
+			<button
+				className='flex items-center gap-2'
+				onClick={actionRight}
+				aria-label='Scroll to next page'
+			>
+				<IconArrow />
+			</button>
+		</div>
 	)
 }

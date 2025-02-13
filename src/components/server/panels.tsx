@@ -58,6 +58,8 @@ export async function Panels() {
 		projects,
 	}
 
+	console.log("load")
+
 	if (
 		!data ||
 		!data.headerNavLinks ||
