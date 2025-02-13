@@ -58,10 +58,7 @@ export default function Subtitle({ subtitle }: SubtitleProps) {
 		return () => ctx.revert()
 	}, [])
 	return (
-		<p
-			className='block mt-16 mb-8 text-titleLarge max-w-prose opacity-0'
-			ref={subtitleRef}
-		>
+		<p className='block mt-16 mb-8 max-w-prose opacity-0' ref={subtitleRef}>
 			{subtitle}
 		</p>
 	)

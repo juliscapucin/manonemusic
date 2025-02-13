@@ -11,6 +11,8 @@ import {
 } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 
+import { ButtonRounded } from "@/components/buttons"
+
 import type { AboutPage } from "@/types"
 
 export default function AboutPage({
@@ -25,25 +27,35 @@ export default function AboutPage({
 	useTitleScrollTrigger(titleAboutRef, "/about", windowAspectRatio)
 
 	return (
-		<SectionWrapper classes='landscape:flex justify-between items-start md:gap-64 lg:gap-16'>
-			<div className='md:w-1/2 xl:w-1/3 z-10'>
+		<SectionWrapper classes='landscape:flex justify-between items-start gap-8'>
+			<div className='flex-1'>
 				<TitleDisplay ref={titleAboutRef}>{title}</TitleDisplay>
 				{subtitle && <Subtitle subtitle={subtitle} />}
 			</div>
-			<div className='w-full landscape:w-1/2 xl:w-2/3 mt-16 md:flex items-start gap-16'>
-				<div className='relative w-full sm:w-2/3 landscape:w-full flex-1 aspect-square rounded-sm overflow-clip'>
+			<div className='relative flex-1 mt-16'>
+				<div className='block relative aspect-square rounded-sm overflow-clip'>
 					<Image
 						{...{
 							src: image.imageUrl,
-							alt: `${title} album cover`,
+							alt: `Profile picture of Matt Rudge, the leading figure behind ManOne Music`,
 							fill: true,
-							className: "gsap-film-image object-cover",
+							className: "object-cover",
 							sizes: "50vw",
 						}}
 					/>
 				</div>
-				<div className='w-full sm:w-3/2 landscape:w-full flex-1'>
-					{content && <TextBlock text={content} />}
+			</div>
+			<div className='flex-1 mt-16'>
+				{content && <TextBlock text={content} />}
+				<div className='flex gap-4'>
+					<ButtonRounded
+						label='Services'
+						action={() => console.log("services")}
+					/>
+					<ButtonRounded
+						label='Clients'
+						action={() => console.log("clients")}
+					/>
 				</div>
 			</div>
 		</SectionWrapper>
