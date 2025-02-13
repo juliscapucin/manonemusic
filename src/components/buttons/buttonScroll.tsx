@@ -6,6 +6,25 @@ type ButtonScrollProps = {
 	sectionsTotal: number
 }
 
+type ScrollArrowProps = {
+	direction: "previous" | "next"
+	isDisabled: boolean
+	onClick: () => void
+}
+
+const ScrollArrow = ({ direction, isDisabled, onClick }: ScrollArrowProps) => (
+	<button
+		className={`flex items-center gap-2 transition-opacity duration-300 ${
+			direction === "previous" ? "rotate-180" : ""
+		} ${isDisabled ? "opacity-0" : "opacity-100"}`}
+		onClick={onClick}
+		aria-label={`Scroll to ${direction} page`}
+		disabled={isDisabled}
+	>
+		<IconArrow />
+	</button>
+)
+
 export default function ButtonScroll({
 	action,
 	index,
@@ -13,21 +32,17 @@ export default function ButtonScroll({
 }: ButtonScrollProps) {
 	return (
 		<div className='flex gap-8'>
-			<button
-				className={`flex items-center gap-2 rotate-180 transition-opacity duration-300 ${index === 0 ? "opacity-0" : "opacity-100"}`}
+			<ScrollArrow
+				direction='previous'
+				isDisabled={index === 0}
 				onClick={() => action("previous")}
-				aria-label='Scroll to previous page'
-			>
-				<IconArrow />
-			</button>
+			/>
 			<p>Scroll</p>
-			<button
-				className={`flex items-center gap-2 transition-opacity duration-300 ${index + 1 === sectionsTotal ? "opacity-0" : "opacity-100"}`}
+			<ScrollArrow
+				direction='next'
+				isDisabled={index + 1 === sectionsTotal}
 				onClick={() => action("next")}
-				aria-label='Scroll to next page'
-			>
-				<IconArrow />
-			</button>
+			/>
 		</div>
 	)
 }
