@@ -98,13 +98,15 @@ export default function ProjectCard({
 				</div>
 			)}
 			{variant === "section" && (
-				<div className='absolute inset-0 flex items-center justify-center duration-300 z-10'>
-					<span
-						className='text-labelMedium lg:text-labelLarge uppercase text-left leading-none -translate-y-full opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-15 pointer-events-none'
-						id={`project-title-${slug}`}
-					>
-						{title}
-					</span>
+				<div className='absolute inset-0 flex items-start justify-center duration-300 z-10 overflow-hidden'>
+					<div className='flex flex-wrap'>
+						<p
+							className='text-labelMedium lg:text-headlineLarge uppercase text-left leading-none -translate-y-full opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-15 pointer-events-none'
+							id={`project-title-${slug}`}
+						>
+							{title} {title} {title} {title} {title} {title}
+						</p>
+					</div>
 				</div>
 			)}
 		</CustomButton>
