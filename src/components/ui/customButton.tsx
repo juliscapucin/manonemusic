@@ -2,7 +2,6 @@
 
 import Link from "next/link"
 
-// Define the props type for MyButton
 type ButtonProps = {
 	href: string
 	classes?: string
