@@ -2,6 +2,9 @@
 
 import Image from "next/image"
 import { useRouter, usePathname } from "next/navigation"
+import { useEffect, useLayoutEffect, useState } from "react"
+import gsap from "gsap"
+import { Observer } from "gsap/Observer"
 
 import { projectExit, panelsExit } from "@/lib/animations"
 import { ImageField } from "@/types/Image"
@@ -25,8 +28,50 @@ export default function ProjectCard({
 }: ProjectCardProps) {
 	const router = useRouter()
 	const pathname = usePathname()
+	let ctx: gsap.Context
 
 	const aspectRatio = image.imageWidth / image.imageHeight
+
+	useLayoutEffect(() => {
+		gsap.registerPlugin(Observer)
+
+		ctx = gsap.context(() => {
+			function handleScroll(scaleAmount: number) {
+				// const clampedScale = Math.min(Math.max(scaleAmount, 1), 0.5)
+
+				gsap.to(".gsap-card-image", {
+					scale: scaleAmount,
+					duration: 0.5,
+					ease: "power4.inOut",
+				})
+			}
+
+			Observer.create({
+				target: window,
+				type: "wheel,scroll,touch",
+				onChange: (self) => {
+					console.log(self.velocityY)
+				},
+
+				onUp: () => {
+					handleScroll(0.5)
+				},
+				onDown: () => {
+					handleScroll(0.5)
+				},
+
+				onStop: () => {
+					gsap.to(".gsap-card-image", {
+						scale: 1,
+						duration: 0.5,
+						ease: "power4.inOut",
+					})
+				},
+			})
+		})
+
+		return () => ctx.revert()
+	}, [])
 
 	return (
 		<CustomButton
@@ -42,7 +87,7 @@ export default function ProjectCard({
 			isDisabled={pathname.includes(slug)}
 		>
 			{image && (
-				<div className='rounded-sm'>
+				<div className='gsap-card-image rounded-sm'>
 					<Image
 						className='h-full w-full object-cover group-hover:scale-105 transition-transform duration-300'
 						src={image.imageUrl}

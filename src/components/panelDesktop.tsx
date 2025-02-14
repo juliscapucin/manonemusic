@@ -62,7 +62,7 @@ export default function PanelDesktop({ data }: PanelDesktopProps) {
 				},
 			})
 
-			// Title Animation on long sections
+			// Title Pin Animation on long sections
 			const sectionTitles = container.querySelectorAll(".gsap-section-title")
 
 			sectionTitles.forEach((title) => {
