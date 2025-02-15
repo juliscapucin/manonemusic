@@ -16,6 +16,7 @@
 	:root[data-theme="dark"] {
 		--color-primary: 3 30 27;
 		--color-secondary: 182 209 194;
+		--color-primary-rgb: 3, 30, 27;
 		--color-secondary-rgb: 182, 209, 194;
 		--color-focus: 154, 152, 152;
 	}

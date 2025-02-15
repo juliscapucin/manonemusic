@@ -1,3 +1,4 @@
+import { animateCardLabel } from "./animateCardLabel"
 import {
 	animateHorizontal,
 	animateHorizontalTransition,
@@ -10,6 +11,7 @@ import { animateSplitText } from "./animateSplitText"
 import { animateStaggerText } from "./animateStaggerText"
 
 export {
+	animateCardLabel,
 	animateEnterHorizontal,
 	animateHorizontal,
 	animateHorizontalTransition,

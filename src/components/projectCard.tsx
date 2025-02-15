@@ -1,8 +1,9 @@
 "use client"
 
-import Image from "next/image"
-import { useRouter, usePathname } from "next/navigation"
 import { useLayoutEffect, useRef } from "react"
+import { useRouter, usePathname } from "next/navigation"
+import Image from "next/image"
+
 import gsap from "gsap"
 import { Observer } from "gsap/Observer"
 
@@ -10,6 +11,8 @@ import { projectExit, panelsExit } from "@/lib/animations"
 import { ImageField } from "@/types/Image"
 
 import { CustomButton } from "@/components/ui"
+
+import { animateCardLabel } from "@/animations"
 
 type ProjectCardProps = {
 	variant: "section" | "page"
@@ -31,17 +34,52 @@ export default function ProjectCard({
 	let ctx: gsap.Context
 
 	const cardImageRef = useRef<HTMLDivElement>(null)
+	const labelRef = useRef<HTMLParagraphElement>(null)
 
 	const aspectRatio = image.imageWidth / image.imageHeight
 
+	// Scale card on scroll + Animate label on hover
 	useLayoutEffect(() => {
-		if (!cardImageRef.current) return
+		if (!cardImageRef.current || !labelRef.current) return
 
 		const cardImage = cardImageRef.current
+		const cardLabel = labelRef.current
+		const container = cardImage.closest("a")
+		let isAnimating = false
+
+		if (!container) return
 
 		gsap.registerPlugin(Observer)
 
 		ctx = gsap.context(() => {
+			gsap.set(cardLabel, {
+				opacity: 0,
+			})
+
+			Observer.create({
+				target: container,
+				onHover: (self) => {
+					if (isAnimating) return
+					gsap.to(cardLabel, {
+						opacity: 1,
+						duration: 0.2,
+					})
+					self.event.target &&
+						self.event.target === container &&
+						animateCardLabel(cardLabel)
+					isAnimating = true
+				},
+				onHoverEnd: () => {
+					if (isAnimating) {
+						isAnimating = false
+						gsap.to(cardLabel, {
+							opacity: 0,
+							duration: 0.2,
+						})
+					}
+				},
+			})
+
 			Observer.create({
 				target: window,
 				type: "wheel,scroll,touch",
@@ -65,7 +103,7 @@ export default function ProjectCard({
 		})
 
 		return () => ctx.revert()
-	}, [cardImageRef])
+	}, [cardImageRef, labelRef])
 
 	return (
 		<CustomButton
@@ -75,14 +113,14 @@ export default function ProjectCard({
 					: projectExit(() => router.push(`/${section}/${slug}`))
 			}}
 			href={`/${section}/${slug}`}
-			classes={`relative group gsap-project-card ${variant === "section" ? "h-full w-[calc((100%/2)-0.5rem)] md:w-[calc((100%/3)-0.5rem)] landscape:w-fit" : "w-16 landscape:w-24 aspect-square"}`}
+			classes={`relative group gsap-project-card bg-primary ${variant === "section" ? "h-full w-[calc((100%/2)-0.5rem)] md:w-[calc((100%/3)-0.5rem)] landscape:w-fit" : "w-16 landscape:w-24 aspect-square"}`}
 			style={{ aspectRatio }}
 			aria-labelledby={`project-title-${slug}`}
 			isDisabled={pathname.includes(slug)}
 		>
 			{image && (
 				<div
-					className='rounded-sm'
+					className='rounded-sm pointer-events-none'
 					ref={cardImageRef}
 					role='img'
 					aria-label={image.imageAlt}
@@ -98,15 +136,15 @@ export default function ProjectCard({
 				</div>
 			)}
 			{variant === "section" && (
-				<div className='absolute inset-0 flex items-start justify-center duration-300 z-10 overflow-hidden'>
-					<div className='flex flex-wrap'>
-						<p
-							className='text-labelMedium lg:text-headlineLarge uppercase text-left leading-none -translate-y-full opacity-0 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 z-15 pointer-events-none'
-							id={`project-title-${slug}`}
-						>
-							{title} {title} {title} {title} {title} {title}
-						</p>
-					</div>
+				<div className='absolute inset-0 flex items-start justify-center z-10 pointer-events-none overflow-hidden'>
+					<p
+						className='text-labelMedium lg:text-headlineLarge uppercase text-left leading-none z-15'
+						id={`project-title-${slug}`}
+						ref={labelRef}
+					>
+						{/* {Array(80).fill(title).join(" ").slice(0, 100)} */}
+						{title}
+					</p>
 				</div>
 			)}
 		</CustomButton>
