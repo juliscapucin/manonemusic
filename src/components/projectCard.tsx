@@ -136,13 +136,14 @@ export default function ProjectCard({
 				</div>
 			)}
 			{variant === "section" && (
-				<div className='absolute inset-0 flex items-start justify-center z-10 pointer-events-none overflow-hidden'>
+				<div className='absolute inset-0 top-3/4 flex items-start justify-center z-10 pointer-events-none'>
 					<p
-						className='text-labelMedium lg:text-headlineLarge uppercase text-left leading-none z-15'
+						className='text-labelMedium lg:text-headlineSmall uppercase text-left leading-none z-15'
 						id={`project-title-${slug}`}
 						ref={labelRef}
 					>
 						{/* {Array(80).fill(title).join(" ").slice(0, 100)} */}
+						{/* {title.slice(0, 50)} */}
 						{title}
 					</p>
 				</div>

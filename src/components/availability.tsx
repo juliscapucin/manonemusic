@@ -4,9 +4,13 @@ import { useMemo } from "react"
 
 type AvailabilityProps = {
 	availability?: string
+	slideToContact?: () => void
 }
 
-export default function Availability({ availability }: AvailabilityProps) {
+export default function Availability({
+	availability,
+	slideToContact,
+}: AvailabilityProps) {
 	const getNextMonth = useMemo(() => {
 		const currentDate = new Date()
 		return new Date(currentDate.getFullYear(), currentDate.getMonth() + 1)
@@ -43,7 +47,14 @@ export default function Availability({ availability }: AvailabilityProps) {
 			<p className='block text-bodyMedium lg:text-bodyLarge uppercase'>
 				Available {furtherAvailability}
 			</p>
-			<button className='custom-button-rounded'>Contact me</button>
+			{slideToContact && (
+				<button
+					onClick={() => slideToContact()}
+					className='custom-button-rounded'
+				>
+					Contact me
+				</button>
+			)}
 		</div>
 	)
 }
