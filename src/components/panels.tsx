@@ -16,16 +16,16 @@ export default function Panels({ data }: { data: AllData }) {
 	const { windowAspectRatio } = useWindowDimensions()
 
 	return (
-		<>
-			<Header navLinks={headerNavLinks} />
-			<PanelDesktop data={data} sections={headerNavLinks} />
-			<Footer navLinks={headerNavLinks} />
-		</>
+		<main>
+			{windowAspectRatio && windowAspectRatio === "landscape" ? (
+				<>
+					<Header navLinks={headerNavLinks} />
+					<PanelDesktop data={data} sections={headerNavLinks} />
+					<Footer navLinks={headerNavLinks} />
+				</>
+			) : (
+				<PanelMobile data={data} />
+			)}
+		</main>
 	)
-
-	// return windowAspectRatio === "landscape" ? (
-	// 	<PanelDesktop data={data} />
-	// ) : (
-	// 	<PanelMobile data={data} />
-	// )
 }

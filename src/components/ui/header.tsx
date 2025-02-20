@@ -32,9 +32,14 @@ export default function Header({ navLinks }: HeaderProps) {
 	useEffect(() => {
 		// Check if the page is loaded to slide into position
 		if (!isPageLoaded) {
-			console.log(pathname)
-			handlePanelSlide(pathname, false)
-			setIsPageLoaded(true)
+			//TODO: Improve this setTimeout
+			setTimeout(() => {
+				console.log(pathname)
+				handlePanelSlide(pathname, false)
+				setIsPageLoaded(true)
+			}, 500)
+			// handlePanelSlide(pathname, false)
+			// setIsPageLoaded(true)
 		}
 	}, [])
 
