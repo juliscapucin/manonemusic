@@ -16,7 +16,7 @@ const ScrollArrow = ({ direction, isDisabled, onClick }: ScrollArrowProps) => (
 	<button
 		className={`flex items-center gap-2 transition-opacity duration-300 ${
 			direction === "previous" ? "rotate-180" : ""
-		} ${isDisabled ? "opacity-0" : "opacity-100"}`}
+		} ${isDisabled ? "opacity-20" : "opacity-100"}`}
 		onClick={onClick}
 		aria-label={`Scroll to ${direction} page`}
 		disabled={isDisabled}
@@ -31,7 +31,7 @@ export default function ButtonScroll({
 	sectionsTotal,
 }: ButtonScrollProps) {
 	return (
-		<div className='flex gap-8'>
+		<div className='flex justify-center gap-8'>
 			<ScrollArrow
 				direction='previous'
 				isDisabled={index === 0}

@@ -2,11 +2,11 @@ import CustomButton from "./customButton"
 import CustomLink from "./customLink"
 import Footer from "./footer"
 import Grid from "./grid"
+import Header from "./header"
 import Heading from "./heading"
 import Loader from "./loader"
 import Logo from "./logo"
 import MenuMobile from "./menuMobile"
-import NavBar from "./navBar"
 import NavLink from "./navLink"
 import PageWrapper from "./pageWrapper"
 import Pagination from "./pagination"
@@ -22,11 +22,11 @@ export {
 	CustomLink,
 	Footer,
 	Grid,
+	Header,
 	Heading,
 	Loader,
 	Logo,
 	MenuMobile,
-	NavBar,
 	NavLink,
 	PageWrapper,
 	Pagination,

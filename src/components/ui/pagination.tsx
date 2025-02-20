@@ -1,10 +1,6 @@
 "use client"
 
-import { handlePanelSlide } from "@/lib/animations"
-import { usePathname } from "next/navigation"
-
 import type { NavLink } from "@/types"
-import { useEffect, useState } from "react"
 
 type PaginationProps = {
 	navLinks: NavLink[]
@@ -13,7 +9,7 @@ type PaginationProps = {
 
 export default function Pagination({ navLinks, index }: PaginationProps) {
 	return (
-		<span>
+		<span className='text-right'>
 			[0{index}/0{navLinks.length}]
 		</span>
 	)

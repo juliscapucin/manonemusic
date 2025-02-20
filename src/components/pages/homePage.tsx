@@ -18,10 +18,7 @@ export default function HomePage({ data }: { data: HomePage }) {
 	useTitleScrollTrigger(titleHomeRef, "/", windowAspectRatio)
 
 	return (
-		<div
-			className='relative h-screen min-h-svh pt-32 pb-16 overflow-x-clip'
-			data-id='panel-home'
-		>
+		<div className='relative h-screen min-h-svh pt-32 pb-16 overflow-x-clip'>
 			<Copyright hasCredits={false} />
 			<h1 ref={titleHomeRef} className='logo'>
 				MAN/ONE MUSIC
@@ -32,7 +29,7 @@ export default function HomePage({ data }: { data: HomePage }) {
 			<div className='w-full landscape:flex justify-between mt-32 md:mt-16'>
 				<p className='text-balance max-w-prose mb-16 landscape:mb-0'>
 					Tailored sound design and audio identities that capture the spirit of
-					your brand and resonate with your audience.
+					your brand and resonate with your audience
 				</p>
 				<Status location={location} />
 			</div>

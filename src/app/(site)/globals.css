@@ -192,5 +192,5 @@ textarea {
 }
 
 .custom-button-rounded {
-	@apply block text-bodyMedium lg:text-bodyLarge uppercase rounded-full border border-secondary px-3 py-1;
+	@apply inline-block text-bodyMedium lg:text-bodyLarge uppercase rounded-full border border-secondary px-3 py-1;
 }

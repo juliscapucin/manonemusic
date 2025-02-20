@@ -13,21 +13,21 @@ type PanelContentProps = {
 }
 
 export default function PanelContent({ data, section }: PanelContentProps) {
-	let content
+	let Content: React.ReactNode
 
 	switch (section) {
 		case "/":
-			content = <HomePage data={data.homePage} />
+			Content = <HomePage data={data.homePage} />
 			break
 		case "about":
-			content = <AboutPage {...data.aboutPage} />
+			Content = <AboutPage {...data.aboutPage} />
 			break
 		case "contact":
-			content = <ContactPage {...data.contactPage} />
+			Content = <ContactPage {...data.contactPage} />
 			break
 		case "film":
 		case "commercial":
-			content = (
+			Content = (
 				<ProjectsPage
 					projectsPageData={data.portfolioSections[section]}
 					projects={data[`${section}s`]}
@@ -36,7 +36,7 @@ export default function PanelContent({ data, section }: PanelContentProps) {
 			break
 		case "releases":
 		case "projects":
-			content = (
+			Content = (
 				<ProjectsPage
 					projectsPageData={data.portfolioSections[section]}
 					projects={data[section]}
@@ -44,8 +44,8 @@ export default function PanelContent({ data, section }: PanelContentProps) {
 			)
 			break
 		default:
-			content = null
+			Content = null
 	}
 
-	return <>{content}</>
+	return <>{Content}</>
 }

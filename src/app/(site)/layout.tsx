@@ -4,7 +4,7 @@ import "./globals.css"
 
 import { RootLayout } from "@/components"
 import { getHeaderNavLinks } from "@/sanity/sanity-queries"
-import { NavBar, MenuMobile, Footer } from "@/components/ui"
+import { MenuMobile } from "@/components/ui"
 
 // Load custom font //
 const font = localFont({
@@ -39,10 +39,8 @@ export default async function Layout({
 			<body
 				className={`${font.className} relative w-screen landscape:h-screen overflow-x-clip`}
 			>
-				<NavBar navLinks={navLinks} />
 				<MenuMobile navLinks={navLinks} />
 				{children}
-				<Footer navLinks={navLinks} />
 			</body>
 		</RootLayout>
 	)

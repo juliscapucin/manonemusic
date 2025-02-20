@@ -35,27 +35,33 @@ export default function ProjectPage({
 	useTransitionOnEnter(ctx)
 
 	useLayoutEffect(() => {
-		if (isPageDisplaced) {
-			const tl = gsap.timeline()
-			tl.to(pageWrapperRef.current, {
-				duration: 0.6,
-				yPercent: -30,
-				opacity: 0,
-			})
-		} else {
-			const tl = gsap.timeline()
-			tl.to(pageWrapperRef.current, {
-				duration: 0.4,
-				yPercent: 0,
-				opacity: 1,
-			})
+		ctx.add(() => {
+			if (isPageDisplaced) {
+				const tl = gsap.timeline()
+				tl.to(pageWrapperRef.current, {
+					duration: 0.6,
+					yPercent: -30,
+					opacity: 0,
+				})
+			} else {
+				const tl = gsap.timeline()
+				tl.to(pageWrapperRef.current, {
+					duration: 0.4,
+					yPercent: 0,
+					opacity: 1,
+				})
+			}
+		})
+
+		return () => {
+			ctx.revert()
 		}
 	}, [isPageDisplaced])
 
 	return (
 		<div
 			ref={containerProjectRef}
-			className='relative w-screen h-screen overflow-clip'
+			className='relative w-screen h-screen bg-primary overflow-hidden'
 		>
 			<ProjectsMenuPage
 				projectsData={projectsData}
@@ -64,7 +70,7 @@ export default function ProjectPage({
 			<PageWrapper ref={pageWrapperRef}>
 				{/* Project Page */}
 				<div className='gsap-project-page opacity-0'>
-					<ButtonBack ctx={ctx} slug={projectsPageData.slug} />
+					<ButtonBack slug={projectsPageData.slug} />
 
 					<TitleHeadline>{projectPageData.title}</TitleHeadline>
 					<ProjectInfo
