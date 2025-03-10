@@ -1,6 +1,7 @@
 import gsap from "gsap"
 
 export const projectExit = (routerAction: () => void) => {
+	console.log("project exit")
 	const tl = gsap.timeline({ ease: "power4.out" })
 	tl.to(".gsap-project-page", {
 		opacity: 0,

@@ -9,32 +9,20 @@ import { NavLink as NavLinkType } from "@/types"
 
 type HeaderProps = {
 	navLinks: NavLinkType[]
+	variant?: "section" | "page"
 }
 
-export default function Header({ navLinks }: HeaderProps) {
-	const [variant, setVariant] = useState<"section" | "page">("section")
+export default function Header({ navLinks, variant = "section" }: HeaderProps) {
 	const [isPageLoaded, setIsPageLoaded] = useState(false)
 	const pathname = usePathname()
 	const router = useRouter()
 	const navRef = useRef<HTMLDivElement | null>(null)
 
 	useEffect(() => {
-		if (!pathname || !isPageLoaded) return
-
-		// Split the pathname and filter out empty segments
-		const pathSegments = pathname.split("/").filter(Boolean)
-
-		// Check if the path is first-level (e.g., "/commercial")
-		if (pathSegments.length <= 1) setVariant("section")
-		else setVariant("page")
-	}, [pathname])
-
-	useEffect(() => {
 		// Check if the page is loaded to slide into position
 		if (!isPageLoaded) {
 			//TODO: Improve this setTimeout
 			setTimeout(() => {
-				console.log(pathname)
 				handlePanelSlide(pathname, false)
 				setIsPageLoaded(true)
 			}, 500)
