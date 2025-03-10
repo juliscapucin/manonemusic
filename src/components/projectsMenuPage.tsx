@@ -39,7 +39,9 @@ export default function ProjectsMenuPage({
 			</aside>
 
 			{/* Desktop */}
-			<aside className={`fixed w-24 top-24 right-4 bottom-4 flex flex-col gap-4 overflow-y-scroll z-10 translate-x-[200%] opacity-0 landscape:opacity-100 transition-transform duration-500 ${isVisible ? "landscape:translate-x-0": ""}`}>
+			<aside
+				className={`gsap-projects-menu-page fixed w-24 top-24 right-4 bottom-4 flex flex-col gap-4 overflow-y-scroll z-10 translate-x-[200%] opacity-0 landscape:opacity-100 transition-transform duration-500 ${isVisible ? "landscape:translate-x-0" : ""}`}
+			>
 				{projectsData?.map((project: PortfolioItem) => {
 					return (
 						<ProjectCard
