@@ -17,23 +17,21 @@ type FooterProps = {
 
 export default function Footer({ navLinks }: FooterProps) {
 	const pathname = usePathname()
-	const [index, setIndex] = useState(0)
+	const [index, setIndex] = useState(1)
 
-	const homeLink = { title: "Home", slug: "", order: 0 }
-	const sections = [homeLink, ...navLinks]
+	const sections = navLinks
 
 	useEffect(() => {
 		const foundPage = sections.find((link) => `/${link.slug}` === pathname)
-		const newIndex = foundPage ? sections.indexOf(foundPage) : 1
+		const newIndex = foundPage ? sections.indexOf(foundPage) + 1 : 1
+		console.log(newIndex)
 
 		setIndex(newIndex)
 	}, [pathname, sections])
 
 	const handleNavigation = (direction: "previous" | "next") => {
-		const newIndex =
-			direction === "previous"
-				? Math.max(0, index - 1)
-				: Math.min(sections.length - 1, index + 1)
+		const newIndex = direction === "previous" ? index - 1 : index + 1
+		if (newIndex < 0 || newIndex >= sections.length) return
 		const newSlug = sections[newIndex].slug
 
 		handlePanelSlide(newSlug, true)
@@ -49,7 +47,7 @@ export default function Footer({ navLinks }: FooterProps) {
 				index={index}
 			/>
 
-			<Pagination index={index + 1} navLinks={sections} />
+			<Pagination index={index} navLinks={sections} />
 		</footer>
 	)
 }
