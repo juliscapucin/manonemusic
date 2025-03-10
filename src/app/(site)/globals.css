@@ -16,6 +16,7 @@
 	:root[data-theme="dark"] {
 		--color-primary: 3 30 27;
 		--color-secondary: 182 209 194;
+		--color-primary-rgb: 3, 30, 27;
 		--color-secondary-rgb: 182, 209, 194;
 		--color-focus: 154, 152, 152;
 	}
@@ -188,4 +189,8 @@ textarea {
 
 .active.underlined-link::after {
 	transform: translateX(0%);
+}
+
+.custom-button-rounded {
+	@apply inline-block text-bodyMedium lg:text-bodyLarge uppercase rounded-full border border-secondary px-3 py-1;
 }

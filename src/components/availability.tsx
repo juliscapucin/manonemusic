@@ -1,13 +1,16 @@
 "use client"
 
 import { useMemo } from "react"
-import { CopyEmailButton } from "@/components/buttons"
 
 type AvailabilityProps = {
 	availability?: string
+	slideToContact?: () => void
 }
 
-export default function Availability({ availability }: AvailabilityProps) {
+export default function Availability({
+	availability,
+	slideToContact,
+}: AvailabilityProps) {
 	const getNextMonth = useMemo(() => {
 		const currentDate = new Date()
 		return new Date(currentDate.getFullYear(), currentDate.getMonth() + 1)
@@ -40,19 +43,18 @@ export default function Availability({ availability }: AvailabilityProps) {
 	}, [availability, getNextMonth])
 
 	return (
-		<div>
-			<p className='block mb-4 text-bodyMedium lg:text-bodyLarge'>
+		<div className='flex items-center gap-4'>
+			<p className='block text-bodyMedium lg:text-bodyLarge uppercase'>
 				Available {furtherAvailability}
 			</p>
-			<div className='overflow-clip'>
-				<a
-					href='mailto:hello@juliscapucin.com'
-					className='underlined-link flex flex-col text-titleSmall md:text-titleMedium lg:text-titleLarge font-light uppercase'
+			{slideToContact && (
+				<button
+					onClick={() => slideToContact()}
+					className='custom-button-rounded'
 				>
-					Get in touch
-				</a>
-			</div>
-			<CopyEmailButton />
+					Contact me
+				</button>
+			)}
 		</div>
 	)
 }

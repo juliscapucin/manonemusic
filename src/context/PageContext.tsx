@@ -1,14 +1,16 @@
 "use client"
 
 import { usePathname, useRouter } from "next/navigation"
-import { createContext, useContext, useEffect, useRef, useState } from "react"
+import { createContext, useContext, useEffect, useRef } from "react"
 
 import gsap from "gsap"
+import { useWindowDimensions } from "@/hooks"
 
 type ContextProps = {
 	transitionOnClick: (link: string) => void
 	transitionOnEnter: (container: HTMLDivElement) => void
 	pageRef: React.MutableRefObject<HTMLDivElement | null>
+	aspectRatio: string
 }
 
 // CREATE CONTEXT
@@ -24,6 +26,9 @@ export const PageContextProvider = ({
 	const router = useRouter()
 	const pathname = usePathname()
 	let ctx = gsap.context(() => {})
+
+	const windowDimensions = useWindowDimensions()
+	const aspectRatio = windowDimensions.windowAspectRatio
 
 	const transitionOnEnter = (container: HTMLDivElement) => {
 		ctx.add(() => {
@@ -63,6 +68,7 @@ export const PageContextProvider = ({
 				transitionOnClick,
 				transitionOnEnter,
 				pageRef,
+				aspectRatio,
 			}}
 		>
 			{children}

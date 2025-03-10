@@ -2,10 +2,11 @@
 
 import { useRef } from "react"
 
-import { Availability, Copyright, SocialLinks } from "@/components"
+import { Copyright, SocialLinks } from "@/components"
 import { SectionWrapper, Subtitle, TitleDisplay } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 import type { ContactPage } from "@/types"
+import ButtonEmail from "../buttons/buttonEmail"
 
 export default function ContactPage({ title, subtitle, socials }: ContactPage) {
 	const titleContactRef = useRef(null)
@@ -17,11 +18,13 @@ export default function ContactPage({ title, subtitle, socials }: ContactPage) {
 		<SectionWrapper>
 			{subtitle && <Subtitle subtitle={subtitle} />}
 			<TitleDisplay ref={titleContactRef}>{title}</TitleDisplay>
-			<div className='flex justify-between mt-16 ml-[25%]'>
-				<Availability availability='' />
+			<div className='mt-32 w-full flex justify-between items-end'>
+				<Copyright />
+
+				<ButtonEmail />
+
 				<SocialLinks data={socials} />
 			</div>
-			<Copyright />
 		</SectionWrapper>
 	)
 }

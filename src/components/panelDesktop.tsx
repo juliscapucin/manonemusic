@@ -1,42 +1,32 @@
 "use client"
 
-import React, { useEffect, useRef } from "react"
-import { usePathname } from "next/navigation"
+import { useEffect, useRef } from "react"
 
 import gsap from "gsap"
-import { ScrollToPlugin } from "gsap/ScrollToPlugin"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
-import { AllData } from "@/types"
+import { AllData, NavLink } from "@/types"
 import { PanelContent } from "@/components"
-import { ButtonScroll } from "./buttons"
-import { handlePanelSlide, panelsEnter } from "@/lib/animations"
 
 type PanelDesktopProps = {
 	data: AllData
+	sections: NavLink[]
 }
 
-export default function PanelDesktop({ data }: PanelDesktopProps) {
-	const pathname = usePathname()
+export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 	const panelsContainerRef = useRef<HTMLDivElement | null>(null)
-	let tween: gsap.core.Tween
-
-	const headerNavLinks = [
-		{ title: "Home", slug: "/", order: 0 },
-		...data.headerNavLinks,
-	]
 
 	// ScrollTrigger + Horizontal Panel animation
 	useEffect(() => {
 		if (!panelsContainerRef.current) return
-		gsap.registerPlugin(ScrollToPlugin, ScrollTrigger)
+		gsap.registerPlugin(ScrollTrigger)
 
 		/* Panels */
 		const container = panelsContainerRef.current
 		const panels = gsap.utils.toArray(".gsap-panel")
 
-		let ctx = gsap.context(() => {
-			tween = gsap.to(panels, {
+		const ctx = gsap.context(() => {
+			const tween = gsap.to(panels, {
 				x: () => -1 * (container.scrollWidth - innerWidth),
 				ease: "none",
 				scrollTrigger: {
@@ -47,23 +37,10 @@ export default function PanelDesktop({ data }: PanelDesktopProps) {
 					end: () => "+=" + (container.scrollWidth - container.offsetWidth),
 					invalidateOnRefresh: true,
 					// markers: true,
-					onUpdate: (self) => {
-						// TODO fix this!
-						// if (self.progress <= 0.12 && !isHome) {
-						// 	window.history.pushState(null, "", "/")
-						// 	setIsHome(true)
-						// }
-						// console.log("end", self.end)
-						// console.log(self.progress, "/1")
-						// console.log(
-						// 	window.scrollY,
-						// 	`/${document.body.scrollHeight - window.innerHeight}`
-						// )
-					},
 				},
 			})
 
-			// Title Animation on long sections
+			// Title Pin Animation on long sections
 			const sectionTitles = container.querySelectorAll(".gsap-section-title")
 
 			sectionTitles.forEach((title) => {
@@ -76,7 +53,7 @@ export default function PanelDesktop({ data }: PanelDesktopProps) {
 					scrollTrigger: {
 						scrub: true,
 						trigger: projectsMenu,
-						start: "left-=30 left",
+						start: "left-=20 left",
 						end: () => "+=" + (projectsMenuWidth - window.innerWidth),
 						invalidateOnRefresh: true,
 						// markers: true,
@@ -93,50 +70,21 @@ export default function PanelDesktop({ data }: PanelDesktopProps) {
 		}
 	}, [panelsContainerRef])
 
-	// Jump to panel on internal page load
-	useEffect(() => {
-		if (!pathname || !panelsContainerRef.current) return
-
-		if (pathname !== "/") {
-			handlePanelSlide(pathname, false)
-		}
-		panelsEnter(panelsContainerRef.current)
-	}, [])
-
 	return (
 		<main>
 			{/* Panels */}
 			<div
 				ref={panelsContainerRef}
-				className='gsap-panels-container opacity-0 flex gap-32'
+				className='gsap-panels-container flex gap-32 opacity-0'
 			>
-				{headerNavLinks.map((section, index) => {
+				{sections.map((section) => {
 					return (
 						<section
-							data-id={`panel-${section.slug}`}
-							className='gsap-panel h-screen min-h-full pl-8 min-w-fit w-fit'
+							data-id={`panel-${section.slug === "/" ? "home" : section.slug}`}
+							className='gsap-panel h-screen min-h-full pl-8 min-w-fit w-fit overflow-clip'
 							key={`panel-${section.slug}`}
 						>
 							<PanelContent data={data} section={section.slug} />
-
-							{/* Previous/Next Navigation */}
-							<div className='absolute bottom-8 right-8 flex gap-8 z-20'>
-								{headerNavLinks.length - 1 !== index && (
-									<ButtonScroll
-										index={index}
-										total={headerNavLinks.length}
-										action={() => {
-											const nextIndex =
-												index + 1 > headerNavLinks.length
-													? headerNavLinks.length
-													: index + 1
-											const nextSlug = headerNavLinks[nextIndex].slug
-
-											handlePanelSlide(nextSlug, true)
-										}}
-									/>
-								)}
-							</div>
 						</section>
 					)
 				})}

@@ -1,4 +1,7 @@
 import gsap from "gsap"
+import { ScrollToPlugin } from "gsap/ScrollToPlugin"
+
+gsap.registerPlugin(ScrollToPlugin)
 
 export const handlePanelSlide = (
 	targetSlug: string,
@@ -7,15 +10,15 @@ export const handlePanelSlide = (
 	panelsContainer?: HTMLDivElement
 ) => {
 	const targetPanel =
-		targetSlug === "/"
-			? null
+		targetSlug === "/" || targetSlug === ""
+			? (document.querySelector("[data-id=panel-home]") as HTMLDivElement)
 			: (document.querySelector(
 					`[data-id=panel-${targetSlug.includes("/") ? targetSlug.split("/")[1] : targetSlug}]`
 				) as HTMLDivElement)
 
-	let y = targetPanel ? targetPanel.offsetLeft : 0
+	const panelParent = targetPanel?.parentElement as HTMLDivElement
 
-	console.log(y)
+	let y = targetPanel ? targetPanel.offsetLeft : 0
 
 	if (animateSlide === true) {
 		gsap.to(window, {
@@ -25,23 +28,24 @@ export const handlePanelSlide = (
 			},
 			duration: 0.5,
 			onComplete: () => {
-				targetSlug === "/"
-					? window.history.pushState(null, "", "/")
-					: window.history.pushState(null, "", `/${targetSlug}`)
-				if (panelsContainer) {
-					gsap.to(panelsContainer, {
-						yPercent: -50,
-						duration: 0.5,
-					})
-				}
 				routerAction && routerAction()
 			},
 		})
 	} else {
-		gsap.set(window, {
+		gsap.set(panelParent, { opacity: 0 })
+
+		gsap.to(window, {
 			scrollTo: {
 				y: y,
 				autoKill: false,
+			},
+			duration: 0.1,
+			onComplete: () => {
+				gsap.to(panelParent, {
+					opacity: 1,
+					duration: 2,
+					ease: "power2.out",
+				})
 			},
 		})
 	}

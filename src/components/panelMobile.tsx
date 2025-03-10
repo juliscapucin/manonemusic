@@ -29,7 +29,7 @@ export default function PanelMobile({ data }: { data: AllData }) {
 	}, [pathname])
 
 	return (
-		<main>
+		<div className='landscape:hidden'>
 			{navLinks.map((section) => (
 				<section
 					id={`panel-${section.slug}`}
@@ -40,6 +40,6 @@ export default function PanelMobile({ data }: { data: AllData }) {
 					<PanelContent data={data} section={section.slug} />
 				</section>
 			))}
-		</main>
+		</div>
 	)
 }

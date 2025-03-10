@@ -41,4 +41,4 @@ export const navLinks = [
 
 export const marginTop = "128px"
 
-export const location = "Amsterdam"
+export const location = "London"

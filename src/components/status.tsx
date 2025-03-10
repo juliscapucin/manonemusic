@@ -7,8 +7,16 @@ type StatusProps = {
 	location: string
 }
 
+type Day = {
+	dayOfWeek: string
+	dayOfMonth: string
+	month: string
+}
+
 function Status({ location }: StatusProps) {
 	const [currentDate, setCurrentDate] = useState(new Date())
+	const [time, setTime] = useState<string | null>(null)
+	const [day, setDay] = useState<Day | null>(null)
 	const statusWrapperRef = useRef<HTMLDivElement>(null)
 
 	// 1s interval to update the time
@@ -40,10 +48,16 @@ function Status({ location }: StatusProps) {
 		}
 	}, [])
 
-	const dayOfWeek = currentDate.toLocaleDateString("en-US", { weekday: "long" })
-	const dayOfMonth = currentDate.toLocaleDateString("en-US", { day: "numeric" })
-	const month = currentDate.toLocaleDateString("en-US", { month: "long" })
-	const time = currentDate.toLocaleTimeString("en-US")
+	useEffect(() => {
+		const date = {
+			dayOfWeek: currentDate.toLocaleDateString("en-US", { weekday: "long" }),
+			dayOfMonth: currentDate.toLocaleDateString("en-US", { day: "numeric" }),
+			month: currentDate.toLocaleDateString("en-US", { month: "long" }),
+		}
+
+		setDay(date)
+		setTime(currentDate.toLocaleTimeString("en-US"))
+	}, [currentDate])
 
 	return (
 		<div
@@ -52,9 +66,9 @@ function Status({ location }: StatusProps) {
 		>
 			<h2 className='line'>{location}</h2>
 			<span className='line'>
-				{dayOfWeek} | {dayOfMonth} {month}
+				{day?.dayOfWeek} | {day?.dayOfMonth} {day?.month}
 			</span>
-			{/* {time && <span className='line'>{time}</span>} */}
+			{time ?? <span className='line'>{time}</span>}
 		</div>
 	)
 }

@@ -28,7 +28,7 @@ export default function ProjectPageContent({
 				<div className='mt-8 space-x-4'>
 					{projectVideo && setIsTrailerActive && (
 						<Button
-							classes='underlined-link'
+							classes='custom-button-rounded'
 							action={() => {
 								setIsTrailerActive(true)
 								setIsPageDisplaced(true)
