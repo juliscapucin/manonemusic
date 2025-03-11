@@ -115,14 +115,14 @@ export default function ProjectCard({
 					: projectExit(() => router.push(`/${section}/${slug}`))
 			}}
 			href={`/${section}/${slug}`}
-			classes={`relative group gsap-project-card bg-primary ${variant === "section" ? "h-full w-[calc((100%/2)-0.5rem)] md:w-[calc((100%/3)-0.5rem)] landscape:w-fit" : "w-16 landscape:w-24 aspect-square"}`}
+			classes={`relative group gsap-project-card bg-primary ${variant === "section" ? "portrait:h-40 min-w-40 portrait:aspect-square landscape:h-full w-[calc((100%/2)-0.5rem)] md:w-[calc((100%/3)-0.5rem)] landscape:w-fit" : "w-16 landscape:w-24 aspect-square"}`}
 			style={{ aspectRatio }}
 			aria-labelledby={`project-title-${slug}`}
 			isDisabled={pathname.includes(slug)}
 		>
 			{image && (
 				<div
-					className='rounded-sm pointer-events-none'
+					className='rounded-sm pointer-events-none w-full portrait:aspect-square overflow-hidden mb-2 lg:-mb-10'
 					ref={cardImageRef}
 					role='img'
 					aria-label={image.imageAlt}
@@ -137,18 +137,17 @@ export default function ProjectCard({
 					/>
 				</div>
 			)}
+			<span className='sr-only'>{title}</span>
+
+			{/* LABEL */}
 			{variant === "section" && (
-				<div className='absolute inset-0 top-3/4 flex items-start justify-center z-10 pointer-events-none'>
-					<p
-						className='text-labelMedium lg:text-headlineSmall uppercase text-left leading-none z-15'
-						id={`project-title-${slug}`}
-						ref={labelRef}
-					>
-						{/* {Array(80).fill(title).join(" ").slice(0, 100)} */}
-						{/* {title.slice(0, 50)} */}
-						{title}
-					</p>
-				</div>
+				<p
+					className='text-labelMedium lg:text-headlineSmall uppercase text-left leading-none '
+					id={`project-title-${slug}`}
+					ref={labelRef}
+				>
+					{title}
+				</p>
 			)}
 		</CustomButton>
 	)
