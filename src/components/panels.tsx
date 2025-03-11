@@ -1,14 +1,14 @@
 "use client"
 
 import { PanelDesktop, PanelMobile } from "@/components"
-import { Footer, Header } from "@/components/ui"
+import { Footer, Header, MenuMobile } from "@/components/ui"
 
 import { useWindowDimensions } from "@/hooks"
 
 import { AllData } from "@/types"
 
 export default function Panels({ data }: { data: AllData }) {
-	const headerNavLinks = [
+	const navLinksWithHome = [
 		{ title: "Home", slug: "/", order: 0 },
 		...data.headerNavLinks,
 	]
@@ -19,12 +19,15 @@ export default function Panels({ data }: { data: AllData }) {
 		<main>
 			{windowAspectRatio && windowAspectRatio === "landscape" ? (
 				<>
-					<Header navLinks={headerNavLinks} />
-					<PanelDesktop data={data} sections={headerNavLinks} />
-					<Footer navLinks={headerNavLinks} />
+					<Header navLinks={navLinksWithHome} />
+					<PanelDesktop data={data} sections={navLinksWithHome} />
+					<Footer navLinks={navLinksWithHome} />
 				</>
 			) : (
-				<PanelMobile data={data} />
+				<>
+					<MenuMobile navLinks={navLinksWithHome} />
+					<PanelMobile data={data} />
+				</>
 			)}
 		</main>
 	)

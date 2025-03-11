@@ -18,6 +18,8 @@ export default function MenuMobile({ navLinks }: NavLinksProps) {
 	const pathname = usePathname()
 	const router = useRouter()
 
+	console.log(navLinks)
+
 	return (
 		<>
 			{navLinks && (

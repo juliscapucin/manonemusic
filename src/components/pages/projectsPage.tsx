@@ -13,18 +13,14 @@ type ProjectPageProps = {
 	projectsPageData: PortfolioPage
 	projects?: PortfolioItem[]
 	titleScrollTrigger?: boolean
-	isMobile?: boolean
 }
 
 export default function ProjectsPage({
 	projectsPageData,
 	projects,
-	isMobile,
 }: ProjectPageProps) {
 	const titleWorkRef = useRef(null)
 	const { windowAspectRatio } = useWindowDimensions()
-
-	console.log(windowAspectRatio)
 
 	useTitleScrollTrigger(titleWorkRef, projectsPageData.slug, windowAspectRatio)
 
