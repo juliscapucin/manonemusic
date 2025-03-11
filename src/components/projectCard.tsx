@@ -20,6 +20,7 @@ type ProjectCardProps = {
 	title: string
 	image: ImageField
 	slug: string
+	isMobile: boolean
 }
 
 export default function ProjectCard({
@@ -28,6 +29,7 @@ export default function ProjectCard({
 	title,
 	image,
 	slug,
+	isMobile,
 }: ProjectCardProps) {
 	const router = useRouter()
 	const pathname = usePathname()
@@ -40,7 +42,7 @@ export default function ProjectCard({
 
 	// Scale card on scroll + Animate label on hover
 	useLayoutEffect(() => {
-		if (!cardImageRef.current || !labelRef.current) return
+		if (!cardImageRef.current || !labelRef.current || isMobile) return
 
 		const cardImage = cardImageRef.current
 		const cardLabel = labelRef.current
@@ -103,7 +105,7 @@ export default function ProjectCard({
 		})
 
 		return () => ctx.revert()
-	}, [cardImageRef, labelRef])
+	}, [cardImageRef, labelRef, isMobile])
 
 	return (
 		<CustomButton

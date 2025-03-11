@@ -5,12 +5,14 @@ type ProjectsMenuProps = {
 	projects: PortfolioItem[]
 	variant: "section" | "page"
 	section: string
+	isMobile: boolean
 }
 
 export default function ProjectsMenu({
 	projects,
 	section,
 	variant,
+	isMobile,
 }: ProjectsMenuProps) {
 	return (
 		<div
@@ -20,12 +22,15 @@ export default function ProjectsMenu({
 			{projects?.map((project: PortfolioItem) => {
 				return (
 					<ProjectCard
-						variant={variant}
-						section={section}
 						key={project.slug}
-						title={project.title}
-						image={project.image}
-						slug={project.slug}
+						{...{
+							variant,
+							section,
+							title: project.title,
+							image: project.image,
+							slug: project.slug,
+							isMobile,
+						}}
 					/>
 				)
 			})}

@@ -13,14 +13,18 @@ type ProjectPageProps = {
 	projectsPageData: PortfolioPage
 	projects?: PortfolioItem[]
 	titleScrollTrigger?: boolean
+	isMobile?: boolean
 }
 
 export default function ProjectsPage({
 	projectsPageData,
 	projects,
+	isMobile,
 }: ProjectPageProps) {
 	const titleWorkRef = useRef(null)
 	const { windowAspectRatio } = useWindowDimensions()
+
+	console.log(windowAspectRatio)
 
 	useTitleScrollTrigger(titleWorkRef, projectsPageData.slug, windowAspectRatio)
 
@@ -38,6 +42,7 @@ export default function ProjectsPage({
 						variant='section'
 						section={projectsPageData.title.toLowerCase().replace(/\s/g, "-")}
 						projects={projects}
+						isMobile={windowAspectRatio == "portrait" ? true : false}
 					/>
 				)}
 			</SectionWrapper>
