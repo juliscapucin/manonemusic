@@ -19,7 +19,7 @@ export default function ProjectPageContent({
 	setIsPageDisplaced,
 }: ProjectPageContentProps) {
 	return (
-		<div className='relative w-full flex items-start gap-8 mt-12'>
+		<div className='gsap-project-page-content relative w-full flex items-start gap-8 mt-12'>
 			<ProjectPageImage imgSrc={image.imageUrl} imgAlt={image.imageAlt} />
 			<div className='mt-2 pr-8 flex-1 max-w-prose'>
 				{tracklist && <PlayerTrackList tracks={tracklist} />}

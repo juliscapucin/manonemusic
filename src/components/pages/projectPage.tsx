@@ -28,13 +28,14 @@ export default function ProjectPage({
 }: ProjectPageProps) {
 	const [isTrailerActive, setIsTrailerActive] = useState(false)
 	const [isPageDisplaced, setIsPageDisplaced] = useState(false)
-	const containerProjectRef = useRef<HTMLDivElement>(null)
 	const pageWrapperRef = useRef<HTMLDivElement>(null)
 	let ctx = gsap.context(() => {})
 
 	useTransitionOnEnter(ctx)
 
 	useLayoutEffect(() => {
+		if (!pageWrapperRef.current) return
+
 		ctx.add(() => {
 			if (isPageDisplaced) {
 				const tl = gsap.timeline()
@@ -56,13 +57,10 @@ export default function ProjectPage({
 		return () => {
 			ctx.revert()
 		}
-	}, [isPageDisplaced])
+	}, [isPageDisplaced, pageWrapperRef])
 
 	return (
-		<div
-			ref={containerProjectRef}
-			className='relative w-screen h-screen bg-primary overflow-hidden'
-		>
+		<div className='relative w-screen h-screen bg-primary overflow-hidden'>
 			<ProjectsMenuPage
 				projectsData={projectsData}
 				pageData={projectsPageData}

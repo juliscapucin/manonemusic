@@ -2,8 +2,6 @@
 
 import React, { forwardRef } from "react"
 
-import { useCustomEase } from "@/hooks"
-
 type PageWrapperProps = {
 	children: React.ReactNode
 	classes?: string
@@ -11,7 +9,6 @@ type PageWrapperProps = {
 
 const PageWrapper = forwardRef<HTMLDivElement, PageWrapperProps>(
 	({ children, classes }, ref) => {
-		useCustomEase()
 		return (
 			<div
 				ref={ref}
