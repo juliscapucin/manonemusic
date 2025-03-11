@@ -20,7 +20,7 @@ const config: Config = {
 		fontSize: {
 			displayLarge: "147px",
 			displayMedium: "103px",
-			displaySmall: "72px",
+			displaySmall: "64px",
 			headlineLarge: "51px",
 			headlineMedium: "40px",
 			headlineSmall: "32px",

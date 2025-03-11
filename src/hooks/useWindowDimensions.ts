@@ -26,8 +26,6 @@ export const useWindowDimensions = () => {
 		}
 	}, [])
 
-	console.log(windowAspectRatio)
-
 	return {
 		width,
 		height,
