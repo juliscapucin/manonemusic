@@ -20,7 +20,7 @@ type ProjectCardProps = {
 	title: string
 	image: ImageField
 	slug: string
-	isMobile: boolean
+	isMobile?: boolean
 }
 
 export default function ProjectCard({
@@ -29,7 +29,7 @@ export default function ProjectCard({
 	title,
 	image,
 	slug,
-	isMobile,
+	isMobile = false,
 }: ProjectCardProps) {
 	const router = useRouter()
 	const pathname = usePathname()
