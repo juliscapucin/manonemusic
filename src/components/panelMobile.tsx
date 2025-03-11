@@ -7,9 +7,12 @@ import { AllData } from "@/types"
 import { usePathname } from "next/navigation"
 import { PanelContent } from "@/components"
 import { useLayoutEffect } from "react"
+import path from "path"
 
 export default function PanelMobile({ data }: { data: AllData }) {
 	const pathname = usePathname()
+
+	const fullHeightSections = ["/", "contact"]
 
 	const navLinks = [
 		{ title: "Home", slug: "/", order: 0 },
@@ -45,7 +48,7 @@ export default function PanelMobile({ data }: { data: AllData }) {
 				<section
 					id={`panel-${section.slug === "/" ? "home" : section.slug}`}
 					data-id={`panel-${section.slug}`}
-					className={`panel w-screen min-h-svh pl-8 overflow-x-clip`}
+					className={`panel w-screen pl-8 overflow-x-clip ${fullHeightSections.includes(section.slug) ? "h-svh" : "h-auto"}`}
 					key={`panel-${section.slug}`}
 				>
 					<PanelContent data={data} section={section.slug} />
