@@ -5,27 +5,32 @@ type ProjectsMenuProps = {
 	projects: PortfolioItem[]
 	variant: "section" | "page"
 	section: string
+	isMobile: boolean
 }
 
 export default function ProjectsMenu({
 	projects,
 	section,
 	variant,
+	isMobile,
 }: ProjectsMenuProps) {
 	return (
 		<div
 			id='projects-menu'
-			className={`gsap-projects-menu relative w-full landscape:w-fit flex items-start justify-start gap-4 flex-wrap landscape:h-2/5 landscape:flex-nowrap`}
+			className={`gsap-projects-menu relative w-full portrait:overflow-x-scroll landscape:w-fit flex items-start justify-start gap-4 portrait:pb-16 landscape:h-2/5`}
 		>
 			{projects?.map((project: PortfolioItem) => {
 				return (
 					<ProjectCard
-						variant={variant}
-						section={section}
 						key={project.slug}
-						title={project.title}
-						image={project.image}
-						slug={project.slug}
+						{...{
+							variant,
+							section,
+							title: project.title,
+							image: project.image,
+							slug: project.slug,
+							isMobile,
+						}}
 					/>
 				)
 			})}

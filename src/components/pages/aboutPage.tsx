@@ -14,6 +14,7 @@ import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 import { ButtonRounded } from "@/components/buttons"
 
 import type { AboutPage } from "@/types"
+import { urlFor } from "@/lib/sanityImageURL"
 
 export default function AboutPage({
 	title,
@@ -36,7 +37,7 @@ export default function AboutPage({
 				<div className='block relative aspect-square rounded-sm overflow-clip'>
 					<Image
 						{...{
-							src: image.imageUrl,
+							src: urlFor(image.imageRef).url(), // generate url via _ref to save on api calls
 							alt: `Profile picture of Matt Rudge, the leading figure behind ManOne Music`,
 							fill: true,
 							className: "object-cover",

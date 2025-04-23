@@ -12,8 +12,6 @@ type ButtonBackProps = {
 export default function ButtonBack({ slug }: ButtonBackProps) {
 	const router = useRouter()
 
-	console.log(slug)
-
 	return (
 		<Button
 			classes='underlined-link mb-8'

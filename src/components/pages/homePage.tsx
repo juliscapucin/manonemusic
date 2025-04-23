@@ -23,7 +23,7 @@ export default function HomePage({ data }: { data: HomePage }) {
 			<h1 ref={titleHomeRef} className='logo'>
 				MAN/ONE MUSIC
 			</h1>
-			<Heading tag='h2' variant='title' classes='w-1/2 mt-8 uppercase'>
+			<Heading tag='h2' variant='title' classes='w-1/2 mt-4 uppercase'>
 				Music & Sound Design
 			</Heading>
 			<div className='w-full landscape:flex justify-between mt-32 md:mt-16'>

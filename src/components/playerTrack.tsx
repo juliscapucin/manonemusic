@@ -89,13 +89,11 @@ export default function PlayerTrack({
 			{/* TODO – Improve Custom Player styles */}
 			{index === 0 && <div className='w-full h-[1px] bg-faded-30'></div>}
 			<button
-				className='relative pt-10 pb-6 px-2 w-full hover:bg-faded-5 transition-colors duration-300'
+				className='relative pt-4 pb-6 px-2 w-full hover:bg-faded-5 transition-colors duration-300'
 				onClick={buttonAction}
 				aria-label={`Play or pause ${track.trackname}`}
 			>
-				<span className='absolute left-2 top-2 w-full text-start'>
-					{track.trackname}
-				</span>
+				<p className='w-full text-left mb-2'>{track.trackname}</p>
 				<div className='flex items-center gap-4 h-full w-full'>
 					<div className='w-16'>{isPlaying ? <IconPause /> : <IconPlay />}</div>
 					<span className=''>{formatDuration(playedSeconds)}</span>

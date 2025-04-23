@@ -2,8 +2,6 @@
 
 import React, { forwardRef } from "react"
 
-import { useCustomEase } from "@/hooks"
-
 type SectionWrapperProps = {
 	children: React.ReactNode
 	classes?: string
@@ -11,7 +9,6 @@ type SectionWrapperProps = {
 
 const SectionWrapper = forwardRef<HTMLDivElement, SectionWrapperProps>(
 	({ children, classes }, ref) => {
-		useCustomEase()
 		return (
 			<div
 				ref={ref}

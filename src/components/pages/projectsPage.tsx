@@ -38,6 +38,7 @@ export default function ProjectsPage({
 						variant='section'
 						section={projectsPageData.title.toLowerCase().replace(/\s/g, "-")}
 						projects={projects}
+						isMobile={windowAspectRatio == "portrait" ? true : false}
 					/>
 				)}
 			</SectionWrapper>

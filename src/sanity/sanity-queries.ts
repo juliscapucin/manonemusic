@@ -31,7 +31,7 @@ export async function getAboutPage(): Promise<AboutPage> {
       title,
       subtitle,
       "image": {
-         "imageUrl": image.image.asset->url,
+         "imageRef": image.image.asset._ref,
          "imageAlt": image.imageAlt
       },      
       content,
@@ -91,10 +91,10 @@ export async function getPortfolioItems(
       _id,
       "slug": slug.current,
       "image": {
-         "imageUrl": image.image.asset->url,
          "imageAlt": image.imageAlt,
          "imageWidth": image.image.asset->metadata.dimensions.width,
-         "imageHeight": image.image.asset->metadata.dimensions.height
+         "imageHeight": image.image.asset->metadata.dimensions.height,
+         "imageRef": image.image.asset._ref
          },
       title,
    }`,
@@ -113,7 +113,7 @@ export async function getProject(
       "slug": slug.current,
       releaseDate,
       "image": {
-         "imageUrl": image.image.asset->url,
+         "imageRef": image.image.asset._ref,
          "imageAlt": image.imageAlt
          },
       info,

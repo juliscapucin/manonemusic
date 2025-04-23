@@ -1,3 +1,5 @@
+import { Heading } from "@/components/ui"
+
 type CopyrightProps = {
 	hasCredits?: boolean
 }
@@ -7,7 +9,9 @@ export default function Copyright({ hasCredits = true }: CopyrightProps) {
 
 	return (
 		<div className='flex-1'>
-			<h3>©2017–{year}</h3>
+			<Heading tag='h3' variant='title' classes='w-1/2 mt-4 uppercase'>
+				{`©2017–${year}`}
+			</Heading>
 			{hasCredits && (
 				<a
 					className='text-labelLarge uppercase'

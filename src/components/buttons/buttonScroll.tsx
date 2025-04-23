@@ -40,7 +40,7 @@ export default function ButtonScroll({
 			<p>Scroll</p>
 			<ScrollArrow
 				direction='next'
-				isDisabled={index + 1 === sectionsTotal}
+				isDisabled={index === sectionsTotal - 1}
 				onClick={() => action("next")}
 			/>
 		</div>

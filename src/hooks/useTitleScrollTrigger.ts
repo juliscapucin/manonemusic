@@ -6,13 +6,14 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 import { animateSplitText } from "@/animations"
 
+let ctx = gsap.context(() => {})
+
 export default function useTitleScrollTrigger(
 	elementRef: React.RefObject<HTMLDivElement>,
 	slug: string,
 	windowAspectRatio: string
 ) {
 	const pathname = usePathname()
-	let ctx = gsap.context(() => {})
 
 	useLayoutEffect(() => {
 		// Start ScrollTrigger when window is in landscape mode
@@ -75,7 +76,7 @@ export default function useTitleScrollTrigger(
 		})
 
 		return () => ctx.revert()
-	}, [elementRef, windowAspectRatio])
+	}, [elementRef, windowAspectRatio, pathname, slug])
 
 	// Revert ScrollTrigger when window is in portrait mode
 	useEffect(() => {

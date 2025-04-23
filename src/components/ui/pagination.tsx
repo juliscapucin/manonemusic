@@ -10,7 +10,7 @@ type PaginationProps = {
 export default function Pagination({ navLinks, index }: PaginationProps) {
 	return (
 		<span className='text-right'>
-			[0{index}/0{navLinks.length}]
+			[0{index + 1}/0{navLinks.length}]
 		</span>
 	)
 }
