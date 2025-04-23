@@ -98,7 +98,10 @@ export async function getPortfolioItems(
          },
       title,
    }`,
-		{ section }
+		{ section },
+		{
+			next: { revalidate: 60 }, // 👈 THIS enables ISR on the query
+		}
 	)
 }
 
