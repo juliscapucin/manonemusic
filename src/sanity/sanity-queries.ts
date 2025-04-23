@@ -7,7 +7,6 @@ import type {
 	NavLink,
 	PortfolioPage,
 	Project,
-	Release,
 } from "@/types"
 import { PortfolioItem } from "@/types/PortfolioItem"
 

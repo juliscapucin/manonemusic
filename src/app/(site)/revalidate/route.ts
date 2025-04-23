@@ -35,6 +35,8 @@ export async function POST(req: NextRequest) {
 			revalidatePath("/projects"),
 			revalidatePath("/releases"),
 			revalidatePath("/commercial"),
+			revalidatePath("/about"),
+			revalidatePath("/contact"),
 		])
 
 		return NextResponse.json({ revalidated: true })
