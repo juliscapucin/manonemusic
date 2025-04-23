@@ -1,5 +1,6 @@
 import { defineConfig } from "sanity"
 import { structureTool } from "sanity/structure"
+import { media } from "sanity-plugin-media"
 
 import schemas from "@/sanity/schemas"
 
@@ -8,6 +9,6 @@ export default defineConfig({
 	projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
 	dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
 	basePath: "/admin",
-	plugins: [structureTool()],
+	plugins: [structureTool(), media()],
 	schema: { types: schemas },
 })
