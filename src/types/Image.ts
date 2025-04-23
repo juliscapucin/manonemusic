@@ -1,5 +1,5 @@
 export type ImageField = {
-	imageUrl: string
+	imageRef: string
 	imageAlt: string
 	imageWidth: number
 	imageHeight: number

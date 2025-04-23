@@ -13,6 +13,7 @@ import { ImageField } from "@/types/Image"
 import { CustomButton } from "@/components/ui"
 
 import { animateCardLabel } from "@/animations"
+import { urlFor } from "@/lib/sanityImageURL"
 
 type ProjectCardProps = {
 	variant: "section" | "page"
@@ -22,6 +23,8 @@ type ProjectCardProps = {
 	slug: string
 	isMobile?: boolean
 }
+
+const ctx = gsap.context(() => {})
 
 export default function ProjectCard({
 	variant,
@@ -33,7 +36,6 @@ export default function ProjectCard({
 }: ProjectCardProps) {
 	const router = useRouter()
 	const pathname = usePathname()
-	let ctx: gsap.Context
 
 	const cardImageRef = useRef<HTMLDivElement>(null)
 	const labelRef = useRef<HTMLParagraphElement>(null)
@@ -53,7 +55,7 @@ export default function ProjectCard({
 
 		gsap.registerPlugin(Observer)
 
-		ctx = gsap.context(() => {
+		ctx.add(() => {
 			gsap.set(cardLabel, {
 				opacity: 0,
 			})
@@ -120,7 +122,7 @@ export default function ProjectCard({
 			aria-labelledby={`project-title-${slug}`}
 			isDisabled={pathname.includes(slug)}
 		>
-			{image && (
+			{image?.imageRef && (
 				<div
 					className='rounded-sm pointer-events-none w-full portrait:aspect-square overflow-hidden mb-2 lg:-mb-10'
 					ref={cardImageRef}
@@ -128,10 +130,9 @@ export default function ProjectCard({
 					aria-label={image.imageAlt}
 				>
 					<Image
-						className={`h-full w-full object-cover group-hover:scale-105 transition-transform duration-300 ${variant === "section" && "rounded-sm"}`}
-						src={image.imageUrl}
-						alt={image.imageAlt}
-						sizes='30vw'
+						className={`relative h-full w-full object-cover group-hover:scale-105 transition-transform duration-300 ${variant === "section" && "rounded-sm"}`}
+						src={urlFor(image.imageRef).url()} // generate url via _ref to save on api calls
+						alt={image.imageAlt || ""}
 						width={image.imageWidth}
 						height={image.imageHeight}
 					/>

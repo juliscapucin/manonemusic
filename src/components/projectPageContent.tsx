@@ -2,6 +2,7 @@ import { Project } from "@/types"
 import { PlayerTrackList, ProjectPageImage } from "@/components"
 import { Button } from "@/components/buttons"
 import { CustomLink, TextBlock } from "@/components/ui"
+import { urlFor } from "@/lib/sanityImageURL"
 
 type ProjectPageContentProps = Project & {
 	setIsTrailerActive: (value: boolean) => void
@@ -20,7 +21,10 @@ export default function ProjectPageContent({
 }: ProjectPageContentProps) {
 	return (
 		<div className='gsap-project-page-content relative w-full flex items-start gap-8 mt-12'>
-			<ProjectPageImage imgSrc={image.imageUrl} imgAlt={image.imageAlt} />
+			<ProjectPageImage
+				imgSrc={urlFor(image.imageRef).url()} // generate url via _ref to save on api calls
+				imgAlt={image.imageAlt}
+			/>
 			<div className='mt-2 pr-8 flex-1 max-w-prose'>
 				{tracklist && <PlayerTrackList tracks={tracklist} />}
 				{description && <TextBlock text={description} />}
