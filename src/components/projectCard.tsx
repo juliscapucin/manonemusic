@@ -131,11 +131,19 @@ export default function ProjectCard({
 				>
 					<Image
 						className={`relative h-full w-full object-cover group-hover:scale-105 transition-transform duration-300 ${variant === "section" && "rounded-sm"}`}
+						src={urlFor(image.imageRef).url()}
+						alt={image.imageAlt}
+						width={image.imageWidth}
+						height={image.imageHeight}
+						sizes='30vw'
+					/>
+					{/* <Image
+						className={`relative h-full w-full object-cover group-hover:scale-105 transition-transform duration-300 ${variant === "section" && "rounded-sm"}`}
 						src={urlFor(image.imageRef).url()} // generate url via _ref to save on api calls
 						alt={image.imageAlt || ""}
 						width={image.imageWidth}
 						height={image.imageHeight}
-					/>
+					/> */}
 				</div>
 			)}
 			<span className='sr-only'>{title}</span>

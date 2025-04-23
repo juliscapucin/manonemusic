@@ -39,5 +39,5 @@ export default function useTransitionOnEnter(ctx: gsap.Context) {
 		return () => {
 			ctx.revert()
 		}
-	}, [])
+	}, [ctx])
 }
