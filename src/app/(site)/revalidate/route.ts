@@ -32,8 +32,8 @@ export async function POST(req: NextRequest) {
 		await Promise.all([
 			revalidatePath("/"),
 			revalidatePath("/film"),
-			revalidatePath("/project"),
-			revalidatePath("/release"),
+			revalidatePath("/projects"),
+			revalidatePath("/releases"),
 			revalidatePath("/commercial"),
 		])
 
