@@ -12,23 +12,6 @@ export async function POST(req: NextRequest) {
 	try {
 		const body = await req.json()
 
-		// const typeToSection: Record<string, string> = {
-		// 	film: "film",
-		// 	project: "project",
-		// 	release: "release",
-		// 	commercial: "commercial",
-		// }
-
-		// const docType = body?._type
-		// const slug = body?.slug?.current
-		// const section = typeToSection[docType]
-
-		// if (section && slug) {
-		// 	await revalidatePath(`/${section}/${slug}`)
-		// } else {
-		// 	await revalidatePath("/")
-		// }
-
 		await Promise.all([
 			revalidatePath("/"),
 			revalidatePath("/film"),
