@@ -7,4 +7,5 @@ export type HomePage = {
 	metadataTitle?: string
 	metadataDescription?: string
 	metadataKeywords?: string[]
+	tween: gsap.core.Tween
 }

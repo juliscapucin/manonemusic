@@ -10,10 +10,14 @@ import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 
 import type { HomePage } from "@/types"
 
-export default function HomePage({ data }: { data: HomePage }) {
+type HomePageProps = {
+	tween: gsap.core.Tween | null
+}
+
+export default function HomePage({ tween }: HomePageProps) {
 	const titleHomeRef = useRef(null)
 
-	// useTitleScrollTrigger(titleHomeRef, "/")
+	useTitleScrollTrigger(titleHomeRef, "/", tween)
 
 	return (
 		<div className='relative h-screen min-h-svh pt-32 pb-16 overflow-x-clip'>

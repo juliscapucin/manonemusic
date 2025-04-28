@@ -11,7 +11,8 @@ let ctx = gsap.context(() => {})
 
 export default function useTitleScrollTrigger(
 	elementRef: React.RefObject<HTMLDivElement>,
-	slug: string
+	slug: string,
+	tween: gsap.core.Tween | null
 ) {
 	const pathname = usePathname()
 	const { windowAspectRatio } = useWindowDimensions()
@@ -25,24 +26,22 @@ export default function useTitleScrollTrigger(
 		const titleElement = element.querySelector("h1")
 		const section = element.closest("section")
 
-		if (!section || !titleElement) return
+		if (!section || !titleElement || !tween) return
 
-		const offsetLeft = () => section.offsetLeft
-		const width = () => section.offsetWidth
-
-		let fastScrollEnd = false
+		console.log(slug)
 
 		ctx.add(() => {
 			ScrollTrigger.create({
 				trigger: titleElement,
-				start: () => `${offsetLeft()}px bottom`,
-				end: () => `+=${width()}`,
+				start: "left center",
+				end: "right right",
 				invalidateOnRefresh: true,
 				animation: animateSplitText(titleElement, 2000),
 				toggleActions: "play none none reverse",
-				fastScrollEnd: fastScrollEnd,
+				fastScrollEnd: true,
+				containerAnimation: tween,
+				// markers: true,
 				onEnter: () => {
-					console.log("entrou", slug)
 					window.history.pushState(null, "", slug)
 				},
 				onEnterBack: () => {
@@ -52,9 +51,9 @@ export default function useTitleScrollTrigger(
 		})
 
 		return () => ctx.revert()
-	}, [elementRef, windowAspectRatio, pathname, slug])
+	}, [elementRef, windowAspectRatio, pathname, slug, tween])
 
 	useEffect(() => {
 		ctx.revert()
-	}, [windowAspectRatio])
+	}, [])
 }

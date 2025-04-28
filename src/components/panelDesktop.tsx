@@ -1,13 +1,12 @@
 "use client"
 
-import { useEffect, useRef } from "react"
+import { useEffect, useRef, useState } from "react"
 
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 import { AllData, NavLink } from "@/types"
 import { PanelContent } from "@/components"
-import { animateSplitText } from "@/animations"
 
 type PanelDesktopProps = {
 	data: AllData
@@ -16,18 +15,25 @@ type PanelDesktopProps = {
 
 export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 	const panelsContainerRef = useRef<HTMLDivElement | null>(null)
+	const tweenRef = useRef<gsap.core.Tween | null>(null)
+	const [isPageLoaded, setIsPageLoaded] = useState(false)
+
+	useEffect(() => {
+		setIsPageLoaded(true)
+	}, [])
 
 	// ScrollTrigger + Horizontal Panel animation
 	useEffect(() => {
-		if (!panelsContainerRef.current) return
+		if (!panelsContainerRef.current || !isPageLoaded) return
 		gsap.registerPlugin(ScrollTrigger)
 
 		/* Panels */
 		const container = panelsContainerRef.current
 		const panels = gsap.utils.toArray(".gsap-panel")
+		let tween
 
 		const ctx = gsap.context(() => {
-			const tween = gsap.to(panels, {
+			tween = gsap.to(panels, {
 				x: () => -1 * (container.scrollWidth - innerWidth),
 				ease: "none",
 				scrollTrigger: {
@@ -40,65 +46,14 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 					// markers: true,
 				},
 			})
-
-			// Title Pin Animation on long sections
-			const sectionTitles = container.querySelectorAll(".gsap-section-title")
-
-			sectionTitles.forEach((title) => {
-				const projectsMenu = title.nextElementSibling as HTMLDivElement
-				const titleElement = title.querySelector("h1")
-				const projectsMenuWidth = projectsMenu?.offsetWidth
-
-				if (!titleElement) return
-
-				ScrollTrigger.create({
-					trigger: projectsMenu,
-					start: "left center",
-					end: "right right",
-					invalidateOnRefresh: true,
-					animation: animateSplitText(titleElement, 2000),
-					toggleActions: "play none none reverse",
-					fastScrollEnd: true,
-					containerAnimation: tween,
-					markers: true,
-					onEnter: () => {
-						window.history.pushState(
-							null,
-							"",
-							`/${titleElement.textContent?.toLowerCase()}`
-						)
-					},
-					onEnterBack: () => {
-						window.history.pushState(
-							null,
-							"",
-							`/${titleElement.textContent?.toLowerCase()}`
-						)
-					},
-				})
-
-				if (!projectsMenuWidth || projectsMenuWidth < window.innerWidth) return
-
-				gsap.to(title, {
-					scrollTrigger: {
-						scrub: true,
-						trigger: projectsMenu,
-						start: "left-=20 left",
-						end: () => "+=" + (projectsMenuWidth - window.innerWidth),
-						invalidateOnRefresh: true,
-						// markers: true,
-						containerAnimation: tween,
-					},
-					x: () => "+=" + (projectsMenuWidth - window.innerWidth),
-					ease: "none",
-				})
-			})
+			// set Ref value to pass down to children
+			tweenRef.current = tween
 		}, container)
 
 		return () => {
 			ctx.revert()
 		}
-	}, [panelsContainerRef])
+	}, [isPageLoaded])
 
 	return (
 		<main>
@@ -113,7 +68,11 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 							className='gsap-panel h-screen min-h-full pl-8 min-w-fit w-fit overflow-clip'
 							key={`panel-${section.slug}`}
 						>
-							<PanelContent data={data} section={section.slug} />
+							<PanelContent
+								data={data}
+								section={section.slug}
+								tween={tweenRef.current}
+							/>
 						</section>
 					)
 				})}

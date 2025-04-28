@@ -13,16 +13,18 @@ type ProjectPageProps = {
 	projectsPageData: PortfolioPage
 	projects?: PortfolioItem[]
 	titleScrollTrigger?: boolean
+	tween: gsap.core.Tween | null
 }
 
 export default function ProjectsPage({
 	projectsPageData,
 	projects,
+	tween,
 }: ProjectPageProps) {
 	const titleRef = useRef(null)
 	const { windowAspectRatio } = useWindowDimensions()
 
-	// useTitleScrollTrigger(titleRef, `/${projectsPageData.slug}`)
+	useTitleScrollTrigger(titleRef, `/${projectsPageData.slug}`, tween)
 
 	return (
 		projectsPageData && (

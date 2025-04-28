@@ -10,20 +10,25 @@ import { AllData } from "@/types"
 type PanelContentProps = {
 	data: AllData
 	section: string
+	tween: gsap.core.Tween | null
 }
 
-export default function PanelContent({ data, section }: PanelContentProps) {
+export default function PanelContent({
+	data,
+	section,
+	tween,
+}: PanelContentProps) {
 	let Content: React.ReactNode
 
 	switch (section) {
 		case "/":
-			Content = <HomePage data={data.homePage} />
+			Content = <HomePage tween={tween} />
 			break
 		case "about":
-			Content = <AboutPage {...data.aboutPage} />
+			Content = <AboutPage {...{ tween, ...data.aboutPage }} />
 			break
 		case "contact":
-			Content = <ContactPage {...data.contactPage} />
+			Content = <ContactPage {...{ tween, ...data.contactPage }} />
 			break
 		case "film":
 		case "commercial":
@@ -31,6 +36,7 @@ export default function PanelContent({ data, section }: PanelContentProps) {
 				<ProjectsPage
 					projectsPageData={data.portfolioSections[section]}
 					projects={data[`${section}s`]}
+					tween={tween}
 				/>
 			)
 			break
@@ -40,6 +46,7 @@ export default function PanelContent({ data, section }: PanelContentProps) {
 				<ProjectsPage
 					projectsPageData={data.portfolioSections[section]}
 					projects={data[section]}
+					tween={tween}
 				/>
 			)
 			break
