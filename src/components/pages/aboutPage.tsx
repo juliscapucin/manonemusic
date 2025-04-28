@@ -31,11 +31,11 @@ export default function AboutPage({
 
 	return (
 		<SectionWrapper classes='landscape:flex justify-between items-start gap-8'>
-			<div className='flex-1'>
+			<div className=''>
 				<TitleDisplay ref={titleAboutRef}>{title}</TitleDisplay>
 				{subtitle && <Subtitle subtitle={subtitle} />}
 			</div>
-			<div className='relative flex-1 mt-16'>
+			<div className='relative min-w-[30vw] mt-16 md:hidden lg:block'>
 				<div className='block relative aspect-square rounded-sm overflow-clip'>
 					<Image
 						{...{
@@ -48,7 +48,10 @@ export default function AboutPage({
 					/>
 				</div>
 			</div>
-			<div className='flex-1 mt-16'>
+			<div className='mt-16 w-[30vw]'>
+				{content && <TextBlock text={content} />}
+			</div>
+			<div className='mt-16 w-[30vw]'>
 				{content && <TextBlock text={content} />}
 				<div className='flex gap-4'>
 					<ButtonRounded
