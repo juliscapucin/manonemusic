@@ -7,7 +7,7 @@ import { customEase } from "@/constants"
 gsap.registerPlugin(SplitText, CustomEase)
 
 export const animateSplitText = (
-	textElement: HTMLElement,
+	textElement: HTMLHeadingElement,
 	xTranslate?: number,
 	delay?: number
 ) => {

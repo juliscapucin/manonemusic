@@ -23,7 +23,11 @@ import {
 // export const dynamic = "force-dynamic"
 // export const fetchCache = "force-no-store"
 
-export default async function Page() {
+export default async function Page({
+	params,
+}: {
+	params: { section: string }
+}) {
 	const [
 		headerNavLinks,
 		homePage,
@@ -53,6 +57,11 @@ export default async function Page() {
 		},
 		{}
 	)
+
+	// Check if the section exists, otherwise thwrow Error Page
+	if (!headerNavLinks.find((item) => item.slug === params.section)) {
+		return notFound()
+	}
 
 	const data = {
 		headerNavLinks,

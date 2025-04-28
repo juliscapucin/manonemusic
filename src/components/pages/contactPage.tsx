@@ -10,9 +10,8 @@ import ButtonEmail from "../buttons/buttonEmail"
 
 export default function ContactPage({ title, subtitle, socials }: ContactPage) {
 	const titleContactRef = useRef(null)
-	const { windowAspectRatio } = useWindowDimensions()
 
-	useTitleScrollTrigger(titleContactRef, "/contact", windowAspectRatio)
+	// useTitleScrollTrigger(titleContactRef, "/contact")
 
 	return (
 		<SectionWrapper>

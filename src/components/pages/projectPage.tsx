@@ -57,7 +57,7 @@ export default function ProjectPage({
 		return () => {
 			ctx.revert()
 		}
-	}, [isPageDisplaced, pageWrapperRef])
+	}, [isPageDisplaced, pageWrapperRef, ctx])
 
 	return (
 		<div className='relative w-screen h-screen bg-primary overflow-hidden'>

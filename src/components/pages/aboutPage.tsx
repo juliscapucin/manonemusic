@@ -23,9 +23,8 @@ export default function AboutPage({
 	image,
 }: AboutPage) {
 	const titleAboutRef = useRef(null)
-	const { windowAspectRatio } = useWindowDimensions()
 
-	useTitleScrollTrigger(titleAboutRef, "/about", windowAspectRatio)
+	// useTitleScrollTrigger(titleAboutRef, "/about")
 
 	return (
 		<SectionWrapper classes='landscape:flex justify-between items-start gap-8'>

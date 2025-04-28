@@ -15,7 +15,7 @@ export const TitleDisplay = forwardRef(function Title(
 ) {
 	return (
 		<div
-			className={`gsap-section-title mt-32 mb-8 bg-primary ${classes}`}
+			className={`gsap-section-title mt-32 mb-8 bg-primary overflow-clip ${classes}`}
 			ref={ref}
 		>
 			<Heading

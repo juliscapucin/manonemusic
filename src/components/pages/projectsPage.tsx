@@ -19,10 +19,10 @@ export default function ProjectsPage({
 	projectsPageData,
 	projects,
 }: ProjectPageProps) {
-	const titleWorkRef = useRef(null)
+	const titleRef = useRef(null)
 	const { windowAspectRatio } = useWindowDimensions()
 
-	useTitleScrollTrigger(titleWorkRef, projectsPageData.slug, windowAspectRatio)
+	// useTitleScrollTrigger(titleRef, `/${projectsPageData.slug}`)
 
 	return (
 		projectsPageData && (
@@ -30,7 +30,7 @@ export default function ProjectsPage({
 				{projectsPageData.subtitle && (
 					<Subtitle subtitle={projectsPageData.subtitle} />
 				)}
-				<TitleDisplay classes='gsap-projects-title' ref={titleWorkRef}>
+				<TitleDisplay classes='gsap-projects-title' ref={titleRef}>
 					{projectsPageData.title}
 				</TitleDisplay>
 				{projects && projectsPageData.title && (

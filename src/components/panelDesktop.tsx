@@ -7,6 +7,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 import { AllData, NavLink } from "@/types"
 import { PanelContent } from "@/components"
+import { animateSplitText } from "@/animations"
 
 type PanelDesktopProps = {
 	data: AllData
@@ -45,7 +46,36 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 
 			sectionTitles.forEach((title) => {
 				const projectsMenu = title.nextElementSibling as HTMLDivElement
+				const titleElement = title.querySelector("h1")
 				const projectsMenuWidth = projectsMenu?.offsetWidth
+
+				if (!titleElement) return
+
+				ScrollTrigger.create({
+					trigger: projectsMenu,
+					start: "left center",
+					end: "right right",
+					invalidateOnRefresh: true,
+					animation: animateSplitText(titleElement, 2000),
+					toggleActions: "play none none reverse",
+					fastScrollEnd: true,
+					containerAnimation: tween,
+					markers: true,
+					onEnter: () => {
+						window.history.pushState(
+							null,
+							"",
+							`/${titleElement.textContent?.toLowerCase()}`
+						)
+					},
+					onEnterBack: () => {
+						window.history.pushState(
+							null,
+							"",
+							`/${titleElement.textContent?.toLowerCase()}`
+						)
+					},
+				})
 
 				if (!projectsMenuWidth || projectsMenuWidth < window.innerWidth) return
 
@@ -72,7 +102,6 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 
 	return (
 		<main>
-			{/* Panels */}
 			<div
 				ref={panelsContainerRef}
 				className='gsap-panels-container flex gap-32 opacity-0'

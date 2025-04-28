@@ -13,9 +13,7 @@ import type { HomePage } from "@/types"
 export default function HomePage({ data }: { data: HomePage }) {
 	const titleHomeRef = useRef(null)
 
-	const { windowAspectRatio } = useWindowDimensions()
-
-	useTitleScrollTrigger(titleHomeRef, "/", windowAspectRatio)
+	// useTitleScrollTrigger(titleHomeRef, "/")
 
 	return (
 		<div className='relative h-screen min-h-svh pt-32 pb-16 overflow-x-clip'>

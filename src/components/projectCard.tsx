@@ -84,26 +84,26 @@ export default function ProjectCard({
 				},
 			})
 
-			Observer.create({
-				target: window,
-				type: "wheel,scroll,touch",
-				onChange: (self) => {
-					gsap.to(cardImage, {
-						scale: 0.78,
-						// filter: "grayscale(0%) brightness(1)",
-						duration: 0.2,
-					})
-				},
+			// Observer.create({
+			// 	target: window,
+			// 	type: "wheel,scroll,touch",
+			// 	onChange: (self) => {
+			// 		gsap.to(cardImage, {
+			// 			scale: 0.78,
+			// 			// filter: "grayscale(0%) brightness(1)",
+			// 			duration: 0.2,
+			// 		})
+			// 	},
 
-				onStop: () => {
-					gsap.to(cardImage, {
-						scale: 0.7,
-						// filter: "grayscale(30%) brightness(0.8)",
-						duration: 0.5,
-						ease: "power4.out",
-					})
-				},
-			})
+			// 	onStop: () => {
+			// 		gsap.to(cardImage, {
+			// 			scale: 0.7,
+			// 			// filter: "grayscale(30%) brightness(0.8)",
+			// 			duration: 0.5,
+			// 			ease: "power4.out",
+			// 		})
+			// 	},
+			// })
 		})
 
 		return () => ctx.revert()

@@ -29,7 +29,7 @@ export default function Header({ navLinks, variant = "section" }: HeaderProps) {
 			// handlePanelSlide(pathname, false)
 			// setIsPageLoaded(true)
 		}
-	}, [])
+	}, [isPageLoaded, pathname, variant])
 
 	return (
 		<header>
