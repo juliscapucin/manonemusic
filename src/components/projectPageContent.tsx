@@ -29,7 +29,7 @@ export default function ProjectPageContent({
 				{tracklist && <PlayerTrackList tracks={tracklist} />}
 				{description && <TextBlock text={description} />}
 				{/* Links */}
-				<div className='mt-8 space-x-4'>
+				<div className='mt-16 space-x-4'>
 					{projectVideo && setIsTrailerActive && (
 						<Button
 							classes='custom-button-rounded'

@@ -14,6 +14,7 @@ import { CustomButton } from "@/components/ui"
 
 import { animateCardLabel } from "@/animations"
 import { urlFor } from "@/lib/sanityImageURL"
+import path from "path"
 
 type ProjectCardProps = {
 	variant: "section" | "page"
@@ -117,7 +118,7 @@ export default function ProjectCard({
 					: projectExit(() => router.push(`/${section}/${slug}`))
 			}}
 			href={`/${section}/${slug}`}
-			classes={`relative group gsap-project-card bg-primary ${variant === "section" ? "portrait:h-40 min-w-40 portrait:aspect-square landscape:h-full w-[calc((100%/2)-0.5rem)] md:w-[calc((100%/3)-0.5rem)] landscape:w-fit" : "w-16 landscape:w-24 aspect-square"}`}
+			classes={`relative group gsap-project-card bg-primary ${variant === "section" ? "portrait:h-40 min-w-40 portrait:aspect-square landscape:h-full w-[calc((100%/2)-0.5rem)] md:w-[calc((100%/3)-0.5rem)] landscape:w-fit" : `w-16 landscape:w-32 aspect-square ${pathname.includes(slug) && "pointer-events-none"}`}`}
 			style={{ aspectRatio }}
 			aria-labelledby={`project-title-${slug}`}
 			isDisabled={pathname.includes(slug)}
@@ -137,13 +138,6 @@ export default function ProjectCard({
 						height={image.imageHeight}
 						sizes='30vw'
 					/>
-					{/* <Image
-						className={`relative h-full w-full object-cover group-hover:scale-105 transition-transform duration-300 ${variant === "section" && "rounded-sm"}`}
-						src={urlFor(image.imageRef).url()} // generate url via _ref to save on api calls
-						alt={image.imageAlt || ""}
-						width={image.imageWidth}
-						height={image.imageHeight}
-					/> */}
 				</div>
 			)}
 			<span className='sr-only'>{title}</span>
@@ -151,7 +145,7 @@ export default function ProjectCard({
 			{/* LABEL */}
 			{variant === "section" && (
 				<p
-					className='text-labelMedium lg:text-headlineSmall uppercase text-left leading-none '
+					className='absolute top-full mt-2 text-labelMedium md:text-titleLarge uppercase text-left leading-none text-nowrap'
 					id={`project-title-${slug}`}
 					ref={labelRef}
 				>
