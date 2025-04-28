@@ -1,5 +1,6 @@
 import Availability from "./availability"
 import Copyright from "./copyright"
+import Credits from "./credits"
 import PanelContent from "./panelContent"
 import PanelDesktop from "./panelDesktop"
 import PanelMobile from "./panelMobile"
@@ -21,6 +22,7 @@ import PlayerTrackList from "./playerTrackList"
 export {
 	Availability,
 	Copyright,
+	Credits,
 	PanelContent,
 	PanelDesktop,
 	PanelMobile,

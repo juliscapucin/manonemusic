@@ -3,8 +3,6 @@
 import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 
-import { useLinkReveal } from "@/hooks"
-
 type SocialsData = { platform: string; link: string }
 
 type SocialLinksProps = {
@@ -12,14 +10,10 @@ type SocialLinksProps = {
 }
 
 export default function SocialLinks({ data }: SocialLinksProps) {
-	const wrapperRef = useRef(null)
-
-	useLinkReveal(wrapperRef)
-
 	return (
-		<div className='flex-1'>
+		<div className='flex-1 flex justify-center'>
 			{data && (
-				<div ref={wrapperRef} className='overflow-hidden'>
+				<div className='overflow-hidden'>
 					<h3 className='mb-4'>Listen & Follow</h3>
 					{data.map((item) => {
 						return (

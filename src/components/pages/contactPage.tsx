@@ -2,7 +2,7 @@
 
 import { useRef } from "react"
 
-import { Copyright, SocialLinks } from "@/components"
+import { Copyright, Credits, SocialLinks } from "@/components"
 import { SectionWrapper, Subtitle, TitleDisplay } from "@/components/ui"
 import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 import type { ContactPage } from "@/types"
@@ -26,9 +26,11 @@ export default function ContactPage({
 		<SectionWrapper>
 			{subtitle && <Subtitle subtitle={subtitle} />}
 			<TitleDisplay ref={titleContactRef}>{title}</TitleDisplay>
-			<div className='mt-32 w-full flex justify-between items-end'>
-				<Copyright />
-
+			<div className='mt-32 w-full flex gap-16'>
+				<div>
+					<Copyright />
+					<Credits />
+				</div>
 				<ButtonEmail />
 
 				<SocialLinks data={socials} />
