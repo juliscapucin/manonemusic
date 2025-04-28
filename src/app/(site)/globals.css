@@ -162,36 +162,18 @@ textarea {
 }
 
 .underlined-link {
-	text-decoration: none !important;
-	position: relative;
-	display: inline-block;
-	overflow-x: clip;
-	width: fit-content;
-	text-transform: uppercase;
-	color: var(--color-secondary);
+	@apply inline-block uppercase relative overflow-x-clip w-fit text-secondary no-underline;
 }
 
 .underlined-link::after {
-	content: "";
-	position: absolute;
-	z-index: 50;
-	bottom: 2px;
-	left: 0;
-	width: 100%;
-	height: 1px;
-	background-color: currentColor;
-	transition: transform 0.3s;
-	transform: translateX(-105%);
+	@apply content-[''] absolute z-50 bottom-[2px] left-0 w-full h-[1px] bg-secondary transition-transform duration-300 -translate-x-[105%];
 }
 
-.underlined-link:hover::after {
-	transform: translateX(0%);
-}
-
+.underlined-link:hover::after,
 .active.underlined-link::after {
-	transform: translateX(0%);
+	@apply translate-x-0;
 }
 
 .custom-button-rounded {
-	@apply inline-block text-bodyMedium lg:text-bodyLarge uppercase rounded-full border border-secondary px-3 py-1;
+	@apply inline-block text-bodyMedium lg:text-titleLarge uppercase rounded-full border border-secondary px-4 py-2;
 }
