@@ -24,36 +24,50 @@ export default function useTitleScrollTrigger(
 		gsap.registerPlugin(ScrollTrigger)
 		const element = elementRef.current
 		const titleElement = element.querySelector("h1")
-		const section = element.closest("section")
+		const projectsMenu = element?.nextElementSibling as HTMLDivElement
 
-		if (!section || !titleElement || !tween) return
-
-		console.log(slug)
+		if (!titleElement || !tween) return
 
 		ctx.add(() => {
 			ScrollTrigger.create({
 				trigger: titleElement,
 				start: "left center",
-				end: "right right",
+				end: "right center",
 				invalidateOnRefresh: true,
 				animation: animateSplitText(titleElement, 2000),
 				toggleActions: "play none none reverse",
-				fastScrollEnd: true,
+				fastScrollEnd: false,
+				horizontal: true,
 				containerAnimation: tween,
 				// markers: true,
 				onEnter: () => {
-					window.history.pushState(null, "", slug)
+					if (slug !== pathname) window.history.pushState(null, "", slug)
 				},
 				onEnterBack: () => {
-					window.history.pushState(null, "", slug)
+					if (slug !== pathname) window.history.pushState(null, "", slug)
 				},
+			})
+
+			// Title Pin Horizontal Animation on long sections
+			const projectsMenuWidth = projectsMenu?.offsetWidth
+
+			if (!projectsMenuWidth || projectsMenuWidth < window.innerWidth) return
+
+			gsap.to(titleElement, {
+				scrollTrigger: {
+					scrub: true,
+					trigger: projectsMenu,
+					start: "left-=20 left",
+					end: () => "+=" + (projectsMenuWidth - window.innerWidth),
+					invalidateOnRefresh: true,
+					// markers: true,
+					containerAnimation: tween,
+				},
+				x: () => "+=" + (projectsMenuWidth - window.innerWidth),
+				ease: "none",
 			})
 		})
 
 		return () => ctx.revert()
-	}, [elementRef, windowAspectRatio, pathname, slug, tween])
-
-	useEffect(() => {
-		ctx.revert()
-	}, [])
+	}, [elementRef, windowAspectRatio, tween]) // eslint-disable-line react-hooks/exhaustive-deps
 }
