@@ -39,12 +39,12 @@ export default function Footer({ navLinks }: FooterProps) {
 					: index
 		const newSlug = sections[newIndex].slug
 
-		handlePanelSlide(newSlug, true)
+		handlePanelSlide(newSlug)
 	}
 
 	return (
 		<footer className='fixed bottom-0 w-full p-8 flex items-center justify-between text-white text-center'>
-			<Availability slideToContact={() => handlePanelSlide("contact", true)} />
+			<Availability slideToContact={() => handlePanelSlide("contact")} />
 
 			<ButtonScroll
 				sectionsTotal={sections.length}
