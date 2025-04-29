@@ -64,65 +64,69 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 
 		gsap.registerPlugin(ScrollTrigger)
 
-		ctx.add(() => {
-			const titles = panelsContainerRef.current?.querySelectorAll("h1")
+		// Wait for the panels to slide into position
+		setTimeout(() => {
+			ctx.add(() => {
+				const titles = panelsContainerRef.current?.querySelectorAll("h1")
 
-			if (!titles) return
+				if (!titles) return
 
-			titles.forEach((title, index) => {
-				if (!title) return
-				let slug = `/${title.innerText.toLowerCase().replace(/\s+/g, "-")}`
-				if (!slug) return
+				titles.forEach((title, index) => {
+					if (!title) return
+					let slug = `/${title.innerText.toLowerCase().replace(/\s+/g, "-")}`
+					if (!slug) return
 
-				if (slug.includes("man")) slug = "/"
+					if (slug.includes("man")) slug = "/"
 
-				const projectsMenu = title.nextElementSibling as HTMLDivElement
+					const projectsMenu = title.nextElementSibling as HTMLDivElement
 
-				ScrollTrigger.create({
-					trigger: title,
-					start: "left center",
-					end: index === 0 ? "right center" : "right right",
-					invalidateOnRefresh: true,
-					animation: animateSplitText(title, 2000),
-					toggleActions: "play none none reverse",
-					fastScrollEnd: true,
-					horizontal: true,
-					containerAnimation: tween,
-					// markers: true,
-					onToggle: (self) => {
-						// console.log(slug)
-						// console.log(self.isActive, title.innerText)
-						if (self.isActive) window.history.pushState(null, "", slug)
-					},
-
-					// onEnter: () => {
-					// 	if (slug !== pathname) window.history.pushState(null, "", slug)
-					// },
-					// onEnterBack: () => {
-					// 	if (slug !== pathname) window.history.pushState(null, "", slug)
-					// },
-				})
-
-				// Title Pin Horizontal Animation on long sections
-				const projectsMenuWidth = projectsMenu?.offsetWidth
-
-				if (!projectsMenuWidth || projectsMenuWidth < window.innerWidth) return
-
-				gsap.to(title, {
-					scrollTrigger: {
-						scrub: true,
-						trigger: projectsMenu,
-						start: "left-=20 left",
-						end: () => "+=" + (projectsMenuWidth - window.innerWidth),
+					ScrollTrigger.create({
+						trigger: title,
+						start: "left center",
+						end: index === 0 ? "right center" : "right right",
 						invalidateOnRefresh: true,
-						// markers: true,
+						animation: animateSplitText(title, 2000),
+						toggleActions: "play none none reverse",
+						fastScrollEnd: true,
+						horizontal: true,
 						containerAnimation: tween,
-					},
-					x: () => "+=" + (projectsMenuWidth - window.innerWidth),
-					ease: "none",
-				})
-			}, panelsContainerRef.current)
-		})
+						// markers: true,
+						onToggle: (self) => {
+							// console.log(slug)
+							// console.log(self.isActive, title.innerText)
+							if (self.isActive) window.history.pushState(null, "", slug)
+						},
+
+						// onEnter: () => {
+						// 	if (slug !== pathname) window.history.pushState(null, "", slug)
+						// },
+						// onEnterBack: () => {
+						// 	if (slug !== pathname) window.history.pushState(null, "", slug)
+						// },
+					})
+
+					// Title Pin Horizontal Animation on long sections
+					const projectsMenuWidth = projectsMenu?.offsetWidth
+
+					if (!projectsMenuWidth || projectsMenuWidth < window.innerWidth)
+						return
+
+					gsap.to(title, {
+						scrollTrigger: {
+							scrub: true,
+							trigger: projectsMenu,
+							start: "left-=20 left",
+							end: () => "+=" + (projectsMenuWidth - window.innerWidth),
+							invalidateOnRefresh: true,
+							// markers: true,
+							containerAnimation: tween,
+						},
+						x: () => "+=" + (projectsMenuWidth - window.innerWidth),
+						ease: "none",
+					})
+				}, panelsContainerRef.current)
+			})
+		}, 400)
 
 		return () => ctx.revert()
 	}, [windowAspectRatio, tween]) // eslint-disable-line react-hooks/exhaustive-deps

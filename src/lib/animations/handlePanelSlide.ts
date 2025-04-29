@@ -3,11 +3,7 @@ import { ScrollToPlugin } from "gsap/ScrollToPlugin"
 
 gsap.registerPlugin(ScrollToPlugin)
 
-export const handlePanelSlide = (
-	targetSlug: string,
-	animateSlide: boolean,
-	routerAction?: () => void
-) => {
+export const handlePanelSlide = (targetSlug: string) => {
 	const targetPanel =
 		targetSlug === "/"
 			? (document.querySelector("[data-id=panel-home]") as HTMLDivElement)
@@ -30,8 +26,6 @@ export const handlePanelSlide = (
 		duration: 0.5,
 		onComplete: () => {
 			window.history.pushState({}, "", `${targetSlug}`)
-
-			routerAction && routerAction()
 		},
 	})
 }

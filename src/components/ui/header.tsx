@@ -20,8 +20,9 @@ export default function Header({ navLinks, variant = "section" }: HeaderProps) {
 	const navRef = useRef<HTMLDivElement | null>(null)
 
 	useEffect(() => {
+		// only run on first level
 		if (variant === "section") {
-			handlePanelSlide(pathname, false)
+			handlePanelSlide(pathname)
 		}
 	}, [])
 
@@ -36,7 +37,7 @@ export default function Header({ navLinks, variant = "section" }: HeaderProps) {
 					classes={`underlined-link text-titleSmall md:text-titleMedium uppercase transition ${pathname === "/" ? "opacity-0 -translate-x-full" : "opacity-100"}`}
 					transitionOnClick={
 						variant === "section"
-							? () => handlePanelSlide("/", true) // if in first level, slide to home
+							? () => handlePanelSlide("/") // if in first level, slide to home
 							: () => projectExit(() => router.push("/")) // if in second level, exit and navigate to home
 					}
 				>
@@ -56,7 +57,7 @@ export default function Header({ navLinks, variant = "section" }: HeaderProps) {
 									}
 									action={() => {
 										variant === "section"
-											? handlePanelSlide(link.slug, true)
+											? handlePanelSlide(link.slug)
 											: projectExit(() => router.push(`/${link.slug}`))
 									}}
 								/>
