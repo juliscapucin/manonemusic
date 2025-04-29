@@ -14,7 +14,6 @@ export const handlePanelSlide = (targetSlug: string) => {
 	const panelParent = targetPanel?.parentElement as HTMLDivElement
 
 	if (!targetPanel) return
-	console.log(targetPanel)
 
 	let y = targetPanel.offsetLeft
 
@@ -25,7 +24,7 @@ export const handlePanelSlide = (targetSlug: string) => {
 		},
 		duration: 0.5,
 		onComplete: () => {
-			window.history.pushState({}, "", `${targetSlug}`)
+			window.history.replaceState(null, "", `${targetSlug}`)
 		},
 	})
 }

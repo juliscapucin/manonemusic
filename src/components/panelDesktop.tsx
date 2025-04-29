@@ -71,14 +71,13 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 
 				if (!titles) return
 
+				// Title ScrollTrigger + route handler
 				titles.forEach((title, index) => {
 					if (!title) return
 					let slug = `/${title.innerText.toLowerCase().replace(/\s+/g, "-")}`
 					if (!slug) return
 
 					if (slug.includes("man")) slug = "/"
-
-					const projectsMenu = title.nextElementSibling as HTMLDivElement
 
 					ScrollTrigger.create({
 						trigger: title,
@@ -92,20 +91,14 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 						containerAnimation: tween,
 						// markers: true,
 						onToggle: (self) => {
-							// console.log(slug)
-							// console.log(self.isActive, title.innerText)
-							if (self.isActive) window.history.pushState(null, "", slug)
+							if (self.isActive) window.history.replaceState(null, "", slug)
 						},
-
-						// onEnter: () => {
-						// 	if (slug !== pathname) window.history.pushState(null, "", slug)
-						// },
-						// onEnterBack: () => {
-						// 	if (slug !== pathname) window.history.pushState(null, "", slug)
-						// },
 					})
 
-					// Title Pin Horizontal Animation on long sections
+					// Pin Title Horizontally on long sections
+					const projectsMenu = title.parentElement
+						?.nextElementSibling as HTMLElement
+
 					const projectsMenuWidth = projectsMenu?.offsetWidth
 
 					if (!projectsMenuWidth || projectsMenuWidth < window.innerWidth)

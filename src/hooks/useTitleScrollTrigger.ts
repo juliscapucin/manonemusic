@@ -18,8 +18,6 @@ export default function useTitleScrollTrigger(
 	const { windowAspectRatio } = useWindowDimensions()
 	let ctx = gsap.context(() => {})
 
-	console.log("useTitleScrollTrigger", slug)
-
 	useEffect(() => {
 		// Start ScrollTrigger when window is in landscape mode
 		if (!elementRef.current || windowAspectRatio === "portrait" || !tween)
