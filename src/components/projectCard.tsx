@@ -118,14 +118,14 @@ export default function ProjectCard({
 					: projectExit(() => router.push(`/${section}/${slug}`))
 			}}
 			href={`/${section}/${slug}`}
-			classes={`relative group gsap-project-card bg-primary ${variant === "section" ? "portrait:h-40 min-w-40 portrait:aspect-square landscape:h-full w-[calc((100%/2)-0.5rem)] md:w-[calc((100%/3)-0.5rem)] landscape:w-fit" : `w-16 landscape:w-32 aspect-square ${pathname.includes(slug) && "pointer-events-none"}`}`}
+			classes={`relative group gsap-project-card bg-primary ${variant === "section" ? "min-w-40 h-full w-fit" : `w-16 landscape:w-32 aspect-square ${pathname.includes(slug) && "pointer-events-none"}`}`}
 			style={{ aspectRatio }}
 			aria-labelledby={`project-title-${slug}`}
 			isDisabled={pathname.includes(slug)}
 		>
 			{image?.imageRef && (
 				<div
-					className='rounded-sm pointer-events-none w-full portrait:aspect-square overflow-hidden mb-2 lg:-mb-10'
+					className='rounded-sm pointer-events-none w-full overflow-hidden mb-2 lg:-mb-10'
 					ref={cardImageRef}
 					role='img'
 					aria-label={image.imageAlt}

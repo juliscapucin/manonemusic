@@ -5,7 +5,7 @@ import { useRef } from "react"
 import { ProjectsMenu } from "@/components"
 
 import { SectionWrapper, Subtitle, TitleDisplay } from "@/components/ui"
-import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
+import { useTitleScrollTrigger } from "@/hooks"
 
 import { PortfolioItem, PortfolioPage } from "@/types"
 
@@ -22,7 +22,6 @@ export default function ProjectsPage({
 	tween,
 }: ProjectPageProps) {
 	const titleRef = useRef(null)
-	const { windowAspectRatio } = useWindowDimensions()
 
 	useTitleScrollTrigger(titleRef, `/${projectsPageData.slug}`, tween)
 
@@ -40,7 +39,6 @@ export default function ProjectsPage({
 						variant='section'
 						section={projectsPageData.title.toLowerCase().replace(/\s/g, "-")}
 						projects={projects}
-						isMobile={windowAspectRatio == "portrait" ? true : false}
 					/>
 				)}
 			</SectionWrapper>

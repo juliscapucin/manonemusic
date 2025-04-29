@@ -6,6 +6,7 @@ export const useWindowDimensions = () => {
 	const [width, setWidth] = useState(0)
 	const [height, setHeight] = useState(0)
 	const [windowAspectRatio, setWindowAspectRatio] = useState("")
+	const [isMobile, setIsMobile] = useState(false)
 
 	useEffect(() => {
 		if (typeof window === "undefined") return
@@ -16,6 +17,7 @@ export const useWindowDimensions = () => {
 			setWindowAspectRatio(
 				window.innerWidth > window.innerHeight ? "landscape" : "portrait"
 			)
+			setIsMobile(window.innerWidth <= 768)
 		}
 		listener()
 
@@ -30,5 +32,6 @@ export const useWindowDimensions = () => {
 		width,
 		height,
 		windowAspectRatio,
+		isMobile,
 	}
 }

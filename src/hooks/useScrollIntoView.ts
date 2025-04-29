@@ -1,3 +1,5 @@
+"use client"
+
 import { useEffect } from "react"
 
 // TODO - try to implement this functionality for accessibility

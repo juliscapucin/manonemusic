@@ -1,19 +1,20 @@
 import { PortfolioItem } from "@/types"
 import { ProjectCard } from "@/components"
+import { useWindowDimensions } from "@/hooks"
 
 type ProjectsMenuProps = {
 	projects: PortfolioItem[]
 	variant: "section" | "page"
 	section: string
-	isMobile: boolean
 }
 
 export default function ProjectsMenu({
 	projects,
 	section,
 	variant,
-	isMobile,
 }: ProjectsMenuProps) {
+	const { isMobile } = useWindowDimensions()
+
 	return (
 		<div
 			id='projects-menu'
