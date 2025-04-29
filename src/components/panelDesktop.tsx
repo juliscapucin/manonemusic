@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useLayoutEffect, useRef, useState } from "react"
 
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
@@ -10,7 +10,7 @@ import { PanelContent } from "@/components"
 import { usePathname } from "next/navigation"
 import { useWindowDimensions } from "@/hooks"
 import { animateSplitText } from "@/animations"
-import { panelsEnter } from "@/lib/animations"
+import { handlePanelSlide, panelsEnter } from "@/lib/animations"
 
 type PanelDesktopProps = {
 	data: AllData
@@ -69,7 +69,7 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 
 			if (!titles) return
 
-			titles.forEach((title) => {
+			titles.forEach((title, index) => {
 				if (!title) return
 				let slug = `/${title.innerText.toLowerCase().replace(/\s+/g, "-")}`
 				if (!slug) return
@@ -81,21 +81,26 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 				ScrollTrigger.create({
 					trigger: title,
 					start: "left center",
-					end: "right right",
+					end: index === 0 ? "right center" : "right right",
 					invalidateOnRefresh: true,
 					animation: animateSplitText(title, 2000),
 					toggleActions: "play none none reverse",
-					fastScrollEnd: false,
+					fastScrollEnd: true,
 					horizontal: true,
 					containerAnimation: tween,
 					// markers: true,
-					onEnter: () => {
-						console.log(slug, "pathname: ", pathname)
-						if (slug !== pathname) window.history.pushState(null, "", slug)
+					onToggle: (self) => {
+						// console.log(slug)
+						// console.log(self.isActive, title.innerText)
+						if (self.isActive) window.history.pushState(null, "", slug)
 					},
-					onEnterBack: () => {
-						if (slug !== pathname) window.history.pushState(null, "", slug)
-					},
+
+					// onEnter: () => {
+					// 	if (slug !== pathname) window.history.pushState(null, "", slug)
+					// },
+					// onEnterBack: () => {
+					// 	if (slug !== pathname) window.history.pushState(null, "", slug)
+					// },
 				})
 
 				// Title Pin Horizontal Animation on long sections

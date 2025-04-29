@@ -50,7 +50,7 @@ export default function PanelMobile({ data }: { data: AllData }) {
 					className={`panel w-screen overflow-x-clip ${fullHeightSections.includes(section.slug) ? "h-svh" : "h-auto"}`}
 					key={`panel-${section.slug}`}
 				>
-					<PanelContent data={data} section={section.slug} tween={null} />
+					<PanelContent data={data} section={section.slug} />
 				</section>
 			))}
 		</div>

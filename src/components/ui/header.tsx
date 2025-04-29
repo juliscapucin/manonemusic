@@ -19,11 +19,9 @@ export default function Header({ navLinks, variant = "section" }: HeaderProps) {
 	const router = useRouter()
 	const navRef = useRef<HTMLDivElement | null>(null)
 
-	useLayoutEffect(() => {
+	useEffect(() => {
 		if (variant === "section") {
-			setTimeout(() => {
-				handlePanelSlide(pathname, false)
-			}, 1000)
+			handlePanelSlide(pathname, false)
 		}
 	}, [])
 

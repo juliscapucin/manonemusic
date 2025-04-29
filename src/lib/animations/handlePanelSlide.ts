@@ -17,14 +17,17 @@ export const handlePanelSlide = (
 
 	const panelParent = targetPanel?.parentElement as HTMLDivElement
 
-	let y = targetPanel ? targetPanel.offsetLeft : 0
+	if (!targetPanel) return
+	console.log(targetPanel)
+
+	let y = targetPanel.offsetLeft
 
 	gsap.to(window, {
 		scrollTo: {
 			y: y,
-			autoKill: true,
+			autoKill: false,
 		},
-		duration: 0.1,
+		duration: 0.5,
 		onComplete: () => {
 			window.history.pushState({}, "", `${targetSlug}`)
 
