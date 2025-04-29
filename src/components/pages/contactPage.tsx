@@ -8,19 +8,16 @@ import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 import type { ContactPage } from "@/types"
 import ButtonEmail from "../buttons/buttonEmail"
 
-type ContactPageProps = ContactPage & {
-	tween: gsap.core.Tween | null
-}
+type ContactPageProps = ContactPage
 
 export default function ContactPage({
 	title,
 	subtitle,
 	socials,
-	tween,
 }: ContactPageProps) {
 	const titleContactRef = useRef(null)
 
-	useTitleScrollTrigger(titleContactRef, "/contact", tween)
+	// useTitleScrollTrigger(titleContactRef, "/contact", tween)
 
 	return (
 		<SectionWrapper>

@@ -7,6 +7,10 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 import { AllData, NavLink } from "@/types"
 import { PanelContent } from "@/components"
+import { usePathname } from "next/navigation"
+import { useWindowDimensions } from "@/hooks"
+import { animateSplitText } from "@/animations"
+import { panelsEnter } from "@/lib/animations"
 
 type PanelDesktopProps = {
 	data: AllData
@@ -15,7 +19,10 @@ type PanelDesktopProps = {
 
 export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 	const panelsContainerRef = useRef<HTMLDivElement | null>(null)
-	const [tweenRef, setTweenRef] = useState<gsap.core.Tween | null>(null)
+	const [tween, setTween] = useState<gsap.core.Tween | null>(null)
+	const pathname = usePathname()
+	const { windowAspectRatio } = useWindowDimensions()
+	let ctx = gsap.context(() => {})
 
 	// Horizontal Panel animation
 	useEffect(() => {
@@ -27,7 +34,7 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 		const panels = gsap.utils.toArray(".gsap-panel")
 
 		const ctx = gsap.context(() => {
-			const tween = gsap.to(panels, {
+			const tweenRef = gsap.to(panels, {
 				x: () => -1 * (container.scrollWidth - innerWidth),
 				ease: "none",
 				scrollTrigger: {
@@ -41,8 +48,8 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 				},
 			})
 
-			// set Ref value to pass down to children
-			setTweenRef(tween)
+			// set Ref value to pass to title animations
+			setTween(tweenRef)
 		}, container)
 
 		return () => {
@@ -50,11 +57,82 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 		}
 	}, [])
 
+	// Title animations
+	useEffect(() => {
+		// Start ScrollTrigger when window is in landscape mode
+		if (windowAspectRatio === "portrait" || !tween) return
+
+		gsap.registerPlugin(ScrollTrigger)
+
+		ctx.add(() => {
+			const titles = panelsContainerRef.current?.querySelectorAll("h1")
+
+			if (!titles) return
+
+			titles.forEach((title) => {
+				if (!title) return
+				let slug = `/${title.innerText.toLowerCase().replace(/\s+/g, "-")}`
+				if (!slug) return
+
+				if (slug.includes("man")) slug = "/"
+
+				const projectsMenu = title.nextElementSibling as HTMLDivElement
+
+				ScrollTrigger.create({
+					trigger: title,
+					start: "left center",
+					end: "right right",
+					invalidateOnRefresh: true,
+					animation: animateSplitText(title, 2000),
+					toggleActions: "play none none reverse",
+					fastScrollEnd: false,
+					horizontal: true,
+					containerAnimation: tween,
+					// markers: true,
+					onEnter: () => {
+						console.log(slug, "pathname: ", pathname)
+						if (slug !== pathname) window.history.pushState(null, "", slug)
+					},
+					onEnterBack: () => {
+						if (slug !== pathname) window.history.pushState(null, "", slug)
+					},
+				})
+
+				// Title Pin Horizontal Animation on long sections
+				const projectsMenuWidth = projectsMenu?.offsetWidth
+
+				if (!projectsMenuWidth || projectsMenuWidth < window.innerWidth) return
+
+				gsap.to(title, {
+					scrollTrigger: {
+						scrub: true,
+						trigger: projectsMenu,
+						start: "left-=20 left",
+						end: () => "+=" + (projectsMenuWidth - window.innerWidth),
+						invalidateOnRefresh: true,
+						// markers: true,
+						containerAnimation: tween,
+					},
+					x: () => "+=" + (projectsMenuWidth - window.innerWidth),
+					ease: "none",
+				})
+			}, panelsContainerRef.current)
+		})
+
+		return () => ctx.revert()
+	}, [windowAspectRatio, tween]) // eslint-disable-line react-hooks/exhaustive-deps
+
+	// Fade in panels on load
+	useEffect(() => {
+		if (!panelsContainerRef.current) return
+		panelsEnter(panelsContainerRef.current as HTMLDivElement)
+	}, [panelsContainerRef])
+
 	return (
 		<main>
 			<div
 				ref={panelsContainerRef}
-				className='gsap-panels-container flex gap-32'
+				className='gsap-panels-container flex gap-32 opacity-0'
 			>
 				{sections.map((section) => {
 					return (
@@ -63,11 +141,7 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 							className='gsap-panel h-screen min-h-full px-8 min-w-fit w-fit overflow-clip'
 							key={`panel-${section.slug}`}
 						>
-							<PanelContent
-								data={data}
-								section={section.slug}
-								tween={tweenRef}
-							/>
+							<PanelContent data={data} section={section.slug} />
 						</section>
 					)
 				})}

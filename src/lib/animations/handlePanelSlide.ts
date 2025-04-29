@@ -9,7 +9,7 @@ export const handlePanelSlide = (
 	routerAction?: () => void
 ) => {
 	const targetPanel =
-		targetSlug === "/" || targetSlug === ""
+		targetSlug === "/"
 			? (document.querySelector("[data-id=panel-home]") as HTMLDivElement)
 			: (document.querySelector(
 					`[data-id=panel-${targetSlug.includes("/") ? targetSlug.split("/")[1] : targetSlug}]`
@@ -19,36 +19,16 @@ export const handlePanelSlide = (
 
 	let y = targetPanel ? targetPanel.offsetLeft : 0
 
-	if (animateSlide === true) {
-		gsap.to(window, {
-			scrollTo: {
-				y: y,
-				autoKill: false,
-			},
-			duration: 0.5,
-			onComplete: () => {
-				routerAction && routerAction()
-			},
-		})
-	} else {
-		window.scrollTo({
-			top: y,
-		})
-		// gsap.set(panelParent, { opacity: 0 })
-		// gsap.to(window, {
-		// 	duration: 0.2,
-		// 	scrollTo: {
-		// 		y: y,
-		// 		autoKill: true,
-		// 	},
-		// 	onComplete: () => {
-		// 		window.history.pushState({}, "", `${targetSlug}`)
-		// 		gsap.to(panelParent, {
-		// 			opacity: 1,
-		// 			duration: 0.5,
-		// 			ease: "power2.out",
-		// 		})
-		// 	},
-		// })
-	}
+	gsap.to(window, {
+		scrollTo: {
+			y: y,
+			autoKill: true,
+		},
+		duration: 0.1,
+		onComplete: () => {
+			window.history.pushState({}, "", `${targetSlug}`)
+
+			routerAction && routerAction()
+		},
+	})
 }

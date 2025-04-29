@@ -13,17 +13,15 @@ type ProjectPageProps = {
 	projectsPageData: PortfolioPage
 	projects?: PortfolioItem[]
 	titleScrollTrigger?: boolean
-	tween: gsap.core.Tween | null
 }
 
 export default function ProjectsPage({
 	projectsPageData,
 	projects,
-	tween,
 }: ProjectPageProps) {
 	const titleRef = useRef(null)
 
-	useTitleScrollTrigger(titleRef, `/${projectsPageData.slug}`, tween)
+	// useTitleScrollTrigger(titleRef, `/${projectsPageData.slug}`, tween)
 
 	return (
 		projectsPageData && (
@@ -31,9 +29,7 @@ export default function ProjectsPage({
 				{projectsPageData.subtitle && (
 					<Subtitle subtitle={projectsPageData.subtitle} />
 				)}
-				<TitleDisplay classes='gsap-projects-title' ref={titleRef}>
-					{projectsPageData.title}
-				</TitleDisplay>
+				<TitleDisplay ref={titleRef}>{projectsPageData.title}</TitleDisplay>
 				{projects && projectsPageData.title && (
 					<ProjectsMenu
 						variant='section'

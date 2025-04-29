@@ -10,14 +10,10 @@ import { useTitleScrollTrigger } from "@/hooks"
 
 import type { HomePage } from "@/types"
 
-type HomePageProps = {
-	tween: gsap.core.Tween | null
-}
-
-export default function HomePage({ tween }: HomePageProps) {
+export default function HomePage() {
 	const titleHomeRef = useRef(null)
 
-	useTitleScrollTrigger(titleHomeRef, "/", tween)
+	// useTitleScrollTrigger(titleHomeRef, "/", tween)
 
 	return (
 		<SectionWrapper>

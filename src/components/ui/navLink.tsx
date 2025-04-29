@@ -16,8 +16,6 @@ export default function NavLink({
 	action,
 	activeState,
 }: NavLinkProps) {
-	const pathname = usePathname()
-
 	return (
 		<div>
 			{activeState ? (

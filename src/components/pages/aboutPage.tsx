@@ -16,7 +16,7 @@ import { ButtonRounded } from "@/components/buttons"
 import type { AboutPage } from "@/types"
 import { urlFor } from "@/lib/sanityImageURL"
 
-type AboutPageProps = AboutPage & { tween: gsap.core.Tween | null }
+type AboutPageProps = AboutPage
 
 export default function AboutPage({
 	title,
@@ -24,11 +24,10 @@ export default function AboutPage({
 	content1,
 	content2,
 	image,
-	tween,
 }: AboutPageProps) {
 	const titleAboutRef = useRef(null)
 
-	useTitleScrollTrigger(titleAboutRef, "/about", tween)
+	// useTitleScrollTrigger(titleAboutRef, "/about", tween)
 
 	return (
 		<SectionWrapper classes='landscape:flex justify-between items-end gap-8 landscape:pb-40'>

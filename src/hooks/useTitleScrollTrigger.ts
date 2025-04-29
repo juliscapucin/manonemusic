@@ -9,8 +9,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { animateSplitText } from "@/animations"
 import { useWindowDimensions } from "./useWindowDimensions"
 
-let ctx = gsap.context(() => {})
-
 export default function useTitleScrollTrigger(
 	elementRef: React.RefObject<HTMLDivElement>,
 	slug: string,
@@ -18,17 +16,21 @@ export default function useTitleScrollTrigger(
 ) {
 	const pathname = usePathname()
 	const { windowAspectRatio } = useWindowDimensions()
+	let ctx = gsap.context(() => {})
+
+	console.log("useTitleScrollTrigger", slug)
 
 	useEffect(() => {
 		// Start ScrollTrigger when window is in landscape mode
-		if (!elementRef.current || windowAspectRatio === "portrait") return
+		if (!elementRef.current || windowAspectRatio === "portrait" || !tween)
+			return
 
 		gsap.registerPlugin(ScrollTrigger)
 		const element = elementRef.current
 		const titleElement = element.querySelector("h1")
 		const projectsMenu = element?.nextElementSibling as HTMLDivElement
 
-		if (!titleElement || !tween) return
+		if (!titleElement) return
 
 		ctx.add(() => {
 			ScrollTrigger.create({
