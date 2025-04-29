@@ -1,6 +1,6 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
+import { useEffect, useLayoutEffect, useRef, useState } from "react"
 import { usePathname, useRouter } from "next/navigation"
 
 import { CustomButton, NavLink } from "@/components/ui"
@@ -12,22 +12,20 @@ type HeaderProps = {
 	variant?: "section" | "page"
 }
 
+// This is the header component for the desktop version
+// Mobile version is handled in menuMobile.tsx
 export default function Header({ navLinks, variant = "section" }: HeaderProps) {
-	const [isPageLoaded, setIsPageLoaded] = useState(false)
 	const pathname = usePathname()
 	const router = useRouter()
 	const navRef = useRef<HTMLDivElement | null>(null)
 
-	useEffect(() => {
-		setIsPageLoaded(true)
-	}, [])
-
-	useEffect(() => {
-		// Check if the page is loaded to slide into position
-		if (isPageLoaded && variant === "section") {
-			handlePanelSlide(pathname, false)
+	useLayoutEffect(() => {
+		if (variant === "section") {
+			setTimeout(() => {
+				handlePanelSlide(pathname, false)
+			}, 1000)
 		}
-	}, [isPageLoaded, pathname, variant])
+	}, [])
 
 	return (
 		<header>

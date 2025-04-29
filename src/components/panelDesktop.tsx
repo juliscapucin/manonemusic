@@ -7,7 +7,6 @@ import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 import { AllData, NavLink } from "@/types"
 import { PanelContent } from "@/components"
-import { animateSplitText } from "@/animations"
 
 type PanelDesktopProps = {
 	data: AllData
@@ -16,17 +15,11 @@ type PanelDesktopProps = {
 
 export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 	const panelsContainerRef = useRef<HTMLDivElement | null>(null)
-	// const tweenRef = useRef<gsap.core.Tween | null>(null)
 	const [tweenRef, setTweenRef] = useState<gsap.core.Tween | null>(null)
-	const [isPageLoaded, setIsPageLoaded] = useState(false)
-
-	useEffect(() => {
-		setIsPageLoaded(true)
-	}, [])
 
 	// Horizontal Panel animation
 	useEffect(() => {
-		if (!panelsContainerRef.current || !isPageLoaded) return
+		if (!panelsContainerRef.current) return
 		gsap.registerPlugin(ScrollTrigger)
 
 		/* Panels */
@@ -49,20 +42,19 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 			})
 
 			// set Ref value to pass down to children
-			// tweenRef.current = tween
 			setTweenRef(tween)
 		}, container)
 
 		return () => {
 			ctx.revert()
 		}
-	}, [isPageLoaded])
+	}, [])
 
 	return (
 		<main>
 			<div
 				ref={panelsContainerRef}
-				className='gsap-panels-container flex gap-32 opacity-0'
+				className='gsap-panels-container flex gap-32'
 			>
 				{sections.map((section) => {
 					return (

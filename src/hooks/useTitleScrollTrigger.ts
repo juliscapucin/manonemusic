@@ -38,7 +38,7 @@ export default function useTitleScrollTrigger(
 				invalidateOnRefresh: true,
 				animation: animateSplitText(titleElement, 2000),
 				toggleActions: "play none none reverse",
-				fastScrollEnd: false,
+				// fastScrollEnd: true,
 				horizontal: true,
 				containerAnimation: tween,
 				// markers: true,
