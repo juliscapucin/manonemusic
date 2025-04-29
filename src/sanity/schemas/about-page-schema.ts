@@ -40,7 +40,14 @@ const aboutPageSchema = {
 			validation: (Rule: Rule) => Rule.required().error("Image is required"),
 		},
 		{
-			name: "content",
+			name: "content1",
+			title: "Content (required)",
+			type: "array",
+			of: [{ type: "block" }],
+			validation: (Rule: Rule) => Rule.required().error("Content is required"),
+		},
+		{
+			name: "content2",
 			title: "Content (required)",
 			type: "array",
 			of: [{ type: "block" }],

@@ -5,7 +5,8 @@ export type AboutPage = {
 	title: string
 	subtitle?: string
 	image: ImageField
-	content: BlockContent[]
+	content1: BlockContent[]
+	content2: BlockContent[]
 	metadataTitle?: string
 	metadataDescription?: string
 	metadataKeywords?: string[]

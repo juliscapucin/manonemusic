@@ -166,7 +166,7 @@ textarea {
 }
 
 .underlined-link::after {
-	@apply content-[''] absolute z-50 bottom-[2px] left-0 w-full h-[1px] bg-secondary transition-transform duration-300 -translate-x-[105%];
+	@apply content-[''] absolute z-50 bottom-[2px] left-0 w-full h-[1px] bg-secondary transition-transform duration-300 -translate-x-[102%];
 }
 
 .underlined-link:hover::after,

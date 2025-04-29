@@ -11,7 +11,7 @@ type SocialLinksProps = {
 
 export default function SocialLinks({ data }: SocialLinksProps) {
 	return (
-		<div className='flex-1 flex justify-center'>
+		<div className='flex-1'>
 			{data && (
 				<div className='overflow-hidden'>
 					<h3 className='mb-4'>Listen & Follow</h3>

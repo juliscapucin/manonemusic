@@ -4,7 +4,7 @@ export default function Credits() {
 			className='text-labelLarge uppercase block mt-2'
 			href='https://juliscapucin.com'
 		>
-			Design & Development by Juli Scapucin
+			Website by Juli Scapucin
 		</a>
 	)
 }

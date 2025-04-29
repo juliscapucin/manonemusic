@@ -33,7 +33,8 @@ export async function getAboutPage(): Promise<AboutPage> {
          "imageRef": image.image.asset._ref,
          "imageAlt": image.imageAlt
       },      
-      content,
+      content1,
+      content2,
       metadataTitle,
       metadataDescription,
       metadataKeywords,

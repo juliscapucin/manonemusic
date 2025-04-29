@@ -43,7 +43,7 @@ export default function Footer({ navLinks }: FooterProps) {
 	}
 
 	return (
-		<footer className='fixed bottom-0 w-full p-8 flex items-center text-white text-center [&>*]:flex-1'>
+		<footer className='fixed bottom-0 w-full p-8 flex items-center justify-between text-white text-center'>
 			<Availability slideToContact={() => handlePanelSlide("contact", true)} />
 
 			<ButtonScroll

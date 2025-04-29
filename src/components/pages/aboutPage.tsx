@@ -9,7 +9,7 @@ import {
 	TextBlock,
 	TitleDisplay,
 } from "@/components/ui"
-import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
+import { useTitleScrollTrigger } from "@/hooks"
 
 import { ButtonRounded } from "@/components/buttons"
 
@@ -21,7 +21,8 @@ type AboutPageProps = AboutPage & { tween: gsap.core.Tween | null }
 export default function AboutPage({
 	title,
 	subtitle,
-	content,
+	content1,
+	content2,
 	image,
 	tween,
 }: AboutPageProps) {
@@ -30,8 +31,8 @@ export default function AboutPage({
 	useTitleScrollTrigger(titleAboutRef, "/about", tween)
 
 	return (
-		<SectionWrapper classes='landscape:flex justify-between items-start gap-8'>
-			<div className=''>
+		<SectionWrapper classes='landscape:flex justify-between items-end gap-8 landscape:pb-40'>
+			<div>
 				<TitleDisplay ref={titleAboutRef}>{title}</TitleDisplay>
 				{subtitle && <Subtitle subtitle={subtitle} />}
 			</div>
@@ -48,20 +49,21 @@ export default function AboutPage({
 					/>
 				</div>
 			</div>
-			<div className='mt-16 w-[30vw]'>
-				{content && <TextBlock text={content} />}
-			</div>
-			<div className='mt-16 w-[30vw]'>
-				{content && <TextBlock text={content} />}
-				<div className='flex gap-4'>
-					<ButtonRounded
-						label='Services'
-						action={() => console.log("services")}
-					/>
-					<ButtonRounded
-						label='Clients'
-						action={() => console.log("clients")}
-					/>
+			<div className='mt-16 landscape:w-[70vw] landscape:flex items-end justify-between gap-8 *:flex-1'>
+				{content1 && <TextBlock text={content1} />}
+				<div>
+					{content2 && <TextBlock text={content2} />}
+					{/* BUTTONS */}
+					<div className='flex gap-4 mt-8'>
+						<ButtonRounded
+							label='Services'
+							action={() => console.log("services")}
+						/>
+						<ButtonRounded
+							label='Clients'
+							action={() => console.log("clients")}
+						/>
+					</div>
 				</div>
 			</div>
 		</SectionWrapper>
