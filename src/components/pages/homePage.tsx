@@ -21,11 +21,11 @@ export default function HomePage({ tween }: HomePageProps) {
 
 	return (
 		<div className='relative h-screen min-h-svh pt-32 pb-16 overflow-x-clip'>
-			<Copyright hasCredits={false} />
+			<Copyright />
 			<div ref={titleHomeRef}>
 				<h1 className='logo'>MAN/ONE MUSIC</h1>
 			</div>
-			<Heading tag='h2' variant='title' classes='w-1/2 mt-4 uppercase'>
+			<Heading tag='h2' variant='headline' classes='w-1/2 mt-4 uppercase'>
 				Music & Sound Design
 			</Heading>
 			<div className='w-full landscape:flex justify-between mt-32 md:mt-16'>

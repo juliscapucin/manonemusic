@@ -62,7 +62,7 @@ function Status({ location }: StatusProps) {
 	return (
 		<div
 			ref={statusWrapperRef}
-			className='flex flex-col w-1/2 text-titleSmall md:text-titleMedium lg:text-titleLarge overflow-clip'
+			className='flex flex-col w-1/2 text-titleSmall md:text-titleMedium lg:text-titleLarge overflow-clip uppercase'
 		>
 			<h2 className='line'>{location}</h2>
 			<span className='line'>

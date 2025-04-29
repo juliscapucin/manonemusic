@@ -19,10 +19,10 @@ export default function CopyEmailButton() {
 	}
 
 	return (
-		<div className='relative'>
+		<div className='relative flex flex-col items-center justify-center mt-2'>
 			<div
 				ref={labelRef}
-				className='relative w-fit h-4 flex items-center overflow-clip'
+				className='relative w-fit h-4 flex items-center justify-center overflow-clip'
 			>
 				<span
 					className={`text-labelSmall transition-transform duration-150 ${showCopyFeedback ? "translate-x-0" : "-translate-x-full"}`}
