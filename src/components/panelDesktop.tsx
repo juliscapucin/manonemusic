@@ -68,7 +68,7 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 					return (
 						<section
 							data-id={`panel-${section.slug === "/" ? "home" : section.slug}`}
-							className='gsap-panel h-screen min-h-full pl-8 min-w-fit w-fit overflow-clip'
+							className='gsap-panel h-screen min-h-full px-8 min-w-fit w-fit overflow-clip'
 							key={`panel-${section.slug}`}
 						>
 							<PanelContent

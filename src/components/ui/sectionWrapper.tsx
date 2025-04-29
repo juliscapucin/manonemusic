@@ -12,7 +12,7 @@ const SectionWrapper = forwardRef<HTMLDivElement, SectionWrapperProps>(
 		return (
 			<div
 				ref={ref}
-				className={`section-wrapper relative custom-min-w-screen landscape:w-fit h-fit landscape:h-screen pr-16 landscape:pt-32 pb-8 landscape:px-16 ${classes ? classes : ""}`}
+				className={`section-wrapper relative custom-min-w-screen landscape:w-fit h-fit landscape:h-screen pt-16 landscape:pt-32 pb-8 px-4 landscape:px-0 ${classes && classes}`}
 			>
 				{children}
 			</div>
