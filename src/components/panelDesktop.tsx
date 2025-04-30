@@ -58,7 +58,6 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 	// Title animations
 	useGSAP(
 		() => {
-			console.log("useEffect animations ran again")
 			let ctx = gsap.context(() => {})
 
 			// Start ScrollTrigger when window is in landscape mode
@@ -83,7 +82,7 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 					ScrollTrigger.create({
 						trigger: title,
 						start: "left center",
-						end: index === 0 ? "right center" : "right right",
+						end: "right center",
 						invalidateOnRefresh: true,
 						animation: animateSplitText(title, 2000),
 						toggleActions: "play none none reverse",
@@ -91,15 +90,9 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 						horizontal: true,
 						containerAnimation: tween,
 						// markers: true,
-						onEnter: (self) => {
+						onToggle: (self) => {
 							// Only update history if trigger is active and if new section
-							if (self.isActive && !window.location.href.includes(slug)) {
-								window.history.pushState(null, "", slug)
-							}
-						},
-						onEnterBack: (self) => {
-							// Only update history if trigger is active and if new section
-							if (self.isActive && !window.location.href.includes(slug)) {
+							if (self.isActive && window.location.pathname !== slug) {
 								window.history.pushState(null, "", slug)
 							}
 						},
