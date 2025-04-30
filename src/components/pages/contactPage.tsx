@@ -4,7 +4,6 @@ import { useRef } from "react"
 
 import { Copyright, Credits, SocialLinks } from "@/components"
 import { SectionWrapper, Subtitle, TitleDisplay } from "@/components/ui"
-import { useTitleScrollTrigger, useWindowDimensions } from "@/hooks"
 import type { ContactPage } from "@/types"
 import ButtonEmail from "../buttons/buttonEmail"
 
@@ -16,8 +15,6 @@ export default function ContactPage({
 	socials,
 }: ContactPageProps) {
 	const titleContactRef = useRef(null)
-
-	// useTitleScrollTrigger(titleContactRef, "/contact", tween)
 
 	return (
 		<SectionWrapper>

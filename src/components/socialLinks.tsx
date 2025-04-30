@@ -1,6 +1,5 @@
 "use client"
 
-import { useEffect, useRef, useState } from "react"
 import Link from "next/link"
 
 type SocialsData = { platform: string; link: string }

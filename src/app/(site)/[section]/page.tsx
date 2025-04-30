@@ -23,12 +23,13 @@ import {
 // export const dynamic = "force-dynamic"
 // export const fetchCache = "force-no-store"
 
-export default async function Page({
-	params,
-}: {
-	params: { section: string }
-}) {
-	const [
+export default async function Page(
+    props: {
+        params: Promise<{ section: string }>
+    }
+) {
+    const params = await props.params;
+    const [
 		headerNavLinks,
 		homePage,
 		contactPage,
@@ -50,7 +51,7 @@ export default async function Page({
 		getPortfolioItems("project"),
 	])
 
-	const portfolioSections = sections.reduce(
+    const portfolioSections = sections.reduce(
 		(acc: { [key: string]: (typeof sections)[0] }, item) => {
 			acc[item.slug] = item
 			return acc
@@ -58,12 +59,12 @@ export default async function Page({
 		{}
 	)
 
-	// Check if the section exists, otherwise thwrow Error Page
-	if (!headerNavLinks.find((item) => item.slug === params.section)) {
+    // Check if the section exists, otherwise thwrow Error Page
+    if (!headerNavLinks.find((item) => item.slug === params.section)) {
 		return notFound()
 	}
 
-	const data = {
+    const data = {
 		headerNavLinks,
 		homePage,
 		contactPage,
@@ -75,7 +76,7 @@ export default async function Page({
 		projects,
 	}
 
-	if (
+    if (
 		!data ||
 		!data.headerNavLinks ||
 		!data.homePage ||
@@ -89,5 +90,5 @@ export default async function Page({
 	)
 		return notFound()
 
-	return <Panels data={data} />
+    return <Panels data={data} />
 }

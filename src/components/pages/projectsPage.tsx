@@ -5,7 +5,6 @@ import { useRef } from "react"
 import { ProjectsMenu } from "@/components"
 
 import { SectionWrapper, Subtitle, TitleDisplay } from "@/components/ui"
-import { useTitleScrollTrigger } from "@/hooks"
 
 import { PortfolioItem, PortfolioPage } from "@/types"
 
@@ -20,8 +19,6 @@ export default function ProjectsPage({
 	projects,
 }: ProjectPageProps) {
 	const titleRef = useRef(null)
-
-	// useTitleScrollTrigger(titleRef, `/${projectsPageData.slug}`, tween)
 
 	return (
 		projectsPageData && (

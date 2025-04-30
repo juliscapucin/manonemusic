@@ -10,7 +10,7 @@ import { animateSplitText } from "@/animations"
 import { useWindowDimensions } from "./useWindowDimensions"
 
 export default function useTitleScrollTrigger(
-	elementRef: React.RefObject<HTMLDivElement>,
+	elementRef: React.RefObject<HTMLDivElement | null>,
 	slug: string,
 	tween: gsap.core.Tween | null
 ) {

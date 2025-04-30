@@ -15,8 +15,8 @@ export const panelsEnter = (element: HTMLElement) => {
 		{
 			opacity: 1,
 			// yPercent: 0,
-			duration: 0.3,
-			delay: 0.5,
+			duration: 0.6,
+			delay: 0.7,
 		}
 	)
 }
