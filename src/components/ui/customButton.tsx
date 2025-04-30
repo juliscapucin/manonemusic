@@ -31,18 +31,16 @@ const CustomButton = ({
 			{children}
 		</div>
 	) : (
-		<Link href={href} passHref legacyBehavior>
-			<a
-				className={`${classes}`}
-				style={style}
-				href={href}
-				onClick={(e) => {
-					e.preventDefault()
-					transitionOnClick(slug)
-				}}
-			>
-				{children}
-			</a>
+		<Link
+			href={href}
+			className={`${classes}`}
+			style={style}
+			onClick={(e) => {
+				e.preventDefault()
+				transitionOnClick(slug)
+			}}
+		>
+			{children}
 		</Link>
 	)
 }
