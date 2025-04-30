@@ -4,6 +4,9 @@ import { useEffect, useRef, useState } from "react"
 
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { useGSAP } from "@gsap/react"
+
+gsap.registerPlugin(useGSAP)
 
 import { AllData, NavLink } from "@/types"
 import { PanelContent } from "@/components"
@@ -22,10 +25,9 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 	const [tween, setTween] = useState<gsap.core.Tween | null>(null)
 	const pathname = usePathname()
 	const { windowAspectRatio } = useWindowDimensions()
-	let ctx = gsap.context(() => {})
 
 	// Horizontal Panel animation
-	useEffect(() => {
+	useGSAP(() => {
 		if (!panelsContainerRef.current) return
 		gsap.registerPlugin(ScrollTrigger)
 
@@ -51,22 +53,21 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 			// set Ref value to pass to title animations
 			setTween(tweenRef)
 		}, container)
-
-		return () => {
-			ctx.revert()
-		}
 	}, [])
 
 	// Title animations
-	useEffect(() => {
-		// Start ScrollTrigger when window is in landscape mode
-		if (windowAspectRatio === "portrait" || !tween) return
+	useGSAP(
+		() => {
+			console.log("useEffect animations ran again")
+			let ctx = gsap.context(() => {})
 
-		gsap.registerPlugin(ScrollTrigger)
+			// Start ScrollTrigger when window is in landscape mode
+			if (windowAspectRatio === "portrait" || !tween) return
 
-		// Wait for the panels to slide into position
-		setTimeout(() => {
-			ctx.add(() => {
+			gsap.registerPlugin(ScrollTrigger)
+
+			// Wait for the panels to slide into position
+			setTimeout(() => {
 				const titles = panelsContainerRef.current?.querySelectorAll("h1")
 
 				if (!titles) return
@@ -90,8 +91,17 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 						horizontal: true,
 						containerAnimation: tween,
 						// markers: true,
-						onToggle: (self) => {
-							if (self.isActive) window.history.replaceState(null, "", slug)
+						onEnter: (self) => {
+							// Only update history if trigger is active and if new section
+							if (self.isActive && !window.location.href.includes(slug)) {
+								window.history.pushState(null, "", slug)
+							}
+						},
+						onEnterBack: (self) => {
+							// Only update history if trigger is active and if new section
+							if (self.isActive && !window.location.href.includes(slug)) {
+								window.history.pushState(null, "", slug)
+							}
 						},
 					})
 
@@ -118,11 +128,12 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 						ease: "none",
 					})
 				}, panelsContainerRef.current)
-			})
-		}, 300)
+			}, 400)
 
-		return () => ctx.revert()
-	}, [windowAspectRatio, tween]) // eslint-disable-line react-hooks/exhaustive-deps
+			return () => ScrollTrigger.killAll()
+		},
+		{ dependencies: [tween], scope: panelsContainerRef }
+	)
 
 	// Fade in panels on load
 	useEffect(() => {
@@ -134,15 +145,13 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 		<main>
 			<div
 				ref={panelsContainerRef}
-				className='gsap-panels-container flex gap-32 opacity-0'
-			>
+				className='gsap-panels-container flex gap-32 opacity-0'>
 				{sections.map((section) => {
 					return (
 						<section
 							data-id={`panel-${section.slug === "/" ? "home" : section.slug}`}
 							className='gsap-panel h-screen min-h-full px-8 min-w-fit w-fit overflow-clip'
-							key={`panel-${section.slug}`}
-						>
+							key={`panel-${section.slug}`}>
 							<PanelContent data={data} section={section.slug} />
 						</section>
 					)

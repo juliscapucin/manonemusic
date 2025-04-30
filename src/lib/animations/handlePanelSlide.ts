@@ -11,8 +11,6 @@ export const handlePanelSlide = (targetSlug: string) => {
 					`[data-id=panel-${targetSlug.includes("/") ? targetSlug.split("/")[1] : targetSlug}]`
 				) as HTMLDivElement)
 
-	const panelParent = targetPanel?.parentElement as HTMLDivElement
-
 	if (!targetPanel) return
 
 	let y = targetPanel.offsetLeft
@@ -24,7 +22,7 @@ export const handlePanelSlide = (targetSlug: string) => {
 		},
 		duration: 0.5,
 		onComplete: () => {
-			window.history.replaceState(null, "", `${targetSlug}`)
+			window.history.pushState(null, "", `${targetSlug}`)
 		},
 	})
 }

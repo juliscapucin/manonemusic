@@ -3,7 +3,6 @@ import localFont from "next/font/local"
 import "./globals.css"
 
 import { RootLayout } from "@/components"
-import { getHeaderNavLinks } from "@/sanity/sanity-queries"
 
 // Load custom font //
 const font = localFont({
@@ -31,13 +30,10 @@ export default async function Layout({
 }: {
 	children: React.ReactNode
 }) {
-	const navLinks = await getHeaderNavLinks()
-
 	return (
 		<RootLayout>
-			<body
-				className={`${font.className} relative w-screen landscape:h-screen overflow-x-clip`}
-			>
+			{/* prettier-ignore */}
+			<body className={`${font.className} relative w-screen landscape:h-screen overflow-x-clip`}>
 				{children}
 			</body>
 		</RootLayout>
