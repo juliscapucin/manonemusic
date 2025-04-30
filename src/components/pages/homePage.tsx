@@ -6,14 +6,11 @@ import { location } from "@/constants"
 
 import { Copyright, Status } from "@/components"
 import { Heading, SectionWrapper } from "@/components/ui"
-import { useTitleScrollTrigger } from "@/hooks"
 
 import type { HomePage } from "@/types"
 
 export default function HomePage() {
 	const titleHomeRef = useRef(null)
-
-	// useTitleScrollTrigger(titleHomeRef, "/", tween)
 
 	return (
 		<SectionWrapper>

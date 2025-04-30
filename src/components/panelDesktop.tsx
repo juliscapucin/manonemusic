@@ -10,7 +10,7 @@ import { PanelContent } from "@/components"
 import { usePathname } from "next/navigation"
 import { useWindowDimensions } from "@/hooks"
 import { animateSplitText } from "@/animations"
-import { handlePanelSlide, panelsEnter } from "@/lib/animations"
+import { panelsEnter } from "@/lib/animations"
 
 type PanelDesktopProps = {
 	data: AllData

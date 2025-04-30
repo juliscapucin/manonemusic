@@ -9,7 +9,6 @@ import {
 	TextBlock,
 	TitleDisplay,
 } from "@/components/ui"
-import { useTitleScrollTrigger } from "@/hooks"
 
 import { ButtonRounded } from "@/components/buttons"
 
@@ -26,8 +25,6 @@ export default function AboutPage({
 	image,
 }: AboutPageProps) {
 	const titleAboutRef = useRef(null)
-
-	// useTitleScrollTrigger(titleAboutRef, "/about", tween)
 
 	return (
 		<SectionWrapper classes='landscape:flex justify-between items-end gap-8 landscape:pb-40'>
