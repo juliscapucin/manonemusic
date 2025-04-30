@@ -126,9 +126,14 @@ export function infiniteHorizontalLoop(
 		}
 		curIndex = newIndex
 		vars.overwrite = true
+
 		return tl.tweenTo(time, vars)
 	}
-	tl.next = (vars: gsap.TweenVars | undefined) => toIndex(curIndex + 1, vars)
+
+	// needs var values ex: { duration: 0.3, ease: "power1.inOut" } to work
+	tl.next = (vars: gsap.TweenVars | undefined) => {
+		toIndex(curIndex + 1, vars)
+	}
 	tl.previous = (vars: gsap.TweenVars | undefined) =>
 		toIndex(curIndex - 1, vars)
 	tl.current = () => curIndex

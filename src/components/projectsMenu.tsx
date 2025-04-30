@@ -1,11 +1,15 @@
 "use client"
 
+import gsap from "gsap"
+import { Observer } from "gsap/Observer"
+
 import { PortfolioItem } from "@/types"
 import { ProjectCard } from "@/components"
 import { useWindowDimensions } from "@/hooks"
 import { useGSAP } from "@gsap/react"
-import { useRef } from "react"
-import { createScrollLoop } from "@/lib/animations"
+import { useRef, useState } from "react"
+import { infiniteHorizontalLoop } from "@/lib/animations"
+import { ButtonsCarousel } from "@/components/buttons"
 
 type ProjectsMenuProps = {
 	projects: PortfolioItem[]
@@ -20,10 +24,49 @@ export default function ProjectsMenu({
 }: ProjectsMenuProps) {
 	const { isMobile } = useWindowDimensions()
 	const projectCardsContainerRef = useRef<HTMLDivElement | null>(null)
+	const tlRef = useRef<gsap.core.Timeline | null>(null)
+	const [timelineReady, setTimelineReady] = useState(false)
 
+	// Create infinite horizontal scroll for menu version
 	useGSAP(() => {
 		if (!projectCardsContainerRef.current || !isMobile) return
-		createScrollLoop(projectCardsContainerRef.current)
+		gsap.registerPlugin(Observer)
+
+		const container = projectCardsContainerRef.current
+		const cards = Array.from(container.children) as HTMLElement[]
+
+		if (cards.length === 0) return
+
+		// Create an infinite horizontal loop
+		tlRef.current = infiniteHorizontalLoop(cards, {
+			repeat: -1,
+			paddingRight: "64px",
+		})
+		const loop = tlRef.current
+		setTimelineReady(true)
+
+		// create a tween that'll always decelerate the timeScale of the timeline back to 0 over the course of 2 seconds (or whatever)
+		let slow = gsap.to(loop, { timeScale: 0, duration: 1 })
+		// make the loop stopped initially.
+
+		loop.timeScale(0)
+
+		// Create an observer to detect touch and wheel events
+		Observer.create({
+			target: container,
+			type: "pointer,touch,wheel",
+			wheelSpeed: -1,
+			onChange: (self) => {
+				loop.timeScale(
+					Math.abs(self.deltaX) > Math.abs(self.deltaY)
+						? -self.deltaX
+						: -self.deltaY
+				) // whichever direction is bigger
+
+				// Decelerate
+				slow.invalidate().restart()
+			},
+		})
 	}, [isMobile, projectCardsContainerRef])
 
 	return (
@@ -49,6 +92,7 @@ export default function ProjectsMenu({
 					)
 				})}
 			</div>
+			{timelineReady && tlRef.current && <ButtonsCarousel tl={tlRef.current} />}
 		</div>
 	)
 }

@@ -1,16 +1,15 @@
 import { IconArrow } from "../icons"
 
-type ButtonArrowProps = {
-	action: () => void
+interface ButtonArrowProps
+	extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 	classes?: string
 }
 
-export default function ButtonArrow({ action, classes }: ButtonArrowProps) {
+export default function ButtonArrow({ classes, ...props }: ButtonArrowProps) {
 	return (
 		<button
-			className={`flex justify-center items-center h-16 w-16 opacity-30 hover:opacity-100 transition-opacity duration-300 ${classes}`}
-			onClick={() => action()}
-		>
+			className={`flex justify-center items-center opacity-30 hover:opacity-100 transition-opacity duration-300 ${classes}`}
+			{...props}>
 			<IconArrow />
 		</button>
 	)
