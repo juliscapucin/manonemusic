@@ -119,7 +119,7 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 					})
 				}, panelsContainerRef.current)
 			})
-		}, 400)
+		}, 300)
 
 		return () => ctx.revert()
 	}, [windowAspectRatio, tween]) // eslint-disable-line react-hooks/exhaustive-deps
