@@ -1,3 +1,4 @@
+import { carouselLoop } from "./carouselLoop"
 import { handlePanelSlide } from "./handlePanelSlide"
 import { infiniteHorizontalLoop } from "./infiniteHorizontalLoop"
 import { panelsExit } from "./panelsExit"
@@ -6,6 +7,7 @@ import { projectExit } from "./projectExit"
 import { transitionOnClickBack } from "./transitionOnClickBack"
 
 export {
+	carouselLoop,
 	handlePanelSlide,
 	infiniteHorizontalLoop,
 	panelsEnter,

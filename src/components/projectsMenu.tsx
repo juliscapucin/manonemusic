@@ -1,14 +1,14 @@
 "use client"
 
 import gsap from "gsap"
-import { Observer } from "gsap/Observer"
+import { useGSAP } from "@gsap/react"
+import { Draggable } from "gsap/Draggable"
 
 import { PortfolioItem } from "@/types"
 import { ProjectCard } from "@/components"
 import { useWindowDimensions } from "@/hooks"
-import { useGSAP } from "@gsap/react"
-import { useRef, useState } from "react"
-import { infiniteHorizontalLoop } from "@/lib/animations"
+import { useEffect, useRef, useState } from "react"
+import { carouselLoop } from "@/lib/animations"
 import { ButtonsCarousel } from "@/components/buttons"
 
 type ProjectsMenuProps = {
@@ -32,69 +32,102 @@ export default function ProjectsMenu({
 	const [activeCarouselImage, setActiveCarouselImage] = useState(0)
 
 	// MOBILE: Create infinite horizontal scroll
+	// useGSAP(
+	// 	() => {
+	// 		if (!outerContainerRef.current || !cardsContainerRef.current || !isMobile)
+	// 			return
+	// 		gsap.registerPlugin(Observer)
+
+	// 		const outerContainer = outerContainerRef.current
+	// 		const container = cardsContainerRef.current
+	// 		const cards = Array.from(container.children) as HTMLElement[]
+
+	// 		const timingSettings = { duration: 0.3, ease: "power1.inOut" }
+
+	// 		if (cards.length === 0) return
+
+	// 		// Create an infinite horizontal loop
+	// 		tlRef.current = infiniteHorizontalLoop(cards, {
+	// 			repeat: -1,
+	// 			paddingRight: "32px",
+	// 			snap: false,
+	// 		})
+
+	// 		if (!tlRef.current) return
+
+	// 		setTimelineReady(true)
+
+	// 		// create a tween that'll always decelerate the timeScale of the timeline back to 0 over the course of 2 seconds (or whatever)
+	// 		let slow = gsap.to(tlRef.current, {
+	// 			timeScale: 0,
+	// 			duration: 1,
+	// 		})
+	// 		// make the loop stopped initially.
+
+	// 		tlRef.current.timeScale(0)
+
+	// 		// Create an observer to detect touch and wheel events
+	// 		Observer.create({
+	// 			target: outerContainer,
+	// 			type: "pointer,touch,wheel",
+	// 			wheelSpeed: -1,
+	// 			onStop: () => {
+	// 				const currentIndex = tlRef.current!.onChange()
+
+	// 				console.log("onDrag", currentIndex)
+	// 				setActiveCarouselImage(currentIndex)
+	// 			},
+	// 			onChange: (self) => {
+	// 				// Adjust the timeline's timeScale based on scroll/touch velocity
+	// 				tlRef.current!.timeScale(
+	// 					Math.abs(self.deltaX) > Math.abs(self.deltaY)
+	// 						? -self.deltaX
+	// 						: -self.deltaY
+	// 				)
+
+	// 				// Decelerate
+	// 				slow.invalidate().restart()
+	// 			},
+	// 		})
+	// 	},
+	// 	{
+	// 		dependencies: [isMobile, cardsContainerRef, outerContainerRef],
+	// 		scope: outerContainerRef,
+	// 	}
+	// )
+
 	useGSAP(
 		() => {
 			if (!outerContainerRef.current || !cardsContainerRef.current || !isMobile)
 				return
-			gsap.registerPlugin(Observer)
 
-			const outerContainer = outerContainerRef.current
-			const container = cardsContainerRef.current
-			const cards = Array.from(container.children) as HTMLElement[]
+			gsap.registerPlugin(Draggable)
+			const cards = gsap.utils.toArray(
+				cardsContainerRef.current.children
+			) as HTMLElement[]
 
-			const timingSettings = { duration: 0.3, ease: "power1.inOut" }
-
-			if (cards.length === 0) return
-
-			// Create an infinite horizontal loop
-			tlRef.current = infiniteHorizontalLoop(cards, {
-				repeat: -1,
-				paddingRight: "32px",
-				snap: false,
-			})
-
-			if (!tlRef.current) return
+			tlRef.current = carouselLoop(
+				cards,
+				{
+					paused: true,
+					paddingRight: 32,
+					draggable: true,
+				},
+				outerContainerRef.current
+			)
 
 			setTimelineReady(true)
-
-			// create a tween that'll always decelerate the timeScale of the timeline back to 0 over the course of 2 seconds (or whatever)
-			let slow = gsap.to(tlRef.current, {
-				timeScale: 0,
-				duration: 1,
-			})
-			// make the loop stopped initially.
-
-			tlRef.current.timeScale(0)
-
-			// Create an observer to detect touch and wheel events
-			Observer.create({
-				target: outerContainer,
-				type: "pointer,touch,wheel",
-				wheelSpeed: -1,
-				onStop: () => {
-					const currentIndex = tlRef.current!.onChange()
-
-					console.log("onDrag", currentIndex)
-					setActiveCarouselImage(currentIndex)
-				},
-				onChange: (self) => {
-					// Adjust the timeline's timeScale based on scroll/touch velocity
-					tlRef.current!.timeScale(
-						Math.abs(self.deltaX) > Math.abs(self.deltaY)
-							? -self.deltaX
-							: -self.deltaY
-					)
-
-					// Decelerate
-					slow.invalidate().restart()
-				},
-			})
 		},
-		{
-			dependencies: [isMobile, cardsContainerRef, outerContainerRef],
-			scope: outerContainerRef,
-		}
+		{ dependencies: [isMobile] }
 	)
+
+	// useEffect(() => {
+	// 	if (!tlRef.current) return
+	// 	tlRef.current.next({
+	// 		duration: 0.8,
+	// 		ease: "power1.inOut",
+	// 	})
+	// }, [timelineReady])
 
 	// DESKTOP: Skew on scroll
 	useGSAP(
@@ -141,39 +174,38 @@ export default function ProjectsMenu({
 	)
 
 	return (
-		<div ref={outerContainerRef}>
+		<div
+			ref={outerContainerRef}
+			id='projects-menu'
+			className={`gsap-projects-menu relative w-full portrait:overflow-x-clip landscape:w-fit portrait:pb-16 h-80 landscape:h-2/5`}>
 			<div
-				id='projects-menu'
-				className={`gsap-projects-menu relative w-full portrait:overflow-x-clip landscape:w-fit portrait:pb-16 h-80 landscape:h-2/5`}>
-				<div
-					ref={cardsContainerRef}
-					className='w-fit h-full flex items-start justify-start gap-8 landscape:gap-40'>
-					{projects?.map((project: PortfolioItem, index) => {
-						return (
-							<ProjectCard
-								key={project.slug}
-								{...{
-									variant,
-									section,
-									title: project.title,
-									image: project.image,
-									slug: project.slug,
-									isMobile,
-								}}
-							/>
-						)
-					})}
-				</div>
-				{/* CAROUSEL ELEMENTS ON MOBILE */}
-				{timelineReady && tlRef.current && (
-					<ButtonsCarousel
-						tl={tlRef.current}
-						itemsCount={projects.length}
-						activeCarouselImage={activeCarouselImage}
-						setActiveCarouselImage={setActiveCarouselImage}
-					/>
-				)}
+				ref={cardsContainerRef}
+				className='relative w-fit h-full flex items-start justify-start gap-8 landscape:gap-40'>
+				{projects?.map((project: PortfolioItem, index) => {
+					return (
+						<ProjectCard
+							key={project.slug}
+							{...{
+								variant,
+								section,
+								title: project.title,
+								image: project.image,
+								slug: project.slug,
+								isMobile,
+							}}
+						/>
+					)
+				})}
 			</div>
+			{/* CAROUSEL ELEMENTS ON MOBILE */}
+			{/* {timelineReady && tlRef.current && (
+				<ButtonsCarousel
+					tl={tlRef.current}
+					itemsCount={projects.length}
+					activeCarouselImage={activeCarouselImage}
+					setActiveCarouselImage={setActiveCarouselImage}
+				/>
+			)} */}
 		</div>
 	)
 }

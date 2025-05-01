@@ -1,196 +1,304 @@
 import { gsap } from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
 import { Draggable } from "gsap/Draggable"
 
-gsap.registerPlugin(ScrollTrigger, Draggable)
-
-type CarouselLoopProps = {
-	cards: HTMLElement[]
-	containerSelector: string
-	dragProxySelector: string
-	nextButtonSelector: string
-	prevButtonSelector: string
+type CarouselConfig = {
+	paused?: boolean
+	paddingRight?: number
+	draggable?: boolean
+	repeat?: number
+	reversed?: boolean
+	center?: boolean | Element | Element[]
+	speed?: number
+	snap?: boolean | number | ((value: number) => number)
+	onChange?: (element: Element, index: number) => void
 }
 
-export function carouselLoop({
-	cards,
-	containerSelector,
-	dragProxySelector,
-	nextButtonSelector,
-	prevButtonSelector,
-}: CarouselLoopProps) {
-	let iteration = 0 // Tracks the iteration count for seamless looping
+type TweenVars = gsap.TweenVars
 
-	// Set the initial state of the cards
-	gsap.set(cards, { xPercent: 400, opacity: 0, scale: 0 })
+interface LoopTimeline extends gsap.core.Timeline {
+	toIndex: (
+		index: number,
+		vars?: TweenVars
+	) => gsap.core.Tween | gsap.core.Timeline
+	next: (vars?: TweenVars) => gsap.core.Tween | gsap.core.Timeline
+	previous: (vars?: TweenVars) => gsap.core.Tween | gsap.core.Timeline
+	current: () => number
+	times: number[]
+	draggable?: Draggable
+	closestIndex: (setCurrent?: boolean) => number
+}
 
-	const spacing = 0.15 // Spacing between cards (stagger)
-	const snapTime = gsap.utils.snap(spacing) // Snap time for seamless looping
+export function carouselLoop(
+	items: Element[],
+	config: CarouselConfig,
+	wrapper: HTMLElement
+): LoopTimeline {
+	const onChange = config.onChange
+	let lastIndex = 0
 
-	// Animation function for each card
-	const animateFunc = (element: HTMLElement): gsap.core.Timeline => {
-		const tl = gsap.timeline()
-		tl.fromTo(
-			element,
-			{ scale: 1, opacity: 1 },
-			{
-				scale: 1,
-				opacity: 1,
-				zIndex: 100,
-				duration: 0.5,
-				repeat: 1,
-				ease: "power1.in",
-				immediateRender: false,
-			}
-		).fromTo(
-			element,
-			{ xPercent: 400 },
-			{ xPercent: -400, duration: 1, ease: "none", immediateRender: false },
-			0
-		)
-		return tl
-	}
+	console.log(items.map((c) => c.getBoundingClientRect().width))
 
-	// Build the seamless loop
-	const seamlessLoop = buildSeamlessLoop(cards, spacing, animateFunc)
-	const playhead = { offset: 0 } // Proxy object for the playhead position
-	const wrapTime = gsap.utils.wrap(0, seamlessLoop.duration()) // Wrap time for seamless looping
+	gsap.registerPlugin(Draggable)
 
-	// Scrub tween for smooth playhead scrubbing
-	const scrub = gsap.to(playhead, {
-		offset: 0,
-		onUpdate() {
-			seamlessLoop.time(wrapTime(playhead.offset)) // Convert the offset to a "safe" corresponding time on the seamlessLoop timeline
-		},
-		duration: 0.5,
-		ease: "power3",
-		paused: true,
-	})
-
-	// ScrollTrigger for seamless looping
-	const trigger = ScrollTrigger.create({
-		start: 0,
-		onUpdate(self) {
-			const scroll = self.scroll()
-			if (scroll > self.end - 1) {
-				wrap(1, 2)
-			} else if (scroll < 1 && self.direction < 0) {
-				wrap(-1, self.end - 2)
-			} else {
-				scrub.vars.offset =
-					(iteration + self.progress) * seamlessLoop.duration()
-				scrub.invalidate().restart() // To improve performance, we just invalidate and restart the same tween
-			}
-		},
-		end: "+=3000",
-		pin: containerSelector,
-	})
-
-	// Converts progress to a safe scroll value
-	const progressToScroll = (progress: number): number =>
-		gsap.utils.clamp(
-			1,
-			trigger.end - 1,
-			gsap.utils.wrap(0, 1, progress) * trigger.end
-		)
-
-	// Wraps the scroll position for seamless looping
-	const wrap = (iterationDelta: number, scrollTo: number): void => {
-		iteration += iterationDelta
-		trigger.scroll(scrollTo)
-		trigger.update() // By default, when we trigger.scroll(), it waits 1 tick to update
-	}
-
-	// Scroll to a specific offset
-	const scrollToOffset = (offset: number): void => {
-		const snappedTime = snapTime(offset)
-		const progress =
-			(snappedTime - seamlessLoop.duration() * iteration) /
-			seamlessLoop.duration()
-		const scroll = progressToScroll(progress)
-		if (progress >= 1 || progress < 0) {
-			return wrap(Math.floor(progress), scroll)
-		}
-		trigger.scroll(scroll)
-	}
-
-	// Snap to the closest item when scrolling stops
-	ScrollTrigger.addEventListener("scrollEnd", () =>
-		scrollToOffset(scrub.vars.offset as number)
-	)
-
-	// Build the seamless loop
-	function buildSeamlessLoop(
-		items: HTMLElement[],
-		spacing: number,
-		animateFunc: (element: HTMLElement) => gsap.core.Timeline
-	): gsap.core.Timeline {
-		const rawSequence = gsap.timeline({ paused: true }) // This is where all the "real" animations live
-		const seamlessLoop = gsap.timeline({
-			paused: true,
-			repeat: -1, // To accommodate infinite scrolling/looping
-			onRepeat() {
-				if (this._time === this._dur) {
-					this._tTime += this._dur - 0.01
+	const tl = gsap.timeline({
+		repeat: config.repeat,
+		paused: config.paused,
+		defaults: { ease: "none" },
+		onUpdate:
+			onChange &&
+			function () {
+				const i = (tl as LoopTimeline).closestIndex()
+				if (lastIndex !== i) {
+					lastIndex = i
+					onChange(items[i], i)
 				}
 			},
-			onReverseComplete() {
-				this.totalTime(this.rawTime() + this.duration() * 100) // Seamless looping backwards
-			},
+		onReverseComplete: () => {
+			tl.totalTime(tl.rawTime() + tl.duration() * 100)
+		},
+	}) as LoopTimeline
+
+	const length = items.length
+	const startX = items[0].getBoundingClientRect().left + wrapper.scrollLeft
+	const times: number[] = []
+	const widths: number[] = []
+	const spaceBefore: number[] = []
+	const xPercents: number[] = []
+	let curIndex = 0
+	let indexIsDirty = false
+	const center = config.center
+	const pixelsPerSecond = (config.speed || 1) * 100
+	const snap =
+		config.snap === false
+			? (v: number) => v
+			: gsap.utils.snap(typeof config.snap === "number" ? config.snap : 1)
+
+	let timeOffset = 0
+	const container =
+		center === true
+			? wrapper
+			: (center ? (gsap.utils.toArray(center)[0] as HTMLElement) : null) ||
+				wrapper
+
+	const getTotalWidth = () =>
+		items[length - 1].getBoundingClientRect().left +
+		(xPercents[length - 1] / 100) * widths[length - 1] -
+		startX +
+		spaceBefore[0] +
+		items[length - 1].getBoundingClientRect().width *
+			Number(gsap.getProperty(items[length - 1], "scaleX")) +
+		(config.paddingRight || 0)
+
+	const populateWidths = () => {
+		let b1 = container.getBoundingClientRect()
+		let b2: DOMRect
+		items.forEach((el, i) => {
+			widths[i] = parseFloat(gsap.getProperty(el, "width", "px") as string)
+			xPercents[i] = snap(
+				(parseFloat(gsap.getProperty(el, "x", "px") as string) / widths[i]) *
+					100 +
+					Number(gsap.getProperty(el, "xPercent"))
+			)
+			b2 = el.getBoundingClientRect()
+			spaceBefore[i] = b2.left - (i ? b1.right : b1.left)
+			b1 = b2
 		})
-		const cycleDuration = spacing * items.length
-		let dur: number | undefined
-
-		// Loop through 3 times so we can have an extra cycle at the start and end
-		items
-			.concat(items)
-			.concat(items)
-			.forEach((item, i) => {
-				const anim = animateFunc(items[i % items.length])
-				rawSequence.add(anim, i * spacing)
-				dur ||= anim.duration()
-			})
-
-		// Animate the playhead linearly from the start of the 2nd cycle to its end
-		seamlessLoop.fromTo(
-			rawSequence,
-			{
-				time: cycleDuration + (dur || 0) / 2,
-			},
-			{
-				time: `+=${cycleDuration}`,
-				duration: cycleDuration,
-				ease: "none",
-			}
-		)
-		return seamlessLoop
+		gsap.set(items, {
+			xPercent: (i: number) => xPercents[i],
+		})
+		totalWidth = getTotalWidth()
 	}
 
-	// Draggable functionality for mobile-friendly interaction
-	Draggable.create(dragProxySelector, {
-		type: "x",
-		trigger: cards,
-		onPress() {
-			this.startOffset = scrub.vars.offset as number
-		},
-		onDrag() {
-			scrub.vars.offset = this.startOffset + (this.startX - this.x) * 0.001
-			scrub.invalidate().restart()
-		},
-		onDragEnd() {
-			scrollToOffset(scrub.vars.offset as number)
-		},
-	})
+	const getClosest = (values: number[], value: number, wrap: number) => {
+		let i = values.length,
+			closest = 1e10,
+			index = 0,
+			d: number
+		while (i--) {
+			d = Math.abs(values[i] - value)
+			if (d > wrap / 2) d = wrap - d
+			if (d < closest) {
+				closest = d
+				index = i
+			}
+		}
+		return index
+	}
 
-	// Add click listeners for next and previous buttons
-	document
-		.querySelector(nextButtonSelector)
-		?.addEventListener("click", () =>
-			scrollToOffset((scrub.vars.offset as number) + spacing)
-		)
-	document
-		.querySelector(prevButtonSelector)
-		?.addEventListener("click", () =>
-			scrollToOffset((scrub.vars.offset as number) - spacing)
-		)
+	let timeWrap: (value: number) => number
+	let totalWidth: number
+	let proxy: HTMLDivElement
+
+	const populateTimeline = () => {
+		let i, item, curX, distanceToStart, distanceToLoop
+		tl.clear()
+		for (i = 0; i < length; i++) {
+			item = items[i]
+			curX = (xPercents[i] / 100) * widths[i]
+			distanceToStart =
+				item.getBoundingClientRect().left + curX - startX + spaceBefore[0]
+			distanceToLoop =
+				distanceToStart + widths[i] * Number(gsap.getProperty(item, "scaleX"))
+
+			tl.to(
+				item,
+				{
+					xPercent: snap(((curX - distanceToLoop) / widths[i]) * 100),
+					duration: distanceToLoop / pixelsPerSecond,
+				},
+				0
+			)
+				.fromTo(
+					item,
+					{
+						xPercent: snap(
+							((curX - distanceToLoop + totalWidth) / widths[i]) * 100
+						),
+					},
+					{
+						xPercent: xPercents[i],
+						duration:
+							(curX - distanceToLoop + totalWidth - curX) / pixelsPerSecond,
+						immediateRender: false,
+					},
+					distanceToLoop / pixelsPerSecond
+				)
+				.add("label" + i, distanceToStart / pixelsPerSecond)
+			times[i] = distanceToStart / pixelsPerSecond
+		}
+		timeWrap = gsap.utils.wrap(0, tl.duration())
+	}
+
+	const populateOffsets = () => {
+		timeOffset = center
+			? (tl.duration() * container.offsetWidth) / 2 / totalWidth
+			: 0
+		if (center) {
+			times.forEach((t, i) => {
+				times[i] = timeWrap(
+					tl.labels["label" + i] +
+						(tl.duration() * widths[i]) / 2 / totalWidth -
+						timeOffset
+				)
+			})
+		}
+	}
+
+	const refresh = (deep = false) => {
+		const progress = tl.progress()
+		tl.progress(0, true)
+		populateWidths()
+		if (deep) populateTimeline()
+		populateOffsets()
+		if (deep && tl.draggable) {
+			tl.time(times[curIndex], true)
+		} else {
+			tl.progress(progress, true)
+		}
+	}
+
+	refresh(true)
+
+	const toIndex = (index: number, vars: TweenVars = {}) => {
+		if (Math.abs(index - curIndex) > length / 2) {
+			index += index > curIndex ? -length : length
+		}
+		const newIndex = gsap.utils.wrap(0, length, index)
+		let time = times[newIndex]
+		if (time > tl.time() !== index > curIndex && index !== curIndex) {
+			time += tl.duration() * (index > curIndex ? 1 : -1)
+		}
+		if (time < 0 || time > tl.duration()) {
+			vars.modifiers = { time: timeWrap }
+		}
+		curIndex = newIndex
+		vars.overwrite = true
+		gsap.killTweensOf(proxy)
+
+		return vars.duration === 0
+			? tl.time(timeWrap(time))
+			: tl.tweenTo(time, vars)
+	}
+
+	tl.toIndex = (index, vars) => toIndex(index, vars)
+	tl.closestIndex = (setCurrent = false) => {
+		const index = getClosest(times, tl.time(), tl.duration())
+		if (setCurrent) {
+			curIndex = index
+			indexIsDirty = false
+		}
+		return index
+	}
+	tl.current = () => (indexIsDirty ? tl.closestIndex(true) : curIndex)
+	tl.next = (vars) => {
+		console.log("next")
+		return toIndex(tl.current() + 1, vars)
+	}
+	tl.previous = (vars) => toIndex(tl.current() - 1, vars)
+	tl.times = times
+	tl.progress(1, true).progress(0, true)
+
+	if (config.reversed) {
+		tl.vars.onReverseComplete?.()
+		tl.reverse()
+	}
+
+	if (config.draggable && typeof Draggable === "function") {
+		proxy = document.createElement("div")
+		let wrap = gsap.utils.wrap(0, 1)
+		let ratio: number, startProgress: number, draggable: Draggable
+		let dragSnap: any, lastSnap: number, initChangeX: number
+
+		draggable = Draggable.create(proxy, {
+			trigger: wrapper,
+			type: "x",
+			onPressInit() {
+				const x = this.x
+				gsap.killTweensOf(tl)
+				startProgress = tl.progress()
+				refresh()
+				ratio = 1 / totalWidth
+				initChangeX = startProgress / -ratio - x
+				gsap.set(proxy, { x: startProgress / -ratio })
+			},
+			onDrag() {
+				console.log("drag")
+				tl.progress(wrap(startProgress + (this.startX - this.x) * ratio))
+			},
+			onThrowUpdate() {
+				tl.progress(wrap(startProgress + (this.startX - this.x) * ratio))
+			},
+			overshootTolerance: 0,
+			inertia: true,
+			snap(value) {
+				if (Math.abs(startProgress / -ratio - this.x) < 10) {
+					return lastSnap + initChangeX
+				}
+				const time = -(value * ratio) * tl.duration()
+				const wrappedTime = timeWrap(time)
+				const snapTime = times[getClosest(times, wrappedTime, tl.duration())]
+				let dif = snapTime - wrappedTime
+				if (Math.abs(dif) > tl.duration() / 2) {
+					dif += dif < 0 ? tl.duration() : -tl.duration()
+				}
+				lastSnap = (time + dif) / tl.duration() / -ratio
+				return lastSnap
+			},
+			onRelease() {
+				tl.closestIndex(true)
+				this.isThrowing && (indexIsDirty = true)
+			},
+			onThrowComplete() {
+				tl.closestIndex(true)
+			},
+		})[0]
+		tl.draggable = draggable
+	}
+
+	tl.closestIndex(true)
+	lastIndex = curIndex
+	onChange?.(items[curIndex], curIndex)
+
+	console.log(tl.times)
+	return tl
 }
