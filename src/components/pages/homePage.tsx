@@ -28,7 +28,7 @@ export default function HomePage() {
 				<Status location={location} />
 			</div>
 			<div className='my-8'>
-				<Copyright />
+				<Copyright alignRight={true} />
 			</div>
 		</SectionWrapper>
 	)

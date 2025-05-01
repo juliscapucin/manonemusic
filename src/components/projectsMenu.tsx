@@ -4,7 +4,7 @@ import gsap from "gsap"
 import { Observer } from "gsap/Observer"
 
 import { PortfolioItem } from "@/types"
-import { ProjectCard } from "@/components"
+import { CarouselIndicators, ProjectCard } from "@/components"
 import { useWindowDimensions } from "@/hooks"
 import { useGSAP } from "@gsap/react"
 import { useRef, useState } from "react"
@@ -137,7 +137,14 @@ export default function ProjectsMenu({
 					)
 				})}
 			</div>
-			{timelineReady && tlRef.current && <ButtonsCarousel tl={tlRef.current} />}
+			{/* CAROUSEL ELEMENTS ON MOBILE */}
+			{/* BUTTONS */}
+			{timelineReady && tlRef.current && (
+				<>
+					<CarouselIndicators itemsCount={projects.length} isActiveIndex={3} />
+					<ButtonsCarousel tl={tlRef.current} />
+				</>
+			)}
 		</div>
 	)
 }
