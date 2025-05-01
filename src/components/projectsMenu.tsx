@@ -27,7 +27,7 @@ export default function ProjectsMenu({
 	const tlRef = useRef<gsap.core.Timeline | null>(null)
 	const [timelineReady, setTimelineReady] = useState(false)
 
-	// Create infinite horizontal scroll for menu version
+	// MOBILE: Create infinite horizontal scroll
 	useGSAP(() => {
 		if (!projectCardsContainerRef.current || !isMobile) return
 		gsap.registerPlugin(Observer)
@@ -69,6 +69,47 @@ export default function ProjectsMenu({
 		})
 	}, [isMobile, projectCardsContainerRef])
 
+	// DESKTOP: Card efffects on scroll
+	useGSAP(() => {
+		if (!projectCardsContainerRef.current || isMobile) return
+
+		const container = projectCardsContainerRef.current
+
+		if (!container) return
+
+		gsap.registerPlugin(Observer)
+
+		let proxy = { skew: 0 },
+			skewSetter = gsap.quickSetter(container, "skewX", "deg"), // fast
+			clamp = gsap.utils.clamp(-10, 10) // don't let the skew go beyond 20 degrees.
+
+		Observer.create({
+			target: window,
+			type: "wheel,scroll,touch",
+			onChange: (self) => {
+				let skew = clamp(self.velocityY / -300)
+				// only do something if the skew is MORE severe. Remember, we're always tweening back to 0, so if the user slows their scrolling quickly, it's more natural to just let the tween handle that smoothly rather than jumping to the smaller skew.
+				if (Math.abs(skew) > Math.abs(proxy.skew)) {
+					proxy.skew = skew
+					gsap.to(proxy, {
+						skew: 0,
+						duration: 1,
+						ease: "power3",
+						overwrite: true,
+						onUpdate: () => skewSetter(proxy.skew),
+					})
+				}
+			},
+			onStop: () => {
+				gsap.to(container, {
+					// opacity: 1,
+					duration: 0.5,
+					ease: "power4.out",
+				})
+			},
+		})
+	}, [isMobile, projectCardsContainerRef])
+
 	return (
 		<div
 			id='projects-menu'
@@ -76,7 +117,7 @@ export default function ProjectsMenu({
 			<div
 				ref={projectCardsContainerRef}
 				className='w-full h-full flex items-start justify-start gap-16'>
-				{projects?.map((project: PortfolioItem) => {
+				{projects?.map((project: PortfolioItem, index) => {
 					return (
 						<ProjectCard
 							key={project.slug}

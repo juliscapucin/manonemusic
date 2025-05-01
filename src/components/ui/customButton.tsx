@@ -2,8 +2,7 @@
 
 import Link from "next/link"
 
-type ButtonProps = {
-	href: string
+type ButtonProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
 	classes?: string
 	style?: React.CSSProperties
 	children?: React.ReactNode
@@ -12,13 +11,15 @@ type ButtonProps = {
 }
 
 const CustomButton = ({
-	href,
 	classes,
 	style,
 	children,
 	transitionOnClick,
 	isDisabled = false,
+	...props
 }: ButtonProps) => {
+	const { href, onMouseEnter, onMouseLeave } = props
+
 	const slug =
 		href && href.length > 0
 			? href.startsWith("/")
@@ -32,14 +33,15 @@ const CustomButton = ({
 		</div>
 	) : (
 		<Link
-			href={href}
+			href={href || ""}
 			className={`${classes}`}
 			style={style}
+			onMouseEnter={onMouseEnter}
+			onMouseLeave={onMouseLeave}
 			onClick={(e) => {
 				e.preventDefault()
 				transitionOnClick(slug)
-			}}
-		>
+			}}>
 			{children}
 		</Link>
 	)
