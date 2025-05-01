@@ -1,11 +1,11 @@
 type CarouselIndicatorsProps = {
 	itemsCount: number
-	isActiveIndex: number
+	activeIndex: number
 }
 
 export default function CarouselIndicators({
 	itemsCount,
-	isActiveIndex: activeIndex,
+	activeIndex,
 }: CarouselIndicatorsProps) {
 	return (
 		<div className='w-full mt-8 flex justify-center gap-2'>

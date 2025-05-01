@@ -140,10 +140,7 @@ export default function ProjectsMenu({
 			{/* CAROUSEL ELEMENTS ON MOBILE */}
 			{/* BUTTONS */}
 			{timelineReady && tlRef.current && (
-				<>
-					<CarouselIndicators itemsCount={projects.length} isActiveIndex={3} />
-					<ButtonsCarousel tl={tlRef.current} />
-				</>
+				<ButtonsCarousel tl={tlRef.current} itemsCount={projects.length} />
 			)}
 		</div>
 	)
