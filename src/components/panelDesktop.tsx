@@ -35,24 +35,42 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 		const container = panelsContainerRef.current
 		const panels = gsap.utils.toArray(".gsap-panel")
 
-		const ctx = gsap.context(() => {
-			const tweenRef = gsap.to(panels, {
-				x: () => -1 * (container.scrollWidth - innerWidth),
-				ease: "none",
-				scrollTrigger: {
-					trigger: container,
-					pin: true,
-					start: "top top",
-					scrub: 1,
-					end: () => "+=" + (container.scrollWidth - container.offsetWidth),
-					invalidateOnRefresh: true,
-					// markers: true,
-				},
-			})
+		// let proxy = { skew: 0 },
+		// 	skewSetter = gsap.quickSetter(panels, "skewX", "deg"), // fast
+		// 	clamp = gsap.utils.clamp(-5, 5) // don't let the skew go beyond 5 degrees.
 
-			// set Ref value to pass to title animations
-			setTween(tweenRef)
-		}, container)
+		const tweenRef = gsap.to(panels, {
+			x: () => -1 * (container.scrollWidth - innerWidth),
+			ease: "none",
+			scrollTrigger: {
+				trigger: container,
+				pin: true,
+				start: "top top",
+				scrub: 1,
+				end: () => "+=" + (container.scrollWidth - container.offsetWidth),
+				invalidateOnRefresh: true,
+				// markers: true,
+
+				// SKEW EFFECT
+				// onUpdate: (self) => {
+				// 	let skew = clamp(self.getVelocity() / -300)
+				// 	// only do something if the skew is MORE severe. Remember, we're always tweening back to 0, so if the user slows their scrolling quickly, it's more natural to just let the tween handle that smoothly rather than jumping to the smaller skew.
+				// 	if (Math.abs(skew) > Math.abs(proxy.skew)) {
+				// 		proxy.skew = skew
+				// 		gsap.to(proxy, {
+				// 			skew: 0,
+				// 			duration: 0.8,
+				// 			ease: "power3",
+				// 			overwrite: true,
+				// 			onUpdate: () => skewSetter(proxy.skew),
+				// 		})
+				// 	}
+				// },
+			},
+		})
+
+		// set Ref value to pass to title animations
+		setTween(tweenRef)
 	}, [])
 
 	// Title animations

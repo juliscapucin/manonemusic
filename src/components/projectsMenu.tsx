@@ -69,7 +69,7 @@ export default function ProjectsMenu({
 		})
 	}, [isMobile, projectCardsContainerRef])
 
-	// DESKTOP: Card efffects on scroll
+	// DESKTOP: Skew on scroll
 	useGSAP(() => {
 		if (!projectCardsContainerRef.current || isMobile) return
 
@@ -81,7 +81,7 @@ export default function ProjectsMenu({
 
 		let proxy = { skew: 0 },
 			skewSetter = gsap.quickSetter(container, "skewX", "deg"), // fast
-			clamp = gsap.utils.clamp(-10, 10) // don't let the skew go beyond 20 degrees.
+			clamp = gsap.utils.clamp(-5, 5) // don't let the skew go beyond 5 degrees.
 
 		Observer.create({
 			target: window,
