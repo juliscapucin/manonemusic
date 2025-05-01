@@ -1,7 +1,6 @@
 import { gsap } from "gsap"
 
 interface LoopConfig {
-	onChange?: any
 	paddingRight?: string
 	reversed?: any
 	snap?: number | number[] | boolean
@@ -9,7 +8,6 @@ interface LoopConfig {
 	repeat?: number
 	paused?: boolean
 	center?: boolean
-	draggable?: boolean
 	inertia?: boolean
 	enterAnimation?: (
 		item: any,
@@ -137,10 +135,30 @@ export function infiniteHorizontalLoop(
 	tl.previous = (vars: gsap.TweenVars | undefined) =>
 		toIndex(curIndex - 1, vars)
 	tl.current = () => curIndex
+	tl.onChange = () => {
+		// Create a listener that updates whenever the timeline progresses
+		tl.eventCallback("onUpdate", () => {
+			// Calculate the current index based on timeline progress
+			const progress = tl.progress()
+			const normalizedTime = tl.duration() * progress
+			const newIndex = times.findIndex((time, i, arr) => {
+				const nextTime = arr[i + 1] || tl.duration()
+				return normalizedTime >= time && normalizedTime < nextTime
+			})
+
+			if (newIndex !== -1 && newIndex !== curIndex) {
+				curIndex = newIndex
+			}
+		})
+
+		return curIndex
+		// return tl // For chaining
+	}
 	tl.toIndex = (index: number, vars: gsap.TweenVars | undefined) =>
 		toIndex(index, vars)
 	tl.times = times
 	tl.progress(1, true).progress(0, true) // pre-render for performance
+
 	if (config.reversed && tl.vars.onReverseComplete) {
 		tl.vars.onReverseComplete()
 		tl.reverse()
