@@ -14,7 +14,6 @@ export default function HomePage() {
 
 	return (
 		<SectionWrapper>
-			<Copyright />
 			<div ref={titleHomeRef} className='mt-2 lg:mt-0'>
 				<h1 className='logo'>MAN/ONE MUSIC</h1>
 			</div>
@@ -27,6 +26,9 @@ export default function HomePage() {
 					your brand and resonate with your audience
 				</p>
 				<Status location={location} />
+			</div>
+			<div className='my-8'>
+				<Copyright />
 			</div>
 		</SectionWrapper>
 	)

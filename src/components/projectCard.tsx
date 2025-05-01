@@ -22,7 +22,7 @@ type ProjectCardProps = {
 	title: string
 	image: ImageField
 	slug: string
-	isMobile?: boolean
+	isMobile: boolean | null
 }
 
 const ctx = gsap.context(() => {})
@@ -87,7 +87,7 @@ export default function ProjectCard({
 			}}
 			onMouseLeave={() => setIsHovered(false)}
 			href={`/${section}/${slug}`}
-			classes={`relative group gsap-project-card bg-primary ${variant === "section" ? "min-w-40 h-full w-fit" : `w-16 landscape:w-32 aspect-square ${pathname.includes(slug) && "pointer-events-none"}`}`}
+			classes={`relative group gsap-project-card bg-primary ${variant === "section" ? "min-w-40 h-full w-fit bg-faded-10" : `w-16 landscape:w-32 ${pathname.includes(slug) && "pointer-events-none"}`}`}
 			style={{ aspectRatio }}
 			aria-labelledby={`project-title-${slug}`}
 			isDisabled={pathname.includes(slug)}>

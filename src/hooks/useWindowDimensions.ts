@@ -6,7 +6,7 @@ export const useWindowDimensions = () => {
 	const [width, setWidth] = useState(0)
 	const [height, setHeight] = useState(0)
 	const [windowAspectRatio, setWindowAspectRatio] = useState("")
-	const [isMobile, setIsMobile] = useState(false)
+	const [isMobile, setIsMobile] = useState<boolean | null>(null)
 
 	useEffect(() => {
 		if (typeof window === "undefined") return

@@ -70,53 +70,57 @@ export default function ProjectsMenu({
 	}, [isMobile, projectCardsContainerRef])
 
 	// DESKTOP: Skew on scroll
-	useGSAP(() => {
-		if (!projectCardsContainerRef.current || isMobile) return
+	useGSAP(
+		() => {
+			if (!projectCardsContainerRef.current || isMobile || isMobile === null)
+				return
 
-		const container = projectCardsContainerRef.current
+			const container = projectCardsContainerRef.current
 
-		if (!container) return
+			if (!container) return
 
-		gsap.registerPlugin(Observer)
+			gsap.registerPlugin(Observer)
 
-		let proxy = { skew: 0 },
-			skewSetter = gsap.quickSetter(container, "skewX", "deg"), // fast
-			clamp = gsap.utils.clamp(-5, 5) // don't let the skew go beyond 5 degrees.
+			let proxy = { skew: 0 },
+				skewSetter = gsap.quickSetter(container, "skewX", "deg"), // fast
+				clamp = gsap.utils.clamp(-5, 5) // don't let the skew go beyond 5 degrees.
 
-		Observer.create({
-			target: window,
-			type: "wheel,scroll,touch",
-			onChange: (self) => {
-				let skew = clamp(self.velocityY / -300)
-				// only do something if the skew is MORE severe. Remember, we're always tweening back to 0, so if the user slows their scrolling quickly, it's more natural to just let the tween handle that smoothly rather than jumping to the smaller skew.
-				if (Math.abs(skew) > Math.abs(proxy.skew)) {
-					proxy.skew = skew
-					gsap.to(proxy, {
-						skew: 0,
-						duration: 1,
-						ease: "power3",
-						overwrite: true,
-						onUpdate: () => skewSetter(proxy.skew),
+			Observer.create({
+				target: window,
+				type: "wheel,scroll,touch",
+				onChange: (self) => {
+					let skew = clamp(self.velocityY / -300)
+					// only do something if the skew is MORE severe. Remember, we're always tweening back to 0, so if the user slows their scrolling quickly, it's more natural to just let the tween handle that smoothly rather than jumping to the smaller skew.
+					if (Math.abs(skew) > Math.abs(proxy.skew)) {
+						proxy.skew = skew
+						gsap.to(proxy, {
+							skew: 0,
+							duration: 1,
+							ease: "power3",
+							overwrite: true,
+							onUpdate: () => skewSetter(proxy.skew),
+						})
+					}
+				},
+				onStop: () => {
+					gsap.to(container, {
+						// opacity: 1,
+						duration: 0.5,
+						ease: "power4.out",
 					})
-				}
-			},
-			onStop: () => {
-				gsap.to(container, {
-					// opacity: 1,
-					duration: 0.5,
-					ease: "power4.out",
-				})
-			},
-		})
-	}, [isMobile, projectCardsContainerRef])
+				},
+			})
+		},
+		{ dependencies: [isMobile, projectCardsContainerRef] }
+	)
 
 	return (
 		<div
 			id='projects-menu'
-			className={`gsap-projects-menu relative w-full portrait:overflow-x-clip landscape:w-fit portrait:pb-16 landscape:h-2/5`}>
+			className={`gsap-projects-menu relative w-full portrait:overflow-x-clip landscape:w-fit portrait:pb-16 h-80 landscape:h-2/5`}>
 			<div
 				ref={projectCardsContainerRef}
-				className='w-full h-full flex items-start justify-start gap-16'>
+				className='w-fit h-full flex items-start justify-start gap-8 landscape:gap-40'>
 				{projects?.map((project: PortfolioItem, index) => {
 					return (
 						<ProjectCard
