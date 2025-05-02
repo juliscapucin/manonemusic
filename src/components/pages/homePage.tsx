@@ -13,7 +13,7 @@ export default function HomePage() {
 	const titleHomeRef = useRef(null)
 
 	return (
-		<SectionWrapper>
+		<SectionWrapper classes={"portrait:h-dvh"}>
 			<div ref={titleHomeRef} className='mt-2 lg:mt-0'>
 				<h1 className='logo'>MAN/ONE MUSIC</h1>
 			</div>

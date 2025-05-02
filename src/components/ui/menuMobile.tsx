@@ -19,9 +19,9 @@ export default function MenuMobile({ navLinks }: NavLinksProps) {
 	const router = useRouter()
 
 	return (
-        <>
-            {navLinks && (
-				<div className='fixed top-0 right-0 left-0 block landscape:hidden h-svh z-mobile pointer-events-none'>
+		<>
+			{navLinks && (
+				<div className='fixed top-0 right-0 left-0 block landscape:hidden h-dvh z-mobile pointer-events-none'>
 					<div className='absolute max-w-full top-4 right-4 flex justify-end items-center z-burger pointer-events-auto'>
 						{/* Burger Button */}
 						<ButtonBurger
@@ -34,8 +34,7 @@ export default function MenuMobile({ navLinks }: NavLinksProps) {
 					</div>
 					<aside
 						className='absolute top-0 w-full min-h-svh bg-primary transition-transform -translate-y-full duration-300 z-mobile pointer-events-auto'
-						ref={mobileMenuRef}
-					>
+						ref={mobileMenuRef}>
 						{/* Close Button */}
 						<div className='absolute top-4 right-4'>
 							<ButtonClose
@@ -51,38 +50,36 @@ export default function MenuMobile({ navLinks }: NavLinksProps) {
 						<nav className='h-screen flex flex-col justify-center items-center'>
 							{navLinks.map((link) => {
 								return (
-                                    <div
+									<div
 										className={`relative w-full flex justify-center`}
-										key={link.slug}
-									>
-                                        {/* Inactive Link */}
-                                        {(pathname === "/" && link.slug === "/") ||
+										key={link.slug}>
+										{/* Inactive Link */}
+										{(pathname === "/" && link.slug === "/") ||
 										pathname.includes(`/${link.slug}`) ? (
 											<span className='font-headline text-headlineMedium sm:text-headlineLarge uppercase text-faded-30 opacity-70'>
 												{link.title}
 											</span>
 										) : (
 											// Active Link
-											(<button
+											<button
 												className='block'
 												onClick={() =>
 													animateMobileMenu(mobileMenuRef.current, () =>
 														router.push(link.slug)
 													)
-												}
-											>
-                                                <span className='font-headline text-headlineMedium sm:text-headlineLarge uppercase text-secondary'>
+												}>
+												<span className='font-headline text-headlineMedium sm:text-headlineLarge uppercase text-secondary'>
 													{link.title}
 												</span>
-                                            </button>)
+											</button>
 										)}
-                                    </div>
-                                );
+									</div>
+								)
 							})}
 						</nav>
 					</aside>
 				</div>
 			)}
-        </>
-    );
+		</>
+	)
 }
