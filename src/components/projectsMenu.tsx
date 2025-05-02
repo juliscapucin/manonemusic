@@ -2,12 +2,13 @@
 
 import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
+import { Observer } from "gsap/Observer"
 
 import { PortfolioItem } from "@/types"
 import { ProjectCard } from "@/components"
 import { useWindowDimensions } from "@/hooks"
 import { useEffect, useRef, useState } from "react"
-import { carouselLoop } from "@/lib/animations"
+import { carouselLoop, infiniteHorizontalLoop } from "@/lib/animations"
 import { ButtonsCarousel } from "@/components/buttons"
 
 type ProjectsMenuProps = {
@@ -30,71 +31,6 @@ export default function ProjectsMenu({
 	const [timelineReady, setTimelineReady] = useState(false)
 	const [activeCarouselImage, setActiveCarouselImage] = useState(0)
 
-	// MOBILE: Create infinite horizontal scroll
-	// useGSAP(
-	// 	() => {
-	// 		if (!outerContainerRef.current || !cardsContainerRef.current || !isMobile)
-	// 			return
-	// 		gsap.registerPlugin(Observer)
-
-	// 		const outerContainer = outerContainerRef.current
-	// 		const container = cardsContainerRef.current
-	// 		const cards = Array.from(container.children) as HTMLElement[]
-
-	// 		const timingSettings = { duration: 0.3, ease: "power1.inOut" }
-
-	// 		if (cards.length === 0) return
-
-	// 		// Create an infinite horizontal loop
-	// 		tlRef.current = infiniteHorizontalLoop(cards, {
-	// 			repeat: -1,
-	// 			paddingRight: "32px",
-	// 			snap: false,
-	// 		})
-
-	// 		if (!tlRef.current) return
-
-	// 		setTimelineReady(true)
-
-	// 		// create a tween that'll always decelerate the timeScale of the timeline back to 0 over the course of 2 seconds (or whatever)
-	// 		let slow = gsap.to(tlRef.current, {
-	// 			timeScale: 0,
-	// 			duration: 1,
-	// 		})
-	// 		// make the loop stopped initially.
-
-	// 		tlRef.current.timeScale(0)
-
-	// 		// Create an observer to detect touch and wheel events
-	// 		Observer.create({
-	// 			target: outerContainer,
-	// 			type: "pointer,touch,wheel",
-	// 			wheelSpeed: -1,
-	// 			onStop: () => {
-	// 				const currentIndex = tlRef.current!.onChange()
-
-	// 				console.log("onDrag", currentIndex)
-	// 				setActiveCarouselImage(currentIndex)
-	// 			},
-	// 			onChange: (self) => {
-	// 				// Adjust the timeline's timeScale based on scroll/touch velocity
-	// 				tlRef.current!.timeScale(
-	// 					Math.abs(self.deltaX) > Math.abs(self.deltaY)
-	// 						? -self.deltaX
-	// 						: -self.deltaY
-	// 				)
-
-	// 				// Decelerate
-	// 				slow.invalidate().restart()
-	// 			},
-	// 		})
-	// 	},
-	// 	{
-	// 		dependencies: [isMobile, cardsContainerRef, outerContainerRef],
-	// 		scope: outerContainerRef,
-	// 	}
-	// )
-
 	useGSAP(() => {
 		if (!outerContainerRef.current || !cardsContainerRef.current || !isMobile)
 			return
@@ -109,19 +45,16 @@ export default function ProjectsMenu({
 				paddingRight: 32,
 				draggable: true,
 			},
-			wrapper
+			wrapper,
+			setActiveCarouselImage
 		)
 
 		setTimelineReady(true)
 	}, [isMobile])
 
-	// useEffect(() => {
-	// 	if (!tlRef.current) return
-	// 	tlRef.current.next({
-	// 		duration: 0.8,
-	// 		ease: "power1.inOut",
-	// 	})
-	// }, [timelineReady, activeCarouselImage])
+	useEffect(() => {
+		console.log("activeCarouselImage", activeCarouselImage)
+	}, [activeCarouselImage])
 
 	// DESKTOP: Skew on scroll
 	useGSAP(

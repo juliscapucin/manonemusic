@@ -33,6 +33,7 @@ export default function ProjectsMenuPage({
 							title={project.title}
 							image={project.image}
 							slug={project.slug}
+							isMobile={true}
 						/>
 					)
 				})}
@@ -40,8 +41,7 @@ export default function ProjectsMenuPage({
 
 			{/* Desktop */}
 			<aside
-				className={`gsap-projects-menu-page fixed w-32 top-24 right-4 bottom-4 flex flex-col gap-4 overflow-y-scroll overflow-x-visible z-10 translate-x-[200%] opacity-0 landscape:opacity-100 transition-transform duration-500 ${isVisible ? "landscape:translate-x-0" : ""}`}
-			>
+				className={`gsap-projects-menu-page fixed w-32 top-24 right-4 bottom-4 flex flex-col gap-4 overflow-y-scroll overflow-x-visible z-10 translate-x-[200%] opacity-0 landscape:opacity-100 transition-transform duration-500 ${isVisible ? "landscape:translate-x-0" : ""}`}>
 				{projectsData?.map((project: PortfolioItem) => {
 					return (
 						<ProjectCard
@@ -51,6 +51,7 @@ export default function ProjectsMenuPage({
 							title={project.title}
 							image={project.image}
 							slug={project.slug}
+							isMobile={false}
 						/>
 					)
 				})}

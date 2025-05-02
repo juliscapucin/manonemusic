@@ -1,7 +1,8 @@
 import { gsap } from "gsap"
 import { Draggable } from "gsap/Draggable"
+import InertiaPlugin from "gsap/InertiaPlugin"
 
-gsap.registerPlugin(Draggable)
+gsap.registerPlugin(InertiaPlugin, Draggable)
 
 type CarouselConfig = {
 	paused?: boolean
@@ -33,7 +34,8 @@ interface LoopTimeline extends gsap.core.Timeline {
 export function carouselLoop(
 	items: Element[],
 	config: CarouselConfig,
-	wrapper: HTMLElement
+	wrapper: HTMLElement,
+	indexSetter: (arg: number) => void
 ): LoopTimeline {
 	const onChange = config.onChange
 	let lastIndex = 0
@@ -164,7 +166,6 @@ export function carouselLoop(
 				.add("label" + i, distanceToStart / pixelsPerSecond)
 			times[i] = distanceToStart / pixelsPerSecond
 		}
-		console.log("times", times)
 		timeWrap = gsap.utils.wrap(0, tl.duration())
 	}
 
@@ -265,10 +266,12 @@ export function carouselLoop(
 				gsap.set(proxy, { x: startProgress / -ratio })
 			},
 			onDrag() {
-				console.log("drag")
+				console.log("indexSetter")
+				indexSetter(curIndex)
 				tl.progress(wrap(startProgress + (this.startX - this.x) * ratio))
 			},
 			onThrowUpdate() {
+				indexSetter(curIndex)
 				tl.progress(wrap(startProgress + (this.startX - this.x) * ratio))
 			},
 			overshootTolerance: 0,
@@ -288,8 +291,13 @@ export function carouselLoop(
 				return lastSnap
 			},
 			onRelease() {
-				tl.closestIndex(true)
-				this.isThrowing && (indexIsDirty = true)
+				const index = tl.closestIndex(true)
+				curIndex = index
+				// tl.tweenTo(times[index], {
+				// 	duration: 0.4,
+				// 	ease: "power1.out",
+				// })
+				indexSetter(index)
 			},
 			onThrowComplete() {
 				tl.closestIndex(true)
@@ -298,10 +306,74 @@ export function carouselLoop(
 		tl.draggable = draggable
 	}
 
+	// if (config.draggable && typeof Draggable === "function") {
+	// 	proxy = document.createElement("div")
+	// 	let wrap = gsap.utils.wrap(0, 1)
+	// 	let ratio: number, startProgress: number, draggable: Draggable
+	// 	let lastSnap: number, initChangeX: number
+
+	// 	const align = () => {
+	// 		tl.progress(
+	// 			wrap(startProgress + (draggable.startX - draggable.x) * ratio)
+	// 		)
+	// 	}
+
+	// 	const syncIndex = () => {
+	// 		const index = tl.closestIndex(true)
+	// 		curIndex = index
+	// 		indexSetter(index)
+	// 	}
+
+	// 	typeof InertiaPlugin === "undefined" &&
+	// 		console.warn(
+	// 			"InertiaPlugin required for momentum-based scrolling and snapping. https://greensock.com/club"
+	// 		)
+
+	// 	draggable = Draggable.create(proxy, {
+	// 		trigger: wrapper,
+	// 		type: "x",
+	// 		onPressInit() {
+	// 			const x = this.x
+	// 			gsap.killTweensOf(tl)
+	// 			startProgress = tl.progress()
+	// 			refresh()
+	// 			ratio = 1 / totalWidth
+	// 			initChangeX = startProgress / -ratio - x
+	// 			gsap.set(proxy, { x: startProgress / -ratio })
+	// 		},
+	// 		onDrag: align,
+	// 		onThrowUpdate: align,
+	// 		overshootTolerance: 0,
+	// 		inertia: true,
+	// 		snap(value) {
+	// 			//note: if the user presses and releases in the middle of a throw, due to the sudden correction of proxy.x in the onPressInit(), the velocity could be very large, throwing off the snap. So sense that condition and adjust for it. We also need to set overshootTolerance to 0 to prevent the inertia from causing it to shoot past and come back
+	// 			if (Math.abs(startProgress / -ratio - this.x) < 10) {
+	// 				return lastSnap + initChangeX
+	// 			}
+	// 			const time = -(value * ratio) * tl.duration()
+	// 			const wrappedTime = timeWrap(time)
+	// 			const snapTime = times[getClosest(times, wrappedTime, tl.duration())]
+	// 			let dif = snapTime - wrappedTime
+	// 			if (Math.abs(dif) > tl.duration() / 2) {
+	// 				dif += dif < 0 ? tl.duration() : -tl.duration()
+	// 			}
+	// 			lastSnap = (time + dif) / tl.duration() / -ratio
+	// 			return lastSnap
+	// 		},
+	// 		onRelease() {
+	// 			// No tweenTo — rely on inertia snap
+	// 			syncIndex()
+	// 			if (draggable.isThrowing) indexIsDirty = true
+	// 		},
+	// 		onThrowComplete: syncIndex,
+	// 	})[0]
+
+	// 	tl.draggable = draggable
+	// }
+
 	tl.closestIndex(true)
 	lastIndex = curIndex
 	onChange?.(items[curIndex], curIndex)
 
-	console.log("times", tl.times)
 	return tl
 }
