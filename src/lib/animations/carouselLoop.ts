@@ -247,87 +247,11 @@ export function carouselLoop(
 		tl.reverse()
 	}
 
-	if (config.draggable && typeof Draggable === "function") {
-		proxy = document.createElement("div")
-		let wrap = gsap.utils.wrap(0, 1)
-		let ratio: number, startProgress: number, draggable: Draggable
-		let dragSnap: any, lastSnap: number, initChangeX: number
-
-		draggable = Draggable.create(proxy, {
-			trigger: wrapper,
-			type: "x",
-			onPressInit() {
-				const x = this.x
-				gsap.killTweensOf(tl)
-				startProgress = tl.progress()
-				refresh()
-				ratio = 1 / totalWidth
-				initChangeX = startProgress / -ratio - x
-				gsap.set(proxy, { x: startProgress / -ratio })
-			},
-			onDrag() {
-				console.log("indexSetter")
-				indexSetter(curIndex)
-				tl.progress(wrap(startProgress + (this.startX - this.x) * ratio))
-			},
-			onThrowUpdate() {
-				indexSetter(curIndex)
-				tl.progress(wrap(startProgress + (this.startX - this.x) * ratio))
-			},
-			overshootTolerance: 0,
-			inertia: true,
-			snap(value) {
-				if (Math.abs(startProgress / -ratio - this.x) < 10) {
-					return lastSnap + initChangeX
-				}
-				const time = -(value * ratio) * tl.duration()
-				const wrappedTime = timeWrap(time)
-				const snapTime = times[getClosest(times, wrappedTime, tl.duration())]
-				let dif = snapTime - wrappedTime
-				if (Math.abs(dif) > tl.duration() / 2) {
-					dif += dif < 0 ? tl.duration() : -tl.duration()
-				}
-				lastSnap = (time + dif) / tl.duration() / -ratio
-				return lastSnap
-			},
-			onRelease() {
-				const index = tl.closestIndex(true)
-				curIndex = index
-				// tl.tweenTo(times[index], {
-				// 	duration: 0.4,
-				// 	ease: "power1.out",
-				// })
-				indexSetter(index)
-			},
-			onThrowComplete() {
-				tl.closestIndex(true)
-			},
-		})[0]
-		tl.draggable = draggable
-	}
-
 	// if (config.draggable && typeof Draggable === "function") {
 	// 	proxy = document.createElement("div")
 	// 	let wrap = gsap.utils.wrap(0, 1)
 	// 	let ratio: number, startProgress: number, draggable: Draggable
-	// 	let lastSnap: number, initChangeX: number
-
-	// 	const align = () => {
-	// 		tl.progress(
-	// 			wrap(startProgress + (draggable.startX - draggable.x) * ratio)
-	// 		)
-	// 	}
-
-	// 	const syncIndex = () => {
-	// 		const index = tl.closestIndex(true)
-	// 		curIndex = index
-	// 		indexSetter(index)
-	// 	}
-
-	// 	typeof InertiaPlugin === "undefined" &&
-	// 		console.warn(
-	// 			"InertiaPlugin required for momentum-based scrolling and snapping. https://greensock.com/club"
-	// 		)
+	// 	let dragSnap: any, lastSnap: number, initChangeX: number
 
 	// 	draggable = Draggable.create(proxy, {
 	// 		trigger: wrapper,
@@ -341,12 +265,18 @@ export function carouselLoop(
 	// 			initChangeX = startProgress / -ratio - x
 	// 			gsap.set(proxy, { x: startProgress / -ratio })
 	// 		},
-	// 		onDrag: align,
-	// 		onThrowUpdate: align,
+	// 		onDrag() {
+	// 			console.log("indexSetter")
+	// 			indexSetter(curIndex)
+	// 			tl.progress(wrap(startProgress + (this.startX - this.x) * ratio))
+	// 		},
+	// 		onThrowUpdate() {
+	// 			indexSetter(curIndex)
+	// 			tl.progress(wrap(startProgress + (this.startX - this.x) * ratio))
+	// 		},
 	// 		overshootTolerance: 0,
 	// 		inertia: true,
 	// 		snap(value) {
-	// 			//note: if the user presses and releases in the middle of a throw, due to the sudden correction of proxy.x in the onPressInit(), the velocity could be very large, throwing off the snap. So sense that condition and adjust for it. We also need to set overshootTolerance to 0 to prevent the inertia from causing it to shoot past and come back
 	// 			if (Math.abs(startProgress / -ratio - this.x) < 10) {
 	// 				return lastSnap + initChangeX
 	// 			}
@@ -361,15 +291,80 @@ export function carouselLoop(
 	// 			return lastSnap
 	// 		},
 	// 		onRelease() {
-	// 			// No tweenTo — rely on inertia snap
-	// 			syncIndex()
-	// 			if (draggable.isThrowing) indexIsDirty = true
+	// 			const index = tl.closestIndex(true)
+	// 			curIndex = index
+	// 			// tl.tweenTo(times[index], {
+	// 			// 	duration: 0.4,
+	// 			// 	ease: "power1.out",
+	// 			// })
+	// 			indexSetter(index)
 	// 		},
-	// 		onThrowComplete: syncIndex,
+	// 		onThrowComplete() {
+	// 			tl.closestIndex(true)
+	// 		},
 	// 	})[0]
-
 	// 	tl.draggable = draggable
 	// }
+
+	if (config.draggable && typeof Draggable === "function") {
+		proxy = document.createElement("div")
+		let wrap = gsap.utils.wrap(0, 1)
+		let ratio: number, startProgress: number, draggable: Draggable
+		let lastSnap: number, initChangeX: number
+
+		const align = () => {
+			tl.progress(
+				wrap(startProgress + (draggable.startX - draggable.x) * ratio)
+			)
+		}
+
+		const syncIndex = () => {
+			const index = tl.closestIndex(true)
+			curIndex = index
+			indexSetter(index)
+		}
+
+		draggable = Draggable.create(proxy, {
+			trigger: wrapper,
+			type: "x",
+			onPressInit() {
+				const x = this.x
+				gsap.killTweensOf(tl)
+				startProgress = tl.progress()
+				refresh()
+				ratio = 1 / totalWidth
+				initChangeX = startProgress / -ratio - x
+				gsap.set(proxy, { x: startProgress / -ratio })
+			},
+			onDrag: align,
+			onThrowUpdate: align,
+			overshootTolerance: 0,
+			inertia: true,
+			snap(value) {
+				//note: if the user presses and releases in the middle of a throw, due to the sudden correction of proxy.x in the onPressInit(), the velocity could be very large, throwing off the snap. So sense that condition and adjust for it. We also need to set overshootTolerance to 0 to prevent the inertia from causing it to shoot past and come back
+				if (Math.abs(startProgress / -ratio - this.x) < 10) {
+					return lastSnap + initChangeX
+				}
+				const time = -(value * ratio) * tl.duration()
+				const wrappedTime = timeWrap(time)
+				const snapTime = times[getClosest(times, wrappedTime, tl.duration())]
+				let dif = snapTime - wrappedTime
+				if (Math.abs(dif) > tl.duration() / 2) {
+					dif += dif < 0 ? tl.duration() : -tl.duration()
+				}
+				lastSnap = (time + dif) / tl.duration() / -ratio
+
+				return lastSnap
+			},
+			onRelease() {
+				syncIndex()
+				if (draggable.isThrowing) indexIsDirty = true
+			},
+			onThrowComplete: syncIndex,
+		})[0]
+
+		tl.draggable = draggable
+	}
 
 	tl.closestIndex(true)
 	lastIndex = curIndex
