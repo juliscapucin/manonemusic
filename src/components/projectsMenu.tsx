@@ -53,10 +53,6 @@ export default function ProjectsMenu({
 		setTimelineReady(true)
 	}, [isMobile])
 
-	useEffect(() => {
-		console.log("activeCarouselImage", activeCarouselImage)
-	}, [activeCarouselImage])
-
 	// DESKTOP: Skew on scroll
 	useGSAP(
 		() => {

@@ -224,7 +224,10 @@ export function carouselLoop(
 			: tl.tweenTo(time, vars)
 	}
 
-	tl.toIndex = (index, vars) => toIndex(index, vars)
+	tl.toIndex = (index, vars) => {
+		syncIndex()
+		return toIndex(index, vars)
+	}
 	tl.closestIndex = (setCurrent = false) => {
 		const index = getClosest(times, tl.time(), tl.duration())
 		if (setCurrent) {
@@ -235,7 +238,6 @@ export function carouselLoop(
 	}
 	tl.current = () => (indexIsDirty ? tl.closestIndex(true) : curIndex)
 	tl.next = (vars) => {
-		console.log("next")
 		return toIndex(tl.current() + 1, vars)
 	}
 	tl.previous = (vars) => toIndex(tl.current() - 1, vars)
@@ -247,64 +249,11 @@ export function carouselLoop(
 		tl.reverse()
 	}
 
-	// if (config.draggable && typeof Draggable === "function") {
-	// 	proxy = document.createElement("div")
-	// 	let wrap = gsap.utils.wrap(0, 1)
-	// 	let ratio: number, startProgress: number, draggable: Draggable
-	// 	let dragSnap: any, lastSnap: number, initChangeX: number
-
-	// 	draggable = Draggable.create(proxy, {
-	// 		trigger: wrapper,
-	// 		type: "x",
-	// 		onPressInit() {
-	// 			const x = this.x
-	// 			gsap.killTweensOf(tl)
-	// 			startProgress = tl.progress()
-	// 			refresh()
-	// 			ratio = 1 / totalWidth
-	// 			initChangeX = startProgress / -ratio - x
-	// 			gsap.set(proxy, { x: startProgress / -ratio })
-	// 		},
-	// 		onDrag() {
-	// 			console.log("indexSetter")
-	// 			indexSetter(curIndex)
-	// 			tl.progress(wrap(startProgress + (this.startX - this.x) * ratio))
-	// 		},
-	// 		onThrowUpdate() {
-	// 			indexSetter(curIndex)
-	// 			tl.progress(wrap(startProgress + (this.startX - this.x) * ratio))
-	// 		},
-	// 		overshootTolerance: 0,
-	// 		inertia: true,
-	// 		snap(value) {
-	// 			if (Math.abs(startProgress / -ratio - this.x) < 10) {
-	// 				return lastSnap + initChangeX
-	// 			}
-	// 			const time = -(value * ratio) * tl.duration()
-	// 			const wrappedTime = timeWrap(time)
-	// 			const snapTime = times[getClosest(times, wrappedTime, tl.duration())]
-	// 			let dif = snapTime - wrappedTime
-	// 			if (Math.abs(dif) > tl.duration() / 2) {
-	// 				dif += dif < 0 ? tl.duration() : -tl.duration()
-	// 			}
-	// 			lastSnap = (time + dif) / tl.duration() / -ratio
-	// 			return lastSnap
-	// 		},
-	// 		onRelease() {
-	// 			const index = tl.closestIndex(true)
-	// 			curIndex = index
-	// 			// tl.tweenTo(times[index], {
-	// 			// 	duration: 0.4,
-	// 			// 	ease: "power1.out",
-	// 			// })
-	// 			indexSetter(index)
-	// 		},
-	// 		onThrowComplete() {
-	// 			tl.closestIndex(true)
-	// 		},
-	// 	})[0]
-	// 	tl.draggable = draggable
-	// }
+	const syncIndex = () => {
+		const index = tl.closestIndex(true)
+		curIndex = index
+		indexSetter(index)
+	}
 
 	if (config.draggable && typeof Draggable === "function") {
 		proxy = document.createElement("div")
@@ -316,12 +265,6 @@ export function carouselLoop(
 			tl.progress(
 				wrap(startProgress + (draggable.startX - draggable.x) * ratio)
 			)
-		}
-
-		const syncIndex = () => {
-			const index = tl.closestIndex(true)
-			curIndex = index
-			indexSetter(index)
 		}
 
 		draggable = Draggable.create(proxy, {

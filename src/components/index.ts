@@ -1,5 +1,4 @@
 import Availability from "./availability"
-import CarouselIndicators from "./carouselIndicators"
 import Copyright from "./copyright"
 import Credits from "./credits"
 import PanelContent from "./panelContent"
@@ -22,7 +21,6 @@ import PlayerTrackList from "./playerTrackList"
 
 export {
 	Availability,
-	CarouselIndicators,
 	Copyright,
 	Credits,
 	PanelContent,
