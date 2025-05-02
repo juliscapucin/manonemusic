@@ -44,6 +44,7 @@ export default function ProjectsMenu({
 				paused: true,
 				paddingRight: 32,
 				draggable: true,
+				speed: 0.5,
 			},
 			wrapper,
 			setActiveCarouselImage

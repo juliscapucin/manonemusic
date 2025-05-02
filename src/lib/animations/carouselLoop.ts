@@ -327,6 +327,7 @@ export function carouselLoop(
 		draggable = Draggable.create(proxy, {
 			trigger: wrapper,
 			type: "x",
+			lockAxis: true,
 			onPressInit() {
 				const x = this.x
 				gsap.killTweensOf(tl)
@@ -342,6 +343,7 @@ export function carouselLoop(
 			inertia: true,
 			snap(value) {
 				//note: if the user presses and releases in the middle of a throw, due to the sudden correction of proxy.x in the onPressInit(), the velocity could be very large, throwing off the snap. So sense that condition and adjust for it. We also need to set overshootTolerance to 0 to prevent the inertia from causing it to shoot past and come back
+
 				if (Math.abs(startProgress / -ratio - this.x) < 10) {
 					return lastSnap + initChangeX
 				}
