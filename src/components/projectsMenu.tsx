@@ -2,7 +2,6 @@
 
 import gsap from "gsap"
 import { useGSAP } from "@gsap/react"
-import { Draggable } from "gsap/Draggable"
 
 import { PortfolioItem } from "@/types"
 import { ProjectCard } from "@/components"
@@ -96,30 +95,25 @@ export default function ProjectsMenu({
 	// 	}
 	// )
 
-	useGSAP(
-		() => {
-			if (!outerContainerRef.current || !cardsContainerRef.current || !isMobile)
-				return
+	useGSAP(() => {
+		if (!outerContainerRef.current || !cardsContainerRef.current || !isMobile)
+			return
 
-			gsap.registerPlugin(Draggable)
-			const cards = gsap.utils.toArray(
-				cardsContainerRef.current.children
-			) as HTMLElement[]
+		const wrapper = outerContainerRef.current
+		const cards = Array.from(cardsContainerRef.current.children)
 
-			tlRef.current = carouselLoop(
-				cards,
-				{
-					paused: true,
-					paddingRight: 32,
-					draggable: true,
-				},
-				outerContainerRef.current
-			)
+		tlRef.current = carouselLoop(
+			cards,
+			{
+				paused: true,
+				paddingRight: 32,
+				draggable: true,
+			},
+			wrapper
+		)
 
-			setTimelineReady(true)
-		},
-		{ dependencies: [isMobile] }
-	)
+		setTimelineReady(true)
+	}, [isMobile])
 
 	// useEffect(() => {
 	// 	if (!tlRef.current) return
@@ -127,7 +121,7 @@ export default function ProjectsMenu({
 	// 		duration: 0.8,
 	// 		ease: "power1.inOut",
 	// 	})
-	// }, [timelineReady])
+	// }, [timelineReady, activeCarouselImage])
 
 	// DESKTOP: Skew on scroll
 	useGSAP(
@@ -198,14 +192,14 @@ export default function ProjectsMenu({
 				})}
 			</div>
 			{/* CAROUSEL ELEMENTS ON MOBILE */}
-			{/* {timelineReady && tlRef.current && (
+			{timelineReady && tlRef.current && (
 				<ButtonsCarousel
 					tl={tlRef.current}
 					itemsCount={projects.length}
 					activeCarouselImage={activeCarouselImage}
 					setActiveCarouselImage={setActiveCarouselImage}
 				/>
-			)} */}
+			)}
 		</div>
 	)
 }

@@ -1,6 +1,8 @@
 import { gsap } from "gsap"
 import { Draggable } from "gsap/Draggable"
 
+gsap.registerPlugin(Draggable)
+
 type CarouselConfig = {
 	paused?: boolean
 	paddingRight?: number
@@ -35,10 +37,6 @@ export function carouselLoop(
 ): LoopTimeline {
 	const onChange = config.onChange
 	let lastIndex = 0
-
-	console.log(items.map((c) => c.getBoundingClientRect().width))
-
-	gsap.registerPlugin(Draggable)
 
 	const tl = gsap.timeline({
 		repeat: config.repeat,
@@ -166,6 +164,7 @@ export function carouselLoop(
 				.add("label" + i, distanceToStart / pixelsPerSecond)
 			times[i] = distanceToStart / pixelsPerSecond
 		}
+		console.log("times", times)
 		timeWrap = gsap.utils.wrap(0, tl.duration())
 	}
 
@@ -197,7 +196,11 @@ export function carouselLoop(
 		}
 	}
 
-	refresh(true)
+	gsap.set(items, { x: 0 })
+	populateWidths()
+	populateTimeline()
+	populateOffsets()
+	window.addEventListener("resize", () => refresh(true))
 
 	const toIndex = (index: number, vars: TweenVars = {}) => {
 		if (Math.abs(index - curIndex) > length / 2) {
@@ -299,6 +302,6 @@ export function carouselLoop(
 	lastIndex = curIndex
 	onChange?.(items[curIndex], curIndex)
 
-	console.log(tl.times)
+	console.log("times", tl.times)
 	return tl
 }
