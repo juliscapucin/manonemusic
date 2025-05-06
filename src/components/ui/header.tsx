@@ -24,6 +24,7 @@ export default function Header({ navLinks, variant = "section" }: HeaderProps) {
 		if (variant === "section") {
 			handlePanelSlide(pathname)
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [variant])
 
 	return (
@@ -37,7 +38,7 @@ export default function Header({ navLinks, variant = "section" }: HeaderProps) {
 					transitionOnClick={
 						variant === "section"
 							? () => handlePanelSlide("/") // if in first level, slide to home
-							: () => projectExit(() => router.push("/")) // if in second level, exit and navigate to home
+							: () => projectExit(() => router.push("/"), true) // if in second level, exit and navigate to home
 					}>
 					MAN/ONE MUSIC
 				</CustomButton>
@@ -56,7 +57,7 @@ export default function Header({ navLinks, variant = "section" }: HeaderProps) {
 									action={() => {
 										variant === "section"
 											? handlePanelSlide(link.slug)
-											: projectExit(() => router.push(`/${link.slug}`))
+											: projectExit(() => router.push(`/${link.slug}`), true)
 									}}
 								/>
 							)

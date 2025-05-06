@@ -1,74 +1,54 @@
 "use client"
 
-import { useLayoutEffect, useRef, useState } from "react"
+import { useRef, useState } from "react"
 
 import gsap from "gsap"
 
 import { PageWrapper, TitleHeadline } from "@/components/ui"
-import { PortfolioItem, PortfolioPage, Project } from "@/types"
+import { Project } from "@/types"
 import { ButtonBack } from "@/components/buttons"
-import {
-	ProjectInfo,
-	ProjectPageContent,
-	ProjectTrailer,
-	ProjectsMenuPage,
-} from "@/components"
+import { ProjectInfo, ProjectPageContent, ProjectTrailer } from "@/components"
 import { useTransitionOnEnter } from "@/hooks"
+import { useGSAP } from "@gsap/react"
 
 type ProjectPageProps = {
 	projectPageData: Project
-	projectsData: PortfolioItem[]
-	projectsPageData: PortfolioPage
 }
 
-export default function ProjectPage({
-	projectPageData,
-	projectsData,
-	projectsPageData,
-}: ProjectPageProps) {
+export default function ProjectPage({ projectPageData }: ProjectPageProps) {
 	const [isTrailerActive, setIsTrailerActive] = useState(false)
 	const [isPageDisplaced, setIsPageDisplaced] = useState(false)
 	const pageWrapperRef = useRef<HTMLDivElement>(null)
-	let ctx = gsap.context(() => {})
 
-	useTransitionOnEnter(ctx)
+	useTransitionOnEnter()
 
-	useLayoutEffect(() => {
+	useGSAP(() => {
 		if (!pageWrapperRef.current) return
 
-		ctx.add(() => {
-			if (isPageDisplaced) {
-				const tl = gsap.timeline()
-				tl.to(pageWrapperRef.current, {
-					duration: 0.6,
-					yPercent: -30,
-					opacity: 0,
-				})
-			} else {
-				const tl = gsap.timeline()
-				tl.to(pageWrapperRef.current, {
-					duration: 0.4,
-					yPercent: 0,
-					opacity: 1,
-				})
-			}
-		})
-
-		return () => {
-			ctx.revert()
+		if (isPageDisplaced) {
+			const tl = gsap.timeline()
+			tl.to(pageWrapperRef.current, {
+				duration: 0.6,
+				yPercent: -30,
+				opacity: 0,
+			})
+		} else {
+			const tl = gsap.timeline()
+			tl.to(pageWrapperRef.current, {
+				duration: 0.4,
+				yPercent: 0,
+				opacity: 1,
+			})
 		}
-	}, [isPageDisplaced, pageWrapperRef, ctx])
+	}, [isPageDisplaced, pageWrapperRef])
 
 	return (
 		<div className='relative w-screen h-screen bg-primary overflow-hidden'>
-			<ProjectsMenuPage
-				projectsData={projectsData}
-				pageData={projectsPageData}
-			/>
 			<PageWrapper ref={pageWrapperRef}>
 				{/* Project Page */}
 				<div className='gsap-project-page opacity-0'>
-					<ButtonBack slug={projectsPageData.slug} />
+					{/* TODO: Fix this */}
+					{/* <ButtonBack slug={projectsPageData.slug} /> */}
 
 					<TitleHeadline>{projectPageData.title}</TitleHeadline>
 					<ProjectInfo

@@ -80,7 +80,7 @@ export default function ProjectCard({
 			transitionOnClick={() => {
 				variant === "section"
 					? panelsExit(() => router.push(`/${section}/${slug}`))
-					: projectExit(() => router.push(`/${section}/${slug}`))
+					: projectExit(() => router.push(`/${section}/${slug}`), false)
 			}}
 			onMouseEnter={() => {
 				setIsHovered(true)
