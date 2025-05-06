@@ -10,10 +10,9 @@ gsap.registerPlugin(useGSAP)
 
 import { AllData, NavLink } from "@/types"
 import { PanelContent } from "@/components"
-import { usePathname } from "next/navigation"
 import { useWindowDimensions } from "@/hooks"
 import { animateSplitText } from "@/animations"
-import { handlePanelSlide, panelsEnter } from "@/lib/animations"
+import { panelsEnter } from "@/lib/animations"
 
 type PanelDesktopProps = {
 	data: AllData
@@ -23,7 +22,6 @@ type PanelDesktopProps = {
 export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 	const panelsContainerRef = useRef<HTMLDivElement | null>(null)
 	const [tween, setTween] = useState<gsap.core.Tween | null>(null)
-	const pathname = usePathname()
 	const { windowAspectRatio } = useWindowDimensions()
 
 	// Horizontal Panel animation

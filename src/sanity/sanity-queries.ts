@@ -136,11 +136,13 @@ export async function getProject(
 }
 
 export async function getHeaderNavLinks(): Promise<NavLink[]> {
-	return client.fetch(
+	const navLinks = await client.fetch(
 		groq`*[_type == "header"]|order(order asc) {
          title,
          "slug": slug.current,
          order
        }`
 	)
+
+	return [{ title: "Home", slug: "/", order: 0 }, ...navLinks]
 }

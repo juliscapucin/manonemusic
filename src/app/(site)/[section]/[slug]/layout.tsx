@@ -4,7 +4,7 @@ import {
 	getPortfolioPage,
 } from "@/sanity/sanity-queries"
 
-import { Header } from "@/components/ui"
+import { Header, MenuMobile } from "@/components/ui"
 import { notFound } from "next/navigation"
 import { ProjectsMenuPage } from "@/components"
 
@@ -29,6 +29,7 @@ export default async function PageLayout({
 	return (
 		<>
 			<Header variant='page' navLinks={headerNavLinks} />
+			<MenuMobile navLinks={headerNavLinks} />
 			<ProjectsMenuPage
 				projectsData={projectsData}
 				pageData={projectsPageData}

@@ -23,7 +23,7 @@ export default function MenuMobile({ navLinks }: NavLinksProps) {
 			{navLinks && (
 				<div className='fixed top-0 right-0 left-0 block landscape:hidden h-dvh z-mobile pointer-events-none'>
 					<div className='absolute max-w-full top-4 right-4 flex justify-end items-center z-burger pointer-events-auto'>
-						{/* Burger Button */}
+						{/* BURGER BUTTON */}
 						<ButtonBurger
 							action={(e) => {
 								if (mobileMenuRef.current) {
@@ -32,6 +32,8 @@ export default function MenuMobile({ navLinks }: NavLinksProps) {
 							}}
 						/>
 					</div>
+
+					{/* EXPANDED MENU */}
 					<aside
 						className='absolute top-0 w-full min-h-svh bg-primary transition-transform -translate-y-full duration-300 z-mobile pointer-events-auto'
 						ref={mobileMenuRef}>
@@ -46,7 +48,7 @@ export default function MenuMobile({ navLinks }: NavLinksProps) {
 							/>
 						</div>
 
-						{/* Nav Links */}
+						{/* NAV LINKS */}
 						<nav className='h-screen flex flex-col justify-center items-center'>
 							{navLinks.map((link) => {
 								return (

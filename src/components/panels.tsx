@@ -8,24 +8,19 @@ import { useWindowDimensions } from "@/hooks"
 import { AllData } from "@/types"
 
 export default function Panels({ data }: { data: AllData }) {
-	const navLinksWithHome = [
-		{ title: "Home", slug: "/", order: 0 },
-		...data.headerNavLinks,
-	]
-
 	const { windowAspectRatio } = useWindowDimensions()
 
 	return (
 		<main>
 			{windowAspectRatio && windowAspectRatio === "landscape" ? (
 				<>
-					<Header navLinks={navLinksWithHome} />
-					<PanelDesktop data={data} sections={navLinksWithHome} />
-					<Footer navLinks={navLinksWithHome} />
+					<Header navLinks={data.headerNavLinks} />
+					<PanelDesktop data={data} sections={data.headerNavLinks} />
+					<Footer navLinks={data.headerNavLinks} />
 				</>
 			) : (
 				<>
-					<MenuMobile navLinks={navLinksWithHome} />
+					<MenuMobile navLinks={data.headerNavLinks} />
 					<PanelMobile data={data} />
 				</>
 			)}
