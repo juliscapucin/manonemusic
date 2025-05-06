@@ -102,7 +102,9 @@ export default function ProjectsMenu({
 		<div
 			ref={outerContainerRef}
 			id='projects-menu'
-			className={`gsap-projects-menu relative w-full portrait:overflow-x-clip landscape:w-fit portrait:pb-16 h-80 landscape:h-2/5`}>
+			className={
+				"gsap-projects-menu relative w-full portrait:overflow-x-clip landscape:w-fit portrait:pb-16 h-80 landscape:h-2/5"
+			}>
 			<div
 				ref={cardsContainerRef}
 				className='relative w-fit h-full flex items-start justify-start gap-8 landscape:gap-40'>

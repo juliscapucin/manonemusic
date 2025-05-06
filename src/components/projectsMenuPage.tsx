@@ -20,6 +20,7 @@ export default function ProjectsMenuPage({
 	const menuDesktopRef = useRef<HTMLDivElement>(null)
 	const isLoaded = useRef(false)
 
+	// Enter animation
 	useGSAP(
 		() => {
 			if (
@@ -44,7 +45,7 @@ export default function ProjectsMenuPage({
 	return (
 		<>
 			{/* Mobile */}
-			<aside className='fixed h-fit right-4 bottom-0 left-4 flex gap-4 overflow-x-scroll z-10 landscape:hidden p-4'>
+			<aside className='fixed h-24 w-full bottom-0 flex gap-4 overflow-x-scroll z-10 landscape:hidden p-4 bg-primary'>
 				{projectsData?.map((project: PortfolioItem) => {
 					return (
 						<ProjectCard

@@ -86,7 +86,7 @@ export default function ProjectCard({
 			}}
 			onMouseLeave={() => setIsHovered(false)}
 			href={`/${section}/${slug}`}
-			classes={`relative group gsap-project-card bg-primary ${variant === "section" ? "min-w-40 h-full w-fit bg-faded-10" : `w-16 landscape:w-32 ${pathname.includes(slug) && "pointer-events-none"}`}`}
+			classes={`relative group gsap-project-card bg-primary ${variant === "section" ? "min-w-40 h-full w-fit bg-faded-10" : `h-full w-fit landscape:h-fit landscape:w-32 ${pathname.includes(slug) && "pointer-events-none"}`}`}
 			style={{ aspectRatio }}
 			aria-labelledby={`project-title-${slug}`}
 			isDisabled={pathname.includes(slug)}>
