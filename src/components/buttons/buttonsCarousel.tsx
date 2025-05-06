@@ -1,4 +1,4 @@
-import ButtonArrow from "./buttonArrow"
+import ButtonChevron from "./buttonChevron"
 
 interface ButtonsCarouselProps {
 	tl: gsap.core.Timeline
@@ -15,20 +15,10 @@ export default function ButtonsCarousel({
 	activeCarouselImage,
 	setActiveCarouselImage,
 }: ButtonsCarouselProps) {
-	const roundedButtonClasses = "rounded-full p-2 border border-secondary"
+	const roundedButtonClasses = "flex items-center justify-center"
 
 	return (
-		<div className='relative mt-6 w-full h-16 px-4 flex flex-row justify-center items-center gap-8'>
-			{/* BUTTON PREVIOUS */}
-			<ButtonArrow
-				isShort={true}
-				onClick={() => {
-					tl.toIndex(activeCarouselImage - 1, timingSettings)
-					setActiveCarouselImage(tl.current())
-				}}
-				classes={`prev-btn rotate-180 ${roundedButtonClasses}`}
-			/>
-
+		<div className='mt-10'>
 			{/* PAGE INDICATORS */}
 			<div className='w-full flex justify-center items-center gap-2 h-full'>
 				{[...Array(itemsCount)].map((_, index) => (
@@ -41,16 +31,25 @@ export default function ButtonsCarousel({
 						key={index}></button>
 				))}
 			</div>
+			<div className='hidden relative mt-2 w-full h-16 px-4 flex flex-row justify-center items-center gap-8'>
+				{/* BUTTON PREVIOUS */}
+				<ButtonChevron
+					onClick={() => {
+						tl.toIndex(activeCarouselImage - 1, timingSettings)
+						setActiveCarouselImage(tl.current())
+					}}
+					classes={`prev-btn rotate-180 ${roundedButtonClasses}`}
+				/>
 
-			{/* BUTTON NEXT */}
-			<ButtonArrow
-				isShort={true}
-				onClick={() => {
-					tl.toIndex(activeCarouselImage + 1, timingSettings)
-					setActiveCarouselImage(tl.current())
-				}}
-				classes={`next-btn rotate-0 ${roundedButtonClasses}`}
-			/>
+				{/* BUTTON NEXT */}
+				<ButtonChevron
+					onClick={() => {
+						tl.toIndex(activeCarouselImage + 1, timingSettings)
+						setActiveCarouselImage(tl.current())
+					}}
+					classes={`next-btn rotate-0 ${roundedButtonClasses}`}
+				/>
+			</div>
 		</div>
 	)
 }
