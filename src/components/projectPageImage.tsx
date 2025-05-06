@@ -10,7 +10,7 @@ export default function ProjectPageImage({
 	imgAlt,
 }: ProjectPageImageProps) {
 	return (
-		<div className='gsap-project-image relative w-1/4 min-w-[300px] aspect-square overflow-clip opacity-0'>
+		<div className='gsap-project-image relative w-full landscape:w-1/4 min-w-[300px] aspect-square overflow-clip opacity-0'>
 			<Image
 				{...{
 					src: imgSrc,

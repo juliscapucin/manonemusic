@@ -36,6 +36,7 @@ export default async function Page(props: {
 		<ProjectPage
 			{...{
 				projectPageData,
+				section,
 			}}
 		/>
 	)

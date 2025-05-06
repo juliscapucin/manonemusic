@@ -13,9 +13,13 @@ import { useGSAP } from "@gsap/react"
 
 type ProjectPageProps = {
 	projectPageData: Project
+	section: string
 }
 
-export default function ProjectPage({ projectPageData }: ProjectPageProps) {
+export default function ProjectPage({
+	projectPageData,
+	section,
+}: ProjectPageProps) {
 	const [isTrailerActive, setIsTrailerActive] = useState(false)
 	const [isPageDisplaced, setIsPageDisplaced] = useState(false)
 	const pageWrapperRef = useRef<HTMLDivElement>(null)
@@ -47,8 +51,7 @@ export default function ProjectPage({ projectPageData }: ProjectPageProps) {
 			<PageWrapper ref={pageWrapperRef}>
 				{/* Project Page */}
 				<div className='gsap-project-page opacity-0'>
-					{/* TODO: Fix this */}
-					{/* <ButtonBack slug={projectsPageData.slug} /> */}
+					<ButtonBack slug={section} />
 
 					<TitleHeadline>{projectPageData.title}</TitleHeadline>
 					<ProjectInfo

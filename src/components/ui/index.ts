@@ -4,6 +4,7 @@ import Footer from "./footer"
 import Grid from "./grid"
 import Header from "./header"
 import Heading from "./heading"
+import ImageWithSpinner from "./imageWithSpinner"
 import Loader from "./loader"
 import Logo from "./logo"
 import MenuMobile from "./menuMobile"
@@ -24,6 +25,7 @@ export {
 	Grid,
 	Header,
 	Heading,
+	ImageWithSpinner,
 	Loader,
 	Logo,
 	MenuMobile,

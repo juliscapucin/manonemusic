@@ -117,7 +117,9 @@ export async function getProject(
       releaseDate,
       "image": {
          "imageRef": image.image.asset._ref,
-         "imageAlt": image.imageAlt
+         "imageAlt": image.imageAlt,
+         "imageWidth": image.image.asset->metadata.dimensions.width,
+         "imageHeight": image.image.asset->metadata.dimensions.height,
          },
       info,
       description,

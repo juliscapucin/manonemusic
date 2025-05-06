@@ -44,7 +44,7 @@ export default function ProjectsMenuPage({
 	return (
 		<>
 			{/* Mobile */}
-			<aside className='fixed h-fit right-4 bottom-0 left-4 flex gap-4 overflow-x-scroll z-10 landscape:opacity-0 p-4'>
+			<aside className='fixed h-fit right-4 bottom-0 left-4 flex gap-4 overflow-x-scroll z-10 landscape:hidden p-4'>
 				{projectsData?.map((project: PortfolioItem) => {
 					return (
 						<ProjectCard
@@ -64,7 +64,7 @@ export default function ProjectsMenuPage({
 			<aside
 				ref={menuDesktopRef}
 				className={
-					"gsap-projects-menu-page fixed w-32 top-24 right-4 bottom-4 flex flex-col gap-4 overflow-y-scroll overflow-x-visible z-10 opacity-0 landscape:opacity-100"
+					"gsap-projects-menu-page hidden landscape:flex fixed w-32 top-24 right-4 bottom-4 flex-col gap-4 overflow-y-scroll overflow-x-visible z-10 opacity-0 landscape:opacity-100"
 				}>
 				{projectsData?.map((project: PortfolioItem) => {
 					return (

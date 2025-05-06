@@ -5,7 +5,6 @@ import { useRouter, usePathname } from "next/navigation"
 import Image from "next/image"
 
 import gsap from "gsap"
-import { Observer } from "gsap/Observer"
 
 import { projectExit, panelsExit } from "@/lib/animations"
 import { ImageField } from "@/types/Image"
@@ -99,7 +98,7 @@ export default function ProjectCard({
 					aria-label={image.imageAlt}>
 					<Image
 						className={`relative h-full w-full object-cover group-hover:scale-105 transition-transform duration-300 ${variant === "section" && "rounded-sm"}`}
-						src={urlFor(image.imageRef).url()}
+						src={urlFor(image.imageRef).url()} // generate url from ref to avoid unnecessary calls on server
 						alt={image.imageAlt}
 						width={image.imageWidth}
 						height={image.imageHeight}
