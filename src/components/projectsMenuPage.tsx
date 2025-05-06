@@ -18,10 +18,16 @@ export default function ProjectsMenuPage({
 	pageData,
 }: ProjectsMenuPageProps) {
 	const menuDesktopRef = useRef<HTMLDivElement>(null)
+	const isLoaded = useRef(false)
 
 	useGSAP(
 		() => {
-			if (!menuDesktopRef.current || !menuDesktopRef.current?.children) return
+			if (
+				!menuDesktopRef.current ||
+				!menuDesktopRef.current?.children ||
+				isLoaded.current
+			)
+				return
 			gsap.fromTo(
 				menuDesktopRef.current.children,
 				{
@@ -29,8 +35,10 @@ export default function ProjectsMenuPage({
 				},
 				{ xPercent: 0, duration: 0.8, stagger: 0.1, ease: "power4.out" }
 			)
+
+			isLoaded.current = true
 		},
-		{ dependencies: [menuDesktopRef.current] }
+		{ scope: menuDesktopRef }
 	)
 
 	return (
