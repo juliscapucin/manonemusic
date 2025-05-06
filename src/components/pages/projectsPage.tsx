@@ -11,22 +11,26 @@ import { PortfolioItem, PortfolioPage } from "@/types"
 type ProjectPageProps = {
 	projectsPageData: PortfolioPage
 	projects?: PortfolioItem[]
-	titleScrollTrigger?: boolean
+	index: number
 }
 
 export default function ProjectsPage({
 	projectsPageData,
 	projects,
+	index,
 }: ProjectPageProps) {
 	const titleRef = useRef(null)
 
 	return (
-		projectsPageData && (
+		projectsPageData &&
+		projects && (
 			<SectionWrapper>
 				{projectsPageData.subtitle && (
 					<Subtitle subtitle={projectsPageData.subtitle} />
 				)}
-				<TitleDisplay ref={titleRef}>{projectsPageData.title}</TitleDisplay>
+				<TitleDisplay ref={titleRef} index={index}>
+					{projectsPageData.title}
+				</TitleDisplay>
 				{projects && projectsPageData.title && (
 					<ProjectsMenu
 						variant='section'

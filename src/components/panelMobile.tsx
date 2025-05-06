@@ -38,13 +38,13 @@ export default function PanelMobile({ data }: { data: AllData }) {
 
 	return (
 		<div className='landscape:hidden'>
-			{data.headerNavLinks.map((section) => (
+			{data.headerNavLinks.map((section, index) => (
 				<section
 					id={`panel-${section.slug === "/" ? "home" : section.slug}`}
 					data-id={`panel-${section.slug}`}
 					className={`panel w-screen overflow-x-clip ${fullHeightSections.includes(section.slug) ? "h-svh" : "h-auto"}`}
 					key={`panel-${section.slug}`}>
-					<PanelContent data={data} section={section.slug} />
+					<PanelContent data={data} section={section.slug} index={index + 1} />
 				</section>
 			))}
 		</div>

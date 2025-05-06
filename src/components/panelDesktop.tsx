@@ -162,13 +162,17 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 			<div
 				ref={panelsContainerRef}
 				className='gsap-panels-container flex gap-32 opacity-0'>
-				{sections.map((section) => {
+				{sections.map((section, index) => {
 					return (
 						<section
 							data-id={`panel-${section.slug === "/" ? "home" : section.slug}`}
 							className='gsap-panel h-screen min-h-full px-8 min-w-fit w-fit overflow-clip'
 							key={`panel-${section.slug}`}>
-							<PanelContent data={data} section={section.slug} />
+							<PanelContent
+								data={data}
+								section={section.slug}
+								index={index + 1}
+							/>
 						</section>
 					)
 				})}

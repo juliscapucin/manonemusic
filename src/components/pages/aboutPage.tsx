@@ -15,7 +15,7 @@ import { ButtonRounded } from "@/components/buttons"
 import type { AboutPage } from "@/types"
 import { urlFor } from "@/lib/sanityImageURL"
 
-type AboutPageProps = AboutPage
+type AboutPageProps = AboutPage & { index: number }
 
 export default function AboutPage({
 	title,
@@ -23,13 +23,16 @@ export default function AboutPage({
 	content1,
 	content2,
 	image,
+	index,
 }: AboutPageProps) {
 	const titleAboutRef = useRef(null)
 
 	return (
 		<SectionWrapper classes='landscape:flex justify-between items-end gap-8 landscape:pb-40'>
 			<div>
-				<TitleDisplay ref={titleAboutRef}>{title}</TitleDisplay>
+				<TitleDisplay ref={titleAboutRef} index={index}>
+					{title}
+				</TitleDisplay>
 				{subtitle && <Subtitle subtitle={subtitle} />}
 			</div>
 			<div className='relative min-w-[30vw] mt-16 md:hidden lg:block'>
