@@ -1,4 +1,4 @@
-import type { JSX } from "react";
+import type { JSX } from "react"
 type HeadingProps = {
 	tag: string
 	classes?: string
@@ -18,18 +18,19 @@ export default function Heading({
 	switch (variant) {
 		case "display":
 			headingStyles =
-				"text-displaySmall md:text-displayMedium lg:text-displayLarge"
+				"text-displaySmall md:text-displayMedium lg:text-displayLarge font-medium uppercase"
 			break
 		case "headline":
 			headingStyles =
-				"text-headlineSmall md:text-headlineMedium lg:text-headlineLarge"
+				"text-headlineSmall md:text-headlineMedium lg:text-headlineLarge font-medium uppercase"
 			break
 		case "title":
-			headingStyles = "text-titleSmall md:text-titleMedium lg:text-titleLarge"
+			headingStyles =
+				"text-titleSmall md:text-titleMedium lg:text-titleLarge uppercase"
 			break
 		default:
 			headingStyles =
-				"text-displaySmall md:text-displayMedium lg:text-displayLarge"
+				"text-displaySmall md:text-displayMedium lg:text-displayLarge uppercase"
 			break
 	}
 
@@ -37,8 +38,7 @@ export default function Heading({
 		<Tag
 			className={`${
 				classes ? classes : ""
-			} ${headingStyles} leading-none tracking-tight font-extralight`}
-		>
+			} ${headingStyles} leading-none tracking-tight font-extralight`}>
 			{children}
 		</Tag>
 	)

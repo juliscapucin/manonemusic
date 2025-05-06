@@ -1,24 +1,22 @@
-import { Logo } from "@/components/ui"
+import { Heading, Logo, PageWrapper, SectionWrapper } from "@/components/ui"
 import Link from "next/link"
 
 const NotFoundPage = () => {
 	return (
-		<section className='flex flex-col justify-between'>
-			<div className='scale-20 origin-top'>
-				<Logo />
-			</div>
-			<div className='text-center'>
-				<h1 className='text-headlineLarge mt-4 mb-2 uppercase'>
+		<SectionWrapper classes=''>
+			<Logo />
+			<div className='text-center basis-auto mt-24'>
+				<Heading tag={"h1"} variant={"headline"} classes='mb-2'>
 					Page Not Found
-				</h1>
-				<p className='text-secondary text-xl mb-10'>
-					The page you are looking for does not exist.
+				</Heading>
+				<p className='text-secondary text-xl my-10 text-balance'>
+					The page you are looking for does not exist
 				</p>
-				<Link href='/' className='text-secondary py-4 px-6'>
-					Go Home
+				<Link href='/' className='custom-button-rounded text-secondary'>
+					Restart
 				</Link>
 			</div>
-		</section>
+		</SectionWrapper>
 	)
 }
 export default NotFoundPage

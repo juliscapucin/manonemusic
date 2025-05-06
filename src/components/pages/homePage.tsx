@@ -5,7 +5,7 @@ import { useRef } from "react"
 import { location } from "@/constants"
 
 import { Copyright, Status } from "@/components"
-import { Heading, SectionWrapper } from "@/components/ui"
+import { Heading, Logo, SectionWrapper } from "@/components/ui"
 
 import type { HomePage } from "@/types"
 
@@ -15,7 +15,7 @@ export default function HomePage() {
 	return (
 		<SectionWrapper classes={"portrait:h-dvh"}>
 			<div ref={titleHomeRef} className='mt-2 lg:mt-0'>
-				<h1 className='logo'>MAN/ONE MUSIC</h1>
+				<Logo />
 			</div>
 			<Heading tag='h2' variant='headline' classes='lg:w-1/2 mt-4 uppercase'>
 				Music & Sound Design

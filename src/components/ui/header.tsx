@@ -34,7 +34,7 @@ export default function Header({ navLinks, variant = "section" }: HeaderProps) {
 				className='hidden landscape:flex fixed top-0 right-0 left-0 p-8 justify-between bg-colorBlack z-header'>
 				<CustomButton
 					href='/'
-					classes={`underlined-link text-titleSmall md:text-titleMedium uppercase transition ${pathname === "/" ? "opacity-0 -translate-x-full" : "opacity-100"}`}
+					classes={`underlined-link text-titleSmall md:text-titleMedium uppercase font-medium transition ${pathname === "/" ? "opacity-0 -translate-x-full" : "opacity-100"}`}
 					transitionOnClick={
 						variant === "section"
 							? () => handlePanelSlide("/") // if in first level, slide to home
