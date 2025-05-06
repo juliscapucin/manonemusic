@@ -66,9 +66,10 @@ export default function MenuMobile({ navLinks }: NavLinksProps) {
 											<button
 												className='block'
 												onClick={() =>
-													animateMobileMenu(mobileMenuRef.current, () =>
-														router.push(link.slug)
-													)
+													animateMobileMenu(mobileMenuRef.current, () => {
+														console.log(link.slug)
+														router.push(`/${link.slug}`)
+													})
 												}>
 												<span className='font-headline text-headlineMedium sm:text-headlineLarge uppercase text-secondary'>
 													{link.title}

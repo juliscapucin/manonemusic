@@ -13,11 +13,6 @@ export default function PanelMobile({ data }: { data: AllData }) {
 
 	const fullHeightSections = ["/", "contact"]
 
-	const navLinks = [
-		{ title: "Home", slug: "/", order: 0 },
-		...data.headerNavLinks,
-	]
-
 	useLayoutEffect(() => {
 		gsap.registerPlugin(ScrollToPlugin)
 
@@ -43,13 +38,12 @@ export default function PanelMobile({ data }: { data: AllData }) {
 
 	return (
 		<div className='landscape:hidden'>
-			{navLinks.map((section) => (
+			{data.headerNavLinks.map((section) => (
 				<section
 					id={`panel-${section.slug === "/" ? "home" : section.slug}`}
 					data-id={`panel-${section.slug}`}
 					className={`panel w-screen overflow-x-clip ${fullHeightSections.includes(section.slug) ? "h-svh" : "h-auto"}`}
-					key={`panel-${section.slug}`}
-				>
+					key={`panel-${section.slug}`}>
 					<PanelContent data={data} section={section.slug} />
 				</section>
 			))}
