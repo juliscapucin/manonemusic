@@ -23,7 +23,7 @@ export default function ProjectPageContent({
 	console.log(image)
 	return (
 		<div className='gsap-project-page-content relative w-full flex flex-col landscape:flex-row items-start gap-8 mt-12'>
-			<div className='gsap-project-image relative w-full landscape:w-1/4 min-w-[300px] aspect-square overflow-clip opacity-0'>
+			<div className='gsap-project-image relative w-full landscape:w-1/4 min-w-[300px] opacity-0'>
 				<ImageWithSpinner
 					quality={70}
 					{...{

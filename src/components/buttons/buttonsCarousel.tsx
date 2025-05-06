@@ -31,7 +31,7 @@ export default function ButtonsCarousel({
 						key={index}></button>
 				))}
 			</div>
-			<div className='hidden relative mt-2 w-full h-16 px-4 flex flex-row justify-center items-center gap-8'>
+			<div className='hidden relative mt-2 w-full h-16 px-4 flex-row justify-center items-center gap-8'>
 				{/* BUTTON PREVIOUS */}
 				<ButtonChevron
 					onClick={() => {
