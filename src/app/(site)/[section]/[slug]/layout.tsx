@@ -13,12 +13,9 @@ export default async function PageLayout({
 	params,
 }: {
 	children: React.ReactNode
-	params: {
-		section: string
-		slug: string
-	}
+	params: Promise<{ section: string; slug: string }>
 }) {
-	const { section, slug } = await params
+	const { section } = await params
 	const headerNavLinks = await getHeaderNavLinks()
 	const projectsPageData = await getPortfolioPage(section)
 
@@ -28,8 +25,6 @@ export default async function PageLayout({
 	const projectsData = await getPortfolioItems(sectionWithoutS)
 
 	if (!projectsData) return notFound()
-
-	console.log("layout")
 
 	return (
 		<>
