@@ -177,6 +177,12 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 					)
 				})}
 			</div>
+			{/* <div className='stripes'>
+				<div></div>
+				<div></div>
+				<div></div>
+			</div> */}
+			{/* <div className='texture'></div> */}
 		</main>
 	)
 }
