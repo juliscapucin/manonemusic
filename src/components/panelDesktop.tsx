@@ -13,7 +13,7 @@ import { PanelContent } from "@/components"
 import { usePathname } from "next/navigation"
 import { useWindowDimensions } from "@/hooks"
 import { animateSplitText } from "@/animations"
-import { panelsEnter } from "@/lib/animations"
+import { handlePanelSlide, panelsEnter } from "@/lib/animations"
 
 type PanelDesktopProps = {
 	data: AllData
@@ -51,7 +51,7 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 				invalidateOnRefresh: true,
 				// markers: true,
 
-				// SKEW EFFECT
+				// TODO: Transfer SKEW EFFECT to here
 				// onUpdate: (self) => {
 				// 	let skew = clamp(self.getVelocity() / -300)
 				// 	// only do something if the skew is MORE severe. Remember, we're always tweening back to 0, so if the user slows their scrolling quickly, it's more natural to just let the tween handle that smoothly rather than jumping to the smaller skew.
@@ -73,24 +73,22 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 		setTween(tweenRef)
 	}, [])
 
-	// Title animations
+	// Title animations / routing funcionality
 	useGSAP(
 		() => {
-			let ctx = gsap.context(() => {})
-
 			// Start ScrollTrigger when window is in landscape mode
 			if (windowAspectRatio === "portrait" || !tween) return
 
 			gsap.registerPlugin(ScrollTrigger)
 
-			// Wait for the panels to slide into position
+			// Wait for the panels to slide into position before starting routing functionality
 			setTimeout(() => {
 				const titles = panelsContainerRef.current?.querySelectorAll("h1")
 
 				if (!titles) return
 
 				// Title ScrollTrigger + route handler
-				titles.forEach((title, index) => {
+				titles.forEach((title) => {
 					if (!title) return
 					let slug = `/${title.innerText.toLowerCase().replace(/\s+/g, "-")}`
 					if (!slug) return
@@ -109,9 +107,16 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 						containerAnimation: tween,
 						// markers: true,
 						onToggle: (self) => {
-							// Only update history if trigger is active and if new section
+							// Only update pathname / history if trigger is active and if new section
 							if (self.isActive && window.location.pathname !== slug) {
-								window.history.pushState(null, "", slug)
+								// Check how deep route is '/' Ex: '/film/sodo-express' vs '/film'
+								const slashCount = (window.location.pathname.match(/\//g) || [])
+									.length
+
+								// If first level
+								if (slashCount < 2) {
+									window.history.pushState(null, "", slug)
+								}
 							}
 						},
 					})
@@ -139,9 +144,11 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 						ease: "none",
 					})
 				}, panelsContainerRef.current)
-			}, 400)
+			}, 600) // Delay routing functionality
 
-			return () => ScrollTrigger.killAll()
+			return () => {
+				ScrollTrigger.killAll()
+			}
 		},
 		{ dependencies: [tween], scope: panelsContainerRef }
 	)

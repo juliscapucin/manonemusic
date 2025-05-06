@@ -7,8 +7,8 @@ import { Observer } from "gsap/Observer"
 import { PortfolioItem } from "@/types"
 import { ProjectCard } from "@/components"
 import { useWindowDimensions } from "@/hooks"
-import { useEffect, useRef, useState } from "react"
-import { carouselLoop, infiniteHorizontalLoop } from "@/lib/animations"
+import { useRef, useState } from "react"
+import { carouselLoop } from "@/lib/animations"
 import { ButtonsCarousel } from "@/components/buttons"
 
 type ProjectsMenuProps = {
@@ -31,6 +31,7 @@ export default function ProjectsMenu({
 	const [timelineReady, setTimelineReady] = useState(false)
 	const [activeCarouselImage, setActiveCarouselImage] = useState(0)
 
+	// MOBILE: Carousel
 	useGSAP(() => {
 		if (!outerContainerRef.current || !cardsContainerRef.current || !isMobile)
 			return

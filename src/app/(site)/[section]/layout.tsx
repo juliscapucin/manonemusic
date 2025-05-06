@@ -29,15 +29,19 @@ export default async function PageLayout({
 
 	if (!projectsData) return notFound()
 
-	console.log("layout")
-
 	return (
 		<>
-			<Header variant='page' navLinks={headerNavLinks} />
-			<ProjectsMenuPage
-				projectsData={projectsData}
-				pageData={projectsPageData}
-			/>
+			{/* Only show menus on internal pages */}
+			{/* These components are positioned here so they don't re-render on project change */}
+			{slug && (
+				<>
+					<Header variant='page' navLinks={headerNavLinks} />
+					<ProjectsMenuPage
+						projectsData={projectsData}
+						pageData={projectsPageData}
+					/>
+				</>
+			)}
 			{children}
 		</>
 	)
