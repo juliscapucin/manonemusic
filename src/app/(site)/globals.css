@@ -70,7 +70,8 @@
 		}
 	} */
 
-	p {
+	p,
+	span {
 		@apply text-bodyMedium;
 	}
 

@@ -1,6 +1,6 @@
 "use client"
 
-import { useRef, useState } from "react"
+import { useRef } from "react"
 import { useRouter, usePathname } from "next/navigation"
 import Image from "next/image"
 
@@ -22,9 +22,10 @@ type ProjectCardProps = {
 	image: ImageField
 	slug: string
 	isMobile: boolean | null
+	index: number
+	handleCardHover: (arg: number | null) => void
+	isCardHovered: boolean
 }
-
-const ctx = gsap.context(() => {})
 
 export default function ProjectCard({
 	variant,
@@ -32,12 +33,13 @@ export default function ProjectCard({
 	title,
 	image,
 	slug,
+	index,
 	isMobile = false,
+	handleCardHover,
+	isCardHovered,
 }: ProjectCardProps) {
 	const router = useRouter()
 	const pathname = usePathname()
-
-	const [isHovered, setIsHovered] = useState(false)
 
 	const cardImageRef = useRef<HTMLDivElement>(null)
 	const labelRef = useRef<HTMLParagraphElement>(null)
@@ -51,7 +53,7 @@ export default function ProjectCard({
 			const label = labelRef.current
 
 			// MouseEnter
-			if (isHovered) {
+			if (isCardHovered) {
 				gsap.set(label, {
 					opacity: 0,
 				})
@@ -71,7 +73,7 @@ export default function ProjectCard({
 				})
 			}
 		},
-		{ dependencies: [isHovered] }
+		{ dependencies: [isCardHovered] }
 	)
 
 	return (
@@ -82,9 +84,9 @@ export default function ProjectCard({
 					: projectExit(() => router.push(`/${section}/${slug}`), false)
 			}}
 			onMouseEnter={() => {
-				setIsHovered(true)
+				handleCardHover(index)
 			}}
-			onMouseLeave={() => setIsHovered(false)}
+			onMouseLeave={() => handleCardHover(null)}
 			href={`/${section}/${slug}`}
 			classes={`relative group gsap-project-card bg-primary ${variant === "section" ? "min-w-40 h-full w-fit bg-faded-10" : `h-full w-fit landscape:h-fit landscape:w-32 ${pathname.includes(slug) && "pointer-events-none"}`}`}
 			style={{ aspectRatio }}
@@ -110,12 +112,15 @@ export default function ProjectCard({
 
 			{/* LABEL */}
 			{variant === "section" && (
-				<p
-					className='absolute top-full mt-2 text-labelMedium md:text-titleLarge uppercase text-left leading-none text-nowrap'
-					id={`project-title-${slug}`}
-					ref={labelRef}>
-					{title}
-				</p>
+				<div className='absolute top-full mt-2 text-labelMedium md:text-titleLarge uppercase text-left leading-none text-nowrap flex gap-2'>
+					<span>
+						[{index < 10 && 0}
+						{index + 1}]
+					</span>
+					<p className='' id={`project-title-${slug}`} ref={labelRef}>
+						{title}
+					</p>
+				</div>
 			)}
 		</CustomButton>
 	)

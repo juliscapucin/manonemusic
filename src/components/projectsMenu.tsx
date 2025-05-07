@@ -29,7 +29,10 @@ export default function ProjectsMenu({
 	const tlRef = useRef<gsap.core.Timeline | null>(null)
 
 	const [timelineReady, setTimelineReady] = useState(false)
+	const [hoveredCard, setHoveredCard] = useState<number | null>(null)
 	const [activeCarouselImage, setActiveCarouselImage] = useState(0)
+
+	const handleCardHover = (arg: number | null) => setHoveredCard(arg)
 
 	// MOBILE: Carousel
 	useGSAP(() => {
@@ -118,7 +121,10 @@ export default function ProjectsMenu({
 								title: project.title,
 								image: project.image,
 								slug: project.slug,
+								index,
 								isMobile,
+								handleCardHover,
+								isCardHovered: hoveredCard === index,
 							}}
 						/>
 					)
