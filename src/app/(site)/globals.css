@@ -122,19 +122,19 @@
 			repeating-linear-gradient(
 				to right,
 				transparent 0px,
-				transparent 50px,
-				rgb(var(--color-primary-rgb)) 50px,
-				rgb(var(--color-primary-rgb)) 100px
+				transparent 10px,
+				rgb(var(--color-primary-rgb)) 10px,
+				rgb(var(--color-primary-rgb)) 400px
 			),
 			/* Repeating stripes */
-				repeating-linear-gradient(
+				/* repeating-linear-gradient(
 					to bottom,
 					transparent 0px,
 					transparent 160px,
 					rgb(var(--color-secondary-rgb)) 160px,
 					rgb(var(--color-secondary-rgb)) 165px
-				),
-			/* Fine detail stripes like the conic effect */
+				), */
+				/* Fine detail stripes like the conic effect */
 				repeating-linear-gradient(
 					to bottom,
 					transparent 0px,
@@ -142,50 +142,6 @@
 					rgb(var(--color-secondary-rgb)) 10px,
 					rgb(var(--color-secondary-rgb)) 10.25px
 				);
-	}
-
-	.stripes {
-		width: 100vw;
-		height: 100dvh;
-		/* background-color: red; */
-		position: fixed;
-		top: 0;
-		left: 0;
-		display: flex;
-		z-index: -10;
-	}
-
-	.stripes > div:nth-child(1) {
-		flex: 1;
-		background: repeating-linear-gradient(
-			45deg,
-			rgba(var(--color-secondary-rgb), 1),
-			rgba(var(--color-secondary-rgb), 1) 3px,
-			rgb(var(--color-primary-rgb)) 3px,
-			rgb(var(--color-primary-rgb)) 160px
-		);
-	}
-
-	.stripes > div:nth-child(2) {
-		flex: 1;
-		background: repeating-linear-gradient(
-			0.25turn,
-			rgba(var(--color-secondary-rgb), 1),
-			rgba(var(--color-secondary-rgb), 1) 5px,
-			rgb(var(--color-primary-rgb)) 5px,
-			rgb(var(--color-primary-rgb)) 120px
-		);
-	}
-
-	.stripes > div:nth-child(3) {
-		flex: 1;
-		background: repeating-linear-gradient(
-			-45deg,
-			rgba(var(--color-secondary-rgb), 1),
-			rgba(var(--color-secondary-rgb), 1) 2px,
-			rgb(var(--color-primary-rgb)) 2px,
-			rgb(var(--color-primary-rgb)) 200px
-		);
 	}
 }
 

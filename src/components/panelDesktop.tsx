@@ -159,6 +159,25 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 		panelsEnter(panelsContainerRef.current as HTMLDivElement)
 	}, [panelsContainerRef])
 
+	useEffect(() => {
+		if (!panelsContainerRef.current) return
+		gsap.registerPlugin(ScrollTrigger)
+
+		const container = panelsContainerRef.current
+
+		/* Panels */
+		gsap.to(".texture", {
+			backgroundPosition: "-1000px 0, 0 0, 0 0",
+			ease: "none",
+			scrollTrigger: {
+				trigger: container,
+				start: "top top",
+				scrub: 1,
+				end: () => "+=" + (container.scrollWidth - container.offsetWidth),
+			},
+		})
+	}, [panelsContainerRef.current])
+
 	return (
 		<main>
 			<div
@@ -179,11 +198,6 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 					)
 				})}
 			</div>
-			{/* <div className='stripes'>
-				<div></div>
-				<div></div>
-				<div></div>
-			</div> */}
 			<div className='texture'></div>
 		</main>
 	)
