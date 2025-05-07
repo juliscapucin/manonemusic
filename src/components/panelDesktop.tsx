@@ -184,7 +184,7 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 				<div></div>
 				<div></div>
 			</div> */}
-			{/* <div className='texture'></div> */}
+			<div className='texture'></div>
 		</main>
 	)
 }

@@ -116,14 +116,15 @@
 		left: 0;
 		display: flex;
 		z-index: -10;
+		/* opacity: 0.05; */
 		background-image:
   /* Main base stripe — like the inner glow */
 			repeating-linear-gradient(
-				to bottom,
+				to right,
 				transparent 0px,
 				transparent 50px,
-				rgb(var(--color-secondary-rgb)) 50px,
-				rgb(var(--color-secondary-rgb)) 60px
+				rgb(var(--color-primary-rgb)) 50px,
+				rgb(var(--color-primary-rgb)) 100px
 			),
 			/* Repeating stripes */
 				repeating-linear-gradient(
@@ -131,7 +132,7 @@
 					transparent 0px,
 					transparent 160px,
 					rgb(var(--color-secondary-rgb)) 160px,
-					rgb(var(--color-secondary-rgb)) 170px
+					rgb(var(--color-secondary-rgb)) 165px
 				),
 			/* Fine detail stripes like the conic effect */
 				repeating-linear-gradient(

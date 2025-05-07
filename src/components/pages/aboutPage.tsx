@@ -48,7 +48,7 @@ export default function AboutPage({
 					/>
 				</div>
 			</div>
-			<div className='mt-16 landscape:w-[70vw] landscape:flex items-end justify-between gap-8 *:flex-1'>
+			<div className='mt-16 landscape:w-[70vw] landscape:flex items-end justify-between gap-8 *:flex-1 bg-primary'>
 				{content1 && <TextBlock text={content1} />}
 				<div>
 					{content2 && <TextBlock text={content2} />}

@@ -23,42 +23,42 @@ export default function Subtitle({ subtitle }: SubtitleProps) {
 	const subtitleRef = useRef<HTMLParagraphElement | null>(null)
 	const ctx = gsap.context(() => {})
 
-	useLayoutEffect(() => {
-		if (!subtitleRef.current) return
+	// useLayoutEffect(() => {
+	// 	if (!subtitleRef.current) return
 
-		gsap.registerPlugin(ScrollTrigger)
+	// 	gsap.registerPlugin(ScrollTrigger)
 
-		const element = subtitleRef.current as HTMLParagraphElement
-		const parentElement = element.closest("section") as HTMLDivElement
+	// 	const element = subtitleRef.current as HTMLParagraphElement
+	// 	const parentElement = element.closest("section") as HTMLDivElement
 
-		const offsetLeft = () => parentElement!.offsetLeft
-		const width = () => parentElement!.offsetWidth
+	// 	const offsetLeft = () => parentElement!.offsetLeft
+	// 	const width = () => parentElement!.offsetWidth
 
-		let fastScrollEnd = true
+	// 	let fastScrollEnd = true
 
-		ctx.add(() => {
-			ScrollTrigger.create({
-				trigger: element,
-				start: () => `${offsetLeft()}px bottom`,
-				end: () => `+=${width()}`,
-				invalidateOnRefresh: true,
-				animation: animateSubtitle(element, 300),
-				toggleActions: "play none none reverse",
-				fastScrollEnd: fastScrollEnd,
-				// markers: true,
-				onUpdate: (self) => {
-					// define fastScrollEnd depending on scroll direction
-					self.direction === 1
-						? (fastScrollEnd = true)
-						: (fastScrollEnd = false)
-				},
-			})
-		})
+	// 	ctx.add(() => {
+	// 		ScrollTrigger.create({
+	// 			trigger: element,
+	// 			start: () => `${offsetLeft()}px bottom`,
+	// 			end: () => `+=${width()}`,
+	// 			invalidateOnRefresh: true,
+	// 			animation: animateSubtitle(element, 300),
+	// 			toggleActions: "play none none reverse",
+	// 			fastScrollEnd: fastScrollEnd,
+	// 			// markers: true,
+	// 			onUpdate: (self) => {
+	// 				// define fastScrollEnd depending on scroll direction
+	// 				self.direction === 1
+	// 					? (fastScrollEnd = true)
+	// 					: (fastScrollEnd = false)
+	// 			},
+	// 		})
+	// 	})
 
-		return () => ctx.revert()
-	}, [])
+	// 	return () => ctx.revert()
+	// }, [])
 	return (
-		<p className='block mt-16 mb-8 max-w-prose opacity-0' ref={subtitleRef}>
+		<p className='block mt-16 mb-8 max-w-prose bg-primary' ref={subtitleRef}>
 			{subtitle}
 		</p>
 	)

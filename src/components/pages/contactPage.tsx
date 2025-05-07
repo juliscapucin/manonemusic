@@ -26,7 +26,7 @@ export default function ContactPage({
 			<TitleDisplay ref={titleContactRef} index={index}>
 				{title}
 			</TitleDisplay>
-			<div className='mt-32 w-full flex flex-col-reverse lg:flex-row gap-16 *:flex-1'>
+			<div className='mt-32 w-full flex flex-col-reverse lg:flex-row gap-16 *:flex-1 bg-primary'>
 				<div>
 					<Copyright />
 					<Credits />
