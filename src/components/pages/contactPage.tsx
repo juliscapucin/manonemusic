@@ -14,6 +14,7 @@ type ContactPageProps = ContactPage & {
 export default function ContactPage({
 	title,
 	subtitle,
+	email,
 	socials,
 	index,
 }: ContactPageProps) {
@@ -30,7 +31,7 @@ export default function ContactPage({
 					<Copyright />
 					<Credits />
 				</div>
-				<ButtonEmail />
+				<ButtonEmail email={email} />
 
 				<SocialLinks data={socials} />
 			</div>

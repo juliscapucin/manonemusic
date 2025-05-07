@@ -54,14 +54,12 @@ export default function AboutPage({
 					{content2 && <TextBlock text={content2} />}
 					{/* BUTTONS */}
 					<div className='flex gap-4 mt-8'>
-						<ButtonRounded
-							label='Services'
-							action={() => console.log("services")}
-						/>
-						<ButtonRounded
-							label='Clients'
-							action={() => console.log("clients")}
-						/>
+						<ButtonRounded onClick={() => console.log("services")}>
+							Services
+						</ButtonRounded>
+						<ButtonRounded onClick={() => console.log("services")}>
+							Clients
+						</ButtonRounded>
 					</div>
 				</div>
 			</div>

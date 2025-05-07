@@ -1,11 +1,17 @@
-import { CopyEmailButton } from "@/components/buttons"
+import { ButtonRounded, CopyEmailButton } from "@/components/buttons"
 
-export default function ButtonEmail() {
+export default function ButtonEmail({ email }: { email: string }) {
+	const subject = encodeURIComponent("Hello there!")
+	const body = encodeURIComponent("I'd like to ask about your services.")
+
 	return (
 		<div className='flex-1 flex flex-col justify-center items-center'>
-			<a href='mailto:hello@juliscapucin.com' className='custom-button-rounded'>
+			<ButtonRounded
+				onClick={() =>
+					(window.location.href = `mailto:${email}?subject=${subject}&body=${body}`)
+				}>
 				Get in touch
-			</a>
+			</ButtonRounded>
 			<CopyEmailButton />
 		</div>
 	)

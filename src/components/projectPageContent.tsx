@@ -2,7 +2,7 @@ import Image from "next/image"
 
 import { Project } from "@/types"
 import { PlayerTrackList } from "@/components"
-import { Button } from "@/components/buttons"
+import { Button, ButtonRounded } from "@/components/buttons"
 import { CustomLink, ImageWithSpinner, TextBlock } from "@/components/ui"
 
 type ProjectPageContentProps = Project & {
@@ -20,7 +20,6 @@ export default function ProjectPageContent({
 	setIsTrailerActive,
 	setIsPageDisplaced,
 }: ProjectPageContentProps) {
-	console.log(image)
 	return (
 		<div className='gsap-project-page-content relative w-full flex flex-col landscape:flex-row items-start gap-8 mt-12'>
 			<div className='gsap-project-image relative w-full landscape:w-1/4 min-w-[300px] opacity-0'>
@@ -40,14 +39,13 @@ export default function ProjectPageContent({
 				{/* Links */}
 				<div className='mt-16 space-x-4'>
 					{projectVideo && setIsTrailerActive && (
-						<Button
-							classes='custom-button-rounded'
-							action={() => {
+						<ButtonRounded
+							onClick={() => {
 								setIsTrailerActive(true)
 								setIsPageDisplaced(true)
 							}}>
 							View Trailer
-						</Button>
+						</ButtonRounded>
 					)}
 					{projectLink && (
 						<CustomLink href={projectLink} label='View Project' />

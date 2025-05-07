@@ -1,6 +1,7 @@
 "use client"
 
 import { useMemo } from "react"
+import { ButtonRounded } from "./buttons"
 
 type AvailabilityProps = {
 	availability?: string
@@ -26,7 +27,7 @@ export default function Availability({
 		return getNextMonth
 	}
 
-	const furtherAvailability = useMemo(() => {
+	const furtherAvailability = () => {
 		const formatMonth = (date: Date) =>
 			`${date.toLocaleString("default", {
 				month: "long",
@@ -40,20 +41,17 @@ export default function Availability({
 		return cmsDate.getTime() < getNextMonth.getTime()
 			? formatMonth(getNextMonth)
 			: formatMonth(cmsDate)
-	}, [availability, getNextMonth])
+	}
 
 	return (
 		<div className='flex items-center gap-4'>
 			<p className='block text-bodyMedium lg:text-bodyLarge uppercase'>
-				Available {furtherAvailability}
+				Available {furtherAvailability()}
 			</p>
 			{slideToContact && (
-				<button
-					onClick={() => slideToContact()}
-					className='custom-button-rounded'
-				>
+				<ButtonRounded onClick={() => slideToContact()}>
 					Contact me
-				</button>
+				</ButtonRounded>
 			)}
 		</div>
 	)
