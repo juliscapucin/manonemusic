@@ -1,6 +1,7 @@
 import Availability from "./availability"
 import Copyright from "./copyright"
 import Credits from "./credits"
+import MouseFollower from "./mouseFollower"
 import PanelContent from "./panelContent"
 import PanelDesktop from "./panelDesktop"
 import PanelMobile from "./panelMobile"
@@ -22,6 +23,7 @@ export {
 	Availability,
 	Copyright,
 	Credits,
+	MouseFollower,
 	PanelContent,
 	PanelDesktop,
 	PanelMobile,

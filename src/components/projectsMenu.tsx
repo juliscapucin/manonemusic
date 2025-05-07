@@ -5,7 +5,7 @@ import { useGSAP } from "@gsap/react"
 import { Observer } from "gsap/Observer"
 
 import { PortfolioItem } from "@/types"
-import { ProjectCard } from "@/components"
+import { MouseFollower, ProjectCard } from "@/components"
 import { useWindowDimensions } from "@/hooks"
 import { useRef, useState } from "react"
 import { carouselLoop } from "@/lib/animations"
@@ -108,6 +108,7 @@ export default function ProjectsMenu({
 			className={
 				"gsap-projects-menu relative w-full portrait:overflow-x-visible landscape:w-fit portrait:pb-16 h-80 landscape:h-2/5 bg-primary"
 			}>
+			<MouseFollower isHovering={hoveredCard !== null} variant='big' />
 			<div
 				ref={cardsContainerRef}
 				className='relative w-fit h-full flex items-start justify-start gap-8 landscape:gap-40'>
