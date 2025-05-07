@@ -81,7 +81,9 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 
 			// Wait for the panels to slide into position before starting routing functionality
 			setTimeout(() => {
-				const titles = panelsContainerRef.current?.querySelectorAll("h1")
+				const titles = panelsContainerRef.current?.querySelectorAll(
+					".gsap-section-title"
+				) as HTMLHeadingElement[] | undefined
 
 				if (!titles) return
 

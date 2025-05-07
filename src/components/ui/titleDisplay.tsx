@@ -16,13 +16,13 @@ export const TitleDisplay = forwardRef(function Title(
 ) {
 	return (
 		<div
-			className={`gsap-section-title mt-16 landscape:mt-24 mb-8 bg-primary overflow-clip ${classes}`}
+			className={`mt-16 landscape:mt-24 mb-8 bg-primary overflow-clip ${classes}`}
 			ref={ref}>
 			<span className='text-titleSmall md:text-titleMedium lg:text-titleLarge'>{`[0${index}]`}</span>
 
 			<Heading
-				tag={"h1"}
-				classes='whitespace-nowrap uppercase'
+				tag={"h2"}
+				classes='gsap-section-title whitespace-nowrap uppercase'
 				variant='display'>
 				{children}
 			</Heading>

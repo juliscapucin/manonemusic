@@ -2,6 +2,7 @@
 
 import { useEffect, useLayoutEffect, useRef, useState } from "react"
 import gsap from "gsap"
+import { useGSAP } from "@gsap/react"
 
 type StatusProps = {
 	location: string
@@ -31,45 +32,64 @@ function Status({ location }: StatusProps) {
 	}, [])
 
 	// Animate the lines
-	useLayoutEffect(() => {
+	useGSAP(() => {
 		if (!statusWrapperRef.current) return
 
-		let ctx = gsap.context(() => {
-			gsap.from(".line", {
+		gsap.fromTo(
+			".line",
+			{
 				xPercent: -100,
+			},
+			{
+				xPercent: 0,
 				duration: 0.3,
 				ease: "expo4.inOut",
 				stagger: 0.25,
-			})
-		}, statusWrapperRef.current)
-
-		return () => {
-			ctx.revert()
-		}
-	}, [])
+			}
+		)
+	}, [statusWrapperRef.current])
 
 	useEffect(() => {
+		const options = { timeZone: "Europe/London" }
+
 		const date = {
-			dayOfWeek: currentDate.toLocaleDateString("en-US", { weekday: "long" }),
-			dayOfMonth: currentDate.toLocaleDateString("en-US", { day: "numeric" }),
-			month: currentDate.toLocaleDateString("en-US", { month: "long" }),
+			dayOfWeek: currentDate.toLocaleDateString("en-GB", {
+				weekday: "long",
+				...options,
+			}),
+			dayOfMonth: currentDate.toLocaleDateString("en-GB", {
+				day: "numeric",
+				...options,
+			}),
+			month: currentDate.toLocaleDateString("en-GB", {
+				month: "long",
+				...options,
+			}),
 		}
 
 		setDay(date)
-		setTime(currentDate.toLocaleTimeString("en-US"))
+		setTime(
+			currentDate.toLocaleTimeString("en-GB", {
+				hour: "2-digit",
+				minute: "2-digit",
+				second: "2-digit",
+				timeZone: "Europe/London",
+			})
+		)
 	}, [currentDate])
 
 	return (
-		<div
-			ref={statusWrapperRef}
-			className='flex flex-col w-1/2 text-titleSmall md:text-titleMedium lg:text-titleLarge overflow-clip uppercase'
-		>
-			<h2 className='line'>{location}</h2>
-			<span className='line'>
-				{day?.dayOfWeek} | {day?.dayOfMonth} {day?.month}
-			</span>
-			{time ?? <span className='line'>{time}</span>}
-		</div>
+		time && (
+			<div
+				ref={statusWrapperRef}
+				className={`flex flex-col w-1/2 text-titleSmall md:text-titleMedium lg:text-titleLarge overflow-clip uppercase ${statusWrapperRef.current ? "opacity-1" : "opacity-0"}`}>
+				<h2 className='line'>{location}</h2>
+				<span className='line'>
+					{day?.dayOfWeek} | {day?.dayOfMonth} {day?.month}
+				</span>
+				<span className='line'>{time}</span>
+			</div>
+		)
 	)
 }
 
