@@ -106,7 +106,7 @@ export default function ProjectsMenu({
 			ref={outerContainerRef}
 			id='projects-menu'
 			className={
-				"gsap-projects-menu relative w-full portrait:overflow-x-visible landscape:w-fit portrait:pb-16 h-80 landscape:h-2/5 bg-primary"
+				"gsap-projects-menu relative w-full overflow-x-visible landscape:w-fit portrait:pb-16 h-80 landscape:h-2/5 bg-primary"
 			}>
 			<MouseFollower isHovering={hoveredCard !== null} variant='big' />
 			<div
