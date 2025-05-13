@@ -182,8 +182,8 @@ textarea {
 /* TAILWIND WORKAROUNDS */
 
 .custom-min-h-screen {
-	min-height: 100vh;
-	min-height: 100svh;
+	min-height: 100dh;
+	min-height: 100dvh;
 }
 
 .custom-min-w-screen {

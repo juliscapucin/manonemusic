@@ -21,10 +21,10 @@ type ProjectCardProps = {
 	title: string
 	image: ImageField
 	slug: string
-	isMobile: boolean | null
 	index: number
-	handleCardHover: (arg: number | null) => void
-	isCardHovered: boolean
+	handleCardHover: ((arg: number | null) => void) | null
+	isCardHovered: boolean | null
+	isMobile?: boolean | null
 }
 
 export default function ProjectCard({
@@ -34,9 +34,9 @@ export default function ProjectCard({
 	image,
 	slug,
 	index,
-	isMobile = false,
 	handleCardHover,
 	isCardHovered,
+	isMobile = false,
 }: ProjectCardProps) {
 	const router = useRouter()
 	const pathname = usePathname()
@@ -84,9 +84,11 @@ export default function ProjectCard({
 					: projectExit(() => router.push(`/${section}/${slug}`), false)
 			}}
 			onMouseEnter={() => {
-				handleCardHover(index)
+				if (variant === "section" && handleCardHover) handleCardHover(index)
 			}}
-			onMouseLeave={() => handleCardHover(null)}
+			onMouseLeave={() => {
+				if (variant === "section" && handleCardHover) handleCardHover(null)
+			}}
 			href={`/${section}/${slug}`}
 			classes={`relative group gsap-project-card bg-primary ${variant === "section" ? "min-w-40 h-full w-fit bg-faded-10" : `h-full w-fit landscape:h-fit landscape:w-32 ${pathname.includes(slug) && "pointer-events-none"}`}`}
 			style={{ aspectRatio }}

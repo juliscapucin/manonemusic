@@ -43,8 +43,8 @@ export default function Footer({ navLinks }: FooterProps) {
 	}
 
 	return (
-		<footer className='fixed bottom-0 w-full p-8 flex items-center justify-between text-white text-center bg-primary'>
-			<Availability slideToContact={() => handlePanelSlide("contact")} />
+		<footer className='fixed bottom-0 w-full p-8 flex items-center justify-center text-white text-center bg-primary'>
+			{/* <Availability slideToContact={() => handlePanelSlide("contact")} /> */}
 
 			<ButtonScroll
 				sectionsTotal={sections.length}
@@ -52,7 +52,7 @@ export default function Footer({ navLinks }: FooterProps) {
 				index={index}
 			/>
 
-			<Pagination index={index} navLinks={sections} />
+			{/* <Pagination index={index} navLinks={sections} /> */}
 		</footer>
 	)
 }

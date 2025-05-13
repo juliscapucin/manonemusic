@@ -33,8 +33,6 @@ export default function ButtonRounded({
 			? "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)"
 			: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)"
 
-		console.log(clipValue)
-
 		gsap.to(maskRef.current, {
 			clipPath: clipValue,
 			duration: 0.4,

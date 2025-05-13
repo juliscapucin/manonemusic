@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react"
 
 import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
+import { ScrollSmoother } from "gsap/ScrollSmoother"
 import { useGSAP } from "@gsap/react"
 
 gsap.registerPlugin(useGSAP)
@@ -159,6 +160,7 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 		panelsEnter(panelsContainerRef.current as HTMLDivElement)
 	}, [panelsContainerRef])
 
+	// Background texture
 	useEffect(() => {
 		if (!panelsContainerRef.current) return
 		gsap.registerPlugin(ScrollTrigger)
@@ -177,6 +179,17 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 			},
 		})
 	}, [panelsContainerRef.current])
+
+	// Smooth Scroller
+	// useEffect(() => {
+	// 	if (!panelsContainerRef.current) return
+	// 	gsap.registerPlugin(ScrollSmoother)
+
+	// 	ScrollSmoother.create({
+	// 		smooth: 1,
+	// 		effects: true,
+	// 	})
+	// }, [panelsContainerRef.current])
 
 	return (
 		<main>

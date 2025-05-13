@@ -1,22 +1,21 @@
+import { ProjectPageLayout } from "@/components/pages"
 import {
 	getHeaderNavLinks,
 	getPortfolioItems,
 	getPortfolioPage,
 } from "@/sanity/sanity-queries"
 
-import { Header, MenuMobile } from "@/components/ui"
 import { notFound } from "next/navigation"
-import { ProjectsMenuPage } from "@/components"
 
 export default async function PageLayout({
 	children,
 	params,
 }: {
 	children: React.ReactNode
-	params: Promise<{ section: string; slug: string }>
+	params: Promise<{ section: string }>
 }) {
 	const { section } = await params
-	const headerNavLinks = await getHeaderNavLinks()
+	const navLinks = await getHeaderNavLinks()
 	const projectsPageData = await getPortfolioPage(section)
 
 	// Because all sections are singular in the schema but vary in the header nav / slug
@@ -28,11 +27,12 @@ export default async function PageLayout({
 
 	return (
 		<>
-			<Header variant='page' navLinks={headerNavLinks} />
-			<MenuMobile navLinks={headerNavLinks} />
-			<ProjectsMenuPage
-				projectsData={projectsData}
-				pageData={projectsPageData}
+			<ProjectPageLayout
+				{...{
+					navLinks,
+					projectsData,
+					projectsPageData,
+				}}
 			/>
 
 			{children}

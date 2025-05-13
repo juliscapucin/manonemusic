@@ -31,7 +31,7 @@ export default function Header({ navLinks, variant = "section" }: HeaderProps) {
 		<header>
 			<nav
 				ref={navRef}
-				className='hidden landscape:flex fixed top-0 right-0 left-0 p-8 justify-between bg-colorBlack z-header'>
+				className='hidden landscape:flex fixed top-0 right-0 left-0 p-8 justify-between bg-primary z-header'>
 				<CustomButton
 					href='/'
 					classes={`underlined-link text-titleSmall md:text-titleMedium uppercase font-medium transition ${pathname === "/" ? "opacity-0 -translate-x-full" : "opacity-100"}`}

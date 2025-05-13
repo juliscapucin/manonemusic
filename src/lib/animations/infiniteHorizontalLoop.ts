@@ -151,7 +151,6 @@ export function infiniteHorizontalLoop(
 			}
 		})
 
-		console.log(curIndex)
 		return curIndex
 		// return tl // For chaining
 	}

@@ -67,7 +67,6 @@ export default function MenuMobile({ navLinks }: NavLinksProps) {
 												className='block'
 												onClick={() =>
 													animateMobileMenu(mobileMenuRef.current, () => {
-														console.log(link.slug)
 														router.push(`/${link.slug}`)
 													})
 												}>
