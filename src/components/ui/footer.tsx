@@ -19,14 +19,12 @@ export default function Footer({ navLinks }: FooterProps) {
 	const pathname = usePathname()
 	const [index, setIndex] = useState(0)
 
-	const sections = navLinks
-
 	useEffect(() => {
-		const foundPage = sections.find((link) => `/${link.slug}` === pathname)
-		const newIndex = foundPage ? sections.indexOf(foundPage) : 0
+		const foundPage = navLinks.find((link) => `/${link.slug}` === pathname)
+		const newIndex = foundPage ? navLinks.indexOf(foundPage) : 0
 
 		setIndex(newIndex)
-	}, [pathname, sections])
+	}, [pathname, navLinks])
 
 	const handleNavigation = (direction: "previous" | "next") => {
 		const newIndex =
@@ -34,10 +32,10 @@ export default function Footer({ navLinks }: FooterProps) {
 				? index - 1 >= 0
 					? index - 1
 					: index
-				: index + 1 < sections.length
+				: index + 1 < navLinks.length
 					? index + 1
 					: index
-		const newSlug = sections[newIndex].slug
+		const newSlug = navLinks[newIndex].slug
 
 		handlePanelSlide(newSlug)
 	}
@@ -47,12 +45,10 @@ export default function Footer({ navLinks }: FooterProps) {
 			{/* <Availability slideToContact={() => handlePanelSlide("contact")} /> */}
 
 			<ButtonScroll
-				sectionsTotal={sections.length}
+				sections={navLinks}
 				action={handleNavigation}
 				index={index}
 			/>
-
-			{/* <Pagination index={index} navLinks={sections} /> */}
 		</footer>
 	)
 }

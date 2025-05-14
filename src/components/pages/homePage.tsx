@@ -14,7 +14,9 @@ export default function HomePage() {
 
 	return (
 		<SectionWrapper classes={"portrait:h-dvh"}>
-			<div ref={titleHomeRef} className='mt-2 lg:mt-0 bg-primary'>
+			<div
+				ref={titleHomeRef}
+				className='gsap-section-title mt-2 lg:mt-0 bg-primary'>
 				<Logo />
 			</div>
 			<Heading

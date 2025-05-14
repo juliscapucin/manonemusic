@@ -89,25 +89,28 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 				if (!titles) return
 
 				// Title ScrollTrigger + route handler
-				titles.forEach((title) => {
+				titles.forEach((title, index) => {
 					if (!title) return
-					let slug = `/${title.innerText.toLowerCase().replace(/\s+/g, "-")}`
+					let slug =
+						index === 0
+							? "/"
+							: `/${title.innerText.toLowerCase().replace(/\s+/g, "-")}`
 					if (!slug) return
-
-					if (slug.includes("man")) slug = "/"
 
 					ScrollTrigger.create({
 						trigger: title,
-						start: "left center",
+						start: index === 0 ? "left+=30 left" : "left center",
 						end: "right center",
 						invalidateOnRefresh: true,
-						animation: animateSplitText(title, 2000),
+						animation: index === 0 ? undefined : animateSplitText(title, 2000), // only run title animation on internal sections
 						toggleActions: "play none none reverse",
 						fastScrollEnd: true,
 						horizontal: true,
 						containerAnimation: tween,
 						// markers: true,
 						onToggle: (self) => {
+							console.log("slug", slug)
+
 							// Only update pathname / history if trigger is active and if new section
 							if (self.isActive && window.location.pathname !== slug) {
 								// Check how deep route is '/' Ex: '/film/sodo-express' vs '/film'
@@ -167,9 +170,8 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 
 		const container = panelsContainerRef.current
 
-		/* Panels */
 		gsap.to(".texture", {
-			backgroundPosition: "-1000px 0, 0 0, 0 0",
+			backgroundPosition: "-1500px 0, 0 0, 0 0",
 			ease: "none",
 			scrollTrigger: {
 				trigger: container,
