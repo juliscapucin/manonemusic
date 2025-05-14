@@ -27,10 +27,9 @@ export default function NavLink({
 			) : (
 				<div className='overflow-clip max-h-8'>
 					<CustomButton
-						href={`/${slug}`}
+						link={`/${slug}`}
 						classes={`underlined-link text-titleSmall md:text-titleMedium uppercase`}
-						transitionOnClick={action}
-					>
+						transitionOnClick={action}>
 						{label}
 					</CustomButton>
 				</div>
