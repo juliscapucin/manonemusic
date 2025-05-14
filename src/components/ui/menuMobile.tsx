@@ -40,7 +40,7 @@ export default function MenuMobile({ navLinks }: NavLinksProps) {
 						{/* Close Button */}
 						<div className='absolute top-4 right-4'>
 							<ButtonClose
-								action={(e) => {
+								onClick={(e) => {
 									if (mobileMenuRef.current) {
 										animateMobileMenu(mobileMenuRef.current)
 									}

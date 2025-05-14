@@ -1,7 +1,7 @@
 import { IconClose } from "@/components/icons"
 
 type ButtonCloseProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-	classes: string
+	classes?: string
 }
 
 export default function ButtonClose({ classes, ...props }: ButtonCloseProps) {
@@ -9,7 +9,7 @@ export default function ButtonClose({ classes, ...props }: ButtonCloseProps) {
 	return (
 		<button
 			onClick={onClick}
-			className={`h-16 w-16 relative ${classes}`}
+			className={`h-16 w-16 relative ${classes ? classes : ""}`}
 			aria-label='close menu'>
 			<IconClose />
 		</button>
