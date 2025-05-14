@@ -12,9 +12,8 @@ const PageWrapper = forwardRef<HTMLDivElement, PageWrapperProps>(
 		return (
 			<div
 				ref={ref}
-				className={`page-wrapper relative w-screen h-screen min-h-svh pt-32 pb-32 landscape:pb-8 pr-4 landscape:pr-32 pl-4 overflow-y-scroll overflow-x-clip ${classes}`}
-				id='page-wrapper'
-			>
+				className={`page-wrapper relative w-screen h-screen min-h-svh pt-32 pb-32 landscape:pb-8 pr-4 landscape:pr-32 pl-4 overflow-y-scroll overflow-x-clip ${classes || ""}`}
+				id='page-wrapper'>
 				{children}
 			</div>
 		)

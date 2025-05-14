@@ -9,7 +9,7 @@ export default function ButtonClose({ classes, ...props }: ButtonCloseProps) {
 	return (
 		<button
 			onClick={onClick}
-			className={`h-16 w-16 relative ${classes ? classes : ""}`}
+			className={`h-16 w-16 relative ${classes || ""}`}
 			aria-label='close menu'>
 			<IconClose />
 		</button>

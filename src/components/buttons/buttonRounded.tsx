@@ -45,11 +45,13 @@ export default function ButtonRounded({
 			{href ? (
 				<div className='relative overflow-clip'>
 					<div className='overflow-clip'>
-						<Link href={href || ""} className={`${stylesOverlay} ${classes}`}>
+						<Link
+							href={href || ""}
+							className={`${stylesOverlay} ${classes || ""}`}>
 							{children}
 						</Link>
 					</div>
-					<Link href={href || ""} className={`${styles} ${classes}`}>
+					<Link href={href || ""} className={`${styles} ${classes || ""}`}>
 						{children}
 					</Link>
 				</div>
@@ -66,7 +68,7 @@ export default function ButtonRounded({
 						onClick={onClick}
 						onMouseEnter={() => setIsHovered(true)}
 						onMouseLeave={() => setIsHovered(false)}
-						className={`${styles} ${classes && classes}`}>
+						className={`${styles} ${classes || ""}`}>
 						{children}
 					</button>
 				</div>

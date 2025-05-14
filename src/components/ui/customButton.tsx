@@ -1,49 +1,45 @@
 "use client"
 
-import Link from "next/link"
-
-type ButtonProps = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
+type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
+	link: string
 	classes?: string
 	style?: React.CSSProperties
 	children?: React.ReactNode
 	transitionOnClick: (slug: string) => void
-	isDisabled?: boolean
 }
 
 const CustomButton = ({
+	link,
 	classes,
 	style,
 	children,
 	transitionOnClick,
-	isDisabled = false,
 	...props
 }: ButtonProps) => {
-	const { href, onMouseEnter, onMouseLeave } = props
+	const { onMouseEnter, onMouseLeave, disabled } = props
 
 	const slug =
-		href && href.length > 0
-			? href.startsWith("/")
-				? href.slice(1)
-				: href
+		link && link.length > 0
+			? link.startsWith("/")
+				? link.slice(1)
+				: link
 			: "/"
 
-	return isDisabled ? (
-		<div className={`${classes}`} style={style}>
-			{children}
-		</div>
-	) : (
-		<Link
-			href={href || ""}
-			className={`${classes}`}
+	return (
+		<button
+			className={`${classes || ""} ${disabled ? "button-active" : ""}`}
 			style={style}
 			onMouseEnter={onMouseEnter}
 			onMouseLeave={onMouseLeave}
 			onClick={(e) => {
-				e.preventDefault()
-				transitionOnClick(slug)
-			}}>
+				if (!disabled) {
+					e.preventDefault()
+					transitionOnClick(slug)
+				}
+			}}
+			disabled={disabled}>
 			{children}
-		</Link>
+		</button>
 	)
 }
 

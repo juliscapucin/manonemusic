@@ -16,7 +16,7 @@ export const TitleDisplay = forwardRef(function Title(
 ) {
 	return (
 		<div
-			className={`mt-16 landscape:mt-24 mb-8 bg-primary overflow-clip ${classes}`}
+			className={`mt-16 landscape:mt-24 mb-8 bg-primary overflow-clip ${classes || ""}`}
 			ref={ref}>
 			<span className='text-titleSmall md:text-titleMedium lg:text-titleLarge'>{`[0${index}]`}</span>
 

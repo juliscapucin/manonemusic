@@ -15,9 +15,8 @@ export const TitleHeadline = forwardRef(function Title(
 ) {
 	return (
 		<div
-			className={`gsap-projects-title gsap-project-content bg-primary ${classes}`}
-			ref={ref}
-		>
+			className={`gsap-projects-title gsap-project-content bg-primary ${classes || ""}`}
+			ref={ref}>
 			<Heading tag={"h1"} classes='uppercase text-balance' variant='headline'>
 				{children}
 			</Heading>

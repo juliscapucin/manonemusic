@@ -6,7 +6,7 @@ type ButtonProps = {
 
 export default function Button({ children, action, classes }: ButtonProps) {
 	return (
-		<button className={`${classes && classes}`} onClick={action}>
+		<button className={`${classes || ""}`} onClick={action}>
 			{children}
 		</button>
 	)

@@ -89,14 +89,14 @@ export default function ProjectCard({
 			onMouseLeave={() => {
 				if (variant === "section" && handleCardHover) handleCardHover(null)
 			}}
-			href={`/${section}/${slug}`}
-			classes={`relative group gsap-project-card bg-primary ${variant === "section" ? "min-w-40 h-full w-fit bg-faded-10" : `h-full w-fit landscape:h-fit landscape:w-32 ${pathname.includes(slug) && "pointer-events-none"}`}`}
+			link={`/${section}/${slug}`}
+			classes={`relative group block bg-primary ${variant === "section" ? "min-w-40 h-full w-fit bg-faded-10" : `h-full w-fit landscape:h-fit landscape:w-32 ${pathname.includes(slug) && "pointer-events-none"}`}`}
 			style={{ aspectRatio }}
 			aria-labelledby={`project-title-${slug}`}
-			isDisabled={pathname.includes(slug)}>
+			disabled={pathname.includes(slug)}>
 			{image?.imageRef && (
 				<div
-					className='rounded-sm pointer-events-none w-full overflow-hidden mb-2 lg:-mb-10'
+					className='rounded-sm pointer-events-none w-full overflow-hidden'
 					ref={cardImageRef}
 					role='img'
 					aria-label={image.imageAlt}>

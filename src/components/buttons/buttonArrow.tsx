@@ -13,7 +13,7 @@ export default function ButtonArrow({
 }: ButtonArrowProps) {
 	return (
 		<button
-			className={`flex justify-center items-center opacity-30 hover:opacity-100 transition-opacity duration-300 ${classes}`}
+			className={`flex justify-center items-center opacity-30 hover:opacity-100 transition-opacity duration-300 ${classes || ""}`}
 			{...props}>
 			{isShort ? <IconArrowShort /> : <IconArrow />}
 		</button>
