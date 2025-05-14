@@ -2,6 +2,7 @@ import { AboutPage } from "./AboutPage"
 import { AllData } from "./AllData"
 import { Commercial } from "./Commercial"
 import { ContactPage } from "./ContactPage"
+import { Cookies } from "./Cookies"
 import { Film } from "./Film"
 import { HomePage } from "./HomePage"
 import { NavLink } from "./NavLink"
@@ -16,6 +17,7 @@ export type {
 	AllData,
 	Commercial,
 	ContactPage,
+	Cookies,
 	Film,
 	HomePage,
 	NavLink,

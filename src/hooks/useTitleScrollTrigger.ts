@@ -7,7 +7,7 @@ import gsap from "gsap"
 import { ScrollTrigger } from "gsap/ScrollTrigger"
 
 import { animateSplitText } from "@/animations"
-import { useWindowDimensions } from "./useWindowDimensions"
+import useWindowDimensions from "./useWindowDimensions"
 
 export default function useTitleScrollTrigger(
 	elementRef: React.RefObject<HTMLDivElement | null>,

@@ -1,3 +1,4 @@
+import Cookies from "./cookies"
 import CustomButton from "./customButton"
 import CustomLink from "./customLink"
 import Footer from "./footer"
@@ -19,6 +20,7 @@ import { TitleHeadline } from "./titleHeadline"
 import VideoPlayer from "./videoPlayer"
 
 export {
+	Cookies,
 	CustomButton,
 	CustomLink,
 	Footer,

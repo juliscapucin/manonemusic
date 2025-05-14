@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react"
 
-export const useWindowDimensions = () => {
+export default function useWindowDimensions() {
 	const [width, setWidth] = useState(0)
 	const [height, setHeight] = useState(0)
 	const [windowAspectRatio, setWindowAspectRatio] = useState("")
