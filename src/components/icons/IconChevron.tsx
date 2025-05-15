@@ -1,13 +1,19 @@
-export default function IconChevron() {
+type IconChevronProps = {
+	direction: string
+}
+
+export default function IconChevron({ direction }: IconChevronProps) {
 	return (
-		<svg
-			width='27'
-			height='28'
-			viewBox='0 0 27 28'
-			fill='none'
-			xmlns='http://www.w3.org/2000/svg'>
-			<path d='M26.5351 14.2071L13.4122 27.33' stroke='#B6D1C2' />
-			<path d='M26.5273 14.3662L13.245 1.08389' stroke='#B6D1C2' />
-		</svg>
+		<div className={direction === "back" ? "rotate-180" : ""}>
+			<svg
+				width='27'
+				height='28'
+				viewBox='0 0 27 28'
+				fill='none'
+				xmlns='http://www.w3.org/2000/svg'>
+				<path d='M26.5351 14.2071L13.4122 27.33' stroke='#B6D1C2' />
+				<path d='M26.5273 14.3662L13.245 1.08389' stroke='#B6D1C2' />
+			</svg>
+		</div>
 	)
 }

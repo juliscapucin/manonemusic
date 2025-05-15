@@ -36,10 +36,12 @@ export default function ProjectPageContent({
 			<div className='mt-2 pr-8 flex-1 max-w-prose'>
 				{tracklist && <PlayerTrackList tracks={tracklist} />}
 				{description && <TextBlock text={description} />}
-				{/* Links */}
-				<div className='mt-16 space-x-4'>
+
+				{/* Project Links */}
+				<div className='mt-16 flex gap-4 w-fit mx-auto'>
 					{projectVideo && setIsTrailerActive && (
 						<ButtonRounded
+							key={"button-trailer"}
 							onClick={() => {
 								setIsTrailerActive(true)
 								setIsPageDisplaced(true)
@@ -48,10 +50,20 @@ export default function ProjectPageContent({
 						</ButtonRounded>
 					)}
 					{projectLink && (
-						<CustomLink href={projectLink} label='View Project' />
+						<ButtonRounded
+							key={"button-project"}
+							href={projectLink}
+							target='_blank'>
+							View Project
+						</ButtonRounded>
 					)}
 					{releaseLink && (
-						<CustomLink href={releaseLink} label='View Release' />
+						<ButtonRounded
+							key={"button-release"}
+							href={releaseLink}
+							target='_blank'>
+							View Release
+						</ButtonRounded>
 					)}
 				</div>
 			</div>
