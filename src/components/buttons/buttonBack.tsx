@@ -14,15 +14,15 @@ export default function ButtonBack({ slug }: ButtonBackProps) {
 	const router = useRouter()
 
 	return (
-		<div className='mb-8 flex gap-4'>
+		<CustomButton
+			classes='mb-8 flex gap-4 items-center'
+			transitionOnClick={() =>
+				transitionOnClickBack(() => router.push(`/${slug}`))
+			}>
 			<IconChevron direction='back' />
-			<CustomButton
-				classes='underlined-link'
-				transitionOnClick={() =>
-					transitionOnClickBack(() => router.push(`/${slug}`))
-				}>
+			<span className='underlined-link'>
 				Back to {slug.charAt(0).toUpperCase() + slug.slice(1)}
-			</CustomButton>
-		</div>
+			</span>
+		</CustomButton>
 	)
 }
