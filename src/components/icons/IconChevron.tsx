@@ -1,5 +1,5 @@
 type IconChevronProps = {
-	direction: string
+	direction: "back" | "forward"
 }
 
 export default function IconChevron({ direction }: IconChevronProps) {
