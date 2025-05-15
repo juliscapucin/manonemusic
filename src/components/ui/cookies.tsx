@@ -20,12 +20,13 @@ export default function Cookies({ cookiesData }: CookiesProps) {
 	const cookieButtonRef = useRef<HTMLDivElement>(null)
 	const modalRef = useRef<HTMLDivElement>(null)
 
-	// Enter cookie button animation
+	// Enter cookie button animation + modal initial position
 	useLayoutEffect(() => {
 		if (!cookieButtonRef.current || cookie === "true") return
-		gsap.set(modalRef.current, { yPercent: 120 })
+		gsap.set(modalRef.current, { yPercent: 150 })
+		gsap.set(cookieButtonRef.current, { xPercent: 120 })
 		gsap.to(cookieButtonRef.current, {
-			xPercent: -100,
+			xPercent: 0,
 			duration: 0.2,
 			ease: "power4.out",
 			delay: 2.7,
@@ -38,13 +39,12 @@ export default function Cookies({ cookiesData }: CookiesProps) {
 
 		const isOpen = !isModalOpen
 
-		setIsModalOpen(isOpen)
-
 		let ctx = gsap.context(() => {
 			gsap.to(modalRef.current, {
 				yPercent: isOpen ? 0 : 120,
 				duration: 0.4,
 				ease: "power2.out",
+				onComplete: () => setIsModalOpen(isOpen),
 			})
 		}, modalRef)
 
@@ -53,10 +53,10 @@ export default function Cookies({ cookiesData }: CookiesProps) {
 		}
 	}
 
-	useCloseOnClickOutside(modalRef.current, handleCookieModal)
+	useCloseOnClickOutside(modalRef, handleCookieModal, isModalOpen)
 
 	useEffect(() => {
-		const handleKeyDown = (e: KeyboardEvent) => {
+		function handleKeyDown(e: KeyboardEvent) {
 			if (e.key === "Escape" && isModalOpen) {
 				handleCookieModal()
 			}
@@ -90,15 +90,17 @@ export default function Cookies({ cookiesData }: CookiesProps) {
 			cookiesData &&
 			cookie !== "true" && (
 				<>
-					{/* White overlay */}
+					{/* Background Overlay */}
 					<div
-						className={`fixed top-0 max-w-desktop mx-auto left-0 right-8 bottom-8 flex items-end justify-end z-cookies overflow-clip pointer-events-none transition-colors duration-300 ${
-							isModalOpen ? "md:bg-primary/80" : ""
+						className={`fixed top-0 left-0 right-0 bottom-0 max-w-desktop mx-auto flex items-end justify-end z-10 overflow-clip  transition-colors duration-300 ${
+							isModalOpen
+								? "md:bg-primary/80 pointer-events-auto"
+								: "pointer-events-none"
 						}`}>
-						{/* Cookie button */}
+						{/* Cookie Button */}
 						<div
 							ref={cookieButtonRef}
-							className='translate-x-full flex items-center gap-4 bg-primary text-secondary border border-secondary rounded-full px-6 py-2 pointer-events-auto'>
+							className='absolute right-8 bottom-8 flex items-center gap-4 bg-primary text-secondary border border-secondary rounded-full px-6 py-2 pointer-events-auto z-50'>
 							<button
 								onClick={(e) => {
 									e.preventDefault()
@@ -117,25 +119,22 @@ export default function Cookies({ cookiesData }: CookiesProps) {
 
 					{/* Cookie Policy modal */}
 					<div
-						className={`fixed w-full top-24 left-0 right-0 bottom-8 pr-0 max-w-desktop mx-auto overflow-clip z-cookiesOverlay ${
-							isModalOpen ? "pointer-events-auto" : "pointer-events-none"
-						}`}>
+						ref={modalRef}
+						className='fixed top-24 right-0 bottom-8 pr-0 z-15 w-full md:w-3/4 lg:w-2/5'>
 						{/* Gradients */}
 						<div
-							className={`absolute top-8 right-10 w-[98%] md:w-[70%] lg:w-[35%] h-16 ml-auto bg-gradient-to-b from-20% bg-gradient-middle from-primary to-transparent z-80 ${
+							className={`absolute top-8 right-10 h-16 ml-auto bg-gradient-to-b from-20% bg-gradient-middle from-primary to-transparent z-80 ${
 								isModalOpen
 									? "transition-opacity duration-300 delay-300"
 									: "opacity-0"
 							}`}></div>
 						<div
-							className={`absolute bottom-0 right-10 w-[98%] md:w-[70%] lg:w-[35%] h-16 ml-auto bg-gradient-to-t from-20% bg-gradient-middle from-primary to-transparent z-80 ${
+							className={`absolute bottom-0 right-10 h-16 ml-auto bg-gradient-to-t from-20% bg-gradient-middle from-primary to-transparent z-80 ${
 								isModalOpen ? "" : "opacity-0"
 							}`}></div>
 
 						{/* Content */}
-						<div
-							ref={modalRef}
-							className='cookies-overlay gutter-stable relative w-full md:w-3/4 lg:w-2/5 ml-auto mr-8 bg-primary border border-secondary rounded-3xl text-secondary h-full pb-8 overflow-y-scroll'>
+						<div className='cookies-overlay gutter-stable relative ml-auto mr-8 bg-primary border border-secondary rounded-3xl h-full pb-8 overflow-y-scroll pointer-events-auto'>
 							{/* Button Close */}
 							<div className='absolute top-8 right-0'>
 								<ButtonClose
@@ -143,7 +142,7 @@ export default function Cookies({ cookiesData }: CookiesProps) {
 									onClick={handleCookieModal}
 								/>
 							</div>
-							<div className='custom-rich-text w-full px-4 lg:px-12 pb-12'>
+							<div className='custom-rich-text w-full px-4 lg:px-12 pb-12 text-secondary'>
 								<Heading
 									tag='h1'
 									variant='headline'
@@ -151,6 +150,11 @@ export default function Cookies({ cookiesData }: CookiesProps) {
 									{cookiesData.title}
 								</Heading>
 								<PortableText value={cookiesData.content} />
+								<ButtonRounded
+									classes='mt-8 mx-auto'
+									onClick={() => handleOKButton("true")}>
+									Agree and dismiss
+								</ButtonRounded>
 							</div>
 						</div>
 					</div>

@@ -32,7 +32,7 @@ export default function ButtonScroll({
 	sections,
 }: ButtonScrollProps) {
 	return (
-		<div className='flex justify-center gap-8'>
+		<div className='flex justify-center gap-8 rounded-full bg-faded-5 px-4 py-3'>
 			<ScrollArrow
 				direction='previous'
 				isDisabled={index === 0}

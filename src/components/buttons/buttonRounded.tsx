@@ -43,7 +43,7 @@ export default function ButtonRounded({
 	return (
 		<>
 			{href ? (
-				<div className='relative overflow-clip'>
+				<div className={`relative overflow-clip ${classes}`}>
 					<div className='overflow-clip'>
 						<Link
 							href={href || ""}
@@ -58,13 +58,16 @@ export default function ButtonRounded({
 					</Link>
 				</div>
 			) : (
-				<div className='relative overflow-clip'>
+				<div className={`relative overflow-clip w-fit ${classes}`}>
 					<div
 						ref={maskRef}
 						className='absolute top-0 left-0 pointer-events-none z-50'
 						style={{ clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)" }} // mask's initial state
 					>
-						<div className={`${sharedStyles} ${overlayStyles}`}>{children}</div>
+						<div
+							className={`${sharedStyles} ${overlayStyles} ${classes || ""}`}>
+							{children}
+						</div>
 					</div>
 					<button
 						onClick={onClick}

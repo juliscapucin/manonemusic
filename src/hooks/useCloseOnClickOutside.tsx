@@ -1,22 +1,23 @@
 import { useEffect } from "react"
 
 export default function useCloseOnClickOutside(
-	container: HTMLElement | null,
-	handleFunction: () => void
+	refContainer: React.RefObject<HTMLDivElement | null>,
+	handleFunction: () => void,
+	isModalOpen: boolean
 ) {
 	useEffect(() => {
-		if (!container) return
-		console.log("container")
+		if (!refContainer.current || !isModalOpen) return
 
 		function handleClickOutside(e: MouseEvent) {
-			console.log("click outside")
-			if (!container!.contains(e.target as Node)) handleFunction()
+			if (isModalOpen && !refContainer.current!.contains(e.target as Node)) {
+				handleFunction()
+			}
 		}
 
-		document.removeEventListener("click", handleClickOutside)
+		window.addEventListener("click", handleClickOutside)
 
 		return () => {
-			document.removeEventListener("click", handleClickOutside)
+			window.removeEventListener("click", handleClickOutside)
 		}
-	}, [container])
+	}, [handleFunction, isModalOpen])
 }

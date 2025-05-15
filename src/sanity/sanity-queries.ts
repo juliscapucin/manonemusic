@@ -73,7 +73,7 @@ export async function getPortfolioSections(): Promise<PortfolioPage[]> {
 
 export async function getCookiesData(): Promise<Cookies> {
 	return client.fetch(
-		groq`*[_type == "cookies"] {
+		groq`*[_type == "cookies"][0] {
       title,
       content,
    }`
