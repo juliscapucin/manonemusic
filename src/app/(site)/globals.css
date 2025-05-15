@@ -108,7 +108,7 @@
       }
    } */
 
-	.texture {
+	.texture1 {
 		width: 100vw;
 		height: 100dvh;
 		position: fixed;
@@ -116,32 +116,42 @@
 		left: 0;
 		display: flex;
 		z-index: -10;
-		/* opacity: 0.05; */
+		opacity: 0.5;
 		background-image:
-  /* Main base stripe — like the inner glow */
+  /* Vertical */
 			repeating-linear-gradient(
 				to right,
 				transparent 0px,
-				transparent 10px,
-				rgb(var(--color-primary-rgb)) 10px,
-				rgb(var(--color-primary-rgb)) 400px
+				transparent 100px,
+				rgb(var(--color-primary-rgb)) 100px,
+				rgb(var(--color-primary-rgb)) 200px
 			),
-			/* Repeating stripes */
-				/* repeating-linear-gradient(
-					to bottom,
-					transparent 0px,
-					transparent 160px,
-					rgb(var(--color-secondary-rgb)) 160px,
-					rgb(var(--color-secondary-rgb)) 165px
-				), */
-				/* Fine detail stripes like the conic effect */
+			/* Horizontal */
 				repeating-linear-gradient(
 					to bottom,
 					transparent 0px,
-					transparent 10px,
-					rgb(var(--color-secondary-rgb)) 10px,
-					rgb(var(--color-secondary-rgb)) 10.25px
+					transparent 20px,
+					rgb(var(--color-secondary-rgb)) 20px,
+					rgb(var(--color-secondary-rgb)) 20.25px
 				);
+	}
+
+	.texture2 {
+		width: 100vw;
+		height: 100dvh;
+		position: fixed;
+		top: 0;
+		left: 0;
+		display: flex;
+		z-index: -5;
+		background-image:
+  /* Vertical */ repeating-linear-gradient(
+			to right,
+			transparent 0px,
+			transparent 30px,
+			rgb(var(--color-primary-rgb)) 30px,
+			rgb(var(--color-primary-rgb)) 300px
+		);
 	}
 }
 

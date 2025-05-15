@@ -109,8 +109,6 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 						containerAnimation: tween,
 						// markers: true,
 						onToggle: (self) => {
-							console.log("slug", slug)
-
 							// Only update pathname / history if trigger is active and if new section
 							if (self.isActive && window.location.pathname !== slug) {
 								// Check how deep route is '/' Ex: '/film/sodo-express' vs '/film'
@@ -170,7 +168,7 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 
 		const container = panelsContainerRef.current
 
-		gsap.to(".texture", {
+		gsap.to(".texture2", {
 			backgroundPosition: "-1500px 0, 0 0, 0 0",
 			ease: "none",
 			scrollTrigger: {
@@ -213,7 +211,8 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 					)
 				})}
 			</div>
-			<div className='texture'></div>
+			<div className='texture1'></div>
+			<div className='texture2'></div>
 		</main>
 	)
 }
