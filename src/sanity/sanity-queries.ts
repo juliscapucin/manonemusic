@@ -3,6 +3,7 @@ import clientConfig from "@/sanity/config/client-config"
 import type {
 	AboutPage,
 	ContactPage,
+	Cookies,
 	HomePage,
 	NavLink,
 	PortfolioPage,
@@ -66,6 +67,15 @@ export async function getPortfolioSections(): Promise<PortfolioPage[]> {
       metadataTitle,
       metadataDescription,
       metadataKeywords,
+   }`
+	)
+}
+
+export async function getCookiesData(): Promise<Cookies> {
+	return client.fetch(
+		groq`*[_type == "cookies"] {
+      title,
+      content,
    }`
 	)
 }

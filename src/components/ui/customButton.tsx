@@ -1,7 +1,7 @@
 "use client"
 
 type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
-	link: string
+	link?: string
 	classes?: string
 	style?: React.CSSProperties
 	children?: React.ReactNode

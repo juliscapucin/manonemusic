@@ -3,6 +3,9 @@ import localFont from "next/font/local"
 import "./globals.css"
 
 import { RootLayout } from "@/components"
+import { Cookies } from "@/components/ui"
+
+import { getCookiesData } from "@/sanity/sanity-queries"
 
 // Load custom font //
 const font = localFont({
@@ -30,11 +33,13 @@ export default async function Layout({
 }: {
 	children: React.ReactNode
 }) {
+	const cookiesData = await getCookiesData()
 	return (
 		<RootLayout>
-			{/* prettier-ignore */}
-			<body className={`${font.className} relative w-screen landscape:h-screen overflow-x-clip`}>
+			<body
+				className={`${font.className} relative w-screen landscape:h-screen overflow-x-clip`}>
 				{children}
+				<Cookies cookiesData={cookiesData} />
 			</body>
 		</RootLayout>
 	)

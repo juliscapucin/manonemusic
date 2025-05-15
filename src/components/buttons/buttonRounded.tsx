@@ -21,10 +21,10 @@ export default function ButtonRounded({
 
 	const [isHovered, setIsHovered] = useState(false)
 
-	const styles =
-		"inline-block text-bodyMedium lg:text-titleLarge uppercase rounded-full border border-secondary px-4 py-2"
-	const stylesOverlay =
-		"text-bodyMedium lg:text-titleLarge uppercase rounded-full border border-secondary bg-secondary text-primary px-4 py-2 pointer-events-none"
+	const sharedStyles =
+		"text-bodyMedium lg:text-bodyLarge uppercase rounded-full border border-secondary px-3 py-1"
+	const buttonStyles = "inline-block"
+	const overlayStyles = "bg-secondary text-primary pointer-events-none"
 
 	useEffect(() => {
 		if (!maskRef.current) return
@@ -47,11 +47,13 @@ export default function ButtonRounded({
 					<div className='overflow-clip'>
 						<Link
 							href={href || ""}
-							className={`${stylesOverlay} ${classes || ""}`}>
+							className={`${sharedStyles} ${overlayStyles} ${classes || ""}`}>
 							{children}
 						</Link>
 					</div>
-					<Link href={href || ""} className={`${styles} ${classes || ""}`}>
+					<Link
+						href={href || ""}
+						className={`${sharedStyles} ${buttonStyles} ${classes || ""}`}>
 						{children}
 					</Link>
 				</div>
@@ -62,13 +64,13 @@ export default function ButtonRounded({
 						className='absolute top-0 left-0 pointer-events-none z-50'
 						style={{ clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)" }} // mask's initial state
 					>
-						<div className={`${stylesOverlay}`}>{children}</div>
+						<div className={`${sharedStyles} ${overlayStyles}`}>{children}</div>
 					</div>
 					<button
 						onClick={onClick}
 						onMouseEnter={() => setIsHovered(true)}
 						onMouseLeave={() => setIsHovered(false)}
-						className={`${styles} ${classes || ""}`}>
+						className={`${sharedStyles} ${buttonStyles} ${classes || ""}`}>
 						{children}
 					</button>
 				</div>
