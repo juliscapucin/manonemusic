@@ -26,7 +26,7 @@ export async function getHomePage(): Promise<HomePage> {
 
 export async function getAboutPage(): Promise<AboutPage> {
 	return client.fetch(
-		groq`*[_type == "aboutPage"][0] {
+		groq`*[_type == "aboutPage"][1] {
       title,
       subtitle,
       "image": {
