@@ -15,14 +15,15 @@ type CookiesProps = {
 };
 
 export default function Cookies({ cookiesData }: CookiesProps) {
-   const { cookie, setCookie, updateCookie } = useCookieStorage();
+   const { cookieConsent, setCookieConsent, updateCookieConsent } =
+      useCookieStorage();
    const [isModalOpen, setIsModalOpen] = useState(false);
    const cookieButtonRef = useRef<HTMLDivElement>(null);
    const modalRef = useRef<HTMLDivElement>(null);
 
    // Enter cookie button animation + modal initial position
    useLayoutEffect(() => {
-      if (!cookieButtonRef.current || cookie === "true") return;
+      if (!cookieButtonRef.current || cookieConsent === "true") return;
       gsap.set(modalRef.current, { yPercent: 150 });
       gsap.set(cookieButtonRef.current, { xPercent: 120 });
       gsap.to(cookieButtonRef.current, {
@@ -31,7 +32,7 @@ export default function Cookies({ cookiesData }: CookiesProps) {
          ease: "power4.out",
          delay: 2.7,
       });
-   }, [cookie]);
+   }, [cookieConsent]);
 
    // Toggle Cookie modal
    const handleCookieModal = () => {
@@ -39,18 +40,13 @@ export default function Cookies({ cookiesData }: CookiesProps) {
 
       const isOpen = !isModalOpen;
 
-      let ctx = gsap.context(() => {
-         gsap.to(modalRef.current, {
-            yPercent: isOpen ? 0 : 120,
-            duration: 0.4,
-            ease: "power2.out",
-            onComplete: () => setIsModalOpen(isOpen),
-         });
-      }, modalRef);
+      setIsModalOpen(isOpen);
 
-      return () => {
-         ctx.revert();
-      };
+      gsap.to(modalRef.current, {
+         yPercent: isOpen ? 0 : 120,
+         duration: 0.4,
+         ease: "power2.out",
+      });
    };
 
    useCloseOnClickOutside(modalRef, handleCookieModal, isModalOpen);
@@ -69,10 +65,10 @@ export default function Cookies({ cookiesData }: CookiesProps) {
       };
    }, [handleCookieModal]); // eslint-disable-line react-hooks/exhaustive-deps
 
-   if (cookie === "true") return null;
+   if (cookieConsent === "true") return null;
 
    const handleOKButton = (cookie: string) => {
-      updateCookie(cookie);
+      updateCookieConsent(cookie);
 
       if (!cookieButtonRef.current) return;
       gsap.to(cookieButtonRef.current, {
@@ -80,7 +76,7 @@ export default function Cookies({ cookiesData }: CookiesProps) {
          duration: 0.2,
          ease: "power4.in",
          onComplete: () => {
-            setCookie(cookie);
+            setCookieConsent(cookie);
          },
       });
    };
@@ -88,7 +84,7 @@ export default function Cookies({ cookiesData }: CookiesProps) {
    {
       return (
          cookiesData &&
-         cookie !== "true" && (
+         cookieConsent !== "true" && (
             <>
                {/* Background Overlay */}
                <div
@@ -125,6 +121,9 @@ export default function Cookies({ cookiesData }: CookiesProps) {
                <div
                   ref={modalRef}
                   className="fixed top-24 right-0 bottom-8 pr-0 z-15 w-full md:w-3/4 lg:w-2/5"
+                  role="dialog"
+                  aria-modal="true"
+                  aria-labelledby="cookie-modal-title"
                >
                   {/* Gradients */}
                   <div
@@ -152,6 +151,7 @@ export default function Cookies({ cookiesData }: CookiesProps) {
                      <div className="custom-rich-text w-full px-4 lg:px-12 pb-12 text-secondary">
                         <Heading
                            tag="h1"
+                           id="cookie-modal-title"
                            variant="headline"
                            classes="mb-16 mt-24 lg:mt-16"
                         >

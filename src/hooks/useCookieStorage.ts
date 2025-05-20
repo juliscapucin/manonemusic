@@ -1,23 +1,25 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 
 export default function useCookieStorage() {
-	const [cookie, setCookie] = useState<string | null>(null)
+   const [cookieConsent, setCookieConsent] = useState<string | null>(null);
 
-	const updateCookie = (cookie: string) => {
-		localStorage.setItem("cookieSettings", cookie)
-	}
+   const updateCookieConsent = (cookieConsent: string) => {
+      localStorage.setItem("cookieConsentSettings", cookieConsent);
+   };
 
-	useEffect(() => {
-		setCookie(localStorage.getItem("cookieSettings") || "false")
-	}, [])
+   useEffect(() => {
+      setCookieConsent(
+         localStorage.getItem("cookieConsentSettings") || "false",
+      );
+   }, []);
 
-	// Update cookie in session storage on change
-	useEffect(() => {
-		if (!cookie) return
-		updateCookie(cookie)
-	}, [cookie])
+   // Update cookieConsent in session storage on change
+   useEffect(() => {
+      if (!cookieConsent) return;
+      updateCookieConsent(cookieConsent);
+   }, [cookieConsent]);
 
-	return { cookie, setCookie, updateCookie }
+   return { cookieConsent, setCookieConsent, updateCookieConsent };
 }
