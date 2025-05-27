@@ -83,11 +83,11 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 
                ScrollTrigger.create({
                   trigger: title,
-                  start: index === 0 ? "left+=30 left" : "left center",
+                  start: index === 0 ? "left+=30 left" : "left right-=400",
                   end: "right center",
                   invalidateOnRefresh: true,
                   animation:
-                     index === 0 ? undefined : animateSplitText(title, 2000), // only run title animation on internal sections
+                     index === 0 ? undefined : animateSplitText(title, 2000), // don't run animation on home section
                   toggleActions: "play none none reverse",
                   fastScrollEnd: true,
                   horizontal: true,
@@ -132,7 +132,7 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
                   ease: "none",
                });
             }, panelsContainerRef.current);
-         }, 600); // Delay routing functionality
+         }, 400); // Delay routing functionality
 
          return () => {
             ScrollTrigger.killAll();

@@ -24,7 +24,6 @@ export default function Cookies({ cookiesData }: CookiesProps) {
    // Enter cookie button animation + modal initial position
    useLayoutEffect(() => {
       if (!cookieButtonRef.current || cookieConsent === "true") return;
-      gsap.set(modalRef.current, { yPercent: 150 });
       gsap.set(cookieButtonRef.current, { xPercent: 120 });
       gsap.to(cookieButtonRef.current, {
          xPercent: 0,
@@ -34,27 +33,22 @@ export default function Cookies({ cookiesData }: CookiesProps) {
       });
    }, [cookieConsent]);
 
-   // Toggle Cookie modal
-   const handleCookieModal = () => {
+   useEffect(() => {
       if (!modalRef.current) return;
 
-      const isOpen = !isModalOpen;
-
-      setIsModalOpen(isOpen);
-
       gsap.to(modalRef.current, {
-         yPercent: isOpen ? 0 : 120,
+         yPercent: isModalOpen ? -120 : 0,
          duration: 0.4,
          ease: "power2.out",
       });
-   };
+   }, [isModalOpen]);
 
-   useCloseOnClickOutside(modalRef, handleCookieModal, isModalOpen);
+   useCloseOnClickOutside(modalRef, () => setIsModalOpen, isModalOpen);
 
    useEffect(() => {
       function handleKeyDown(e: KeyboardEvent) {
          if (e.key === "Escape" && isModalOpen) {
-            handleCookieModal();
+            setIsModalOpen(false);
          }
       }
 
@@ -63,7 +57,7 @@ export default function Cookies({ cookiesData }: CookiesProps) {
       return () => {
          window.removeEventListener("keydown", handleKeyDown);
       };
-   }, [handleCookieModal]); // eslint-disable-line react-hooks/exhaustive-deps
+   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
    if (cookieConsent === "true") return null;
 
@@ -100,10 +94,7 @@ export default function Cookies({ cookiesData }: CookiesProps) {
                      className="absolute right-8 bottom-8 flex items-center gap-4 bg-primary text-secondary border border-secondary rounded-full px-6 py-2 pointer-events-auto z-50"
                   >
                      <button
-                        onClick={(e) => {
-                           e.preventDefault();
-                           handleCookieModal();
-                        }}
+                        onClick={() => setIsModalOpen(true)}
                         className="underlined-link uppercase text-bodySmall select-none"
                      >
                         This site uses cookies
@@ -120,7 +111,7 @@ export default function Cookies({ cookiesData }: CookiesProps) {
                {/* Cookie Policy modal */}
                <div
                   ref={modalRef}
-                  className="fixed top-24 right-0 bottom-8 pr-0 z-15 w-full md:w-3/4 lg:w-2/5"
+                  className="fixed top-24 right-0 bottom-8 pr-0 z-15 w-full md:w-3/4 lg:w-2/5 translate-y-[120%]"
                   role="dialog"
                   aria-modal="true"
                   aria-labelledby="cookie-modal-title"
@@ -145,7 +136,7 @@ export default function Cookies({ cookiesData }: CookiesProps) {
                      <div className="absolute top-8 right-0">
                         <ButtonClose
                            classes={`mx-auto pr-4 mt-4 flex justify-end z-100`}
-                           onClick={handleCookieModal}
+                           onClick={() => setIsModalOpen(false)}
                         />
                      </div>
                      <div className="custom-rich-text w-full px-4 lg:px-12 pb-12 text-secondary">
