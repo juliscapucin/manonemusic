@@ -1,3 +1,3 @@
-import { PageContextProvider, usePageContext } from "./PageContext"
+import { PageContextProvider, usePageContext } from "./PageContext";
 
-export { usePageContext, PageContextProvider }
+export { PageContextProvider, usePageContext };
