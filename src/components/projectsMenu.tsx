@@ -106,13 +106,13 @@ export default function ProjectsMenu({
          ref={outerContainerRef}
          id="projects-menu"
          className={
-            "gsap-projects-menu relative w-full overflow-x-visible landscape:w-fit portrait:pb-16 h-80 landscape:h-2/5 bg-primary"
+            "gsap-projects-menu relative w-full h-80 overflow-x-visible landscape:w-fit portrait:pb-16"
          }
       >
          {/* TODO: Make this work <MouseFollower isHovering={hoveredCard !== null} variant="big" /> */}
          <div
             ref={cardsContainerRef}
-            className="relative w-fit h-full flex items-start justify-start gap-8 landscape:gap-40"
+            className="relative w-fit h-full flex items-start justify-start gap-8 landscape:gap-40 bg-primary p-10"
          >
             {projects?.map((project: PortfolioItem, index) => {
                return (

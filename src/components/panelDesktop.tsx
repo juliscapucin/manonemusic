@@ -10,10 +10,15 @@ import { useGSAP } from "@gsap/react";
 gsap.registerPlugin(useGSAP);
 
 import { AllData, NavLink } from "@/types";
-import { PanelContent } from "@/components";
+import {
+   HalftoneBackground,
+   StripedBackground,
+   PanelContent,
+} from "@/components";
 import { useWindowDimensions } from "@/hooks";
 import { animateSplitText } from "@/animations";
 import { panelsEnter } from "@/lib/animations";
+import StripedHorizontalBackground from "./stripedHorizontalBackground";
 
 type PanelDesktopProps = {
    data: AllData;
@@ -33,10 +38,6 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
       /* Panels */
       const container = panelsContainerRef.current;
       const panels = gsap.utils.toArray(".gsap-panel");
-
-      // let proxy = { skew: 0 },
-      // 	skewSetter = gsap.quickSetter(panels, "skewX", "deg"), // fast
-      // 	clamp = gsap.utils.clamp(-5, 5) // don't let the skew go beyond 5 degrees.
 
       const tweenRef = gsap.to(panels, {
          x: () => -1 * (container.scrollWidth - innerWidth),
@@ -147,6 +148,7 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
       panelsEnter(panelsContainerRef.current as HTMLDivElement);
    }, [panelsContainerRef]);
 
+   // TODO: Delete after publishing
    // Background texture
    // useEffect(() => {
    //    if (!panelsContainerRef.current) return;
@@ -181,7 +183,7 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
       <main>
          <div
             ref={panelsContainerRef}
-            className="gsap-panels-container flex gap-32 opacity-0"
+            className="gsap-panels-container relative flex gap-32 opacity-0"
          >
             {sections.map((section) => {
                return (
@@ -198,6 +200,7 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 
          {/* TODO: DELETE AFTER PUBLISHING <div className='texture1'></div>
 			<div className='texture2'></div> */}
+         <StripedBackground />
       </main>
    );
 }
