@@ -1,18 +1,14 @@
 "use client";
 
-import { forwardRef } from "react";
-
 import { Heading } from "@/components/ui";
 
 type TitleProps = {
    children: string;
    classes?: string;
+   ref?: React.Ref<HTMLDivElement>;
 };
 
-export const TitleHeadline = forwardRef(function Title(
-   { children, classes }: TitleProps,
-   ref: React.Ref<HTMLDivElement>,
-) {
+export default function TitleHeadline({ children, classes, ref }: TitleProps) {
    return (
       <div
          className={`gsap-projects-title gsap-project-content ${classes || ""}`}
@@ -27,4 +23,4 @@ export const TitleHeadline = forwardRef(function Title(
          </Heading>
       </div>
    );
-});
+}

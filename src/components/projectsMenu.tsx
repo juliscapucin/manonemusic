@@ -57,50 +57,6 @@ export default function ProjectsMenu({
       setTimelineReady(true);
    }, [isMobile]);
 
-   // TODO: DELETE AFTER PUBLISHING DESKTOP: Skew on scroll
-   // useGSAP(
-   // 	() => {
-   // 		if (!cardsContainerRef.current || isMobile || isMobile === null) return
-
-   // 		const container = cardsContainerRef.current
-
-   // 		if (!container) return
-
-   // 		gsap.registerPlugin(Observer)
-
-   // 		let proxy = { skew: 0 },
-   // 			skewSetter = gsap.quickSetter(container, "skewX", "deg"), // fast
-   // 			clamp = gsap.utils.clamp(-5, 5) // don't let the skew go beyond 5 degrees.
-
-   // 		Observer.create({
-   // 			target: window,
-   // 			type: "wheel,scroll,touch",
-   // 			onChange: (self) => {
-   // 				let skew = clamp(self.velocityY / -300)
-   // 				// only do something if the skew is MORE severe. Remember, we're always tweening back to 0, so if the user slows their scrolling quickly, it's more natural to just let the tween handle that smoothly rather than jumping to the smaller skew.
-   // 				if (Math.abs(skew) > Math.abs(proxy.skew)) {
-   // 					proxy.skew = skew
-   // 					gsap.to(proxy, {
-   // 						skew: 0,
-   // 						duration: 1,
-   // 						ease: "power3",
-   // 						overwrite: true,
-   // 						onUpdate: () => skewSetter(proxy.skew),
-   // 					})
-   // 				}
-   // 			},
-   // 			onStop: () => {
-   // 				gsap.to(container, {
-   // 					// opacity: 1,
-   // 					duration: 0.5,
-   // 					ease: "power4.out",
-   // 				})
-   // 			},
-   // 		})
-   // 	},
-   // 	{ dependencies: [isMobile, cardsContainerRef] }
-   // )
-
    return (
       <div
          ref={outerContainerRef}
@@ -127,7 +83,7 @@ export default function ProjectsMenu({
                         index,
                         isMobile,
                         handleCardHover,
-                        isCardHovered: hoveredCard === index,
+                        hoveredCard,
                      }}
                   />
                );

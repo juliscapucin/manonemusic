@@ -23,8 +23,7 @@ type ProjectCardProps = {
    slug: string;
    index: number;
    handleCardHover: ((arg: number | null) => void) | null;
-   isCardHovered: boolean | null;
-   isMobile?: boolean | null;
+   hoveredCard: number | null;
 };
 
 export default function ProjectCard({
@@ -35,8 +34,7 @@ export default function ProjectCard({
    slug,
    index,
    handleCardHover,
-   isCardHovered,
-   isMobile = false,
+   hoveredCard,
 }: ProjectCardProps) {
    const router = useRouter();
    const pathname = usePathname();
@@ -45,6 +43,8 @@ export default function ProjectCard({
    const labelRef = useRef<HTMLParagraphElement>(null);
 
    const aspectRatio = image.imageWidth / image.imageHeight;
+
+   const isCardHovered = hoveredCard === index;
 
    // LABEL ANIMATIONS
    useGSAP(
@@ -98,11 +98,14 @@ export default function ProjectCard({
       >
          {image?.imageRef && (
             <div
-               className="rounded-sm pointer-events-none w-full overflow-hidden group-hover:scale-105 origin-bottom transition-transform duration-300"
+               className="rounded-sm pointer-events-none w-full overflow-hidden group-hover:scale-105 origin-bottom transition-all duration-300"
                ref={cardImageRef}
                role="img"
                aria-label={image.imageAlt}
             >
+               <div
+                  className={`absolute top-0 left-0 mix-blend-multiply w-full h-full z-15 bg-primary transition-opacity duration-300 ${(!isCardHovered && hoveredCard) || (variant === "page" && !pathname.includes(slug)) ? "group-hover:opacity-0 opacity-80" : "opacity-0"}`}
+               ></div>
                <Image
                   className={`relative h-full w-full object-cover ${variant === "section" && "rounded-sm"}`}
                   src={urlFor(image.imageRef).url()} // generate url from ref to avoid unnecessary calls on server
