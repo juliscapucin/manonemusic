@@ -46,7 +46,7 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
             trigger: container,
             pin: true,
             start: "top top",
-            scrub: 1,
+            scrub: 0.2,
             end: () => "+=" + (container.scrollWidth - container.offsetWidth),
             invalidateOnRefresh: true,
             // markers: true,
@@ -57,7 +57,30 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
       setTween(tweenRef);
    }, []);
 
-   // Title animations / routing funcionality
+   // Left/right gestures through trackpad
+   useEffect(() => {
+      const container = panelsContainerRef.current;
+      if (!container) return;
+
+      const onWheel = (e: WheelEvent) => {
+         // Ignore vertical scrolls
+         if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+
+         e.preventDefault(); // Prevent horizontal native scroll
+         window.scrollBy({
+            top: e.deltaX, // Translate horizontal delta into vertical scroll
+            behavior: "auto",
+         });
+      };
+
+      window.addEventListener("wheel", onWheel, { passive: false });
+
+      return () => {
+         window.removeEventListener("wheel", onWheel);
+      };
+   }, []);
+
+   // Title animations + routing funcionality
    useGSAP(
       () => {
          // Start ScrollTrigger when window is in landscape mode
@@ -148,26 +171,7 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
       panelsEnter(panelsContainerRef.current as HTMLDivElement);
    }, [panelsContainerRef]);
 
-   // TODO: Delete after publishing
-   // Background texture
-   // useEffect(() => {
-   //    if (!panelsContainerRef.current) return;
-   //    gsap.registerPlugin(ScrollTrigger);
-
-   //    const container = panelsContainerRef.current;
-
-   //    gsap.to(".texture2", {
-   //       backgroundPosition: "-1500px 0, 0 0, 0 0",
-   //       ease: "none",
-   //       scrollTrigger: {
-   //          trigger: container,
-   //          start: "top top",
-   //          scrub: 1,
-   //          end: () => "+=" + (container.scrollWidth - container.offsetWidth),
-   //       },
-   //    });
-   // }, []);
-
+   // TODO: Implement Smooth Scroller
    // Smooth Scroller
    // useEffect(() => {
    // 	if (!panelsContainerRef.current) return
@@ -198,18 +202,7 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
             })}
          </div>
 
-         {/* TODO: DELETE AFTER PUBLISHING <div className='texture1'></div>
-			<div className='texture2'></div> */}
-         {/* <StripedBackground /> */}
-         {/* <StripedHorizontalBackground /> */}
          <HalftoneBackground />
-         {/* <HalftoneBackground
-            dotSize={1}
-            spacing={150}
-            waveAmplitude={20}
-            fillColor="#98FF9E"
-            bgColor="transparent"
-         /> */}
       </main>
    );
 }
