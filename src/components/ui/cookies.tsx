@@ -91,7 +91,7 @@ export default function Cookies({ cookiesData }: CookiesProps) {
                   {/* Cookie Button */}
                   <div
                      ref={cookieButtonRef}
-                     className="absolute right-8 bottom-8 flex items-center gap-4 bg-primary text-secondary border border-secondary rounded-full px-6 py-2 pointer-events-auto z-50"
+                     className="absolute right-8 bottom-8 flex items-center gap-4 bg-primary text-secondary border border-secondary rounded-full px-5 py-1 pointer-events-auto z-50"
                   >
                      <button
                         onClick={() => setIsModalOpen(true)}
@@ -100,7 +100,7 @@ export default function Cookies({ cookiesData }: CookiesProps) {
                         This site uses cookies
                      </button>
                      <ButtonRounded
-                        classes="text-bodySmall custom-rounded"
+                        classes="text-bodySmall leading-[1.4]"
                         onClick={() => handleOKButton("true")}
                      >
                         OK
