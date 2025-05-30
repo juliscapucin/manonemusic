@@ -13,18 +13,18 @@
       --color-black: 3 30 27;
       --color-white: 182 209 194;
       --color-primary: 3 30 27;
-      --color-secondary: 182 224 194;
+      --color-secondary: 163 205 177;
    }
    :root[data-theme="dark"] {
       --color-primary: 3 30 27;
       /* --color-secondary: 152 255 158; */
-      --color-secondary: 182 224 194;
+      --color-secondary: 163 205 177;
       --color-primary-rgb: 3, 30, 27;
-      --color-secondary-rgb: 182, 224, 194;
+      --color-secondary-rgb: 163, 205, 177;
       --color-focus: 154, 152, 152;
    }
    :root[data-theme="light"] {
-      --color-primary: 182 224 194;
+      --color-primary: 163 205 177;
       --color-secondary: 3 30 27;
       --color-secondary-rgb: 3, 30, 27;
       --color-focus: 154, 152, 152;

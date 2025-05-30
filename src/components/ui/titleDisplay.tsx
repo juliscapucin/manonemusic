@@ -5,16 +5,17 @@ import { forwardRef } from "react";
 import { Heading } from "@/components/ui";
 
 type TitleProps = {
+   ref?: React.RefObject<HTMLDivElement | null>;
    children: string;
    classes?: string;
 };
 
-export const TitleDisplay = forwardRef(function Title(
-   { children, classes }: TitleProps,
-   ref: React.Ref<HTMLDivElement>,
-) {
+export default function TitleDisplay({ children, classes, ref }: TitleProps) {
    return (
-      <div className={`mt-16 landscape:mt-24 mb-8 ${classes || ""}`} ref={ref}>
+      <div
+         className={`mt-16 landscape:mt-24 mb-8 opacity-90 ${classes || ""}`}
+         ref={ref}
+      >
          <Heading
             tag={"h2"}
             classes="gsap-section-title whitespace-nowrap uppercase"
@@ -24,4 +25,4 @@ export const TitleDisplay = forwardRef(function Title(
          </Heading>
       </div>
    );
-});
+}

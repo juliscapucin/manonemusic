@@ -1,28 +1,21 @@
 export default function IconPause() {
-	return (
-		<div className='w-16 h-16 flex justify-center items-center'>
-			<svg
-				width='44'
-				height='62'
-				viewBox='0 0 44 62'
-				fill='none'
-				xmlns='http://www.w3.org/2000/svg'
-			>
-				<rect
-					x='1.28516'
-					y='0.67041'
-					width='16.0508'
-					height='60.4668'
-					stroke='currentColor'
-				/>
-				<rect
-					x='27.2695'
-					y='0.67041'
-					width='16.0508'
-					height='60.4668'
-					stroke='currentColor'
-				/>
-			</svg>
-		</div>
-	)
+   return (
+      <div className="w-16 h-16 flex justify-center items-center">
+         <svg
+            width="30"
+            height="45"
+            viewBox="0 0 30 45"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+         >
+            <path
+               d="M29.5 0.5V44.5H19.5V0.5H29.5ZM10.5 0.5V44.5H0.5V0.5H10.5Z"
+               // stroke="currentColor"
+               // strokeOpacity="0.6"
+               stroke-linejoin="round"
+               fill="currentColor"
+            />
+         </svg>
+      </div>
+   );
 }
