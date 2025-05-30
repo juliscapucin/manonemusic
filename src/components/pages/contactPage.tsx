@@ -21,7 +21,7 @@ export default function ContactPage({
       <SectionWrapper>
          {subtitle && <Subtitle subtitle={subtitle} />}
          <TitleDisplay ref={titleContactRef}>{title}</TitleDisplay>
-         <div className="mt-32 w-full flex flex-col-reverse lg:flex-row gap-16 *:flex-1 bg-primary">
+         <div className="mt-32 w-full flex flex-col-reverse lg:flex-row gap-16 *:flex-1">
             <div>
                <Copyright />
                <Credits />

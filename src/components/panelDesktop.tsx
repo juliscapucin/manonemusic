@@ -183,7 +183,7 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
       <main>
          <div
             ref={panelsContainerRef}
-            className="gsap-panels-container relative flex gap-32 opacity-0"
+            className="gsap-panels-container flex gap-32 opacity-0"
          >
             {sections.map((section) => {
                return (
@@ -200,7 +200,16 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 
          {/* TODO: DELETE AFTER PUBLISHING <div className='texture1'></div>
 			<div className='texture2'></div> */}
-         <StripedBackground />
+         {/* <StripedBackground /> */}
+         {/* <StripedHorizontalBackground /> */}
+         <HalftoneBackground />
+         {/* <HalftoneBackground
+            dotSize={1}
+            spacing={150}
+            waveAmplitude={20}
+            fillColor="#98FF9E"
+            bgColor="transparent"
+         /> */}
       </main>
    );
 }

@@ -15,10 +15,10 @@ interface AnimatedStripedBackgroundProps {
 
 export default function StripedBackground({
    className = "",
-   spacing = 10,
+   spacing = 8,
    waveSpeed = 0.005,
-   waveAmplitude = 20,
-   segmentLength = 200,
+   waveAmplitude = 22,
+   segmentLength = 20,
    segmentHeight = 2,
    fillColor = colors.primaryDarkRGB,
 }: AnimatedStripedBackgroundProps) {
@@ -109,7 +109,9 @@ export default function StripedBackground({
          ref={canvasRef}
          className={`w-full h-full ${className}`}
          style={{
-            position: "absolute",
+            width: "100%",
+            height: "100%",
+            position: "fixed",
             top: 0,
             left: 0,
             zIndex: -1,

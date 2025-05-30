@@ -9,6 +9,8 @@ interface AnimatedHalftoneBackgroundProps {
    spacing?: number;
    waveSpeed?: number;
    waveAmplitude?: number;
+   fillColor?: string;
+   bgColor?: string;
 }
 
 export default function HalftoneBackground({
@@ -17,6 +19,8 @@ export default function HalftoneBackground({
    spacing = 9,
    waveSpeed = 0.01,
    waveAmplitude = 4,
+   fillColor = colors.primaryDarkRGB,
+   bgColor = colors.primaryRGB,
 }: AnimatedHalftoneBackgroundProps) {
    const canvasRef = useRef<HTMLCanvasElement>(null);
    const animationRef = useRef<number>(null);
@@ -44,11 +48,11 @@ export default function HalftoneBackground({
          const height = rect.height;
 
          // Clear canvas
-         ctx.fillStyle = colors.primaryRGB;
+         ctx.fillStyle = bgColor;
          ctx.fillRect(0, 0, width, height);
 
          // Set dot color
-         ctx.fillStyle = colors.primaryDarkRGB;
+         ctx.fillStyle = fillColor;
 
          // Calculate grid dimensions
          const cols = Math.ceil(width / spacing) + 2;
@@ -112,7 +116,7 @@ export default function HalftoneBackground({
          }
          window.removeEventListener("resize", handleResize);
       };
-   }, [dotSize, spacing, waveSpeed, waveAmplitude]);
+   }, [dotSize, spacing, waveSpeed, waveAmplitude, fillColor, bgColor]);
 
    return (
       <canvas

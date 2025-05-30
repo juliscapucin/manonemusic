@@ -8,7 +8,8 @@ export const colors = {
    colorWhite: "#B6D1C2",
    blackRGB: "rgb(2, 16, 14)",
    primaryRGB: "rgb(3, 30, 27)",
-   primaryDarkRGB: "rgb(2, 23, 20)",
+   // primaryDarkRGB: "rgb(6, 36, 33)",
+   primaryDarkRGB: "rgb(2, 25, 21)",
    primaryLightRGB: "rgb(6, 40, 36)", // slightly lighter than primaryRGB
    secondaryRGB: "rgba(182, 209, 194, 0.2)",
 };

@@ -14,27 +14,20 @@ export default function HomePage() {
 
    return (
       <SectionWrapper classes={"portrait:h-dvh"}>
-         <div
-            ref={titleHomeRef}
-            className="gsap-section-title mt-2 lg:mt-0 bg-primary"
-         >
+         <div ref={titleHomeRef} className="gsap-section-title mt-2 lg:mt-0">
             <Logo />
          </div>
-         <Heading
-            tag="h2"
-            variant="headline"
-            classes="lg:w-1/2 mt-4 uppercase bg-primary"
-         >
+         <Heading tag="h2" variant="headline" classes="lg:w-1/2 mt-4 uppercase">
             Music & Sound Design
          </Heading>
-         <div className="w-full landscape:flex justify-between mt-32 md:mt-16 bg-primary">
+         <div className="w-full landscape:flex justify-between mt-32 md:mt-16">
             <p className="text-balance max-w-[400px] mb-16 landscape:mb-0">
                Tailored sound design and audio identities that capture the
                spirit of your brand and resonate with your audience
             </p>
             <Status location={location} />
          </div>
-         <div className="my-8 bg-primary">
+         <div className="my-8">
             <Copyright alignRight={true} />
          </div>
       </SectionWrapper>

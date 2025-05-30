@@ -1,65 +1,65 @@
-"use client"
+"use client";
 
-import { useLayoutEffect, useRef } from "react"
+import { useLayoutEffect, useRef } from "react";
 
-import gsap from "gsap"
-import { ScrollTrigger } from "gsap/ScrollTrigger"
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const animateSubtitle = (element: HTMLParagraphElement, duration: number) => {
-	const tl = gsap.timeline()
-	tl.fromTo(
-		element,
-		{ opacity: 0, y: 50 },
-		{ opacity: 1, y: 0, duration: duration / 1000 }
-	)
-	return tl
-}
+   const tl = gsap.timeline();
+   tl.fromTo(
+      element,
+      { opacity: 0, y: 50 },
+      { opacity: 1, y: 0, duration: duration / 1000 },
+   );
+   return tl;
+};
 
 type SubtitleProps = {
-	subtitle: string
-}
+   subtitle: string;
+};
 
 export default function Subtitle({ subtitle }: SubtitleProps) {
-	const subtitleRef = useRef<HTMLParagraphElement | null>(null)
-	const ctx = gsap.context(() => {})
+   const subtitleRef = useRef<HTMLParagraphElement | null>(null);
+   const ctx = gsap.context(() => {});
 
-	// useLayoutEffect(() => {
-	// 	if (!subtitleRef.current) return
+   // useLayoutEffect(() => {
+   // 	if (!subtitleRef.current) return
 
-	// 	gsap.registerPlugin(ScrollTrigger)
+   // 	gsap.registerPlugin(ScrollTrigger)
 
-	// 	const element = subtitleRef.current as HTMLParagraphElement
-	// 	const parentElement = element.closest("section") as HTMLDivElement
+   // 	const element = subtitleRef.current as HTMLParagraphElement
+   // 	const parentElement = element.closest("section") as HTMLDivElement
 
-	// 	const offsetLeft = () => parentElement!.offsetLeft
-	// 	const width = () => parentElement!.offsetWidth
+   // 	const offsetLeft = () => parentElement!.offsetLeft
+   // 	const width = () => parentElement!.offsetWidth
 
-	// 	let fastScrollEnd = true
+   // 	let fastScrollEnd = true
 
-	// 	ctx.add(() => {
-	// 		ScrollTrigger.create({
-	// 			trigger: element,
-	// 			start: () => `${offsetLeft()}px bottom`,
-	// 			end: () => `+=${width()}`,
-	// 			invalidateOnRefresh: true,
-	// 			animation: animateSubtitle(element, 300),
-	// 			toggleActions: "play none none reverse",
-	// 			fastScrollEnd: fastScrollEnd,
-	// 			// markers: true,
-	// 			onUpdate: (self) => {
-	// 				// define fastScrollEnd depending on scroll direction
-	// 				self.direction === 1
-	// 					? (fastScrollEnd = true)
-	// 					: (fastScrollEnd = false)
-	// 			},
-	// 		})
-	// 	})
+   // 	ctx.add(() => {
+   // 		ScrollTrigger.create({
+   // 			trigger: element,
+   // 			start: () => `${offsetLeft()}px bottom`,
+   // 			end: () => `+=${width()}`,
+   // 			invalidateOnRefresh: true,
+   // 			animation: animateSubtitle(element, 300),
+   // 			toggleActions: "play none none reverse",
+   // 			fastScrollEnd: fastScrollEnd,
+   // 			// markers: true,
+   // 			onUpdate: (self) => {
+   // 				// define fastScrollEnd depending on scroll direction
+   // 				self.direction === 1
+   // 					? (fastScrollEnd = true)
+   // 					: (fastScrollEnd = false)
+   // 			},
+   // 		})
+   // 	})
 
-	// 	return () => ctx.revert()
-	// }, [])
-	return (
-		<p className='block mt-16 mb-8 max-w-prose bg-primary' ref={subtitleRef}>
-			{subtitle}
-		</p>
-	)
+   // 	return () => ctx.revert()
+   // }, [])
+   return (
+      <p className="block mt-16 mb-8 max-w-prose" ref={subtitleRef}>
+         {subtitle}
+      </p>
+   );
 }

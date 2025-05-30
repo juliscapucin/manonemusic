@@ -32,7 +32,7 @@ export default function Header({ navLinks, variant = "section" }: HeaderProps) {
       <header>
          <nav
             ref={navRef}
-            className="hidden landscape:flex fixed top-0 right-0 left-0 p-8 justify-between bg-primary z-header"
+            className="hidden landscape:flex fixed top-0 right-0 left-0 p-8 justify-between z-header"
          >
             <CustomButton
                link="/"

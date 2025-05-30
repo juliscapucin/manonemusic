@@ -20,7 +20,7 @@ export const TitleDisplay = forwardRef(function Title(
       >
          <Heading
             tag={"h2"}
-            classes="gsap-section-title whitespace-nowrap uppercase bg-primary"
+            classes="gsap-section-title whitespace-nowrap uppercase"
             variant="display"
          >
             {children}
