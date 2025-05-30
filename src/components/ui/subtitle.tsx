@@ -58,7 +58,7 @@ export default function Subtitle({ subtitle }: SubtitleProps) {
    // 	return () => ctx.revert()
    // }, [])
    return (
-      <p className="block mt-16 mb-8 max-w-prose" ref={subtitleRef}>
+      <p className="block mb-8 max-w-prose" ref={subtitleRef}>
          {subtitle}
       </p>
    );
