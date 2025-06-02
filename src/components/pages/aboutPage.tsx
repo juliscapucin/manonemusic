@@ -32,23 +32,23 @@ export default function AboutPage({
             {/* First Block */}
             <div>
                <TitleDisplay ref={titleAboutRef}>{title}</TitleDisplay>
-               <div className="landscape:h-80">
-                  {subtitle && <Subtitle subtitle={subtitle} />}
-               </div>
-            </div>
-            {/* Image Block */}
-            <div className="relative lg:block">
-               <div className="block relative aspect-square rounded-sm overflow-clip">
-                  <Image
-                     {...{
-                        src: urlFor(image.imageRef).url(), // generate url via _ref to save on api calls
-                        alt: `Profile picture of Matt Rudge, the leading figure behind ManOne Music`,
-                        fill: true,
-                        className: "object-cover",
-                        sizes: "50vw",
-                     }}
-                  />
-               </div>
+
+               {/* Image Block */}
+               {image && (
+                  <div className="relative lg:block h-80 overflow-clip">
+                     <div className="block relative h-full aspect-square rounded-sm overflow-clip">
+                        <Image
+                           {...{
+                              src: urlFor(image.imageRef).url(), // generate url via _ref to save on api calls
+                              alt: `Profile picture of Matt Rudge, the leading figure behind ManOne Music`,
+                              fill: true,
+                              className: "object-cover",
+                              sizes: "50vw",
+                           }}
+                        />
+                     </div>
+                  </div>
+               )}
             </div>
             {/* Text Block 1 */}
             {content1 && (

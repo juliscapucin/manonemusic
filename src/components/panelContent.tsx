@@ -17,7 +17,7 @@ export default function PanelContent({ data, section }: PanelContentProps) {
 
    switch (section) {
       case "/":
-         Content = <HomePage />;
+         Content = <HomePage {...data.homePage} />;
          break;
       case "about":
          Content = <AboutPage {...data.aboutPage} />;

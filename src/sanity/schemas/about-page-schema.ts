@@ -20,7 +20,7 @@ const aboutPageSchema = {
       {
          name: "image",
          type: "object",
-         title: "Image (required)",
+         title: "Image",
          fields: [
             {
                name: "image",
@@ -37,7 +37,6 @@ const aboutPageSchema = {
                   Rule.required().error("Image Alt Text is required"),
             },
          ],
-         validation: (Rule: Rule) => Rule.required().error("Image is required"),
       },
       {
          name: "content1",
