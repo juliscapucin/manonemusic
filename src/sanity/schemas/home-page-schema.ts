@@ -12,13 +12,6 @@ const homePageSchema = {
          validation: (Rule: Rule) => Rule.required().error("Title is required"),
       },
       {
-         name: "subtitle",
-         title: "Subtitle (required)",
-         type: "string",
-         validation: (Rule: Rule) =>
-            Rule.required().error("Subtitle is required"),
-      },
-      {
          name: "content",
          title: "Content (required)",
          type: "array",

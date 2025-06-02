@@ -17,7 +17,6 @@ export async function getHomePage(): Promise<HomePage> {
    return client.fetch(
       groq`*[_type == "homePage"][0] {
       title,
-      subtitle,
       content,
       metadataTitle,
       metadataDescription,

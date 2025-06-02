@@ -11,42 +11,34 @@ import type { HomePage } from "@/types";
 import { BlockContent } from "@/types/BlockContent";
 
 type HomePageProps = {
-   subtitle: string;
    content: BlockContent[];
 };
 
-export default function HomePage({ subtitle, content }: HomePageProps) {
+export default function HomePage({ content }: HomePageProps) {
    const titleHomeRef = useRef(null);
 
    return (
-      <SectionWrapper classes={"portrait:h-dvh"}>
-         <div className="h-full flex flex-col justify-between">
-            <div>
-               <div
-                  ref={titleHomeRef}
-                  className="gsap-section-title mt-2 lg:mt-0 opacity-90"
-               >
-                  <Logo />
-               </div>
-               <Heading
-                  tag="h2"
-                  variant="headline"
-                  classes="lg:w-1/2 mt-4 uppercase opacity-80"
-               >
-                  {subtitle}
-               </Heading>
+      <SectionWrapper>
+         <div className="h-fit">
+            <div
+               ref={titleHomeRef}
+               className="gsap-section-title mt-2 lg:mt-0 opacity-90"
+            >
+               <Logo />
             </div>
-            <div className="w-full lg:flex justify-between mt-32 md:mt-16">
+
+            <div className="w-full h-80 lg:flex gap-16 mt-8 *:flex-1">
                <TextBlock
                   text={content}
-                  classes="text-balance max-w-[400px] mb-16 lg:mb-0"
+                  classes="text-balance max-w-[60%] lg:max-w-[400px] mb-16 lg:mb-0"
                />
 
                <Status location={location} />
-            </div>
-            <div className="text-right my-8">
-               <p>[Selected works]</p>
-               <Copyright alignRight={true} />
+
+               <div className="text-right self-end">
+                  <p>[Selected works]</p>
+                  <Copyright alignRight={true} />
+               </div>
             </div>
          </div>
       </SectionWrapper>

@@ -14,7 +14,7 @@ export default function SectionWrapper({
    return (
       <div
          ref={ref}
-         className="section-wrapper relative custom-min-w-screen lg:w-fit h-fit lg:h-full pt-16 lg:pt-0 pb-8 px-4 lg:px-0 lg:pb-40 lg:flex justify-between items-center overflow-clip"
+         className="section-wrapper relative custom-min-w-screen lg:w-fit h-fit lg:h-full pt-16 lg:pt-0 pb-8 px-4 lg:px-0 lg:flex justify-between items-center overflow-clip"
       >
          <div className={`items-end ${classes || ""}`}>{children}</div>
       </div>

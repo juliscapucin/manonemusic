@@ -28,7 +28,7 @@ type PanelDesktopProps = {
 export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
    const panelsContainerRef = useRef<HTMLDivElement | null>(null);
    const [tween, setTween] = useState<gsap.core.Tween | null>(null);
-   const { windowAspectRatio, width } = useWindowDimensions();
+   const { width } = useWindowDimensions();
 
    // Horizontal Panel animation
    useGSAP(() => {
