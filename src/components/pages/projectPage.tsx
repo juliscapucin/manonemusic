@@ -55,6 +55,17 @@ export default function ProjectPage({
 
                <TitleHeadline>{projectPageData.title}</TitleHeadline>
                <div className="gsap-project-content mt-4">
+                  {projectPageData.releaseDate && (
+                     <p>
+                        Released{" "}
+                        {new Date(
+                           projectPageData.releaseDate,
+                        ).toLocaleDateString("en-US", {
+                           month: "long",
+                           year: "numeric",
+                        })}
+                     </p>
+                  )}
                   {projectPageData.info && <p>{projectPageData.info}</p>}
                </div>
                <ProjectPageContent

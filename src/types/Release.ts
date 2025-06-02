@@ -1,16 +1,16 @@
-import { ImageField } from "./Image"
+import { ImageField } from "./Image";
 
-import { Track } from "./Track"
+import { Track } from "./Track";
 
 export type Release = {
-	title: string
-	slug: {
-		_type: string
-		current: string
-	}
-	image: ImageField
-	releaseDate: string
-	info?: string
-	tracklist: Track[]
-	releaseLink?: string
-}
+   title: string;
+   slug: {
+      _type: string;
+      current: string;
+   };
+   image: ImageField;
+   releaseDate: string;
+   info?: string;
+   tracklist: Track[];
+   releaseLink?: string;
+};
