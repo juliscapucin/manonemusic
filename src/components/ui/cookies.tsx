@@ -37,7 +37,7 @@ export default function Cookies({ cookiesData }: CookiesProps) {
       if (!modalRef.current) return;
 
       gsap.to(modalRef.current, {
-         yPercent: isModalOpen ? -120 : 0,
+         yPercent: isModalOpen ? -150 : 0,
          duration: 0.4,
          ease: "power2.out",
       });
@@ -82,7 +82,7 @@ export default function Cookies({ cookiesData }: CookiesProps) {
             <>
                {/* Background Overlay */}
                <div
-                  className={`fixed top-0 left-0 right-0 bottom-0 max-w-desktop mx-auto flex items-end justify-end z-10 overflow-clip  transition-colors duration-300 ${
+                  className={`fixed top-0 left-0 right-0 bottom-0 max-w-desktop mx-auto flex items-end justify-end z-10 overflow-clip transition-colors duration-300 ${
                      isModalOpen
                         ? "md:bg-primary/80 pointer-events-auto"
                         : "pointer-events-none"
@@ -111,7 +111,7 @@ export default function Cookies({ cookiesData }: CookiesProps) {
                {/* Cookie Policy modal */}
                <div
                   ref={modalRef}
-                  className="fixed top-24 right-0 bottom-8 pr-0 z-15 w-full md:w-3/4 lg:w-2/5 translate-y-[120%]"
+                  className="fixed top-24 right-0 bottom-8 pr-0 z-15 w-full md:w-3/4 lg:w-2/5 translate-y-[150%]"
                   role="dialog"
                   aria-modal="true"
                   aria-labelledby="cookie-modal-title"
