@@ -47,9 +47,9 @@ export default function ProjectTrailer({
    return (
       <div
          ref={trailerContainerRef}
-         className={`fixed left-0 top-0 w-screen h-screen min-h-svh pt-16 pb-8 px-32 flex items-center justify-start overflow-clip translate-y-full  ${isTrailerActive ? "pointer-events-auto" : "pointer-events-none"}`}
+         className={`fixed left-0 top-0 w-screen lg:h-screen lg:min-h-svh pt-16 pb-8 lg:pl-4 lg:pr-96 flex items-center justify-start overflow-clip translate-y-full  ${isTrailerActive ? "pointer-events-auto" : "pointer-events-none"}`}
       >
-         <div>
+         <div className="relative w-screen h-screen pt-24 px-4">
             <Button classes="mb-4" action={() => backToProject()}>
                Back
             </Button>
