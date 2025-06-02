@@ -10,8 +10,6 @@ import { AllData } from "@/types";
 export default function Panels({ data }: { data: AllData }) {
    const { width } = useWindowDimensions();
 
-   console.log(width);
-
    return (
       <main>
          {width && width >= 1024 ? (

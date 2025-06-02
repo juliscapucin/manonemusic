@@ -28,9 +28,9 @@ export default function AboutPage({
 
    return (
       <SectionWrapper>
-         <div className="lg:flex items-end gap-8 [&>*]:flex-1 [&>*]:md:min-w-[45vw] [&>*]:lg:min-w-[28vw]">
+         <div className="lg:flex items-end gap-8">
             {/* First Block */}
-            <div>
+            <div className="flex-1">
                <TitleDisplay ref={titleAboutRef}>{title}</TitleDisplay>
 
                {/* Image Block */}
@@ -50,13 +50,16 @@ export default function AboutPage({
                   </div>
                )}
             </div>
-            {/* Text Block 1 */}
-            {content1 && <TextBlock text={content1} classes="mt-8 lg:mt-0" />}
-            {/* Text Block 2 */}
-            <div>
-               {content2 && <TextBlock text={content2} />}
-               {/* TODO: IMPLEMENT BUTTONS */}
-               {/* <div className='flex gap-4 mt-8'>
+            <div className="flex gap-8 h-full [&>*]:flex-1">
+               {/* Text Block 1 */}
+               {content1 && (
+                  <TextBlock text={content1} classes="mt-8 lg:mt-0" />
+               )}
+               {/* Text Block 2 */}
+               <div className="self-start">
+                  {content2 && <TextBlock text={content2} />}
+                  {/* TODO: IMPLEMENT BUTTONS */}
+                  {/* <div className='flex gap-4 mt-8'>
 						<ButtonRounded onClick={() => console.log("services")}>
 							Services
 						</ButtonRounded>
@@ -64,6 +67,7 @@ export default function AboutPage({
 							Clients
 						</ButtonRounded>
 					</div> */}
+               </div>
             </div>
          </div>
       </SectionWrapper>

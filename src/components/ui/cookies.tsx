@@ -111,7 +111,7 @@ export default function Cookies({ cookiesData }: CookiesProps) {
                {/* Cookie Policy modal */}
                <div
                   ref={modalRef}
-                  className="fixed top-24 right-0 bottom-8 pr-0 z-15 w-full md:w-3/4 lg:w-2/5 translate-y-[150%]"
+                  className="fixed top-24 left-4 right-4 md:left-auto md:right-4 lg:right-0 bottom-8 pr-0 z-15 md:w-3/4 lg:w-2/5 translate-y-[150%]"
                   role="dialog"
                   aria-modal="true"
                   aria-labelledby="cookie-modal-title"
@@ -131,7 +131,7 @@ export default function Cookies({ cookiesData }: CookiesProps) {
                   ></div>
 
                   {/* Content */}
-                  <div className="cookies-overlay gutter-stable relative ml-auto mr-8 bg-primary border border-secondary rounded-3xl h-full pb-8 overflow-y-scroll pointer-events-auto">
+                  <div className="cookies-overlay gutter-stable relative ml-auto lg:mr-8 bg-primary border border-secondary rounded-3xl h-full pb-8 overflow-y-scroll pointer-events-auto">
                      {/* Button Close */}
                      <div className="absolute top-8 right-0">
                         <ButtonClose

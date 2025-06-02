@@ -35,13 +35,13 @@ export default function MenuMobile({ navLinks }: NavLinksProps) {
 
                {/* EXPANDED MENU */}
                <aside
-                  className="absolute top-0 w-full min-h-svh bg-primary transition-transform -translate-y-full duration-300 z-mobile pointer-events-auto"
+                  className="absolute top-0 w-full min-h-svh bg-primary transition-transform -translate-y-[120%] duration-300 z-mobile pointer-events-auto"
                   ref={mobileMenuRef}
                >
                   {/* Close Button */}
-                  <div className="absolute top-4 right-4">
+                  <div className="absolute top-4 right-4 z-100">
                      <ButtonClose
-                        onClick={(e) => {
+                        onClick={() => {
                            if (mobileMenuRef.current) {
                               animateMobileMenu(mobileMenuRef.current);
                            }
