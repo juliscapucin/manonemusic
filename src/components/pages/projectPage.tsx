@@ -7,7 +7,7 @@ import gsap from "gsap";
 import { PageWrapper, TitleHeadline } from "@/components/ui";
 import { Project } from "@/types";
 import { ButtonBack } from "@/components/buttons";
-import { ProjectInfo, ProjectPageContent, ProjectTrailer } from "@/components";
+import { ProjectPageContent, ProjectTrailer } from "@/components";
 import { useTransitionOnEnter } from "@/hooks";
 import { useGSAP } from "@gsap/react";
 
@@ -54,12 +54,9 @@ export default function ProjectPage({
                <ButtonBack slug={section} />
 
                <TitleHeadline>{projectPageData.title}</TitleHeadline>
-               <ProjectInfo
-                  projectInfo={{
-                     releaseDate: projectPageData.releaseDate,
-                     info: projectPageData.info,
-                  }}
-               />
+               <div className="gsap-project-content mt-4">
+                  {projectPageData.info && <p>{projectPageData.info}</p>}
+               </div>
                <ProjectPageContent
                   {...projectPageData}
                   setIsTrailerActive={setIsTrailerActive}
