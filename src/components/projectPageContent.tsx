@@ -38,7 +38,7 @@ export default function ProjectPageContent({
             {description && <TextBlock text={description} />}
 
             {/* Project Links */}
-            <div className="mt-16 flex gap-4 w-fit mx-auto">
+            <div className="mt-16 flex flex-col lg:flex-row gap-4 w-fit mx-auto">
                {projectVideo && setIsTrailerActive && (
                   <ButtonRounded
                      key={"button-trailer"}

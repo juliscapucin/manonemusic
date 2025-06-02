@@ -18,8 +18,8 @@ export default function HomePage({ content }: HomePageProps) {
    const titleHomeRef = useRef(null);
 
    return (
-      <SectionWrapper>
-         <div className="h-fit">
+      <SectionWrapper classes="h-full">
+         <div className="h-full">
             <div
                ref={titleHomeRef}
                className="gsap-section-title mt-2 lg:mt-0 opacity-90"
@@ -27,7 +27,7 @@ export default function HomePage({ content }: HomePageProps) {
                <Logo />
             </div>
 
-            <div className="w-full h-80 lg:flex gap-16 mt-8 *:flex-1">
+            <div className="w-full min-h-full lg:h-80 flex flex-col lg:flex-row gap-16 mt-8 *:lg:flex-1">
                <TextBlock
                   text={content}
                   classes="text-balance max-w-[60%] lg:max-w-[400px] mb-16 lg:mb-0"

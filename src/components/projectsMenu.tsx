@@ -1,8 +1,6 @@
 "use client";
 
-import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { Observer } from "gsap/Observer";
 
 import { PortfolioItem } from "@/types";
 import { MouseFollower, ProjectCard } from "@/components";
@@ -22,7 +20,7 @@ export default function ProjectsMenu({
    section,
    variant,
 }: ProjectsMenuProps) {
-   const { isMobile } = useWindowDimensions();
+   const { width } = useWindowDimensions();
 
    const outerContainerRef = useRef<HTMLDivElement | null>(null);
    const cardsContainerRef = useRef<HTMLDivElement | null>(null);
@@ -36,7 +34,11 @@ export default function ProjectsMenu({
 
    // MOBILE: Carousel
    useGSAP(() => {
-      if (!outerContainerRef.current || !cardsContainerRef.current || !isMobile)
+      if (
+         !outerContainerRef.current ||
+         !cardsContainerRef.current ||
+         width > 1024
+      )
          return;
 
       const wrapper = outerContainerRef.current;
@@ -55,20 +57,20 @@ export default function ProjectsMenu({
       );
 
       setTimelineReady(true);
-   }, [isMobile]);
+   }, [width]);
 
    return (
       <div
          ref={outerContainerRef}
          id="projects-menu"
          className={
-            "gsap-projects-menu relative w-full h-80 overflow-x-visible lg:w-fit portrait:pb-16"
+            "gsap-projects-menu relative w-full h-96 lg:h-80 overflow-x-visible lg:w-fit pb-16 lg:pb-0"
          }
       >
          {/* TODO: Make this work <MouseFollower isHovering={hoveredCard !== null} variant="big" /> */}
          <div
             ref={cardsContainerRef}
-            className="relative w-fit h-full flex items-start justify-start gap-8 lg:gap-40 px-4 py-10"
+            className="relative w-fit h-full flex items-start justify-start gap-8 lg:gap-40 px-4 py-8 lg:py-0 lg:pb-4"
          >
             {projects?.map((project: PortfolioItem, index) => {
                return (
@@ -81,7 +83,7 @@ export default function ProjectsMenu({
                         image: project.image,
                         slug: project.slug,
                         index,
-                        isMobile,
+                        isMobile: width < 1024,
                         handleCardHover,
                         hoveredCard,
                      }}

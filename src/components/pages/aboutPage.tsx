@@ -35,8 +35,8 @@ export default function AboutPage({
 
                {/* Image Block */}
                {image && (
-                  <div className="relative lg:block h-80 overflow-clip">
-                     <div className="block relative h-full aspect-square rounded-sm overflow-clip">
+                  <div className="relative lg:block w-full aspect-square lg:h-80 rounded-sm overflow-clip">
+                     <div className="block relative h-full rounded-sm overflow-clip">
                         <Image
                            {...{
                               src: urlFor(image.imageRef).url(), // generate url via _ref to save on api calls
@@ -50,7 +50,7 @@ export default function AboutPage({
                   </div>
                )}
             </div>
-            <div className="flex gap-8 h-full [&>*]:flex-1">
+            <div className="lg:flex gap-8 h-full [&>*]:flex-1">
                {/* Text Block 1 */}
                {content1 && (
                   <TextBlock text={content1} classes="mt-8 lg:mt-0" />

@@ -122,7 +122,7 @@ export default function ProjectCard({
          {variant === "section" && (
             <div className="absolute top-full mt-2 text-labelMedium md:text-titleLarge uppercase text-left leading-none text-nowrap flex gap-2">
                <span>
-                  [{index < 10 && 0}
+                  [{index < 9 && 0}
                   {index + 1}]
                </span>
                <p className="" id={`project-title-${slug}`} ref={labelRef}>
