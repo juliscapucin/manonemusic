@@ -91,7 +91,7 @@ export default function ProjectCard({
             if (variant === "section" && handleCardHover) handleCardHover(null);
          }}
          link={`/${section}/${slug}`}
-         classes={`relative group block bg-primary ${variant === "section" ? "min-w-40 h-full w-fit bg-faded-10" : `h-full w-fit landscape:h-fit landscape:w-32 ${pathname.includes(slug) && "pointer-events-none"}`}`}
+         classes={`relative group block bg-primary ${variant === "section" ? "min-w-40 h-full w-fit bg-faded-10" : `h-full w-fit lg:h-fit lg:w-32 ${pathname.includes(slug) && "pointer-events-none"}`}`}
          style={{ aspectRatio }}
          aria-labelledby={`project-title-${slug}`}
          disabled={pathname.includes(slug)}

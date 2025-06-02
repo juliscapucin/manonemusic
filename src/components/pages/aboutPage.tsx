@@ -28,7 +28,7 @@ export default function AboutPage({
 
    return (
       <SectionWrapper>
-         <div className="landscape:flex items-end gap-8 [&>*]:flex-1 [&>*]:md:min-w-[45vw] [&>*]:lg:min-w-[28vw]">
+         <div className="lg:flex items-end gap-8 [&>*]:flex-1 [&>*]:md:min-w-[45vw] [&>*]:lg:min-w-[28vw]">
             {/* First Block */}
             <div>
                <TitleDisplay ref={titleAboutRef}>{title}</TitleDisplay>
@@ -51,9 +51,7 @@ export default function AboutPage({
                )}
             </div>
             {/* Text Block 1 */}
-            {content1 && (
-               <TextBlock text={content1} classes="mt-8 landscape:mt-0" />
-            )}
+            {content1 && <TextBlock text={content1} classes="mt-8 lg:mt-0" />}
             {/* Text Block 2 */}
             <div>
                {content2 && <TextBlock text={content2} />}

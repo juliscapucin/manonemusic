@@ -37,7 +37,7 @@ export default function PanelMobile({ data }: { data: AllData }) {
    }, [pathname]);
 
    return (
-      <div className="landscape:hidden">
+      <div className="lg:hidden">
          {data.headerNavLinks.map((section, index) => (
             <section
                id={`panel-${section.slug === "/" ? "home" : section.slug}`}

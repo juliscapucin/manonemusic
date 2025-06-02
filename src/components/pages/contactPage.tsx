@@ -18,11 +18,11 @@ export default function ContactPage({
    const titleContactRef = useRef(null);
 
    return (
-      <SectionWrapper classes="landscape:w-full">
+      <SectionWrapper classes="lg:w-full">
          {subtitle && <Subtitle subtitle={subtitle} />}
          <TitleDisplay ref={titleContactRef}>{title}</TitleDisplay>
          <div className="h-80 w-full flex flex-col-reverse lg:flex-row gap-16 *:flex-1">
-            <div className="landscape:self-end">
+            <div className="lg:self-end">
                <Copyright />
                <Credits />
             </div>

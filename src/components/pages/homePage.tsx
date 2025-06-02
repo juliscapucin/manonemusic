@@ -36,10 +36,10 @@ export default function HomePage({ subtitle, content }: HomePageProps) {
                   {subtitle}
                </Heading>
             </div>
-            <div className="w-full landscape:flex justify-between mt-32 md:mt-16">
+            <div className="w-full lg:flex justify-between mt-32 md:mt-16">
                <TextBlock
                   text={content}
-                  classes="text-balance max-w-[400px] mb-16 landscape:mb-0"
+                  classes="text-balance max-w-[400px] mb-16 lg:mb-0"
                />
 
                <Status location={location} />

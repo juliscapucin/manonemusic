@@ -32,7 +32,7 @@ export default function Header({ navLinks, variant = "section" }: HeaderProps) {
       <header>
          <nav
             ref={navRef}
-            className="hidden landscape:flex fixed top-0 right-0 left-0 p-8 justify-between z-header"
+            className="hidden lg:flex fixed top-0 right-0 left-0 p-8 justify-between z-header"
          >
             <CustomButton
                link="/"
@@ -46,7 +46,7 @@ export default function Header({ navLinks, variant = "section" }: HeaderProps) {
                MAN/ONE MUSIC
             </CustomButton>
 
-            <div className="hidden landscape:flex gap-8">
+            <div className="hidden lg:flex gap-8">
                {navLinks.map(
                   (link, index) =>
                      link.slug !== "/" && (

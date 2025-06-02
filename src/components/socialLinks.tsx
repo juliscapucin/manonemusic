@@ -11,7 +11,7 @@ type SocialLinksProps = {
 export default function SocialLinks({ data }: SocialLinksProps) {
    return (
       data && (
-         <div className="overflow-hidden text-right landscape:self-end">
+         <div className="text-right lg:self-end">
             <h3 className="mb-4">Listen & Follow</h3>
             {data.map((item) => {
                return (

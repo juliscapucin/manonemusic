@@ -28,7 +28,7 @@ type PanelDesktopProps = {
 export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
    const panelsContainerRef = useRef<HTMLDivElement | null>(null);
    const [tween, setTween] = useState<gsap.core.Tween | null>(null);
-   const { windowAspectRatio } = useWindowDimensions();
+   const { windowAspectRatio, width } = useWindowDimensions();
 
    // Horizontal Panel animation
    useGSAP(() => {
@@ -83,8 +83,8 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
    // Title animations + routing funcionality
    useGSAP(
       () => {
-         // Start ScrollTrigger when window is in landscape mode
-         if (windowAspectRatio === "portrait" || !tween) return;
+         // Start ScrollTrigger when window is in desktop breakpoint
+         if (width < 1024 || !tween) return;
 
          gsap.registerPlugin(ScrollTrigger);
 
