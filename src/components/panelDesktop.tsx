@@ -202,7 +202,7 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
             })}
          </div>
 
-         <HalftoneBackground />
+         {/* <HalftoneBackground /> */}
       </main>
    );
 }
