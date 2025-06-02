@@ -8,6 +8,7 @@ export type Project = {
       _type: string;
       current: string;
    };
+   releaseDate?: string;
    info?: string;
    image: ImageField;
    description?: PortableTextBlock[];
