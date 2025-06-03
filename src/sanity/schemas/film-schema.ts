@@ -65,6 +65,16 @@ const filmSchema = {
             Rule.required().error("Image texture is required"),
       },
       {
+         name: "releaseDate",
+         title: "Release Date",
+         type: "date",
+         options: {
+            dateFormat: "MM/YYYY",
+         },
+         validation: (Rule: Rule) =>
+            Rule.required().error("Release Date is required"),
+      },
+      {
          name: "description",
          title: "Description",
          type: "array",

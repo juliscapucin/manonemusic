@@ -81,6 +81,7 @@ export default function ProjectsMenu({
                         section,
                         title: project.title,
                         image: project.image,
+                        imageTexture: project.imageTexture,
                         slug: project.slug,
                         index,
                         isMobile: width < 1024,

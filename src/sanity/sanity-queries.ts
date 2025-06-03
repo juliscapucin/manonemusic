@@ -103,6 +103,7 @@ export async function getPortfolioItems(
       groq`*[_type == $section] | order(releaseDate desc){
       _id,
       "slug": slug.current,
+      releaseDate,
       "image": {
          "imageAlt": image.imageAlt,
          "imageWidth": image.image.asset->metadata.dimensions.width,
@@ -110,7 +111,7 @@ export async function getPortfolioItems(
          "imageRef": image.image.asset._ref
          },
       "imageTexture": {
-         "imageRef": image.image.asset._ref,
+         "imageRef": imageTexture.image.asset._ref,
          },
       title,
    }`,

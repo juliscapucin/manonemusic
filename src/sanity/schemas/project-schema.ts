@@ -60,6 +60,16 @@ const projectSchema = {
             Rule.required().error("Image texture is required"),
       },
       {
+         name: "releaseDate",
+         title: "Release Date",
+         type: "date",
+         options: {
+            dateFormat: "MM/YYYY",
+         },
+         validation: (Rule: Rule) =>
+            Rule.required().error("Release Date is required"),
+      },
+      {
          name: "info",
          title: "Info",
          type: "string",

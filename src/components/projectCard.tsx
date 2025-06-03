@@ -7,7 +7,7 @@ import Image from "next/image";
 import gsap from "gsap";
 
 import { projectExit, panelsExit } from "@/lib/animations";
-import { ImageField } from "@/types/Image";
+import { ImageField, ImageTexture } from "@/types/Image";
 
 import { CustomButton } from "@/components/ui";
 
@@ -20,6 +20,7 @@ type ProjectCardProps = {
    section: string;
    title: string;
    image: ImageField;
+   imageTexture: ImageTexture;
    slug: string;
    index: number;
    handleCardHover: ((arg: number | null) => void) | null;
@@ -31,6 +32,7 @@ export default function ProjectCard({
    section,
    title,
    image,
+   imageTexture,
    slug,
    index,
    handleCardHover,
@@ -39,14 +41,14 @@ export default function ProjectCard({
    const router = useRouter();
    const pathname = usePathname();
 
-   const cardImageRef = useRef<HTMLDivElement>(null);
+   const imageTextureRef = useRef<HTMLDivElement>(null);
    const labelRef = useRef<HTMLParagraphElement>(null);
 
    const aspectRatio = image.imageWidth / image.imageHeight;
 
    const isCardHovered = hoveredCard === index;
 
-   // LABEL ANIMATIONS
+   // LABEL ANIMATION
    useGSAP(
       () => {
          if (!labelRef.current) return;
@@ -76,6 +78,22 @@ export default function ProjectCard({
       { dependencies: [isCardHovered] },
    );
 
+   // REVEAL ANIMATION
+   useGSAP(
+      () => {
+         if (!imageTextureRef.current) return;
+
+         gsap.to(imageTextureRef.current, {
+            clipPath: isCardHovered
+               ? "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)"
+               : "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)",
+            duration: 0.4,
+            ease: "power4.out",
+         });
+      },
+      { dependencies: [isCardHovered] },
+   );
+
    return (
       <CustomButton
          transitionOnClick={() => {
@@ -91,7 +109,7 @@ export default function ProjectCard({
             if (variant === "section" && handleCardHover) handleCardHover(null);
          }}
          link={`/${section}/${slug}`}
-         classes={`relative group block bg-primary ${variant === "section" ? "min-w-40 h-full w-fit bg-faded-10" : `h-full w-fit lg:h-fit lg:w-32 ${pathname.includes(slug) && "pointer-events-none"}`}`}
+         classes={`relative group block bg-primary ${variant === "section" ? "min-w-40 lg:min-w-16 h-full w-fit bg-faded-10" : `h-full w-fit lg:h-fit lg:w-32 ${pathname.includes(slug) && "pointer-events-none"}`}`}
          style={{ aspectRatio }}
          aria-labelledby={`project-title-${slug}`}
          disabled={pathname.includes(slug)}
@@ -99,21 +117,43 @@ export default function ProjectCard({
          {image?.imageRef && (
             <div
                className="rounded-sm pointer-events-none w-full overflow-hidden group-hover:scale-105 origin-bottom transition-all duration-300"
-               ref={cardImageRef}
                role="img"
                aria-label={image.imageAlt}
             >
                <div
                   className={`absolute top-0 left-0 mix-blend-multiply w-full h-full z-15 bg-primary transition-opacity duration-300 ${(!isCardHovered && hoveredCard) || (variant === "page" && !pathname.includes(slug)) ? "group-hover:opacity-0 opacity-80" : "opacity-0"}`}
                ></div>
-               <Image
-                  className={`relative h-full w-full object-cover ${variant === "section" && "rounded-sm"}`}
-                  src={urlFor(image.imageRef).url()} // generate url from ref to avoid unnecessary calls on server
-                  alt={image.imageAlt}
-                  width={image.imageWidth}
-                  height={image.imageHeight}
-                  sizes="30vw"
-               />
+
+               {/* TEXTURE */}
+               {imageTexture && imageTexture.imageRef && (
+                  <Image
+                     className="relative h-full w-full object-cover rounded-sm"
+                     src={urlFor(imageTexture.imageRef).url()} // generate url from ref to avoid unnecessary calls on server
+                     alt={image.imageAlt}
+                     width={image.imageWidth}
+                     height={image.imageHeight}
+                     sizes="30vw"
+                  />
+               )}
+
+               {/* IMAGE */}
+               <div
+                  className="absolute top-0 left-0 right-0 bottom-0"
+                  // mask's initial state
+                  style={{
+                     clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)",
+                  }}
+                  ref={imageTextureRef}
+               >
+                  <Image
+                     className="relative h-full w-full object-cover rounded-sm"
+                     src={urlFor(image.imageRef).url()} // generate url from ref to avoid unnecessary calls on server
+                     alt={image.imageAlt}
+                     width={image.imageWidth}
+                     height={image.imageHeight}
+                     sizes="30vw"
+                  />{" "}
+               </div>
             </div>
          )}
          <span className="sr-only">{title}</span>

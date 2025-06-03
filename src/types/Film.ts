@@ -1,14 +1,5 @@
 import { ImageField, ImageTexture } from "./Image";
 
-type FilmInfo = {
-   genre?: string;
-   duration?: string;
-   releaseDate?: string;
-   director?: string;
-   writer?: string;
-   music?: string;
-};
-
 export type Film = {
    title: string;
    slug: {
