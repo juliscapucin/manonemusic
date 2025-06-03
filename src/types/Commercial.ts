@@ -1,4 +1,4 @@
-import { ImageField } from "./Image";
+import { ImageField, ImageTexture } from "./Image";
 
 export type Commercial = {
    title: string;
@@ -7,6 +7,7 @@ export type Commercial = {
       current: string;
    };
    image: ImageField;
+   imageTexture: ImageTexture;
    info?: string;
    description?: string;
    projectLink?: string;

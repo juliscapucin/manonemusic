@@ -1,7 +1,8 @@
-import { ImageField } from "./Image"
+import { ImageField, ImageTexture } from "./Image";
 
 export type PortfolioItem = {
-	title: string
-	slug: string
-	image: ImageField
-}
+   title: string;
+   slug: string;
+   image: ImageField;
+   imageTexture: ImageTexture;
+};

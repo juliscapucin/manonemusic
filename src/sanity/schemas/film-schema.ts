@@ -49,6 +49,22 @@ const filmSchema = {
          validation: (Rule: Rule) => Rule.required().error("Image is required"),
       },
       {
+         name: "imageTexture",
+         type: "object",
+         title: "Image Texture (required)",
+         fields: [
+            {
+               name: "image",
+               title: "Image",
+               type: "image",
+               validation: (Rule: Rule) =>
+                  Rule.required().error("Image texture file is required"),
+            },
+         ],
+         validation: (Rule: Rule) =>
+            Rule.required().error("Image texture is required"),
+      },
+      {
          name: "description",
          title: "Description",
          type: "array",

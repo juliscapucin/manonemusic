@@ -39,6 +39,22 @@ const aboutPageSchema = {
          ],
       },
       {
+         name: "imageTexture",
+         type: "object",
+         title: "Image Texture (required)",
+         fields: [
+            {
+               name: "image",
+               title: "Image",
+               type: "image",
+               validation: (Rule: Rule) =>
+                  Rule.required().error("Image texture file is required"),
+            },
+         ],
+         validation: (Rule: Rule) =>
+            Rule.required().error("Image texture is required"),
+      },
+      {
          name: "content1",
          title: "Content 1 (required)",
          type: "array",
