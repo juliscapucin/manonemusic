@@ -1,7 +1,7 @@
 "use client";
 
 import { PanelDesktop, PanelMobile } from "@/components";
-import { Footer, Header, MenuMobile } from "@/components/ui";
+import { Footer, NavMenu } from "@/components/ui";
 
 import { useWindowDimensions } from "@/hooks";
 
@@ -14,13 +14,22 @@ export default function Panels({ data }: { data: AllData }) {
       <main>
          {width && width >= 1024 ? (
             <>
-               <Header navLinks={data.headerNavLinks} />
+               {/* <Header navLinks={data.headerNavLinks} /> */}
+               <NavMenu
+                  navLinks={data.headerNavLinks}
+                  breakpoint="desktop"
+                  variant="section"
+               />
                <PanelDesktop data={data} sections={data.headerNavLinks} />
                <Footer navLinks={data.headerNavLinks} />
             </>
          ) : (
             <>
-               <MenuMobile navLinks={data.headerNavLinks} />
+               <NavMenu
+                  navLinks={data.headerNavLinks}
+                  breakpoint="mobile"
+                  variant="section"
+               />
                <PanelMobile data={data} />
             </>
          )}

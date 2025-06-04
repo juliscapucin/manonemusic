@@ -34,7 +34,7 @@ export default function HomePage({ content }: HomePageProps) {
 
             <Status location={location} />
 
-            <span>::</span>
+            <span>::::::::::::::::::::</span>
 
             <div className="flex flex-col justify-end lg:h-80 text-right">
                <p>[Selected works]</p>

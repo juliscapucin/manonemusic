@@ -116,7 +116,7 @@ export default function ProjectCard({
       >
          {image?.imageRef && (
             <div
-               className={`rounded-sm pointer-events-none w-full overflow-clip group-hover:scale-105 origin-bottom transition-all duration-300 ${(!isCardHovered && typeof hoveredCard === "number") || (variant === "page" && !pathname.includes(slug)) ? "opacity-90" : ""}`}
+               className={`rounded-sm pointer-events-none w-full overflow-clip group-hover:scale-105 origin-bottom transition-all duration-300 ${(!isCardHovered && typeof hoveredCard === "number") || (variant === "page" && !pathname.includes(slug)) ? "" : ""}`} //TODO: Remove after publishing
                role="img"
                aria-label={image.imageAlt}
             >

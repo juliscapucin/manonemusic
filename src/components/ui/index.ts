@@ -10,6 +10,7 @@ import Loader from "./loader";
 import Logo from "./logo";
 import MenuMobile from "./menuMobile";
 import NavLink from "./navLink";
+import NavMenu from "./navMenu";
 import PageWrapper from "./pageWrapper";
 import Pagination from "./pagination";
 import SectionWrapper from "./sectionWrapper";
@@ -32,6 +33,7 @@ export {
    Logo,
    MenuMobile,
    NavLink,
+   NavMenu,
    PageWrapper,
    Pagination,
    TextBlock,
