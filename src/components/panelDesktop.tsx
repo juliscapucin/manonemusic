@@ -187,7 +187,7 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
       <main>
          <div
             ref={panelsContainerRef}
-            className="gsap-panels-container flex gap-32 opacity-0"
+            className="gsap-panels-container flex gap-96 opacity-0"
          >
             {sections.map((section) => {
                return (
