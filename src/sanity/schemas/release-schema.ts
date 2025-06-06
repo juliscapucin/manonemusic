@@ -52,12 +52,12 @@ const releaseSchema = {
                name: "image",
                title: "Image",
                type: "image",
-               validation: (Rule: Rule) =>
-                  Rule.required().error("Image texture file is required"),
+               // validation: (Rule: Rule) =>
+               //    Rule.required().error("Image texture file is required"),
             },
          ],
-         validation: (Rule: Rule) =>
-            Rule.required().error("Image texture is required"),
+         // validation: (Rule: Rule) =>
+         //    Rule.required().error("Image texture is required"),
       },
       {
          name: "releaseDate",

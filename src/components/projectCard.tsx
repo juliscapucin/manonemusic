@@ -85,8 +85,8 @@ export default function ProjectCard({
 
          gsap.to(imageTextureRef.current, {
             clipPath: isCardHovered
-               ? "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)"
-               : "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)",
+               ? "polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)"
+               : "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
             duration: 0.4,
             ease: "power4.out",
          });
@@ -121,7 +121,7 @@ export default function ProjectCard({
                aria-label={image.imageAlt}
             >
                {/* TEXTURE */}
-               {imageTexture && imageTexture.imageRef && (
+               {/* {imageTexture && imageTexture.imageRef && (
                   <Image
                      className="relative h-full w-full object-cover rounded-sm"
                      src={urlFor(imageTexture.imageRef).url()} // generate url from ref to avoid unnecessary calls on server
@@ -130,19 +130,12 @@ export default function ProjectCard({
                      height={image.imageHeight}
                      sizes="30vw"
                   />
-               )}
+               )} */}
 
                {/* IMAGE */}
-               <div
-                  className="absolute top-0 left-0 right-0 bottom-0"
-                  // mask's initial state
-                  style={{
-                     clipPath: "polygon(0% 0%, 0% 0%, 0% 100%, 0% 100%)",
-                  }}
-                  ref={imageTextureRef}
-               >
+               <div>
                   <Image
-                     className="relative h-full w-full object-cover rounded-sm"
+                     className={`relative h-full w-full object-cover rounded-sm ${isCardHovered ? "saturate-100" : "saturate-50"}`}
                      src={urlFor(image.imageRef).url()} // generate url from ref to avoid unnecessary calls on server
                      alt={image.imageAlt}
                      width={image.imageWidth}
@@ -150,6 +143,16 @@ export default function ProjectCard({
                      sizes="30vw"
                   />{" "}
                </div>
+
+               {/* OVERLAY */}
+               <div
+                  className="absolute top-0 left-0 right-0 bottom-0 bg-primary opacity-50 mix-blend-overlay"
+                  // mask's initial state
+                  style={{
+                     clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
+                  }}
+                  ref={imageTextureRef}
+               ></div>
             </div>
          )}
          <span className="sr-only">{title}</span>
@@ -158,9 +161,8 @@ export default function ProjectCard({
          {variant === "section" && (
             <div className="absolute top-full mt-2 text-labelMedium md:text-titleLarge uppercase text-left leading-none text-nowrap flex gap-2">
                <span>
-                  ::
-                  {/* [{index < 9 && 0}
-                  {index + 1}] */}
+                  [{index < 9 && 0}
+                  {index + 1}]
                </span>
                <p className="" id={`project-title-${slug}`} ref={labelRef}>
                   {title}

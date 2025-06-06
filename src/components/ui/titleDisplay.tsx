@@ -11,7 +11,7 @@ type TitleProps = {
 export default function TitleDisplay({ children, classes, ref }: TitleProps) {
    return (
       <div
-         className={`mt-16 lg:mt-0 mb-8 opacity-90 ${classes || ""}`}
+         className={`mt-16 lg:mt-0 mb-8 lg:pl-6 border-faded-5 border-t border-b ${classes || ""}`}
          ref={ref}
       >
          <Heading

@@ -46,18 +46,18 @@ const commercialSchema = {
       {
          name: "imageTexture",
          type: "object",
-         title: "Image Texture (required)",
+         title: "Image Texture",
          fields: [
             {
                name: "image",
                title: "Image",
                type: "image",
-               validation: (Rule: Rule) =>
-                  Rule.required().error("Image texture file is required"),
+               // validation: (Rule: Rule) =>
+               //    Rule.required().error("Image texture file is required"),
             },
          ],
-         validation: (Rule: Rule) =>
-            Rule.required().error("Image texture is required"),
+         // validation: (Rule: Rule) =>
+         //    Rule.required().error("Image texture is required"),
       },
       {
          name: "releaseDate",
