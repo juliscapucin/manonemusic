@@ -52,21 +52,22 @@ export default function ProjectPage({
             {/* Project Page */}
             <div className="gsap-project-page opacity-0">
                <ButtonBack slug={section} />
-
-               <TitleHeadline>{projectPageData.title}</TitleHeadline>
-               <div className="gsap-project-content mt-4">
-                  {projectPageData.releaseDate && (
-                     <p>
-                        Released{" "}
-                        {new Date(
-                           projectPageData.releaseDate,
-                        ).toLocaleDateString("en-US", {
-                           month: "long",
-                           year: "numeric",
-                        })}
-                     </p>
-                  )}
-                  {projectPageData.info && <p>{projectPageData.info}</p>}
+               <div className="pl-8">
+                  <TitleHeadline>{projectPageData.title}</TitleHeadline>
+                  <div className="gsap-project-content mt-4">
+                     {projectPageData.releaseDate && (
+                        <p>
+                           Released{" "}
+                           {new Date(
+                              projectPageData.releaseDate,
+                           ).toLocaleDateString("en-US", {
+                              month: "long",
+                              year: "numeric",
+                           })}
+                        </p>
+                     )}
+                     {projectPageData.info && <p>{projectPageData.info}</p>}
+                  </div>
                </div>
                <ProjectPageContent
                   {...projectPageData}
