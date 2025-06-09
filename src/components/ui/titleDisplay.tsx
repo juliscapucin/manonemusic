@@ -16,7 +16,7 @@ export default function TitleDisplay({ children, classes, ref }: TitleProps) {
       >
          <Heading
             tag={"h2"}
-            classes="gsap-section-title whitespace-nowrap uppercase"
+            classes="gsap-section-title whitespace-nowrap uppercase leading-0.8 lg:-mt-3"
             variant="display"
          >
             {children}

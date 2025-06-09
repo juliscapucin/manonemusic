@@ -42,7 +42,7 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
             trigger: container,
             pin: true,
             start: "top top",
-            scrub: 0.2,
+            scrub: 1,
             end: () => "+=" + (container.scrollWidth - container.offsetWidth),
             invalidateOnRefresh: true,
             // markers: true,
@@ -167,27 +167,6 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
       panelsEnter(panelsContainerRef.current as HTMLDivElement);
    }, [panelsContainerRef]);
 
-   // Background texture
-   // useEffect(() => {
-   //    const node = bgRef.current;
-   //    if (!node) return;
-
-   //    const textures = [
-   //       "imgs/noise1.png",
-   //       "imgs/noise2.png",
-   //       "imgs/noise3.png",
-   //       "imgs/noise4.png",
-   //    ];
-   //    let i = 0;
-
-   //    const interval = setInterval(() => {
-   //       i = (i + 1) % textures.length;
-   //       node.style.backgroundImage = `url('${textures[i]}')`;
-   //    }, 100);
-
-   //    return () => clearInterval(interval);
-   // }, []);
-
    // TODO: Implement Smooth Scroller
    // Smooth Scroller
    // useEffect(() => {
@@ -205,7 +184,7 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
          {/* Noise Background */}
          <div
             ref={bgRef}
-            className="fixed inset-[-50%] w-[200vw] h-[200vh] pointer-events-none z-10 bg-faded-5"
+            className="fixed inset-[-50%] w-[200vw] h-[200vh] pointer-events-none z-header bg-faded-5"
             aria-hidden="true"
             style={{
                backgroundImage: 'url("/imgs/noise-transparent.png")',

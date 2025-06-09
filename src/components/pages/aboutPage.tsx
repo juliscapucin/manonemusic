@@ -27,39 +27,30 @@ export default function AboutPage({
    const titleAboutRef = useRef(null);
 
    return (
-      <SectionWrapper>
-         <div className="lg:flex items-end gap-8">
-            {/* First Block */}
-            <div className="flex-1 border-r border-faded-10">
-               <TitleDisplay ref={titleAboutRef}>{title}</TitleDisplay>
-
-               {/* Image Block */}
-               {image && (
-                  <div className="relative lg:block w-full aspect-square lg:h-80 rounded-sm overflow-clip">
-                     <div className="block relative h-full rounded-sm overflow-clip">
-                        <Image
-                           {...{
-                              src: urlFor(image.imageRef).url(), // generate url via _ref to save on api calls
-                              alt: `Profile picture of Matt Rudge, the leading figure behind ManOne Music`,
-                              fill: true,
-                              className: "object-cover",
-                              sizes: "50vw",
-                           }}
-                        />
-                     </div>
-                  </div>
-               )}
-            </div>
-            <div className="lg:flex gap-8 h-full [&>*]:flex-1">
-               {/* Text Block 1 */}
-               {content1 && (
-                  <TextBlock text={content1} classes="mt-8 lg:mt-0" />
-               )}
-               {/* Text Block 2 */}
-               <div className="self-start">
-                  {content2 && <TextBlock text={content2} />}
-                  {/* TODO: IMPLEMENT BUTTONS */}
-                  {/* <div className='flex gap-4 mt-8'>
+      <SectionWrapper classes="w-full">
+         <TitleDisplay ref={titleAboutRef}>{title}</TitleDisplay>
+         <div className="relative w-full lg:flex items-start *:flex-1 gap-8 lg:px-8 lg:h-80">
+            {/* Image Block */}
+            {image && (
+               <div className="relative lg:block w-full aspect-square lg:h-80 rounded-sm overflow-clip">
+                  <Image
+                     {...{
+                        src: urlFor(image.imageRef).url(), // generate url via _ref to save on api calls
+                        alt: `Profile picture of Matt Rudge, the leading figure behind ManOne Music`,
+                        fill: true,
+                        className: "object-cover",
+                        sizes: "50vw",
+                     }}
+                  />
+               </div>
+            )}
+            {/* Text Block 1 */}
+            {content1 && <TextBlock text={content1} classes="mt-8 lg:mt-0" />}
+            {/* Text Block 2 */}
+            <div>
+               {content2 && <TextBlock text={content2} />}
+               {/* TODO: IMPLEMENT BUTTONS */}
+               {/* <div className='flex gap-4 mt-8'>
 						<ButtonRounded onClick={() => console.log("services")}>
 							Services
 						</ButtonRounded>
@@ -67,7 +58,6 @@ export default function AboutPage({
 							Clients
 						</ButtonRounded>
 					</div> */}
-               </div>
             </div>
          </div>
       </SectionWrapper>
