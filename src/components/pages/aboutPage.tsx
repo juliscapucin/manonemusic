@@ -30,7 +30,7 @@ export default function AboutPage({
       <SectionWrapper>
          <div className="lg:flex items-end gap-8">
             {/* First Block */}
-            <div className="flex-1 border-r border-faded-5">
+            <div className="flex-1 border-r border-faded-10">
                <TitleDisplay ref={titleAboutRef}>{title}</TitleDisplay>
 
                {/* Image Block */}

@@ -202,7 +202,7 @@ textarea {
 }
 
 .logo {
-   @apply font-medium portrait:mt-16 text-[clamp(4rem,12vw,13rem)] leading-[0.8];
+   @apply font-medium portrait:mt-16 text-[clamp(4rem,12vw,13rem)] leading-[0.8] -ml-1 lg:-ml-3;
 }
 
 .underlined-link {

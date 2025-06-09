@@ -70,7 +70,7 @@ export default function ProjectsMenu({
          {/* TODO: Make this work <MouseFollower isHovering={hoveredCard !== null} variant="big" /> */}
          <div
             ref={cardsContainerRef}
-            className="relative w-fit h-full flex items-start justify-start gap-16 lg:gap-32 px-4 lg:px-8 py-8 lg:py-0 lg:pb-8 border-t border-b border-faded-5"
+            className="relative w-fit h-full flex items-start justify-start gap-16 lg:gap-32 px-4 lg:px-8 py-8 lg:py-0 lg:pb-8 border-t border-b border-faded-10"
          >
             {projects?.map((project: PortfolioItem, index) => {
                return (
