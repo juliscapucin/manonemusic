@@ -29,7 +29,7 @@ export default function Header({ navLinks, variant = "section" }: HeaderProps) {
 
    return (
       <header>
-         <nav className="hidden lg:flex fixed top-0 right-0 left-0 px-8 py-4 justify-between bg-primary border border-faded-10 z-header">
+         <nav className="hidden lg:flex fixed top-0 right-0 left-0 px-8 py-4 justify-between border border-faded-10 z-header">
             <CustomButton
                link="/"
                classes={`underlined-link text-titleSmall md:text-titleMedium uppercase font-medium transition ${pathname === "/" ? "opacity-0 -translate-x-full" : "opacity-100"}`}

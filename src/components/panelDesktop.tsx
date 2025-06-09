@@ -22,6 +22,7 @@ type PanelDesktopProps = {
 
 export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
    const panelsContainerRef = useRef<HTMLDivElement | null>(null);
+   const bgRef = useRef<HTMLDivElement | null>(null);
    const [tween, setTween] = useState<gsap.core.Tween | null>(null);
    const { width } = useWindowDimensions();
 
@@ -166,6 +167,27 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
       panelsEnter(panelsContainerRef.current as HTMLDivElement);
    }, [panelsContainerRef]);
 
+   // Background texture
+   // useEffect(() => {
+   //    const node = bgRef.current;
+   //    if (!node) return;
+
+   //    const textures = [
+   //       "imgs/noise1.png",
+   //       "imgs/noise2.png",
+   //       "imgs/noise3.png",
+   //       "imgs/noise4.png",
+   //    ];
+   //    let i = 0;
+
+   //    const interval = setInterval(() => {
+   //       i = (i + 1) % textures.length;
+   //       node.style.backgroundImage = `url('${textures[i]}')`;
+   //    }, 100);
+
+   //    return () => clearInterval(interval);
+   // }, []);
+
    // TODO: Implement Smooth Scroller
    // Smooth Scroller
    // useEffect(() => {
@@ -180,9 +202,22 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 
    return (
       <div>
+         {/* Noise Background */}
+         <div
+            ref={bgRef}
+            className="fixed inset-[-50%] w-[200vw] h-[200vh] pointer-events-none z-10 bg-faded-5"
+            aria-hidden="true"
+            style={{
+               backgroundImage: 'url("/imgs/noise-transparent.png")',
+               backgroundRepeat: "repeat",
+               animation: "bg-animation .2s infinite",
+               opacity: 0.5,
+               // mixBlendMode: "overlay",
+            }}
+         />
          <div
             ref={panelsContainerRef}
-            className="gsap-panels-container flex gap-96 opacity-0"
+            className="gsap-panels-container relative flex gap-96 opacity-0"
          >
             {sections.map((section) => {
                return (
@@ -195,14 +230,8 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
                   </section>
                );
             })}
-            <div
-               className="gsap-texture absolute min-h-full min-w-full bg-faded-50 -z-5 opacity-50"
-               style={{
-                  backgroundImage: "url('imgs/background-fold.gif')",
-                  backgroundSize: "100%",
-                  backgroundRepeat: "no-repeat",
-               }}
-            ></div>
+
+            {/* BACKGROUND */}
          </div>
       </div>
    );
