@@ -10,15 +10,10 @@ import { useGSAP } from "@gsap/react";
 gsap.registerPlugin(useGSAP);
 
 import { AllData, NavLink } from "@/types";
-import {
-   HalftoneBackground,
-   StripedBackground,
-   PanelContent,
-} from "@/components";
+import { PanelContent } from "@/components";
 import { useWindowDimensions } from "@/hooks";
 import { animateSplitText } from "@/animations";
 import { panelsEnter } from "@/lib/animations";
-import StripedHorizontalBackground from "./stripedHorizontalBackground";
 
 type PanelDesktopProps = {
    data: AllData;
@@ -156,7 +151,7 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
                   ease: "none",
                });
             }, panelsContainerRef.current);
-         }, 400); // Delay routing functionality
+         }, 10); // Delay routing functionality
 
          return () => {
             ScrollTrigger.killAll();
@@ -184,7 +179,7 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
    // }, [panelsContainerRef.current])
 
    return (
-      <main>
+      <div>
          <div
             ref={panelsContainerRef}
             className="gsap-panels-container flex gap-96 opacity-0"
@@ -200,9 +195,15 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
                   </section>
                );
             })}
+            <div
+               className="gsap-texture absolute min-h-full min-w-full bg-faded-50 -z-5 opacity-50"
+               style={{
+                  backgroundImage: "url('imgs/background-fold.gif')",
+                  backgroundSize: "100%",
+                  backgroundRepeat: "no-repeat",
+               }}
+            ></div>
          </div>
-
-         {/* <HalftoneBackground /> */}
-      </main>
+      </div>
    );
 }
