@@ -34,9 +34,6 @@ export async function getAboutPage(): Promise<AboutPage> {
          "imageRef": image.image.asset._ref,
          "imageAlt": image.imageAlt
       },
-      "imageTexture": {
-         "imageRef": image.image.asset._ref,
-         },      
       content1,
       content2,
       metadataTitle,
@@ -110,9 +107,6 @@ export async function getPortfolioItems(
          "imageHeight": image.image.asset->metadata.dimensions.height,
          "imageRef": image.image.asset._ref
          },
-      "imageTexture": {
-         "imageRef": imageTexture.image.asset._ref,
-         },
       title,
    }`,
       { section },
@@ -137,9 +131,6 @@ export async function getProject(
          "imageAlt": image.imageAlt,
          "imageWidth": image.image.asset->metadata.dimensions.width,
          "imageHeight": image.image.asset->metadata.dimensions.height,
-         },
-      "imageTexture": {
-         "imageRef": image.image.asset._ref,
          },
       info,
       description,

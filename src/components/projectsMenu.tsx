@@ -5,7 +5,7 @@ import { useGSAP } from "@gsap/react";
 import { PortfolioItem } from "@/types";
 import { MouseFollower, ProjectCard } from "@/components";
 import { useWindowDimensions } from "@/hooks";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { carouselLoop } from "@/lib/animations";
 import { ButtonsCarousel } from "@/components/buttons";
 
@@ -38,8 +38,14 @@ export default function ProjectsMenu({
          !outerContainerRef.current ||
          !cardsContainerRef.current ||
          width > 1024
-      )
+      ) {
+         setTimelineReady(false);
+         if (tlRef.current) {
+            tlRef.current.kill();
+            tlRef.current = null;
+         }
          return;
+      }
 
       const wrapper = outerContainerRef.current;
       const cards = Array.from(cardsContainerRef.current.children);
@@ -48,7 +54,7 @@ export default function ProjectsMenu({
          cards,
          {
             paused: true,
-            paddingRight: 32,
+            paddingRight: 16,
             draggable: true,
             speed: 0.5,
          },
@@ -64,13 +70,13 @@ export default function ProjectsMenu({
          ref={outerContainerRef}
          id="projects-menu"
          className={
-            "gsap-projects-menu relative w-full h-96 lg:h-72 overflow-x-visible lg:w-fit pb-32 lg:pb-8 lg:pt-8 lg:border-b border-t border-faded bg-primary z-10"
+            "gsap-projects-menu relative w-full h-[52svh] lg:h-72 overflow-x-visible lg:w-fit pb-32 lg:pb-8 lg:pt-8 lg:border-b border-t border-faded bg-primary z-10"
          }
       >
          {/* TODO: Make this work <MouseFollower isHovering={hoveredCard !== null} variant="big" /> */}
          <div
             ref={cardsContainerRef}
-            className="relative w-fit h-full flex items-start justify-start gap-16 lg:gap-32 px-4 lg:px-8 py-8 lg:pt-0 lg:pb-4 mt-16 lg:mt-0"
+            className="relative w-fit h-full flex items-start justify-start gap-8 lg:gap-32 px-4 lg:px-8 py-8 lg:pt-0 lg:pb-4 mt-16 lg:mt-0"
          >
             {projects?.map((project: PortfolioItem, index) => {
                return (
@@ -81,7 +87,6 @@ export default function ProjectsMenu({
                         section,
                         title: project.title,
                         image: project.image,
-                        imageTexture: project.imageTexture,
                         slug: project.slug,
                         index,
                         isMobile: width < 1024,

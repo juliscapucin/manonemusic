@@ -4,7 +4,3 @@ export type ImageField = {
    imageWidth: number;
    imageHeight: number;
 };
-
-export type ImageTexture = {
-   imageRef: string;
-};

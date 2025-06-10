@@ -1,37 +1,42 @@
-"use client"
+"use client";
 
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react";
 
 export default function useWindowDimensions() {
-	const [width, setWidth] = useState(0)
-	const [height, setHeight] = useState(0)
-	const [windowAspectRatio, setWindowAspectRatio] = useState("")
-	const [isMobile, setIsMobile] = useState<boolean | null>(null)
+   const getWindowWidth = () =>
+      typeof window !== "undefined" ? window.innerWidth : 0;
+   const getWindowHeight = () =>
+      typeof window !== "undefined" ? window.innerHeight : 0;
 
-	useEffect(() => {
-		if (typeof window === "undefined") return
+   const [width, setWidth] = useState(getWindowWidth());
+   const [height, setHeight] = useState(getWindowHeight());
+   const [windowAspectRatio, setWindowAspectRatio] = useState("");
+   const [isMobile, setIsMobile] = useState<boolean | null>(null);
 
-		const listener = () => {
-			setWidth(window.innerWidth)
-			setHeight(window.innerHeight)
-			setWindowAspectRatio(
-				window.innerWidth > window.innerHeight ? "landscape" : "portrait"
-			)
-			setIsMobile(window.innerWidth <= 768)
-		}
-		listener()
+   useEffect(() => {
+      if (typeof window === "undefined") return;
 
-		window.addEventListener("resize", listener)
+      const listener = () => {
+         setWidth(window.innerWidth);
+         setHeight(window.innerHeight);
+         setWindowAspectRatio(
+            window.innerWidth > window.innerHeight ? "landscape" : "portrait",
+         );
+         setIsMobile(window.innerWidth <= 768);
+      };
+      listener();
 
-		return () => {
-			window.removeEventListener("resize", listener)
-		}
-	}, [])
+      window.addEventListener("resize", listener);
 
-	return {
-		width,
-		height,
-		windowAspectRatio,
-		isMobile,
-	}
+      return () => {
+         window.removeEventListener("resize", listener);
+      };
+   }, []);
+
+   return {
+      width,
+      height,
+      windowAspectRatio,
+      isMobile,
+   };
 }

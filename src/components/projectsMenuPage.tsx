@@ -49,7 +49,6 @@ export default function ProjectsMenuPage({
                      key={project.slug}
                      title={project.title}
                      image={project.image}
-                     imageTexture={project.imageTexture}
                      slug={project.slug}
                      handleCardHover={null}
                      hoveredCard={null}
@@ -74,7 +73,6 @@ export default function ProjectsMenuPage({
                      key={project.slug}
                      title={project.title}
                      image={project.image}
-                     imageTexture={project.imageTexture}
                      slug={project.slug}
                      handleCardHover={null}
                      hoveredCard={null}

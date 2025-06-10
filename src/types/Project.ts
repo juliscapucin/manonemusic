@@ -1,5 +1,5 @@
 import { PortableTextBlock } from "next-sanity";
-import { ImageField, ImageTexture } from "./Image";
+import { ImageField } from "./Image";
 import { Track } from "./Track";
 
 export type Project = {
@@ -11,7 +11,6 @@ export type Project = {
    releaseDate?: string;
    info?: string;
    image: ImageField;
-   imageTexture: ImageTexture;
    description?: PortableTextBlock[];
    projectLink?: string;
    releaseLink?: string;

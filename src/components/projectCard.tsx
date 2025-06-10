@@ -7,7 +7,7 @@ import Image from "next/image";
 import gsap from "gsap";
 
 import { projectExit, panelsExit } from "@/lib/animations";
-import { ImageField, ImageTexture } from "@/types/Image";
+import { ImageField } from "@/types/Image";
 
 import { CustomButton } from "@/components/ui";
 
@@ -20,7 +20,6 @@ type ProjectCardProps = {
    section: string;
    title: string;
    image: ImageField;
-   imageTexture: ImageTexture;
    slug: string;
    index: number;
    handleCardHover: ((arg: number | null) => void) | null;
@@ -32,7 +31,6 @@ export default function ProjectCard({
    section,
    title,
    image,
-   imageTexture,
    slug,
    index,
    handleCardHover,
@@ -41,7 +39,7 @@ export default function ProjectCard({
    const router = useRouter();
    const pathname = usePathname();
 
-   const imageTextureRef = useRef<HTMLDivElement>(null);
+   const imageOverlayRef = useRef<HTMLDivElement>(null);
    const labelRef = useRef<HTMLParagraphElement>(null);
 
    const aspectRatio = image.imageWidth / image.imageHeight;
@@ -81,9 +79,9 @@ export default function ProjectCard({
    // REVEAL ANIMATION
    useGSAP(
       () => {
-         if (!imageTextureRef.current) return;
+         if (!imageOverlayRef.current) return;
 
-         gsap.to(imageTextureRef.current, {
+         gsap.to(imageOverlayRef.current, {
             clipPath: isCardHovered
                ? "polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)"
                : "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
@@ -116,22 +114,10 @@ export default function ProjectCard({
       >
          {image?.imageRef && (
             <div
-               className={`rounded-sm pointer-events-none w-full overflow-clip group-hover:scale-105 origin-bottom transition-all duration-300 ${(!isCardHovered && typeof hoveredCard === "number") || (variant === "page" && !pathname.includes(slug)) ? "" : ""}`} //TODO: Remove after publishing
+               className={`rounded-sm pointer-events-none w-full overflow-clip lg:group-hover:scale-105 origin-bottom transition-all duration-300 ${(!isCardHovered && typeof hoveredCard === "number") || (variant === "page" && !pathname.includes(slug)) ? "" : ""}`} //TODO: Remove after publishing
                role="img"
                aria-label={image.imageAlt}
             >
-               {/* TEXTURE */}
-               {/* {imageTexture && imageTexture.imageRef && (
-                  <Image
-                     className="relative h-full w-full object-cover rounded-sm"
-                     src={urlFor(imageTexture.imageRef).url()} // generate url from ref to avoid unnecessary calls on server
-                     alt={image.imageAlt}
-                     width={image.imageWidth}
-                     height={image.imageHeight}
-                     sizes="30vw"
-                  />
-               )} */}
-
                {/* IMAGE */}
                <div>
                   <Image
@@ -151,7 +137,7 @@ export default function ProjectCard({
                   style={{
                      clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
                   }}
-                  ref={imageTextureRef}
+                  ref={imageOverlayRef}
                ></div>
             </div>
          )}

@@ -31,7 +31,7 @@ export default function AutoGrid() {
                      i !== columns - 1 ? "border-r border-faded" : ""
                   }`}
                >
-                  <div className="w-full h-full bg-faded-70 transition-transform duration-500 -translate-y-[92%] group-hover:translate-y-0 mix-blend-plus-lighter"></div>
+                  <div className="w-full h-full bg-faded-70 transition-transform duration-500 -translate-y-[96%] lg:-translate-y-[92%] group-hover:translate-y-0 mix-blend-plus-lighter"></div>
                </div>
             ))}
          </div>

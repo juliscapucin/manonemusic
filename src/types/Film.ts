@@ -1,4 +1,4 @@
-import { ImageField, ImageTexture } from "./Image";
+import { ImageField } from "./Image";
 
 export type Film = {
    title: string;
@@ -8,7 +8,6 @@ export type Film = {
    };
    info?: string;
    image: ImageField;
-   imageTexture: ImageTexture;
    description?: string;
    projectLink?: string;
    projectVideo?: string;

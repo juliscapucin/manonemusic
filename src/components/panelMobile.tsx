@@ -11,8 +11,6 @@ import { useLayoutEffect } from "react";
 export default function PanelMobile({ data }: { data: AllData }) {
    const pathname = usePathname();
 
-   const fullHeightSections = ["/", "contact"];
-
    useLayoutEffect(() => {
       gsap.registerPlugin(ScrollToPlugin);
 
@@ -30,19 +28,19 @@ export default function PanelMobile({ data }: { data: AllData }) {
       gsap.to(window, {
          scrollTo: {
             y: `#panel-${pathname.split("/")[1]}`,
-            // offsetY: 20,
+            offsetY: 50,
          },
          duration: 0.5,
       });
    }, [pathname]);
 
    return (
-      <div className="lg:hidden">
-         {data.headerNavLinks.map((section, index) => (
+      <div className="lg:hidden space-y-32">
+         {data.headerNavLinks.map((section) => (
             <section
                id={`panel-${section.slug === "/" ? "home" : section.slug}`}
                data-id={`panel-${section.slug}`}
-               className={`panel w-screen overflow-x-clip ${fullHeightSections.includes(section.slug) ? "h-svh" : "h-auto"}`}
+               className="panel w-screen overflow-x-clip"
                key={`panel-${section.slug}`}
             >
                <PanelContent data={data} section={section.slug} />

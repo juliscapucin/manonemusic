@@ -54,33 +54,28 @@ export default function MenuMobile({ navLinks }: NavLinksProps) {
                      {navLinks.map((link) => {
                         return (
                            <div
-                              className={`relative w-full flex justify-center`}
+                              className="relative w-full flex justify-center"
                               key={link.slug}
                            >
-                              {/* Inactive Link */}
-                              {(pathname === "/" && link.slug === "/") ||
-                              pathname.includes(`/${link.slug}`) ? (
-                                 <span className="font-headline text-headlineMedium sm:text-headlineLarge uppercase text-faded-30 opacity-70">
+                              <button
+                                 className="block disabled:opacity-30"
+                                 onClick={() =>
+                                    animateMobileMenu(
+                                       mobileMenuRef.current,
+                                       () => {
+                                          router.push(`/${link.slug}`);
+                                       },
+                                    )
+                                 }
+                                 disabled={
+                                    (pathname === "/" && link.slug === "/") ||
+                                    pathname.includes(`/${link.slug}`)
+                                 }
+                              >
+                                 <span className="font-headline text-headlineMedium sm:text-headlineLarge uppercase text-secondary">
                                     {link.title}
                                  </span>
-                              ) : (
-                                 // Active Link
-                                 <button
-                                    className="block"
-                                    onClick={() =>
-                                       animateMobileMenu(
-                                          mobileMenuRef.current,
-                                          () => {
-                                             router.push(`/${link.slug}`);
-                                          },
-                                       )
-                                    }
-                                 >
-                                    <span className="font-headline text-headlineMedium sm:text-headlineLarge uppercase text-secondary">
-                                       {link.title}
-                                    </span>
-                                 </button>
-                              )}
+                              </button>
                            </div>
                         );
                      })}
