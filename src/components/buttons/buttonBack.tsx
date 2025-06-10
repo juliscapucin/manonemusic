@@ -15,7 +15,7 @@ export default function ButtonBack({ slug }: ButtonBackProps) {
 
    return (
       <CustomButton
-         classes="mb-8 flex gap-4 items-center border-b border-faded w-full pl-8 pb-4"
+         classes="absolute mb-8 flex gap-4 items-center border-b border-faded w-full pl-4 lg:pl-8 pb-4 bg-primary z-15"
          transitionOnClick={() =>
             transitionOnClickBack(() => router.push(`/${slug}`))
          }

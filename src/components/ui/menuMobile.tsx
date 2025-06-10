@@ -22,7 +22,7 @@ export default function MenuMobile({ navLinks }: NavLinksProps) {
       <>
          {navLinks && (
             <div className="fixed top-0 right-0 left-0 block lg:hidden h-dvh z-mobile pointer-events-none">
-               <div className="absolute max-w-full top-4 right-4 flex justify-end items-center z-burger pointer-events-auto">
+               <div className="absolute w-full top-0 pr-4 flex justify-end items-center z-burger pointer-events-auto border-b border-faded bg-primary">
                   {/* BURGER BUTTON */}
                   <ButtonBurger
                      action={(e) => {

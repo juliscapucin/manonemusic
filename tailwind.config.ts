@@ -62,6 +62,7 @@ const config: Config = {
             header: "1000",
             burger: "2000",
             mobile: "2500",
+            noise: "3000",
          },
          letterSpacing: { tightest: "-.075em" },
          lineHeight: { tightest: "0.1" },

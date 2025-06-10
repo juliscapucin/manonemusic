@@ -1,6 +1,6 @@
 "use client";
 
-import AutoGrid from "../autoGrid";
+import { AutoGrid } from "@/components";
 
 type SectionWrapperProps = {
    children: React.ReactNode;

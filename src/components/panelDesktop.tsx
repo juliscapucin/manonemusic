@@ -22,7 +22,6 @@ type PanelDesktopProps = {
 
 export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
    const panelsContainerRef = useRef<HTMLDivElement | null>(null);
-   const bgRef = useRef<HTMLDivElement | null>(null);
    const [tween, setTween] = useState<gsap.core.Tween | null>(null);
    const { width } = useWindowDimensions();
 
@@ -181,19 +180,6 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 
    return (
       <div>
-         {/* Noise Background */}
-         <div
-            ref={bgRef}
-            className="fixed inset-[-50%] w-[200vw] h-[200vh] pointer-events-none z-header bg-faded-5"
-            aria-hidden="true"
-            style={{
-               backgroundImage: 'url("/imgs/noise-transparent.png")',
-               backgroundRepeat: "repeat",
-               animation: "bg-animation .2s infinite",
-               opacity: 0.5,
-               // mixBlendMode: "overlay",
-            }}
-         />
          <div
             ref={panelsContainerRef}
             className="gsap-panels-container relative flex gap-96 opacity-0"

@@ -1,8 +1,10 @@
+import AutoGrid from "./autoGrid";
 import Availability from "./availability";
 import Copyright from "./copyright";
 import Credits from "./credits";
 import HalftoneBackground from "./halftoneBackground";
 import MouseFollower from "./mouseFollower";
+import NoiseBackground from "./noiseBackground";
 import PanelContent from "./panelContent";
 import PanelDesktop from "./panelDesktop";
 import PanelMobile from "./panelMobile";
@@ -21,11 +23,13 @@ import PlayerTrack from "./playerTrack";
 import PlayerTrackList from "./playerTrackList";
 
 export {
+   AutoGrid,
    Availability,
    Copyright,
    Credits,
    HalftoneBackground,
    MouseFollower,
+   NoiseBackground,
    PanelContent,
    PanelDesktop,
    PanelMobile,

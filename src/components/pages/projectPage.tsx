@@ -7,9 +7,10 @@ import gsap from "gsap";
 import { PageWrapper, TitleHeadline } from "@/components/ui";
 import { Project } from "@/types";
 import { ButtonBack } from "@/components/buttons";
-import { ProjectPageContent, ProjectTrailer } from "@/components";
+import { AutoGrid, ProjectPageContent, ProjectTrailer } from "@/components";
 import { useTransitionOnEnter } from "@/hooks";
 import { useGSAP } from "@gsap/react";
+import { usePathname } from "next/navigation";
 
 type ProjectPageProps = {
    projectPageData: Project;
@@ -23,6 +24,7 @@ export default function ProjectPage({
    const [isTrailerActive, setIsTrailerActive] = useState(false);
    const [isPageDisplaced, setIsPageDisplaced] = useState(false);
    const pageWrapperRef = useRef<HTMLDivElement>(null);
+   const pathname = usePathname();
 
    useTransitionOnEnter();
 
@@ -47,25 +49,29 @@ export default function ProjectPage({
    }, [isPageDisplaced, pageWrapperRef]);
 
    return (
-      <div className="relative w-screen h-screen bg-primary overflow-hidden">
+      <div className="relative w-screen h-screen bg-primary overflow-hidden pl-4 lg:px-0">
          <PageWrapper ref={pageWrapperRef}>
             {/* Project Page */}
-            <div className="gsap-project-page opacity-0">
+            <div className="gsap-project-page opacity-0 mr-4 pt-4 border-l border-r border-faded pb-8">
                <ButtonBack slug={section} />
-               <div className="pl-8">
+               <div className="px-4 lg:px-8 mt-16">
+                  <AutoGrid />
                   <TitleHeadline>{projectPageData.title}</TitleHeadline>
+
+                  {/* RENDER RELEASE DATE ONLY ON RELEASES */}
                   <div className="gsap-project-content mt-4">
-                     {projectPageData.releaseDate && (
-                        <p>
-                           Released{" "}
-                           {new Date(
-                              projectPageData.releaseDate,
-                           ).toLocaleDateString("en-US", {
-                              month: "long",
-                              year: "numeric",
-                           })}
-                        </p>
-                     )}
+                     {pathname.includes("releases") &&
+                        projectPageData.releaseDate && (
+                           <p>
+                              Released{" "}
+                              {new Date(
+                                 projectPageData.releaseDate,
+                              ).toLocaleDateString("en-US", {
+                                 month: "long",
+                                 year: "numeric",
+                              })}
+                           </p>
+                        )}
                      {projectPageData.info && <p>{projectPageData.info}</p>}
                   </div>
                </div>

@@ -21,7 +21,8 @@ export default function ProjectPageContent({
    setIsPageDisplaced,
 }: ProjectPageContentProps) {
    return (
-      <div className="gsap-project-page-content relative w-full flex flex-col lg:flex-row items-start gap-8 mt-8 pt-8 pl-8 border-t border-faded">
+      <div className="gsap-project-page-content relative w-full lg:flex lg:flex-row items-start gap-8 mt-8 lg:pt-8 lg:px-8 border-t border-faded bg-primary">
+         {/* IMAGE */}
          <div className="gsap-project-image relative w-full lg:w-1/4 min-w-[300px] opacity-0">
             <ImageWithSpinner
                quality={70}
@@ -33,7 +34,9 @@ export default function ProjectPageContent({
                }}
             />
          </div>
-         <div className="mt-2 pr-8 flex-1 max-w-prose">
+
+         {/* CONTENT */}
+         <div className="mt-2 px-4 lg:px-0 lg:flex-1 max-w-prose">
             {tracklist && <PlayerTrackList tracks={tracklist} />}
             {description && <TextBlock text={description} />}
 
