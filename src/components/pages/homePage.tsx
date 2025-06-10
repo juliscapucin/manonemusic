@@ -14,13 +14,12 @@ import {
 } from "@/components/ui";
 
 import type { HomePage } from "@/types";
-import { BlockContent } from "@/types/BlockContent";
 
 type HomePageProps = {
-   content: BlockContent[];
+   subtitle: string;
 };
 
-export default function HomePage({ content }: HomePageProps) {
+export default function HomePage({ subtitle }: HomePageProps) {
    const titleHomeRef = useRef(null);
 
    return (
@@ -28,18 +27,17 @@ export default function HomePage({ content }: HomePageProps) {
          <div className="mx-4 lg:mx-8 h-full flex flex-col justify-between">
             <div ref={titleHomeRef} className="gsap-section-title mt-2 lg:mt-0">
                <Logo />
-               <TextBlock
-                  text={content}
-                  classes="*:text-displayLarge text-balance max-w-[60%] lg:max-w-[400px] mb-16 lg:mb-0"
-               />
+               <h2 className="text-titleLarge text-balance max-w-[60%] lg:max-w-[400px] mt-2">
+                  {subtitle}
+               </h2>
             </div>
 
             <div className="flex items-end">
                <Status location={location} />
 
-               <div className="text-right">
+               <div>
                   <p>[Selected works]</p>
-                  <Copyright alignRight={true} />
+                  <Copyright />
                </div>
             </div>
          </div>

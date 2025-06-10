@@ -23,9 +23,6 @@ export default function ProjectsPage({
       projectsPageData &&
       projects && (
          <SectionWrapper>
-            {projectsPageData.subtitle && (
-               <Subtitle subtitle={projectsPageData.subtitle} />
-            )}
             <TitleDisplay ref={titleRef}>{projectsPageData.title}</TitleDisplay>
             {projects && projectsPageData.title && (
                <ProjectsMenu

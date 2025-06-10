@@ -12,12 +12,11 @@ const homePageSchema = {
          validation: (Rule: Rule) => Rule.required().error("Title is required"),
       },
       {
-         name: "content",
-         title: "Content (required)",
-         type: "array",
-         of: [{ type: "block" }],
+         name: "subtitle",
+         title: "Subtitle",
+         type: "string",
          validation: (Rule: Rule) =>
-            Rule.required().error("Content is required"),
+            Rule.required().error("Subtitle is required"),
       },
       { name: "metadataTitle", title: "Metadata Title", type: "string" },
       {

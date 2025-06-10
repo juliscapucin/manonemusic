@@ -82,15 +82,13 @@ function Status({ location }: StatusProps) {
       time && (
          <div
             ref={statusWrapperRef}
-            className={`flex flex-col w-1/2 text-titleSmall md:text-titleMedium lg:text-titleLarge overflow-clip uppercase ${statusWrapperRef.current ? "opacity-1" : "opacity-0"}`}
+            className={`flex flex-col w-1/2 *:text-bodyMedium *:lg:text-bodyLarge overflow-clip uppercase ${statusWrapperRef.current ? "opacity-1" : "opacity-0"}`}
          >
             <h2 className="gsap-line">{location}</h2>
-            <span className="gsap-line text-titleSmall md:text-titleMedium lg:text-titleLarge">
+            <span className="gsap-line">
                {day?.dayOfWeek} | {day?.dayOfMonth} {day?.month}
             </span>
-            <span className="gsap-line text-titleSmall md:text-titleMedium lg:text-titleLarge">
-               {time}
-            </span>
+            <span className="gsap-line">{time}</span>
          </div>
       )
    );

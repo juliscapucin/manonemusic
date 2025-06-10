@@ -9,7 +9,7 @@ export default function AutoGrid() {
    useEffect(() => {
       const updateGrid = () => {
          const containerWidth = containerRef.current?.offsetWidth || 0;
-         const colCount = Math.floor(containerWidth / 30);
+         const colCount = Math.floor(containerWidth / 60);
          setColumns(colCount - 1);
       };
 
@@ -27,11 +27,11 @@ export default function AutoGrid() {
             {Array.from({ length: columns }).map((_, i) => (
                <div
                   key={i}
-                  className={`relative flex-1 min-w-[30px] h-full group overflow-clip ${
+                  className={`relative flex-1 min-w-[60px] h-full group overflow-clip ${
                      i !== columns - 1 ? "border-r border-faded" : ""
                   }`}
                >
-                  <div className="w-full h-full bg-faded-70 transition-transform duration-500 -translate-y-[92%] group-hover:translate-y-0"></div>
+                  <div className="w-full h-full bg-faded-70 transition-transform duration-500 -translate-y-[92%] group-hover:translate-y-0 mix-blend-plus-lighter"></div>
                </div>
             ))}
          </div>

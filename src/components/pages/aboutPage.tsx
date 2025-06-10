@@ -29,7 +29,7 @@ export default function AboutPage({
    return (
       <SectionWrapper classes="w-full">
          <TitleDisplay ref={titleAboutRef}>{title}</TitleDisplay>
-         <div className="relative w-full lg:flex items-start *:flex-1 gap-8 lg:px-8 lg:pt-8 lg:h-72 bg-primary border-t border-faded">
+         <div className="relative w-full lg:flex items-start *:flex-1 gap-8 lg:px-8 lg:pt-8 lg:h-72 bg-primary border-t border-faded z-5">
             {/* Image Block */}
             {image && (
                <div className="relative lg:block w-full aspect-square rounded-sm overflow-clip">
