@@ -29,10 +29,11 @@ export default function Header({ navLinks, variant = "section" }: HeaderProps) {
 
    return (
       <header>
-         <nav className="hidden lg:flex fixed top-0 right-0 left-0 px-8 py-4 justify-between bg-primary border border-faded-10 z-header">
+         <nav className="hidden lg:flex fixed top-0 right-0 left-0 px-8 py-4 justify-between bg-primary border-b border-faded z-header overflow-clip">
+            {/* LOGO */}
             <CustomButton
                link="/"
-               classes={`underlined-link text-titleSmall md:text-titleMedium uppercase font-medium transition ${pathname === "/" ? "opacity-0 -translate-x-full" : "opacity-100"}`}
+               classes={`underlined-link text-titleSmall md:text-titleMedium uppercase transition-transform ${pathname === "/" ? "-translate-x-[150%]" : "translate-x-0"}`}
                transitionOnClick={
                   variant === "section"
                      ? () => handlePanelSlide("/") // if in first level, slide to home
@@ -42,6 +43,7 @@ export default function Header({ navLinks, variant = "section" }: HeaderProps) {
                MAN/ONE MUSIC
             </CustomButton>
 
+            {/* NAVLINKS */}
             <div className="hidden lg:flex gap-8">
                {navLinks.map(
                   (link, index) =>

@@ -38,7 +38,7 @@ export default function Heading({
       <Tag
          className={`${
             classes ? classes : ""
-         } ${headingStyles} leading-none tracking-tight font-extralight`}
+         } ${headingStyles} leading-none tracking-tight font-extralight text-faded-70`}
       >
          {children}
       </Tag>

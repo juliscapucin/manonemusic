@@ -1,3 +1,5 @@
 export default function Logo() {
-   return <h1 className="logo pointer-events-none">MAN/ONE MUSIC</h1>;
+   return (
+      <h1 className="logo pointer-events-none text-faded-70">MAN/ONE MUSIC</h1>
+   );
 }

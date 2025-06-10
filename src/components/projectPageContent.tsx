@@ -21,7 +21,7 @@ export default function ProjectPageContent({
    setIsPageDisplaced,
 }: ProjectPageContentProps) {
    return (
-      <div className="gsap-project-page-content relative w-full flex flex-col lg:flex-row items-start gap-8 mt-8 pt-8 pl-8 border-t border-faded-10">
+      <div className="gsap-project-page-content relative w-full flex flex-col lg:flex-row items-start gap-8 mt-8 pt-8 pl-8 border-t border-faded">
          <div className="gsap-project-image relative w-full lg:w-1/4 min-w-[300px] opacity-0">
             <ImageWithSpinner
                quality={70}

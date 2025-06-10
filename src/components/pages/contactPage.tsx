@@ -3,7 +3,7 @@
 import { useRef } from "react";
 
 import { Copyright, Credits, SocialLinks } from "@/components";
-import { SectionWrapper, Subtitle, TitleDisplay } from "@/components/ui";
+import { SectionWrapper, TitleDisplay } from "@/components/ui";
 import type { ContactPage } from "@/types";
 import ButtonEmail from "../buttons/buttonEmail";
 
@@ -11,7 +11,6 @@ type ContactPageProps = ContactPage;
 
 export default function ContactPage({
    title,
-   subtitle,
    email,
    socials,
 }: ContactPageProps) {
@@ -19,9 +18,8 @@ export default function ContactPage({
 
    return (
       <SectionWrapper classes="lg:w-full">
-         {subtitle && <Subtitle subtitle={subtitle} />}
          <TitleDisplay ref={titleContactRef}>{title}</TitleDisplay>
-         <div className="lg:h-80 w-full flex flex-col-reverse lg:flex-row gap-16 *:flex-1 px-8">
+         <div className="relative lg:h-72 w-full flex flex-col-reverse lg:flex-row gap-16 *:flex-1 px-8 lg:pb-8 border-t border-b border-faded bg-primary">
             <div className="lg:self-end">
                <Copyright />
                <Credits />

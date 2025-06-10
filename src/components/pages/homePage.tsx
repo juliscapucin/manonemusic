@@ -24,25 +24,23 @@ export default function HomePage({ content }: HomePageProps) {
    const titleHomeRef = useRef(null);
 
    return (
-      <SectionWrapper classes="h-full lg:pt-20 lg:pb-40">
-         <div
-            ref={titleHomeRef}
-            className="gsap-section-title mt-2 mx-8 lg:mt-0 opacity-90"
-         >
-            <Logo />
-         </div>
+      <SectionWrapper classes="h-full lg:pt-20 lg:pb-20">
+         <div className="mx-4 lg:mx-8 h-full flex flex-col justify-between">
+            <div ref={titleHomeRef} className="gsap-section-title mt-2 lg:mt-0">
+               <Logo />
+               <TextBlock
+                  text={content}
+                  classes="*:text-displayLarge text-balance max-w-[60%] lg:max-w-[400px] mb-16 lg:mb-0"
+               />
+            </div>
 
-         <div className="mt-8 px-8 w-full flex flex-col justify-between lg:flex-row gap-16 *:lg:flex-1">
-            <TextBlock
-               text={content}
-               classes="*:text-titleLarge text-balance max-w-[60%] lg:max-w-[400px] mb-16 lg:mb-0"
-            />
+            <div className="flex items-end">
+               <Status location={location} />
 
-            <Status location={location} />
-
-            <div className="flex flex-col justify-end lg:h-80 text-right">
-               <p>[Selected works]</p>
-               <Copyright alignRight={true} />
+               <div className="text-right">
+                  <p>[Selected works]</p>
+                  <Copyright alignRight={true} />
+               </div>
             </div>
          </div>
       </SectionWrapper>

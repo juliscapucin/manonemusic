@@ -22,15 +22,17 @@ export default function AutoGrid() {
       <div className="autogrid absolute inset-0 min-w-full min-h-full">
          <div
             ref={containerRef}
-            className="absolute top-8 w-full h-[50vh] flex border-y border-faded-10"
+            className="absolute top-8 w-full h-[50vh] flex border-y border-faded"
          >
             {Array.from({ length: columns }).map((_, i) => (
                <div
                   key={i}
-                  className={`flex-1 min-w-[30px] h-full transition-colors duration-300 hover:bg-secondary ${
-                     i !== columns - 1 ? "border-r border-faded-10" : ""
+                  className={`relative flex-1 min-w-[30px] h-full group overflow-clip ${
+                     i !== columns - 1 ? "border-r border-faded" : ""
                   }`}
-               ></div>
+               >
+                  <div className="w-full h-full bg-faded-70 transition-transform duration-500 -translate-y-[92%] group-hover:translate-y-0"></div>
+               </div>
             ))}
          </div>
       </div>
