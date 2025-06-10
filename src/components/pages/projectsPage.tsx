@@ -22,7 +22,7 @@ export default function ProjectsPage({
    return (
       projectsPageData &&
       projects && (
-         <SectionWrapper>
+         <SectionWrapper classes="h-[60svh]">
             <TitleDisplay ref={titleRef}>{projectsPageData.title}</TitleDisplay>
             {projects && projectsPageData.title && (
                <ProjectsMenu

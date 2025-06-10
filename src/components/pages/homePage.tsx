@@ -23,7 +23,7 @@ export default function HomePage({ subtitle }: HomePageProps) {
    const titleHomeRef = useRef(null);
 
    return (
-      <SectionWrapper classes="h-full lg:pt-20 lg:pb-20">
+      <SectionWrapper classes="h-[90svh] lg:pt-20 lg:pb-20">
          <div className="mx-4 lg:mx-8 h-full flex flex-col justify-between">
             <div ref={titleHomeRef} className="gsap-section-title mt-2 lg:mt-0">
                <Logo />

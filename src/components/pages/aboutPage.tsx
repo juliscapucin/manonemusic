@@ -27,12 +27,12 @@ export default function AboutPage({
    const titleAboutRef = useRef(null);
 
    return (
-      <SectionWrapper classes="w-full">
+      <SectionWrapper classes="w-full h-fit">
          <TitleDisplay ref={titleAboutRef}>{title}</TitleDisplay>
-         <div className="relative w-full lg:flex items-start *:flex-1 gap-8 lg:px-8 lg:pt-8 lg:h-72 bg-primary border-t border-faded z-5">
+         <div className="relative w-full lg:flex items-start *:flex-1 gap-8 px-4 lg:px-8 lg:pt-8 lg:h-72 bg-primary border-t border-faded z-5">
             {/* Image Block */}
             {image && (
-               <div className="relative lg:block w-full aspect-square rounded-sm overflow-clip">
+               <div className="relative lg:block w-full aspect-square rounded-sm overflow-clip mt-4 lg:mt-0">
                   <Image
                      {...{
                         src: urlFor(image.imageRef).url(), // generate url via _ref to save on api calls

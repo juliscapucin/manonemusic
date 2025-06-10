@@ -19,7 +19,7 @@ export default function ContactPage({
    return (
       <SectionWrapper classes="lg:w-full">
          <TitleDisplay ref={titleContactRef}>{title}</TitleDisplay>
-         <div className="relative lg:h-72 w-full flex flex-col-reverse lg:flex-row gap-16 *:flex-1 px-8 lg:pb-8 border-t border-b border-faded bg-primary z-5">
+         <div className="relative h-full lg:h-72 w-full flex flex-col-reverse gap-32 lg:flex-row lg:gap-16 *:flex-1 px-8 pb-8 border-t border-b border-faded bg-primary z-5">
             <div className="lg:self-end">
                <Copyright />
                <Credits />

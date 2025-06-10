@@ -64,13 +64,13 @@ export default function ProjectsMenu({
          ref={outerContainerRef}
          id="projects-menu"
          className={
-            "gsap-projects-menu relative w-full h-96 lg:h-72 overflow-x-visible lg:w-fit pb-16 lg:pb-8 lg:pt-8 border-b border-t border-faded bg-primary z-10"
+            "gsap-projects-menu relative w-full h-96 lg:h-72 overflow-x-visible lg:w-fit pb-32 lg:pb-8 lg:pt-8 lg:border-b border-t border-faded bg-primary z-10"
          }
       >
          {/* TODO: Make this work <MouseFollower isHovering={hoveredCard !== null} variant="big" /> */}
          <div
             ref={cardsContainerRef}
-            className="relative w-fit h-full flex items-start justify-start gap-16 lg:gap-32 px-4 lg:px-8 py-8 lg:pt-0 lg:pb-4"
+            className="relative w-fit h-full flex items-start justify-start gap-16 lg:gap-32 px-4 lg:px-8 py-8 lg:pt-0 lg:pb-4 mt-16 lg:mt-0"
          >
             {projects?.map((project: PortfolioItem, index) => {
                return (
