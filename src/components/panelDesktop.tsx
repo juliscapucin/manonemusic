@@ -25,10 +25,10 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
    const [tween, setTween] = useState<gsap.core.Tween | null>(null);
    const { width } = useWindowDimensions();
 
+   // Smooth Scroll
    useLayoutEffect(() => {
       gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
 
-      // TODO: Implement Smooth Scroller
       ScrollSmoother.create({
          effects: true,
          smooth: 1,
@@ -41,14 +41,6 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
    useGSAP(() => {
       if (!panelsContainerRef.current) return;
       gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
-
-      // TODO: Implement Smooth Scroller
-      // ScrollSmoother.create({
-      //    effects: true,
-      //    smooth: 3,
-      //    normalizeScroll: true,
-      //    ease: "power3",
-      // });
 
       /* Panels */
       const container = panelsContainerRef.current;

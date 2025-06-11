@@ -14,6 +14,7 @@ import { CustomButton } from "@/components/ui";
 import { animateCardLabel } from "@/animations";
 import { urlFor } from "@/lib/sanityImageURL";
 import { useGSAP } from "@gsap/react";
+import { IconClose } from "./icons";
 
 type ProjectCardProps = {
    variant: "section" | "page";
@@ -22,7 +23,7 @@ type ProjectCardProps = {
    image: ImageField;
    slug: string;
    index: number;
-   handleCardHover: ((arg: number | null) => void) | null;
+   handleCardHover: (arg: number | null) => void;
    hoveredCard: number | null;
 };
 
@@ -100,11 +101,10 @@ export default function ProjectCard({
                : projectExit(() => router.push(`/${section}/${slug}`), false);
          }}
          onMouseEnter={() => {
-            if (variant === "section" && handleCardHover)
-               handleCardHover(index);
+            handleCardHover(index);
          }}
          onMouseLeave={() => {
-            if (variant === "section" && handleCardHover) handleCardHover(null);
+            handleCardHover(null);
          }}
          link={`/${section}/${slug}`}
          classes={`relative group block ${variant === "section" ? "min-w-40 lg:min-w-16 h-full w-fit" : `h-full w-fit lg:h-fit lg:w-32 ${pathname.includes(slug) && "pointer-events-none"}`}`}
@@ -112,9 +112,22 @@ export default function ProjectCard({
          aria-labelledby={`project-title-${slug}`}
          disabled={pathname.includes(slug)}
       >
+         {/* DISABLED OVERLAY */}
+         {pathname.includes(slug) && (
+            <>
+               <div className="absolute inset-0 overflow-clip border border-faded rounded-sm z-10">
+                  <div className="absolute top-0 h-[1px] w-[150%] bg-faded rotate-45 origin-top-left"></div>
+                  <div className="absolute top-0 right-0 h-[1px] w-[150%] bg-faded -rotate-45 origin-top-right"></div>
+               </div>
+
+               <div className="absolute inset-0 bg-primary opacity-70 rounded-sm z-5"></div>
+            </>
+         )}
+
+         {/* IMAGE */}
          {image?.imageRef && (
             <div
-               className={`rounded-sm pointer-events-none w-full overflow-clip lg:group-hover:scale-105 origin-bottom transition-all duration-300 ${(!isCardHovered && typeof hoveredCard === "number") || (variant === "page" && !pathname.includes(slug)) ? "" : ""}`} //TODO: Remove after publishing
+               className={`rounded-sm pointer-events-none w-full overflow-clip lg:group-hover:scale-105 origin-bottom transition-all duration-300`}
                role="img"
                aria-label={image.imageAlt}
             >

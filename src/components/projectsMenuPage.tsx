@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -18,6 +18,9 @@ export default function ProjectsMenuPage({
    pageData,
 }: ProjectsMenuPageProps) {
    const menuDesktopRef = useRef<HTMLDivElement>(null);
+   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+
+   const handleCardHover = (arg: number | null) => setHoveredCard(arg);
 
    // Enter animation
    useGSAP(
@@ -39,7 +42,7 @@ export default function ProjectsMenuPage({
    return (
       <>
          {/* Mobile */}
-         <aside className="fixed h-24 w-full bottom-0 flex gap-4 overflow-x-scroll z-10 lg:hidden p-4 bg-primary">
+         <aside className="fixed h-24 w-full bottom-0 flex gap-4 overflow-x-scroll border-t border-faded z-10 lg:hidden p-4 bg-primary">
             {projectsData?.map((project: PortfolioItem, index) => {
                return (
                   <ProjectCard
@@ -50,8 +53,8 @@ export default function ProjectsMenuPage({
                      title={project.title}
                      image={project.image}
                      slug={project.slug}
-                     handleCardHover={null}
-                     hoveredCard={null}
+                     handleCardHover={handleCardHover}
+                     hoveredCard={hoveredCard}
                   />
                );
             })}
@@ -61,7 +64,7 @@ export default function ProjectsMenuPage({
          <aside
             ref={menuDesktopRef}
             className={
-               "gsap-projects-menu-page hidden lg:flex fixed w-36 top-16 right-2 bottom-0 flex-col gap-4 overflow-y-scroll overflow-x-visible z-10 opacity-0 lg:opacity-100 border-l border-faded py-4 pl-4 bg-primary"
+               "gsap-projects-menu-page hidden lg:flex fixed w-[150px] top-16 right-4 bottom-0 flex-col gap-4 overflow-y-scroll overflow-x-visible z-10 opacity-0 lg:opacity-100 border-l border-faded py-4 pl-4 bg-primary"
             }
          >
             {projectsData?.map((project: PortfolioItem, index) => {
@@ -74,8 +77,8 @@ export default function ProjectsMenuPage({
                      title={project.title}
                      image={project.image}
                      slug={project.slug}
-                     handleCardHover={null}
-                     hoveredCard={null}
+                     handleCardHover={handleCardHover}
+                     hoveredCard={hoveredCard}
                   />
                );
             })}
