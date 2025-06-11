@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -25,17 +25,37 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
    const [tween, setTween] = useState<gsap.core.Tween | null>(null);
    const { width } = useWindowDimensions();
 
+   useLayoutEffect(() => {
+      gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
+
+      // TODO: Implement Smooth Scroller
+      ScrollSmoother.create({
+         effects: true,
+         smooth: 1,
+         normalizeScroll: true,
+         ease: "power3",
+      });
+   }, []);
+
    // Horizontal Panel animation
    useGSAP(() => {
       if (!panelsContainerRef.current) return;
-      gsap.registerPlugin(ScrollTrigger);
+      gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
+
+      // TODO: Implement Smooth Scroller
+      // ScrollSmoother.create({
+      //    effects: true,
+      //    smooth: 3,
+      //    normalizeScroll: true,
+      //    ease: "power3",
+      // });
 
       /* Panels */
       const container = panelsContainerRef.current;
-      const panels = gsap.utils.toArray(".gsap-panel");
 
-      const tweenRef = gsap.to(panels, {
+      const tweenRef = gsap.to(".gsap-panels-container", {
          x: () => -1 * (container.scrollWidth - innerWidth),
+         duration: 5,
          ease: "none",
          scrollTrigger: {
             trigger: container,
@@ -166,37 +186,27 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
       panelsEnter(panelsContainerRef.current as HTMLDivElement);
    }, [panelsContainerRef]);
 
-   // TODO: Implement Smooth Scroller
-   // Smooth Scroller
-   // useEffect(() => {
-   // 	if (!panelsContainerRef.current) return
-   // 	gsap.registerPlugin(ScrollSmoother)
-
-   // 	ScrollSmoother.create({
-   // 		smooth: 1,
-   // 		effects: true,
-   // 	})
-   // }, [panelsContainerRef.current])
-
    return (
-      <div>
-         <div
-            ref={panelsContainerRef}
-            className="gsap-panels-container relative flex gap-96 opacity-0"
-         >
-            {sections.map((section) => {
-               return (
-                  <section
-                     data-id={`panel-${section.slug === "/" ? "home" : section.slug}`}
-                     className="gsap-panel h-screen min-h-full px-8 min-w-fit w-fit"
-                     key={`panel-${section.slug}`}
-                  >
-                     <PanelContent data={data} section={section.slug} />
-                  </section>
-               );
-            })}
+      <div id="smooth-wrapper">
+         <div id="smooth-content">
+            <div
+               ref={panelsContainerRef}
+               className="gsap-panels-container relative flex gap-96 opacity-0"
+            >
+               {sections.map((section) => {
+                  return (
+                     <section
+                        data-id={`panel-${section.slug === "/" ? "home" : section.slug}`}
+                        className="gsap-panel h-screen min-h-full px-8 min-w-fit w-fit"
+                        key={`panel-${section.slug}`}
+                     >
+                        <PanelContent data={data} section={section.slug} />
+                     </section>
+                  );
+               })}
 
-            {/* BACKGROUND */}
+               {/* BACKGROUND */}
+            </div>
          </div>
       </div>
    );
