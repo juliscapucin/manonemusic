@@ -5,6 +5,7 @@ import gsap from "gsap";
 import { VideoPlayer } from "@/components/ui";
 import { Button } from "@/components/buttons";
 import { useLayoutEffect, useRef } from "react";
+import { IconChevron } from "@/components/icons";
 
 type ProjectTrailerProps = {
    videoUrl: string;
@@ -50,8 +51,12 @@ export default function ProjectTrailer({
          className={`fixed left-0 top-0 w-screen lg:h-screen lg:min-h-svh pt-16 pb-8 lg:pl-4 lg:pr-96 flex items-center justify-start overflow-clip translate-y-full  ${isTrailerActive ? "pointer-events-auto" : "pointer-events-none"}`}
       >
          <div className="relative w-screen h-screen pt-24 px-4">
-            <Button classes="mb-4" action={() => backToProject()}>
-               Back
+            <Button
+               classes="mb-4 flex items-center gap-4"
+               action={() => backToProject()}
+            >
+               <IconChevron direction="back" />
+               BACK
             </Button>
             <VideoPlayer src={videoUrl.split("/").pop() || ""} />
          </div>
