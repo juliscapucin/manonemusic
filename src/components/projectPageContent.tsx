@@ -1,9 +1,10 @@
-import Image from "next/image";
+"use client";
 
 import { Project } from "@/types";
 import { PlayerTrackList } from "@/components";
 import { Button, ButtonRounded } from "@/components/buttons";
 import { CustomLink, ImageWithSpinner, TextBlock } from "@/components/ui";
+import { usePathname } from "next/navigation";
 
 type ProjectPageContentProps = Project & {
    setIsTrailerActive: (value: boolean) => void;
@@ -20,6 +21,8 @@ export default function ProjectPageContent({
    setIsTrailerActive,
    setIsPageDisplaced,
 }: ProjectPageContentProps) {
+   const pathname = usePathname();
+
    return (
       <div className="gsap-project-page-content relative w-full md:flex md:flex-row items-start gap-8 mt-8 lg:pt-8 lg:px-8 border-t border-faded bg-primary">
          {/* IMAGE */}
@@ -50,7 +53,7 @@ export default function ProjectPageContent({
                         setIsPageDisplaced(true);
                      }}
                   >
-                     View Trailer
+                     View {pathname.includes("film") ? "Trailer" : "Video"}
                   </ButtonRounded>
                )}
                {projectLink && (

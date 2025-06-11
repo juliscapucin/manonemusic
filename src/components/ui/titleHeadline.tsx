@@ -11,7 +11,7 @@ type TitleProps = {
 export default function TitleHeadline({ children, classes, ref }: TitleProps) {
    return (
       <div
-         className={`gsap-projects-title gsap-project-content ${classes || ""}`}
+         className={`gsap-projects-title gsap-project-content mt-2 ${classes || ""}`}
          ref={ref}
       >
          <Heading
