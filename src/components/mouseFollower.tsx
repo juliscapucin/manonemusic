@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 
 import { IconChevron } from "@/components/icons";
+import { usePathname } from "next/navigation";
 
 type Props = {
    variant: "big" | "small";
@@ -14,24 +15,28 @@ export default function MouseFollower({ variant }: Props) {
    const refCursor = useRef<HTMLDivElement | null>(null);
    const [isActive, setIsActive] = useState(true);
    const activityTimeout = useRef<NodeJS.Timeout | null>(null);
+   const pathname = usePathname();
 
    // Shared activity handler (scroll or mousemove)
-   const triggerActivity = () => {
-      setIsActive(true);
+   const triggerActivity = (pathname: string) => {
+      setIsActive(pathname !== "/");
+
       if (activityTimeout.current) clearTimeout(activityTimeout.current);
       activityTimeout.current = setTimeout(() => {
          setIsActive(false);
-      }, 3000); // hide after 3s of inactivity
+      }, 3000); // show after 3s of inactivity
    };
 
    // Scroll detection
    useEffect(() => {
-      window.addEventListener("scroll", triggerActivity, { passive: true });
+      window.addEventListener("scroll", () => triggerActivity(pathname), {
+         passive: true,
+      });
       return () => {
-         window.removeEventListener("scroll", triggerActivity);
+         window.removeEventListener("scroll", () => triggerActivity(pathname));
          if (activityTimeout.current) clearTimeout(activityTimeout.current);
       };
-   }, []);
+   }, [pathname]);
 
    // Mouse movement detection
    useEffect(() => {
@@ -44,7 +49,7 @@ export default function MouseFollower({ variant }: Props) {
          const parentRect = cursorDiv.parentElement!.getBoundingClientRect();
          const relativeX = e.clientX - parentRect.left;
 
-         triggerActivity();
+         triggerActivity(pathname);
 
          gsap.to(cursorDiv, {
             x: relativeX,
@@ -59,12 +64,12 @@ export default function MouseFollower({ variant }: Props) {
       return () => {
          parent.removeEventListener("mousemove", moveCursor);
       };
-   }, [variant]);
+   }, [variant, pathname]);
 
    return (
       <div
          ref={refCursor}
-         className={`fixed top-0 left-0 rounded-full flex items-center justify-center z-15 pointer-events-none border transition-opacity duration-500
+         className={`fixed top-0 left-0 rounded-full flex items-center justify-center z-15 pointer-events-none border transition-opacity duration-700
             ${variant === "big" ? "w-40 h-40 bg-primary/30 border-secondary" : "w-24 h-24 bg-primary/30 border-secondary"}
             ${isActive ? "opacity-0" : "opacity-100"}`}
       >

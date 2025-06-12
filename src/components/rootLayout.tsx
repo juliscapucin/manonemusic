@@ -23,7 +23,10 @@ export default function RootLayout({
    const [rootTheme, setRootTheme] = useState<string>("dark");
    const { width } = useWindowDimensions();
    const pathname = usePathname();
-   const isTopLevelPath = pathname.split("/").filter(Boolean).length === 1;
+
+   const segments = pathname.split("/").filter(Boolean);
+   const isHome = pathname === "/";
+   const isTopLevelPath = isHome || segments.length === 1;
 
    useEffect(() => {
       const storageTheme = localStorage.getItem("theme");
