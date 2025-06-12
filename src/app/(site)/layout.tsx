@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
-import { NoiseBackground, RootLayout } from "@/components";
+import { MouseFollower, NoiseBackground, RootLayout } from "@/components";
 import { Cookies } from "@/components/ui";
 
 import { getCookiesData } from "@/sanity/sanity-queries";
@@ -41,8 +41,9 @@ export default async function Layout({
          >
             {children}
             <Cookies cookiesData={cookiesData} />
+            <NoiseBackground />
+            <MouseFollower variant="small" />
          </body>
-         <NoiseBackground />
       </RootLayout>
    );
 }

@@ -1,80 +1,84 @@
-"use client"
+"use client";
 
-import { useEffect, useRef } from "react"
-import { gsap } from "gsap"
+import { useEffect, useRef, useState } from "react";
+import { gsap } from "gsap";
+import { IconChevron } from "@/components/icons";
 
 type Props = {
-	isHovering: boolean
-	variant: "big" | "small"
-}
+   variant: "big" | "small";
+};
 
-export default function MouseFollower({ isHovering, variant }: Props) {
-	const refCursor = useRef(null)
+export default function MouseFollower({ variant }: Props) {
+   const refCursor = useRef<HTMLDivElement | null>(null);
+   const [isActive, setIsActive] = useState(true);
+   const activityTimeout = useRef<NodeJS.Timeout | null>(null);
 
-	// useEffect(() => {
-	// 	const cursorDiv = refCursor.current as HTMLDivElement | null
+   // Shared activity handler (scroll or mousemove)
+   const triggerActivity = () => {
+      setIsActive(true);
+      if (activityTimeout.current) clearTimeout(activityTimeout.current);
+      activityTimeout.current = setTimeout(() => {
+         setIsActive(false);
+      }, 3000); // hide after 3s of inactivity
+   };
 
-	// 	if (!cursorDiv) return
+   // Scroll detection
+   useEffect(() => {
+      window.addEventListener("scroll", triggerActivity, { passive: true });
+      return () => {
+         window.removeEventListener("scroll", triggerActivity);
+         if (activityTimeout.current) clearTimeout(activityTimeout.current);
+      };
+   }, []);
 
-	// 	gsap.set(cursorDiv, { xPercent: -50, yPercent: -50 })
+   // Mouse movement detection
+   useEffect(() => {
+      const cursorDiv = refCursor.current;
+      if (!cursorDiv || !cursorDiv.parentElement) return;
 
-	// 	let xTo = gsap.quickTo(cursorDiv, "x", { duration: 0.6, ease: "power3" }),
-	// 		yTo = gsap.quickTo(cursorDiv, "y", { duration: 0.6, ease: "power3" })
+      gsap.set(cursorDiv, { xPercent: -50, yPercent: -50 });
 
-	// 	const moveCursor = (e: MouseEvent) => {
-	// 		xTo(e.clientX)
-	// 		yTo(e.clientY)
-	// 	}
+      const moveCursor = (e: MouseEvent) => {
+         const parentRect = cursorDiv.parentElement!.getBoundingClientRect();
+         const relativeX = e.clientX - parentRect.left;
 
-	// 	cursorDiv.parentElement?.addEventListener("mousemove", moveCursor)
-	// 	return () => {
-	// 		cursorDiv.parentElement?.removeEventListener("mousemove", moveCursor)
-	// 	}
-	// }, [refCursor])
+         triggerActivity();
 
-	useEffect(() => {
-		const cursorDiv = refCursor.current as HTMLDivElement | null
+         gsap.to(cursorDiv, {
+            x: relativeX,
+            y: e.clientY,
+            duration: 0.3,
+         });
+      };
 
-		if (!cursorDiv || !cursorDiv.parentElement) return
+      const parent = cursorDiv.parentElement;
+      parent.addEventListener("mousemove", moveCursor);
 
-		gsap.set(cursorDiv, { xPercent: -50, yPercent: -50 })
+      return () => {
+         parent.removeEventListener("mousemove", moveCursor);
+      };
+   }, [variant]);
 
-		const moveCursor = (e: MouseEvent) => {
-			const parentRect = cursorDiv.parentElement!.getBoundingClientRect()
-			if (!parentRect) return
-
-			// Get x position relative to container because of scroll
-			const relativeX = e.clientX - parentRect.left
-
-			gsap.to(cursorDiv, {
-				x: relativeX,
-				y: e.clientY,
-				duration: 0.5,
-			})
-		}
-
-		cursorDiv.parentElement.addEventListener("mousemove", moveCursor)
-		return () => {
-			cursorDiv.parentElement!.removeEventListener("mousemove", moveCursor)
-		}
-	}, [refCursor, variant])
-
-	return (
-		<div
-			className={`${
-				variant === "big" ? "w-40 h-40 bg-primary/30" : "w-24 h-24 bg-secondary"
-			} fixed top-0 left-0 rounded-full flex items-center justify-center z-15 pointer-events-none cursor-pointer border border-secondary transition-opacity duration-200 ${isHovering ? "" : "opacity-0"}`}
-			ref={refCursor}>
-			<div className='customcursor__follower__inner'>
-				<span
-					className={`${
-						variant === "big"
-							? "text-titleLarge font-extralight"
-							: "text-labelLarge text-primary"
-					}`}>
-					OPEN
-				</span>
-			</div>
-		</div>
-	)
+   return (
+      <div
+         ref={refCursor}
+         className={`fixed top-0 left-0 rounded-full flex items-center justify-center z-15 pointer-events-none border transition-opacity duration-500
+            ${variant === "big" ? "w-40 h-40 bg-primary/30 border-secondary" : "w-24 h-24 bg-primary/30 border-secondary"}
+            ${isActive ? "opacity-0" : "opacity-100"}`}
+      >
+         <div className="flex items-center gap-8">
+            <IconChevron direction="back" />
+            <span
+               className={`${
+                  variant === "big"
+                     ? "text-titleLarge font-extralight"
+                     : "text-labelLarge text-secondary"
+               }`}
+            >
+               SCROLL
+            </span>
+            <IconChevron direction="forward" />
+         </div>
+      </div>
+   );
 }

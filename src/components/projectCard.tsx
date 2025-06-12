@@ -134,7 +134,7 @@ export default function ProjectCard({
                {/* IMAGE */}
                <div>
                   <Image
-                     className={`relative h-full w-full object-cover rounded-sm ${isCardHovered ? "saturate-100" : "saturate-50"}`}
+                     className={`relative h-full w-full object-cover rounded-sm ${isCardHovered ? "saturate-100" : "saturate-50"} ${pathname.includes(slug) ? "saturate-0" : ""}`}
                      src={urlFor(image.imageRef).url()} // generate url from ref to avoid unnecessary calls on server
                      alt={image.imageAlt}
                      width={image.imageWidth}
