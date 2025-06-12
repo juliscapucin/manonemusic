@@ -18,38 +18,41 @@ export default function ButtonsCarousel({
    const buttonClasses = "flex items-center justify-center";
 
    return (
-      <div className="lg:hidden mt-10">
+      <div className="relative lg:hidden mt-8 z-10">
          {/* PAGE INDICATORS */}
-         <div className="w-full flex justify-center items-center gap-2 h-full">
+         <div className="w-full h-4 flex items-center *:flex-1 gap-[1px] border-t border-b border-faded overflow-clip">
             {[...Array(itemsCount)].map((_, index) => (
                <button
                   onClick={() => {
                      tl.toIndex(index, timingSettings);
                      setActiveCarouselImage(tl.current());
                   }}
-                  className={`h-[1px] bg-secondary w-4 ${activeCarouselImage === index ? "opacity-100" : "opacity-30"}`}
+                  className={`bg-secondary w-6 transition-transform ${activeCarouselImage === index ? "opacity-100 h-full" : "h-full  opacity-10"}`}
                   key={index}
                ></button>
             ))}
          </div>
-         {/* TODO: remove or fix this */}
-         <div className="hidden relative mt-2 w-full h-16 px-4 justify-center items-center gap-8">
+
+         {/* BUTTONS PREV/NEXT */}
+         <div className="flex relative w-full h-16 items-center border-b border-faded *:flex-1">
             {/* BUTTON PREVIOUS */}
             <ButtonChevron
+               classes={`prev-btn h-full border-r border-faded ${buttonClasses}`}
+               direction="back"
                onClick={() => {
                   tl.toIndex(activeCarouselImage - 1, timingSettings);
                   setActiveCarouselImage(tl.current());
                }}
-               classes={`prev-btn rotate-180 ${buttonClasses}`}
             />
 
             {/* BUTTON NEXT */}
             <ButtonChevron
+               classes={`next-btn rotate-0 ${buttonClasses}`}
+               direction="forward"
                onClick={() => {
                   tl.toIndex(activeCarouselImage + 1, timingSettings);
                   setActiveCarouselImage(tl.current());
                }}
-               classes={`next-btn rotate-0 ${buttonClasses}`}
             />
          </div>
       </div>

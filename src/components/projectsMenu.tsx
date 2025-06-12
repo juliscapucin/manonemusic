@@ -37,7 +37,7 @@ export default function ProjectsMenu({
       if (
          !outerContainerRef.current ||
          !cardsContainerRef.current ||
-         width > 1024
+         width >= 1024
       ) {
          setTimelineReady(false);
          if (tlRef.current) {
@@ -66,38 +66,40 @@ export default function ProjectsMenu({
    }, [width]);
 
    return (
-      <div
-         ref={outerContainerRef}
-         id="projects-menu"
-         className={
-            "gsap-projects-menu relative w-full h-[52svh] lg:h-72 overflow-x-visible lg:w-fit pb-32 lg:pb-8 lg:pt-8 lg:border-b border-t border-faded bg-primary z-10"
-         }
-      >
+      <div>
          <div
-            ref={cardsContainerRef}
-            className="relative w-fit h-full flex items-start justify-start gap-8 lg:gap-32 px-4 lg:px-8 py-8 lg:pt-0 lg:pb-4 mt-16 lg:mt-0"
+            ref={outerContainerRef}
+            id="projects-menu"
+            className={
+               "gsap-projects-menu relative w-full h-[52svh] lg:h-72 overflow-x-visible lg:w-fit mx-4 lg:mx-0 pb-24 lg:pb-8 lg:pt-8 lg:border-b border-t border-faded bg-primary z-10"
+            }
          >
-            {projects?.map((project: PortfolioItem, index) => {
-               return (
-                  <ProjectCard
-                     key={project.slug}
-                     {...{
-                        variant,
-                        section,
-                        title: project.title,
-                        image: project.image,
-                        slug: project.slug,
-                        index,
-                        isMobile: width < 1024,
-                        handleCardHover,
-                        hoveredCard,
-                     }}
-                  />
-               );
-            })}
+            <div
+               ref={cardsContainerRef}
+               className="relative w-fit h-full flex items-start justify-start gap-8 lg:gap-32 px-4 lg:px-8 pb-10 pt-2 lg:pt-0 lg:pb-4 mt-16 lg:mt-0"
+            >
+               {projects?.map((project: PortfolioItem, index) => {
+                  return (
+                     <ProjectCard
+                        key={project.slug}
+                        {...{
+                           variant,
+                           section,
+                           title: project.title,
+                           image: project.image,
+                           slug: project.slug,
+                           index,
+                           isMobile: width < 1024,
+                           handleCardHover,
+                           hoveredCard,
+                        }}
+                     />
+                  );
+               })}
+            </div>
          </div>
          {/* CAROUSEL ELEMENTS ON MOBILE */}
-         {timelineReady && tlRef.current && (
+         {width < 1024 && timelineReady && tlRef.current && (
             <ButtonsCarousel
                tl={tlRef.current}
                itemsCount={projects.length}
