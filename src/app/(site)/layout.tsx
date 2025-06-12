@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 
-import { MouseFollower, NoiseBackground, RootLayout } from "@/components";
-import { Cookies } from "@/components/ui";
+import { RootLayout } from "@/components";
 
 import { getCookiesData } from "@/sanity/sanity-queries";
 
@@ -35,15 +34,8 @@ export default async function Layout({
 }) {
    const cookiesData = await getCookiesData();
    return (
-      <RootLayout>
-         <body
-            className={`${font.className} relative w-screen lg:h-screen overflow-x-clip`}
-         >
-            {children}
-            <Cookies cookiesData={cookiesData} />
-            <NoiseBackground />
-            <MouseFollower variant="small" />
-         </body>
+      <RootLayout cookiesData={cookiesData} fontClass={font.className}>
+         {children}
       </RootLayout>
    );
 }

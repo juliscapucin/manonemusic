@@ -1,7 +1,9 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+
 import { gsap } from "gsap";
+
 import { IconChevron } from "@/components/icons";
 
 type Props = {
