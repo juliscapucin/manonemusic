@@ -52,9 +52,9 @@ export default function ProjectPage({
       <div className="relative w-screen h-screen bg-primary overflow-hidden pl-4 lg:px-0">
          <PageWrapper ref={pageWrapperRef}>
             {/* Project Page */}
-            <div className="gsap-project-page opacity-0 mr-4 pt-4 border-l border-r border-faded pb-8">
+            <div className="gsap-project-page opacity-0 mr-4 pt-4 border-l border-r border-faded pb-16 lg:pb-8">
                <ButtonBack slug={section} />
-               <div className="px-4 lg:px-8 mt-16">
+               <div className="px-4 lg:px-8 mt-16 overflow-clip">
                   <AutoGrid />
                   <TitleHeadline>{projectPageData.title}</TitleHeadline>
 

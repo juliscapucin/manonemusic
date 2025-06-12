@@ -13,6 +13,7 @@ import NavLink from "./navLink";
 import NavMenu from "./navMenu";
 import PageWrapper from "./pageWrapper";
 import Pagination from "./pagination";
+import ScrollProgress from "./scrollProgress";
 import SectionWrapper from "./sectionWrapper";
 import Subtitle from "./subtitle";
 import TextBlock from "./textBlock";
@@ -37,6 +38,7 @@ export {
    PageWrapper,
    Pagination,
    TextBlock,
+   ScrollProgress,
    SectionWrapper,
    Subtitle,
    TitleDisplay,

@@ -14,6 +14,8 @@ import { PanelContent } from "@/components";
 import { useWindowDimensions } from "@/hooks";
 import { animateSplitText } from "@/animations";
 import { panelsEnter } from "@/lib/animations";
+import { ScrollProgress } from "./ui";
+import scrollProgress from "./ui/scrollProgress";
 
 type PanelDesktopProps = {
    data: AllData;
@@ -23,6 +25,8 @@ type PanelDesktopProps = {
 export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
    const panelsContainerRef = useRef<HTMLDivElement | null>(null);
    const [tween, setTween] = useState<gsap.core.Tween | null>(null);
+   // const [scrollProgress, setScrollProgress] = useState(0);
+   const scrollProgressRef = useRef(0);
    const { width } = useWindowDimensions();
 
    // Smooth Scroll
@@ -56,6 +60,9 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
             scrub: 1,
             end: () => "+=" + (container.scrollWidth - container.offsetWidth),
             invalidateOnRefresh: true,
+            onUpdate: (self) => {
+               scrollProgressRef.current = self.progress * 100;
+            },
             // markers: true,
          },
       });
@@ -179,27 +186,28 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
    }, [panelsContainerRef]);
 
    return (
-      <div id="smooth-wrapper">
-         <div id="smooth-content">
-            <div
-               ref={panelsContainerRef}
-               className="gsap-panels-container relative flex gap-96 opacity-0"
-            >
-               {sections.map((section) => {
-                  return (
-                     <section
-                        data-id={`panel-${section.slug === "/" ? "home" : section.slug}`}
-                        className="gsap-panel h-screen min-h-full px-8 min-w-fit w-fit"
-                        key={`panel-${section.slug}`}
-                     >
-                        <PanelContent data={data} section={section.slug} />
-                     </section>
-                  );
-               })}
-
-               {/* BACKGROUND */}
+      <>
+         <div id="smooth-wrapper">
+            <div id="smooth-content">
+               <div
+                  ref={panelsContainerRef}
+                  className="gsap-panels-container relative flex gap-96 opacity-0"
+               >
+                  {sections.map((section) => {
+                     return (
+                        <section
+                           data-id={`panel-${section.slug === "/" ? "home" : section.slug}`}
+                           className="gsap-panel h-screen min-h-full px-8 min-w-fit w-fit"
+                           key={`panel-${section.slug}`}
+                        >
+                           <PanelContent data={data} section={section.slug} />
+                        </section>
+                     );
+                  })}
+               </div>
             </div>
          </div>
-      </div>
+         <ScrollProgress progressRef={scrollProgressRef} />
+      </>
    );
 }

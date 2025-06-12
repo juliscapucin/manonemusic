@@ -66,12 +66,12 @@ export default function ProjectsMenu({
    }, [width]);
 
    return (
-      <div>
+      <div className="relative z-10">
          <div
             ref={outerContainerRef}
             id="projects-menu"
             className={
-               "gsap-projects-menu relative w-full h-[52svh] lg:h-72 overflow-x-visible lg:w-fit mx-4 lg:mx-0 pb-24 lg:pb-8 lg:pt-8 lg:border-b border-t border-faded bg-primary z-10"
+               "gsap-projects-menu w-full h-[52svh] lg:h-72 overflow-x-visible lg:w-fit mx-4 lg:mx-0 pb-24 lg:pb-8 lg:pt-8 lg:border-b border-t border-faded bg-primary"
             }
          >
             <div
