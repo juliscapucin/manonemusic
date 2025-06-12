@@ -18,9 +18,10 @@ export default function IntroPage() {
       animateSplitTextVertical(logoRef2.current, undefined, 0.2);
 
       gsap.to(maskRef.current, {
-         clipPath: "polygon(100% 0%, 100% 0%, 100% 100%, 100% 100%)",
+         clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
          delay: 2,
-         duration: 0.4,
+         duration: 0.6,
+         ease: "power2.inOut",
       });
    }, []);
 
