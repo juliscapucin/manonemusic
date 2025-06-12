@@ -1,10 +1,9 @@
-import gsap from 'gsap';
-import { start } from 'repl';
+import gsap from "gsap";
 
 export const animateEnterHorizontal = (
    divElement: HTMLElement,
    startPercent: number,
-   delay?: number
+   delay?: number,
 ) => {
    gsap.fromTo(
       divElement,
@@ -14,7 +13,7 @@ export const animateEnterHorizontal = (
          delay: delay || 0,
          xPercent: 0,
          opacity: 1,
-         ease: 'expo.out',
-      }
+         ease: "expo.out",
+      },
    );
 };

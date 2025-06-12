@@ -60,6 +60,7 @@ const config: Config = {
             15: "15",
             100: "100",
             header: "1000",
+            intro: "1500",
             burger: "2000",
             mobile: "2500",
             noise: "3000",

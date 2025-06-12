@@ -8,6 +8,8 @@ import { MouseFollower, NoiseBackground } from "@/components";
 
 import { useWindowDimensions } from "@/hooks";
 import { Cookies as CookiesType } from "@/types";
+import { IntroPage } from "./pages";
+import subtitle from "./ui/subtitle";
 
 type RootLayoutProps = {
    children: React.ReactNode;
@@ -50,6 +52,7 @@ export default function RootLayout({
             {isTopLevelPath && width >= 1024 && (
                <MouseFollower variant="small" />
             )}
+            <IntroPage />
          </body>
       </html>
    );

@@ -14,8 +14,7 @@ import { PanelContent } from "@/components";
 import { useWindowDimensions } from "@/hooks";
 import { animateSplitText } from "@/animations";
 import { panelsEnter } from "@/lib/animations";
-import { ScrollProgress } from "./ui";
-import scrollProgress from "./ui/scrollProgress";
+import { ScrollProgress } from "@/components/ui";
 
 type PanelDesktopProps = {
    data: AllData;

@@ -15,7 +15,8 @@ export const colors = {
 };
 
 // export const ease = [0.6, 0.05, -0.01, 0.9]
-export const customEase = "1, 0.01, 0.01, 1";
+// export const customEase = "1, 0.01, 0.01, 1";
+export const customEase = "0.9, 0, 0.1, 1";
 
 export const marginTop = "128px";
 
