@@ -34,6 +34,7 @@ export default function ProjectPageContent({
                   fill: true,
                   classes: "",
                   sizes: "50vw",
+                  priority: true,
                }}
             />
          </div>

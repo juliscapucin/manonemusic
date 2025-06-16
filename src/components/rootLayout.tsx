@@ -41,18 +41,16 @@ export default function RootLayout({
       <html
          lang="en"
          data-theme={rootTheme}
-         className="relative w-screen h-screen custom-min-h-screen bg-primary text-secondary"
+         className="relative w-screen h-dvh overflow-clip bg-primary text-secondary"
       >
-         <body
-            className={`${fontClass} relative w-screen lg:h-screen overflow-x-clip`}
-         >
+         <body className={`${fontClass}`}>
             {children}
             <Cookies cookiesData={cookiesData} />
             <NoiseBackground />
             {isTopLevelPath && width >= 1024 && (
                <MouseFollower variant="small" />
             )}
-            <IntroPage />
+            {/* <IntroPage /> */}
          </body>
       </html>
    );

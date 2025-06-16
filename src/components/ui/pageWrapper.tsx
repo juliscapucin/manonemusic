@@ -3,7 +3,7 @@
 type PageWrapperProps = {
    children: React.ReactNode;
    classes?: string;
-   ref: React.RefObject<HTMLDivElement | null>;
+   ref?: React.RefObject<HTMLDivElement | null>;
 };
 
 export default function PageWrapper({
@@ -12,12 +12,12 @@ export default function PageWrapper({
    ref,
 }: PageWrapperProps) {
    return (
-      <div
+      <main
          ref={ref}
-         className={`page-wrapper relative w-full h-screen min-h-svh pt-16 pb-20 lg:pb-8 lg:pr-40 overflow-y-scroll overflow-x-clip lg:ml-8 ${classes || ""}`}
+         className={`page-wrapper relative w-full h-dvh pt-16 pb-20 lg:pb-8 lg:pr-40 lg:ml-8 ${classes || ""}`}
          id="page-wrapper"
       >
          {children}
-      </div>
+      </main>
    );
 }

@@ -49,7 +49,7 @@ export default function ProjectPage({
    }, [isPageDisplaced, pageWrapperRef]);
 
    return (
-      <div className="relative w-screen h-screen bg-primary overflow-hidden pl-4 lg:px-0">
+      <>
          <PageWrapper ref={pageWrapperRef}>
             {/* Project Page */}
             <div className="gsap-project-page opacity-0 mr-4 pt-4 border-l border-r border-faded pb-16 lg:pb-8">
@@ -94,6 +94,6 @@ export default function ProjectPage({
                }}
             />
          )}
-      </div>
+      </>
    );
 }

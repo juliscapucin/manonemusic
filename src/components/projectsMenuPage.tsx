@@ -64,7 +64,7 @@ export default function ProjectsMenuPage({
          <aside
             ref={menuDesktopRef}
             className={
-               "gsap-projects-menu-page hidden lg:flex fixed w-[150px] top-16 right-4 bottom-0 flex-col gap-4 overflow-y-scroll overflow-x-visible z-10 opacity-0 lg:opacity-100 border-l border-faded py-4 pl-4 bg-primary"
+               "gsap-projects-menu-page hidden lg:flex fixed w-[150px] top-16 right-4 bottom-32 flex-col gap-4 overflow-y-scroll overflow-x-clip z-noise opacity-0 lg:opacity-100 border-l border-faded py-4 pl-4 bg-primary pointer-events-auto"
             }
          >
             {projectsData?.map((project: PortfolioItem, index) => {

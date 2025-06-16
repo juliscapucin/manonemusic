@@ -6,6 +6,7 @@
 
 :root {
    --font-secondary: "ff-real-text-pro", sans-serif;
+   --header-height-mobile: 4rem;
 }
 
 @layer base {

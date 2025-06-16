@@ -46,7 +46,9 @@ export default function MouseFollower({ variant }: Props) {
       gsap.set(cursorDiv, { xPercent: -50, yPercent: -50 });
 
       const moveCursor = (e: MouseEvent) => {
-         const parentRect = cursorDiv.parentElement!.getBoundingClientRect();
+         const parentRect = cursorDiv.parentElement?.getBoundingClientRect();
+
+         if (!parentRect) return;
          const relativeX = e.clientX - parentRect.left;
 
          triggerActivity(pathname);

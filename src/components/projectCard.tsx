@@ -112,18 +112,6 @@ export default function ProjectCard({
          aria-labelledby={`project-title-${slug}`}
          disabled={pathname.includes(slug)}
       >
-         {/* DISABLED OVERLAY */}
-         {pathname.includes(slug) && (
-            <>
-               <div className="absolute inset-0 overflow-clip border border-faded rounded-sm z-10">
-                  <div className="absolute top-0 h-[1px] w-[150%] bg-faded rotate-45 origin-top-left"></div>
-                  <div className="absolute top-0 right-0 h-[1px] w-[150%] bg-faded -rotate-45 origin-top-right"></div>
-               </div>
-
-               <div className="absolute inset-0 bg-primary opacity-70 rounded-sm z-5"></div>
-            </>
-         )}
-
          {/* IMAGE */}
          {image?.imageRef && (
             <div
@@ -131,6 +119,17 @@ export default function ProjectCard({
                role="img"
                aria-label={image.imageAlt}
             >
+               {/* DISABLED OVERLAY */}
+               {pathname.includes(slug) && (
+                  <>
+                     <div className="absolute inset-0 overflow-clip border border-faded rounded-sm z-10">
+                        <div className="absolute top-0 h-[1px] w-[150%] bg-faded rotate-45 origin-top-left"></div>
+                        <div className="absolute top-0 right-0 h-[1px] w-[150%] bg-faded -rotate-45 origin-top-right"></div>
+                     </div>
+
+                     <div className="absolute inset-0 bg-primary opacity-70 rounded-sm z-5"></div>
+                  </>
+               )}
                {/* IMAGE */}
                <div>
                   <Image

@@ -29,7 +29,7 @@ export default function Header({ navLinks, variant = "section" }: HeaderProps) {
 
    return (
       <header>
-         <nav className="hidden lg:flex fixed top-0 right-0 left-0 px-8 py-4 justify-between bg-primary border-b border-faded z-header overflow-clip">
+         <nav className="hidden lg:flex fixed top-0 right-0 left-0 px-12 py-4 justify-between bg-primary border-b border-faded z-header overflow-clip h-[--header-height-mobile]">
             {/* LOGO */}
             <CustomButton
                link="/"
