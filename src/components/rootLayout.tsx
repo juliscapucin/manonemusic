@@ -38,12 +38,10 @@ export default function RootLayout({
    }, []);
 
    return (
-      <html
-         lang="en"
-         data-theme={rootTheme}
-         className="relative w-screen h-dvh overflow-clip bg-primary text-secondary"
-      >
-         <body className={`${fontClass}`}>
+      <html lang="en" data-theme={rootTheme}>
+         <body
+            className={`relative w-screen overflow-x-clip bg-primary text-secondary ${fontClass}`}
+         >
             {children}
             <Cookies cookiesData={cookiesData} />
             <NoiseBackground />

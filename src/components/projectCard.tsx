@@ -107,7 +107,7 @@ export default function ProjectCard({
             handleCardHover(null);
          }}
          link={`/${section}/${slug}`}
-         classes={`relative group block ${variant === "section" ? "min-w-40 lg:min-w-16 h-full w-fit" : `h-full w-fit lg:h-fit lg:w-32 ${pathname.includes(slug) && "pointer-events-none"}`}`}
+         classes={`relative group block ${variant === "section" ? "min-w-40 lg:min-w-16 h-full w-fit" : `h-full w-fit lg:h-fit lg:w-32`}`}
          style={{ aspectRatio }}
          aria-labelledby={`project-title-${slug}`}
          disabled={pathname.includes(slug)}
@@ -115,7 +115,7 @@ export default function ProjectCard({
          {/* IMAGE */}
          {image?.imageRef && (
             <div
-               className={`rounded-sm pointer-events-none w-full overflow-clip lg:group-hover:scale-105 origin-bottom transition-all duration-300`}
+               className={`rounded-sm w-full overflow-clip lg:group-hover:scale-105 origin-bottom transition-all duration-300`}
                role="img"
                aria-label={image.imageAlt}
             >

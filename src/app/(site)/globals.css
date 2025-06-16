@@ -77,12 +77,6 @@
       @apply text-bodyMedium;
    }
 
-   /* MAX WIDTH WRAPPER */
-
-   .max-width-wrapper {
-      @apply max-w-desktop mx-auto px-4 lg:px-8;
-   }
-
    /* PLAYER SLIDER THUMB */
    input[type="range"]::-webkit-slider-thumb {
       -webkit-appearance: none;
@@ -225,13 +219,6 @@ a {
 
 textarea {
    resize: none;
-}
-
-/* TAILWIND WORKAROUNDS */
-
-.custom-min-h-screen {
-   min-height: 100dh;
-   min-height: 100dvh;
 }
 
 .custom-min-w-screen {

@@ -64,6 +64,7 @@ const config: Config = {
             burger: "2000",
             mobile: "2500",
             noise: "3000",
+            projectsMenu: "4000",
          },
          letterSpacing: { tightest: "-.075em" },
          lineHeight: { tightest: "0.1" },

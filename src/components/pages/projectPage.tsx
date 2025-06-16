@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import gsap from "gsap";
 
@@ -48,41 +48,42 @@ export default function ProjectPage({
       }
    }, [isPageDisplaced, pageWrapperRef]);
 
+   useEffect(() => {
+      window.scrollTo(0, 0);
+   }, [pathname]);
+
    return (
-      <>
-         <PageWrapper ref={pageWrapperRef}>
-            {/* Project Page */}
-            <div className="gsap-project-page opacity-0 mr-4 pt-4 border-l border-r border-faded pb-16 lg:pb-8">
-               <ButtonBack slug={section} />
-               <div className="px-4 lg:px-8 mt-16 overflow-clip">
-                  <AutoGrid />
-                  <TitleHeadline>{projectPageData.title}</TitleHeadline>
+      <PageWrapper ref={pageWrapperRef}>
+         {/* Project Page */}
+         <div className="gsap-project-page mr-4 pt-4 border-l border-r border-faded pb-16 lg:pb-8">
+            <ButtonBack slug={section} />
+            <div className="px-4 lg:px-8 mt-16">
+               <AutoGrid />
+               <TitleHeadline>{projectPageData.title}</TitleHeadline>
 
-                  {/* RENDER RELEASE DATE ONLY ON RELEASES */}
-                  <div className="gsap-project-content mt-4">
-                     {pathname.includes("releases") &&
-                        projectPageData.releaseDate && (
-                           <p>
-                              Released{" "}
-                              {new Date(
-                                 projectPageData.releaseDate,
-                              ).toLocaleDateString("en-US", {
-                                 month: "long",
-                                 year: "numeric",
-                              })}
-                           </p>
-                        )}
-                     {projectPageData.info && <p>{projectPageData.info}</p>}
-                  </div>
+               {/* RENDER RELEASE DATE ONLY ON RELEASES */}
+               <div className="gsap-project-content mt-4">
+                  {pathname.includes("releases") &&
+                     projectPageData.releaseDate && (
+                        <p>
+                           Released{" "}
+                           {new Date(
+                              projectPageData.releaseDate,
+                           ).toLocaleDateString("en-US", {
+                              month: "long",
+                              year: "numeric",
+                           })}
+                        </p>
+                     )}
+                  {projectPageData.info && <p>{projectPageData.info}</p>}
                </div>
-               <ProjectPageContent
-                  {...projectPageData}
-                  setIsTrailerActive={setIsTrailerActive}
-                  setIsPageDisplaced={setIsPageDisplaced}
-               />
             </div>
-         </PageWrapper>
-
+            <ProjectPageContent
+               {...projectPageData}
+               setIsTrailerActive={setIsTrailerActive}
+               setIsPageDisplaced={setIsPageDisplaced}
+            />
+         </div>
          {/* Trailer */}
          {projectPageData.projectVideo && isTrailerActive && (
             <ProjectTrailer
@@ -94,6 +95,6 @@ export default function ProjectPage({
                }}
             />
          )}
-      </>
+      </PageWrapper>
    );
 }

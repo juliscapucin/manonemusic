@@ -38,10 +38,16 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
          normalizeScroll: true,
          ease: "power3",
       });
+
+      return () => {
+         ScrollSmoother.get()?.kill();
+         ScrollTrigger.killAll();
+      };
    }, []);
 
    // Horizontal Panel animation
    useGSAP(() => {
+      console.log("horizontal animation");
       if (!panelsContainerRef.current) return;
       gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
 
@@ -73,9 +79,12 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
    // Left/right gestures through trackpad
    useEffect(() => {
       const container = panelsContainerRef.current;
-      if (!container) return;
+      if (width < 1024 || !container) return;
 
       const onWheel = (e: WheelEvent) => {
+         // Only handle wheel events if the event target is inside the panels container
+         if (!container.contains(e.target as Node)) return;
+
          // Ignore vertical scrolls
          if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
 
@@ -86,10 +95,11 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
          });
       };
 
-      window.addEventListener("wheel", onWheel, { passive: false });
+      container.addEventListener("wheel", onWheel, { passive: false });
 
       return () => {
-         window.removeEventListener("wheel", onWheel);
+         container.removeEventListener("wheel", onWheel);
+         console.log("remove wheel");
       };
    }, []);
 
