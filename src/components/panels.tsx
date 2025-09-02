@@ -12,18 +12,16 @@ export default function Panels({ data }: { data: AllData }) {
 
    return (
       <main>
-         {width && width >= 1024 ? (
-            <>
-               <Header navLinks={data.headerNavLinks} />
-               <PanelDesktop data={data} sections={data.headerNavLinks} />
-               <Footer navLinks={data.headerNavLinks} />
-            </>
-         ) : (
-            <>
-               <MenuMobile navLinks={data.headerNavLinks} />
-               <PanelMobile data={data} />
-            </>
-         )}
+         <div className="hidden lg:block">
+            <Header navLinks={data.headerNavLinks} />
+            <PanelDesktop data={data} sections={data.headerNavLinks} />
+            <Footer navLinks={data.headerNavLinks} />
+         </div>
+
+         <div className="lg:hidden">
+            <MenuMobile navLinks={data.headerNavLinks} />
+            <PanelMobile data={data} />
+         </div>
       </main>
    );
 }
