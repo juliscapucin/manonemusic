@@ -48,7 +48,6 @@ const config: Config = {
          },
          fontFamily: {
             headline: ["var(--font-primary) sans-serif"],
-            text: ["var(--font-secondary)"],
          },
          zIndex: {
             5: "5",
