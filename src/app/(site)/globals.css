@@ -1,8 +1,9 @@
-/* @import url('https://use.typekit.net/cbg5juo.css') layer(base); */
-
 @import "tailwindcss";
 
-@config '../../../tailwind.config.ts';
+@import url("https://use.typekit.net/cbg5juo.css") layer(base);
+
+/* 
+@config '../../../tailwind.config.ts'; */
 
 /*
   The default border color has changed to `currentcolor` in Tailwind CSS v4,
@@ -22,11 +23,9 @@
    }
 }
 
-@layer utilities {
-   :root {
-      --font-secondary: "ff-real-text-pro", sans-serif;
-      --header-height-mobile: 4rem;
-   }
+:root {
+   --font-secondary: "ff-real-text-pro", sans-serif;
+   --header-height-mobile: 4rem;
 }
 
 :root {
