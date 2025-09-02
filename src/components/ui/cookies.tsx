@@ -95,12 +95,12 @@ export default function Cookies({ cookiesData }: CookiesProps) {
                   >
                      <button
                         onClick={() => setIsModalOpen(true)}
-                        className="underlined-link uppercase text-bodySmall select-none"
+                        className="underlined-link uppercase text-body-small select-none"
                      >
                         This site uses cookies
                      </button>
                      <ButtonRounded
-                        classes="text-bodySmall leading-[1.4]"
+                        classes="text-body-small leading-[1.4]"
                         onClick={() => handleOKButton("true")}
                      >
                         OK
@@ -118,14 +118,14 @@ export default function Cookies({ cookiesData }: CookiesProps) {
                >
                   {/* Gradients */}
                   <div
-                     className={`absolute top-8 right-10 h-16 ml-auto bg-gradient-to-b from-20% bg-gradient-middle from-primary to-transparent z-80 ${
+                     className={`absolute top-8 right-10 h-16 ml-auto bg-linear-to-b from-20% bg-gradient-middle from-primary to-transparent z-80 ${
                         isModalOpen
                            ? "transition-opacity duration-300 delay-300"
                            : "opacity-0"
                      }`}
                   ></div>
                   <div
-                     className={`absolute bottom-0 right-10 h-16 ml-auto bg-gradient-to-t from-20% bg-gradient-middle from-primary to-transparent z-80 ${
+                     className={`absolute bottom-0 right-10 h-16 ml-auto bg-linear-to-t from-20% bg-gradient-middle from-primary to-transparent z-80 ${
                         isModalOpen ? "" : "opacity-0"
                      }`}
                   ></div>

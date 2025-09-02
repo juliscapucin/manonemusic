@@ -20,7 +20,7 @@ export default function ButtonsCarousel({
    return (
       <div className="relative lg:hidden mt-8 z-10">
          {/* PAGE INDICATORS */}
-         <div className="w-full h-4 flex items-center *:flex-1 gap-[1px] border-t border-b border-faded overflow-clip">
+         <div className="w-full h-4 flex items-center *:flex-1 gap-px border-t border-b border-faded overflow-clip">
             {[...Array(itemsCount)].map((_, index) => (
                <button
                   onClick={() => {

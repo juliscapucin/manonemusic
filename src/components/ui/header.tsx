@@ -29,11 +29,11 @@ export default function Header({ navLinks, variant = "section" }: HeaderProps) {
 
    return (
       <header>
-         <nav className="hidden lg:flex fixed top-0 right-0 left-0 px-12 py-4 justify-between bg-primary border-b border-faded z-header overflow-clip h-[--header-height-mobile]">
+         <nav className="hidden lg:flex fixed top-0 right-0 left-0 px-12 py-4 justify-between bg-primary border-b border-faded z-header overflow-clip h-(--header-height-mobile)">
             {/* LOGO */}
             <CustomButton
                link="/"
-               classes={`underlined-link text-titleSmall md:text-titleMedium uppercase transition-transform ${pathname === "/" ? "-translate-x-[150%]" : "translate-x-0"}`}
+               classes={`underlined-link text-title-small md:text-title-medium uppercase transition-transform ${pathname === "/" ? "-translate-x-[150%]" : "translate-x-0"}`}
                transitionOnClick={
                   variant === "section"
                      ? () => handlePanelSlide("/") // if in first level, slide to home

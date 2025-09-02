@@ -40,7 +40,7 @@ export default function NavMenu({
          {/* LOGO */}
          {/* <CustomButton
             link="/"
-            classes={`underlined-link text-titleSmall md:text-titleMedium uppercase font-medium transition ${pathname === "/" ? "opacity-0 -translate-x-full" : "opacity-100"}`}
+            classes={`underlined-link text-title-small md:text-title-medium uppercase font-medium transition ${pathname === "/" ? "opacity-0 -translate-x-full" : "opacity-100"}`}
             transitionOnClick={
                variant === "section"
                   ? () => handlePanelSlide("/") // if in first level, slide to home
@@ -117,7 +117,7 @@ export default function NavMenu({
                                     }
                                  }}
                               >
-                                 <span className="font-headline text-headlineMedium sm:text-headlineLarge uppercase">
+                                 <span className="font-headline text-headline-medium sm:text-headline-large uppercase">
                                     {link.title}
                                  </span>
                               </button>

@@ -80,8 +80,8 @@ export default function MouseFollower({ variant }: Props) {
             <span
                className={`${
                   variant === "big"
-                     ? "text-titleLarge font-extralight"
-                     : "text-labelLarge text-secondary"
+                     ? "text-title-large font-extralight"
+                     : "text-label-large text-secondary"
                }`}
             >
                SCROLL

@@ -20,7 +20,7 @@ export default function NavLink({
 		<div>
 			{activeState ? (
 				<div className='relative max-h-8'>
-					<span className='underlined-link active text-titleSmall md:text-titleMedium uppercase'>
+					<span className='underlined-link active text-title-small md:text-title-medium uppercase'>
 						{label}
 					</span>
 				</div>
@@ -28,7 +28,7 @@ export default function NavLink({
 				<div className='overflow-clip max-h-8'>
 					<CustomButton
 						link={`/${slug}`}
-						classes={`underlined-link text-titleSmall md:text-titleMedium uppercase`}
+						classes={`underlined-link text-title-small md:text-title-medium uppercase`}
 						transitionOnClick={action}>
 						{label}
 					</CustomButton>

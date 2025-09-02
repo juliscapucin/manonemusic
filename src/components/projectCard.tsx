@@ -115,25 +115,25 @@ export default function ProjectCard({
          {/* IMAGE */}
          {image?.imageRef && (
             <div
-               className={`rounded-sm w-full overflow-clip lg:group-hover:scale-105 origin-bottom transition-all duration-300`}
+               className={`rounded-xs w-full overflow-clip lg:group-hover:scale-105 origin-bottom transition-all duration-300`}
                role="img"
                aria-label={image.imageAlt}
             >
                {/* DISABLED OVERLAY */}
                {pathname.includes(slug) && (
                   <>
-                     <div className="absolute inset-0 overflow-clip border border-faded rounded-sm z-10">
-                        <div className="absolute top-0 h-[1px] w-[150%] bg-faded rotate-45 origin-top-left"></div>
-                        <div className="absolute top-0 right-0 h-[1px] w-[150%] bg-faded -rotate-45 origin-top-right"></div>
+                     <div className="absolute inset-0 overflow-clip border border-faded rounded-xs z-10">
+                        <div className="absolute top-0 h-px w-[150%] bg-faded rotate-45 origin-top-left"></div>
+                        <div className="absolute top-0 right-0 h-px w-[150%] bg-faded -rotate-45 origin-top-right"></div>
                      </div>
 
-                     <div className="absolute inset-0 bg-primary opacity-70 rounded-sm z-5"></div>
+                     <div className="absolute inset-0 bg-primary opacity-70 rounded-xs z-5"></div>
                   </>
                )}
                {/* IMAGE */}
                <div>
                   <Image
-                     className={`relative h-full w-full object-cover rounded-sm ${isCardHovered ? "saturate-100" : "saturate-50"} ${pathname.includes(slug) ? "saturate-0" : ""}`}
+                     className={`relative h-full w-full object-cover rounded-xs ${isCardHovered ? "saturate-100" : "saturate-50"} ${pathname.includes(slug) ? "saturate-0" : ""}`}
                      src={urlFor(image.imageRef).url()} // generate url from ref to avoid unnecessary calls on server
                      alt={image.imageAlt}
                      width={image.imageWidth}
@@ -157,7 +157,7 @@ export default function ProjectCard({
 
          {/* LABEL */}
          {variant === "section" && (
-            <div className="absolute top-full mt-2 text-labelMedium md:text-titleLarge uppercase text-left leading-none text-nowrap flex gap-2">
+            <div className="absolute top-full mt-2 text-label-medium md:text-title-large uppercase text-left leading-none text-nowrap flex gap-2">
                <span>
                   [{index < 9 && 0}
                   {index + 1}]

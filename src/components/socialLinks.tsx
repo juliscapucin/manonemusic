@@ -20,7 +20,7 @@ export default function SocialLinks({ data }: SocialLinksProps) {
                      key={item.platform}
                   >
                      <Link
-                        className="underlined-link block text-titleSmall md:text-titleMedium lg:text-titleLarge uppercase"
+                        className="underlined-link block text-title-small md:text-title-medium lg:text-title-large uppercase"
                         href={item.link}
                         target="_blank"
                      >

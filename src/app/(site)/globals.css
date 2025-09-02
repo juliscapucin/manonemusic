@@ -1,12 +1,32 @@
-@import url("https://use.typekit.net/cbg5juo.css");
+@import url('https://use.typekit.net/cbg5juo.css') layer(base);
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-:root {
-   --font-secondary: "ff-real-text-pro", sans-serif;
-   --header-height-mobile: 4rem;
+@config '../../../tailwind.config.ts';
+
+/*
+  The default border color has changed to `currentcolor` in Tailwind CSS v4,
+  so we've added these compatibility styles to make sure everything still
+  looks the same as it did with Tailwind CSS v3.
+
+  If we ever want to remove these styles, we need to add an explicit border
+  color utility to any element that depends on these defaults.
+*/
+@layer base {
+  *,
+  ::after,
+  ::before,
+  ::backdrop,
+  ::file-selector-button {
+    border-color: var(--color-gray-200, currentcolor);
+  }
+}
+
+@layer utilities {
+  :root {
+    --font-secondary: 'ff-real-text-pro', sans-serif;
+    --header-height-mobile: 4rem;
+  }
 }
 
 @layer base {
@@ -74,7 +94,7 @@
 
    p,
    span {
-      @apply text-bodyMedium;
+      @apply text-body-medium;
    }
 
    /* PLAYER SLIDER THUMB */
@@ -234,7 +254,7 @@ textarea {
 }
 
 .underlined-link::after {
-   @apply content-[''] absolute z-50 bottom-[2px] left-0 w-full h-[1px] bg-secondary transition-transform duration-300 -translate-x-[102%];
+   @apply content-[''] absolute z-50 bottom-[2px] left-0 w-full h-px bg-secondary transition-transform duration-300 -translate-x-[102%];
 }
 
 .underlined-link:hover::after,

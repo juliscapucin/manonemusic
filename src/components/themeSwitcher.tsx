@@ -7,8 +7,8 @@ import { useThemeStorage } from "@/hooks"
 // import { IconChevron } from "@icons/."
 
 const themes = [
-	{ theme: "light", color: "bg-colorWhite" },
-	{ theme: "dark", color: "bg-colorBlack" },
+	{ theme: "light", color: "bg-color-white" },
+	{ theme: "dark", color: "bg-color-black" },
 	{ theme: "green", color: "bg-colorGreen" },
 ]
 

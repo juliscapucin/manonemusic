@@ -23,7 +23,7 @@ export default function Logo({ subtitle }: LogoProps) {
          <h1 className="logo pointer-events-none text-faded-70">MUSIC</h1>
          <h2
             ref={subtitleRef}
-            className="text-titleLarge text-balance max-w-[60%] lg:max-w-[400px] mt-2"
+            className="text-title-large text-balance max-w-[60%] lg:max-w-[400px] mt-2"
          >
             {subtitle}
          </h2>

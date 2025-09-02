@@ -72,7 +72,7 @@ export default function MenuMobile({ navLinks }: NavLinksProps) {
                                     pathname.includes(`/${link.slug}`)
                                  }
                               >
-                                 <span className="font-headline text-headlineMedium sm:text-headlineLarge uppercase text-secondary">
+                                 <span className="font-headline text-headline-medium sm:text-headline-large uppercase text-secondary">
                                     {link.title}
                                  </span>
                               </button>
