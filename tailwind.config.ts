@@ -60,6 +60,8 @@ const config: Config = {
             mobile: "2500",
             noise: "3000",
             projectsMenu: "4000",
+            cookiesModal: "4500",
+            cookiesElements: "4510",
          },
          letterSpacing: { tightest: "-.075em" },
          lineHeight: { tightest: "0.1" },

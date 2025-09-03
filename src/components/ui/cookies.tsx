@@ -43,7 +43,12 @@ export default function Cookies({ cookiesData }: CookiesProps) {
       });
    }, [isModalOpen]);
 
-   useCloseOnClickOutside(modalRef, () => setIsModalOpen, isModalOpen);
+   useCloseOnClickOutside(
+      modalRef,
+      cookieButtonRef,
+      setIsModalOpen,
+      isModalOpen,
+   );
 
    useEffect(() => {
       function handleKeyDown(e: KeyboardEvent) {
@@ -82,7 +87,7 @@ export default function Cookies({ cookiesData }: CookiesProps) {
             <>
                {/* Background Overlay */}
                <div
-                  className={`fixed top-0 left-0 right-0 bottom-0 max-w-desktop mx-auto flex items-end justify-end z-10 overflow-clip transition-colors duration-300 ${
+                  className={`fixed top-0 left-0 right-0 bottom-0 max-w-desktop mx-auto flex items-end justify-end z-cookies-modal overflow-clip transition-colors duration-300 ${
                      isModalOpen
                         ? "md:bg-primary/80 pointer-events-auto"
                         : "pointer-events-none"
@@ -91,7 +96,7 @@ export default function Cookies({ cookiesData }: CookiesProps) {
                   {/* Cookie Button */}
                   <div
                      ref={cookieButtonRef}
-                     className="absolute right-8 bottom-8 flex items-center gap-4 bg-primary text-secondary border border-secondary rounded-full px-5 py-1 pointer-events-auto z-50"
+                     className="absolute right-8 bottom-8 flex items-center gap-4 bg-primary text-secondary border border-secondary rounded-full px-5 py-1 pointer-events-auto z-cookies-elements"
                   >
                      <button
                         onClick={() => setIsModalOpen(true)}
@@ -111,21 +116,21 @@ export default function Cookies({ cookiesData }: CookiesProps) {
                {/* Cookie Policy modal */}
                <div
                   ref={modalRef}
-                  className="fixed top-24 left-4 right-4 md:left-auto md:right-4 lg:right-0 bottom-8 pr-0 z-15 md:w-3/4 lg:w-2/5 translate-y-[150%]"
+                  className="fixed top-24 left-4 right-4 md:left-auto md:right-4 lg:right-0 bottom-8 pr-0 z-cookies-modal md:w-3/4 lg:w-2/5 translate-y-[150%]"
                   role="dialog"
                   aria-modal="true"
                   aria-labelledby="cookie-modal-title"
                >
                   {/* Gradients */}
                   <div
-                     className={`absolute top-8 right-10 h-16 ml-auto bg-linear-to-b from-20% bg-gradient-middle from-primary to-transparent z-80 ${
+                     className={`absolute top-8 right-10 h-16 ml-auto bg-linear-to-b from-20% bg-gradient-middle from-primary to-transparent z-cookies-elements ${
                         isModalOpen
                            ? "transition-opacity duration-300 delay-300"
                            : "opacity-0"
                      }`}
                   ></div>
                   <div
-                     className={`absolute bottom-0 right-10 h-16 ml-auto bg-linear-to-t from-20% bg-gradient-middle from-primary to-transparent z-80 ${
+                     className={`absolute bottom-0 right-10 h-16 ml-auto bg-linear-to-t from-20% bg-gradient-middle from-primary to-transparent z-cookies-elements ${
                         isModalOpen ? "" : "opacity-0"
                      }`}
                   ></div>
