@@ -8,7 +8,7 @@ type TextBlockProps = {
 export default function TextBlock({ text, classes }: TextBlockProps) {
    return (
       <div
-         className={`space-y-8 max-w-prose *:lg:text-bodySmall *:xl:text-bodyMedium ${classes}`}
+         className={`space-y-8 max-w-prose lg:*:text-body-small xl:*:text-body-medium ${classes}`}
       >
          <PortableText value={text} onMissingComponent={false} />
       </div>

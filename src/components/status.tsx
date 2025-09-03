@@ -82,7 +82,7 @@ function Status({ location }: StatusProps) {
       time && (
          <div
             ref={statusWrapperRef}
-            className={`flex flex-col w-1/2 *:text-bodyMedium *:lg:text-bodyLarge overflow-clip uppercase ${statusWrapperRef.current ? "opacity-1" : "opacity-0"}`}
+            className={`flex flex-col w-1/2 *:text-body-medium lg:*:text-body-large overflow-clip uppercase ${statusWrapperRef.current ? "opacity-1" : "opacity-0"}`}
          >
             <h2 className="gsap-line">{location}</h2>
             <span className="gsap-line">

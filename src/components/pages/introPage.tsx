@@ -35,7 +35,7 @@ export default function IntroPage() {
          }}
       >
          {/* Header spacer */}
-         <div className="fixed left-0 top-0 right-0 h-[--header-height-mobile] bg-primary border-b border-faded z-header"></div>
+         <div className="fixed left-0 top-0 right-0 h-(--header-height-mobile) bg-primary border-b border-faded z-header"></div>
          <SectionWrapper classes="h-[90svh] lg:pt-20 lg:pb-20">
             <div className="mx-4 lg:mx-8 h-full flex flex-col justify-between">
                <div className="gsap-section-title mt-2 lg:mt-0 overflow-y-clip">

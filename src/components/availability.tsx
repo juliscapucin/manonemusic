@@ -45,7 +45,7 @@ export default function Availability({
 
    return (
       <div className="flex items-center gap-4">
-         <p className="block text-bodyMedium lg:text-bodyLarge uppercase">
+         <p className="block text-body-medium lg:text-body-large uppercase">
             Available {furtherAvailability()}
          </p>
          {slideToContact && (

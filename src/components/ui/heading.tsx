@@ -18,19 +18,19 @@ export default function Heading({
    switch (variant) {
       case "display":
          headingStyles =
-            "text-displaySmall md:text-displayMedium lg:text-displayLarge font-medium uppercase";
+            "text-display-small md:text-display-medium lg:text-display-large font-medium uppercase";
          break;
       case "headline":
          headingStyles =
-            "text-headlineSmall md:text-headlineMedium lg:text-headlineLarge font-medium uppercase";
+            "text-headline-small md:text-headline-medium lg:text-headline-large font-medium uppercase";
          break;
       case "title":
          headingStyles =
-            "text-titleSmall md:text-titleMedium lg:text-titleLarge uppercase";
+            "text-title-small md:text-title-medium lg:text-title-large uppercase";
          break;
       default:
          headingStyles =
-            "text-displaySmall md:text-displayMedium lg:text-displayLarge uppercase";
+            "text-display-small md:text-display-medium lg:text-display-large uppercase";
          break;
    }
 

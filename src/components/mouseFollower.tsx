@@ -27,6 +27,17 @@ export default function MouseFollower({ variant }: Props) {
       }, 3000); // show after 3s of inactivity
    };
 
+   // Active / Inactive
+   useEffect(() => {
+      if (!refCursor.current) return;
+
+      if (isActive) {
+         gsap.to(refCursor.current, { opacity: 0, duration: 0.7 });
+      } else {
+         gsap.to(refCursor.current, { opacity: 1, duration: 0.7 });
+      }
+   }, [isActive]);
+
    // Scroll detection
    useEffect(() => {
       window.addEventListener("scroll", () => triggerActivity(pathname), {
@@ -71,17 +82,15 @@ export default function MouseFollower({ variant }: Props) {
    return (
       <div
          ref={refCursor}
-         className={`fixed top-0 left-0 rounded-full flex items-center justify-center z-15 pointer-events-none border transition-opacity duration-700
-            ${variant === "big" ? "w-40 h-40 bg-primary/30 border-secondary" : "w-24 h-24 bg-primary/30 border-secondary"}
-            ${isActive ? "opacity-0" : "opacity-100"}`}
+         className={`fixed top-0 left-0 rounded-full flex items-center justify-center z-15 pointer-events-none border ${variant === "big" ? "w-40 h-40 bg-primary/30 border-secondary" : "w-24 h-24 bg-primary/30 border-secondary"}`}
       >
          <div className="flex items-center gap-8">
             <IconChevron direction="back" />
             <span
                className={`${
                   variant === "big"
-                     ? "text-titleLarge font-extralight"
-                     : "text-labelLarge text-secondary"
+                     ? "text-title-large font-extralight"
+                     : "text-label-large text-secondary"
                }`}
             >
                SCROLL

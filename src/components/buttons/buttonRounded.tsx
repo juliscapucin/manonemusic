@@ -21,7 +21,7 @@ export default function ButtonRounded({
    const [isHovered, setIsHovered] = useState(false);
 
    const sharedStyles =
-      "text-bodyMedium lg:text-bodyLarge uppercase rounded-full border border-secondary px-4 py-2";
+      "text-body-medium lg:text-body-large uppercase rounded-full border border-secondary px-4 py-2";
    const buttonStyles = "inline-block";
    const overlayStyles = "bg-secondary text-primary pointer-events-none";
 

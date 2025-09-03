@@ -88,7 +88,7 @@ export default function PlayerTrack({
             </div>
          )}
          {/* Custom Player */}
-         {index === 0 && <div className="w-full h-[1px] bg-faded-30"></div>}
+         {index === 0 && <div className="w-full h-px bg-faded-30"></div>}
          <button
             className={`relative pt-4 pb-6 px-4 w-full group hover:bg-faded-5 transition-colors duration-300 ${isPlaying ? "bg-faded-5" : ""}`}
             onClick={buttonAction}
@@ -103,7 +103,7 @@ export default function PlayerTrack({
                   {isPlaying ? <IconPause /> : <IconPlay />}
                   <span className="">{formatDuration(playedSeconds)}</span>
                   <input
-                     className=" h-[1px] w-full bg-faded-30 appearance-none"
+                     className=" h-px w-full bg-faded-30 appearance-none"
                      type="range"
                      min={0}
                      max={duration}
@@ -118,7 +118,7 @@ export default function PlayerTrack({
                </div>
             </div>
          </button>
-         <div className="w-full h-[1px] bg-faded-30"></div>
+         <div className="w-full h-px bg-faded-30"></div>
       </>
    );
 }

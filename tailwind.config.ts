@@ -40,10 +40,6 @@ const config: Config = {
          animation: {
             "fade-in": "fadeIn 1s linear forwards",
          },
-         screens: {
-            landscape: { raw: "(min-width: 0) and (orientation: landscape)" },
-            portrait: { raw: "(min-width: 0) and (orientation: portrait)" },
-         },
          maxWidth: {
             desktop: "2000px",
          },
@@ -52,7 +48,6 @@ const config: Config = {
          },
          fontFamily: {
             headline: ["var(--font-primary) sans-serif"],
-            text: ["var(--font-secondary)"],
          },
          zIndex: {
             5: "5",
