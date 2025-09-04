@@ -12,19 +12,23 @@ import {
 
 type VideoPlayerProps = {
    src: string; // Vimeo video ID
+   isTrailerActive: boolean;
 };
 
-export default function VideoPlayer({ src }: VideoPlayerProps) {
+export default function VideoPlayer({
+   src,
+   isTrailerActive,
+}: VideoPlayerProps) {
    const iframeRef = useRef<HTMLIFrameElement | null>(null);
-   const [player, setPlayer] = useState<Player | null>(null);
-   const [isPlaying, setIsPlaying] = useState(false);
+   const [isPlaying, setIsPlaying] = useState(isTrailerActive);
    const [isMuted, setIsMuted] = useState(false);
+   const player = useRef<Player | null>(null);
 
    useEffect(() => {
-      if (!iframeRef.current || !src) return;
+      if (!iframeRef.current || !src || !isTrailerActive) return;
 
       const newPlayer = new Player(iframeRef.current);
-      setPlayer(newPlayer);
+      player.current = newPlayer;
 
       newPlayer.on("play", () => setIsPlaying(true));
       newPlayer.on("pause", () => setIsPlaying(false));
@@ -34,16 +38,16 @@ export default function VideoPlayer({ src }: VideoPlayerProps) {
       return () => {
          newPlayer.unload();
       };
-   }, [src]);
+   }, [src, isTrailerActive]);
 
    const handlePlayPause = () => {
-      if (!player) return;
-      isPlaying ? player.pause() : player.play();
+      if (!player.current) return;
+      isPlaying ? player.current.pause() : player.current.play();
    };
 
    const handleMuteToggle = () => {
-      if (!player) return;
-      player.setVolume(isMuted ? 1 : 0);
+      if (!player.current) return;
+      player.current.setVolume(isMuted ? 1 : 0);
       setIsMuted(!isMuted);
    };
 
@@ -64,7 +68,7 @@ export default function VideoPlayer({ src }: VideoPlayerProps) {
             ref={iframeRef}
             src={`https://player.vimeo.com/video/${src}?title=0&byline=0&portrait=0&muted=0&autoplay=1&controls=0&loop=0&dnt=1`}
             allow="autoplay; fullscreen"
-            className="w-full h-full"
+            className="w-full h-full bg-primary"
          />
          <div className="absolute bottom-4 left-4 right-4 flex justify-center z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             <div className="backdrop-blur-md bg-faded-10 py-2 px-8 rounded-full flex gap-16 items-center">
