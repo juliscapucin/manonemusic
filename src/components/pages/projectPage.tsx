@@ -53,37 +53,39 @@ export default function ProjectPage({
    }, [pathname]);
 
    return (
-      <PageWrapper ref={pageWrapperRef}>
-         {/* Project Page */}
-         <div className="gsap-project-page mr-4 pt-4 border-l border-r border-faded pb-16 lg:pb-8">
-            <ButtonBack slug={section} />
-            <div className="px-4 lg:px-8 mt-16">
-               <AutoGrid />
-               <TitleHeadline>{projectPageData.title}</TitleHeadline>
+      <>
+         <PageWrapper ref={pageWrapperRef}>
+            {/* Project Page */}
+            <div className="gsap-project-page mr-4 pt-4 border-l border-r border-faded pb-16 lg:pb-8">
+               <ButtonBack slug={section} />
+               <div className="px-4 lg:px-8 mt-16">
+                  <AutoGrid />
+                  <TitleHeadline>{projectPageData.title}</TitleHeadline>
 
-               {/* RENDER RELEASE DATE ONLY ON RELEASES */}
-               <div className="gsap-project-content mt-4">
-                  {pathname.includes("releases") &&
-                     projectPageData.releaseDate && (
-                        <p>
-                           Released{" "}
-                           {new Date(
-                              projectPageData.releaseDate,
-                           ).toLocaleDateString("en-US", {
-                              month: "long",
-                              year: "numeric",
-                           })}
-                        </p>
-                     )}
-                  {projectPageData.info && <p>{projectPageData.info}</p>}
+                  {/* RENDER RELEASE DATE ONLY ON RELEASES */}
+                  <div className="gsap-project-content mt-4">
+                     {pathname.includes("releases") &&
+                        projectPageData.releaseDate && (
+                           <p>
+                              Released{" "}
+                              {new Date(
+                                 projectPageData.releaseDate,
+                              ).toLocaleDateString("en-US", {
+                                 month: "long",
+                                 year: "numeric",
+                              })}
+                           </p>
+                        )}
+                     {projectPageData.info && <p>{projectPageData.info}</p>}
+                  </div>
                </div>
+               <ProjectPageContent
+                  {...projectPageData}
+                  setIsTrailerActive={setIsTrailerActive}
+                  setIsPageDisplaced={setIsPageDisplaced}
+               />
             </div>
-            <ProjectPageContent
-               {...projectPageData}
-               setIsTrailerActive={setIsTrailerActive}
-               setIsPageDisplaced={setIsPageDisplaced}
-            />
-         </div>
+         </PageWrapper>
          {/* Trailer */}
          {projectPageData.projectVideo && isTrailerActive && (
             <ProjectTrailer
@@ -95,6 +97,6 @@ export default function ProjectPage({
                }}
             />
          )}
-      </PageWrapper>
+      </>
    );
 }

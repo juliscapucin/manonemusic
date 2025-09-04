@@ -58,7 +58,10 @@ export default function ProjectTrailer({
                <IconChevron direction="back" />
                BACK
             </Button>
-            <VideoPlayer src={videoUrl.split("/").pop() || ""} />
+            <VideoPlayer
+               src={videoUrl.split("/").pop() || ""}
+               isTrailerActive={isTrailerActive}
+            />
          </div>
       </div>
    );
