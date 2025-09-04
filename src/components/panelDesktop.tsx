@@ -13,8 +13,8 @@ import { AllData, NavLink } from "@/types";
 import { PanelContent } from "@/components";
 import { useWindowDimensions } from "@/hooks";
 import { animateSplitText } from "@/animations";
-import { panelsEnter } from "@/lib/animations";
 import { ScrollProgress } from "@/components/ui";
+import { useCookieModalContext } from "@/context";
 
 type PanelDesktopProps = {
    data: AllData;
@@ -27,27 +27,34 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
    // const [scrollProgress, setScrollProgress] = useState(0);
    const scrollProgressRef = useRef(0);
    const { width } = useWindowDimensions();
+   const { isModalOpen } = useCookieModalContext();
+   const scrollSmootherRef = useRef<ScrollSmoother | null>(null);
 
    // Smooth Scroll
    useLayoutEffect(() => {
       gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
 
-      ScrollSmoother.create({
+      const smoother = ScrollSmoother.create({
          effects: true,
          smooth: 1,
          normalizeScroll: true,
          ease: "power3",
       });
 
+      scrollSmootherRef.current = smoother;
+
       return () => {
-         ScrollSmoother.get()?.kill();
-         ScrollTrigger.killAll();
+         scrollSmootherRef.current?.kill();
       };
    }, []);
 
+   // Pause ScrollSmoother if cookie modal is open
+   useLayoutEffect(() => {
+      scrollSmootherRef.current?.paused(isModalOpen);
+   }, [isModalOpen]);
+
    // Horizontal Panel animation
    useGSAP(() => {
-      console.log("horizontal animation");
       if (!panelsContainerRef.current) return;
       gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
 
@@ -82,9 +89,6 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
       if (width < 1024 || !container) return;
 
       const onWheel = (e: WheelEvent) => {
-         // Only handle wheel events if the event target is inside the panels container
-         if (!container.contains(e.target as Node)) return;
-
          // Ignore vertical scrolls
          if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
 
@@ -99,9 +103,8 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 
       return () => {
          container.removeEventListener("wheel", onWheel);
-         console.log("remove wheel");
       };
-   }, []);
+   }, [width]);
 
    // Title animations + routing funcionality
    useGSAP(
@@ -189,9 +192,23 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
    );
 
    // Fade in panels on load
-   useEffect(() => {
+   useGSAP(() => {
       if (!panelsContainerRef.current) return;
-      panelsEnter(panelsContainerRef.current as HTMLDivElement);
+      gsap.set(panelsContainerRef.current, {
+         opacity: 0,
+      });
+
+      gsap.fromTo(
+         panelsContainerRef.current,
+         {
+            opacity: 0,
+         },
+         {
+            opacity: 1,
+            duration: 0.6,
+            delay: 0.7,
+         },
+      );
    }, [panelsContainerRef]);
 
    return (

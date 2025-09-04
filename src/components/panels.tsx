@@ -3,13 +3,9 @@
 import { PanelDesktop, PanelMobile } from "@/components";
 import { Footer, Header, MenuMobile } from "@/components/ui";
 
-import { useWindowDimensions } from "@/hooks";
-
 import { AllData } from "@/types";
 
 export default function Panels({ data }: { data: AllData }) {
-   const { width } = useWindowDimensions();
-
    return (
       <main>
          <div className="hidden lg:block">

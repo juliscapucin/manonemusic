@@ -1,3 +1,6 @@
-import { PageContextProvider, usePageContext } from "./PageContext";
+import {
+   CookieModalContextProvider,
+   useCookieModalContext,
+} from "./CookieModalContext";
 
-export { PageContextProvider, usePageContext };
+export { CookieModalContextProvider, useCookieModalContext };

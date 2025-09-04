@@ -2,15 +2,20 @@ import { useEffect } from "react";
 
 export default function useCloseOnClickOutside(
    refContainer: React.RefObject<HTMLDivElement | null>,
-   handleFunction: (arg: boolean) => void,
+   refOpenButton: React.RefObject<HTMLDivElement | HTMLButtonElement | null>,
+   setIsOpen: (arg: boolean) => void,
    isModalOpen: boolean,
 ) {
    useEffect(() => {
-      if (!refContainer.current || !isModalOpen) return;
-
       function handleClickOutside(e: MouseEvent) {
-         if (isModalOpen && !refContainer.current!.contains(e.target as Node)) {
-            handleFunction(false);
+         if (!refContainer.current || !refOpenButton.current || !isModalOpen)
+            return;
+         if (
+            isModalOpen &&
+            !refContainer.current.contains(e.target as Node) &&
+            !refOpenButton.current.contains(e.target as Node)
+         ) {
+            setIsOpen(false);
          }
       }
 
@@ -19,5 +24,5 @@ export default function useCloseOnClickOutside(
       return () => {
          window.removeEventListener("click", handleClickOutside);
       };
-   }, [handleFunction, isModalOpen, refContainer]);
+   }, [setIsOpen, isModalOpen, refContainer, refOpenButton]);
 }
