@@ -52,7 +52,8 @@ export default function Cookies({ cookiesData }: CookiesProps) {
       const tl = gsap.timeline();
 
       tl.to(modalRef.current, {
-         yPercent: isModalOpen ? -150 : 0,
+         yPercent: isModalOpen ? 0 : 150,
+         opacity: isModalOpen ? 1 : 0,
          duration: 0.4,
          ease: "power2.out",
       }).to(
@@ -108,7 +109,7 @@ export default function Cookies({ cookiesData }: CookiesProps) {
                <div className="fixed top-0 left-0 right-0 bottom-0 max-w-desktop mx-auto flex items-end justify-end z-cookies-modal overflow-clip pointer-events-none">
                   <div
                      ref={cookieButtonRef}
-                     className="absolute right-8 bottom-8 flex items-center gap-4 bg-primary text-secondary border border-secondary rounded-full px-5 py-1 pointer-events-auto z-cookies-elements"
+                     className="absolute right-12 bottom-22 flex items-center gap-4 bg-primary text-secondary border border-secondary rounded-full px-5 py-1 pointer-events-auto z-cookies-elements"
                   >
                      <button
                         onClick={() => setIsModalOpen(true)}
@@ -128,35 +129,37 @@ export default function Cookies({ cookiesData }: CookiesProps) {
                {/* Modal */}
                <div
                   ref={modalRef}
-                  className="fixed top-20 left-4 right-4 md:left-auto md:right-4 lg:right-4 bottom-8 pr-0 md:w-3/4 lg:w-2/5 translate-y-[150%] z-cookies-elements"
+                  className="fixed opacity-0 top-4 left-4 right-4 md:left-auto md:right-4 bottom-6 pr-0 md:w-3/4 lg:w-2/5 z-cookies-elements"
                   role="dialog"
                   aria-modal="true"
                   aria-labelledby="cookie-modal-title"
                >
-                  {/* Button Close */}
-                  <div className="fixed top-[1px] right-4 left-1 bg-primary p-3 flex justify-end z-cookies-elements">
+                  {/* Close Button */}
+                  <div className="fixed top-[1px] right-4 left-1 bg-primary p-3 pt-4 flex justify-end z-cookies-elements">
                      <ButtonClose onClick={() => setIsModalOpen(false)} />
                   </div>
-                  {/* Bottom Margin */}
-                  <div className="fixed bottom-[1px] right-4 left-1 bg-primary p-4 flex justify-end z-cookies-elements"></div>
-                  {/* Content */}
-                  <div className="gutter-stable relative ml-auto lg:mr-8 bg-primary border border-secondary rounded-xs h-full w-full pb-8 overflow-y-scroll overflow-x-clip">
-                     <div className="custom-rich-text w-full px-4 lg:px-8 pb-8 text-secondary">
+
+                  {/* Dismiss Button */}
+                  <div className="fixed right-4 left-[1px] bottom-[1px] bg-primary flex justify-center items-center pointer-events-none z-cookies-elements">
+                     <ButtonRounded
+                        classes="block my-4 pointer-events-auto"
+                        onClick={() => handleOKButton("true")}
+                     >
+                        Agree and dismiss
+                     </ButtonRounded>
+                  </div>
+
+                  <div className="gutter-stable relative ml-auto lg:mr-8 bg-primary border border-secondary rounded-xs h-full w-full pb-28 overflow-y-scroll overflow-x-clip">
+                     <div className="custom-rich-text w-full px-4 lg:px-8 text-secondary">
                         <Heading
                            tag="h1"
                            id="cookie-modal-title"
                            variant="headline"
-                           classes="mb-16 mt-24 lg:mt-16"
+                           classes="mb-8 mt-24 lg:mt-18"
                         >
                            {cookiesData.title}
                         </Heading>
                         <PortableText value={cookiesData.content} />
-                        <ButtonRounded
-                           classes="mt-6 mx-auto"
-                           onClick={() => handleOKButton("true")}
-                        >
-                           Agree and dismiss
-                        </ButtonRounded>
                      </div>
                   </div>
                </div>
