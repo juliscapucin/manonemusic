@@ -61,7 +61,7 @@ const config: Config = {
             noise: "3000",
             projectsMenu: "4000",
             cookiesModal: "4500",
-            cookiesElements: "4510",
+            cookiesElements: "4600",
          },
          letterSpacing: { tightest: "-.075em" },
          lineHeight: { tightest: "0.1" },

@@ -15,7 +15,6 @@ export default function useCloseOnClickOutside(
             !refContainer.current.contains(e.target as Node) &&
             !refOpenButton.current.contains(e.target as Node)
          ) {
-            console.log("click outside");
             setIsOpen(false);
          }
       }

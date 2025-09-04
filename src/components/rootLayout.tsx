@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 import { Cookies } from "@/components/ui";
@@ -10,6 +10,7 @@ import { useWindowDimensions } from "@/hooks";
 import { Cookies as CookiesType } from "@/types";
 import { IntroPage } from "./pages";
 import subtitle from "./ui/subtitle";
+import { CookieModalContextProvider } from "@/context";
 
 type RootLayoutProps = {
    children: React.ReactNode;
@@ -43,11 +44,15 @@ export default function RootLayout({
             className={`relative w-screen overflow-x-clip bg-primary text-secondary ${fontClass}`}
          >
             {children}
-            <Cookies cookiesData={cookiesData} />
             <NoiseBackground />
-            {isTopLevelPath && width >= 1024 && (
-               <MouseFollower variant="small" />
-            )}
+            <CookieModalContextProvider>
+               <Cookies cookiesData={cookiesData} />
+            </CookieModalContextProvider>
+            <Suspense>
+               {isTopLevelPath && width >= 1024 && (
+                  <MouseFollower variant="small" />
+               )}
+            </Suspense>
             {/* <IntroPage /> */}
          </body>
       </html>

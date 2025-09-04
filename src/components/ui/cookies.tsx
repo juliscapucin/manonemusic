@@ -7,19 +7,30 @@ import gsap from "gsap";
 
 import { ButtonClose, ButtonRounded } from "@/components/buttons";
 import { Heading } from "@/components/ui";
-import { useCloseOnClickOutside, useCookieStorage } from "@/hooks";
+import {
+   useCloseOnClickOutside,
+   useCloseOnKeyPress,
+   useCookieStorage,
+} from "@/hooks";
 import { Cookies as CookiesType } from "@/types";
+import { useGSAP } from "@gsap/react";
+import { useCookieModalContext } from "@/context";
 
 type CookiesProps = {
    cookiesData: CookiesType;
 };
 
 export default function Cookies({ cookiesData }: CookiesProps) {
-   const { cookieConsent, setCookieConsent, updateCookieConsent } =
-      useCookieStorage();
-   const [isModalOpen, setIsModalOpen] = useState(false);
+   const {
+      isModalOpen,
+      setIsModalOpen,
+      cookieConsent,
+      setCookieConsent,
+      updateCookieConsent,
+   } = useCookieModalContext();
    const cookieButtonRef = useRef<HTMLDivElement>(null);
    const modalRef = useRef<HTMLDivElement>(null);
+   const backgroundOverlayRef = useRef<HTMLDivElement>(null);
 
    // Enter cookie button animation + modal initial position
    useLayoutEffect(() => {
@@ -33,16 +44,28 @@ export default function Cookies({ cookiesData }: CookiesProps) {
       });
    }, [cookieConsent]);
 
-   useEffect(() => {
-      if (!modalRef.current) return;
+   // Open / Close animation
+   useGSAP(() => {
+      if (!modalRef.current || !backgroundOverlayRef.current) return;
 
-      gsap.to(modalRef.current, {
+      const tl = gsap.timeline();
+
+      tl.to(modalRef.current, {
          yPercent: isModalOpen ? -150 : 0,
          duration: 0.4,
          ease: "power2.out",
-      });
+      }).to(
+         backgroundOverlayRef.current,
+         {
+            opacity: isModalOpen ? 1 : 0,
+            duration: 0.3,
+            ease: "power2.out",
+         },
+         "<", // sync with modal animation
+      );
    }, [isModalOpen]);
 
+   // Close on click outside hook
    useCloseOnClickOutside(
       modalRef,
       cookieButtonRef,
@@ -50,19 +73,8 @@ export default function Cookies({ cookiesData }: CookiesProps) {
       isModalOpen,
    );
 
-   useEffect(() => {
-      function handleKeyDown(e: KeyboardEvent) {
-         if (e.key === "Escape" && isModalOpen) {
-            setIsModalOpen(false);
-         }
-      }
-
-      window.addEventListener("keydown", handleKeyDown);
-
-      return () => {
-         window.removeEventListener("keydown", handleKeyDown);
-      };
-   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+   // Close on Escape key
+   useCloseOnKeyPress(isModalOpen, setIsModalOpen);
 
    if (cookieConsent === "true") return null;
 
@@ -87,13 +99,12 @@ export default function Cookies({ cookiesData }: CookiesProps) {
             <>
                {/* Background Overlay */}
                <div
-                  className={`fixed top-0 left-0 right-0 bottom-0 max-w-desktop mx-auto flex items-end justify-end z-cookies-modal overflow-clip transition-colors duration-300 ${
-                     isModalOpen
-                        ? "md:bg-primary/80 pointer-events-auto"
-                        : "pointer-events-none"
-                  }`}
-               >
-                  {/* Cookie Button */}
+                  ref={backgroundOverlayRef}
+                  className="fixed top-0 left-0 right-0 bottom-0 max-w-desktop mx-auto flex items-end justify-end overflow-clip md:bg-primary/80 z-cookies-modal pointer-events-none"
+               ></div>
+
+               {/* Cookie Button */}
+               <div className="fixed top-0 left-0 right-0 bottom-0 max-w-desktop mx-auto flex items-end justify-end z-cookies-modal overflow-clip pointer-events-none">
                   <div
                      ref={cookieButtonRef}
                      className="absolute right-8 bottom-8 flex items-center gap-4 bg-primary text-secondary border border-secondary rounded-full px-5 py-1 pointer-events-auto z-cookies-elements"
@@ -113,37 +124,20 @@ export default function Cookies({ cookiesData }: CookiesProps) {
                   </div>
                </div>
 
-               {/* Cookie Policy modal */}
+               {/* Modal */}
                <div
                   ref={modalRef}
-                  className="fixed top-24 left-4 right-4 md:left-auto md:right-4 lg:right-0 bottom-8 pr-0 z-cookies-modal md:w-3/4 lg:w-2/5 translate-y-[150%]"
+                  className="fixed top-20 left-4 right-4 md:left-auto md:right-4 lg:right-4 bottom-8 pr-0 md:w-3/4 lg:w-2/5 translate-y-[150%] z-cookies-elements"
                   role="dialog"
                   aria-modal="true"
                   aria-labelledby="cookie-modal-title"
                >
-                  {/* Gradients */}
-                  <div
-                     className={`absolute top-8 right-10 h-16 ml-auto bg-linear-to-b from-20% bg-gradient-middle from-primary to-transparent z-cookies-elements ${
-                        isModalOpen
-                           ? "transition-opacity duration-300 delay-300"
-                           : "opacity-0"
-                     }`}
-                  ></div>
-                  <div
-                     className={`absolute bottom-0 right-10 h-16 ml-auto bg-linear-to-t from-20% bg-gradient-middle from-primary to-transparent z-cookies-elements ${
-                        isModalOpen ? "" : "opacity-0"
-                     }`}
-                  ></div>
-
+                  {/* Button Close */}
+                  <div className="fixed top-[1px] right-4 left-1 bg-primary p-3 flex justify-end z-cookies-elements">
+                     <ButtonClose onClick={() => setIsModalOpen(false)} />
+                  </div>
                   {/* Content */}
-                  <div className="cookies-overlay gutter-stable relative ml-auto lg:mr-8 bg-primary border border-secondary rounded-3xl h-full pb-8 overflow-y-scroll pointer-events-auto">
-                     {/* Button Close */}
-                     <div className="absolute top-8 right-0">
-                        <ButtonClose
-                           classes={`mx-auto pr-4 mt-4 flex justify-end z-100`}
-                           onClick={() => setIsModalOpen(false)}
-                        />
-                     </div>
+                  <div className="gutter-stable relative ml-auto lg:mr-8 bg-primary border border-secondary rounded-xs h-full w-full pb-8 overflow-y-scroll overflow-x-clip">
                      <div className="custom-rich-text w-full px-4 lg:px-12 pb-12 text-secondary">
                         <Heading
                            tag="h1"
