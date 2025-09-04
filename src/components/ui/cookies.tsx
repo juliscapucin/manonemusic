@@ -137,9 +137,11 @@ export default function Cookies({ cookiesData }: CookiesProps) {
                   <div className="fixed top-[1px] right-4 left-1 bg-primary p-3 flex justify-end z-cookies-elements">
                      <ButtonClose onClick={() => setIsModalOpen(false)} />
                   </div>
+                  {/* Bottom Margin */}
+                  <div className="fixed bottom-[1px] right-4 left-1 bg-primary p-4 flex justify-end z-cookies-elements"></div>
                   {/* Content */}
                   <div className="gutter-stable relative ml-auto lg:mr-8 bg-primary border border-secondary rounded-xs h-full w-full pb-8 overflow-y-scroll overflow-x-clip">
-                     <div className="custom-rich-text w-full px-4 lg:px-12 pb-12 text-secondary">
+                     <div className="custom-rich-text w-full px-4 lg:px-8 pb-8 text-secondary">
                         <Heading
                            tag="h1"
                            id="cookie-modal-title"
@@ -150,7 +152,7 @@ export default function Cookies({ cookiesData }: CookiesProps) {
                         </Heading>
                         <PortableText value={cookiesData.content} />
                         <ButtonRounded
-                           classes="mt-8 mx-auto"
+                           classes="mt-6 mx-auto"
                            onClick={() => handleOKButton("true")}
                         >
                            Agree and dismiss
