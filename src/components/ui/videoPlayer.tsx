@@ -25,9 +25,11 @@ export default function VideoPlayer({
    const player = useRef<Player | null>(null);
 
    useEffect(() => {
-      if (!iframeRef.current || !src || !isTrailerActive) return;
+      if (!iframeRef.current || !src) return;
 
-      const newPlayer = new Player(iframeRef.current);
+      let newPlayer: Player | null = null;
+
+      newPlayer = new Player(iframeRef.current);
       player.current = newPlayer;
 
       newPlayer.on("play", () => setIsPlaying(true));
@@ -36,9 +38,12 @@ export default function VideoPlayer({
       newPlayer.getVolume().then((volume) => setIsMuted(volume === 0));
 
       return () => {
-         newPlayer.unload();
+         if (player.current) {
+            player.current.unload();
+            player.current = null;
+         }
       };
-   }, [src, isTrailerActive]);
+   }, [src]);
 
    const handlePlayPause = () => {
       if (!player.current) return;
