@@ -2,8 +2,8 @@
 
 import { Project } from "@/types";
 import { PlayerTrackList } from "@/components";
-import { Button, ButtonRounded } from "@/components/buttons";
-import { CustomLink, ImageWithSpinner, TextBlock } from "@/components/ui";
+import { ButtonRounded } from "@/components/buttons";
+import { ImageWithSpinner, TextBlock } from "@/components/ui";
 import { usePathname } from "next/navigation";
 
 type ProjectPageContentProps = Project & {
@@ -24,9 +24,9 @@ export default function ProjectPageContent({
    const pathname = usePathname();
 
    return (
-      <div className="gsap-project-page-content relative w-full md:flex md:flex-row items-start gap-8 mt-8 lg:pt-8 lg:px-8 border-t border-faded bg-primary">
+      <div className="gsap-project-page-content flex-1 relative w-full md:flex md:flex-row items-start gap-8 mt-8 pb-24 md:pb-0 lg:pt-8 lg:px-8 border-t border-faded bg-primary md:overflow-y-scroll">
          {/* IMAGE */}
-         <div className="gsap-project-image relative w-full md:w-1/2 lg:w-1/4 min-w-[300px] opacity-0">
+         <div className="gsap-project-image md:fixed w-full md:w-1/2 lg:w-1/3 min-w-[300px] opacity-0">
             <ImageWithSpinner
                quality={70}
                {...{
@@ -40,12 +40,12 @@ export default function ProjectPageContent({
          </div>
 
          {/* CONTENT */}
-         <div className="mt-2 px-4 lg:px-0 lg:flex-1 max-w-prose">
+         <div className="mt-2 md:ml-[50%] lg:ml-[30%] px-4 lg:px-0 md:pl-16 lg:pl-24 lg:flex-1 max-w-prose">
             {tracklist && <PlayerTrackList tracks={tracklist} />}
             {description && <TextBlock text={description} />}
 
             {/* Project Links */}
-            <div className="mt-16 flex flex-col lg:flex-row gap-4 w-fit mx-auto">
+            <div className="mt-10 flex flex-col lg:flex-row gap-4 w-fit mx-auto">
                {projectVideo && setIsTrailerActive && (
                   <ButtonRounded
                      key={"button-trailer"}
