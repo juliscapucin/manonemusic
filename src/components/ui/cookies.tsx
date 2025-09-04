@@ -1,17 +1,13 @@
 "use client";
 
 import { PortableText } from "@portabletext/react";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useLayoutEffect, useRef } from "react";
 
 import gsap from "gsap";
 
 import { ButtonClose, ButtonRounded } from "@/components/buttons";
 import { Heading } from "@/components/ui";
-import {
-   useCloseOnClickOutside,
-   useCloseOnKeyPress,
-   useCookieStorage,
-} from "@/hooks";
+import { useCloseOnClickOutside, useCloseOnKeyPress } from "@/hooks";
 import { Cookies as CookiesType } from "@/types";
 import { useGSAP } from "@gsap/react";
 import { useCookieModalContext } from "@/context";
@@ -46,7 +42,12 @@ export default function Cookies({ cookiesData }: CookiesProps) {
 
    // Open / Close animation
    useGSAP(() => {
-      if (!modalRef.current || !backgroundOverlayRef.current) return;
+      if (
+         !modalRef.current ||
+         !backgroundOverlayRef.current ||
+         cookieConsent === "true"
+      )
+         return;
 
       const tl = gsap.timeline();
 

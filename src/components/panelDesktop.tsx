@@ -49,8 +49,9 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
    }, []);
 
    // Pause ScrollSmoother if cookie modal is open
-   useEffect(() => {
-      if (isModalOpen) scrollSmootherRef.current?.paused(true);
+   useLayoutEffect(() => {
+      console.log(isModalOpen);
+      scrollSmootherRef.current?.paused(isModalOpen);
    }, [isModalOpen]);
 
    // Horizontal Panel animation

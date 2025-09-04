@@ -9,7 +9,6 @@ import { MouseFollower, NoiseBackground } from "@/components";
 import { useWindowDimensions } from "@/hooks";
 import { Cookies as CookiesType } from "@/types";
 import { IntroPage } from "./pages";
-import subtitle from "./ui/subtitle";
 import { CookieModalContextProvider } from "@/context";
 
 type RootLayoutProps = {
@@ -40,21 +39,21 @@ export default function RootLayout({
 
    return (
       <html lang="en" data-theme={rootTheme}>
-         <body
-            className={`relative w-screen overflow-x-clip bg-primary text-secondary ${fontClass}`}
-         >
-            {children}
-            <NoiseBackground />
-            <CookieModalContextProvider>
+         <CookieModalContextProvider>
+            <body
+               className={`relative w-screen overflow-x-clip bg-primary text-secondary ${fontClass}`}
+            >
+               {children}
+               <NoiseBackground />
                <Cookies cookiesData={cookiesData} />
-            </CookieModalContextProvider>
-            <Suspense>
-               {isTopLevelPath && width >= 1024 && (
-                  <MouseFollower variant="small" />
-               )}
-            </Suspense>
-            {/* <IntroPage /> */}
-         </body>
+               <Suspense>
+                  {isTopLevelPath && width >= 1024 && (
+                     <MouseFollower variant="small" />
+                  )}
+               </Suspense>
+               {/* <IntroPage /> */}
+            </body>
+         </CookieModalContextProvider>
       </html>
    );
 }
