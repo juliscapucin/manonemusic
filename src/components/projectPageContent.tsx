@@ -24,9 +24,9 @@ export default function ProjectPageContent({
     const pathname = usePathname();
 
     return (
-        <div className='gsap-project-page-content relative flex-1 w-fit gap-8 mt-8 pb-24 md:pb-0 lg:pt-8 lg:pl-8 md:pr-16 border-t border-faded md:overflow-y-auto bg-primary'>
+        <div className='gsap-project-page-content relative flex-1 gap-8 border-b border-l border-faded bg-primary pb-12 md:w-fit md:overflow-y-auto md:pb-0 lg:pl-8'>
             {/* IMAGE */}
-            <div className='gsap-project-image md:fixed w-full md:w-1/2 lg:w-1/3 xl:w-1/4 min-w-[300px] max-w-[550px] opacity-0'>
+            <div className='gsap-project-image z-50 w-full max-w-[550px] min-w-[300px] pt-8 opacity-0 md:fixed md:w-1/2 lg:w-1/3 xl:w-1/4'>
                 <ImageWithSpinner
                     quality={70}
                     {...{
@@ -37,15 +37,15 @@ export default function ProjectPageContent({
                         priority: true,
                     }}
                 />
+                §
             </div>
-
-            {/* CONTENT */}
-            <div className='mt-2 md:ml-[50vw] lg:ml-[30vw] xl:ml-[25vw] px-4 pt-4 lg:pt-0 lg:flex-1 max-w-prose'>
+            §{/* CONTENT */}
+            <div className='mb-8 h-fit max-w-prose px-4 pt-4 md:mb-16 md:ml-[50vw] md:pt-8 md:pr-8 lg:ml-[30vw] lg:flex-1 xl:ml-[25vw]'>
                 {tracklist && <PlayerTrackList tracks={tracklist} />}
                 {description && <TextBlock text={description} />}
 
                 {/* Project Links */}
-                <div className='mt-10 flex flex-col lg:flex-row gap-4 w-fit mx-auto'>
+                <div className='mx-auto mt-10 mb-8 flex w-fit flex-col items-center gap-4 lg:flex-row'>
                     {projectVideo && setIsTrailerActive && (
                         <ButtonRounded
                             key={'button-trailer'}

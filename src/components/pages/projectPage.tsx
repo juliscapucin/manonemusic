@@ -56,16 +56,16 @@ export default function ProjectPage({
         <>
             <main
                 ref={pageWrapperRef}
-                className='page-wrapper relative w-full h-svh overflow-x-clip md:overflow-clip pt-16 pb-20 lg:pb-0 lg:pr-40 lg:ml-8'
+                className='page-wrapper relative h-svh w-full overflow-x-clip pt-16 pr-4 pb-20 md:overflow-clip md:pr-0 lg:ml-8 lg:pr-40 lg:pb-0'
                 id='page-wrapper'
             >
                 {/* Outlines */}
-                <div className='gsap-project-page relative h-full flex flex-col ml-4 lg:ml-0 mr-4 border-l border-r border-faded'>
+                <div className='gsap-project-page relative mr-4 ml-4 flex h-full flex-col border-r border-l border-faded lg:ml-0'>
                     {/* Back Button */}
                     <ButtonBack slug={section} />
 
                     {/* Header */}
-                    <div className='px-4 lg:px-8 mt-16'>
+                    <div className='relative overflow-clip border-b border-faded px-4 pt-16 pb-4 lg:mr-8 lg:pl-8'>
                         <AutoGrid />
                         <TitleHeadline>{projectPageData.title}</TitleHeadline>
 
