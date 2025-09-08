@@ -14,7 +14,7 @@ export default function Logo({ subtitle }: LogoProps) {
    useEffect(() => {
       if (!subtitleRef.current) return;
 
-      animateSplitTextVertical(subtitleRef.current, 1500, 1.4);
+      animateSplitTextVertical(subtitleRef.current, 1.4, 0.6, 1, 0.03);
    }, []);
 
    return (

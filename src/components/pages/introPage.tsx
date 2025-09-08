@@ -14,15 +14,29 @@ export default function IntroPage() {
 
    useEffect(() => {
       if (!logoRef1.current || !logoRef2.current || !maskRef.current) return;
-      animateSplitTextVertical(logoRef1.current);
-      animateSplitTextVertical(logoRef2.current, undefined, 0.2);
 
-      // REVEAL
-      gsap.to(maskRef.current, {
+      const tl = gsap.timeline();
+
+      // Logo Animation
+      tl.add(
+         // (element, yTranslate, delay, duration, stagger)
+         animateSplitTextVertical(logoRef1.current, undefined, 0.2, 0.3, 0.05)!,
+      ).add(
+         animateSplitTextVertical(
+            logoRef2.current,
+            undefined,
+            undefined,
+            0.3,
+            0.05,
+         )!,
+      );
+
+      // Mask Reveal
+      tl.to(maskRef.current, {
          clipPath: "polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)",
-         delay: 2,
-         duration: 0.6,
-         ease: "power2.inOut",
+         delay: 0.6,
+         duration: 1,
+         ease: "power4.out",
       });
    }, []);
 
@@ -36,7 +50,7 @@ export default function IntroPage() {
       >
          {/* Header spacer */}
          <div className="fixed left-0 top-0 right-0 h-(--header-height-mobile) bg-primary border-b border-faded z-header"></div>
-         <SectionWrapper classes="h-[90svh] lg:pt-20 lg:pb-20">
+         <SectionWrapper classes="h-[90svh] lg:pt-20 lg:pb-20" isIntro={true}>
             <div className="mx-4 lg:mx-8 h-full flex flex-col justify-between">
                <div className="gsap-section-title mt-2 lg:mt-0 overflow-y-clip">
                   <h1

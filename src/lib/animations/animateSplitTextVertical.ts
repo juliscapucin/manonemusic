@@ -13,6 +13,7 @@ export const animateSplitTextVertical = (
    yTranslate?: number,
    delay?: number,
    duration?: number,
+   stagger?: number,
 ) => {
    if (!textElement) return;
    const split = new SplitText(textElement, { type: "chars" });
@@ -33,10 +34,9 @@ export const animateSplitTextVertical = (
       {
          opacity: 1,
          yPercent: 0,
-         duration: 0.8,
+         duration: duration || 0.8,
          delay: delay || 0,
-         stagger: 0.02,
-         ease: CustomEase.create("custom", customEase),
+         stagger: stagger || 0.02,
       },
    );
 };

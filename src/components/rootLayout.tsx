@@ -51,7 +51,7 @@ export default function RootLayout({
                      <MouseFollower variant="small" />
                   )}
                </Suspense>
-               {/* <IntroPage /> */}
+               <IntroPage />
             </body>
          </CookieModalContextProvider>
       </html>
