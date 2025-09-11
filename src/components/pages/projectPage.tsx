@@ -65,7 +65,7 @@ export default function ProjectPage({
                     <ButtonBack slug={section} />
 
                     {/* Header */}
-                    <div className='relative overflow-clip border-b border-faded px-4 pt-16 pb-4 lg:mr-8 lg:pl-8'>
+                    <div className='relative h-fit overflow-clip border-b border-faded px-4 pt-16 pb-4 lg:mr-8 lg:pl-8'>
                         <AutoGrid />
                         <TitleHeadline>{projectPageData.title}</TitleHeadline>
 

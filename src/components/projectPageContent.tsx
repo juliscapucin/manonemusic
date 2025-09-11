@@ -39,8 +39,9 @@ export default function ProjectPageContent({
                 />
                 §
             </div>
-            §{/* CONTENT */}
-            <div className='mb-8 h-fit max-w-prose px-4 pt-4 md:mb-16 md:ml-[50vw] md:pt-8 md:pr-8 lg:ml-[30vw] lg:flex-1 xl:ml-[25vw]'>
+
+            {/* CONTENT */}
+            <div className='mb-20 h-fit max-w-prose px-4 pt-4 md:mb-16 md:ml-[50vw] md:pt-8 md:pr-8 lg:mb-8 lg:ml-[30vw] lg:flex-1 xl:ml-[25vw]'>
                 {tracklist && <PlayerTrackList tracks={tracklist} />}
                 {description && <TextBlock text={description} />}
 
