@@ -5,9 +5,10 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollSmoother } from 'gsap/ScrollSmoother';
+import { Observer } from 'gsap/Observer';
 import { useGSAP } from '@gsap/react';
 
-gsap.registerPlugin(useGSAP, ScrollTrigger, ScrollSmoother);
+gsap.registerPlugin(useGSAP, ScrollTrigger, ScrollSmoother, Observer);
 
 import { AllData, NavLink } from '@/types';
 import { PanelContent } from '@/components';
@@ -83,26 +84,24 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
     }, []);
 
     // Left/right gestures through trackpad
-    useEffect(() => {
+    useGSAP(() => {
         const container = panelsContainerRef.current;
-        if (width < 1024 || !container) return;
+        if (width < 1024) return;
 
-        const onWheel = (e: WheelEvent) => {
-            // Ignore vertical scrolls
-            if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+        Observer.create({
+            target: window,
+            type: 'touch, pointer, wheel',
+            preventDefault: true,
 
-            e.preventDefault(); // Prevent horizontal native scroll
-            window.scrollBy({
-                top: e.deltaX, // Translate horizontal delta into vertical scroll
-                behavior: 'auto',
-            });
-        };
-
-        container.addEventListener('wheel', onWheel, { passive: false });
-
-        return () => {
-            container.removeEventListener('wheel', onWheel);
-        };
+            onChange: (self) => {
+                // Ignore vertical scrolls
+                if (Math.abs(self.deltaX) <= Math.abs(self.deltaY)) return;
+                window.scrollBy({
+                    top: self.deltaX * 3, // Translate horizontal delta into vertical scroll
+                    behavior: 'auto',
+                });
+            },
+        });
     }, [width]);
 
     // Title animations + routing funcionality
