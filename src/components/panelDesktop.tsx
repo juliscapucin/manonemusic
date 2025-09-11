@@ -30,6 +30,8 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
     const { isModalOpen } = useCookieModalContext();
     const scrollSmootherRef = useRef<ScrollSmoother | null>(null);
 
+    console.log('render panel desktop');
+
     // Smooth Scroll
     useLayoutEffect(() => {
         gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
@@ -128,7 +130,7 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 
             ScrollTrigger.create({
                 trigger: title,
-                start: 'left right-=4',
+                start: 'left right-=400',
                 //  start: index === 0 ? 'left+=30 left' : 'left right-=400',
                 end: 'right center',
                 invalidateOnRefresh: true,
@@ -141,7 +143,7 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
                 horizontal: true,
                 containerAnimation: tween,
                 onToggle: (self) => {
-                    if (self.isActive) {
+                    if (self.isActive && window.location.pathname !== slug) {
                         // cancel any existing timeout before starting a new one
                         if (slugTimeout) {
                             clearTimeout(slugTimeout);
@@ -161,12 +163,6 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
                                 slugTimeout = null;
                             }
                         }, 700);
-                    } else {
-                        // if trigger deactivates, cancel pending timeout
-                        if (slugTimeout) {
-                            clearTimeout(slugTimeout);
-                            slugTimeout = null;
-                        }
                     }
                 },
             });
