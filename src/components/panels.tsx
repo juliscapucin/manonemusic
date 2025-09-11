@@ -1,23 +1,29 @@
-"use client";
+'use client';
 
-import { PanelDesktop, PanelMobile } from "@/components";
-import { Footer, Header, MenuMobile } from "@/components/ui";
+import { PanelDesktop, PanelMobile } from '@/components';
+import { Footer, Header, MenuMobile } from '@/components/ui';
 
-import { AllData } from "@/types";
+import { AllData } from '@/types';
+
+import { useWindowDimensions } from '@/hooks';
 
 export default function Panels({ data }: { data: AllData }) {
-   return (
-      <main>
-         <div className="hidden lg:block">
-            <Header navLinks={data.headerNavLinks} />
-            <PanelDesktop data={data} sections={data.headerNavLinks} />
-            <Footer navLinks={data.headerNavLinks} />
-         </div>
+    const { width } = useWindowDimensions();
 
-         <div className="lg:hidden">
-            <MenuMobile navLinks={data.headerNavLinks} />
-            <PanelMobile data={data} />
-         </div>
-      </main>
-   );
+    return (
+        <main>
+            {width >= 1024 ? (
+                <>
+                    <Header navLinks={data.headerNavLinks} />
+                    <PanelDesktop data={data} sections={data.headerNavLinks} />
+                    <Footer navLinks={data.headerNavLinks} />{' '}
+                </>
+            ) : (
+                <>
+                    <MenuMobile navLinks={data.headerNavLinks} />
+                    <PanelMobile data={data} />
+                </>
+            )}
+        </main>
+    );
 }

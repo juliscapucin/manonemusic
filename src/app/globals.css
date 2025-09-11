@@ -175,7 +175,7 @@
 
 @layer components {
     .logo {
-        @apply -ml-1 text-[clamp(4rem,12vw,13rem)] leading-[0.8] font-medium lg:-ml-3 portrait:mt-16;
+        @apply -ml-1 text-[clamp(5rem,12vw,13rem)] leading-[clamp(3.8rem,9vw,10rem)] font-medium text-nowrap lg:-ml-3;
     }
 
     .texture1 {
