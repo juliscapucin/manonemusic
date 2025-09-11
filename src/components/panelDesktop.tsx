@@ -105,96 +105,96 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
     }, [width]);
 
     // Title animations + routing funcionality
-    useGSAP(
-        () => {
-            // Start ScrollTrigger when window is in desktop breakpoint
-            if (width < 1024 || !tween) return;
+    useGSAP(() => {
+        // Start ScrollTrigger when window is in desktop breakpoint
+        if (width < 1024 || !tween) return;
 
-            const titles = panelsContainerRef.current?.querySelectorAll(
-                '.gsap-section-title'
-            ) as HTMLHeadingElement[] | undefined;
+        const titles = panelsContainerRef.current?.querySelectorAll(
+            '.gsap-section-title'
+        ) as HTMLHeadingElement[] | undefined;
 
-            if (!titles) return;
+        if (!titles) return;
 
-            let pendingSlug: string | null = null;
+        // Title ScrollTrigger + route handler
+        titles.forEach((title, index) => {
+            if (!title) return;
+            let slug =
+                index === 0
+                    ? '/'
+                    : `/${title.innerText.toLowerCase().replace(/\s+/g, '-')}`;
+            if (!slug) return;
 
-            // Title ScrollTrigger + route handler
-            titles.forEach((title, index) => {
-                if (!title) return;
-                let slug =
+            let slugTimeout: ReturnType<typeof setTimeout> | null = null;
+
+            ScrollTrigger.create({
+                trigger: title,
+                start: 'left right-=4',
+                //  start: index === 0 ? 'left+=30 left' : 'left right-=400',
+                end: 'right center',
+                invalidateOnRefresh: true,
+                animation:
                     index === 0
-                        ? '/'
-                        : `/${title.innerText.toLowerCase().replace(/\s+/g, '-')}`;
-                if (!slug) return;
-
-                ScrollTrigger.create({
-                    trigger: title,
-                    start: 'left right-=4',
-                    //   start: index === 0 ? 'left+=3 left' : 'left right-=4',
-                    end: 'right center',
-                    invalidateOnRefresh: true,
-                    animation:
-                        index === 0 ? undefined : animateSplitText(title, 2000), // don't run animation on home section
-                    toggleActions: 'play none none reverse',
-                    fastScrollEnd: true,
-                    horizontal: true,
-                    containerAnimation: tween,
-                    // markers: true,
-                    onToggle: (self) => {
-                        // Only update pathname / history if trigger is active and if new section
-                        if (
-                            self.isActive &&
-                            window.location.pathname !== slug
-                        ) {
-                            // Check how deep route is '/' Ex: '/film/sodo-express' vs '/film'
-                            const slashCount = (
-                                window.location.pathname.match(/\//g) || []
-                            ).length;
-
-                            // If first level
-                            if (slashCount < 2) {
-                                pendingSlug = slug;
-                            }
+                        ? undefined
+                        : animateSplitText(title, 2000, undefined), // don't run animation on home section
+                toggleActions: 'play none none reverse',
+                fastScrollEnd: true,
+                horizontal: true,
+                containerAnimation: tween,
+                onToggle: (self) => {
+                    if (self.isActive) {
+                        // cancel any existing timeout before starting a new one
+                        if (slugTimeout) {
+                            clearTimeout(slugTimeout);
+                            slugTimeout = null;
                         }
-                    },
-                });
 
-                // Pin Title Horizontally on long sections
-                const projectsMenu = title.parentElement
-                    ?.nextElementSibling as HTMLElement;
-
-                const projectsMenuWidth = projectsMenu?.offsetWidth;
-
-                if (!projectsMenuWidth || projectsMenuWidth < window.innerWidth)
-                    return;
-
-                gsap.to(title, {
-                    scrollTrigger: {
-                        scrub: true,
-                        trigger: projectsMenu,
-                        start: 'left-=20 left',
-                        end: () =>
-                            '+=' + (projectsMenuWidth - window.innerWidth),
-                        invalidateOnRefresh: true,
-                        // markers: true,
-                        containerAnimation: tween,
-                    },
-                    x: () => '+=' + (projectsMenuWidth - window.innerWidth),
-                    ease: 'none',
-                });
-            }, panelsContainerRef.current);
-
-            ScrollTrigger.observe({
-                target: window,
-                type: 'scroll',
-                onStop: () => {
-                    window.history.pushState(null, '', pendingSlug || '/');
+                        slugTimeout = setTimeout(() => {
+                            if (
+                                self.isActive &&
+                                window.location.pathname !== slug
+                            ) {
+                                window.history.pushState(null, '', slug);
+                            }
+                            // clear after use
+                            if (slugTimeout) {
+                                clearTimeout(slugTimeout);
+                                slugTimeout = null;
+                            }
+                        }, 700);
+                    } else {
+                        // if trigger deactivates, cancel pending timeout
+                        if (slugTimeout) {
+                            clearTimeout(slugTimeout);
+                            slugTimeout = null;
+                        }
+                    }
                 },
-                onStopDelay: 2,
             });
-        },
-        { dependencies: [tween], scope: panelsContainerRef }
-    );
+
+            // Pin Title Horizontally on long sections
+            const projectsMenu = title.parentElement
+                ?.nextElementSibling as HTMLElement;
+
+            const projectsMenuWidth = projectsMenu?.offsetWidth;
+
+            if (!projectsMenuWidth || projectsMenuWidth < window.innerWidth)
+                return;
+
+            gsap.to(title, {
+                scrollTrigger: {
+                    scrub: true,
+                    trigger: projectsMenu,
+                    start: 'left-=20 left',
+                    end: () => '+=' + (projectsMenuWidth - window.innerWidth),
+                    invalidateOnRefresh: true,
+                    markers: true,
+                    containerAnimation: tween,
+                },
+                x: () => '+=' + (projectsMenuWidth - window.innerWidth),
+                ease: 'none',
+            });
+        }, panelsContainerRef.current);
+    }, [{ dependencies: [tween], scope: panelsContainerRef }]);
 
     // Fade in panels on load
     useGSAP(() => {

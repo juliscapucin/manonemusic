@@ -3,7 +3,7 @@ import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
 gsap.registerPlugin(ScrollToPlugin);
 
-export const handlePanelSlide = (targetSlug: string) => {
+export const handlePanelSlide = (targetSlug: string, initial?: boolean) => {
     const targetPanel =
         targetSlug === '/'
             ? (document.querySelector('[data-id=panel-home]') as HTMLDivElement)
@@ -21,8 +21,15 @@ export const handlePanelSlide = (targetSlug: string) => {
             autoKill: false,
         },
         duration: 0.5,
-        // onComplete: () => {
-        //    window.history.pushState(null, "", `${targetSlug}`);
-        // },
+        //   onComplete: () => {
+        //       // Only push state on initial load
+        //       if (initial) {
+        //           window.history.pushState(
+        //               null,
+        //               '',
+        //               targetSlug === '/' ? '/' : `/${targetSlug}`
+        //           );
+        //       }
+        //   },
     });
 };

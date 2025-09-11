@@ -24,7 +24,9 @@ export default function RootLayout({
 }: RootLayoutProps) {
     const [rootTheme, setRootTheme] = useState<string>('dark');
     const [isTopLevel, setIsTopLevel] = useState(false);
-    const pathname = usePathname();
+    //  const pathname = usePathname();
+
+    console.log('render root layout');
 
     useEffect(() => {
         const storageTheme = localStorage.getItem('theme');
@@ -33,10 +35,10 @@ export default function RootLayout({
         }
     }, []);
 
-    useEffect(() => {
-        const segments = pathname.split('/').filter(Boolean);
-        setIsTopLevel(pathname === '/' || segments.length === 1);
-    }, [pathname]);
+    //  useEffect(() => {
+    //      const segments = pathname.split('/').filter(Boolean);
+    //      setIsTopLevel(pathname === '/' || segments.length === 1);
+    //  }, []);
 
     return (
         <Suspense>
@@ -48,11 +50,11 @@ export default function RootLayout({
                         {children}
                         <NoiseBackground />
                         <Cookies cookiesData={cookiesData} />
-                        <Suspense>
+                        {/* <Suspense>
                             {isTopLevel && pathname === '/' && (
                                 <MouseFollower variant='small' />
                             )}
-                        </Suspense>
+                        </Suspense> */}
                         <IntroPage />
                     </body>
                 </CookieModalContextProvider>
