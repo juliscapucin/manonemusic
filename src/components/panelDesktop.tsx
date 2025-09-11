@@ -1,239 +1,239 @@
-"use client";
+'use client';
 
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { ScrollSmoother } from "gsap/ScrollSmoother";
-import { useGSAP } from "@gsap/react";
+import gsap from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollSmoother } from 'gsap/ScrollSmoother';
+import { useGSAP } from '@gsap/react';
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(useGSAP, ScrollTrigger, ScrollSmoother);
 
-import { AllData, NavLink } from "@/types";
-import { PanelContent } from "@/components";
-import { useWindowDimensions } from "@/hooks";
-import { animateSplitText } from "@/animations";
-import { ScrollProgress } from "@/components/ui";
-import { useCookieModalContext } from "@/context";
+import { AllData, NavLink } from '@/types';
+import { PanelContent } from '@/components';
+import { useWindowDimensions } from '@/hooks';
+import { animateSplitText } from '@/animations';
+import { ScrollProgress } from '@/components/ui';
+import { useCookieModalContext } from '@/context';
 
 type PanelDesktopProps = {
-   data: AllData;
-   sections: NavLink[];
+    data: AllData;
+    sections: NavLink[];
 };
 
 export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
-   const panelsContainerRef = useRef<HTMLDivElement | null>(null);
-   const [tween, setTween] = useState<gsap.core.Tween | null>(null);
-   // const [scrollProgress, setScrollProgress] = useState(0);
-   const scrollProgressRef = useRef(0);
-   const { width } = useWindowDimensions();
-   const { isModalOpen } = useCookieModalContext();
-   const scrollSmootherRef = useRef<ScrollSmoother | null>(null);
+    const panelsContainerRef = useRef<HTMLDivElement | null>(null);
+    const [tween, setTween] = useState<gsap.core.Tween | null>(null);
+    const scrollProgressRef = useRef(0);
+    const { width } = useWindowDimensions();
+    const { isModalOpen } = useCookieModalContext();
+    const scrollSmootherRef = useRef<ScrollSmoother | null>(null);
 
-   // Smooth Scroll
-   useLayoutEffect(() => {
-      gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
+    // Smooth Scroll
+    useLayoutEffect(() => {
+        gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
 
-      const smoother = ScrollSmoother.create({
-         effects: true,
-         smooth: 1,
-         normalizeScroll: true,
-         ease: "power3",
-      });
+        const smoother = ScrollSmoother.create({
+            effects: true,
+            smooth: 1,
+            normalizeScroll: true,
+            ease: 'power3',
+        });
 
-      scrollSmootherRef.current = smoother;
+        scrollSmootherRef.current = smoother;
 
-      return () => {
-         scrollSmootherRef.current?.kill();
-      };
-   }, []);
+        return () => {
+            scrollSmootherRef.current?.kill();
+        };
+    }, []);
 
-   // Pause ScrollSmoother if cookie modal is open
-   useLayoutEffect(() => {
-      scrollSmootherRef.current?.paused(isModalOpen);
-   }, [isModalOpen]);
+    // Pause ScrollSmoother if cookie modal is open
+    useLayoutEffect(() => {
+        scrollSmootherRef.current?.paused(isModalOpen);
+    }, [isModalOpen]);
 
-   // Horizontal Panel animation
-   useGSAP(() => {
-      if (!panelsContainerRef.current) return;
-      gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
+    // Horizontal Panel animation
+    useGSAP(() => {
+        if (!panelsContainerRef.current || width < 1024) return;
 
-      /* Panels */
-      const container = panelsContainerRef.current;
+        /* Panels */
+        const container = panelsContainerRef.current;
 
-      const tweenRef = gsap.to(".gsap-panels-container", {
-         x: () => -1 * (container.scrollWidth - innerWidth),
-         duration: 5,
-         ease: "none",
-         scrollTrigger: {
-            trigger: container,
-            pin: true,
-            start: "top top",
-            scrub: 1,
-            end: () => "+=" + (container.scrollWidth - container.offsetWidth),
-            invalidateOnRefresh: true,
-            onUpdate: (self) => {
-               scrollProgressRef.current = self.progress * 100;
+        const tweenRef = gsap.to('.gsap-panels-container', {
+            x: () => -1 * (container.scrollWidth - innerWidth),
+            duration: 5,
+            ease: 'none',
+            scrollTrigger: {
+                trigger: container,
+                pin: true,
+                start: 'top top',
+                scrub: 1,
+                end: () =>
+                    '+=' + (container.scrollWidth - container.offsetWidth),
+                invalidateOnRefresh: true,
+                onUpdate: (self) => {
+                    scrollProgressRef.current = self.progress * 100;
+                },
+                // markers: true,
             },
-            // markers: true,
-         },
-      });
+        });
 
-      // set Ref value to pass to title animations
-      setTween(tweenRef);
-   }, []);
+        // set Ref value to pass to title animations
+        setTween(tweenRef);
+    }, []);
 
-   // Left/right gestures through trackpad
-   useEffect(() => {
-      const container = panelsContainerRef.current;
-      if (width < 1024 || !container) return;
+    // Left/right gestures through trackpad
+    useEffect(() => {
+        const container = panelsContainerRef.current;
+        if (width < 1024 || !container) return;
 
-      const onWheel = (e: WheelEvent) => {
-         // Ignore vertical scrolls
-         if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
+        const onWheel = (e: WheelEvent) => {
+            // Ignore vertical scrolls
+            if (Math.abs(e.deltaX) <= Math.abs(e.deltaY)) return;
 
-         e.preventDefault(); // Prevent horizontal native scroll
-         window.scrollBy({
-            top: e.deltaX, // Translate horizontal delta into vertical scroll
-            behavior: "auto",
-         });
-      };
+            e.preventDefault(); // Prevent horizontal native scroll
+            window.scrollBy({
+                top: e.deltaX, // Translate horizontal delta into vertical scroll
+                behavior: 'auto',
+            });
+        };
 
-      container.addEventListener("wheel", onWheel, { passive: false });
+        container.addEventListener('wheel', onWheel, { passive: false });
 
-      return () => {
-         container.removeEventListener("wheel", onWheel);
-      };
-   }, [width]);
+        return () => {
+            container.removeEventListener('wheel', onWheel);
+        };
+    }, [width]);
 
-   // Title animations + routing funcionality
-   useGSAP(
-      () => {
-         // Start ScrollTrigger when window is in desktop breakpoint
-         if (width < 1024 || !tween) return;
+    // Title animations + routing funcionality
+    //  useGSAP(
+    //      () => {
+    //          // Start ScrollTrigger when window is in desktop breakpoint
+    //          if (width < 1024 || !tween) return;
 
-         gsap.registerPlugin(ScrollTrigger);
+    //          const titles = panelsContainerRef.current?.querySelectorAll(
+    //              '.gsap-section-title'
+    //          ) as HTMLHeadingElement[] | undefined;
 
-         // Wait for the panels to slide into position before starting routing functionality
-         setTimeout(() => {
-            const titles = panelsContainerRef.current?.querySelectorAll(
-               ".gsap-section-title",
-            ) as HTMLHeadingElement[] | undefined;
+    //          if (!titles) return;
 
-            if (!titles) return;
+    //          // Title ScrollTrigger + route handler
+    //          titles.forEach((title, index) => {
+    //              if (!title) return;
+    //              let slug =
+    //                  index === 0
+    //                      ? '/'
+    //                      : `/${title.innerText.toLowerCase().replace(/\s+/g, '-')}`;
+    //              if (!slug) return;
 
-            // Title ScrollTrigger + route handler
-            titles.forEach((title, index) => {
-               if (!title) return;
-               let slug =
-                  index === 0
-                     ? "/"
-                     : `/${title.innerText.toLowerCase().replace(/\s+/g, "-")}`;
-               if (!slug) return;
+    //              ScrollTrigger.create({
+    //                  trigger: title,
+    //                  start: index === 0 ? 'left+=3 left' : 'left right-=4',
+    //                  end: 'right center',
+    //                  invalidateOnRefresh: true,
+    //                  animation:
+    //                      index === 0 ? undefined : animateSplitText(title, 2000), // don't run animation on home section
+    //                  toggleActions: 'play none none reverse',
+    //                  fastScrollEnd: true,
+    //                  horizontal: true,
+    //                  containerAnimation: tween,
+    //                  // markers: true,
+    //                  onToggle: (self) => {
+    //                      // Only update pathname / history if trigger is active and if new section
+    //                      if (
+    //                          self.isActive &&
+    //                          window.location.pathname !== slug
+    //                      ) {
+    //                          // Check how deep route is '/' Ex: '/film/sodo-express' vs '/film'
+    //                          const slashCount = (
+    //                              window.location.pathname.match(/\//g) || []
+    //                          ).length;
 
-               ScrollTrigger.create({
-                  trigger: title,
-                  start: index === 0 ? "left+=30 left" : "left right-=400",
-                  end: "right center",
-                  invalidateOnRefresh: true,
-                  animation:
-                     index === 0 ? undefined : animateSplitText(title, 2000), // don't run animation on home section
-                  toggleActions: "play none none reverse",
-                  fastScrollEnd: true,
-                  horizontal: true,
-                  containerAnimation: tween,
-                  // markers: true,
-                  onToggle: (self) => {
-                     // Only update pathname / history if trigger is active and if new section
-                     if (self.isActive && window.location.pathname !== slug) {
-                        // Check how deep route is '/' Ex: '/film/sodo-express' vs '/film'
-                        const slashCount = (
-                           window.location.pathname.match(/\//g) || []
-                        ).length;
+    //                          // If first level
+    //                          if (slashCount < 2) {
+    //                              window.history.pushState(null, '', slug);
+    //                          }
+    //                      }
+    //                  },
+    //              });
 
-                        // If first level
-                        if (slashCount < 2) {
-                           window.history.pushState(null, "", slug);
-                        }
-                     }
-                  },
-               });
+    //              // Pin Title Horizontally on long sections
+    //              const projectsMenu = title.parentElement
+    //                  ?.nextElementSibling as HTMLElement;
 
-               // Pin Title Horizontally on long sections
-               const projectsMenu = title.parentElement
-                  ?.nextElementSibling as HTMLElement;
+    //              const projectsMenuWidth = projectsMenu?.offsetWidth;
 
-               const projectsMenuWidth = projectsMenu?.offsetWidth;
+    //              if (!projectsMenuWidth || projectsMenuWidth < window.innerWidth)
+    //                  return;
 
-               if (!projectsMenuWidth || projectsMenuWidth < window.innerWidth)
-                  return;
+    //              gsap.to(title, {
+    //                  scrollTrigger: {
+    //                      scrub: true,
+    //                      trigger: projectsMenu,
+    //                      start: 'left-=20 left',
+    //                      end: () =>
+    //                          '+=' + (projectsMenuWidth - window.innerWidth),
+    //                      invalidateOnRefresh: true,
+    //                      // markers: true,
+    //                      containerAnimation: tween,
+    //                  },
+    //                  x: () => '+=' + (projectsMenuWidth - window.innerWidth),
+    //                  ease: 'none',
+    //              });
+    //          }, panelsContainerRef.current);
 
-               gsap.to(title, {
-                  scrollTrigger: {
-                     scrub: true,
-                     trigger: projectsMenu,
-                     start: "left-=20 left",
-                     end: () => "+=" + (projectsMenuWidth - window.innerWidth),
-                     invalidateOnRefresh: true,
-                     // markers: true,
-                     containerAnimation: tween,
-                  },
-                  x: () => "+=" + (projectsMenuWidth - window.innerWidth),
-                  ease: "none",
-               });
-            }, panelsContainerRef.current);
-         }, 10); // Delay routing functionality
+    //          return () => {
+    //              ScrollTrigger.killAll();
+    //          };
+    //      },
+    //      { dependencies: [tween], scope: panelsContainerRef }
+    //  );
 
-         return () => {
-            ScrollTrigger.killAll();
-         };
-      },
-      { dependencies: [tween], scope: panelsContainerRef },
-   );
-
-   // Fade in panels on load
-   useGSAP(() => {
-      if (!panelsContainerRef.current) return;
-      gsap.set(panelsContainerRef.current, {
-         opacity: 0,
-      });
-
-      gsap.fromTo(
-         panelsContainerRef.current,
-         {
+    // Fade in panels on load
+    useGSAP(() => {
+        if (!panelsContainerRef.current) return;
+        gsap.set(panelsContainerRef.current, {
             opacity: 0,
-         },
-         {
-            opacity: 1,
-            duration: 0.6,
-            delay: 0.7,
-         },
-      );
-   }, [panelsContainerRef]);
+        });
 
-   return (
-      <>
-         <div id="smooth-wrapper">
-            <div id="smooth-content">
-               <div
-                  ref={panelsContainerRef}
-                  className="gsap-panels-container relative flex gap-96 opacity-0"
-               >
-                  {sections.map((section) => {
-                     return (
-                        <section
-                           data-id={`panel-${section.slug === "/" ? "home" : section.slug}`}
-                           className="gsap-panel h-screen min-h-full px-8 min-w-fit w-fit"
-                           key={`panel-${section.slug}`}
-                        >
-                           <PanelContent data={data} section={section.slug} />
-                        </section>
-                     );
-                  })}
-               </div>
+        gsap.fromTo(
+            panelsContainerRef.current,
+            {
+                opacity: 0,
+            },
+            {
+                opacity: 1,
+                duration: 0.6,
+                delay: 0.7,
+            }
+        );
+    }, [panelsContainerRef]);
+
+    return (
+        <div id='smooth-wrapper'>
+            <div id='smooth-content'>
+                <div
+                    ref={panelsContainerRef}
+                    className='gsap-panels-container relative flex gap-96 opacity-0'
+                >
+                    {sections.map((section) => {
+                        return (
+                            <section
+                                data-id={`panel-${section.slug === '/' ? 'home' : section.slug}`}
+                                className='gsap-panel h-screen min-h-full w-fit min-w-fit px-8'
+                                key={`panel-${section.slug}`}
+                            >
+                                <PanelContent
+                                    data={data}
+                                    section={section.slug}
+                                />
+                            </section>
+                        );
+                    })}
+                </div>
+                {/* TODO: enable scroll progress bar */}
+                <ScrollProgress progressRef={scrollProgressRef} />
             </div>
-         </div>
-         <ScrollProgress progressRef={scrollProgressRef} />
-      </>
-   );
+        </div>
+    );
 }

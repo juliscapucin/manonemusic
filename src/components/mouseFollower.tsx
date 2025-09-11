@@ -1,102 +1,87 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from 'react';
 
-import { gsap } from "gsap";
+import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
+import { Observer } from 'gsap/Observer';
+gsap.registerPlugin(useGSAP, Observer);
 
-import { IconChevron } from "@/components/icons";
-import { usePathname } from "next/navigation";
+import { IconChevron } from '@/components/icons';
+import { usePathname } from 'next/navigation';
 
 type Props = {
-   variant: "big" | "small";
+    variant: 'big' | 'small';
 };
 
 export default function MouseFollower({ variant }: Props) {
-   const refCursor = useRef<HTMLDivElement | null>(null);
-   const [isActive, setIsActive] = useState(true);
-   const activityTimeout = useRef<NodeJS.Timeout | null>(null);
-   const pathname = usePathname();
+    const refCursor = useRef<HTMLDivElement | null>(null);
 
-   // Shared activity handler (scroll or mousemove)
-   const triggerActivity = (pathname: string) => {
-      setIsActive(pathname !== "/");
+    const fadeOutAnimation = () =>
+        gsap.to(refCursor.current, { opacity: 0, duration: 0.7 });
 
-      if (activityTimeout.current) clearTimeout(activityTimeout.current);
-      activityTimeout.current = setTimeout(() => {
-         setIsActive(false);
-      }, 3000); // show after 3s of inactivity
-   };
+    // Scroll detection
+    useGSAP(() => {
+        Observer.create({
+            type: 'wheel,touch,pointer',
+            onMove: fadeOutAnimation,
+            onChange: fadeOutAnimation,
+            onStop: () => {
+                gsap.to(refCursor.current, {
+                    opacity: 1,
+                    duration: 0.7,
+                    delay: 5,
+                });
+            },
+        });
+    }, []);
 
-   // Active / Inactive
-   useEffect(() => {
-      if (!refCursor.current) return;
+    // Mouse follower movement
+    useEffect(() => {
+        const cursorDiv = refCursor.current;
+        if (!cursorDiv || !cursorDiv.parentElement) return;
 
-      if (isActive) {
-         gsap.to(refCursor.current, { opacity: 0, duration: 0.7 });
-      } else {
-         gsap.to(refCursor.current, { opacity: 1, duration: 0.7 });
-      }
-   }, [isActive]);
+        gsap.set(cursorDiv, { xPercent: -50, yPercent: -50 });
 
-   // Scroll detection
-   useEffect(() => {
-      window.addEventListener("scroll", () => triggerActivity(pathname), {
-         passive: true,
-      });
-      return () => {
-         window.removeEventListener("scroll", () => triggerActivity(pathname));
-         if (activityTimeout.current) clearTimeout(activityTimeout.current);
-      };
-   }, [pathname]);
+        const moveCursor = (e: MouseEvent) => {
+            const parentRect = cursorDiv.parentElement?.getBoundingClientRect();
 
-   // Mouse movement detection
-   useEffect(() => {
-      const cursorDiv = refCursor.current;
-      if (!cursorDiv || !cursorDiv.parentElement) return;
+            if (!parentRect) return;
+            const relativeX = e.clientX - parentRect.left;
 
-      gsap.set(cursorDiv, { xPercent: -50, yPercent: -50 });
+            gsap.to(cursorDiv, {
+                x: relativeX,
+                y: e.clientY,
+                duration: 0.8,
+            });
+        };
 
-      const moveCursor = (e: MouseEvent) => {
-         const parentRect = cursorDiv.parentElement?.getBoundingClientRect();
+        const parent = cursorDiv.parentElement;
+        parent.addEventListener('mousemove', moveCursor);
 
-         if (!parentRect) return;
-         const relativeX = e.clientX - parentRect.left;
+        return () => {
+            parent.removeEventListener('mousemove', moveCursor);
+        };
+    }, []);
 
-         triggerActivity(pathname);
-
-         gsap.to(cursorDiv, {
-            x: relativeX,
-            y: e.clientY,
-            duration: 0.3,
-         });
-      };
-
-      const parent = cursorDiv.parentElement;
-      parent.addEventListener("mousemove", moveCursor);
-
-      return () => {
-         parent.removeEventListener("mousemove", moveCursor);
-      };
-   }, [variant, pathname]);
-
-   return (
-      <div
-         ref={refCursor}
-         className={`fixed top-0 left-0 rounded-full flex items-center justify-center z-15 pointer-events-none border ${variant === "big" ? "w-40 h-40 bg-primary/30 border-secondary" : "w-24 h-24 bg-primary/30 border-secondary"}`}
-      >
-         <div className="flex items-center gap-8">
-            <IconChevron direction="back" />
-            <span
-               className={`${
-                  variant === "big"
-                     ? "text-title-large font-extralight"
-                     : "text-label-large text-secondary"
-               }`}
-            >
-               SCROLL
-            </span>
-            <IconChevron direction="forward" />
-         </div>
-      </div>
-   );
+    return (
+        <div
+            ref={refCursor}
+            className={`pointer-events-none fixed top-0 left-0 z-15 flex items-center justify-center rounded-full border ${variant === 'big' ? 'h-40 w-40 border-secondary bg-primary/30' : 'h-24 w-24 border-secondary bg-primary/30'}`}
+        >
+            <div className='flex items-center gap-8'>
+                <IconChevron direction='back' />
+                <span
+                    className={`${
+                        variant === 'big'
+                            ? 'text-title-large font-extralight'
+                            : 'text-label-large text-secondary'
+                    }`}
+                >
+                    SCROLL
+                </span>
+                <IconChevron direction='forward' />
+            </div>
+        </div>
+    );
 }

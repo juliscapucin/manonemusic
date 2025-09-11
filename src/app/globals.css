@@ -175,7 +175,7 @@
 
 @layer components {
     .logo {
-        @apply font-medium portrait:mt-16 text-[clamp(4rem,12vw,13rem)] leading-[0.8] -ml-1 lg:-ml-3;
+        @apply -ml-1 text-[clamp(4rem,12vw,13rem)] leading-[0.8] font-medium lg:-ml-3 portrait:mt-16;
     }
 
     .texture1 {
@@ -225,11 +225,11 @@
     }
 
     .underlined-link {
-        @apply inline-block uppercase relative overflow-x-clip w-fit text-secondary no-underline;
+        @apply relative inline-block w-fit overflow-x-clip text-secondary uppercase no-underline;
     }
 
     .underlined-link::after {
-        @apply content-[''] absolute z-50 bottom-[2px] left-0 w-full h-px bg-secondary transition-transform duration-300 -translate-x-[102%];
+        @apply absolute bottom-[2px] left-0 z-50 h-px w-full -translate-x-[102%] bg-secondary transition-transform duration-300 content-[''];
     }
 
     .underlined-link:hover::after,
