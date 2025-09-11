@@ -56,11 +56,11 @@ export default function ProjectPage({
         <>
             <main
                 ref={pageWrapperRef}
-                className='page-wrapper relative h-svh w-full overflow-x-clip pt-16 pr-4 pb-20 md:overflow-clip md:pr-0 lg:ml-8 lg:pr-40 lg:pb-0'
+                className='page-wrapper relative w-full overflow-x-clip pt-16 pr-4 pb-20 md:h-svh md:overflow-clip md:pr-0 lg:ml-8 lg:pr-40 lg:pb-0'
                 id='page-wrapper'
             >
                 {/* Outlines */}
-                <div className='gsap-project-page relative mr-4 ml-4 flex h-full flex-col border-r border-l border-faded lg:ml-0'>
+                <div className='gsap-project-page relative ml-4 flex h-full flex-col border-r border-l border-faded lg:mr-4 lg:ml-0'>
                     {/* Back Button */}
                     <ButtonBack slug={section} />
 
