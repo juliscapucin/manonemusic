@@ -13,7 +13,7 @@ gsap.registerPlugin(useGSAP, ScrollTrigger, ScrollSmoother, Observer);
 import { AllData, NavLink } from '@/types';
 import { PanelContent } from '@/components';
 import { useWindowDimensions } from '@/hooks';
-import { animateSplitText } from '@/animations';
+import { animateSplitText } from '@/lib/animations';
 import { ScrollProgress } from '@/components/ui';
 import { useCookieModalContext } from '@/context';
 
