@@ -6,11 +6,7 @@ import { animateSplitTextVertical } from '@/lib/animations';
 import { useEffect, useRef } from 'react';
 import { useWindowDimensions } from '@/hooks';
 
-type LogoProps = {
-    subtitle: string;
-};
-
-export default function Logo({ subtitle }: LogoProps) {
+export default function Logo() {
     const subtitleRef = useRef(null);
     const { width } = useWindowDimensions();
     const logoRef1 = useRef(null);
@@ -88,7 +84,7 @@ export default function Logo({ subtitle }: LogoProps) {
                 ref={subtitleRef}
                 className='mt-2 max-w-[60%] text-title-large text-nowrap lg:max-w-[400px]'
             >
-                {subtitle}
+                Bespoke Audio & Music
             </h2>
         </div>
     );

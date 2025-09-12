@@ -7,15 +7,11 @@ import { Logo, SectionWrapper } from '@/components/ui';
 
 import type { HomePage } from '@/types';
 
-type HomePageProps = {
-    subtitle: string;
-};
-
-export default function HomePage({ subtitle }: HomePageProps) {
+export default function HomePage() {
     return (
         <SectionWrapper classes='h-[90svh] lg:pt-20 lg:pb-20'>
             <div className='mx-4 flex h-full flex-col justify-between lg:mx-8'>
-                <Logo subtitle={subtitle} />
+                <Logo />
 
                 <div className='flex items-end'>
                     <Status location={location} />
