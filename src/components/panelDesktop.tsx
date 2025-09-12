@@ -30,8 +30,6 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
     const { isModalOpen } = useCookieModalContext();
     const scrollSmootherRef = useRef<ScrollSmoother | null>(null);
 
-    console.log('render panel desktop');
-
     // Smooth Scroll
     useLayoutEffect(() => {
         gsap.registerPlugin(ScrollSmoother, ScrollTrigger);

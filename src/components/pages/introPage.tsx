@@ -5,42 +5,19 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 
 import { Logo, SectionWrapper } from '@/components/ui';
-import { animateSplitTextVertical } from '@/lib/animations';
 
 export default function IntroPage() {
-    const logoRef1 = useRef(null);
-    const logoRef2 = useRef(null);
     const maskRef = useRef(null);
 
     useEffect(() => {
-        if (!logoRef1.current || !logoRef2.current || !maskRef.current) return;
+        if (!maskRef.current) return;
 
         const tl = gsap.timeline();
-
-        // Logo Animation
-        tl.add(
-            // (element, yTranslate, delay, duration, stagger)
-            animateSplitTextVertical(
-                logoRef1.current,
-                undefined,
-                0.2,
-                0.3,
-                0.05
-            )!
-        ).add(
-            animateSplitTextVertical(
-                logoRef2.current,
-                undefined,
-                undefined,
-                0.3,
-                0.05
-            )!
-        );
 
         // Mask Reveal
         tl.to(maskRef.current, {
             clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)',
-            delay: 0.6,
+            delay: 2,
             duration: 1,
             ease: 'power4.out',
         });
@@ -61,21 +38,21 @@ export default function IntroPage() {
                 isIntro={true}
             >
                 <div className='mx-4 flex h-full flex-col justify-between lg:mx-8'>
-                    <Logo />
-                    {/* <div className="gsap-section-title mt-2 lg:mt-0 overflow-y-clip">
-                  <h1
-                     ref={logoRef1}
-                     className="logo pointer-events-none text-faded-70 overflow-y-clip"
-                  >
-                     MAN/ONE
-                  </h1>
-                  <h1
-                     ref={logoRef2}
-                     className="logo pointer-events-none text-faded-70 overflow-y-clip"
-                  >
-                     MUSIC
-                  </h1>
-               </div> */}
+                    <Logo subtitle='Bespoke Audio & Music' />
+                    {/* <div className='gsap-section-title mt-2 overflow-y-clip lg:mt-0'>
+                        <h1
+                            ref={logoRef1}
+                            className='logo pointer-events-none overflow-y-clip text-faded-70'
+                        >
+                            MAN/ONE
+                        </h1>
+                        <h1
+                            ref={logoRef2}
+                            className='logo pointer-events-none overflow-y-clip text-faded-70'
+                        >
+                            MUSIC
+                        </h1>
+                    </div> */}
                 </div>
             </SectionWrapper>
         </div>

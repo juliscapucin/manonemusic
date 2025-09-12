@@ -24,8 +24,6 @@ export default function RootLayout({
     const [rootTheme, setRootTheme] = useState<string>('dark');
     const { width } = useWindowDimensions();
 
-    console.log('render root layout');
-
     useEffect(() => {
         const storageTheme = localStorage.getItem('theme');
         if (storageTheme) {
