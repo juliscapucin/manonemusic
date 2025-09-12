@@ -102,11 +102,11 @@ export default function Cookies({ cookiesData }: CookiesProps) {
                     {/* Background Overlay */}
                     <div
                         ref={backgroundOverlayRef}
-                        className='pointer-events-none fixed top-0 right-0 bottom-0 left-0 z-cookies-modal mx-auto flex max-w-desktop items-end justify-end overflow-clip md:bg-primary/80'
+                        className='pointer-events-none fixed inset-0 z-cookies-modal mx-auto flex items-end justify-end overflow-clip md:bg-primary/80'
                     ></div>
 
                     {/* Cookie Button */}
-                    <div className='pointer-events-none fixed top-0 right-0 bottom-0 left-0 z-cookies-modal mx-auto flex max-w-desktop items-end justify-end overflow-clip'>
+                    <div className='pointer-events-none fixed inset-0 z-cookies-modal mx-auto flex items-end justify-end overflow-clip'>
                         <div
                             ref={cookieButtonRef}
                             className='pointer-events-auto absolute right-12 bottom-22 z-cookies-elements flex items-center gap-4 rounded-full border border-secondary bg-primary px-5 py-1 text-secondary'

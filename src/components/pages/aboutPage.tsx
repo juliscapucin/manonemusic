@@ -1,65 +1,58 @@
-"use client";
+'use client';
 
-import { useRef } from "react";
-import Image from "next/image";
+import { useRef } from 'react';
+import Image from 'next/image';
 
 import {
-   SectionWrapper,
-   Subtitle,
-   TextBlock,
-   TitleDisplay,
-} from "@/components/ui";
+    SectionWrapper,
+    Subtitle,
+    TextBlock,
+    TitleDisplay,
+} from '@/components/ui';
 
-import { ButtonRounded } from "@/components/buttons";
+import { ButtonRounded } from '@/components/buttons';
 
-import type { AboutPage } from "@/types";
-import { urlFor } from "@/lib/sanityImageURL";
+import type { AboutPage } from '@/types';
+import { urlFor } from '@/lib/sanityImageURL';
 
 type AboutPageProps = AboutPage;
 
 export default function AboutPage({
-   title,
-   subtitle,
-   content1,
-   content2,
-   image,
+    title,
+    subtitle,
+    content1,
+    content2,
+    image,
 }: AboutPageProps) {
-   const titleAboutRef = useRef(null);
+    const titleAboutRef = useRef(null);
 
-   return (
-      <SectionWrapper classes="w-full h-fit">
-         <TitleDisplay ref={titleAboutRef}>{title}</TitleDisplay>
-         <div className="relative w-full lg:flex items-start *:flex-1 gap-8 px-4 lg:px-8 lg:pt-8 lg:h-72 bg-primary border-t border-faded z-5">
-            {/* Image Block */}
-            {image && (
-               <div className="relative lg:block w-full aspect-square rounded-xs overflow-clip mt-4 lg:mt-0">
-                  <Image
-                     {...{
-                        src: urlFor(image.imageRef).url(), // generate url via _ref to save on api calls
-                        alt: `Profile picture of Matt Rudge, the leading figure behind ManOne Music`,
-                        fill: true,
-                        className: "object-cover",
-                        sizes: "50vw",
-                     }}
-                  />
-               </div>
-            )}
-            {/* Text Block 1 */}
-            {content1 && <TextBlock text={content1} classes="mt-8 lg:mt-0" />}
-            {/* Text Block 2 */}
-            <div>
-               {content2 && <TextBlock text={content2} />}
-               {/* TODO: IMPLEMENT BUTTONS */}
-               {/* <div className='flex gap-4 mt-8'>
-						<ButtonRounded onClick={() => console.log("services")}>
-							Services
-						</ButtonRounded>
-						<ButtonRounded onClick={() => console.log("services")}>
-							Clients
-						</ButtonRounded>
-					</div> */}
+    return (
+        <SectionWrapper classes='w-full'>
+            <TitleDisplay ref={titleAboutRef}>{title}</TitleDisplay>
+            <div className='relative z-5 h-fit w-full border-t border-faded bg-primary px-4 lg:h-72 lg:px-8 lg:pt-8'>
+                <div className='w-full max-w-section items-start gap-8 *:flex-1 lg:flex'>
+                    {/* Image Block */}
+                    {image && (
+                        <div className='relative mt-4 aspect-square w-full overflow-clip rounded-xs lg:mt-0 lg:block lg:max-w-[420px]'>
+                            <Image
+                                {...{
+                                    src: urlFor(image.imageRef).url(), // generate url via _ref to save on api calls
+                                    alt: `Profile picture of Matt Rudge, the leading figure behind ManOne Music`,
+                                    fill: true,
+                                    className: 'object-cover',
+                                    sizes: '50vw',
+                                }}
+                            />
+                        </div>
+                    )}
+                    {/* Text Block 1 */}
+                    {content1 && (
+                        <TextBlock text={content1} classes='mt-8 lg:mt-0' />
+                    )}
+                    {/* Text Block 2 */}
+                    <div>{content2 && <TextBlock text={content2} />}</div>
+                </div>
             </div>
-         </div>
-      </SectionWrapper>
-   );
+        </SectionWrapper>
+    );
 }

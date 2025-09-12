@@ -1,27 +1,27 @@
-"use client";
+'use client';
 
-import { AutoGrid } from "@/components";
+import { AutoGrid } from '@/components';
 
 type SectionWrapperProps = {
-   children: React.ReactNode;
-   classes?: string;
-   ref?: React.Ref<HTMLDivElement>;
-   isIntro?: boolean;
+    children: React.ReactNode;
+    classes?: string;
+    ref?: React.Ref<HTMLDivElement>;
+    isIntro?: boolean;
 };
 
 export default function SectionWrapper({
-   children,
-   classes,
-   ref,
-   isIntro,
+    children,
+    classes,
+    ref,
+    isIntro,
 }: SectionWrapperProps) {
-   return (
-      <div
-         ref={ref}
-         className="section-wrapper relative w-screen min-w-[95vw] lg:w-fit lg:min-h-svh pt-16 lg:pt-0 pb-8 px-0 lg:flex justify-between items-center overflow-x-clip lg:overflow-clip lg:border border-faded"
-      >
-         <div className={`bg-primary ${classes || ""}`}>{children}</div>
-         {!isIntro && <AutoGrid />}
-      </div>
-   );
+    return (
+        <div
+            ref={ref}
+            className='section-wrapper relative w-screen min-w-[95vw] items-center justify-between overflow-x-clip border-faded px-0 pt-16 pb-8 lg:flex lg:min-h-svh lg:w-fit lg:overflow-clip lg:border lg:pt-0'
+        >
+            <div className={`bg-primary ${classes || ''}`}>{children}</div>
+            {!isIntro && <AutoGrid />}
+        </div>
+    );
 }
