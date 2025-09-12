@@ -38,21 +38,7 @@ export default function IntroPage() {
                 isIntro={true}
             >
                 <div className='mx-4 flex h-full flex-col justify-between lg:mx-8'>
-                    <Logo subtitle='Bespoke Audio & Music' />
-                    {/* <div className='gsap-section-title mt-2 overflow-y-clip lg:mt-0'>
-                        <h1
-                            ref={logoRef1}
-                            className='logo pointer-events-none overflow-y-clip text-faded-70'
-                        >
-                            MAN/ONE
-                        </h1>
-                        <h1
-                            ref={logoRef2}
-                            className='logo pointer-events-none overflow-y-clip text-faded-70'
-                        >
-                            MUSIC
-                        </h1>
-                    </div> */}
+                    <Logo />
                 </div>
             </SectionWrapper>
         </div>
