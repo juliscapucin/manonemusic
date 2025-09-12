@@ -132,7 +132,7 @@ export default function Cookies({ cookiesData }: CookiesProps) {
                         className='fixed top-4 right-4 bottom-6 left-4 z-cookies-elements pr-0 opacity-0 md:right-4 md:left-auto md:w-3/4 lg:w-2/5'
                         role='dialog'
                         aria-modal='true'
-                        aria-labelledby='cookie-modal-title'
+                        aria-label='Cookie preferences'
                     >
                         {/* Close Button */}
                         <div className='fixed top-[1px] right-4 left-1 z-cookies-elements flex justify-end bg-primary p-3 pt-4'>
