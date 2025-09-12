@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
@@ -14,32 +14,51 @@ type Props = {
     variant: 'big' | 'small';
 };
 
-export default function MouseFollower({ variant }: Props) {
-    const refCursor = useRef<HTMLDivElement | null>(null);
+const fadeOutAnimation = (element: HTMLElement | null) => {
+    if (element) return gsap.to(element, { opacity: 0, duration: 0.7 });
+};
 
-    const fadeOutAnimation = () =>
-        gsap.to(refCursor.current, { opacity: 0, duration: 0.7 });
+export default function MouseFollower({ variant }: Props) {
+    const cursorRef = useRef<HTMLDivElement | null>(null);
+    const [isTopLevel, setIsTopLevel] = useState(false);
+    const observerRef = useRef<Observer | null>(null);
+    const pathname = usePathname();
+
+    useEffect(() => {
+        const segments = pathname.split('/').filter(Boolean);
+        setIsTopLevel(pathname === '/' || segments.length === 1);
+    }, [pathname]);
 
     // Scroll detection
     useGSAP(() => {
-        Observer.create({
-            type: 'wheel,touch,pointer',
-            onMove: fadeOutAnimation,
-            onChange: fadeOutAnimation,
+        if (!cursorRef.current || !isTopLevel) return;
+        observerRef.current?.kill();
+        observerRef.current = Observer.create({
+            type:
+                pathname === '/'
+                    ? 'wheel,scroll'
+                    : 'wheel, scroll, pointer, touch',
+            onMove: () => fadeOutAnimation(cursorRef.current),
+            onChange: () => fadeOutAnimation(cursorRef.current),
             onStop: () => {
-                gsap.to(refCursor.current, {
+                gsap.to(cursorRef.current, {
                     opacity: 1,
                     duration: 0.7,
-                    delay: 5,
                 });
             },
+            onStopDelay: 5, // time (in seconds) after which onStop should be called
+            tolerance: 10, // the minimum distance (in pixels) necessary to trigger one of the callbacks
         });
-    }, []);
+
+        return () => {
+            observerRef.current?.kill();
+        };
+    }, [{ dependencies: [isTopLevel, pathname], scope: cursorRef }]);
 
     // Mouse follower movement
-    useEffect(() => {
-        const cursorDiv = refCursor.current;
-        if (!cursorDiv || !cursorDiv.parentElement) return;
+    useLayoutEffect(() => {
+        const cursorDiv = cursorRef.current;
+        if (!cursorDiv || !cursorDiv.parentElement || !isTopLevel) return;
 
         gsap.set(cursorDiv, { xPercent: -50, yPercent: -50 });
 
@@ -47,6 +66,7 @@ export default function MouseFollower({ variant }: Props) {
             const parentRect = cursorDiv.parentElement?.getBoundingClientRect();
 
             if (!parentRect) return;
+
             const relativeX = e.clientX - parentRect.left;
 
             gsap.to(cursorDiv, {
@@ -62,26 +82,28 @@ export default function MouseFollower({ variant }: Props) {
         return () => {
             parent.removeEventListener('mousemove', moveCursor);
         };
-    }, []);
+    }, [isTopLevel, pathname]);
 
     return (
-        <div
-            ref={refCursor}
-            className={`pointer-events-none fixed top-0 left-0 z-15 flex items-center justify-center rounded-full border ${variant === 'big' ? 'h-40 w-40 border-secondary bg-primary/30' : 'h-24 w-24 border-secondary bg-primary/30'}`}
-        >
-            <div className='flex items-center gap-8'>
-                <IconChevron direction='back' />
-                <span
-                    className={`${
-                        variant === 'big'
-                            ? 'text-title-large font-extralight'
-                            : 'text-label-large text-secondary'
-                    }`}
-                >
-                    SCROLL
-                </span>
-                <IconChevron direction='forward' />
+        isTopLevel && (
+            <div
+                ref={cursorRef}
+                className={`pointer-events-none fixed top-0 left-0 z-15 flex items-center justify-center rounded-full border ${variant === 'big' ? 'h-40 w-40 border-secondary bg-primary/30' : 'h-24 w-24 border-secondary bg-primary/30'}`}
+            >
+                <div className='flex items-center gap-8'>
+                    <IconChevron direction='back' />
+                    <span
+                        className={`${
+                            variant === 'big'
+                                ? 'text-title-large font-extralight'
+                                : 'text-label-large text-secondary'
+                        }`}
+                    >
+                        SCROLL
+                    </span>
+                    <IconChevron direction='forward' />
+                </div>
             </div>
-        </div>
+        )
     );
 }

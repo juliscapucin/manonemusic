@@ -1,7 +1,6 @@
 'use client';
 
 import { Suspense, useEffect, useState } from 'react';
-import { usePathname } from 'next/navigation';
 
 import { Cookies } from '@/components/ui';
 import { MouseFollower, NoiseBackground } from '@/components';
@@ -23,8 +22,7 @@ export default function RootLayout({
     fontClass,
 }: RootLayoutProps) {
     const [rootTheme, setRootTheme] = useState<string>('dark');
-    const [isTopLevel, setIsTopLevel] = useState(false);
-    //  const pathname = usePathname();
+    const { width } = useWindowDimensions();
 
     console.log('render root layout');
 
@@ -34,11 +32,6 @@ export default function RootLayout({
             setRootTheme(storageTheme);
         }
     }, []);
-
-    //  useEffect(() => {
-    //      const segments = pathname.split('/').filter(Boolean);
-    //      setIsTopLevel(pathname === '/' || segments.length === 1);
-    //  }, []);
 
     return (
         <Suspense>
@@ -50,11 +43,9 @@ export default function RootLayout({
                         {children}
                         <NoiseBackground />
                         <Cookies cookiesData={cookiesData} />
-                        {/* <Suspense>
-                            {isTopLevel && pathname === '/' && (
-                                <MouseFollower variant='small' />
-                            )}
-                        </Suspense> */}
+                        {width && width > 1024 && (
+                            <MouseFollower variant='small' />
+                        )}
                         <IntroPage />
                     </body>
                 </CookieModalContextProvider>

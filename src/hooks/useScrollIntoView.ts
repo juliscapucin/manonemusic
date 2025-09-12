@@ -1,36 +1,36 @@
-"use client"
+'use client';
 
-import { useEffect } from "react"
+import { useEffect } from 'react';
 
-// TODO - try to implement this functionality for accessibility
+// TODO - implement this functionality for accessibility
 type FocusHandler = {
-	button: HTMLButtonElement
-	handleFocus: () => void
-}
+    button: HTMLButtonElement;
+    handleFocus: () => void;
+};
 
 export default function useScrollIntoView() {
-	useEffect(() => {
-		const buttons = document.querySelectorAll("button")
+    useEffect(() => {
+        const buttons = document.querySelectorAll('button');
 
-		// Create an array to keep track of each button's unique focus handler
-		const focusHandlers: FocusHandler[] = []
+        // Create an array to keep track of each button's unique focus handler
+        const focusHandlers: FocusHandler[] = [];
 
-		buttons.forEach((button) => {
-			const handleFocus = () => {
-				button.scrollIntoView({ behavior: "smooth" })
-			}
+        buttons.forEach((button) => {
+            const handleFocus = () => {
+                button.scrollIntoView({ behavior: 'smooth' });
+            };
 
-			// Add the focus handler to the array
-			focusHandlers.push({ button, handleFocus })
+            // Add the focus handler to the array
+            focusHandlers.push({ button, handleFocus });
 
-			button.addEventListener("focus", handleFocus)
-		})
+            button.addEventListener('focus', handleFocus);
+        });
 
-		// Cleanup function to remove event listeners
-		return () => {
-			focusHandlers.forEach(({ button, handleFocus }) => {
-				button.removeEventListener("focus", handleFocus)
-			})
-		}
-	}, [])
+        // Cleanup function to remove event listeners
+        return () => {
+            focusHandlers.forEach(({ button, handleFocus }) => {
+                button.removeEventListener('focus', handleFocus);
+            });
+        };
+    }, []);
 }
