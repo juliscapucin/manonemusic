@@ -1,8 +1,10 @@
 'use client';
 
-import { animateSplitText } from '@/animations';
+import gsap from 'gsap';
+
 import { animateSplitTextVertical } from '@/lib/animations';
 import { useEffect, useRef } from 'react';
+import { useWindowDimensions } from '@/hooks';
 
 type LogoProps = {
     subtitle?: string;
@@ -10,12 +12,17 @@ type LogoProps = {
 
 export default function Logo({ subtitle }: LogoProps) {
     const subtitleRef = useRef(null);
+    const { width } = useWindowDimensions();
 
     useEffect(() => {
         if (!subtitleRef.current) return;
 
-        animateSplitTextVertical(subtitleRef.current, 1.4, 0.6, 1, 0.03);
-    }, []);
+        const ctx = gsap.context(() => {
+            animateSplitTextVertical(subtitleRef.current!, 200, 0.5, 0.5, 0.05);
+        }, subtitleRef);
+
+        return () => ctx.revert();
+    }, [width]);
 
     return (
         <div className='gsap-section-title mt-16 overflow-y-clip lg:mt-0'>
