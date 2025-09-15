@@ -14,6 +14,8 @@ type Day = {
     month: string;
 };
 
+const timezone = { timeZone: 'Europe/London' };
+
 function Status({ location }: StatusProps) {
     const [currentDate, setCurrentDate] = useState(new Date());
     const [time, setTime] = useState<string | null>(null);
@@ -50,33 +52,29 @@ function Status({ location }: StatusProps) {
     }, [statusWrapperRef.current]);
 
     useEffect(() => {
-        const options = { timeZone: 'Europe/London' };
-
         const date = {
             dayOfWeek: currentDate.toLocaleDateString('en-GB', {
                 weekday: 'long',
-                ...options,
+                ...timezone,
             }),
             dayOfMonth: currentDate.toLocaleDateString('en-GB', {
                 day: 'numeric',
-                ...options,
+                ...timezone,
             }),
             month: currentDate.toLocaleDateString('en-GB', {
                 month: 'long',
-                ...options,
+                ...timezone,
             }),
         };
 
         setDay(date);
-        // Get user's timezone using Intl API
-        const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
         setTime(
             currentDate.toLocaleTimeString('en-GB', {
                 hour: '2-digit',
                 minute: '2-digit',
                 second: '2-digit',
-                timeZone: userTimeZone,
+                timeZone: timezone.timeZone,
             })
         );
     }, [currentDate]);
