@@ -12,7 +12,7 @@ export default function Panels({ data }: { data: AllData }) {
 
     return (
         <main>
-            {width >= 1024 ? (
+            {width && width >= 1024 ? (
                 <>
                     <Header navLinks={data.headerNavLinks} />
                     <PanelDesktop data={data} sections={data.headerNavLinks} />

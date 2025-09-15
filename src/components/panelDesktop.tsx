@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useLayoutEffect, useRef, useState } from 'react';
 
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -29,6 +29,8 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
     const { width } = useWindowDimensions();
     const { isModalOpen } = useCookieModalContext();
     const scrollSmootherRef = useRef<ScrollSmoother | null>(null);
+
+    console.log('panel desktop render');
 
     // Smooth Scroll
     useLayoutEffect(() => {
