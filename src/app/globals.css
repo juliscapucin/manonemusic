@@ -5,13 +5,13 @@
 @layer base {
     :root {
         --header-height-mobile: 4rem;
-    }
 
-    :root {
         --color-black: 3 30 27;
         --color-white: 182 209 194;
         --color-primary: 3 30 27;
+        --color-primary-rgb: 3, 30, 27;
         --color-secondary: 163 205 177;
+        --color-secondary-rgb: 163, 205, 177;
     }
     :root[data-theme='dark'] {
         --color-primary: 3 30 27;
