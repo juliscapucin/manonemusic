@@ -10,12 +10,13 @@ import { useGSAP } from '@gsap/react';
 
 export default function IntroPage() {
     const maskRef = useRef(null);
+    const maskGridRef = useRef(null);
     const containerRef = useRef<HTMLDivElement>(null);
 
     // Get number of columns based on container width
     const columns = useGenerateGrid(containerRef.current);
 
-    // Mask Reveal
+    // Main Mask Reveal
     useEffect(() => {
         if (!maskRef.current) return;
 
@@ -23,8 +24,8 @@ export default function IntroPage() {
 
         tl.to(maskRef.current, {
             clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)',
-            delay: 4,
-            duration: 1,
+            delay: 3.8,
+            duration: 0.7,
             ease: 'power4.out',
         });
     }, []);
@@ -36,15 +37,23 @@ export default function IntroPage() {
             containerRef.current.querySelectorAll('.gsap-column-fill');
 
         // Reset initial state
-        gsap.set(fills, { yPercent: 100, opacity: 0 });
+        gsap.set(fills, { y: '100%', opacity: 0 });
 
         // Animate them in
         gsap.to(fills, {
-            y: '-96.5%',
+            y: 'random([-50, 50])%',
             opacity: 1,
-            duration: 1,
-            stagger: 0.05, // each column slightly after the previous
-            delay: 0.3, // wait a bit after page load
+            duration: 0.6,
+            stagger: 0.03,
+            onComplete: () => {
+                // Mask grid reveal
+                gsap.to(maskGridRef.current, {
+                    clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)',
+                    delay: 0.8,
+                    duration: 0.6,
+                    ease: 'power4.out',
+                });
+            },
         });
     }, [columns]);
 
@@ -67,7 +76,13 @@ export default function IntroPage() {
                 </div>
 
                 {/* GRID */}
-                <div className='autogrid absolute inset-0 min-h-full min-w-full'>
+                <div
+                    ref={maskGridRef}
+                    className='autogrid absolute inset-0 min-h-full min-w-full'
+                    style={{
+                        clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
+                    }}
+                >
                     <div
                         ref={containerRef}
                         className='absolute top-8 flex h-[90svh] w-full border-y border-faded'

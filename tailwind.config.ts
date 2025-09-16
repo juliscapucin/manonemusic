@@ -17,6 +17,7 @@ const config: Config = {
             'faded-10': 'rgba(var(--color-secondary-rgb), 0.1)',
             'faded-30': 'rgba(var(--color-secondary-rgb), 0.3)',
             'faded-70': 'rgba(var(--color-secondary-rgb), 0.7)',
+            'faded-90': 'rgba(var(--color-secondary-rgb), 0.9)',
             faded: 'rgba(var(--color-secondary-rgb), 0.1)',
         },
         fontSize: {

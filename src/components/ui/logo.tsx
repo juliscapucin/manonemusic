@@ -39,7 +39,7 @@ export default function Logo() {
                 animateSplitTextVertical(
                     logoRef1.current,
                     undefined,
-                    2.3,
+                    1.5,
                     0.3,
                     0.07
                 )!
@@ -48,7 +48,7 @@ export default function Logo() {
                     animateSplitTextVertical(
                         logoRef2.current,
                         undefined,
-                        2.6,
+                        1.8,
                         0.3,
                         0.07
                     )!
@@ -57,7 +57,7 @@ export default function Logo() {
                     animateSplitTextVertical(
                         subtitleRef.current!,
                         200,
-                        2.6,
+                        1.8,
                         0.3,
                         0.04
                     )!
@@ -72,7 +72,7 @@ export default function Logo() {
             <div className='h-fit overflow-clip pb-1'>
                 <h1
                     ref={logoRef1}
-                    className='logo pointer-events-none text-faded-70 opacity-0'
+                    className='logo pointer-events-none text-faded-90 opacity-0'
                 >
                     MAN/ONE
                 </h1>
@@ -80,7 +80,7 @@ export default function Logo() {
             <div className='h-fit overflow-clip pb-1'>
                 <h1
                     ref={logoRef2}
-                    className='logo pointer-events-none text-faded-70 opacity-0'
+                    className='logo pointer-events-none text-faded-90 opacity-0'
                 >
                     MUSIC
                 </h1>
