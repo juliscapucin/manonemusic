@@ -30,8 +30,6 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
     const { isModalOpen } = useCookieModalContext();
     const scrollSmootherRef = useRef<ScrollSmoother | null>(null);
 
-    console.log('panel desktop render');
-
     // Smooth Scroll
     useLayoutEffect(() => {
         gsap.registerPlugin(ScrollSmoother, ScrollTrigger);
@@ -117,7 +115,7 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 
         if (!titles) return;
 
-        // Title ScrollTrigger + route handler
+        // Title ScrollTrigger + Horizontal pin + route handler
         titles.forEach((title, index) => {
             if (!title) return;
 
@@ -134,32 +132,32 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
 
             ScrollTrigger.create({
                 trigger: title,
-                start: 'left right-=400',
-                //  start: index === 0 ? 'left+=30 left' : 'left right-=400',
-                end: 'right center',
+                start: index === 0 ? 'left-=10% left' : 'left right-=400',
+                end: index === 0 ? 'center+=400 left' : 'right center',
                 invalidateOnRefresh: true,
                 toggleActions: 'play none none reverse',
                 onEnter: () => {
-                    if (index === 0) return; // don't run animation on home section
+                    if (index === 0) return undefined; // don't run animation on home section
                     gsap.set(title, { opacity: 1 });
                     animateSplitText(title, 2000);
                 },
                 onEnterBack: () => {
-                    if (index === 0) return;
+                    if (index === 0) return undefined;
                     gsap.set(title, { opacity: 1 });
                 },
                 onLeave: () => {
-                    if (index === 0) return;
+                    if (index === 0) return undefined;
                     gsap.to(title, { opacity: 0 });
                 },
                 onLeaveBack: () => {
-                    if (index === 0) return;
+                    if (index === 0) return undefined;
                     gsap.to(title, { opacity: 0 });
                 },
                 fastScrollEnd: true,
                 horizontal: true,
                 containerAnimation: tween,
                 onToggle: (self) => {
+                    console.log('toggle', index, slug, self.isActive);
                     if (self.isActive && window.location.pathname !== slug) {
                         // cancel any existing timeout before starting a new one
                         if (slugTimeout) {

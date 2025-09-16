@@ -3,8 +3,9 @@
 import gsap from 'gsap';
 
 import { animateSplitTextVertical } from '@/lib/animations';
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 import { useWindowDimensions } from '@/hooks';
+import { useGSAP } from '@gsap/react';
 
 export default function Logo() {
     const subtitleRef = useRef(null);
@@ -12,7 +13,7 @@ export default function Logo() {
     const logoRef1 = useRef(null);
     const logoRef2 = useRef(null);
 
-    useEffect(() => {
+    useGSAP(() => {
         const ctx = gsap.context(() => {
             if (
                 !subtitleRef.current ||
@@ -30,9 +31,9 @@ export default function Logo() {
                 animateSplitTextVertical(
                     logoRef1.current,
                     undefined,
-                    0.2,
                     0.3,
-                    0.05
+                    0.3,
+                    0.07
                 )!
             )
                 // Logo 2
@@ -40,22 +41,20 @@ export default function Logo() {
                     animateSplitTextVertical(
                         logoRef2.current,
                         undefined,
-                        undefined,
+                        0.6,
                         0.3,
-                        0.05
-                    )!,
-                    '>-=0.3'
+                        0.07
+                    )!
                 )
                 // Subtitle
                 .add(
                     animateSplitTextVertical(
                         subtitleRef.current!,
                         200,
-                        undefined,
+                        0.6,
                         0.3,
-                        0.02
-                    )!,
-                    '>-=0.4'
+                        0.04
+                    )!
                 );
         }, subtitleRef);
 
@@ -80,7 +79,10 @@ export default function Logo() {
                     MUSIC
                 </h1>
             </div>
-            <h2 ref={subtitleRef} className='mt-2 text-title-large text-nowrap'>
+            <h2
+                ref={subtitleRef}
+                className='mt-2 overflow-clip text-title-large text-nowrap'
+            >
                 Bespoke Audio & Music
             </h2>
         </div>
