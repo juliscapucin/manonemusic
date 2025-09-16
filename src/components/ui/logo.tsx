@@ -22,6 +22,14 @@ export default function Logo() {
                 !logoRef2.current
             )
                 return;
+
+            gsap.set(
+                [logoRef1.current, logoRef2.current, subtitleRef.current],
+                {
+                    opacity: 1,
+                }
+            );
+
             const tl = gsap.timeline();
 
             // Logo Animation
@@ -31,27 +39,25 @@ export default function Logo() {
                 animateSplitTextVertical(
                     logoRef1.current,
                     undefined,
-                    0.3,
+                    2.3,
                     0.3,
                     0.07
                 )!
             )
-                // Logo 2
                 .add(
                     animateSplitTextVertical(
                         logoRef2.current,
                         undefined,
-                        0.6,
+                        2.6,
                         0.3,
                         0.07
                     )!
                 )
-                // Subtitle
                 .add(
                     animateSplitTextVertical(
                         subtitleRef.current!,
                         200,
-                        0.6,
+                        2.6,
                         0.3,
                         0.04
                     )!
@@ -66,7 +72,7 @@ export default function Logo() {
             <div className='h-fit overflow-clip pb-1'>
                 <h1
                     ref={logoRef1}
-                    className='logo pointer-events-none text-faded-70'
+                    className='logo pointer-events-none text-faded-70 opacity-0'
                 >
                     MAN/ONE
                 </h1>
@@ -74,14 +80,14 @@ export default function Logo() {
             <div className='h-fit overflow-clip pb-1'>
                 <h1
                     ref={logoRef2}
-                    className='logo pointer-events-none text-faded-70'
+                    className='logo pointer-events-none text-faded-70 opacity-0'
                 >
                     MUSIC
                 </h1>
             </div>
             <h2
                 ref={subtitleRef}
-                className='mt-2 overflow-clip text-title-large text-nowrap'
+                className='mt-2 overflow-clip text-title-large text-nowrap opacity-0'
             >
                 Bespoke Audio & Music
             </h2>

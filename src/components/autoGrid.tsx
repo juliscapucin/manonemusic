@@ -1,22 +1,20 @@
 'use client';
 
-import { useEffect, useRef, useState } from 'react';
+import gsap from 'gsap';
 
-export default function AutoGrid() {
+import { useGSAP } from '@gsap/react';
+import { useRef } from 'react';
+import useGenerateGrid from '@/hooks/useGenerateGrid';
+
+type autoGridProps = {
+    isIntro?: boolean;
+};
+
+export default function AutoGrid({ isIntro }: autoGridProps) {
     const containerRef = useRef<HTMLDivElement>(null);
-    const [columns, setColumns] = useState(0);
 
-    useEffect(() => {
-        const updateGrid = () => {
-            const containerWidth = containerRef.current?.offsetWidth || 0;
-            const colCount = Math.floor(containerWidth / 60);
-            setColumns(colCount - 1);
-        };
-
-        updateGrid();
-        window.addEventListener('resize', updateGrid);
-        return () => window.removeEventListener('resize', updateGrid);
-    }, []);
+    // Get number of columns based on container width
+    const columns = useGenerateGrid(containerRef.current);
 
     return (
         <div className='autogrid absolute inset-0 min-h-full min-w-full'>
