@@ -12,28 +12,34 @@ export const animateSplitText = (
     delay?: number
 ) => {
     if (!textElement) return;
-    const split = new SplitText(textElement, { type: 'chars' });
+    SplitText.create(textElement, {
+        type: 'chars',
+        autoSplit: true,
+        onSplit: (self) => {
+            const tl = gsap.timeline();
 
-    const tl = gsap.timeline();
+            gsap.set(self.chars, {
+                xPercent: (index) =>
+                    xTranslate ? xTranslate * (index + 1) : 100,
+                opacity: 0,
+            });
 
-    gsap.set(split.chars, {
-        xPercent: (index) => (xTranslate ? xTranslate * (index + 1) : 100),
-        opacity: 0,
-    });
-
-    return tl.fromTo(
-        split.chars,
-        {
-            xPercent: (index) => (xTranslate ? xTranslate * (index + 1) : 100),
-            opacity: 1,
+            return tl.fromTo(
+                self.chars,
+                {
+                    xPercent: (index) =>
+                        xTranslate ? xTranslate * (index + 1) : 100,
+                    opacity: 1,
+                },
+                {
+                    opacity: 1,
+                    xPercent: 0,
+                    duration: 0.8,
+                    delay: delay || 0,
+                    stagger: 0.05,
+                    ease: CustomEase.create('custom', customEase),
+                }
+            );
         },
-        {
-            opacity: 1,
-            xPercent: 0,
-            duration: 0.8,
-            delay: delay || 0,
-            stagger: 0.05,
-            ease: CustomEase.create('custom', customEase),
-        }
-    );
+    });
 };

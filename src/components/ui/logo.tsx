@@ -80,10 +80,7 @@ export default function Logo() {
                     MUSIC
                 </h1>
             </div>
-            <h2
-                ref={subtitleRef}
-                className='mt-2 max-w-[60%] text-title-large text-nowrap lg:max-w-[400px]'
-            >
+            <h2 ref={subtitleRef} className='mt-2 text-title-large text-nowrap'>
                 Bespoke Audio & Music
             </h2>
         </div>
