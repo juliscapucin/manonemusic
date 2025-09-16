@@ -12,7 +12,8 @@ export const animateSplitText = (
     delay?: number
 ) => {
     if (!textElement) return;
-    SplitText.create(textElement, {
+
+    return SplitText.create(textElement, {
         type: 'chars',
         autoSplit: true,
         onSplit: (self) => {
@@ -29,7 +30,7 @@ export const animateSplitText = (
                 {
                     xPercent: (index) =>
                         xTranslate ? xTranslate * (index + 1) : 100,
-                    opacity: 1,
+                    opacity: 0,
                 },
                 {
                     opacity: 1,

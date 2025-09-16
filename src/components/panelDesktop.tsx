@@ -120,6 +120,10 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
         // Title ScrollTrigger + route handler
         titles.forEach((title, index) => {
             if (!title) return;
+
+            if (index !== 0) gsap.set(title, { opacity: 0 });
+
+            // Create slug from title text
             let slug =
                 index === 0
                     ? '/'
@@ -134,11 +138,24 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
                 //  start: index === 0 ? 'left+=30 left' : 'left right-=400',
                 end: 'right center',
                 invalidateOnRefresh: true,
-                animation:
-                    index === 0
-                        ? undefined
-                        : animateSplitText(title, 2000, undefined), // don't run animation on home section
                 toggleActions: 'play none none reverse',
+                onEnter: () => {
+                    if (index === 0) return; // don't run animation on home section
+                    gsap.set(title, { opacity: 1 });
+                    animateSplitText(title, 2000);
+                },
+                onEnterBack: () => {
+                    if (index === 0) return;
+                    gsap.set(title, { opacity: 1 });
+                },
+                onLeave: () => {
+                    if (index === 0) return;
+                    gsap.to(title, { opacity: 0 });
+                },
+                onLeaveBack: () => {
+                    if (index === 0) return;
+                    gsap.to(title, { opacity: 0 });
+                },
                 fastScrollEnd: true,
                 horizontal: true,
                 containerAnimation: tween,
