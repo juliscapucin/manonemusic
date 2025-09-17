@@ -109,7 +109,7 @@ export default function Cookies({ cookiesData }: CookiesProps) {
                     <div className='pointer-events-none fixed inset-0 z-cookies-modal mx-auto flex items-end justify-end overflow-clip'>
                         <div
                             ref={cookieButtonRef}
-                            className='pointer-events-auto absolute right-12 bottom-22 z-cookies-elements flex items-center gap-4 rounded-full border border-secondary bg-primary px-5 py-1 text-secondary'
+                            className='pointer-events-auto absolute right-2 bottom-2 z-cookies-elements flex items-center gap-4 rounded-full border border-secondary bg-primary px-5 py-1 text-secondary lg:right-8 lg:bottom-22'
                         >
                             <button
                                 onClick={() => setIsModalOpen(true)}
