@@ -1,33 +1,33 @@
-import { createClient, groq } from "next-sanity";
-import clientConfig from "@/sanity/config/client-config";
+import { createClient, groq } from 'next-sanity';
+import clientConfig from '@/sanity/config/client-config';
 import type {
-   AboutPage,
-   ContactPage,
-   Cookies,
-   HomePage,
-   NavLink,
-   PortfolioPage,
-   Project,
-} from "@/types";
-import { PortfolioItem } from "@/types/PortfolioItem";
+    AboutPage,
+    ContactPage,
+    Cookies,
+    HomePage,
+    NavLink,
+    PortfolioPage,
+    Project,
+} from '@/types';
+import { PortfolioItem } from '@/types/PortfolioItem';
 
 const client = createClient(clientConfig);
 
 export async function getHomePage(): Promise<HomePage> {
-   return client.fetch(
-      groq`*[_type == "homePage"][0] {
+    return client.fetch(
+        groq`*[_type == "homePage"][0] {
       title,
       subtitle,
       metadataTitle,
       metadataDescription,
       metadataKeywords,
-   }`,
-   );
+   }`
+    );
 }
 
 export async function getAboutPage(): Promise<AboutPage> {
-   return client.fetch(
-      groq`*[_type == "aboutPage"][1] {
+    return client.fetch(
+        groq`*[_type == "aboutPage"][1] {
       title,
       subtitle,
       "image": {
@@ -39,13 +39,13 @@ export async function getAboutPage(): Promise<AboutPage> {
       metadataTitle,
       metadataDescription,
       metadataKeywords,
-   }`,
-   );
+   }`
+    );
 }
 
 export async function getContactPage(): Promise<ContactPage> {
-   return client.fetch(
-      groq`*[_type == "contactPage"][0] {
+    return client.fetch(
+        groq`*[_type == "contactPage"][0] {
       title,
       subtitle,
       email,
@@ -54,50 +54,50 @@ export async function getContactPage(): Promise<ContactPage> {
       metadataTitle,
       metadataDescription,
       metadataKeywords,
-   }`,
-   );
+   }`
+    );
 }
 
 export async function getPortfolioSections(): Promise<PortfolioPage[]> {
-   return client.fetch(
-      groq`*[_type == "portfolioPage"] {
+    return client.fetch(
+        groq`*[_type == "portfolioPage"] {
       title,
       "slug": slug.current,
       subtitle,
       metadataTitle,
       metadataDescription,
       metadataKeywords,
-   }`,
-   );
+   }`
+    );
 }
 
 export async function getCookiesData(): Promise<Cookies> {
-   return client.fetch(
-      groq`*[_type == "cookies"][0] {
+    return client.fetch(
+        groq`*[_type == "cookies"][0] {
       title,
       content,
-   }`,
-   );
+   }`
+    );
 }
 
 export async function getPortfolioPage(
-   section: string,
+    section: string
 ): Promise<PortfolioPage> {
-   return client.fetch(
-      groq`*[_type == "portfolioPage" && slug.current == $section] | order(releaseDate desc)[0]{
+    return client.fetch(
+        groq`*[_type == "portfolioPage" && slug.current == $section] | order(releaseDate desc)[0]{
       title,
       subtitle,
       "slug": slug.current
    }`,
-      { section },
-   );
+        { section }
+    );
 }
 
 export async function getPortfolioItems(
-   section: string,
+    section: string
 ): Promise<PortfolioItem[]> {
-   return client.fetch(
-      groq`*[_type == $section] | order(releaseDate desc){
+    return client.fetch(
+        groq`*[_type == $section] | order(releaseDate desc){
       _id,
       "slug": slug.current,
       releaseDate,
@@ -109,19 +109,19 @@ export async function getPortfolioItems(
          },
       title,
    }`,
-      { section },
-      {
-         next: { revalidate: 60 }, // 👈 THIS enables ISR on the query
-      },
-   );
+        { section },
+        {
+            next: { revalidate: 60 }, // 👈 THIS enables ISR on the query
+        }
+    );
 }
 
 export async function getProject(
-   section: string,
-   slug: string,
+    section: string,
+    slug: string
 ): Promise<Project> {
-   return client.fetch(
-      groq`*[_type == $section && slug.current == $slug][0]{
+    return client.fetch(
+        groq`*[_type == $section && slug.current == $slug][0]{
       _id,
       title,
       "slug": slug.current,
@@ -142,18 +142,18 @@ export async function getProject(
          link
          }
       }`,
-      { slug, section },
-   );
+        { slug, section }
+    );
 }
 
 export async function getHeaderNavLinks(): Promise<NavLink[]> {
-   const navLinks = await client.fetch(
-      groq`*[_type == "header"]|order(order asc) {
+    const navLinks = await client.fetch(
+        groq`*[_type == "header"]|order(order asc) {
          title,
          "slug": slug.current,
          order
-       }`,
-   );
+       }`
+    );
 
-   return [{ title: "Home", slug: "/", order: 0 }, ...navLinks];
+    return [{ title: 'Home', slug: '/', order: 0 }, ...navLinks];
 }
