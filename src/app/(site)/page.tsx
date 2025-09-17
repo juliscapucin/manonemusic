@@ -1,84 +1,103 @@
-import type { Metadata } from "next"
+import type { Metadata } from 'next';
 
-import { Panels } from "@/components"
-
-export const metadata: Metadata = {
-	title: "Man One Music",
-	description:
-		"Man One Music and lead composer Matt Rudge specialise in original music and sound.",
-}
-
-import { notFound } from "next/navigation"
+// Sanity Live implementation
+import { draftMode } from 'next/headers';
+import { sanityFetch } from '@/lib/sanity.fetch';
 
 import {
-	getHomePage,
-	getAboutPage,
-	getContactPage,
-	getPortfolioItems,
-	getPortfolioSections,
-	getHeaderNavLinks,
-} from "@/sanity/sanity-queries"
+    PreviewDocumentsCount, // Sanity Live implementation
+    DocumentsCount, // Sanity Live implementation
+    sanityQuery, // Sanity Live implementation
+    Panels,
+} from '@/components';
 
-// Opt out of caching for all data requests in the route segment
-// export const dynamic = "force-dynamic"
-// export const fetchCache = "force-no-store"
+export const metadata: Metadata = {
+    title: 'Man One Music',
+    description:
+        'Man One Music and lead composer Matt Rudge specialise in original music and sound.',
+};
+
+import { notFound } from 'next/navigation';
+
+import {
+    getHomePage,
+    getAboutPage,
+    getContactPage,
+    getPortfolioItems,
+    getPortfolioSections,
+    getHeaderNavLinks,
+} from '@/sanity/sanity-queries';
 
 export default async function Page() {
-	const [
-		headerNavLinks,
-		homePage,
-		contactPage,
-		aboutPage,
-		sections,
-		films,
-		commercials,
-		releases,
-		projects,
-	] = await Promise.all([
-		getHeaderNavLinks(),
-		getHomePage(),
-		getContactPage(),
-		getAboutPage(),
-		getPortfolioSections(),
-		getPortfolioItems("film"),
-		getPortfolioItems("commercial"),
-		getPortfolioItems("release"),
-		getPortfolioItems("project"),
-	])
+    const [
+        headerNavLinks,
+        homePage,
+        contactPage,
+        aboutPage,
+        sections,
+        films,
+        commercials,
+        releases,
+        projects,
+    ] = await Promise.all([
+        getHeaderNavLinks(),
+        getHomePage(),
+        getContactPage(),
+        getAboutPage(),
+        getPortfolioSections(),
+        getPortfolioItems('film'),
+        getPortfolioItems('commercial'),
+        getPortfolioItems('release'),
+        getPortfolioItems('project'),
+    ]);
 
-	const portfolioSections = sections.reduce(
-		(acc: { [key: string]: (typeof sections)[0] }, item) => {
-			acc[item.slug] = item
-			return acc
-		},
-		{}
-	)
+    const sanityData = await sanityFetch<number>({
+        query: sanityQuery,
+        tags: ['post'],
+    });
 
-	const data = {
-		headerNavLinks,
-		homePage,
-		contactPage,
-		aboutPage,
-		portfolioSections,
-		films,
-		commercials,
-		releases,
-		projects,
-	}
+    if ((await draftMode()).isEnabled) {
+        return <PreviewDocumentsCount data={sanityData} />;
+    }
 
-	if (
-		!data ||
-		!data.headerNavLinks ||
-		!data.homePage ||
-		!data.contactPage ||
-		!data.aboutPage ||
-		!data.portfolioSections ||
-		!data.films ||
-		!data.commercials ||
-		!data.releases ||
-		!data.projects
-	)
-		return notFound()
+    const portfolioSections = sections.reduce(
+        (acc: { [key: string]: (typeof sections)[0] }, item) => {
+            acc[item.slug] = item;
+            return acc;
+        },
+        {}
+    );
 
-	return <Panels data={data} />
+    const data = {
+        headerNavLinks,
+        homePage,
+        contactPage,
+        aboutPage,
+        portfolioSections,
+        films,
+        commercials,
+        releases,
+        projects,
+    };
+
+    if (
+        !data ||
+        !data.headerNavLinks ||
+        !data.homePage ||
+        !data.contactPage ||
+        !data.aboutPage ||
+        !data.portfolioSections ||
+        !data.films ||
+        !data.commercials ||
+        !data.releases ||
+        !data.projects
+    )
+        return notFound();
+
+    return (
+        <>
+            <DocumentsCount data={sanityData} />
+            <Panels data={data} />
+        </>
+    );
 }

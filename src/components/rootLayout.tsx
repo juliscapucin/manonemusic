@@ -1,6 +1,6 @@
 'use client';
 
-import { Suspense, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Cookies } from '@/components/ui';
 import { MouseFollower, NoiseBackground } from '@/components';
@@ -32,22 +32,18 @@ export default function RootLayout({
     }, []);
 
     return (
-        <Suspense>
-            <html lang='en' data-theme={rootTheme}>
-                <CookieModalContextProvider>
-                    <body
-                        className={`relative w-screen overflow-x-clip bg-primary text-secondary ${fontClass}`}
-                    >
-                        {children}
-                        <NoiseBackground />
-                        <Cookies cookiesData={cookiesData} />
-                        {width && width > 1024 && (
-                            <MouseFollower variant='small' />
-                        )}
-                        <IntroPage />
-                    </body>
-                </CookieModalContextProvider>
-            </html>
-        </Suspense>
+        <html lang='en' data-theme={rootTheme}>
+            <CookieModalContextProvider>
+                <body
+                    className={`relative w-screen overflow-x-clip bg-primary text-secondary ${fontClass}`}
+                >
+                    {children}
+                    <NoiseBackground />
+                    <Cookies cookiesData={cookiesData} />
+                    {width && width > 1024 && <MouseFollower variant='small' />}
+                    <IntroPage />
+                </body>
+            </CookieModalContextProvider>
+        </html>
     );
 }

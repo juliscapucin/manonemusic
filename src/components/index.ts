@@ -2,6 +2,7 @@ import AutoGrid from './autoGrid';
 import Availability from './availability';
 import Copyright from './copyright';
 import Credits from './credits';
+import DocumentsCount, { sanityQuery } from './DocumentsCount'; // Sanity Live Implementation
 import HalftoneBackground from './halftoneBackground';
 import MouseFollower from './mouseFollower';
 import NoiseBackground from './noiseBackground';
@@ -9,6 +10,7 @@ import PanelContent from './panelContent';
 import PanelDesktop from './panelDesktop';
 import PanelMobile from './panelMobile';
 import Panels from './panels';
+import PreviewDocumentsCount from './PreviewDocumentsCount'; // Sanity Live Implementation
 import ProjectCard from './projectCard';
 import ProjectPageContent from './projectPageContent';
 import ProjectTrailer from './projectTrailer';
@@ -26,6 +28,7 @@ export {
     Availability,
     Copyright,
     Credits,
+    DocumentsCount,
     HalftoneBackground,
     MouseFollower,
     NoiseBackground,
@@ -35,12 +38,14 @@ export {
     Panels,
     PlayerTrack,
     PlayerTrackList,
+    PreviewDocumentsCount,
     ProjectCard,
     ProjectPageContent,
     ProjectTrailer,
     ProjectsMenu,
     ProjectsMenuPage,
     RootLayout,
+    sanityQuery,
     SocialLinks,
     Status,
     StripedBackground,

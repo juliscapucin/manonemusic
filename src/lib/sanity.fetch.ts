@@ -1,11 +1,10 @@
 import 'server-only';
 
 import { draftMode } from 'next/headers';
-import type { QueryOptions, QueryParams } from 'next-sanity';
+import type { QueryParams } from 'next-sanity';
 
 import { client } from './sanity.client';
-
-export const token = process.env.SANITY_API_READ_TOKEN;
+import { sanityLiveFetch } from './sanity.live';
 
 export async function sanityFetch<QueryResponse>({
     query,
@@ -17,20 +16,18 @@ export async function sanityFetch<QueryResponse>({
     tags?: string[];
 }) {
     const isDraftMode = (await draftMode()).isEnabled;
-    if (isDraftMode && !token) {
-        throw new Error(
-            'The `SANITY_API_READ_TOKEN` environment variable is required.'
-        );
+    if (isDraftMode) {
+        const { data } = await sanityLiveFetch({
+            query,
+            params,
+            tags,
+        });
+        return data;
     }
 
     return client.fetch<QueryResponse>(query, params, {
-        ...(isDraftMode &&
-            ({
-                token: token,
-                perspective: 'drafts',
-            } satisfies QueryOptions)),
         next: {
-            revalidate: isDraftMode ? 0 : false,
+            revalidate: false,
             tags,
         },
     });
