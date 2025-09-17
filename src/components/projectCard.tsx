@@ -12,7 +12,7 @@ import { ImageField } from '@/types/Image';
 
 import { CustomButton } from '@/components/ui';
 
-import { urlFor } from '@/lib/sanityImageURL';
+import { urlFor } from '@/sanity/lib/sanityImageURL';
 import { useWindowDimensions } from '@/hooks';
 
 type ProjectCardProps = {

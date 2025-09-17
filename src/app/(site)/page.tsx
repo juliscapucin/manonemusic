@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 
 // Sanity Live implementation
 import { draftMode } from 'next/headers';
-import { sanityFetch } from '@/lib/sanity.fetch';
+import { sanityFetch } from '@/sanity/lib/sanity.fetch';
 
 import {
     PreviewDocumentsCount, // Sanity Live implementation

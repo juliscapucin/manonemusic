@@ -3,7 +3,7 @@ import localFont from 'next/font/local';
 import './../globals.css';
 
 // Sanity Live implementation
-import { SanityLive } from '@/lib/sanity.live';
+import { SanityLive } from '@/sanity/lib/sanity.live';
 import { VisualEditing } from 'next-sanity/visual-editing';
 
 import { RootLayout } from '@/components';

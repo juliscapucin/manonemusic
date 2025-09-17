@@ -13,7 +13,7 @@ import {
 import { ButtonRounded } from '@/components/buttons';
 
 import type { AboutPage } from '@/types';
-import { urlFor } from '@/lib/sanityImageURL';
+import { urlFor } from '@/sanity/lib/sanityImageURL';
 
 type AboutPageProps = AboutPage;
 
