@@ -38,7 +38,6 @@ export default function ProjectCard({
 }: ProjectCardProps) {
     const router = useRouter();
     const pathname = usePathname();
-    const { width } = useWindowDimensions();
 
     const imageOverlayRef = useRef<HTMLDivElement>(null);
     const labelRef = useRef<HTMLParagraphElement>(null);
