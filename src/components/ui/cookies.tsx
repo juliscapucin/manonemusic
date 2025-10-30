@@ -114,12 +114,14 @@ export default function Cookies({ cookiesData }: CookiesProps) {
                             <button
                                 onClick={() => setIsModalOpen(true)}
                                 className='underlined-link text-body-small uppercase select-none'
+                                aria-label='By using this site, you agree to our Privacy Policy, including cookie policy. Click to learn more.'
                             >
                                 This site uses cookies
                             </button>
                             <ButtonRounded
                                 classes='text-body-small leading-[1.4]'
                                 onClick={() => handleOKButton('true')}
+                                aria-label='Accept cookies and dismiss notification'
                             >
                                 OK
                             </ButtonRounded>
