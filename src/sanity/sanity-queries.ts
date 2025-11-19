@@ -7,9 +7,9 @@ import type {
     HomePage,
     NavLink,
     PortfolioPage,
+    PortfolioItem,
     Project,
 } from '@/types';
-import { PortfolioItem } from '@/types/PortfolioItem';
 
 const client = createClient(clientConfig);
 
