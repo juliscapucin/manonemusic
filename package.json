@@ -39,6 +39,7 @@
   },
   "overrides": {
     "@types/react": "19.1.13",
-    "@types/react-dom": "19.1.9"
+    "@types/react-dom": "19.1.9",
+    "glob": "^11.1.0"
   }
 }
