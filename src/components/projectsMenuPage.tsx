@@ -42,7 +42,7 @@ export default function ProjectsMenuPage({
     return (
         <>
             {/* Mobile */}
-            <aside className='fixed h-24 w-full bottom-0 flex gap-4 overflow-x-auto border-t border-faded z-10 lg:hidden p-4 bg-primary '>
+            <aside className='fixed bottom-0 z-10 flex h-24 w-full gap-4 overflow-x-auto border-t border-faded bg-primary p-4 lg:hidden'>
                 {projectsData?.map((project: PortfolioItem, index) => {
                     return (
                         <ProjectCard
@@ -63,7 +63,7 @@ export default function ProjectsMenuPage({
             {/* Desktop */}
             <aside
                 ref={menuDesktopRef}
-                className='gsap-projects-menu-page hidden lg:flex fixed w-[172px] overflow-x-clip top-16 right-0 bottom-0 flex-col gap-4 z-projects-menu bg-primary border-l border-faded p-4 overflow-y-auto gutter-stable pointer-events-auto'
+                className='gsap-projects-menu-page gutter-stable pointer-events-auto fixed top-16 right-0 bottom-0 z-projects-menu hidden w-[172px] flex-col gap-4 overflow-x-clip overflow-y-auto border-l border-faded bg-primary p-4 lg:flex'
             >
                 {projectsData?.map((project: PortfolioItem, index) => {
                     return (
@@ -80,7 +80,6 @@ export default function ProjectsMenuPage({
                         />
                     );
                 })}
-                {/* <div style={{ height: 4000, background: "#eee" }}>Test scroll</div> */}
             </aside>
         </>
     );
