@@ -24,7 +24,7 @@ export default function IntroPage() {
 
         tl.to(maskRef.current, {
             clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)',
-            delay: 3.8,
+            delay: 3,
             duration: 0.7,
             ease: 'power4.out',
         });
