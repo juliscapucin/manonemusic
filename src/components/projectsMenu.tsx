@@ -71,7 +71,7 @@ export default function ProjectsMenu({
                 ref={outerContainerRef}
                 id='projects-menu'
                 className={
-                    'gsap-projects-menu mx-4 h-[52svh] w-full items-center overflow-x-visible border-t border-faded bg-primary pb-24 lg:mx-0 lg:flex lg:h-140 lg:w-fit lg:border-b lg:pt-8 lg:pb-8 xl:h-72'
+                    'gsap-projects-menu mx-4 h-[52svh] w-full items-center overflow-x-visible border-t border-faded bg-primary pb-24 lg:mx-0 lg:flex lg:h-140 lg:w-fit lg:border-y lg:py-8 xl:h-fit'
                 }
             >
                 <div

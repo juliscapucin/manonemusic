@@ -11,10 +11,10 @@ import { animateSplitTextVertical } from '@/lib/animations';
 import { useWindowDimensions } from '@/hooks';
 
 type LogoProps = {
-    showSubtitle?: boolean;
+    isIntro?: boolean;
 };
 
-export default function Logo({ showSubtitle }: LogoProps) {
+export default function Logo({ isIntro }: LogoProps) {
     const subtitleRef = useRef(null);
     const { width } = useWindowDimensions();
     const logoRef1 = useRef(null);
@@ -59,7 +59,7 @@ export default function Logo({ showSubtitle }: LogoProps) {
                     0.07
                 )!
             );
-            if (showSubtitle && width && width >= 768) {
+            if (!isIntro) {
                 tl.add(
                     animateSplitTextVertical(
                         subtitleRef.current!,
@@ -98,13 +98,13 @@ export default function Logo({ showSubtitle }: LogoProps) {
                 <div className='h-fit overflow-clip'>
                     <h2
                         ref={subtitleRef}
-                        className={`mt-2 overflow-clip text-title-large text-nowrap opacity-0 ${showSubtitle ? '' : 'hidden'}`}
+                        className={`mt-2 overflow-clip text-title-large text-nowrap opacity-0 ${isIntro ? 'hidden' : ''}`}
                     >
                         Bespoke Audio & Music
                     </h2>
                 </div>
             </div>
-            <AutoGrid />
+            {!isIntro && <AutoGrid />}
         </div>
     );
 }

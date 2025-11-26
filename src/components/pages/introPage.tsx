@@ -72,7 +72,7 @@ export default function IntroPage() {
                 isIntro={true}
             >
                 <div className='lg:mx-8'>
-                    <Logo showSubtitle={false} />
+                    <Logo isIntro={true} />
                 </div>
 
                 {/* GRID */}
