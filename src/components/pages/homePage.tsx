@@ -17,7 +17,9 @@ export default function HomePage() {
                     <Status location={location} />
 
                     <div>
-                        <p>[Selected works]</p>
+                        <p className='text-body-medium uppercase lg:text-body-large'>
+                            [Selected works]
+                        </p>
                         <Copyright />
                     </div>
                 </div>

@@ -3,14 +3,7 @@
 import { useRef } from 'react';
 import Image from 'next/image';
 
-import {
-    SectionWrapper,
-    Subtitle,
-    TextBlock,
-    TitleDisplay,
-} from '@/components/ui';
-
-import { ButtonRounded } from '@/components/buttons';
+import { SectionWrapper, TextBlock, TitleDisplay } from '@/components/ui';
 
 import type { AboutPage } from '@/types';
 import { urlFor } from '@/sanity/lib/sanityImageURL';
@@ -29,7 +22,7 @@ export default function AboutPage({
     return (
         <SectionWrapper classes='w-full'>
             <TitleDisplay ref={titleAboutRef}>{title}</TitleDisplay>
-            <div className='relative z-5 h-fit w-full border-t border-faded bg-primary px-4 lg:h-72 lg:px-8 lg:pt-8'>
+            <div className='relative z-5 h-fit w-full border-t border-faded bg-primary px-4 md:h-96 lg:h-72 lg:px-8 lg:pt-8'>
                 <div className='w-full max-w-section items-start gap-8 *:flex-1 lg:flex'>
                     {/* Image Block */}
                     {image && (

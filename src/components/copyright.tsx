@@ -1,19 +1,15 @@
-import { Heading } from "@/components/ui";
-
 type CopyrightProps = {
-   alignRight?: boolean;
+    alignRight?: boolean;
 };
 
 export default function Copyright({ alignRight }: CopyrightProps) {
-   const year = new Date().getFullYear();
+    const year = new Date().getFullYear();
 
-   return (
-      <Heading
-         tag="h3"
-         variant="title"
-         classes={`uppercase text-nowrap ${alignRight && "text-right"}`}
-      >
-         {`©2017–${year}`}
-      </Heading>
-   );
+    return (
+        <p
+            className={`text-body-medium text-nowrap uppercase lg:text-body-large ${alignRight && 'text-right'}`}
+        >
+            {`©2017–${year}`}
+        </p>
+    );
 }

@@ -3,7 +3,7 @@
 @config '../../tailwind.config.ts';
 
 :root {
-    --primary: rgb(3, 30, 27);
+    --primary: rgb(0, 0, 0);
     --secondary: rgb(183, 255, 207);
     --focus: rgb(154, 152, 152);
 }
@@ -52,7 +52,7 @@
 
     html,
     body {
-        font-weight: 200;
+        font-weight: 400;
         -webkit-font-smoothing: antialiased;
         transition: background-color 0.2s linear;
     }
@@ -140,7 +140,7 @@
 
     /* RICH TEXT STYLES */
     .custom-rich-text p {
-        @apply mb-2 text-body-small md:text-body-medium lg:text-body-large;
+        @apply mb-2 text-body-medium lg:text-body-large;
     }
 
     .custom-rich-text p:last-of-type {

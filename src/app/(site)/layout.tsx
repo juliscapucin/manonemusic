@@ -28,7 +28,7 @@ const font = localFont({
 export const metadata: Metadata = {
     title: 'ManOne Music & Sound Design',
     description:
-        "We create tailored sound design and audio identities that captures the spirit of your brand and resonate with your audience. Let's elevate your identity through sound.",
+        'We create tailored sound design and audio identities that captures the spirit of your brand and resonate with your audience.',
 };
 
 export default async function Layout({

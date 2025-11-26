@@ -14,7 +14,6 @@ import NavMenu from './navMenu';
 import Pagination from './pagination';
 import ScrollProgress from './scrollProgress';
 import SectionWrapper from './sectionWrapper';
-import Subtitle from './subtitle';
 import TextBlock from './textBlock';
 import TitleDisplay from './titleDisplay';
 import TitleHeadline from './titleHeadline';
@@ -38,7 +37,6 @@ export {
     TextBlock,
     ScrollProgress,
     SectionWrapper,
-    Subtitle,
     TitleDisplay,
     TitleHeadline,
     VideoPlayer,

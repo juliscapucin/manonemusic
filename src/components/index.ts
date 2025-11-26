@@ -3,7 +3,6 @@ import Availability from './availability';
 import Copyright from './copyright';
 import Credits from './credits';
 import DocumentsCount, { sanityQuery } from './DocumentsCount'; // Sanity Live Implementation
-import HalftoneBackground from './halftoneBackground';
 import MouseFollower from './mouseFollower';
 import NoiseBackground from './noiseBackground';
 import PanelContent from './panelContent';
@@ -19,7 +18,6 @@ import ProjectsMenuPage from './projectsMenuPage';
 import RootLayout from './rootLayout';
 import SocialLinks from './socialLinks';
 import Status from './status';
-import StripedBackground from './stripedBackground';
 import PlayerTrack from './playerTrack';
 import PlayerTrackList from './playerTrackList';
 
@@ -29,7 +27,6 @@ export {
     Copyright,
     Credits,
     DocumentsCount,
-    HalftoneBackground,
     MouseFollower,
     NoiseBackground,
     PanelContent,
@@ -48,5 +45,4 @@ export {
     sanityQuery,
     SocialLinks,
     Status,
-    StripedBackground,
 };

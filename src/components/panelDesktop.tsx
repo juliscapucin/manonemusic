@@ -198,7 +198,7 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
                     start: 'left-=20 left',
                     end: () => '+=' + (projectsMenuWidth - window.innerWidth),
                     invalidateOnRefresh: true,
-                    markers: true,
+                    //   markers: true,
                     containerAnimation: tween,
                 },
                 x: () => '+=' + (projectsMenuWidth - window.innerWidth),
