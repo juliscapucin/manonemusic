@@ -1,12 +1,12 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useRef } from 'react';
 
 import gsap from 'gsap';
+import { useGSAP } from '@gsap/react';
 
 import { Logo, SectionWrapper } from '@/components/ui';
 import useGenerateGrid from '@/hooks/useGenerateGrid';
-import { useGSAP } from '@gsap/react';
 
 export default function IntroPage() {
     const maskRef = useRef(null);
@@ -15,20 +15,6 @@ export default function IntroPage() {
 
     // Get number of columns based on container width
     const columns = useGenerateGrid(containerRef.current);
-
-    // Main Mask Reveal
-    useEffect(() => {
-        if (!maskRef.current) return;
-
-        const tl = gsap.timeline();
-
-        tl.to(maskRef.current, {
-            clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)',
-            delay: 3,
-            duration: 0.7,
-            ease: 'power4.out',
-        });
-    }, []);
 
     // Animate grid
     useGSAP(() => {
@@ -44,18 +30,32 @@ export default function IntroPage() {
             y: 'random([-50, 50])%',
             opacity: 1,
             duration: 0.6,
-            stagger: 0.03,
+            stagger: 0.02,
             onComplete: () => {
                 // Mask grid reveal
                 gsap.to(maskGridRef.current, {
                     clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)',
-                    delay: 0.8,
+                    delay: 0.6,
                     duration: 0.6,
                     ease: 'power4.out',
                 });
             },
         });
     }, [columns]);
+
+    // Main Mask Reveal
+    useGSAP(() => {
+        if (!maskRef.current) return;
+
+        const tl = gsap.timeline();
+
+        tl.to(maskRef.current, {
+            clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)',
+            delay: 2.5,
+            duration: 0.7,
+            ease: 'power4.out',
+        });
+    }, []);
 
     return (
         <div
@@ -72,7 +72,7 @@ export default function IntroPage() {
                 isIntro={true}
             >
                 <div className='lg:mx-8'>
-                    <Logo />
+                    <Logo showSubtitle={false} />
                 </div>
 
                 {/* GRID */}
