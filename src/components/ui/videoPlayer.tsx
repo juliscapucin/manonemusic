@@ -1,105 +1,105 @@
-"use client";
+'use client';
 
-import { useEffect, useRef, useState } from "react";
-import Player from "@vimeo/player";
+import { useEffect, useRef, useState } from 'react';
+import Player from '@vimeo/player';
 import {
-   IconPlay,
-   IconPause,
-   IconFullscreen,
-   IconVolume,
-   IconVolumeX,
-} from "@/components/icons";
+    IconPlay,
+    IconPause,
+    IconFullscreen,
+    IconVolume,
+    IconVolumeX,
+} from '@/components/icons';
 
 type VideoPlayerProps = {
-   src: string; // Vimeo video ID
-   isTrailerActive: boolean;
+    src: string; // Vimeo video ID
+    isTrailerActive: boolean;
 };
 
 export default function VideoPlayer({
-   src,
-   isTrailerActive,
+    src,
+    isTrailerActive,
 }: VideoPlayerProps) {
-   const iframeRef = useRef<HTMLIFrameElement | null>(null);
-   const [isPlaying, setIsPlaying] = useState(isTrailerActive);
-   const [isMuted, setIsMuted] = useState(false);
-   const player = useRef<Player | null>(null);
+    const iframeRef = useRef<HTMLIFrameElement | null>(null);
+    const [isPlaying, setIsPlaying] = useState(isTrailerActive);
+    const [isMuted, setIsMuted] = useState(false);
+    const player = useRef<Player | null>(null);
 
-   useEffect(() => {
-      if (!iframeRef.current || !src) return;
+    useEffect(() => {
+        if (!iframeRef.current || !src) return;
 
-      let newPlayer: Player | null = null;
+        let newPlayer: Player | null = null;
 
-      newPlayer = new Player(iframeRef.current);
-      player.current = newPlayer;
+        newPlayer = new Player(iframeRef.current);
+        player.current = newPlayer;
 
-      newPlayer.on("play", () => setIsPlaying(true));
-      newPlayer.on("pause", () => setIsPlaying(false));
+        newPlayer.on('play', () => setIsPlaying(true));
+        newPlayer.on('pause', () => setIsPlaying(false));
 
-      newPlayer.getVolume().then((volume) => setIsMuted(volume === 0));
+        newPlayer.getVolume().then((volume) => setIsMuted(volume === 0));
 
-      return () => {
-         if (player.current) {
-            player.current.unload();
-            player.current = null;
-         }
-      };
-   }, [src]);
+        return () => {
+            if (player.current) {
+                player.current.unload();
+                player.current = null;
+            }
+        };
+    }, [src]);
 
-   const handlePlayPause = () => {
-      if (!player.current) return;
-      isPlaying ? player.current.pause() : player.current.play();
-   };
+    const handlePlayPause = () => {
+        if (!player.current) return;
+        isPlaying ? player.current.pause() : player.current.play();
+    };
 
-   const handleMuteToggle = () => {
-      if (!player.current) return;
-      player.current.setVolume(isMuted ? 1 : 0);
-      setIsMuted(!isMuted);
-   };
+    const handleMuteToggle = () => {
+        if (!player.current) return;
+        player.current.setVolume(isMuted ? 1 : 0);
+        setIsMuted(!isMuted);
+    };
 
-   const handleFullscreen = () => {
-      const iframe = iframeRef.current;
-      if (!iframe) return;
+    const handleFullscreen = () => {
+        const iframe = iframeRef.current;
+        if (!iframe) return;
 
-      if (iframe.requestFullscreen) iframe.requestFullscreen();
-      else if ((iframe as any).webkitRequestFullscreen)
-         (iframe as any).webkitRequestFullscreen();
-      else if ((iframe as any).msRequestFullscreen)
-         (iframe as any).msRequestFullscreen();
-   };
+        if (iframe.requestFullscreen) iframe.requestFullscreen();
+        else if ((iframe as any).webkitRequestFullscreen)
+            (iframe as any).webkitRequestFullscreen();
+        else if ((iframe as any).msRequestFullscreen)
+            (iframe as any).msRequestFullscreen();
+    };
 
-   return (
-      <div className="relative w-full aspect-video group">
-         <iframe
-            ref={iframeRef}
-            src={`https://player.vimeo.com/video/${src}?title=0&byline=0&portrait=0&muted=0&autoplay=1&controls=0&loop=0&dnt=1`}
-            allow="autoplay; fullscreen"
-            className="w-full h-full bg-primary"
-         />
-         <div className="absolute bottom-4 left-4 right-4 flex justify-center z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-            <div className="backdrop-blur-md bg-faded-10 py-2 px-8 rounded-full flex gap-16 items-center">
-               <button
-                  onClick={handlePlayPause}
-                  aria-label={isPlaying ? "Pause video" : "Play video"}
-                  className="text-secondary hover:scale-110 transition-transform"
-               >
-                  {isPlaying ? <IconPause /> : <IconPlay />}
-               </button>
-               <button
-                  onClick={handleMuteToggle}
-                  aria-label={isMuted ? "Unmute video" : "Mute video"}
-                  className="text-secondary hover:scale-110 transition-transform"
-               >
-                  {isMuted ? <IconVolumeX /> : <IconVolume />}
-               </button>
-               <button
-                  onClick={handleFullscreen}
-                  aria-label="Enter fullscreen"
-                  className="text-secondary hover:scale-110 transition-transform"
-               >
-                  <IconFullscreen />
-               </button>
+    return (
+        <div className='group relative aspect-video w-full'>
+            <iframe
+                ref={iframeRef}
+                src={`https://player.vimeo.com/video/${src}?title=0&byline=0&portrait=0&muted=0&autoplay=1&controls=0&loop=0&dnt=1`}
+                allow='autoplay; fullscreen'
+                className='h-full w-full bg-primary'
+            />
+            <div className='absolute right-4 bottom-4 left-4 z-10 flex justify-center opacity-0 transition-opacity duration-300 group-hover:opacity-100'>
+                <div className='flex items-center gap-16 rounded-full bg-faded px-8 py-2 backdrop-blur-md'>
+                    <button
+                        onClick={handlePlayPause}
+                        aria-label={isPlaying ? 'Pause video' : 'Play video'}
+                        className='text-secondary transition-transform hover:scale-110'
+                    >
+                        {isPlaying ? <IconPause /> : <IconPlay />}
+                    </button>
+                    <button
+                        onClick={handleMuteToggle}
+                        aria-label={isMuted ? 'Unmute video' : 'Mute video'}
+                        className='text-secondary transition-transform hover:scale-110'
+                    >
+                        {isMuted ? <IconVolumeX /> : <IconVolume />}
+                    </button>
+                    <button
+                        onClick={handleFullscreen}
+                        aria-label='Enter fullscreen'
+                        className='text-secondary transition-transform hover:scale-110'
+                    >
+                        <IconFullscreen />
+                    </button>
+                </div>
             </div>
-         </div>
-      </div>
-   );
+        </div>
+    );
 }

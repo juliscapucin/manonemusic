@@ -1,7 +1,5 @@
 'use client';
 
-import { useEffect, useState } from 'react';
-
 import { Cookies } from '@/components/ui';
 import { MouseFollower, NoiseBackground } from '@/components';
 
@@ -21,18 +19,10 @@ export default function RootLayout({
     cookiesData,
     fontClass,
 }: RootLayoutProps) {
-    const [rootTheme, setRootTheme] = useState<string>('dark');
     const { width } = useWindowDimensions();
 
-    useEffect(() => {
-        const storageTheme = localStorage.getItem('theme');
-        if (storageTheme) {
-            setRootTheme(storageTheme);
-        }
-    }, []);
-
     return (
-        <html lang='en' data-theme={rootTheme}>
+        <html lang='en'>
             <CookieModalContextProvider>
                 <body
                     className={`relative w-screen overflow-x-clip bg-primary text-secondary ${fontClass}`}
