@@ -11,7 +11,7 @@ export default function HomePage() {
     return (
         <SectionWrapper classes='h-[90svh] lg:pt-20 lg:pb-20'>
             <div className='mx-4 flex h-full flex-col justify-between lg:mx-8'>
-                <Logo showSubtitle={true} />
+                <Logo isIntro={false} />
 
                 <div className='flex items-end'>
                     <Status location={location} />
