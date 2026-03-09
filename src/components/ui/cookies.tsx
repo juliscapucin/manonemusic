@@ -102,14 +102,14 @@ export default function Cookies({ cookiesData }: CookiesProps) {
                     {/* Background Overlay */}
                     <div
                         ref={backgroundOverlayRef}
-                        className='pointer-events-none fixed inset-0 z-cookies-modal mx-auto flex items-end justify-end overflow-clip md:bg-primary/80'
+                        className='pointer-events-none fixed inset-0 z-30 mx-auto flex items-end justify-end overflow-clip md:bg-primary/80'
                     ></div>
 
                     {/* Cookie Button */}
-                    <div className='pointer-events-none fixed inset-0 z-cookies-modal mx-auto flex items-end justify-end overflow-clip'>
+                    <div className='pointer-events-none fixed inset-0 z-30 mx-auto flex items-end justify-end overflow-clip'>
                         <div
                             ref={cookieButtonRef}
-                            className='pointer-events-auto absolute right-2 bottom-2 z-cookies-elements flex items-center gap-4 rounded-full border border-secondary bg-primary px-5 py-1 text-secondary lg:right-8 lg:bottom-22'
+                            className='pointer-events-auto absolute right-2 bottom-2 z-40 flex items-center gap-4 rounded-full border border-secondary bg-primary px-5 py-1 text-secondary lg:right-8 lg:bottom-22'
                         >
                             <button
                                 onClick={() => setIsModalOpen(true)}
@@ -131,20 +131,20 @@ export default function Cookies({ cookiesData }: CookiesProps) {
                     {/* Modal */}
                     <div
                         ref={modalRef}
-                        className='fixed top-4 right-4 bottom-6 left-4 z-cookies-elements pr-0 opacity-0 md:right-4 md:left-auto md:w-3/4 lg:w-2/5'
+                        className='fixed top-4 right-4 bottom-6 left-4 z-40 pr-0 opacity-0 md:right-4 md:left-auto md:w-3/4 lg:w-2/5'
                         role='dialog'
                         aria-modal='true'
                         aria-label='Cookie preferences'
                     >
                         {/* Close Button */}
-                        <div className='fixed top-[1px] right-4 left-1 z-cookies-elements flex justify-end bg-primary p-3 pt-4'>
+                        <div className='fixed top-px right-4 left-1 z-40 flex justify-end bg-primary p-3 pt-4'>
                             <ButtonClose
                                 onClick={() => setIsModalOpen(false)}
                             />
                         </div>
 
                         {/* Dismiss Button */}
-                        <div className='pointer-events-none fixed right-4 bottom-[1px] left-[1px] z-cookies-elements flex items-center justify-center bg-primary'>
+                        <div className='pointer-events-none fixed right-4 bottom-px left-px z-40 flex items-center justify-center bg-primary'>
                             <ButtonRounded
                                 classes='block my-4 pointer-events-auto'
                                 onClick={() => handleOKButton('true')}

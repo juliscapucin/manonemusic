@@ -2,10 +2,6 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import './../globals.css';
 
-// Sanity Live implementation
-import { SanityLive } from '@/sanity/lib/sanity.live';
-import { VisualEditing } from 'next-sanity/visual-editing';
-
 import { RootLayout } from '@/components';
 
 import { getCookiesData } from '@/sanity/sanity-queries';
@@ -40,8 +36,6 @@ export default async function Layout({
     return (
         <RootLayout cookiesData={cookiesData} fontClass={font.className}>
             {children}
-            {/* <SanityLive />
-            <VisualEditing /> */}
         </RootLayout>
     );
 }

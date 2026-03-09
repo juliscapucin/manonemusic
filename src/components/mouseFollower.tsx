@@ -7,6 +7,8 @@ import { useGSAP } from '@gsap/react';
 import { Observer } from 'gsap/Observer';
 gsap.registerPlugin(useGSAP, Observer);
 
+import { useWindowDimensions } from '@/hooks';
+
 import { IconChevron } from '@/components/icons';
 import { usePathname } from 'next/navigation';
 
@@ -23,6 +25,7 @@ export default function MouseFollower({ variant }: Props) {
     const [isTopLevel, setIsTopLevel] = useState(false);
     const observerRef = useRef<Observer | null>(null);
     const pathname = usePathname();
+    const { width } = useWindowDimensions();
 
     useEffect(() => {
         const segments = pathname.split('/').filter(Boolean);
@@ -85,7 +88,9 @@ export default function MouseFollower({ variant }: Props) {
     }, [isTopLevel, pathname]);
 
     return (
-        isTopLevel && (
+        isTopLevel &&
+        width &&
+        width > 1024 && (
             <div
                 ref={cursorRef}
                 className={`pointer-events-none fixed top-0 left-0 z-15 flex items-center justify-center rounded-full border ${variant === 'big' ? 'h-40 w-40 border-secondary bg-primary/30' : 'h-24 w-24 border-secondary bg-primary/30'}`}

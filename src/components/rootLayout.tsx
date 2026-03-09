@@ -3,7 +3,6 @@
 import { Cookies } from '@/components/ui';
 import { MouseFollower, NoiseBackground } from '@/components';
 
-import { useWindowDimensions } from '@/hooks';
 import { Cookies as CookiesType } from '@/types';
 import { IntroPage } from './pages';
 import { CookieModalContextProvider } from '@/context';
@@ -19,8 +18,6 @@ export default function RootLayout({
     cookiesData,
     fontClass,
 }: RootLayoutProps) {
-    const { width } = useWindowDimensions();
-
     return (
         <html lang='en'>
             <CookieModalContextProvider>
@@ -30,7 +27,7 @@ export default function RootLayout({
                     {children}
                     <NoiseBackground />
                     <Cookies cookiesData={cookiesData} />
-                    {width && width > 1024 && <MouseFollower variant='small' />}
+                    <MouseFollower variant='small' />
                     <IntroPage />
                 </body>
             </CookieModalContextProvider>

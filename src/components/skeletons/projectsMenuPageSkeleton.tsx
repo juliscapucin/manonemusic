@@ -12,7 +12,7 @@ export default function ProjectsMenuPageSkeleton() {
             </aside>
 
             {/* Desktop */}
-            <aside className='fixed top-16 right-0 bottom-0 z-projects-menu hidden w-[172px] flex-col gap-4 overflow-x-clip overflow-y-auto border-l border-faded bg-primary p-4 lg:flex'>
+            <aside className='fixed top-16 right-0 bottom-0 z-20 hidden w-[172px] flex-col gap-4 overflow-x-clip overflow-y-auto border-l border-faded bg-primary p-4 lg:flex'>
                 {Array.from({ length: 6 }).map((_, index) => (
                     <div
                         key={index}
