@@ -101,7 +101,7 @@ export default function MouseFollower({ variant }: Props) {
     return (
         <div
             ref={cursorRef}
-            className={`pointer-events-none fixed top-0 left-0 z-15 flex items-center justify-center rounded-full border ${variant === 'big' ? 'h-40 w-40 border-secondary bg-primary/30' : 'h-24 w-24 border-secondary bg-primary/30'}`}
+            className={`pointer-events-none fixed top-0 left-0 z-100 flex items-center justify-center rounded-full border ${variant === 'big' ? 'h-40 w-40 border-secondary bg-primary/30' : 'h-24 w-24 border-secondary bg-primary/30'}`}
         >
             <div className='flex items-center gap-8'>
                 <IconChevron direction='back' />

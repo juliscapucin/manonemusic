@@ -46,7 +46,7 @@ export default function Logo({ isIntro }: LogoProps) {
                 animateSplitTextVertical(
                     logoRef1.current,
                     undefined,
-                    1.3,
+                    1.8,
                     0.3,
                     0.07
                 )!
@@ -54,7 +54,7 @@ export default function Logo({ isIntro }: LogoProps) {
                 animateSplitTextVertical(
                     logoRef2.current,
                     undefined,
-                    1.6,
+                    2,
                     0.3,
                     0.07
                 )!
@@ -64,7 +64,7 @@ export default function Logo({ isIntro }: LogoProps) {
                     animateSplitTextVertical(
                         subtitleRef.current!,
                         200,
-                        2.4,
+                        1.8,
                         0.3,
                         0.04
                     )!

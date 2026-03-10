@@ -9,8 +9,8 @@ import { Logo, SectionWrapper } from '@/components/ui';
 import useGenerateGrid from '@/hooks/useGenerateGrid';
 
 export default function IntroPage() {
-    const maskRef = useRef(null);
-    const maskGridRef = useRef(null);
+    const mainMaskRef = useRef(null);
+    const gridMaskRef = useRef(null);
     const containerRef = useRef<HTMLDivElement>(null);
 
     // Get number of columns based on container width
@@ -18,9 +18,10 @@ export default function IntroPage() {
 
     // Animate grid
     useGSAP(() => {
-        if (!containerRef.current) return;
-        const fills =
-            containerRef.current.querySelectorAll('.gsap-column-fill');
+        if (!containerRef.current || !gridMaskRef.current) return;
+        const fills = containerRef.current.children;
+
+        if (!fills || fills.length === 0) return;
 
         // Reset initial state
         gsap.set(fills, { y: '100%', opacity: 0 });
@@ -33,7 +34,7 @@ export default function IntroPage() {
             stagger: 0.02,
             onComplete: () => {
                 // Mask grid reveal
-                gsap.to(maskGridRef.current, {
+                gsap.to(gridMaskRef.current, {
                     clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)',
                     delay: 0.6,
                     duration: 0.6,
@@ -45,21 +46,21 @@ export default function IntroPage() {
 
     // Main Mask Reveal
     useGSAP(() => {
-        if (!maskRef.current) return;
+        if (!mainMaskRef.current) return;
 
         const tl = gsap.timeline();
 
-        tl.to(maskRef.current, {
+        tl.to(mainMaskRef.current, {
             clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)',
-            delay: 2.5,
+            delay: 1.6,
             duration: 0.7,
             ease: 'power4.out',
         });
-    }, []);
+    }, [columns]);
 
     return (
         <div
-            ref={maskRef}
+            ref={mainMaskRef}
             className='pointer-events-none fixed inset-0 z-100 bg-primary px-4 lg:px-8'
             style={{
                 clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
@@ -77,7 +78,7 @@ export default function IntroPage() {
 
                 {/* GRID */}
                 <div
-                    ref={maskGridRef}
+                    ref={gridMaskRef}
                     className='autogrid absolute inset-0 min-h-full min-w-full'
                     style={{
                         clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
