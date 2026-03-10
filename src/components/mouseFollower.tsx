@@ -20,6 +20,13 @@ const fadeOutAnimation = (element: HTMLElement | null) => {
     if (element) return gsap.to(element, { opacity: 0, duration: 0.7 });
 };
 
+const fadeInAnimation = (element: HTMLElement | null) => {
+    gsap.to(element, {
+        opacity: 1,
+        duration: 0.7,
+    });
+};
+
 export default function MouseFollower({ variant }: Props) {
     const cursorRef = useRef<HTMLDivElement | null>(null);
     const [isTopLevel, setIsTopLevel] = useState(false);
@@ -31,25 +38,38 @@ export default function MouseFollower({ variant }: Props) {
         if (!pathname || !width || width <= 1024) return;
         const segments = pathname.split('/').filter(Boolean);
         setIsTopLevel(pathname === '/' || segments.length === 1);
-    }, [pathname]);
+    }, [pathname, width]);
 
     // Scroll detection
     useGSAP(() => {
         if (!cursorRef.current || !isTopLevel || !width || width <= 1024)
             return;
+
         observerRef.current?.kill();
+
+        let isVisible = true;
+
         observerRef.current = Observer.create({
-            type:
-                pathname === '/'
-                    ? 'wheel,scroll'
-                    : 'wheel, scroll, pointer, touch',
-            onMove: () => fadeOutAnimation(cursorRef.current),
-            onChange: () => fadeOutAnimation(cursorRef.current),
+            type: 'wheel, scroll, pointer, touch',
+            onMove: (self) => {
+                if (pathname === '/' && self.y) {
+                    if ((self.y < 80 || self.y > 880) && isVisible) {
+                        fadeOutAnimation(cursorRef.current);
+                        isVisible = false;
+                    } else if (self.y > 81 && self.y < 881 && !isVisible) {
+                        fadeInAnimation(cursorRef.current);
+                        isVisible = true;
+                    }
+                } else if (pathname !== '/' && isVisible) {
+                    fadeOutAnimation(cursorRef.current);
+                    isVisible = false;
+                }
+            },
+            onChange: () => {
+                if (pathname !== '/') fadeOutAnimation(cursorRef.current);
+            },
             onStop: () => {
-                gsap.to(cursorRef.current, {
-                    opacity: 1,
-                    duration: 0.7,
-                });
+                fadeInAnimation(cursorRef.current);
             },
             onStopDelay: 5, // time (in seconds) after which onStop should be called
             tolerance: 10, // the minimum distance (in pixels) necessary to trigger one of the callbacks
