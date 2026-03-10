@@ -157,7 +157,6 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
                 horizontal: true,
                 containerAnimation: tween,
                 onToggle: (self) => {
-                    console.log('toggle', index, slug, self.isActive);
                     if (self.isActive && window.location.pathname !== slug) {
                         // cancel any existing timeout before starting a new one
                         if (slugTimeout) {
