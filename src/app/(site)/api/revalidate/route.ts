@@ -13,10 +13,13 @@ export async function POST(req: NextRequest) {
         const body = await req.json();
 
         const slug = body?.slug?.current;
-        const section = body?.section || body?.sectionSlug || body?._type; // You can customize this logic
+        const section =
+            body?.section ||
+            body?.sectionSlug ||
+            body?._type.replace('Page', '');
 
         // Always revalidate the homepage
-        const pathsToRevalidate = ['/', '/contact'];
+        const pathsToRevalidate = ['/'];
 
         // Revalidate /[section] if section is present
         if (section) {
