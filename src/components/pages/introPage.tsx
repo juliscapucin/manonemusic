@@ -30,13 +30,13 @@ export default function IntroPage() {
         gsap.to(fills, {
             y: 'random([-50, 50])%',
             opacity: 1,
-            duration: 0.6,
+            duration: 0.5,
             stagger: 0.02,
             onComplete: () => {
                 // Mask grid reveal
                 gsap.to(gridMaskRef.current, {
                     clipPath: 'polygon(0% 0%, 100% 0%, 100% 0%, 0% 0%)',
-                    delay: 0.6,
+                    delay: 0.1,
                     duration: 0.6,
                     ease: 'power4.out',
                 });
@@ -72,10 +72,6 @@ export default function IntroPage() {
                 classes='h-[90svh] lg:pt-20 lg:pb-20'
                 isIntro={true}
             >
-                <div className='lg:mx-8'>
-                    <Logo isIntro={true} />
-                </div>
-
                 {/* GRID */}
                 <div
                     ref={gridMaskRef}

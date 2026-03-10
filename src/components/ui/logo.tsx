@@ -10,11 +10,7 @@ import { AutoGrid } from '@/components';
 import { animateSplitTextVertical } from '@/lib/animations';
 import { useWindowDimensions } from '@/hooks';
 
-type LogoProps = {
-    isIntro?: boolean;
-};
-
-export default function Logo({ isIntro }: LogoProps) {
+export default function Logo() {
     const subtitleRef = useRef(null);
     const { width } = useWindowDimensions();
     const logoRef1 = useRef(null);
@@ -46,30 +42,29 @@ export default function Logo({ isIntro }: LogoProps) {
                 animateSplitTextVertical(
                     logoRef1.current,
                     undefined,
-                    1.8,
-                    0.3,
+                    1.4,
+                    0.2,
                     0.07
                 )!
-            ).add(
-                animateSplitTextVertical(
-                    logoRef2.current,
-                    undefined,
-                    2,
-                    0.3,
-                    0.07
-                )!
-            );
-            if (!isIntro) {
-                tl.add(
+            )
+                .add(
                     animateSplitTextVertical(
-                        subtitleRef.current!,
+                        logoRef2.current,
+                        undefined,
+                        1.6,
+                        0.2,
+                        0.07
+                    )!
+                )
+                .add(
+                    animateSplitTextVertical(
+                        subtitleRef.current,
                         200,
-                        1.8,
-                        0.3,
+                        1.4,
+                        0.2,
                         0.04
                     )!
                 );
-            }
         }, subtitleRef);
 
         return () => ctx.revert();
@@ -98,13 +93,13 @@ export default function Logo({ isIntro }: LogoProps) {
                 <div className='h-fit overflow-clip'>
                     <h2
                         ref={subtitleRef}
-                        className={`mt-2 overflow-clip text-title-large text-nowrap opacity-0 ${isIntro ? 'hidden' : ''}`}
+                        className='mt-2 overflow-clip text-title-large text-nowrap opacity-0'
                     >
                         Bespoke Audio & Music
                     </h2>
                 </div>
             </div>
-            {!isIntro && <AutoGrid />}
+            <AutoGrid />
         </div>
     );
 }
