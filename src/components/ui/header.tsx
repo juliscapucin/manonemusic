@@ -24,12 +24,11 @@ export default function Header({ navLinks, variant = 'section' }: HeaderProps) {
             // ScrollTo on Load
             handlePanelSlide(pathname, true);
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [variant]);
 
     return (
         <header>
-            <nav className='fixed top-0 right-0 left-0 z-header hidden h-(--header-height-mobile) justify-between overflow-clip border-b border-faded bg-primary px-12 py-4 lg:flex'>
+            <nav className='fixed top-0 right-0 left-0 z-50 hidden h-(--header-height-mobile) justify-between overflow-clip border-b border-faded bg-primary px-12 py-4 lg:flex'>
                 {/* LOGO */}
                 <CustomButton
                     link='/'

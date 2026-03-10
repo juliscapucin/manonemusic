@@ -60,13 +60,13 @@ export default function IntroPage() {
     return (
         <div
             ref={maskRef}
-            className='pointer-events-none fixed inset-0 z-intro bg-primary px-4 lg:px-8'
+            className='pointer-events-none fixed inset-0 z-100 bg-primary px-4 lg:px-8'
             style={{
                 clipPath: 'polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)',
             }}
         >
             {/* Header spacer */}
-            <div className='fixed top-0 right-0 left-0 z-header h-(--header-height-mobile) border-b border-faded bg-primary'></div>
+            <div className='fixed top-0 right-0 left-0 z-100 h-(--header-height-mobile) border-b border-faded bg-primary'></div>
             <SectionWrapper
                 classes='h-[90svh] lg:pt-20 lg:pb-20'
                 isIntro={true}

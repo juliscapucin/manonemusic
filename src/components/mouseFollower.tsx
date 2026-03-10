@@ -28,13 +28,15 @@ export default function MouseFollower({ variant }: Props) {
     const { width } = useWindowDimensions();
 
     useEffect(() => {
+        if (!pathname || !width || width <= 1024) return;
         const segments = pathname.split('/').filter(Boolean);
         setIsTopLevel(pathname === '/' || segments.length === 1);
     }, [pathname]);
 
     // Scroll detection
     useGSAP(() => {
-        if (!cursorRef.current || !isTopLevel) return;
+        if (!cursorRef.current || !isTopLevel || !width || width <= 1024)
+            return;
         observerRef.current?.kill();
         observerRef.current = Observer.create({
             type:
@@ -61,7 +63,14 @@ export default function MouseFollower({ variant }: Props) {
     // Mouse follower movement
     useLayoutEffect(() => {
         const cursorDiv = cursorRef.current;
-        if (!cursorDiv || !cursorDiv.parentElement || !isTopLevel) return;
+        if (
+            !cursorDiv ||
+            !cursorDiv.parentElement ||
+            !isTopLevel ||
+            !width ||
+            width <= 1024
+        )
+            return;
 
         gsap.set(cursorDiv, { xPercent: -50, yPercent: -50 });
 
@@ -87,28 +96,26 @@ export default function MouseFollower({ variant }: Props) {
         };
     }, [isTopLevel, pathname]);
 
+    if (!isTopLevel || !width || width <= 1024) return null;
+
     return (
-        isTopLevel &&
-        width &&
-        width > 1024 && (
-            <div
-                ref={cursorRef}
-                className={`pointer-events-none fixed top-0 left-0 z-15 flex items-center justify-center rounded-full border ${variant === 'big' ? 'h-40 w-40 border-secondary bg-primary/30' : 'h-24 w-24 border-secondary bg-primary/30'}`}
-            >
-                <div className='flex items-center gap-8'>
-                    <IconChevron direction='back' />
-                    <span
-                        className={`${
-                            variant === 'big'
-                                ? 'text-title-large font-extralight'
-                                : 'text-label-large text-secondary'
-                        }`}
-                    >
-                        SCROLL
-                    </span>
-                    <IconChevron direction='forward' />
-                </div>
+        <div
+            ref={cursorRef}
+            className={`pointer-events-none fixed top-0 left-0 z-15 flex items-center justify-center rounded-full border ${variant === 'big' ? 'h-40 w-40 border-secondary bg-primary/30' : 'h-24 w-24 border-secondary bg-primary/30'}`}
+        >
+            <div className='flex items-center gap-8'>
+                <IconChevron direction='back' />
+                <span
+                    className={`${
+                        variant === 'big'
+                            ? 'text-title-large font-extralight'
+                            : 'text-label-large text-secondary'
+                    }`}
+                >
+                    SCROLL
+                </span>
+                <IconChevron direction='forward' />
             </div>
-        )
+        </div>
     );
 }

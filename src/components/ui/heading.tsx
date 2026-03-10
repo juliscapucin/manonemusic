@@ -6,6 +6,7 @@ type HeadingProps = React.HTMLAttributes<HTMLHeadingElement> & {
     classes?: string;
     children: React.ReactNode;
     variant: 'display' | 'headline' | 'title';
+    hasGrid?: boolean;
 };
 
 export default function Heading({
@@ -13,6 +14,7 @@ export default function Heading({
     classes,
     children,
     variant,
+    hasGrid = true,
 }: HeadingProps) {
     const Tag = tag as keyof JSX.IntrinsicElements;
     let headingStyles = '';
@@ -45,7 +47,7 @@ export default function Heading({
             >
                 {children}
             </Tag>
-            <AutoGrid />
+            {hasGrid && <AutoGrid />}
         </div>
     );
 }
