@@ -9,7 +9,7 @@ import { PortfolioItem } from './PortfolioItem';
 
 export type AllData = {
     headerNavLinks: NavLink[];
-    contact: ContactPage;
+    contactPage: ContactPage;
     aboutPage: AboutPage;
     portfolioSections: { [key: string]: PortfolioPage };
     films: PortfolioItem[];

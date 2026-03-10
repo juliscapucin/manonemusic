@@ -34,7 +34,7 @@ export default async function Page(props: {
     const params = await props.params;
     const [
         headerNavLinks,
-        contact,
+        contactPage,
         aboutPage,
         sections,
         films,
@@ -67,7 +67,7 @@ export default async function Page(props: {
 
     const data = {
         headerNavLinks,
-        contact,
+        contactPage,
         aboutPage,
         portfolioSections,
         films,
@@ -79,7 +79,7 @@ export default async function Page(props: {
     if (
         !data ||
         !data.headerNavLinks ||
-        !data.contact ||
+        !data.contactPage ||
         !data.aboutPage ||
         !data.portfolioSections ||
         !data.films ||
