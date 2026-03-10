@@ -9,7 +9,6 @@ type SocialLinksProps = {
 };
 
 export default function SocialLinks({ data }: SocialLinksProps) {
-    console.log(data);
     return (
         data && (
             <div className='mt-8 text-right lg:mt-0 lg:self-end'>
