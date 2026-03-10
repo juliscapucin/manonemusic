@@ -32,7 +32,12 @@ export async function POST(req: NextRequest) {
             pathsToRevalidate.map((path) => revalidatePath(path))
         );
 
-        console.log('✅ Revalidated:', pathsToRevalidate);
+        console.log(
+            '✅ Revalidated:',
+            pathsToRevalidate,
+            'Webhook body:',
+            body
+        );
         return NextResponse.json({ revalidated: true });
     } catch (err) {
         console.error('❌ Revalidation error:', err);
