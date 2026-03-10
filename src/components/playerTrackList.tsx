@@ -29,7 +29,7 @@ export default function PlayerTrackList({ tracks }: PlayerTrackListProps) {
     };
 
     return (
-        <div className='gsap-project-content w-full'>
+        <div className='gsap-project-content w-full lg:pr-4'>
             {tracks.map((track, index) => (
                 <PlayerTrack
                     index={index}

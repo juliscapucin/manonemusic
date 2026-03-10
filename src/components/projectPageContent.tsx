@@ -24,7 +24,7 @@ export default function ProjectPageContent({
     const pathname = usePathname();
 
     return (
-        <div className='gsap-project-page-content relative flex-1 gap-8 border-b border-l border-faded bg-primary pb-12 md:w-fit md:overflow-y-auto md:pb-0 lg:pl-8'>
+        <div className='gsap-project-page-content relative flex-1 gap-8 border-b border-l border-faded bg-primary pb-12 md:overflow-y-auto md:pb-0 lg:pl-8'>
             {/* IMAGE */}
             <div className='gsap-project-image z-50 w-full max-w-[550px] min-w-[300px] pt-8 opacity-0 md:fixed md:w-1/2 lg:w-1/3 xl:w-1/4'>
                 <ImageWithSpinner
