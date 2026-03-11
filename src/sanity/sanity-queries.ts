@@ -50,11 +50,14 @@ export async function getContactPage(): Promise<ContactPage> {
       subtitle,
       email,
       socials,
-      love,
       metadataTitle,
       metadataDescription,
       metadataKeywords,
-   }`
+   }`,
+        {},
+        {
+            next: { tags: ['contact-page'] },
+        }
     );
 }
 

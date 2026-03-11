@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, revalidateTag } from 'next/cache';
 
 export async function POST(req: NextRequest) {
     const secret = req.nextUrl.searchParams.get('secret');
@@ -13,10 +13,15 @@ export async function POST(req: NextRequest) {
         const body = await req.json();
 
         const slug = body?.slug?.current;
+        const documentType = body?._type;
         const section =
             body?.section ||
             body?.sectionSlug ||
-            body?._type.replace('Page', '');
+            documentType.replace('Page', '');
+
+        if (documentType === 'contactPage') {
+            revalidateTag('contact-page', 'max');
+        }
 
         // Always revalidate the homepage
         const pathsToRevalidate = ['/'];
