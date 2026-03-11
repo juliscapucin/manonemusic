@@ -55,9 +55,7 @@ export async function getContactPage(): Promise<ContactPage> {
       metadataKeywords,
    }`,
         {},
-        {
-            next: { tags: ['contact-page'] },
-        }
+        { cache: 'no-store' }
     );
 }
 
