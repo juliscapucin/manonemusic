@@ -24,7 +24,7 @@ export async function POST(req: NextRequest) {
         }
 
         // Always revalidate the homepage
-        const pathsToRevalidate = ['/'];
+        const pathsToRevalidate = ['/', 'layout'];
 
         // Revalidate /[section] if section is present
         if (section) {
