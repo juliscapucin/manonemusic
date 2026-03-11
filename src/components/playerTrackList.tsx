@@ -10,22 +10,20 @@ type PlayerTrackListProps = {
 };
 
 export default function PlayerTrackList({ tracks }: PlayerTrackListProps) {
-    const [currentlyPlaying, setCurrentlyPlaying] = useState<string | null>(
-        null
-    );
+    const [currentlyPlaying, setCurrentlyPlaying] = useState<string | null>(null);
 
-    const handleTrackClick = (clickedTrackTitle: string) => {
-        if (currentlyPlaying === clickedTrackTitle) {
+    const handleTrackClick = (clickedTrackLink: string) => {
+        if (currentlyPlaying === clickedTrackLink) {
             // If the clicked track is already playing, pause it.
             setCurrentlyPlaying(null);
         } else {
             // Play the clicked track and pause others
-            setCurrentlyPlaying(clickedTrackTitle);
+            setCurrentlyPlaying(clickedTrackLink);
         }
     };
 
-    const handleSlideClick = (clickedTrackTitle: string) => {
-        setCurrentlyPlaying(clickedTrackTitle);
+    const handleSlideClick = (clickedTrackLink: string) => {
+        setCurrentlyPlaying(clickedTrackLink);
     };
 
     return (
@@ -33,11 +31,11 @@ export default function PlayerTrackList({ tracks }: PlayerTrackListProps) {
             {tracks.map((track, index) => (
                 <PlayerTrack
                     index={index}
-                    key={track.trackname}
+                    key={`${track.link}-${index}`}
                     track={track}
-                    buttonAction={() => handleTrackClick(track.trackname)}
-                    sliderAction={() => handleSlideClick(track.trackname)}
-                    isPlaying={currentlyPlaying === track.trackname}
+                    buttonAction={() => handleTrackClick(track.link)}
+                    sliderAction={() => handleSlideClick(track.link)}
+                    isPlaying={currentlyPlaying === track.link}
                 />
             ))}
             {/* TODO add Soundcloud logo */}
