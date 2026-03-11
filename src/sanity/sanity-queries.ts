@@ -45,7 +45,7 @@ export async function getAboutPage(): Promise<AboutPage> {
 
 export async function getContactPage(): Promise<ContactPage> {
     return client.fetch(
-        groq`*[_type == "contactPage"][0] {
+        groq`*[_type == "contactPage"][1] {
       title,
       subtitle,
       email,
@@ -53,9 +53,7 @@ export async function getContactPage(): Promise<ContactPage> {
       metadataTitle,
       metadataDescription,
       metadataKeywords,
-   }`,
-        {},
-        { cache: 'no-store' }
+   }`
     );
 }
 

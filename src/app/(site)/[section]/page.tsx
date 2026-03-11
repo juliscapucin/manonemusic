@@ -17,6 +17,7 @@ import {
     getPortfolioItems,
     getPortfolioSections,
 } from '@/sanity/sanity-queries';
+import { ContactPage } from '@/components/pages';
 
 export async function generateStaticParams() {
     const headerNavLinks = await getHeaderNavLinks();

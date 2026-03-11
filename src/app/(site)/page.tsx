@@ -1,15 +1,6 @@
 import type { Metadata } from 'next';
 
-// Sanity Live implementation
-import { draftMode } from 'next/headers';
-import { sanityFetch } from '@/sanity/lib/sanity.fetch';
-
-import {
-    PreviewDocumentsCount, // Sanity Live implementation
-    DocumentsCount, // Sanity Live implementation
-    sanityQuery, // Sanity Live implementation
-    Panels,
-} from '@/components';
+import { Panels } from '@/components';
 
 export const metadata: Metadata = {
     title: 'Man One Music',
@@ -51,15 +42,6 @@ export default async function Page() {
         getPortfolioItems('project'),
     ]);
 
-    const sanityData = await sanityFetch<number>({
-        query: sanityQuery,
-        tags: ['post'],
-    });
-
-    if ((await draftMode()).isEnabled) {
-        return <PreviewDocumentsCount data={sanityData} />;
-    }
-
     const portfolioSections = sections.reduce(
         (acc: { [key: string]: (typeof sections)[0] }, item) => {
             acc[item.slug] = item;
@@ -94,10 +76,5 @@ export default async function Page() {
     )
         return notFound();
 
-    return (
-        <>
-            <DocumentsCount data={sanityData} />
-            <Panels data={data} />
-        </>
-    );
+    return <Panels data={data} />;
 }

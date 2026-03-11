@@ -8,7 +8,7 @@ export type ContactPage = {
             link: string;
         },
     ];
-    metadataTitle: string;
-    metadataDescription: string;
-    metadataKeywords: string[];
+    metadataTitle?: string;
+    metadataDescription?: string;
+    metadataKeywords?: string[];
 };
