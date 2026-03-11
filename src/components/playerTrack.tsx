@@ -49,15 +49,13 @@ export default function PlayerTrack({
     };
 
     // Slider change starts
-    const onSeekMouseDown = () => {
+    const onSeekStart = () => {
         setIsSeeking(true);
     };
 
     // Slider change ends and seek to new time
-    const onSeekMouseUp = (
-        e: React.MouseEvent<HTMLInputElement, MouseEvent>
-    ) => {
-        const newTime = parseFloat((e.target as HTMLInputElement).value);
+    const onSeekEnd = (e: React.PointerEvent<HTMLInputElement>) => {
+        const newTime = parseFloat(e.currentTarget.value);
         setIsSeeking(false);
         playerRef.current?.seekTo(newTime);
         setPlayedSeconds(newTime);
@@ -78,6 +76,7 @@ export default function PlayerTrack({
                         ref={playerRef}
                         url={track.link}
                         playing={isPlaying}
+                        playsinline
                         onDuration={handleDuration}
                         onProgress={handleProgress}
                         onEnded={handleEnd}
@@ -110,12 +109,13 @@ export default function PlayerTrack({
                             type='range'
                             min={0}
                             max={duration}
+                            step='any'
                             value={playedSeconds}
-                            onMouseDown={onSeekMouseDown}
+                            onPointerDown={onSeekStart}
                             onChange={(e) =>
                                 setPlayedSeconds(parseFloat(e.target.value))
                             }
-                            onMouseUp={onSeekMouseUp}
+                            onPointerUp={onSeekEnd}
                         />
                         <span className=''>{formatDuration(duration)}</span>
                     </div>
