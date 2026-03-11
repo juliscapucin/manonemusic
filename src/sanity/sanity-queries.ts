@@ -53,7 +53,11 @@ export async function getContactPage(): Promise<ContactPage> {
       metadataTitle,
       metadataDescription,
       metadataKeywords,
-   }`
+   }`,
+        {},
+        {
+            next: { tags: ['contact-page'] },
+        }
     );
 }
 
