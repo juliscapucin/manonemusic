@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { cacheTag } from 'next/cache';
 
 import { Panels } from '@/components';
 
@@ -31,6 +32,9 @@ export async function generateStaticParams() {
 export default async function Page(props: {
     params: Promise<{ section: string }>;
 }) {
+    'use cache';
+    cacheTag('contact-page');
+
     const params = await props.params;
     const [
         headerNavLinks,
