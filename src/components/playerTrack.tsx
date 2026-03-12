@@ -86,7 +86,6 @@ export default function PlayerTrack({
                 {/* Play / Pause icons */}
                 <div className='flex h-full w-10 items-center justify-center'>
                     {isPlaying ? <IconPause /> : <IconPlay />}
-                    <div className='pointer-events-auto absolute bottom-0 z-5 h-4 w-full'></div>
                 </div>
 
                 {/* Progress bar / Duration */}
@@ -126,8 +125,7 @@ export default function PlayerTrack({
                 onDuration={handleDuration}
                 onProgress={handleProgress}
                 onEnded={handleEnd}
-                width={100}
-                height={100}
+                height={120}
                 onStart={() => {
                     if (isPlaying) return;
                     onTrackClick();
