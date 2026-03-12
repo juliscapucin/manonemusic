@@ -70,18 +70,20 @@ export default function PlayerTrack({
     }, []);
 
     return isClient ? (
-        <div className='relative h-24'>
+        <div
+            className={`relative overflow-clip ${track.trackname.length > 40 ? 'h-32' : 'h-24'}`}
+        >
             {/* Custom Player */}
 
             {index === 0 && (
                 <div className='absolute top-0 right-0 left-0 h-px w-full bg-faded'></div>
             )}
             <div
-                className={`group pointer-events-none absolute inset-0 z-5 flex w-full flex-nowrap py-4 pr-4 pl-3 transition-colors duration-300 hover:bg-faded-5 ${isPlaying ? 'bg-faded-5' : ''}`}
+                className={`group pointer-events-none absolute inset-0 z-5 flex w-full flex-nowrap items-start py-4 pr-4 pl-3 transition-colors duration-300 hover:bg-faded-5 ${isPlaying ? 'bg-faded-5' : ''}`}
                 aria-label={`${isPlaying ? 'Pause' : 'Play'} ${track.trackname}`}
             >
                 {/* Play / Pause icons */}
-                <div className='flex w-16 items-center justify-center'>
+                <div className='flex h-full w-16 items-center justify-center'>
                     {isPlaying ? <IconPause /> : <IconPlay />}
                 </div>
 
@@ -124,7 +126,7 @@ export default function PlayerTrack({
                 onProgress={handleProgress}
                 onEnded={handleEnd}
                 width={'100%'}
-                height={80}
+                height={100}
                 onPlay={() => {
                     if (!isPlaying) onTrackClick();
                 }}
@@ -133,6 +135,7 @@ export default function PlayerTrack({
                 }}
                 style={{
                     opacity: 0,
+                    paddingTop: 10,
                 }}
             />
         </div>
