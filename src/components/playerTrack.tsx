@@ -127,7 +127,7 @@ export default function PlayerTrack({
                 onDuration={handleDuration}
                 onProgress={handleProgress}
                 onEnded={handleEnd}
-                width={'100%'}
+                width={100}
                 height={100}
                 onPlay={() => {
                     if (isPlaying) return;
