@@ -136,7 +136,7 @@ export default function PlayerTrack({
                     if (isPlaying) onTrackClick();
                 }}
                 style={{
-                    opacity: 0,
+                    //   opacity: 0,
                     paddingTop: 10,
                 }}
             />
