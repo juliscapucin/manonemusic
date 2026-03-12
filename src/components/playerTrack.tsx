@@ -122,14 +122,13 @@ export default function PlayerTrack({
             <ReactPlayer
                 ref={playerRef}
                 url={finalTrackLink}
-                autoplay={false}
                 playsinline
                 onDuration={handleDuration}
                 onProgress={handleProgress}
                 onEnded={handleEnd}
                 width={100}
                 height={100}
-                onPlay={() => {
+                onStart={() => {
                     if (isPlaying) return;
                     onTrackClick();
                 }}
