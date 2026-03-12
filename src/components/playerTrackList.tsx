@@ -24,7 +24,7 @@ export default function PlayerTrackList({ tracks }: PlayerTrackListProps) {
         }
     };
 
-    const handleSlideClick = (clickedTrackLink: string) => {
+    const handleTrackSlide = (clickedTrackLink: string) => {
         setCurrentlyPlaying(clickedTrackLink);
     };
 
@@ -37,7 +37,7 @@ export default function PlayerTrackList({ tracks }: PlayerTrackListProps) {
                         key={track.link}
                         track={track}
                         onTrackClick={() => handleTrackClick(track.link)}
-                        sliderAction={() => handleSlideClick(track.link)}
+                        onSlide={() => handleTrackSlide(track.link)}
                         currentlyPlaying={currentlyPlaying}
                     />
                 );

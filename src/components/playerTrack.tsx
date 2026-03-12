@@ -10,7 +10,7 @@ type PlayerTrackProps = {
     track: Track;
     currentlyPlaying: string | null;
     onTrackClick: () => void;
-    sliderAction: () => void;
+    onSlide: () => void;
 };
 
 export default function PlayerTrack({
@@ -18,7 +18,7 @@ export default function PlayerTrack({
     track,
     currentlyPlaying,
     onTrackClick,
-    sliderAction,
+    onSlide,
 }: PlayerTrackProps) {
     const [isClient, setIsClient] = useState(false);
     const [duration, setDuration] = useState(0); // Store duration in seconds
@@ -62,7 +62,7 @@ export default function PlayerTrack({
         setIsSeeking(false);
         playerRef.current?.seekTo(newTime);
         setPlayedSeconds(newTime);
-        sliderAction();
+        onSlide();
     };
 
     // Workaround to run component only on client side
@@ -84,9 +84,11 @@ export default function PlayerTrack({
                 aria-label={`${isPlaying ? 'Pause' : 'Play'} ${track.trackname}`}
             >
                 {/* Play / Pause icons */}
-                <div className='flex h-full w-10 items-center justify-center'>
+                <span
+                    className={`flex h-full w-10 items-center justify-center opacity-70 hover:opacity-100`}
+                >
                     {isPlaying ? <IconPause /> : <IconPlay />}
-                </div>
+                </span>
 
                 {/* Progress bar / Duration */}
                 <div
@@ -121,20 +123,20 @@ export default function PlayerTrack({
             <ReactPlayer
                 ref={playerRef}
                 url={finalTrackLink}
+                //  playing={isPlaying}
                 playsinline
                 onDuration={handleDuration}
                 onProgress={handleProgress}
                 onEnded={handleEnd}
                 height={120}
                 onStart={() => {
-                    if (isPlaying) return;
                     onTrackClick();
                 }}
                 onPause={() => {
-                    if (isPlaying) onTrackClick();
+                    onTrackClick();
                 }}
                 style={{
-                    //   opacity: 0,
+                    opacity: 0,
                     paddingTop: 10,
                 }}
             />
