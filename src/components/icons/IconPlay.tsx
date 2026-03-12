@@ -1,6 +1,6 @@
 export default function IconPlay() {
     return (
-        <div className='flex aspect-square h-8 items-center'>
+        <div className='flex aspect-square h-full items-center justify-center'>
             <svg
                 width='17'
                 height='28'

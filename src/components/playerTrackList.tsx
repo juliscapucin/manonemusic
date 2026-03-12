@@ -14,32 +14,37 @@ export default function PlayerTrackList({ tracks }: PlayerTrackListProps) {
         null
     );
 
-    const handleTrackClick = (clickedTrackTitle: string) => {
-        if (currentlyPlaying === clickedTrackTitle) {
+    const handleTrackClick = (clickedTrackLink: string) => {
+        if (currentlyPlaying === clickedTrackLink) {
             // If the clicked track is already playing, pause it.
             setCurrentlyPlaying(null);
         } else {
             // Play the clicked track and pause others
-            setCurrentlyPlaying(clickedTrackTitle);
+            setCurrentlyPlaying(clickedTrackLink);
         }
     };
 
-    const handleSlideClick = (clickedTrackTitle: string) => {
-        setCurrentlyPlaying(clickedTrackTitle);
+    const handleSlideClick = (clickedTrackLink: string) => {
+        setCurrentlyPlaying(clickedTrackLink);
     };
 
     return (
         <div className='gsap-project-content w-full lg:pr-4'>
-            {tracks.map((track, index) => (
-                <PlayerTrack
-                    index={index}
-                    key={track.trackname}
-                    track={track}
-                    buttonAction={() => handleTrackClick(track.trackname)}
-                    sliderAction={() => handleSlideClick(track.trackname)}
-                    isPlaying={currentlyPlaying === track.trackname}
-                />
-            ))}
+            {tracks.map((track, index) => {
+                const isPlaying = currentlyPlaying
+                    ? currentlyPlaying === track.link
+                    : undefined;
+                return (
+                    <PlayerTrack
+                        index={index}
+                        key={track.link}
+                        track={track}
+                        onTrackClick={() => handleTrackClick(track.link)}
+                        sliderAction={() => handleSlideClick(track.link)}
+                        isPlaying={isPlaying}
+                    />
+                );
+            })}
             {/* TODO add Soundcloud logo */}
         </div>
     );

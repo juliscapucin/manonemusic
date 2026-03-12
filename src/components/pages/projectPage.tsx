@@ -7,7 +7,7 @@ import gsap from 'gsap';
 import { TitleHeadline } from '@/components/ui';
 import { Project } from '@/types';
 import { ButtonBack } from '@/components/buttons';
-import { AutoGrid, ProjectPageContent, ProjectTrailer } from '@/components';
+import { ProjectPageContent, ProjectTrailer } from '@/components';
 import { useTransitionOnEnter } from '@/hooks';
 import { useGSAP } from '@gsap/react';
 import { usePathname } from 'next/navigation';

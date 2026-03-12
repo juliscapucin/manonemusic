@@ -1,6 +1,6 @@
 export default function IconPause() {
     return (
-        <div className='flex aspect-square h-8 items-center'>
+        <div className='flex aspect-square h-full items-center justify-center'>
             <svg
                 width='20'
                 height='26'

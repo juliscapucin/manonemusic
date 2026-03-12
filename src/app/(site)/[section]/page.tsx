@@ -90,7 +90,5 @@ export default async function Page(props: {
     )
         return notFound();
 
-    console.log(data.contactPage);
-
     return <Panels data={data} />;
 }
