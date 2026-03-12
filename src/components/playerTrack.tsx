@@ -8,7 +8,7 @@ import { IconPause, IconPlay } from '@/components/icons';
 type PlayerTrackProps = {
     index: number;
     track: Track;
-    isPlaying: boolean | undefined;
+    currentlyPlaying: string | null;
     onTrackClick: () => void;
     sliderAction: () => void;
 };
@@ -16,7 +16,7 @@ type PlayerTrackProps = {
 export default function PlayerTrack({
     index,
     track,
-    isPlaying,
+    currentlyPlaying,
     onTrackClick,
     sliderAction,
 }: PlayerTrackProps) {
@@ -26,6 +26,7 @@ export default function PlayerTrack({
     const [isSeeking, setIsSeeking] = useState(false); // Track whether the user is currently seeking
     const playerRef = useRef<ReactPlayer | null>(null);
 
+    const isPlaying = currentlyPlaying === track.link;
     const finalTrackLink = `${track.link}&show_artwork=false`;
 
     const formatDuration = (data: number) => {
@@ -120,7 +121,7 @@ export default function PlayerTrack({
             <ReactPlayer
                 ref={playerRef}
                 url={finalTrackLink}
-                playing={isPlaying}
+                autoplay={false}
                 playsinline
                 onDuration={handleDuration}
                 onProgress={handleProgress}
@@ -128,7 +129,8 @@ export default function PlayerTrack({
                 width={'100%'}
                 height={100}
                 onPlay={() => {
-                    if (!isPlaying) onTrackClick();
+                    if (isPlaying) return;
+                    onTrackClick();
                 }}
                 onPause={() => {
                     if (isPlaying) onTrackClick();

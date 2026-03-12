@@ -31,9 +31,6 @@ export default function PlayerTrackList({ tracks }: PlayerTrackListProps) {
     return (
         <div className='gsap-project-content w-full lg:pr-4'>
             {tracks.map((track, index) => {
-                const isPlaying = currentlyPlaying
-                    ? currentlyPlaying === track.link
-                    : undefined;
                 return (
                     <PlayerTrack
                         index={index}
@@ -41,7 +38,7 @@ export default function PlayerTrackList({ tracks }: PlayerTrackListProps) {
                         track={track}
                         onTrackClick={() => handleTrackClick(track.link)}
                         sliderAction={() => handleSlideClick(track.link)}
-                        isPlaying={isPlaying}
+                        currentlyPlaying={currentlyPlaying}
                     />
                 );
             })}
