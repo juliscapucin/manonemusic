@@ -80,12 +80,13 @@ export default function PlayerTrack({
                 <div className='absolute top-0 right-0 left-0 h-px w-full bg-faded'></div>
             )}
             <div
-                className={`group pointer-events-none absolute inset-0 z-5 flex w-full flex-nowrap items-start py-4 pr-4 pl-3 transition-colors duration-300 hover:bg-faded-5 ${isPlaying ? 'bg-faded-5' : ''}`}
+                className={`group pointer-events-none absolute inset-0 z-5 flex w-full flex-nowrap items-center py-4 pr-4 pl-3 transition-colors duration-300 hover:bg-faded-5 ${isPlaying ? 'bg-faded-5' : ''}`}
                 aria-label={`${isPlaying ? 'Pause' : 'Play'} ${track.trackname}`}
             >
                 {/* Play / Pause icons */}
-                <div className='flex h-full w-16 items-center justify-center'>
+                <div className='flex h-full w-10 items-center justify-center'>
                     {isPlaying ? <IconPause /> : <IconPlay />}
+                    <div className='pointer-events-auto absolute bottom-0 z-5 h-4 w-full'></div>
                 </div>
 
                 {/* Progress bar / Duration */}
