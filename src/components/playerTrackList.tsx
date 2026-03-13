@@ -14,18 +14,16 @@ export default function PlayerTrackList({ tracks }: PlayerTrackListProps) {
         null
     );
 
-    const handleTrackClick = (clickedTrackLink: string) => {
-        if (currentlyPlaying === clickedTrackLink) {
-            // If the clicked track is already playing, pause it.
-            setCurrentlyPlaying(null);
-        } else {
-            // Play the clicked track and pause others
-            setCurrentlyPlaying(clickedTrackLink);
-        }
-    };
-
     const handleTrackSlide = (clickedTrackLink: string) => {
         setCurrentlyPlaying(clickedTrackLink);
+    };
+
+    const handlePlay = (clickedTrackLink: string) => {
+        console.log('play');
+        setCurrentlyPlaying(clickedTrackLink);
+    };
+    const handlePause = (clickedTrackLink: string) => {
+        setCurrentlyPlaying(null);
     };
 
     return (
@@ -36,7 +34,8 @@ export default function PlayerTrackList({ tracks }: PlayerTrackListProps) {
                         index={index}
                         key={track.link}
                         track={track}
-                        onTrackClick={() => handleTrackClick(track.link)}
+                        handlePlay={() => handlePlay(track.link)}
+                        handlePause={() => handlePause(track.link)}
                         onSlide={() => handleTrackSlide(track.link)}
                         currentlyPlaying={currentlyPlaying}
                     />

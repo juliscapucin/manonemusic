@@ -9,16 +9,19 @@ type PlayerTrackProps = {
     index: number;
     track: Track;
     currentlyPlaying: string | null;
-    onTrackClick: () => void;
+
     onSlide: () => void;
+    handlePlay: () => void;
+    handlePause: () => void;
 };
 
 export default function PlayerTrack({
     index,
     track,
     currentlyPlaying,
-    onTrackClick,
     onSlide,
+    handlePlay,
+    handlePause,
 }: PlayerTrackProps) {
     const [isClient, setIsClient] = useState(false);
     const [duration, setDuration] = useState(0); // Store duration in seconds
@@ -27,7 +30,8 @@ export default function PlayerTrack({
     const playerRef = useRef<ReactPlayer | null>(null);
 
     const isPlaying = currentlyPlaying === track.link;
-    const finalTrackLink = `${track.link}&show_artwork=false`;
+    console.log(isPlaying);
+    console.log('currentlyPlaying', currentlyPlaying);
 
     const formatDuration = (data: number) => {
         const minutes = Math.floor(data / 60);
@@ -40,6 +44,7 @@ export default function PlayerTrack({
     };
 
     const handleProgress = ({ playedSeconds }: { playedSeconds: number }) => {
+        console.log('progress');
         if (!isSeeking) {
             // Update progress only if not currently seeking
             setPlayedSeconds(playedSeconds);
@@ -47,7 +52,7 @@ export default function PlayerTrack({
     };
 
     const handleEnd = () => {
-        onTrackClick();
+        handlePause();
         setPlayedSeconds(0);
     };
 
@@ -69,6 +74,10 @@ export default function PlayerTrack({
     useEffect(() => {
         setIsClient(true);
     }, []);
+
+    //  useEffect(() => {
+    //      console.log(playerRef.current);
+    //  }, [isClient]);
 
     return isClient ? (
         <div
@@ -107,9 +116,9 @@ export default function PlayerTrack({
                             step='any'
                             value={playedSeconds}
                             onPointerDown={onSeekStart}
-                            onChange={(e) =>
-                                setPlayedSeconds(parseFloat(e.target.value))
-                            }
+                            onChange={(e) => {
+                                setPlayedSeconds(parseFloat(e.target.value));
+                            }}
                             onPointerUp={onSeekEnd}
                         />
                         <span className=''>{formatDuration(duration)}</span>
@@ -119,25 +128,23 @@ export default function PlayerTrack({
             <div className='absolute right-0 bottom-0 left-0 h-px w-full bg-faded'></div>
 
             {/* Original Player – Hidden */}
-
             <ReactPlayer
                 ref={playerRef}
-                url={finalTrackLink}
-                //  playing={isPlaying}
+                url={track.link}
                 playsinline
                 onDuration={handleDuration}
                 onProgress={handleProgress}
                 onEnded={handleEnd}
                 height={120}
-                onStart={() => {
-                    onTrackClick();
-                }}
-                onPause={() => {
-                    onTrackClick();
-                }}
+                width={'100%'}
+                onPlay={handlePlay}
+                //   onStart={handlePlay}
+                //  onReady={handlePause}
+                onPause={handlePause}
                 style={{
                     opacity: 0,
                     paddingTop: 10,
+                    width: '100%',
                 }}
             />
         </div>
