@@ -14,15 +14,10 @@ export default function PlayerTrackList({ tracks }: PlayerTrackListProps) {
         null
     );
 
-    const handleTrackSlide = (clickedTrackLink: string) => {
-        setCurrentlyPlaying(clickedTrackLink);
-    };
-
     const handlePlay = (clickedTrackLink: string) => {
-        console.log('play');
         setCurrentlyPlaying(clickedTrackLink);
     };
-    const handlePause = (clickedTrackLink: string) => {
+    const handlePause = () => {
         setCurrentlyPlaying(null);
     };
 
@@ -35,8 +30,7 @@ export default function PlayerTrackList({ tracks }: PlayerTrackListProps) {
                         key={track.link}
                         track={track}
                         handlePlay={() => handlePlay(track.link)}
-                        handlePause={() => handlePause(track.link)}
-                        onSlide={() => handleTrackSlide(track.link)}
+                        handlePause={() => handlePause()}
                         currentlyPlaying={currentlyPlaying}
                     />
                 );

@@ -1,16 +1,23 @@
 'use client';
 
-import { useEffect, useState, useRef } from 'react';
-import { Track } from '@/types';
-import ReactPlayer from 'react-player/soundcloud';
+import { useState, useRef } from 'react';
+import dynamic from 'next/dynamic';
+
+// lazy load & disable pre-rendering to avoid hydration errors
+// https://nextjs.org/docs/app/guides/lazy-loading
+const ReactPlayer = dynamic(() => import('react-player/soundcloud'), {
+    ssr: false,
+});
+
+import BaseReactPlayer, { BaseReactPlayerProps } from 'react-player/base';
+// import ReactPlayer from 'react-player/soundcloud';
 import { IconPause, IconPlay } from '@/components/icons';
+import { Track } from '@/types';
 
 type PlayerTrackProps = {
     index: number;
     track: Track;
     currentlyPlaying: string | null;
-
-    onSlide: () => void;
     handlePlay: () => void;
     handlePause: () => void;
 };
@@ -19,7 +26,6 @@ export default function PlayerTrack({
     index,
     track,
     currentlyPlaying,
-    onSlide,
     handlePlay,
     handlePause,
 }: PlayerTrackProps) {
@@ -27,11 +33,11 @@ export default function PlayerTrack({
     const [duration, setDuration] = useState(0); // Store duration in seconds
     const [playedSeconds, setPlayedSeconds] = useState(0); // Track played time in seconds
     const [isSeeking, setIsSeeking] = useState(false); // Track whether the user is currently seeking
-    const playerRef = useRef<ReactPlayer | null>(null);
+    const playerRef = useRef<BaseReactPlayer<BaseReactPlayerProps> | null>(
+        null
+    );
 
     const isPlaying = currentlyPlaying === track.link;
-    console.log(isPlaying);
-    console.log('currentlyPlaying', currentlyPlaying);
 
     const formatDuration = (data: number) => {
         const minutes = Math.floor(data / 60);
@@ -44,47 +50,33 @@ export default function PlayerTrack({
     };
 
     const handleProgress = ({ playedSeconds }: { playedSeconds: number }) => {
-        console.log('progress');
         if (!isSeeking) {
-            // Update progress only if not currently seeking
             setPlayedSeconds(playedSeconds);
         }
     };
 
-    const handleEnd = () => {
+    const handleTrackEnd = () => {
         handlePause();
         setPlayedSeconds(0);
     };
 
-    // Slider change starts
     const onSeekStart = () => {
         setIsSeeking(true);
     };
 
-    // Slider change ends and seek to new time
     const onSeekEnd = (e: React.PointerEvent<HTMLInputElement>) => {
         const newTime = parseFloat(e.currentTarget.value);
         setIsSeeking(false);
         playerRef.current?.seekTo(newTime);
         setPlayedSeconds(newTime);
-        onSlide();
+        handlePlay();
     };
 
-    // Workaround to run component only on client side
-    useEffect(() => {
-        setIsClient(true);
-    }, []);
-
-    //  useEffect(() => {
-    //      console.log(playerRef.current);
-    //  }, [isClient]);
-
-    return isClient ? (
+    return (
         <div
             className={`relative overflow-clip ${track.trackname.length > 40 ? 'h-32' : 'h-24'}`}
         >
             {/* Custom Player */}
-
             {index === 0 && (
                 <div className='absolute top-0 right-0 left-0 h-px w-full bg-faded'></div>
             )}
@@ -130,16 +122,17 @@ export default function PlayerTrack({
             {/* Original Player – Hidden */}
             <ReactPlayer
                 ref={playerRef}
+                playing={isPlaying}
                 url={track.link}
                 playsinline
                 onDuration={handleDuration}
                 onProgress={handleProgress}
-                onEnded={handleEnd}
+                onEnded={handleTrackEnd}
                 height={120}
                 width={'100%'}
                 onPlay={handlePlay}
-                //   onStart={handlePlay}
-                //  onReady={handlePause}
+                //  onStart={handlePlay}
+                onReady={handlePause}
                 onPause={handlePause}
                 style={{
                     opacity: 0,
@@ -148,5 +141,5 @@ export default function PlayerTrack({
                 }}
             />
         </div>
-    ) : null;
+    );
 }

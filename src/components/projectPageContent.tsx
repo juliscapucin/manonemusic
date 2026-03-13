@@ -5,6 +5,7 @@ import { PlayerTrackList } from '@/components';
 import { ButtonRounded } from '@/components/buttons';
 import { ImageWithSpinner, TextBlock } from '@/components/ui';
 import { usePathname } from 'next/navigation';
+import { useWindowDimensions } from '@/hooks';
 
 type ProjectPageContentProps = Project & {
     setIsTrailerActive: (value: boolean) => void;
@@ -22,6 +23,7 @@ export default function ProjectPageContent({
     setIsPageDisplaced,
 }: ProjectPageContentProps) {
     const pathname = usePathname();
+    const { isMobile } = useWindowDimensions();
 
     return (
         <div className='gsap-project-page-content relative flex-1 gap-8 border-b border-l border-faded bg-primary pb-12 md:overflow-y-auto md:pb-0 lg:pl-8'>
@@ -42,7 +44,9 @@ export default function ProjectPageContent({
 
             {/* CONTENT */}
             <div className='h-fit max-w-prose px-4 pt-4 md:mb-16 md:ml-[50vw] md:pt-8 md:pr-8 lg:mb-8 lg:ml-[30vw] lg:flex-1 xl:ml-[25vw]'>
-                {tracklist && <PlayerTrackList tracks={tracklist} />}
+                {!isMobile && tracklist && (
+                    <PlayerTrackList tracks={tracklist} />
+                )}
                 {description && <TextBlock text={description} />}
 
                 {/* Project Links */}
