@@ -29,7 +29,6 @@ export default function PlayerTrack({
     handlePlay,
     handlePause,
 }: PlayerTrackProps) {
-    const [isClient, setIsClient] = useState(false);
     const [duration, setDuration] = useState(0); // Store duration in seconds
     const [playedSeconds, setPlayedSeconds] = useState(0); // Track played time in seconds
     const [isSeeking, setIsSeeking] = useState(false); // Track whether the user is currently seeking
@@ -61,6 +60,7 @@ export default function PlayerTrack({
     };
 
     const onSeekStart = () => {
+        handlePause();
         setIsSeeking(true);
     };
 
@@ -68,6 +68,7 @@ export default function PlayerTrack({
         const newTime = parseFloat(e.currentTarget.value);
         setIsSeeking(false);
         playerRef.current?.seekTo(newTime);
+        playerRef.current?.getInternalPlayer()?.play?.(); //workaround for Safari bug
         setPlayedSeconds(newTime);
         handlePlay();
     };
@@ -132,7 +133,7 @@ export default function PlayerTrack({
                 width={'100%'}
                 onPlay={handlePlay}
                 //  onStart={handlePlay}
-                onReady={handlePause}
+                onReady={handlePause} //workaround for Safari bug
                 onPause={handlePause}
                 style={{
                     opacity: 0,

@@ -17,6 +17,7 @@ export default function PlayerTrackList({ tracks }: PlayerTrackListProps) {
     const handlePlay = (clickedTrackLink: string) => {
         setCurrentlyPlaying(clickedTrackLink);
     };
+
     const handlePause = () => {
         setCurrentlyPlaying(null);
     };
