@@ -21,15 +21,5 @@ export const handlePanelSlide = (targetSlug: string, initial?: boolean) => {
             autoKill: false,
         },
         duration: 0.5,
-        //   onComplete: () => {
-        //       // Only push state on initial load
-        //       if (initial) {
-        //           window.history.pushState(
-        //               null,
-        //               '',
-        //               targetSlug === '/' ? '/' : `/${targetSlug}`
-        //           );
-        //       }
-        //   },
     });
 };

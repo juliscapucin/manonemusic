@@ -9,18 +9,18 @@ import { NavLink as NavLinkType } from '@/types';
 
 type HeaderProps = {
     navLinks: NavLinkType[];
-    variant?: 'section' | 'page';
+    variant?: 'home' | 'project';
 };
 
 // This is the header component for the desktop version
 // Mobile version is handled in menuMobile.tsx
-export default function Header({ navLinks, variant = 'section' }: HeaderProps) {
+export default function Header({ navLinks, variant = 'home' }: HeaderProps) {
     const pathname = usePathname();
     const router = useRouter();
 
     useEffect(() => {
         // only run on first level
-        if (variant === 'section') {
+        if (variant === 'home') {
             // ScrollTo on Load
             handlePanelSlide(pathname, true);
         }
@@ -34,7 +34,7 @@ export default function Header({ navLinks, variant = 'section' }: HeaderProps) {
                     link='/'
                     classes={`underlined-link text-title-small md:text-title-medium uppercase transition-transform ${pathname === '/' ? '-translate-x-[150%]' : 'translate-x-0'}`}
                     transitionOnClick={
-                        variant === 'section'
+                        variant === 'home'
                             ? () => handlePanelSlide('/') // if in first level, slide to home
                             : () => projectExit(() => router.push('/'), true) // if in second level, exit and navigate to home
                     }
@@ -57,7 +57,7 @@ export default function Header({ navLinks, variant = 'section' }: HeaderProps) {
                                             : false
                                     }
                                     action={() => {
-                                        variant === 'section'
+                                        variant === 'home'
                                             ? handlePanelSlide(link.slug)
                                             : projectExit(
                                                   () =>

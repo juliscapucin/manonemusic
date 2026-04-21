@@ -25,7 +25,7 @@ const CustomButton = ({
 
     return (
         <button
-            className={`${classes || ''} ${props.disabled ? 'button-active' : ''}`}
+            className={`${classes || ''} ${props.disabled ? 'button-active pointer-events-none' : ''}`}
             style={style}
             onClick={(e) => {
                 if (!props.disabled) {

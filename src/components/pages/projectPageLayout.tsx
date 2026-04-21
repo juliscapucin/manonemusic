@@ -24,7 +24,7 @@ export default function ProjectPageLayout({
 
     return (
         <>
-            <Header variant='page' navLinks={navLinks} />
+            <Header variant='project' navLinks={navLinks} />
             <MenuMobile navLinks={navLinks} />
             {children}
         </>

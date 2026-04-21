@@ -38,6 +38,7 @@ export default function ProjectCard({
 }: ProjectCardProps) {
     const router = useRouter();
     const pathname = usePathname();
+    const isDisabled = pathname.includes(slug);
 
     const imageOverlayRef = useRef<HTMLDivElement>(null);
     const labelRef = useRef<HTMLParagraphElement>(null);
@@ -112,7 +113,7 @@ export default function ProjectCard({
             classes={`relative group block ${variant === 'section' ? 'min-w-40 lg:min-w-16 h-full w-fit' : `h-full w-fit lg:h-fit lg:w-32`}`}
             style={{ aspectRatio }}
             aria-label={`Click to open ${title} project`}
-            disabled={pathname.includes(slug)}
+            disabled={isDisabled}
         >
             {/* IMAGE */}
             {image?.imageRef && (
@@ -122,7 +123,7 @@ export default function ProjectCard({
                     aria-label={image.imageAlt}
                 >
                     {/* DISABLED OVERLAY */}
-                    {pathname.includes(slug) && (
+                    {isDisabled && (
                         <>
                             <div className='absolute inset-0 z-10 overflow-clip rounded-xs border border-faded'>
                                 <div className='absolute top-0 h-px w-[150%] origin-top-left rotate-45 bg-faded'></div>
@@ -135,7 +136,7 @@ export default function ProjectCard({
                     {/* IMAGE */}
                     <div>
                         <Image
-                            className={`relative h-full w-full rounded-xs object-cover ${isCardHovered ? 'saturate-100' : 'saturate-50'} ${pathname.includes(slug) ? 'saturate-0' : ''}`}
+                            className={`relative h-full w-full rounded-xs object-cover ${isCardHovered ? 'saturate-100' : 'saturate-50'} ${isDisabled ? 'saturate-0' : ''}`}
                             src={urlFor(image.imageRef).url()} // generate url from ref to avoid unnecessary calls on server
                             alt={image.imageAlt}
                             width={image.imageWidth}
