@@ -8,7 +8,6 @@ export default function NoiseBackground() {
                 backgroundRepeat: 'repeat',
                 animation: 'bg-animation .2s infinite',
                 opacity: 0.5,
-                // mixBlendMode: "overlay",
             }}
         />
     );

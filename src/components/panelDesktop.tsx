@@ -164,6 +164,7 @@ export default function PanelDesktop({ data, sections }: PanelDesktopProps) {
                             slugTimeout = null;
                         }
 
+                        // Delay page address update to avoid bugs
                         slugTimeout = setTimeout(() => {
                             if (
                                 self.isActive &&

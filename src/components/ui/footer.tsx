@@ -6,8 +6,8 @@ import { usePathname } from 'next/navigation';
 import { NavLink } from '@/types';
 
 import { handlePanelSlide } from '@/lib/animations';
-import { Button, ButtonScroll } from '../buttons';
-import Availability from '../availability';
+import Pagination from '@/components/pagination';
+import Availability from '@/components/availability';
 
 type FooterProps = {
     navLinks: NavLink[];
@@ -39,10 +39,10 @@ export default function Footer({ navLinks }: FooterProps) {
     };
 
     return (
-        <footer className='fixed bottom-0 flex w-full items-center justify-between border-t border-faded bg-primary px-8 text-center text-secondary'>
+        <footer className='fixed bottom-0 z-header flex w-full items-center justify-between border-t border-faded bg-primary px-8 text-center text-secondary'>
             <Availability slideToContact={() => handlePanelSlide('contact')} />
 
-            <ButtonScroll
+            <Pagination
                 sections={navLinks}
                 action={handleNavigation}
                 index={index}

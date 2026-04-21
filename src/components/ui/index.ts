@@ -11,7 +11,6 @@ import Logo from './logo';
 import MenuMobile from './menuMobile';
 import NavLink from './navLink';
 import NavMenu from './navMenu';
-import Pagination from './pagination';
 import ScrollProgress from './scrollProgress';
 import SectionWrapper from './sectionWrapper';
 import TextBlock from './textBlock';
@@ -33,7 +32,6 @@ export {
     MenuMobile,
     NavLink,
     NavMenu,
-    Pagination,
     TextBlock,
     ScrollProgress,
     SectionWrapper,

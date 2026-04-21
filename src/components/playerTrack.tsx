@@ -132,7 +132,6 @@ export default function PlayerTrack({
                 height={120}
                 width={'100%'}
                 onPlay={handlePlay}
-                //  onStart={handlePlay}
                 onReady={handlePause} //workaround for Safari bug
                 onPause={handlePause}
                 style={{

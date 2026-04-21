@@ -19,7 +19,7 @@ export default function Header({ navLinks, variant = 'home' }: HeaderProps) {
     const router = useRouter();
 
     useEffect(() => {
-        // only run on first level
+        // only run on home
         if (variant === 'home') {
             // ScrollTo on Load
             handlePanelSlide(pathname, true);
@@ -35,8 +35,8 @@ export default function Header({ navLinks, variant = 'home' }: HeaderProps) {
                     classes={`underlined-link text-title-small md:text-title-medium uppercase transition-transform ${pathname === '/' ? '-translate-x-[150%]' : 'translate-x-0'}`}
                     transitionOnClick={
                         variant === 'home'
-                            ? () => handlePanelSlide('/') // if in first level, slide to home
-                            : () => projectExit(() => router.push('/'), true) // if in second level, exit and navigate to home
+                            ? () => handlePanelSlide('/') // if on home, slide to home
+                            : () => projectExit(() => router.push('/'), true) // if on project, exit and navigate to home
                     }
                 >
                     MAN/ONE MUSIC
