@@ -56,7 +56,7 @@ export default function Header({ navLinks, variant = 'home' }: HeaderProps) {
                                             ? true
                                             : false
                                     }
-                                    action={() => {
+                                    onClick={() => {
                                         variant === 'home'
                                             ? handlePanelSlide(link.slug)
                                             : projectExit(

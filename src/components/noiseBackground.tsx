@@ -6,7 +6,7 @@ export default function NoiseBackground() {
             style={{
                 backgroundImage: 'url("/imgs/noise-transparent.png")',
                 backgroundRepeat: 'repeat',
-                animation: 'bg-animation .2s infinite',
+                animation: 'noise-animation .2s infinite',
                 opacity: 0.5,
             }}
         />
